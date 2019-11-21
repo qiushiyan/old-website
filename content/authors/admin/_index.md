@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio:  骐骥一跃，不能十步；驽马十驾，功在不舍。 
+bio: 浮生若梦，为欢几何
 education:
   courses:
   - course: BA in Data Journalism

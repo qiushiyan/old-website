@@ -19,7 +19,7 @@
   weight = 30
   
 [[main]]
-  name = "Categories"
+  name = "Topics"
   url = "#tags"
   weight = 40
 

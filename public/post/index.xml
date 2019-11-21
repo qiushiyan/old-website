@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts | Qiushi&#39;s blog</title>
+    <link>/post/</link>
+      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 21 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Posts</title>
+      <link>/post/</link>
+    </image>
+    
+    <item>
+      <title>50 Years of Data Science</title>
+      <link>/post/50-years-of-data-science/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/post/50-years-of-data-science/</guid>
+      <description>
+
+
+&lt;p&gt;More than 50 years ago, John Tukey in his renowned “The Future of Dat Analysis” envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / analysis” trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
+&lt;div id=&#34;data-science-vs.-statistics&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Data Science vs. Statistics&lt;/h1&gt;
+&lt;p&gt;The author first starts to distinguish data science from traditional statistics. Yet 3 commonly used indicators are discredited:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;“Big data” is not a credible criterion for meaningful distinction between statistics and data science, for both historical and scientific reasons, viz:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The very term “statistics” was coined at the beginning of modern efforts to compile census data, roughly the size of today’s big data&lt;/li&gt;
+&lt;li&gt;Statisticians have long since delved into large databases, and come up with sufficient measures&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Although some would tout “new skills” on the part of data scientists, that is another “big data” meme cloaked in another term.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Data science programs doesn’t necessarily guide one to a satisfying job, comapared with statistics. Even it does, a data science master degree cannot exempt you from various constraints in real workplace&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, is there any solid case for an new entity called “data science” ? David proposed that data science would be a true science, an enlargement of traditional academic statistics. And the underlying motivation is intellectual rather than commerical. In the next 50 years, scientific publication in various disciplines will become a body of data that we can analyze and study, and the opportunity to improve the accuracy and validity of all science relies upon this would-be field: data science.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review-on-the-concept&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Review on the concept&lt;/h1&gt;
+&lt;p&gt;Based on the timeline, the author then organizes insights that have been published over the years about data science, as shown below:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;All in all I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Tukey identified four driving forces in the new science &lt;span class=&#34;citation&#34;&gt;(Tukey &lt;a href=&#34;#ref-tukey1962future&#34; role=&#34;doc-biblioref&#34;&gt;1962&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The formal theories of statistics&lt;/li&gt;
+&lt;li&gt;Accelerating developments in computers and display devices&lt;/li&gt;
+&lt;li&gt;The challenge, in many fields, of more and ever larger bodies of data&lt;/li&gt;
+&lt;li&gt;The emphasis on quantification in an ever wider variety of disciplines&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Let’s spend a minute admiring Tukey’s prophecy…&lt;/p&gt;
+&lt;p&gt;Among other things, Tukey also pointed out that:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;…data analysis is a very difficult field. It must adapt itself to what people can and need to do with data. In the sense that biology is more complex than physics, and the behavioral sciences are more complex than either, it is likely that the general problems of data analysis are more complex than those of all three. It is too much to ask for close and effective guidance for data analysis from any highly formalized structure, either now or in the near future.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Data analysis can gain much from formal statistics, but only if the connection is kept adequately loose.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;John Chambers presented a choice between “greater” or “lesser” statistics. He argued
+&lt;span class=&#34;citation&#34;&gt;(Chambers &lt;a href=&#34;#ref-chambers1993greater&#34; role=&#34;doc-biblioref&#34;&gt;1993&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The statistics profession faces a choice in its future research between continuing concentration on traditional topics—based largely on data analysis supported by mathematical statistics—and a broader viewpoint—based on an inclusive concept of learning from data. The latter course presents severe challenges as well as exciting opportunities. The former risks seeing statistics become increasingly marginal…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;C. F. Jeff Wu characterized statistical work as a trilogy of data collection, data modeling and analysis, and decision making, and called for courses outside out the statistics department.&lt;/p&gt;
+&lt;p&gt;William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today’s perspective &lt;span class=&#34;citation&#34;&gt;(Cleveland &lt;a href=&#34;#ref-cleveland2001data&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Multidisciplinary investigations (25%)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Models and Methods for Data (20%)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Computing with Data (15%)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Pedagogy (15%)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Tool Evaluation (5%)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Theory (20%)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;UC Berkeley statistician Leo Breiman brought his “two modeling cultures theory” into the exhortation. He asserted &lt;span class=&#34;citation&#34;&gt;(Breiman and others &lt;a href=&#34;#ref-breiman2001statistical&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt; :&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are two goals in analyzing the data:&lt;br /&gt;
+Prediction: To be able to predict what the responses are going to be to future input variables;&lt;br /&gt;
+[Inference]: To [infer] how nature is associating the response variables to the input variables.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Proceeding from this basis, Brieman thought that the prdiction emphasis can be described as “predictive modeling” culture&#34;, which lay stress on accuracy of prediction made by different algorithm on various datasets. But this culture, according to his estimation, is only practiced by 2% of academic statisticians.&lt;/p&gt;
+&lt;p&gt;“Generative modeling culture” corresponds to the latter inference emphasis, and accounted for 98% statistical practice. Brienman said:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If our goal as a field is to use data to solve problems, then we need to move away from exclusive dependence on [generative] models&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;From today’s standpoint, Breiman’s opinions is fairly justified. But why? &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; thinks the Common Task Framework played a key role here.&lt;/p&gt;
+&lt;p&gt;An instance of the CTF has these ingredients( I actually have never heard the term before. To my mind, it’s just like a usual kaggle contest or a data visualization challenge, yet may not subjected ot choosing the “best” machine learning model or plot):&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;A publicly available training dataset involving, for each observation, a list of (possibly many) feature measurements, and a class label for that observation.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Set of enrolled competitors whose common task is to infer a class prediction rule from the training data.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A scoring referee, to which competitors can submit their prediction rule. The referee runs the prediction rule against a testing dataset, which is sequestered behind a Chinese wall. The referee objectively and automatically reports the score (prediction accuracy) achieved by the submitted rule.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The synergy of minimizing prediction error with CTF is worth noting. This combination leads directly to a total focus on optimization of empirical performance, allows large numbers of researchers to compete at any given common task challenge, and allows for efficient and unemotional judging of challenge winners.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-six-divisions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The Six Divisions&lt;/h1&gt;
+&lt;p&gt;Further, to dipict an even larger professional on a quest to extract information from data, the author comes up with a classificcation concerning data science practices:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Data Gathering, Preparation, and Exploration&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Representation and Transformation:&lt;/strong&gt; To tranfrom data collected from a wealth of formats in an attempt to represent them in one format susceptible for analysis.(i.e., get features with acoustic data, one often transforms to the cepstrum or the Fourier transform)&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Computing with Data&lt;/strong&gt;: Beyond basic knowledge of programming languages, data scientists need to keep current on new idioms for efficiently using those languages and need to understand the deeper issues associated with computational efficiency. Cluster and cloud computing and the ability to run massive numbers of jobs on such clusters has become an overwhelmingly powerful ingredient of the modern computational landscape.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Modeling&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Visualization and Presentation&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Science about Data Science&lt;/strong&gt;: Data scientists are doing science about data science when they identify commonly occurring analysis/processing workflows, for example, using data about their frequency of occurrence in some scholarly or business domain; when they measure the effectiveness of standard workflows in terms of the human time, the computing resource, the analysis validity, or other performance metric, and when they uncover emergent phenomena in data analysis, for example, new patterns arising in data analysis workflows, or disturbing artifacts in published analysis results.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;science-about-data-science&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Science About Data Science&lt;/h1&gt;
+&lt;p&gt;David then elaborates on the 6th part: science about data Science, which has made data science a true branch of science, rather than a broad collection of technical activities. Data science offered a continually evolving, evidence-based approach for analysts, covering:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Science-Wide Meta Analysis: the idea of “analyzing what people have analyzed” across disciplines&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Cross-Study Analysis: To study the validation of different studies on the same dataset. * Cross-Workflow Analysis: To study the impact of analysis workflow on results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All these 3 approaches, comtribute to enhancing the validity of the scientific literature.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;next-50-years&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Next 50 years&lt;/h1&gt;
+&lt;p&gt;At the end, what about the next 50 years of data science?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Research will be more open and reproducible. Code sharing, data sharing will allow large numbers of datasets and analysis workflows to be derived from studies science-wide&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;All scientific publifications will be transformed to data thta can be mined&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Ample data will be available to measure the performance of algorithms and models across a whole ensemble of situations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Each proposed notion of data science involves some &lt;strong&gt;enlargement&lt;/strong&gt; of academic statistics and machine learning. The “GDS” variant specifically discussed in this article derives from insights about data analysis and modeling stretching back decades. In this variant, the core motivation for the expansion to data science is intellectual. In the future, there may be great industrial demand for the skills inculcated by GDS; however, the core questions which drive the field are scientific, not industrial.&lt;/p&gt;
+&lt;p&gt;GDS(initialtive for greater data science) proposes that data science is the science of learning from data; it studies the methods involved in the analysis and processing of data and proposes technology to improve methods in an evidence-based manner. The scope and impact of this science will expand enormously in coming decades as scientific data and data about science itself become ubiquitously available.&lt;/p&gt;
+&lt;p&gt;Society already spends tens of billions of dollars yearly on scientific research, and much of that research takes place at universities. GDS inherently works to understand and improve the validity of the conclusions produced by university research, and can play a key role in all campuses where data analysis and modeling are major activities.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-breiman2001statistical&#34;&gt;
+&lt;p&gt;Breiman, Leo, and others. 2001. “Statistical Modeling: The Two Cultures (with Comments and a Rejoinder by the Author).” &lt;em&gt;Statistical Science&lt;/em&gt; 16 (3): 199–231.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-chambers1993greater&#34;&gt;
+&lt;p&gt;Chambers, John M. 1993. “Greater or Lesser Statistics: A Choice for Future Research.” &lt;em&gt;Statistics and Computing&lt;/em&gt; 3 (4): 182–84.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-cleveland2001data&#34;&gt;
+&lt;p&gt;Cleveland, William S. 2001. “Data Science: An Action Plan for Expanding the Technical Areas of the Field of Statistics.” &lt;em&gt;International Statistical Review&lt;/em&gt; 69 (1): 21–26.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-doi:10.1080/10618600.2017.1384734&#34;&gt;
+&lt;p&gt;Donoho, David. 2017. “50 Years of Data Science.” &lt;em&gt;Journal of Computational and Graphical Statistics&lt;/em&gt; 26 (4): 745–66. &lt;a href=&#34;https://doi.org/10.1080/10618600.2017.1384734&#34;&gt;https://doi.org/10.1080/10618600.2017.1384734&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-tukey1962future&#34;&gt;
+&lt;p&gt;Tukey, John W. 1962. “The Future of Data Analysis.” &lt;em&gt;The Annals of Mathematical Statistics&lt;/em&gt; 33 (1): 1–67.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-knitr&#34;&gt;
+&lt;p&gt;Xie, Yihui. 2019. &lt;em&gt;Knitr: A General-Purpose Package for Dynamic Report Generation in R&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=knitr&#34;&gt;https://CRAN.R-project.org/package=knitr&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;The original line was slightly modified by David, the original has “information” in place of [inference] and “extract some information about” in place of [infer]&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;Here I skipped some discussion related to R as an computing environment, literate programming in &lt;code&gt;knitr&lt;/code&gt;&lt;span class=&#34;citation&#34;&gt;(Xie &lt;a href=&#34;#ref-R-knitr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; and the “tidy data” concept&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;For now, this section is copied from the original article&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Enterprise Data Analysis and Visualization: An Interview Study</title>
+      <link>/post/enterprise-data-analysis-and-visualization-an-interview-study/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/post/enterprise-data-analysis-and-visualization-an-interview-study/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;strong&gt;“Enterprise Data Analysis and Visualization: An Interview Study”&lt;/strong&gt; is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.&lt;/p&gt;
+&lt;div id=&#34;archetypes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;3 Archetypes&lt;/h1&gt;
+&lt;p&gt;According to the responses, we can see analysts generally fall into 3 archetypes: &lt;em&gt;hacker&lt;/em&gt;, &lt;em&gt;scripter&lt;/em&gt; and &lt;em&gt;application user&lt;/em&gt;.&lt;br /&gt;
+&lt;img src=&#34;/img/archetypes.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hackers&lt;/strong&gt; are faced with the most diverse and complex tasks. They are most literate in terms of programming and thus rarely ask IT staffs fro help. More oftern than not, hackers master more than three languages, R / Matlab for analysis, Python, Perl as an scripting language, and SQL for queries.&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    I guess for now Python has gained ground also as a data analysis language, and Matlab is less popular among analysts doing “practical” analysis, but more frquently used in labs of nature science.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;Also note that with their ability to collect, manipulate data, some hackers could be in charge of managing the data warehouse of the company, and dealing with large datasets. In constrast, they perform less statistical models, and spend more time in early-stage analytic activities prior to modeling, if any.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scripters&lt;/strong&gt; take care of advanced modeling and use a software package such as R or Matlab extensively. They are less proficient when parsing log files or scraping data off the web, and the data susceptible for modeling are often prepared by IT staff.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Application user&lt;/strong&gt; prefer operations done in a spreadsheet( Mostly in Excel ), or other analysis application (e.g., SAS / JMP, SPSS, etc.). Data are also pulled out from several relationald databases prior to their work. They typically worked on smaller datasets than other gorups, advanced application users may wrote scripts using an embedded language such as Visual Basic.&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    To my mind, application users dipicted here seem to be titled “data analysts” for historical reasons, and there is little case for keeping such a position when there are already hackers and scripters. Perhaps they were traditional bussiness people in charge of analysis or accountants, so they are most comforatble with Microsoft Excel or SPSS. As the “big data” meme started to present itself, all of a sudden their enterprise felr it imperative to set up a “data scientist / analyst” position to keep up with this new trend. Yet I doubt if this archetype could still survive when graduates from data.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;analysts-within-organization&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Analysts within organization&lt;/h1&gt;
+&lt;p&gt;Analysts interact closely with IT staff to complete aspects of theire job. For IT staff, his relationship includes data ingesting and acquiring, operationalizing recurring workflows, and serve as a source of documentation when analysts, say, con’t figure out how to wirte a complex SQL statement.&lt;/p&gt;
+&lt;p&gt;This reliance on IT staff was particularly true in organizations where data was distributed across many different data sources. Hackers were most likely to use the IT team explicitly for this function, as they were more likely to access data directly from the warehouse. Scripters and application users relied on this function implicitly when receiving data from members of IT.&lt;/p&gt;
+&lt;p&gt;Another thread of this topic is distributed data, which are generated from multiple departments of the enterprise. They are often stored in various databases and formats. adding to the diffculty of intergrating them.&lt;/p&gt;
+&lt;p&gt;When analysis is finished, analysts typically shared static reports in the form of template documents. In some cases, reports could be interactive dashboards that enabled end users to filter or modify statistics computed. It’s not hard to imagine consumers of the report often give a blurred image of what they want, and hardly could analysts translate them into practical data problems.&lt;/p&gt;
+&lt;p&gt;When it comes to collaboration, it is an exception rather than the rule for analysts. They do share some central repository data processing scriptes are kept to oneself as a rule. Ont the other hand, final reports in the form of charts or model summary are commonly shared among analytsts in planning meeting or presentations. These reports, however, are rarely parametrizable or interactive.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; identifies three impediemnts to collaboration:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the diversity of tools and programming languages&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;finding a script or inter-
+mediate data product someone else produced was often more time-
+consumingthanwritingthescriptfromscratch&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;many analysis process are “ad hoc”, “experimental”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;challenges&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Challenges&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; identified five high-level tasks in the workflow and challenges within each of them.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Discovering&lt;/strong&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;: Since data are often distributed across multiple databases and sources, finding the exact data sheet or file needed can be time-consuming, not to mention that some analysts only have restricted access to the data warehhouse. Another problem is field definitions, these definitions were
+often missing in relational databases and non-existent in other types of data stores.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Wranling&lt;/strong&gt;: Many analysts reported parsing, ingesting semi-structured data(i.e., log files, block data&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;). Another difficulty is integrating the data, after analysts manage to find them in databases. Sometimes identifiers are missing or encoded inconsistantly in some databases, and sometimes there is no column than could be an identifier.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Profiling&lt;/strong&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;: Many analysts (22 / 35) reports issues dealing with missing data and heterogeneous data in a column. When detecting outliers, there is no general agreement between visualization and traditional staistical methods.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Modeling&lt;/strong&gt;: The biggest challenge in constructing an model according to respondents are feature selection, whether to choose a set of variables, which to transfrom and how to transform.&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: &lt;a href=&#34;http://www.feat.engineering/index.html&#34;&gt;Feature Engineering and Selection: A Practical Approach for Predictive Models&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help explore these models and visualize their output.&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    R’s package &lt;code&gt;broom&lt;/code&gt; &lt;span class=&#34;citation&#34;&gt;(Robinson and Hayes &lt;a href=&#34;#ref-R-broom&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; are desgined to facilitate modeling diagnosis, visualization, etc. &lt;code&gt;tidymodels&lt;/code&gt; &lt;span class=&#34;citation&#34;&gt;(Kuhn and Wickham &lt;a href=&#34;#ref-R-tidymodels&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains a burgeoning list of such packages.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reporing&lt;/strong&gt;: The two most-cited challenges in reporoting were communicating assumptions and building interactive reports. Documentation that should have been provided alongside the report are often missing or poorly written. Even when assumptions were tracked, they were often treated as footnotes instead of first-class results. Moreover, analysts complained that reports were too
+inflexible and did not allow interactive verification or sensitivity analysis.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;future-trends&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Future trends&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Heer (&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; then prophesy future trends in technology and the analytic workforce:&lt;/p&gt;
+&lt;p&gt;Public data become more accessible and add to the diffculty of data discovery and intergration.&lt;/p&gt;
+&lt;p&gt;The market of Hadoop-like software will continue to increase, allowing analysts to operate on less structured data formats.&lt;/p&gt;
+&lt;p&gt;“Hacker-level” analysts will be in demand, analysts therefore need to be adept at both statistical reasoning and writing complex SQL or Map-Reduce code. Those who are comfortable in multiple data processing / analysis frameworks will be competent.&lt;/p&gt;
+&lt;p&gt;The size of analytic teams should grow, efficient collaboration will become both increasingly important and difficult.&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-R-rmarkdown&#34;&gt;
+&lt;p&gt;Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. &lt;em&gt;Rmarkdown: Dynamic Documents for R&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=rmarkdown&#34;&gt;https://CRAN.R-project.org/package=rmarkdown&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-shiny&#34;&gt;
+&lt;p&gt;Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2019. &lt;em&gt;Shiny: Web Application Framework for R&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=shiny&#34;&gt;https://CRAN.R-project.org/package=shiny&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-2012-enterprise-analysis-interviews&#34;&gt;
+&lt;p&gt;Heer, Sean Kandel AND Andreas Paepcke AND Joseph Hellerstein AND Jeffrey. 2012. “Enterprise Data Analysis and Visualization: An Interview Study.” In &lt;em&gt;IEEE Visual Analytics Science &amp;amp; Technology (Vast)&lt;/em&gt;. &lt;a href=&#34;http://idl.cs.washington.edu/papers/enterprise-analysis-interviews&#34;&gt;http://idl.cs.washington.edu/papers/enterprise-analysis-interviews&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-tidymodels&#34;&gt;
+&lt;p&gt;Kuhn, Max, and Hadley Wickham. 2019. &lt;em&gt;Tidymodels: Easily Install and Load the ’Tidymodels’ Packages&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=tidymodels&#34;&gt;https://CRAN.R-project.org/package=tidymodels&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-sparklyr&#34;&gt;
+&lt;p&gt;Luraschi, Javier, Kevin Kuo, Kevin Ushey, JJ Allaire, and The Apache Software Foundation. 2019. &lt;em&gt;Sparklyr: R Interface to Apache Spark&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=sparklyr&#34;&gt;https://CRAN.R-project.org/package=sparklyr&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-broom&#34;&gt;
+&lt;p&gt;Robinson, David, and Alex Hayes. 2019. &lt;em&gt;Broom: Convert Statistical Analysis Objects into Tidy Tibbles&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=broom&#34;&gt;https://CRAN.R-project.org/package=broom&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-tidyverse&#34;&gt;
+&lt;p&gt;Wickham, Hadley. 2017. &lt;em&gt;Tidyverse: Easily Install and Load the ’Tidyverse’&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=tidyverse&#34;&gt;https://CRAN.R-project.org/package=tidyverse&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-knitr&#34;&gt;
+&lt;p&gt;Xie, Yihui. 2019. &lt;em&gt;Knitr: A General-Purpose Package for Dynamic Report Generation in R&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=knitr&#34;&gt;https://CRAN.R-project.org/package=knitr&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Here discovering means acquire data necessary to complete analysis tasks&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;In a block format, logical records of data are spread
+across multiple lines of a file. Typically one line (the “header”) con-
+tains metadata about the record, such as how many of the subsequent
+lines (the “payload”) belong to the record&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;To verify data qualityand its suitability for the analysis tasks. Example tasks include inspecting outliers, examining distributions&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;In the last section, the author move on to discuss improvements that can be made to analytic tools. I figure these suggestions are somehow outdated by today’s standard, and &lt;code&gt;tidyverse&lt;/code&gt;&lt;span class=&#34;citation&#34;&gt;(Wickham &lt;a href=&#34;#ref-R-tidyverse&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt;、&lt;code&gt;knitr&lt;/code&gt;&lt;span class=&#34;citation&#34;&gt;(Xie &lt;a href=&#34;#ref-R-knitr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;、&lt;code&gt;rmarkdown&lt;/code&gt;&lt;span class=&#34;citation&#34;&gt;(Allaire et al. &lt;a href=&#34;#ref-R-rmarkdown&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;、&lt;code&gt;shiny&lt;/code&gt;&lt;span class=&#34;citation&#34;&gt;(Chang et al. &lt;a href=&#34;#ref-R-shiny&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;、&lt;code&gt;sparklyr&lt;/code&gt;&lt;span class=&#34;citation&#34;&gt;(Luraschi et al. &lt;a href=&#34;#ref-R-sparklyr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; and some other packages in R have already given fine solutions to them, so this section is skipped.&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Of Certificate</title>
+      <link>/post/of-certificate/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/post/of-certificate/</guid>
+      <description>&lt;p&gt;With the ever-growing expansion of higher education, today’s world has seen college graduates growing in larger numbers, leading to fierce competition in the talent market, where a subtle craze for various of certificates is on the rise and here to stay. Students took several weeks or months cramming for an examination to get one certificate for qualification, and they aimed at another certificate afterwards, irrespective of what previous cramming has brought him or future learning routes on the subject concerned. What’s more, various training institutions sprouting up these days are also in a ferment. They go out their way to inculcate in the minds of patrons the importance of those certificates. Implanted the beliefs, many are under the illusion that certificates are panacea and selling points for their resume, that it would open up hidden opportunities. These convictions, however inappropriate, add to the mania.&lt;/p&gt;
+
+&lt;p&gt;Does a cupboard bedecked with certificates necessarily means competence? The answer is a qualified yes. The ultimate value of any accomplishment, including gaining certificates, depends on the what kind of capability to which it attests and what it will bring to us aside from physical evidence of any sort. Work that are too ambiguous to demonstrate certain abilities are rarely helpful, thus is not worth questing. And Work that revolves around rote learning without inspiring, is another slippery slope.&lt;/p&gt;
+
+&lt;p&gt;Certificates offered nowadays are multifarious. Take university students for example, one has a wide selection among CET 4 and CET 6 certificates, computer certificate, lawyer certificate, tour guide certificate, certified public accountant, certified tax accountant etc. And it is because this variety and inclusiveness, on the part of all these certificates, that make the majority of them don’t lend themselves to an adequate testament to the specific calibre that the workplace calls for. More importantly, some college students prepare for these examinations at the cost of their major disciplines, which could do more harm than good to their careers in long terms and defeat the purpose of certificate-gaining.&lt;/p&gt;
+
+&lt;p&gt;For another, learning is an end in itself. It is those confounding moments, self-discovery after self-doubt that make knowledge so desirable. A healthy way of learning inculcates in students a love for the subject, not just what the test requires, so the students can, and most importantly will, make the subject their business to learn. Most students, on the other hand, are swamped by exam-oriented education, deprived of the joy of mental adventure, so that creativity and ingenuous pursuit of knowledge can never be attained. While they are preparing for the examination related to certificates, reference books, didactic teaching, rote learning and cramming schooling play a major role. They are told so, and without serious consideration, another quiz begins. This process, however, produces only dilettantes with a smattering of knowledge that would soon grow unlearned. Of greater concern is that they may become unable to explore a new field without an all-knowing guide, but there is rarely a guide in practical working experience.&lt;/p&gt;
+
+&lt;p&gt;By no means am I making the conclusion that certificates are pure evil, for they can be equally used for good. Certificates and examinations correlated to one’s interests and consistent with his / her professional aspirations can, in most cases, cultivate one’s ability and guide them through the job market.&lt;/p&gt;
+
+&lt;p&gt;On balance, I believe that certificates do little to enhance one’s capability until we have poured in meaning efforts in something that would give meaning help in the days to come. Certificates itself is neutral, and we could use it to our advantage once we follow an appropriate way to learn. We should always acquire knowledge from the process and keep exploring and thinking instead of be guided by utilitarianism. Only in this way can we truly improve our abilities.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

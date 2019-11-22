@@ -8,7 +8,7 @@ categories:
 tags:
   - Data Science
 subtitle: ''
-summary: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by '
+summary: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer'
 authors: []
 lastmod: '2019-11-21T18:42:03+08:00'
 bibliography: bib/enterprise-data-analysis-and-visualization-an-interview-study.bib

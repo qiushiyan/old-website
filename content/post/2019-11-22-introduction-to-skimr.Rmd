@@ -35,7 +35,7 @@ projects: []
 knitr::opts_chunk$set(message=F)
 ```
 
-The **skimr**[@R-skimr] package is developed by the [rOpenSci](https://github.com/ropensci) cummunity, with its core function `skim()` as an enhanced version of `summary()`, and has just experienced a major update to V2. ^[In the sense that `skim()` provides useful, tidy summary statistics and display it in a pretty form for exploratory analysis based on data frames. `skim()` cannot supplant `summary()` in terms of model interpretation, viewing geospatial objects, etc.] 
+The **skimr**[@R-skimr] package is developed by the [rOpenSci](https://github.com/ropensci) cummunity, with its core function `skim()` as an enhanced version of `summary()`, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its [vignette](https://docs.ropensci.org/skimr/index.html). ^[In the sense that `skim()` provides useful, tidy summary statistics and displays it in a pretty form for exploratory analysis based on data frames. `skim()` cannot supplant `summary()` in terms of model interpretation, viewing geospatial objects, etc.] 
 
 What `skim()` returns can be divided into 2 parts:  
 
@@ -64,7 +64,7 @@ skim(iris, contains("Length"))
 ```
 
 
-We can also take the `summary` of the skimmed data frame, and get the **Data Summary** part:   
+We can also take the `summary()` of the skimmed data frame, and get the **Data Summary** part:   
 
 ```{r}
 skim(iris) %>% 
@@ -149,7 +149,7 @@ skim(iris) %>%
 
 ## Manipulating the results  {#manipulation}
 
-As noted above, `skim()` returns a wide data frame, an `skim_df` object. This is usually the most sensible format for the majority of operations when investigating data, so the package provides certain functions to convert `skim_df` into more useful data types(i.e., data frames).  
+As noted above, `skim()` returns a wide data frame, an `skim_df` object. This is usually the most sensible format for the majority of operations when investigating data, and **skimr** also provides functions aimed at facilitating the exploratory process .  
 
 First, `partition()` returns a named list of the wide data frames **for each data type**. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type. These data frames are, therefore, not `skim_df` objects. And we can easily subset that list to get desirable component:  
 
@@ -168,7 +168,7 @@ iris %>%
   map(class)
 ```
 
-This is useful when we only want to look at certain data types, we can subset that component out of the `partition` result, coerce it to a tibble, and then manipulate it. We don't have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:  
+This is useful when we only want to look at certain data types, we can subset that component out of the partitioned result, coerce it to a tibble, and then manipulate it. We don't have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:  
 
 ```{r}
 # subset
@@ -266,7 +266,7 @@ lynx
 skim(lynx)
 ```
 
-when skimming matrices, columns and treated as variables and rows and records, so statistics calculated are in fact column-wise:  
+when skimming matrices, columns and treated as variables and rows as observations, so statistics are calculated on a column basis:  
 
 ```{r}
 m <- matrix(1:12, nrow = 4, ncol = 3)

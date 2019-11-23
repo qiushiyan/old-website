@@ -33,7 +33,7 @@ projects: []
 </div>
 <div id="intro" class="section level2">
 <h2><code>skim()</code> basics</h2>
-<p>The <strong>skimr</strong><span class="citation">(Waring et al. <a href="#ref-R-skimr" role="doc-biblioref">2019</a>)</span> package is developed by the <a href="https://github.com/ropensci">rOpenSci</a> cummunity, with its core function <code>skim()</code> as an enhanced version of <code>summary()</code>, and has just experienced a major update to V2.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>The <strong>skimr</strong><span class="citation">(Waring et al. <a href="#ref-R-skimr" role="doc-biblioref">2019</a>)</span> package is developed by the <a href="https://github.com/ropensci">rOpenSci</a> cummunity, with its core function <code>skim()</code> as an enhanced version of <code>summary()</code>, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its <a href="https://docs.ropensci.org/skimr/index.html">vignette</a>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>What <code>skim()</code> returns can be divided into 2 parts:</p>
 <ul>
 <li><strong>Data summary</strong>: an overview of the input data frame, including <strong>#</strong> of rows and columns, column types and if the data frame is grouped<br />
@@ -363,7 +363,7 @@ library(tidyverse)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>We can also take the <code>summary</code> of the skimmed data frame, and get the <strong>Data Summary</strong> part:</p>
+<p>We can also take the <code>summary()</code> of the skimmed data frame, and get the <strong>Data Summary</strong> part:</p>
 <pre class="r"><code>skim(iris) %&gt;% 
   summary()</code></pre>
 <table>
@@ -969,7 +969,7 @@ skim(iris) %&gt;%
 </div>
 <div id="manipulation" class="section level2">
 <h2>Manipulating the results</h2>
-<p>As noted above, <code>skim()</code> returns a wide data frame, an <code>skim_df</code> object. This is usually the most sensible format for the majority of operations when investigating data, so the package provides certain functions to convert <code>skim_df</code> into more useful data types(i.e., data frames).</p>
+<p>As noted above, <code>skim()</code> returns a wide data frame, an <code>skim_df</code> object. This is usually the most sensible format for the majority of operations when investigating data, and <strong>skimr</strong> also provides functions aimed at facilitating the exploratory process .</p>
 <p>First, <code>partition()</code> returns a named list of the wide data frames <strong>for each data type</strong>. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type. These data frames are, therefore, not <code>skim_df</code> objects. And we can easily subset that list to get desirable component:</p>
 <pre class="r"><code>iris %&gt;%
   skim() %&gt;%
@@ -1079,7 +1079,7 @@ skim(iris) %&gt;%
 ## 
 ## $numeric
 ## [1] &quot;one_skim_df&quot; &quot;tbl_df&quot;      &quot;tbl&quot;         &quot;data.frame&quot;</code></pre>
-<p>This is useful when we only want to look at certain data types, we can subset that component out of the <code>partition</code> result, coerce it to a tibble, and then manipulate it. We don’t have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:</p>
+<p>This is useful when we only want to look at certain data types, we can subset that component out of the partitioned result, coerce it to a tibble, and then manipulate it. We don’t have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:</p>
 <pre class="r"><code># subset
 iris_numeric &lt;- iris %&gt;%
   skim() %&gt;% 
@@ -1657,7 +1657,7 @@ skim(lynx)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>when skimming matrices, columns and treated as variables and rows and records, so statistics calculated are in fact column-wise:</p>
+<p>when skimming matrices, columns and treated as variables and rows as observations, so statistics are calculated on a column basis:</p>
 <pre class="r"><code>m &lt;- matrix(1:12, nrow = 4, ncol = 3)
 m</code></pre>
 <pre><code>##      [,1] [,2] [,3]
@@ -1888,6 +1888,6 @@ m</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>In the sense that <code>skim()</code> provides useful, tidy summary statistics and display it in a pretty form for exploratory analysis based on data frames. <code>skim()</code> cannot supplant <code>summary()</code> in terms of model interpretation, viewing geospatial objects, etc.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>In the sense that <code>skim()</code> provides useful, tidy summary statistics and displays it in a pretty form for exploratory analysis based on data frames. <code>skim()</code> cannot supplant <code>summary()</code> in terms of model interpretation, viewing geospatial objects, etc.<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>

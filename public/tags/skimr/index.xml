@@ -30,7 +30,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;intro&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/h2&gt;
-&lt;p&gt;The &lt;strong&gt;skimr&lt;/strong&gt;&lt;span class=&#34;citation&#34;&gt;(Waring et al. &lt;a href=&#34;#ref-R-skimr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; package is developed by the &lt;a href=&#34;https://github.com/ropensci&#34;&gt;rOpenSci&lt;/a&gt; cummunity, with its core function &lt;code&gt;skim()&lt;/code&gt; as an enhanced version of &lt;code&gt;summary()&lt;/code&gt;, and has just experienced a major update to V2.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;skimr&lt;/strong&gt;&lt;span class=&#34;citation&#34;&gt;(Waring et al. &lt;a href=&#34;#ref-R-skimr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; package is developed by the &lt;a href=&#34;https://github.com/ropensci&#34;&gt;rOpenSci&lt;/a&gt; cummunity, with its core function &lt;code&gt;skim()&lt;/code&gt; as an enhanced version of &lt;code&gt;summary()&lt;/code&gt;, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its &lt;a href=&#34;https://docs.ropensci.org/skimr/index.html&#34;&gt;vignette&lt;/a&gt;.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;What &lt;code&gt;skim()&lt;/code&gt; returns can be divided into 2 parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Data summary&lt;/strong&gt;: an overview of the input data frame, including &lt;strong&gt;#&lt;/strong&gt; of rows and columns, column types and if the data frame is grouped&lt;br /&gt;
@@ -360,7 +360,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;We can also take the &lt;code&gt;summary&lt;/code&gt; of the skimmed data frame, and get the &lt;strong&gt;Data Summary&lt;/strong&gt; part:&lt;/p&gt;
+&lt;p&gt;We can also take the &lt;code&gt;summary()&lt;/code&gt; of the skimmed data frame, and get the &lt;strong&gt;Data Summary&lt;/strong&gt; part:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   summary()&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
@@ -966,7 +966,7 @@ skim(iris) %&amp;gt;%
 &lt;/div&gt;
 &lt;div id=&#34;manipulation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Manipulating the results&lt;/h2&gt;
-&lt;p&gt;As noted above, &lt;code&gt;skim()&lt;/code&gt; returns a wide data frame, an &lt;code&gt;skim_df&lt;/code&gt; object. This is usually the most sensible format for the majority of operations when investigating data, so the package provides certain functions to convert &lt;code&gt;skim_df&lt;/code&gt; into more useful data types(i.e., data frames).&lt;/p&gt;
+&lt;p&gt;As noted above, &lt;code&gt;skim()&lt;/code&gt; returns a wide data frame, an &lt;code&gt;skim_df&lt;/code&gt; object. This is usually the most sensible format for the majority of operations when investigating data, and &lt;strong&gt;skimr&lt;/strong&gt; also provides functions aimed at facilitating the exploratory process .&lt;/p&gt;
 &lt;p&gt;First, &lt;code&gt;partition()&lt;/code&gt; returns a named list of the wide data frames &lt;strong&gt;for each data type&lt;/strong&gt;. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type. These data frames are, therefore, not &lt;code&gt;skim_df&lt;/code&gt; objects. And we can easily subset that list to get desirable component:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;iris %&amp;gt;%
   skim() %&amp;gt;%
@@ -1076,7 +1076,7 @@ skim(iris) %&amp;gt;%
 ## 
 ## $numeric
 ## [1] &amp;quot;one_skim_df&amp;quot; &amp;quot;tbl_df&amp;quot;      &amp;quot;tbl&amp;quot;         &amp;quot;data.frame&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is useful when we only want to look at certain data types, we can subset that component out of the &lt;code&gt;partition&lt;/code&gt; result, coerce it to a tibble, and then manipulate it. We don’t have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:&lt;/p&gt;
+&lt;p&gt;This is useful when we only want to look at certain data types, we can subset that component out of the partitioned result, coerce it to a tibble, and then manipulate it. We don’t have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# subset
 iris_numeric &amp;lt;- iris %&amp;gt;%
   skim() %&amp;gt;% 
@@ -1654,7 +1654,7 @@ skim(lynx)&lt;/code&gt;&lt;/pre&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;when skimming matrices, columns and treated as variables and rows and records, so statistics calculated are in fact column-wise:&lt;/p&gt;
+&lt;p&gt;when skimming matrices, columns and treated as variables and rows as observations, so statistics are calculated on a column basis:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;m &amp;lt;- matrix(1:12, nrow = 4, ncol = 3)
 m&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      [,1] [,2] [,3]
@@ -1885,7 +1885,7 @@ m&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;In the sense that &lt;code&gt;skim()&lt;/code&gt; provides useful, tidy summary statistics and display it in a pretty form for exploratory analysis based on data frames. &lt;code&gt;skim()&lt;/code&gt; cannot supplant &lt;code&gt;summary()&lt;/code&gt; in terms of model interpretation, viewing geospatial objects, etc.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;In the sense that &lt;code&gt;skim()&lt;/code&gt; provides useful, tidy summary statistics and displays it in a pretty form for exploratory analysis based on data frames. &lt;code&gt;skim()&lt;/code&gt; cannot supplant &lt;code&gt;summary()&lt;/code&gt; in terms of model interpretation, viewing geospatial objects, etc.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>

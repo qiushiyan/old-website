@@ -1,0 +1,286 @@
+---
+title: Introduction to skimr
+author: Qiushi Yan
+date: '2019-11-22'
+slug: introduction-to-skimr
+categories:
+  - R
+tags:
+  - skimr
+subtitle: ''
+summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics about variables.'
+bibliography: bib/introduction-to-skimr.bib
+biblio-style: "apalike"
+link-citations: true
+lastmod: '2019-11-22T23:27:44+08:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+## Table of Contents 
+
+1.[`skim()` basics](#intro)  
+2.[Manipulating the results](#manipulation)  
+3.[Customizing `skim()`](#customization)   
+4.[Skimming non-data frames](#other)  
+5.[References](#ref)
+
+## `skim()` basics  {#intro}
+
+```{r, include=F}
+knitr::opts_chunk$set(message=F)
+```
+
+The **skimr**[@R-skimr] package is developed by the [rOpenSci](https://github.com/ropensci) cummunity, with its core function `skim()` as an enhanced version of `summary()`, and has just experienced a major update to V2. ^[In the sense that `skim()` provides useful, tidy summary statistics and display it in a pretty form for exploratory analysis based on data frames. `skim()` cannot supplant `summary()` in terms of model interpretation, viewing geospatial objects, etc.] 
+
+What `skim()` returns can be divided into 2 parts:  
+
+  * **Data summary**: an overview of the input data frame, including **#** of rows and columns, column types and if the data frame is grouped  
+  * **Summary of column variables based on their types, with one section per variable type and one row per variable**: For instance, all numerical variables are explained by missing rate, quantiles (`fivenum()`), mean, standard deviation and a tiny inline histogram. With factors, the count of top values are returned instaed.  
+
+```{r}
+library(skimr)
+library(tidyverse)
+```
+
+```{r}
+skim(iris)
+```
+
+The second argument `...` in `skim()` could specify any number of variables to be included, similar to `dplyr::select()`: 
+
+```{r}
+skim(iris, Sepal.Width, Species)
+```
+
+or with common `select()` helpers:  
+
+```{r}
+skim(iris, contains("Length"))
+```
+
+
+We can also take the `summary` of the skimmed data frame, and get the **Data Summary** part:   
+
+```{r}
+skim(iris) %>% 
+  summary()
+```
+
+
+
+`skim()` also supports grouped data created by `dplyr::group_by()`(and later we will see that `skim()` workes seamlessly in a typical **tidyverse**[@tidyverse2019] workflow). In the grouped case, one additional column for each grouping variable is added.
+
+```{r}
+iris %>%
+  group_by(Species) %>%
+  skim()
+```
+
+To better illustrate `skim()`, we should know it returns a `skim_df` object, which is essentially **a single wide data frame** combining the results, with some additional attributes and two metadata columns:  
+
+* skim_type: class of the variable
+* skim_variable: name of the original variable  
+  
+
+`is_skim_df()` function is used to assert that an object is a skim_df.
+
+```{r}
+class(skim(iris))
+is_skim_df(skim(iris))
+```
+
+To explicitly show 2 columns `skim_type` and `skim_variable` and see the nature of this `skim_df` object, we can transfrom it to a `tibble` or `data.frame`  
+
+```{r}
+iris %>% 
+  skim() %>% 
+  as_tibble()
+```
+
+As you can see, the **Data Summary** part are excluded after the transformation, and the wide data frame are left. This is in contrast to `summary.data.frame()`, which stores statistics in a table. The distinction is important, **because the `skim_df object` is pipeable and easy to use for additional manipulation**: for example, the user could select all of the `variable` means, or all summary statistics for a specific variable (Note that we don't have to really transform it before such manipulation).  
+
+Filtering by column types:  
+
+```{r}
+skim(iris) %>% 
+  filter(skim_type == "numeric")
+```
+
+
+```{r}
+skim(iris) %>% 
+  filter(skim_variable == "Sepal.Length")
+```
+
+
+When using `select()` to choose statistics we want to display, `n_missing` and `complete_rate` can be directly specified, since they are computed for all types of columns. Other statistics must be specified in `select` with a prefix, as shown in the column names of `skim(iris) %>% as_tibble()` (i.e, extracting the arithmet mean by `numeric.mean`):
+
+```{r}
+# no need to put a prefix
+skim(iris) %>% 
+  select(skim_variable, skim_type, n_missing, complete_rate)
+```
+
+`
+```{r}
+# extract the mean and median with a prefix
+skim(iris) %>% 
+  filter(skim_type == "numeric") %>%
+  select(skim_variable, numeric.mean, numeric.p50)
+# extract top levels of a factor
+skim(iris) %>% 
+  filter(skim_type == "factor") %>% 
+  select(skim_variable, factor.top_counts)
+```
+
+Finally, just for fun, what statistics or which variable we choose to use will not affect the `skim_df` variable type, yet this is not the case for `skim_variable` and `skim_type`, which are intrinsic to `skim_df` objects. If we exclude these two, the `skim_df` object will be automatically coerced to a tibble:
+
+```{r}
+skim(iris) %>% 
+  select(-skim_type, -skim_variable) %>%
+  is_skim_df
+```
+
+
+## Manipulating the results  {#manipulation}
+
+As noted above, `skim()` returns a wide data frame, an `skim_df` object. This is usually the most sensible format for the majority of operations when investigating data, so the package provides certain functions to convert `skim_df` into more useful data types(i.e., data frames).  
+
+First, `partition()` returns a named list of the wide data frames **for each data type**. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type. These data frames are, therefore, not `skim_df` objects. And we can easily subset that list to get desirable component:  
+
+```{r}
+iris %>%
+  skim() %>%
+  partition()
+```
+
+Each component of the resulting list is an `one_skim_df` object, and can be readily coerced to tibbles:  
+
+```{r}
+iris %>%
+  skim() %>%
+  partition() %>%
+  map(class)
+```
+
+This is useful when we only want to look at certain data types, we can subset that component out of the `partition` result, coerce it to a tibble, and then manipulate it. We don't have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:  
+
+```{r}
+# subset
+iris_numeric <- iris %>%
+  skim() %>% 
+  partition() %>%
+  pluck("numeric") %>%
+  as_tibble()
+
+iris_numeric %>% 
+  arrange(sd)  ## no more numeric.sd
+```
+
+Second, `yank()` selects only specified variables base on their type, this can be viewed as a shortcut to `partition()` and subsetting:   
+
+```{r}
+iris %>% 
+  skim() %>% 
+  yank("factor")
+```
+
+Use `focus()` to select columns of the skimmed results and keep them as a `skim_df`; it always keeps the metadata column. In other words, to **focus** on some statistics:  
+
+```{r}
+iris %>% 
+  skim() %>%
+  focus(n_missing, numeric.mean)
+```
+
+## Customizing `skim()`  {#customization}
+
+We can create out own skimming function with the `skim_with()` function factory. To add a statistic for a data type, create an `sfl()` (a skimr function list) for each class that you want to change:  
+
+```{r}
+# also look at skewness and kurtosis for numerical variables
+library(e1071)
+my_skim <- skim_with(numeric = sfl("3rd_central_moment" = skewness,
+                                   "4th_central_moment" = kurtosis))
+```
+
+Now, we can use `my_skim` to skim through numerical variables:  
+
+```{r}
+my_skim(iris) %>% 
+  yank("numeric")
+```
+
+When using `skim_with()`, the named list in `sf1()` correspond to statistics calculated on a specified type, so names of that list must fall into one of R's classes, available classes are (see `?get_skimmers`):  
+
+* numeric
+* character  
+* factor  
+* logical  
+* complex  
+* Date   
+* POSIXct  
+* difftime  
+* ts  
+* AsIs  
+
+It you want to customize `skim()` to support more data classes, [here](https://docs.ropensci.org/skimr/articles/Supporting_additional_objects.html#conclusion) is an simple example, adding support for `sf` oject.  
+
+
+
+## Skimming non-data frames  {#other}
+
+In **skimr** [v2](https://github.com/ropensci/skimr/releases), `skim()` will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in as.data.frame().  
+
+
+Skimming charactor vector:  
+```{r}
+
+skim(letters)
+```
+
+This is same to: 
+
+```{r}
+skim(as.data.frame(letters))
+```
+
+The way `skim()` works with `list` is some natural, for data frames are just a special case of list:  
+```{r}
+my_list <- list(a = 1:10, b = letters[1:10], c = factor(1:10))
+skim(my_list)
+```
+
+
+
+skimming `ts` object: 
+
+```{r}
+lynx
+# note the last inline line graph, pretty cute
+skim(lynx)
+```
+
+when skimming matrices, columns and treated as variables and rows and records, so statistics calculated are in fact column-wise:  
+
+```{r}
+m <- matrix(1:12, nrow = 4, ncol = 3)
+m
+```
+
+```{r}
+skim(m)
+```
+
+Transpose the matrix:  
+
+```{r}
+skim(t(m))
+```
+
+## References {#ref}

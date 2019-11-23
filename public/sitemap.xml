@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</loc>
+    <lastmod>2019-11-22T14:09:39+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/introduction-to-skimr/</loc>
+    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/skimr/</loc>
+    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/50-years-of-data-science/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
   </url>
@@ -10,11 +50,6 @@
   <url>
     <loc>/project/advanced-r-graphics/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-11-21T18:42:03+08:00</lastmod>
   </url>
   
   <url>
@@ -43,18 +78,8 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-11-21T18:42:03+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/project/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-11-21T18:42:03+08:00</lastmod>
   </url>
   
   <url>
@@ -80,11 +105,6 @@
   <url>
     <loc>/project/readings/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-11-21T18:42:03+08:00</lastmod>
   </url>
   
   <url>

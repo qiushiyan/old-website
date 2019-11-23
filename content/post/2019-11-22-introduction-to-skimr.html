@@ -1,0 +1,1893 @@
+---
+title: Introduction to skimr
+author: Qiushi Yan
+date: '2019-11-22'
+slug: introduction-to-skimr
+categories:
+  - R
+tags:
+  - skimr
+subtitle: ''
+summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics about variables.'
+bibliography: bib/introduction-to-skimr.bib
+biblio-style: "apalike"
+link-citations: true
+lastmod: '2019-11-22T23:27:44+08:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<div id="table-of-contents" class="section level2">
+<h2>Table of Contents</h2>
+<p>1.<a href="#intro"><code>skim()</code> basics</a><br />
+2.<a href="#manipulation">Manipulating the results</a><br />
+3.<a href="#customization">Customizing <code>skim()</code></a><br />
+4.<a href="#other">Skimming non-data frames</a><br />
+5.<a href="#ref">References</a></p>
+</div>
+<div id="intro" class="section level2">
+<h2><code>skim()</code> basics</h2>
+<p>The <strong>skimr</strong><span class="citation">(Waring et al. <a href="#ref-R-skimr" role="doc-biblioref">2019</a>)</span> package is developed by the <a href="https://github.com/ropensci">rOpenSci</a> cummunity, with its core function <code>skim()</code> as an enhanced version of <code>summary()</code>, and has just experienced a major update to V2.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>What <code>skim()</code> returns can be divided into 2 parts:</p>
+<ul>
+<li><strong>Data summary</strong>: an overview of the input data frame, including <strong>#</strong> of rows and columns, column types and if the data frame is grouped<br />
+</li>
+<li><strong>Summary of column variables based on their types, with one section per variable type and one row per variable</strong>: For instance, all numerical variables are explained by missing rate, quantiles (<code>fivenum()</code>), mean, standard deviation and a tiny inline histogram. With factors, the count of top values are returned instaed.</li>
+</ul>
+<pre class="r"><code>library(skimr)
+library(tidyverse)</code></pre>
+<pre class="r"><code>skim(iris)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-3">Table 1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">set: 50, ver: 50, vir: 50</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.00</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.20</td>
+<td align="right">0.76</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
+<td align="right">1.30</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="left">▇▁▇▅▃</td>
+</tr>
+</tbody>
+</table>
+<p>The second argument <code>...</code> in <code>skim()</code> could specify any number of variables to be included, similar to <code>dplyr::select()</code>:</p>
+<pre class="r"><code>skim(iris, Sepal.Width, Species)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 2: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">set: 50, ver: 50, vir: 50</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2</td>
+<td align="right">2.8</td>
+<td align="right">3</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
+</tr>
+</tbody>
+</table>
+<p>or with common <code>select()</code> helpers:</p>
+<pre class="r"><code>skim(iris, contains(&quot;Length&quot;))</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-5">Table 3: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
+</tr>
+</tbody>
+</table>
+<p>We can also take the <code>summary</code> of the skimmed data frame, and get the <strong>Data Summary</strong> part:</p>
+<pre class="r"><code>skim(iris) %&gt;% 
+  summary()</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 4: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><code>skim()</code> also supports grouped data created by <code>dplyr::group_by()</code>(and later we will see that <code>skim()</code> workes seamlessly in a typical <strong>tidyverse</strong><span class="citation">(Wickham et al. <a href="#ref-tidyverse2019" role="doc-biblioref">2019</a>)</span> workflow). In the grouped case, one additional column for each grouping variable is added.</p>
+<pre class="r"><code>iris %&gt;%
+  group_by(Species) %&gt;%
+  skim()</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-7">Table 5: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">Species</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="left">Species</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="left">setosa</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.01</td>
+<td align="right">0.35</td>
+<td align="right">4.3</td>
+<td align="right">4.80</td>
+<td align="right">5.00</td>
+<td align="right">5.20</td>
+<td align="right">5.8</td>
+<td align="left">▃▃▇▅▁</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Length</td>
+<td align="left">versicolor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.94</td>
+<td align="right">0.52</td>
+<td align="right">4.9</td>
+<td align="right">5.60</td>
+<td align="right">5.90</td>
+<td align="right">6.30</td>
+<td align="right">7.0</td>
+<td align="left">▂▇▆▃▃</td>
+</tr>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="left">virginica</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6.59</td>
+<td align="right">0.64</td>
+<td align="right">4.9</td>
+<td align="right">6.23</td>
+<td align="right">6.50</td>
+<td align="right">6.90</td>
+<td align="right">7.9</td>
+<td align="left">▁▃▇▃▂</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="left">setosa</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.43</td>
+<td align="right">0.38</td>
+<td align="right">2.3</td>
+<td align="right">3.20</td>
+<td align="right">3.40</td>
+<td align="right">3.68</td>
+<td align="right">4.4</td>
+<td align="left">▁▃▇▅▂</td>
+</tr>
+<tr class="odd">
+<td align="left">Sepal.Width</td>
+<td align="left">versicolor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.77</td>
+<td align="right">0.31</td>
+<td align="right">2.0</td>
+<td align="right">2.52</td>
+<td align="right">2.80</td>
+<td align="right">3.00</td>
+<td align="right">3.4</td>
+<td align="left">▁▅▆▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="left">virginica</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.97</td>
+<td align="right">0.32</td>
+<td align="right">2.2</td>
+<td align="right">2.80</td>
+<td align="right">3.00</td>
+<td align="right">3.18</td>
+<td align="right">3.8</td>
+<td align="left">▂▆▇▅▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="left">setosa</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.46</td>
+<td align="right">0.17</td>
+<td align="right">1.0</td>
+<td align="right">1.40</td>
+<td align="right">1.50</td>
+<td align="right">1.58</td>
+<td align="right">1.9</td>
+<td align="left">▁▃▇▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Length</td>
+<td align="left">versicolor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4.26</td>
+<td align="right">0.47</td>
+<td align="right">3.0</td>
+<td align="right">4.00</td>
+<td align="right">4.35</td>
+<td align="right">4.60</td>
+<td align="right">5.1</td>
+<td align="left">▂▂▇▇▆</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="left">virginica</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.55</td>
+<td align="right">0.55</td>
+<td align="right">4.5</td>
+<td align="right">5.10</td>
+<td align="right">5.55</td>
+<td align="right">5.88</td>
+<td align="right">6.9</td>
+<td align="left">▃▇▇▃▂</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="left">setosa</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.25</td>
+<td align="right">0.11</td>
+<td align="right">0.1</td>
+<td align="right">0.20</td>
+<td align="right">0.20</td>
+<td align="right">0.30</td>
+<td align="right">0.6</td>
+<td align="left">▇▂▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Width</td>
+<td align="left">versicolor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.33</td>
+<td align="right">0.20</td>
+<td align="right">1.0</td>
+<td align="right">1.20</td>
+<td align="right">1.30</td>
+<td align="right">1.50</td>
+<td align="right">1.8</td>
+<td align="left">▅▇▃▆▁</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="left">virginica</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.03</td>
+<td align="right">0.27</td>
+<td align="right">1.4</td>
+<td align="right">1.80</td>
+<td align="right">2.00</td>
+<td align="right">2.30</td>
+<td align="right">2.5</td>
+<td align="left">▂▇▆▅▇</td>
+</tr>
+</tbody>
+</table>
+<p>To better illustrate <code>skim()</code>, we should know it returns a <code>skim_df</code> object, which is essentially <strong>a single wide data frame</strong> combining the results, with some additional attributes and two metadata columns:</p>
+<ul>
+<li>skim_type: class of the variable</li>
+<li>skim_variable: name of the original variable</li>
+</ul>
+<p><code>is_skim_df()</code> function is used to assert that an object is a skim_df.</p>
+<pre class="r"><code>class(skim(iris))</code></pre>
+<pre><code>## [1] &quot;skim_df&quot;    &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>is_skim_df(skim(iris))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>To explicitly show 2 columns <code>skim_type</code> and <code>skim_variable</code> and see the nature of this <code>skim_df</code> object, we can transfrom it to a <code>tibble</code> or <code>data.frame</code></p>
+<pre class="r"><code>iris %&gt;% 
+  skim() %&gt;% 
+  as_tibble()</code></pre>
+<pre><code>## # A tibble: 5 x 15
+##   skim_type skim_variable n_missing complete_rate factor.ordered factor.n_unique
+##   &lt;chr&gt;     &lt;chr&gt;             &lt;int&gt;         &lt;dbl&gt; &lt;lgl&gt;                    &lt;int&gt;
+## 1 factor    Species               0             1 FALSE                        3
+## 2 numeric   Sepal.Length          0             1 NA                          NA
+## 3 numeric   Sepal.Width           0             1 NA                          NA
+## 4 numeric   Petal.Length          0             1 NA                          NA
+## 5 numeric   Petal.Width           0             1 NA                          NA
+## # ... with 9 more variables: factor.top_counts &lt;chr&gt;, numeric.mean &lt;dbl&gt;,
+## #   numeric.sd &lt;dbl&gt;, numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;, numeric.p50 &lt;dbl&gt;,
+## #   numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;, numeric.hist &lt;chr&gt;</code></pre>
+<p>As you can see, the <strong>Data Summary</strong> part are excluded after the transformation, and the wide data frame are left. This is in contrast to <code>summary.data.frame()</code>, which stores statistics in a table. The distinction is important, <strong>because the <code>skim_df object</code> is pipeable and easy to use for additional manipulation</strong>: for example, the user could select all of the <code>variable</code> means, or all summary statistics for a specific variable (Note that we don’t have to really transform it before such manipulation).</p>
+<p>Filtering by column types:</p>
+<pre class="r"><code>skim(iris) %&gt;% 
+  filter(skim_type == &quot;numeric&quot;)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-10">Table 6: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.00</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.20</td>
+<td align="right">0.76</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
+<td align="right">1.30</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="left">▇▁▇▅▃</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>skim(iris) %&gt;% 
+  filter(skim_variable == &quot;Sepal.Length&quot;)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-11">Table 7: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.8</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
+</tr>
+</tbody>
+</table>
+<p>When using <code>select()</code> to choose statistics we want to display, <code>n_missing</code> and <code>complete_rate</code> can be directly specified, since they are computed for all types of columns. Other statistics must be specified in <code>select</code> with a prefix, as shown in the column names of <code>skim(iris) %&gt;% as_tibble()</code> (i.e, extracting the arithmet mean by <code>numeric.mean</code>):</p>
+<pre class="r"><code># no need to put a prefix
+skim(iris) %&gt;% 
+  select(skim_variable, skim_type, n_missing, complete_rate)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-12">Table 8: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>`</p>
+<pre class="r"><code># extract the mean and median with a prefix
+skim(iris) %&gt;% 
+  filter(skim_type == &quot;numeric&quot;) %&gt;%
+  select(skim_variable, numeric.mean, numeric.p50)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   skim_variable numeric.mean numeric.p50
+##   &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Sepal.Length          5.84        5.8 
+## 2 Sepal.Width           3.06        3   
+## 3 Petal.Length          3.76        4.35
+## 4 Petal.Width           1.20        1.3</code></pre>
+<pre class="r"><code># extract top levels of a factor
+skim(iris) %&gt;% 
+  filter(skim_type == &quot;factor&quot;) %&gt;% 
+  select(skim_variable, factor.top_counts)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   skim_variable factor.top_counts        
+##   &lt;chr&gt;         &lt;chr&gt;                    
+## 1 Species       set: 50, ver: 50, vir: 50</code></pre>
+<p>Finally, just for fun, what statistics or which variable we choose to use will not affect the <code>skim_df</code> variable type, yet this is not the case for <code>skim_variable</code> and <code>skim_type</code>, which are intrinsic to <code>skim_df</code> objects. If we exclude these two, the <code>skim_df</code> object will be automatically coerced to a tibble:</p>
+<pre class="r"><code>skim(iris) %&gt;% 
+  select(-skim_type, -skim_variable) %&gt;%
+  is_skim_df</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+<div id="manipulation" class="section level2">
+<h2>Manipulating the results</h2>
+<p>As noted above, <code>skim()</code> returns a wide data frame, an <code>skim_df</code> object. This is usually the most sensible format for the majority of operations when investigating data, so the package provides certain functions to convert <code>skim_df</code> into more useful data types(i.e., data frames).</p>
+<p>First, <code>partition()</code> returns a named list of the wide data frames <strong>for each data type</strong>. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type. These data frames are, therefore, not <code>skim_df</code> objects. And we can easily subset that list to get desirable component:</p>
+<pre class="r"><code>iris %&gt;%
+  skim() %&gt;%
+  partition()</code></pre>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">set: 50, ver: 50, vir: 50</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.00</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.20</td>
+<td align="right">0.76</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
+<td align="right">1.30</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="left">▇▁▇▅▃</td>
+</tr>
+</tbody>
+</table>
+<p>Each component of the resulting list is an <code>one_skim_df</code> object, and can be readily coerced to tibbles:</p>
+<pre class="r"><code>iris %&gt;%
+  skim() %&gt;%
+  partition() %&gt;%
+  map(class)</code></pre>
+<pre><code>## $factor
+## [1] &quot;one_skim_df&quot; &quot;tbl_df&quot;      &quot;tbl&quot;         &quot;data.frame&quot; 
+## 
+## $numeric
+## [1] &quot;one_skim_df&quot; &quot;tbl_df&quot;      &quot;tbl&quot;         &quot;data.frame&quot;</code></pre>
+<p>This is useful when we only want to look at certain data types, we can subset that component out of the <code>partition</code> result, coerce it to a tibble, and then manipulate it. We don’t have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:</p>
+<pre class="r"><code># subset
+iris_numeric &lt;- iris %&gt;%
+  skim() %&gt;% 
+  partition() %&gt;%
+  pluck(&quot;numeric&quot;) %&gt;%
+  as_tibble()
+
+iris_numeric %&gt;% 
+  arrange(sd)  ## no more numeric.sd</code></pre>
+<pre><code>## # A tibble: 4 x 11
+##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
+##   &lt;chr&gt;             &lt;int&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3
+## 2 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8
+## 3 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4
+## 4 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1
+## # ... with 2 more variables: p100 &lt;dbl&gt;, hist &lt;chr&gt;</code></pre>
+<p>Second, <code>yank()</code> selects only specified variables base on their type, this can be viewed as a shortcut to <code>partition()</code> and subsetting:</p>
+<pre class="r"><code>iris %&gt;% 
+  skim() %&gt;% 
+  yank(&quot;factor&quot;)</code></pre>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">set: 50, ver: 50, vir: 50</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>focus()</code> to select columns of the skimmed results and keep them as a <code>skim_df</code>; it always keeps the metadata column. In other words, to <strong>focus</strong> on some statistics:</p>
+<pre class="r"><code>iris %&gt;% 
+  skim() %&gt;%
+  focus(n_missing, numeric.mean)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-19">Table 9: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">5.84</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">3.06</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">3.76</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1.20</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="customization" class="section level2">
+<h2>Customizing <code>skim()</code></h2>
+<p>We can create out own skimming function with the <code>skim_with()</code> function factory. To add a statistic for a data type, create an <code>sfl()</code> (a skimr function list) for each class that you want to change:</p>
+<pre class="r"><code># also look at skewness and kurtosis for numerical variables
+library(e1071)
+my_skim &lt;- skim_with(numeric = sfl(&quot;3rd_central_moment&quot; = skewness,
+                                   &quot;4th_central_moment&quot; = kurtosis))</code></pre>
+<p>Now, we can use <code>my_skim</code> to skim through numerical variables:</p>
+<pre class="r"><code>my_skim(iris) %&gt;% 
+  yank(&quot;numeric&quot;)</code></pre>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+<th align="right">3rd_central_moment</th>
+<th align="right">4th_central_moment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
+<td align="right">0.31</td>
+<td align="right">-0.61</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.00</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
+<td align="right">0.31</td>
+<td align="right">0.14</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
+<td align="right">-0.27</td>
+<td align="right">-1.42</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.20</td>
+<td align="right">0.76</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
+<td align="right">1.30</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="left">▇▁▇▅▃</td>
+<td align="right">-0.10</td>
+<td align="right">-1.36</td>
+</tr>
+</tbody>
+</table>
+<p>When using <code>skim_with()</code>, the named list in <code>sf1()</code> correspond to statistics calculated on a specified type, so names of that list must fall into one of R’s classes, available classes are (see <code>?get_skimmers</code>):</p>
+<ul>
+<li>numeric</li>
+<li>character<br />
+</li>
+<li>factor<br />
+</li>
+<li>logical<br />
+</li>
+<li>complex<br />
+</li>
+<li>Date<br />
+</li>
+<li>POSIXct<br />
+</li>
+<li>difftime<br />
+</li>
+<li>ts<br />
+</li>
+<li>AsIs</li>
+</ul>
+<p>It you want to customize <code>skim()</code> to support more data classes, <a href="https://docs.ropensci.org/skimr/articles/Supporting_additional_objects.html#conclusion">here</a> is an simple example, adding support for <code>sf</code> oject.</p>
+</div>
+<div id="other" class="section level2">
+<h2>Skimming non-data frames</h2>
+<p>In <strong>skimr</strong> <a href="https://github.com/ropensci/skimr/releases">v2</a>, <code>skim()</code> will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in as.data.frame().</p>
+<p>Skimming charactor vector:</p>
+<pre class="r"><code>skim(letters)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-22">Table 10: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">letters</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">26</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">data</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">26</td>
+<td align="left">a: 1, b: 1, c: 1, d: 1</td>
+</tr>
+</tbody>
+</table>
+<p>This is same to:</p>
+<pre class="r"><code>skim(as.data.frame(letters))</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-23">Table 11: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">as.data.frame(letters)</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">26</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">letters</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">26</td>
+<td align="left">a: 1, b: 1, c: 1, d: 1</td>
+</tr>
+</tbody>
+</table>
+<p>The way <code>skim()</code> works with <code>list</code> is some natural, for data frames are just a special case of list:</p>
+<pre class="r"><code>my_list &lt;- list(a = 1:10, b = letters[1:10], c = factor(1:10))
+skim(my_list)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-24">Table 12: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">my_list</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">b</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">10</td>
+<td align="left">a: 1, b: 1, c: 1, d: 1</td>
+</tr>
+<tr class="even">
+<td align="left">c</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">10</td>
+<td align="left">1: 1, 2: 1, 3: 1, 4: 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">a</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.5</td>
+<td align="right">3.03</td>
+<td align="right">1</td>
+<td align="right">3.25</td>
+<td align="right">5.5</td>
+<td align="right">7.75</td>
+<td align="right">10</td>
+<td align="left">▇▇▇▇▇</td>
+</tr>
+</tbody>
+</table>
+<p>skimming <code>ts</code> object:</p>
+<pre class="r"><code>lynx</code></pre>
+<pre><code>## Time Series:
+## Start = 1821 
+## End = 1934 
+## Frequency = 1 
+##   [1]  269  321  585  871 1475 2821 3928 5943 4950 2577  523   98  184  279  409
+##  [16] 2285 2685 3409 1824  409  151   45   68  213  546 1033 2129 2536  957  361
+##  [31]  377  225  360  731 1638 2725 2871 2119  684  299  236  245  552 1623 3311
+##  [46] 6721 4254  687  255  473  358  784 1594 1676 2251 1426  756  299  201  229
+##  [61]  469  736 2042 2811 4431 2511  389   73   39   49   59  188  377 1292 4031
+##  [76] 3495  587  105  153  387  758 1307 3465 6991 6313 3794 1836  345  382  808
+##  [91] 1388 2713 3800 3091 2985 3790  674   81   80  108  229  399 1132 2432 3574
+## [106] 2935 1537  529  485  662 1000 1590 2657 3396</code></pre>
+<pre class="r"><code># note the last inline line graph, pretty cute
+skim(lynx)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-25">Table 13: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">lynx</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">114</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">ts</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: ts</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">start</th>
+<th align="right">end</th>
+<th align="right">frequency</th>
+<th align="right">deltat</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">median</th>
+<th align="left">line_graph</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">x</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1821</td>
+<td align="right">1934</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1538.02</td>
+<td align="right">1585.84</td>
+<td align="right">39</td>
+<td align="right">6991</td>
+<td align="right">771</td>
+<td align="left">⡈⢄⡠⢁⣀⠒⣀⠔</td>
+</tr>
+</tbody>
+</table>
+<p>when skimming matrices, columns and treated as variables and rows and records, so statistics calculated are in fact column-wise:</p>
+<pre class="r"><code>m &lt;- matrix(1:12, nrow = 4, ncol = 3)
+m</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+<pre class="r"><code>skim(m)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-27">Table 14: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">m</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">V1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.5</td>
+<td align="right">1.29</td>
+<td align="right">1</td>
+<td align="right">1.75</td>
+<td align="right">2.5</td>
+<td align="right">3.25</td>
+<td align="right">4</td>
+<td align="left">▇▇▁▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">V2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6.5</td>
+<td align="right">1.29</td>
+<td align="right">5</td>
+<td align="right">5.75</td>
+<td align="right">6.5</td>
+<td align="right">7.25</td>
+<td align="right">8</td>
+<td align="left">▇▇▁▇▇</td>
+</tr>
+<tr class="odd">
+<td align="left">V3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10.5</td>
+<td align="right">1.29</td>
+<td align="right">9</td>
+<td align="right">9.75</td>
+<td align="right">10.5</td>
+<td align="right">11.25</td>
+<td align="right">12</td>
+<td align="left">▇▇▁▇▇</td>
+</tr>
+</tbody>
+</table>
+<p>Transpose the matrix:</p>
+<pre class="r"><code>skim(t(m))</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-28">Table 15: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">t(m)</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">V1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">7</td>
+<td align="right">9</td>
+<td align="left">▇▁▇▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">V2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="left">▇▁▇▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">V3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">7</td>
+<td align="right">9</td>
+<td align="right">11</td>
+<td align="left">▇▁▇▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">V4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="right">12</td>
+<td align="left">▇▁▇▁▇</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="ref" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-R-skimr">
+<p>Waring, Elin, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, and Shannon Ellis. 2019. <em>Skimr: Compact and Flexible Summaries of Data</em>. <a href="https://CRAN.R-project.org/package=skimr">https://CRAN.R-project.org/package=skimr</a>.</p>
+</div>
+<div id="ref-tidyverse2019">
+<p>Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. “Welcome to the tidyverse.” <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>In the sense that <code>skim()</code> provides useful, tidy summary statistics and display it in a pretty form for exploratory analysis based on data frames. <code>skim()</code> cannot supplant <code>summary()</code> in terms of model interpretation, viewing geospatial objects, etc.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>

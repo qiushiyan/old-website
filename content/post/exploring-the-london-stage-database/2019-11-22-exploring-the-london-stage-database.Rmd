@@ -1,0 +1,35 @@
+---
+title: Exploring the London Stage Database
+author: Qiushi Yan
+date: '2019-11-22'
+slug: exploring-the-london-stage-database
+categories:
+  - R
+tags: []
+subtitle: ''
+summary: 'Data wranling, cleaning practice using the English Stage Database'
+authors: []
+lastmod: '2019-11-22T14:09:39+08:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r,message=F}
+# setup
+library(tidyverse)
+library(jsonlite)
+```
+
+```{r,cache=T}
+# get the data
+london_stage <- fromJSON("D:/RProjects/data/LondonStageFull.json") %>% 
+  as_tibble()
+
+london_stage
+```
+
+The `json` file can be downloaded at https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip.  

@@ -11,6 +11,9 @@ date: {{ .Date }}
 lastmod: {{ .Date }}
 featured: false
 draft: false
+bibliography: bib/xxxx.bib
+biblio-style: "apalike"
+link-citations: true
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder.

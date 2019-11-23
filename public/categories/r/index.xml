@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R | Qiushi Yan</title>
+    <title>R on Qiushi Yan</title>
     <link>/categories/r/</link>
-      <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
-    <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 22 Nov 2019 00:00:00 +0000</lastBuildDate>
-    <image>
-      <url>/img/icon-192.png</url>
-      <title>R</title>
-      <link>/categories/r/</link>
-    </image>
+    <description>Recent content in R on Qiushi Yan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Exploring the London Stage Database</title>
       <link>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</guid>
       <description>
 
@@ -51,6 +51,7 @@ london_stage&lt;/code&gt;&lt;/pre&gt;
       <title>Introduction to skimr</title>
       <link>/post/introduction-to-skimr/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/introduction-to-skimr/</guid>
       <description>
 

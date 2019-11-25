@@ -175,7 +175,7 @@ Prediction: To be able to predict what the responses are going to be to future i
       <description>
 
 
-&lt;p&gt;&lt;strong&gt;“Enterprise Data Analysis and Visualization: An Interview Study”&lt;/strong&gt; is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“Enterprise Data Analysis and Visualization: An Interview Study”&lt;/strong&gt; is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, &lt;span class=&#34;citation&#34;&gt;Heer (&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.&lt;/p&gt;
 &lt;div id=&#34;archetypes&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;3 Archetypes&lt;/h1&gt;
 &lt;p&gt;According to the responses, we can see analysts generally fall into 3 archetypes: &lt;em&gt;hacker&lt;/em&gt;, &lt;em&gt;scripter&lt;/em&gt; and &lt;em&gt;application user&lt;/em&gt;.&lt;br /&gt;
@@ -204,7 +204,7 @@ Prediction: To be able to predict what the responses are going to be to future i
 &lt;p&gt;Another thread of this topic is distributed data, which are generated from multiple departments of the enterprise. They are often stored in various databases and formats. adding to the diffculty of intergrating them.&lt;/p&gt;
 &lt;p&gt;When analysis is finished, analysts typically shared static reports in the form of template documents. In some cases, reports could be interactive dashboards that enabled end users to filter or modify statistics computed. It’s not hard to imagine consumers of the report often give a blurred image of what they want, and hardly could analysts translate them into practical data problems.&lt;/p&gt;
 &lt;p&gt;When it comes to collaboration, it is an exception rather than the rule for analysts. They do share some central repository data processing scriptes are kept to oneself as a rule. Ont the other hand, final reports in the form of charts or model summary are commonly shared among analytsts in planning meeting or presentations. These reports, however, are rarely parametrizable or interactive.&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; identifies three impediemnts to collaboration:&lt;/p&gt;
+&lt;p&gt;The author identifies three impediemnts to collaboration:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;the diversity of tools and programming languages&lt;br /&gt;
 &lt;/li&gt;
@@ -217,7 +217,7 @@ consumingthanwritingthescriptfromscratch&lt;br /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;challenges&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Challenges&lt;/h1&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; identified five high-level tasks in the workflow and challenges within each of them.&lt;/p&gt;
+&lt;p&gt;Five high-level tasks in the workflow are proposed and and challenges within each of them elaborated.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Discovering&lt;/strong&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;: Since data are often distributed across multiple databases and sources, finding the exact data sheet or file needed can be time-consuming, not to mention that some analysts only have restricted access to the data warehhouse. Another problem is field definitions, these definitions were
 often missing in relational databases and non-existent in other types of data stores.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Wranling&lt;/strong&gt;: Many analysts reported parsing, ingesting semi-structured data(i.e., log files, block data&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;). Another difficulty is integrating the data, after analysts manage to find them in databases. Sometimes identifiers are missing or encoded inconsistantly in some databases, and sometimes there is no column than could be an identifier.&lt;/p&gt;
@@ -232,7 +232,7 @@ often missing in relational databases and non-existent in other types of data st
 &lt;p&gt;Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help explore these models and visualize their output.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    R’s package &lt;code&gt;broom&lt;/code&gt; &lt;span class=&#34;citation&#34;&gt;(Robinson and Hayes &lt;a href=&#34;#ref-R-broom&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; are desgined to facilitate modeling diagnosis, visualization, etc. &lt;code&gt;tidymodels&lt;/code&gt; &lt;span class=&#34;citation&#34;&gt;(Kuhn and Wickham &lt;a href=&#34;#ref-R-tidymodels&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains a burgeoning list of such packages.
+    R’s package &lt;strong&gt;broom&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Robinson and Hayes &lt;a href=&#34;#ref-R-broom&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; are desgined to facilitate modeling diagnosis, visualization, etc. &lt;strong&gt;tidymodels&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Kuhn and Wickham &lt;a href=&#34;#ref-R-tidymodels&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains a burgeoning list of such packages.
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -241,7 +241,7 @@ inflexible and did not allow interactive verification or sensitivity analysis.&l
 &lt;/div&gt;
 &lt;div id=&#34;future-trends&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Future trends&lt;/h1&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Heer (&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; then prophesy future trends in technology and the analytic workforce:&lt;/p&gt;
+&lt;p&gt;The article then prophesy future trends in technology and the analytic workforce:&lt;/p&gt;
 &lt;p&gt;Public data become more accessible and add to the diffculty of data discovery and intergration.&lt;/p&gt;
 &lt;p&gt;The market of Hadoop-like software will continue to increase, allowing analysts to operate on less structured data formats.&lt;/p&gt;
 &lt;p&gt;“Hacker-level” analysts will be in demand, analysts therefore need to be adept at both statistical reasoning and writing complex SQL or Map-Reduce code. Those who are comfortable in multiple data processing / analysis frameworks will be competent.&lt;/p&gt;

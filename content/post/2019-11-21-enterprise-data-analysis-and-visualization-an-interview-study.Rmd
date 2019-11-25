@@ -9,6 +9,7 @@ tags:
   - Data Science
 subtitle: ''
 summary: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer'
+description: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer'
 authors: []
 lastmod: '2019-11-21T18:42:03+08:00'
 bibliography: bib/enterprise-data-analysis-and-visualization-an-interview-study.bib
@@ -17,7 +18,7 @@ link-citations: true
 ---
 
 
-**"Enterprise Data Analysis and Visualization: An Interview Study"** is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, -@2012-enterprise-analysis-interviews provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.  
+**"Enterprise Data Analysis and Visualization: An Interview Study"** is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, @2012-enterprise-analysis-interviews provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.  
 
 
 
@@ -61,7 +62,7 @@ When analysis is finished, analysts typically shared static reports in the form 
 
 When it comes to collaboration, it is an exception rather than the rule for analysts. They do share some central repository data processing scriptes are kept to oneself as a rule.  Ont the other hand, final reports in the form of charts or model summary are commonly shared among analytsts in planning meeting or presentations. These reports, however, are rarely parametrizable or interactive.  
 
--@2012-enterprise-analysis-interviews identifies three impediemnts to collaboration: 
+The author identifies three impediemnts to collaboration: 
 
 * the diversity of tools and programming languages  
 * finding a script or inter-
@@ -71,7 +72,7 @@ consumingthanwritingthescriptfromscratch
 
 # Challenges  
 
--@2012-enterprise-analysis-interviews identified five high-level tasks in the workflow and challenges within each of them.  
+Five high-level tasks in the workflow are proposed and and challenges within each of them elaborated.  
 
 **Discovering**^[Here discovering means acquire data necessary to complete analysis tasks]: Since data are often distributed across multiple databases and sources, finding the exact data sheet or file needed can be time-consuming, not to mention that some analysts only have restricted access to the data warehhouse. Another problem is field definitions, these definitions were
 often missing in relational databases and non-existent in other types of data stores. 
@@ -94,7 +95,7 @@ There is a great book on feature engineering and selectin by Max Kuhn and Kjell 
 Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help explore these models and visualize their output.
 
 {{% alert note %}}
-R's package `broom` [@R-broom] are desgined to facilitate modeling diagnosis, visualization, etc.  `tidymodels` [@R-tidymodels] contains a burgeoning list of such packages.
+R's package **broom** [@R-broom] are desgined to facilitate modeling diagnosis, visualization, etc.  **tidymodels** [@R-tidymodels] contains a burgeoning list of such packages.
 {{% /alert %}}
 
 
@@ -104,7 +105,7 @@ inflexible and did not allow interactive verification or sensitivity analysis.
 
 # Future trends  
 
-@2012-enterprise-analysis-interviews then prophesy future trends in technology and the analytic workforce:  
+The article then prophesy future trends in technology and the analytic workforce:  
 
 Public data become more accessible and add to the diffculty of data discovery and intergration.  
 

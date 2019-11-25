@@ -8,7 +8,8 @@ categories:
 tags:
   - skimr
 subtitle: ''
-summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics about variables.'
+summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics about variables'
+description: "introduction to skimr"
 bibliography: bib/introduction-to-skimr.bib
 biblio-style: "apalike"
 link-citations: true

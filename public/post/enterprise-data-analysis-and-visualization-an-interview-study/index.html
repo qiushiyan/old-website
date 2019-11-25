@@ -515,7 +515,7 @@
       
 
 
-<p><strong>“Enterprise Data Analysis and Visualization: An Interview Study”</strong> is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, <span class="citation">(<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.</p>
+<p><strong>“Enterprise Data Analysis and Visualization: An Interview Study”</strong> is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, <span class="citation">Heer (<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.</p>
 <div id="archetypes" class="section level1">
 <h1>3 Archetypes</h1>
 <p>According to the responses, we can see analysts generally fall into 3 archetypes: <em>hacker</em>, <em>scripter</em> and <em>application user</em>.<br />
@@ -544,7 +544,7 @@
 <p>Another thread of this topic is distributed data, which are generated from multiple departments of the enterprise. They are often stored in various databases and formats. adding to the diffculty of intergrating them.</p>
 <p>When analysis is finished, analysts typically shared static reports in the form of template documents. In some cases, reports could be interactive dashboards that enabled end users to filter or modify statistics computed. It’s not hard to imagine consumers of the report often give a blurred image of what they want, and hardly could analysts translate them into practical data problems.</p>
 <p>When it comes to collaboration, it is an exception rather than the rule for analysts. They do share some central repository data processing scriptes are kept to oneself as a rule. Ont the other hand, final reports in the form of charts or model summary are commonly shared among analytsts in planning meeting or presentations. These reports, however, are rarely parametrizable or interactive.</p>
-<p><span class="citation">(<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> identifies three impediemnts to collaboration:</p>
+<p>The author identifies three impediemnts to collaboration:</p>
 <ul>
 <li>the diversity of tools and programming languages<br />
 </li>
@@ -557,7 +557,7 @@ consumingthanwritingthescriptfromscratch<br />
 </div>
 <div id="challenges" class="section level1">
 <h1>Challenges</h1>
-<p><span class="citation">(<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> identified five high-level tasks in the workflow and challenges within each of them.</p>
+<p>Five high-level tasks in the workflow are proposed and and challenges within each of them elaborated.</p>
 <p><strong>Discovering</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>: Since data are often distributed across multiple databases and sources, finding the exact data sheet or file needed can be time-consuming, not to mention that some analysts only have restricted access to the data warehhouse. Another problem is field definitions, these definitions were
 often missing in relational databases and non-existent in other types of data stores.</p>
 <p><strong>Wranling</strong>: Many analysts reported parsing, ingesting semi-structured data(i.e., log files, block data<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>). Another difficulty is integrating the data, after analysts manage to find them in databases. Sometimes identifiers are missing or encoded inconsistantly in some databases, and sometimes there is no column than could be an identifier.</p>
@@ -572,7 +572,7 @@ often missing in relational databases and non-existent in other types of data st
 <p>Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help explore these models and visualize their output.</p>
 <p><div class="alert alert-note">
   <div>
-    R’s package <code>broom</code> <span class="citation">(Robinson and Hayes <a href="#ref-R-broom" role="doc-biblioref">2019</a>)</span> are desgined to facilitate modeling diagnosis, visualization, etc. <code>tidymodels</code> <span class="citation">(Kuhn and Wickham <a href="#ref-R-tidymodels" role="doc-biblioref">2019</a>)</span> contains a burgeoning list of such packages.
+    R’s package <strong>broom</strong> <span class="citation">(Robinson and Hayes <a href="#ref-R-broom" role="doc-biblioref">2019</a>)</span> are desgined to facilitate modeling diagnosis, visualization, etc. <strong>tidymodels</strong> <span class="citation">(Kuhn and Wickham <a href="#ref-R-tidymodels" role="doc-biblioref">2019</a>)</span> contains a burgeoning list of such packages.
   </div>
 </div>
 </p>
@@ -581,7 +581,7 @@ inflexible and did not allow interactive verification or sensitivity analysis.</
 </div>
 <div id="future-trends" class="section level1">
 <h1>Future trends</h1>
-<p><span class="citation">Heer (<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> then prophesy future trends in technology and the analytic workforce:</p>
+<p>The article then prophesy future trends in technology and the analytic workforce:</p>
 <p>Public data become more accessible and add to the diffculty of data discovery and intergration.</p>
 <p>The market of Hadoop-like software will continue to increase, allowing analysts to operate on less structured data formats.</p>
 <p>“Hacker-level” analysts will be in demand, analysts therefore need to be adept at both statistical reasoning and writing complex SQL or Map-Reduce code. Those who are comfortable in multiple data processing / analysis frameworks will be competent.</p>

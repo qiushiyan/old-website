@@ -66,4 +66,4 @@ subtitle = "Recent Posts"
  css_class = ""
 +++
 
-## [See all posts](/post) or [divided by categories](/categories)
+## [Divided by categories](/categories)

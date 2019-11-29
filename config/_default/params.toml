@@ -18,7 +18,7 @@ day_night = true
 #   Latest font sets (may require updating): https://sourcethemes.com/academic/themes/
 #   Browse built-in font sets in `themes/academic/data/fonts/`
 #   Browse user installed font sets in `data/fonts/`
-font = "Rose"
+font = "Minimal"
 
 # Choose a font size.
 # Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
@@ -60,7 +60,7 @@ highlight = true
 # Add support for highlighting additional languages
 highlight_languages = ["bash", "cs", "http", "javascript", "json", "markdown", "r", "xml", "yaml"]
 # For supported styles, see https://cdnjs.com/libraries/highlight.js/
-highlight_style = "routeros" 
+highlight_style = "vs" 
 
 
 # Enable LaTeX math rendering? true/false

@@ -138,7 +138,7 @@ top_names %&amp;gt;%
   ggplot(aes(reorder_within(name, n, decade), n, fill = factor(decade))) + 
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ decade, scales = &amp;quot;free&amp;quot;) + 
+  facet_wrap(~ decade, scales = &amp;quot;free_y&amp;quot;) + 
   theme(legend.position = &amp;quot;none&amp;quot;) + 
   labs(x = NULL, y = NULL)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;

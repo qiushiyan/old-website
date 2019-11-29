@@ -145,7 +145,7 @@ top_names %>%
   ggplot(aes(reorder_within(name, n, decade), n, fill = factor(decade))) + 
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ decade, scales = "free") + 
+  facet_wrap(~ decade, scales = "free_y") + 
   theme(legend.position = "none") + 
   labs(x = NULL, y = NULL)
 ```

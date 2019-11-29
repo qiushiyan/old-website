@@ -3,12 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/better-science-in-less-time/</loc>
-    <lastmod>2019-11-25T08:23:18+08:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2019-11-29T21:38:24+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/tags/ggplot2/</loc>
+    <lastmod>2019-11-29T21:38:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-11-29T21:38:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-11-29T21:38:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-11-29T21:38:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/reorder-varible-within-facets-reorder-within/</loc>
+    <lastmod>2019-11-29T21:38:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-11-29T21:38:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/better-science-in-less-time/</loc>
     <lastmod>2019-11-25T08:23:18+08:00</lastmod>
   </url>
   
@@ -23,16 +53,6 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-11-25T08:23:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-11-25T08:23:18+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/r/</loc>
     <lastmod>2019-11-25T08:23:18+08:00</lastmod>
   </url>
@@ -43,22 +63,12 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-11-25T08:23:18+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</loc>
     <lastmod>2019-11-22T14:09:39+08:00</lastmod>
   </url>
   
   <url>
     <loc>/post/introduction-to-skimr/</loc>
-    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
     <lastmod>2019-11-22T23:27:44+08:00</lastmod>
   </url>
   

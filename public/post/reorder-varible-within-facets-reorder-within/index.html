@@ -28,10 +28,11 @@
   
     
   
-  <meta name="description" content="Reading notes on &#34;Our path to better science in less time using open data science tools&#34; by the Ocean Health Index project">
+  <meta name="description" content="This blog post is inspired by Julia Silge’s Reordering and facetting for ggplot2. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.
+Most common words in Jane Austen’s booksHere is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/better-science-in-less-time/">
+  <link rel="alternate" hreflang="en-us" href="/post/reorder-varible-within-facets-reorder-within/">
 
   
 
@@ -98,7 +99,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/better-science-in-less-time/">
+  <link rel="canonical" href="/post/reorder-varible-within-facets-reorder-within/">
 
   
   
@@ -114,15 +115,16 @@
   <meta property="twitter:creator" content="@Qiushi14252698">
   
   <meta property="og:site_name" content="Qiushi Yan">
-  <meta property="og:url" content="/post/better-science-in-less-time/">
-  <meta property="og:title" content="Better science in less time | Qiushi Yan">
-  <meta property="og:description" content="Reading notes on &#34;Our path to better science in less time using open data science tools&#34; by the Ocean Health Index project"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/post/reorder-varible-within-facets-reorder-within/">
+  <meta property="og:title" content="Reorder within facets: reorder_within | Qiushi Yan">
+  <meta property="og:description" content="This blog post is inspired by Julia Silge’s Reordering and facetting for ggplot2. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.
+Most common words in Jane Austen’s booksHere is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2019-11-25T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2019-11-29T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-11-25T08:23:18&#43;08:00">
+    <meta property="article:modified_time" content="2019-11-29T21:38:24&#43;08:00">
   
 
   
@@ -148,12 +150,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/post/better-science-in-less-time/"
+    "@id": "/post/reorder-varible-within-facets-reorder-within/"
   },
-  "headline": "Better science in less time",
+  "headline": "Reorder within facets: reorder_within",
   
-  "datePublished": "2019-11-25T00:00:00Z",
-  "dateModified": "2019-11-25T08:23:18+08:00",
+  "datePublished": "2019-11-29T00:00:00Z",
+  "dateModified": "2019-11-29T21:38:24+08:00",
   
   "author": {
     "@type": "Person",
@@ -168,7 +170,7 @@
       "url": "/img/icon-512.png"
     }
   },
-  "description": "Reading notes on \"Our path to better science in less time using open data science tools\" by the Ocean Health Index project"
+  "description": "This blog post is inspired by Julia Silge’s Reordering and facetting for ggplot2. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.\nMost common words in Jane Austen’s books\rHere is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets."
 }
 </script>
 
@@ -186,7 +188,7 @@
 
 
 
-  <title>Better science in less time | Qiushi Yan</title>
+  <title>Reorder within facets: reorder_within | Qiushi Yan</title>
 
 </head>
 
@@ -442,7 +444,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>Better science in less time</h1>
+  <h1>Reorder within facets: reorder_within</h1>
 
   
 
@@ -463,7 +465,7 @@
           Last updated on
       
     
-    Nov 25, 2019
+    Nov 29, 2019
   </span>
   
 
@@ -472,7 +474,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    6 min read
+    4 min read
   </span>
   
 
@@ -484,7 +486,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/reading-notes/">Reading Notes</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a></span>
   
 
 </div>
@@ -515,85 +517,140 @@
       
 
 
-<p>The <a href="http://www.oceanhealthindex.org">Ocean Health Index project</a>(OHI) provides a means to advance comprehensive ocean policy and compare future progress, with an aim of informing decisions about how to use or protect marine ecosystems, and promoting ongoing assessment of ocean health.</p>
-<p><strong>“Our path to better science in less time using open data science tools”</strong> <span class="citation">(Lowndes et al. <a href="#ref-lowndes2017our" role="doc-biblioref">2017</a>)</span> describes how several free software tools have fundamentally upgraded OHI team’s approach to collaborative research, and assist better science in less time.</p>
-<div id="reproducibility-challenges-in-environmental-science" class="section level2">
-<h2>Reproducibility challenges in environmental science</h2>
-<p>Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because “they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines”.</p>
-<p>For another, environmental scientists, perhaps more than ever, are eager to build trust in public. So that in recognition of their work, some people would be roused to action. However, proposed environmental solutions can be opaque, controversial and prohibitively costly either in financial or resource terms, increasing the need for scientists to work transparently, reproducibly and collaboratively with data.</p>
-<p>Without appropriate training, scientists tend to develop their own bespoke workarounds to keep
-pace, with which comes wasted time struggling to create their own conventions for managing, wrangling and versioning data. The OHI project experienced this sort of struggle first, and by borrowing philosophies, tools, and workflows primarily created for software development, they have dramatically improved work reproducibily, transparency and effectiveness in less time.</p>
+<p>This blog post is inspired by Julia Silge’s <a href="https://juliasilge.com/blog/reorder-within/">Reordering and facetting for ggplot2</a>. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.</p>
+<div id="most-common-words-in-jane-austens-books" class="section level2">
+<h2>Most common words in Jane Austen’s books</h2>
+<p>Here is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets.</p>
+<pre class="r"><code># load package
+library(tidyverse)
+library(tidytext)
+library(janeaustenr)
+
+austen_books()</code></pre>
+<pre><code>## # A tibble: 73,422 x 2
+##    text                  book               
+##  * &lt;chr&gt;                 &lt;fct&gt;              
+##  1 SENSE AND SENSIBILITY Sense &amp; Sensibility
+##  2 &quot;&quot;                    Sense &amp; Sensibility
+##  3 by Jane Austen        Sense &amp; Sensibility
+##  4 &quot;&quot;                    Sense &amp; Sensibility
+##  5 (1811)                Sense &amp; Sensibility
+##  6 &quot;&quot;                    Sense &amp; Sensibility
+##  7 &quot;&quot;                    Sense &amp; Sensibility
+##  8 &quot;&quot;                    Sense &amp; Sensibility
+##  9 &quot;&quot;                    Sense &amp; Sensibility
+## 10 CHAPTER 1             Sense &amp; Sensibility
+## # ... with 73,412 more rows</code></pre>
+<p>Note that the raw data generated by calling <code>austen_books()</code>, provided in the <strong>janeaustenr</strong> package <span class="citation">(Silge <a href="#ref-R-janeaustenr" role="doc-biblioref">2017</a>)</span>, is not in its most sensible format for analysis. Since each row is made up of multiple combined words.</p>
+<p>Here we use <code>unnest_tokens</code> from the <strong>tidytext</strong> package <span class="citation">(Robinson and Silge <a href="#ref-R-tidytext" role="doc-biblioref">2019</a>)</span> to break the text into individual tokens and transform it into a tidy structure:</p>
+<pre class="r"><code># calculate 10 most common words in each book
+common_words &lt;- austen_books() %&gt;%
+  unnest_tokens(word, text) %&gt;% 
+  anti_join(stop_words) %&gt;% 
+  count(book, word) %&gt;% 
+  group_by(book) %&gt;% 
+  top_n(10)</code></pre>
+<p>Take a look at our prepared data:</p>
+<pre class="r"><code>common_words</code></pre>
+<pre><code>## # A tibble: 60 x 3
+## # Groups:   book [6]
+##    book                word           n
+##    &lt;fct&gt;               &lt;chr&gt;      &lt;int&gt;
+##  1 Sense &amp; Sensibility dashwood     231
+##  2 Sense &amp; Sensibility edward       220
+##  3 Sense &amp; Sensibility elinor       623
+##  4 Sense &amp; Sensibility jennings     199
+##  5 Sense &amp; Sensibility marianne     492
+##  6 Sense &amp; Sensibility miss         210
+##  7 Sense &amp; Sensibility mother       213
+##  8 Sense &amp; Sensibility sister       229
+##  9 Sense &amp; Sensibility time         239
+## 10 Sense &amp; Sensibility willoughby   181
+## # ... with 50 more rows</code></pre>
+<p>For details many and other useful text mining techniques in R, I recommend reading <a href="Text%20Mining%20with%20R:%20A%20tidy%20approach">Text mining with R: A tidy approach</a> by Julia Silge and David Robinson<span class="citation">(<a href="#ref-silge2017text" role="doc-biblioref">2017</a>)</span>.</p>
+<pre class="r"><code># plot
+common_words %&gt;% 
+  ggplot(aes(word, n, fill = book)) +
+  geom_col() + 
+  coord_flip() + 
+  facet_wrap(~ book, ncol = 2, scales = &quot;free&quot;) + 
+  theme_classic() + 
+  theme(legend.position = &quot;none&quot;, 
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(size = 14)) +
+  rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;)</code></pre>
+<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>In its default setting, <strong>ggplot2</strong> puts the names in alphabetical order, because they are of type character. One common solution is to use <code>fct_reorder()</code> or its equivalent <code>reorder()</code> in baes R`:</p>
+<pre class="r"><code>common_words %&gt;% 
+  ggplot(aes(fct_reorder(word, n), n, fill = book)) +
+  geom_col() + 
+  coord_flip() + 
+  facet_wrap(~ book, ncol = 2, scales = &quot;free&quot;) + 
+  theme_classic() + 
+  theme(legend.position = &quot;none&quot;, 
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(size = 14)) +
+  rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;)</code></pre>
+<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, <code>fct_reorder()</code> or <code>reorder</code> only reorder all of these together, meaning that <code>word</code> are reordered in an overall level so that it cannot guarantee order in any specific subset of data.</p>
 </div>
-<div id="the-happy-transition" class="section level2">
-<h2>the happy transition</h2>
-<div class="figure"><span id="fig:transition"></span>
-<img src="/img/ohi_transition.png" alt="Better science in less time, illustrated by the Ocean Health Index project"  />
-<p class="caption">
-Figure 1: Better science in less time, illustrated by the Ocean Health Index project
-</p>
+<div id="reorder_within-and-scale_x_reordered" class="section level2">
+<h2><code>reorder_within()</code> and <code>scale_x_reordered()</code></h2>
+<p>The <strong>tidytext</strong> package provides 2 new functions to reorder a variable on a facet level.</p>
+<p><code>reorder_within()</code> takes three arguments:
+- <strong>x</strong>: the item we want to reorder
+- <strong>by</strong>: what we want to reorder by
+- <strong>within</strong>: the groups or categories we want to reorder within</p>
+<p>After that, we use <code>scale_x_reordered()</code>(or <code>scale_y_reordered()</code>) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., <strong>name</strong>, <strong>labels</strong>, <strong>expand</strong>).</p>
+<p>Here is a final example:</p>
+<pre class="r"><code># reorder word by n, grouped by book
+common_words %&gt;% 
+  ggplot(aes(reorder_within(word, n, book), n, fill = book)) +
+  geom_col() + 
+  coord_flip() + 
+  scale_x_reordered() + 
+  facet_wrap(~ book, ncol = 2, scales = &quot;free&quot;) + 
+  theme_classic() + 
+  theme(legend.position = &quot;none&quot;, 
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(size = 14)) +
+  rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;) +
+  labs(title = &quot;What are the most common words in Jane Austen&#39;s books?&quot;,
+       x = NULL,
+       y = NULL)</code></pre>
+<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Without using <code>scale_x_reordered</code> to overide ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, which make its label way too long. Here is an simple example using the <a href="https://github.com/hadley/babynames">babynames</a> data:</p>
+<pre class="r"><code>library(babynames)
+
+top_names &lt;- babynames %&gt;% 
+  filter(year &gt;= 1950,
+           year &lt; 1990) %&gt;% 
+  mutate(decade = (year %/% 10) * 10) %&gt;% 
+  group_by(decade) %&gt;%
+  count(name, wt = n) %&gt;% 
+  group_by(decade) %&gt;% 
+  top_n(10)
+
+top_names %&gt;% 
+  ggplot(aes(reorder_within(name, n, decade), n, fill = factor(decade))) + 
+  geom_col() + 
+  coord_flip() + 
+  facet_wrap(~ decade, scales = &quot;free&quot;) + 
+  theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<p>Figure <a href="#fig:transition">1</a> shows an interesting transition of the OHI project from traditional methods to modern data science tools, and most importantly, with greater reproducibility and collaboration effectiveness. As they described:</p>
-<blockquote>
-<p>The original assessment in 2012 focused solely on scientific methods (for example, obtaining and analysing data, developing models, calculating, and presenting results; dark shading). In 2013, by necessity we gave more focus to data science (for example, data organization and wrangling, coding, versioning, and documentation; light shading), using open data science tools. We established R as the main language for all data preparation and modelling (using RStudio), which drastically decreased the time involved to complete the assessment. In 2014, we adopted Git and GitHub for version control, project management, and collaboration. This further decreased the time required to repeat the assessment. We also created the OHI Toolbox, which includes our R package ohicore for core analytical operations used in all OHI assessments. In subsequent years we have continued (and plan to continue) this trajectory towards better science in less time by improving code with principles of tidy data ; standardizing file and data structure; and focusing more on communication, in part by creating websites with the same open data science tools and workflow.</p>
-</blockquote>
-<p>In OHI’s 2012 annual report, global assessments of 220 coastal nations and territories are presented. Data from nearly one hundred sources were <strong>prepared manually</strong> — that is, without coding, typically in Microsoft Excel—which included organizing, transforming, rescaling, gap filling and formatting data. Records of data processing, if any, are scattered. Members communicated and shared files frequently, with long, often forwarded and vaguely titled email chains.</p>
-<p>Not surprisingly, team members struggled to efficienty repeat our own work during the second assessment in 2013. And a 130-pages documentation just seems not sufficient.</p>
-<p>However, in 2013 OHI team started to tackle with reproducibility, collaboration and communication, “with R and Rstudio for coding and visualization, Git for version control, GitHub for collaboration, and a combination of GitHub and Rstudio for organization, documentation, project management, online publishing, distribution and communication”.</p>
-<div id="reproducibility" class="section level3">
-<h3>Reproducibility</h3>
-<p>Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data<span class="citation">(Wickham and others <a href="#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span>, and grammar of data manipulation provided by dplyr<span class="citation">(Wickham et al. <a href="#ref-R-dplyr" role="doc-biblioref">2019</a>)</span> have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown<span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown" role="doc-biblioref">2019</a>)</span>, instead of plain text files.</p>
-<p>Modeling practices are also unified and standardized in R, and the OHI framwork are incorporated in an R package <strong>ohicore</strong>, which can be downloaded in R via <code>devtools::install_github('ohi-science/ohicore')</code></p>
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
-<img src="/img/ohi.png" alt="ohicore: an toolbox in R presented by the project"  />
-<p class="caption">
-Figure 2: ohicore: an toolbox in R presented by the project
-</p>
-</div>
-<p>Of all things that <strong>ohicore</strong> package has to offer, most seminal is that it has made self-made OHI assessment possible without recreating the wheel. There are currently two dozen OHI assessments underway, most of which are led by independent groups.</p>
-<p><div class="alert alert-note">
-  <div>
-    Scientific advancement comes from building off the past work of others. Only in an growing, accomodating community could modern science thrive.<br />
-  </div>
-</div>
-</p>
-<p>For version control, Git has consigned to history local folder with weird naming conventions. Rstudio plays a key role here by offering an simple interface with Git.</p>
-</div>
-<div id="collaboration" class="section level3">
-<h3>Collaboration</h3>
-<p>The OHI team transitioned from a team of distinct roles (scientists and programmer) to become a team with overlapping skill sets(data scientists). This transition has enable easier collaboration(i.e., to vet code as a team).</p>
-<p>GitHub is now central to OHI’s collaboration workflow, an interesting report is that the team uses the <em>“Issues”</em> feature to record discussions, decisions, collect feedbacks. Compared to email, team members can communicate directly by linking to specific lins of code in any branch of a repo. Conversations are open to all, and <code>@</code> can be readily used when assigning tasks.</p>
-</div>
-<div id="communication" class="section level3">
-<h3>Communication</h3>
-<blockquote>
-<p>Open data science tools have made us reimagine what communication can mean for science and management. They enable us to not only share our code online, but to create reports, ebooks, interactive web applications, and entire websites, which we can share for free to communicate our work.</p>
-</blockquote>
-<p>Code from the OHI project can be browsed at <a href="https://github.com/ohi-science" class="uri">https://github.com/ohi-science</a> and official website at <a href="https://ohi-science.org/" class="uri">https://ohi-science.org/</a>. A training book (also authored by OHI tema) about open data science with R can be found at <a href="http://ohi-science.org/data-science-training/" class="uri">http://ohi-science.org/data-science-training/</a>.</p>
-<p>Communication outside the project (result publishing) are also part of the Rstudio-github workflow, saving scientists from copying and pasting code, figures and text. Thus, the website provides scientific methods, publications, data, and code, as well as instruction, news, and blog posts.</p>
-<p>Ecologists and environmental scientists arguably have a heightened responsibility for transparency and openness, as data products provide important snapshots of systems that may be forever altered due to climate change and other human pressures 16,18 . There is particular urgency for efficiency and transparency, as well as opportunity to democratize science in fields that operate at the interface of science and policy.</p>
-<p>Two critical barrier to embracing open science using efficient tools are brieved in the last section of this paper:</p>
-<ul>
-<li>knowing which tools exist that can be directly useful to one’s research<br />
-</li>
-<li>having the confidence to develop the skills to use them</li>
-</ul>
-<p>I really enjoy reading the last section, in which the author explained why open, transparent and reproducible science should be promoted and how to kickstart the rewarding learning path. The original line can be found at <a href="https://www.nature.com/articles/s41559-017-0160#Sec7" class="uri">https://www.nature.com/articles/s41559-017-0160#Sec7</a>.</p>
-</div>
-</div>
-<div id="references" class="section level2 unnumbered">
+<div id="references" class="section level2">
 <h2>References</h2>
+<p>Nowosad, J. (2018). ‘CARTOColors’ Palettes. R package version 1.0.0. <a href="https://nowosad.github.io/rcartocolor" class="uri">https://nowosad.github.io/rcartocolor</a></p>
 <div id="refs" class="references">
-<div id="ref-R-rmarkdown">
-<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
+<div id="ref-R-tidytext">
+<p>Robinson, David, and Julia Silge. 2019. <em>Tidytext: Text Mining Using ’Dplyr’, ’Ggplot2’, and Other Tidy Tools</em>. <a href="https://CRAN.R-project.org/package=tidytext">https://CRAN.R-project.org/package=tidytext</a>.</p>
 </div>
-<div id="ref-lowndes2017our">
-<p>Lowndes, Julia S Stewart, Benjamin D Best, Courtney Scarborough, Jamie C Afflerbach, Melanie R Frazier, Casey C O’Hara, Ning Jiang, and Benjamin S Halpern. 2017. “Our Path to Better Science in Less Time Using Open Data Science Tools.” <em>Nature Ecology &amp; Evolution</em> 1 (6): 0160.</p>
+<div id="ref-R-janeaustenr">
+<p>Silge, Julia. 2017. <em>Janeaustenr: Jane Austen’s Complete Novels</em>. <a href="https://CRAN.R-project.org/package=janeaustenr">https://CRAN.R-project.org/package=janeaustenr</a>.</p>
 </div>
-<div id="ref-R-dplyr">
-<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
-</div>
-<div id="ref-wickham2014tidy">
-<p>Wickham, Hadley, and others. 2014. “Tidy Data.” <em>Journal of Statistical Software</em> 59 (10): 1–23.</p>
+<div id="ref-silge2017text">
+<p>Silge, Julia, and David Robinson. 2017. <em>Text Mining with R: A Tidy Approach</em>. " O’Reilly Media, Inc.".</p>
 </div>
 </div>
 </div>
@@ -608,11 +665,7 @@ Figure 2: ohicore: an toolbox in R presented by the project
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/r/">R</a>
-  
-  <a class="badge badge-light" href="/tags/github/">GitHub</a>
-  
-  <a class="badge badge-light" href="/tags/git/">Git</a>
+  <a class="badge badge-light" href="/tags/ggplot2/">ggplot2</a>
   
 </div>
 
@@ -629,7 +682,7 @@ Figure 2: ohicore: an toolbox in R presented by the project
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/better-science-in-less-time/&amp;text=Better%20science%20in%20less%20time" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/reorder-varible-within-facets-reorder-within/&amp;text=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -642,7 +695,7 @@ Figure 2: ohicore: an toolbox in R presented by the project
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/better-science-in-less-time/&amp;t=Better%20science%20in%20less%20time" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/reorder-varible-within-facets-reorder-within/&amp;t=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -655,7 +708,7 @@ Figure 2: ohicore: an toolbox in R presented by the project
       
       
       <li>
-        <a href="mailto:?subject=Better%20science%20in%20less%20time&amp;body=/post/better-science-in-less-time/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Reorder%20within%20facets:%20reorder_within&amp;body=/post/reorder-varible-within-facets-reorder-within/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -668,7 +721,7 @@ Figure 2: ohicore: an toolbox in R presented by the project
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/better-science-in-less-time/&amp;title=Better%20science%20in%20less%20time" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/reorder-varible-within-facets-reorder-within/&amp;title=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -681,7 +734,7 @@ Figure 2: ohicore: an toolbox in R presented by the project
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Better%20science%20in%20less%20time%20/post/better-science-in-less-time/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Reorder%20within%20facets:%20reorder_within%20/post/reorder-varible-within-facets-reorder-within/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -694,7 +747,7 @@ Figure 2: ohicore: an toolbox in R presented by the project
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/better-science-in-less-time/&amp;title=Better%20science%20in%20less%20time" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/reorder-varible-within-facets-reorder-within/&amp;title=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -790,15 +843,8 @@ Figure 2: ohicore: an toolbox in R presented by the project
   
   
   <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/post/reorder-varible-within-facets-reorder-within/" rel="next">Reorder within facets: reorder_within</a>
-  </div>
-  
-  
-  
-  <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/post/exploring-the-london-stage-database/exploring-the-london-stage-database/" rel="prev">Exploring the London Stage Database</a>
+    <a href="/post/better-science-in-less-time/" rel="prev">Better science in less time</a>
   </div>
   
 </div>
@@ -808,19 +854,6 @@ Figure 2: ohicore: an toolbox in R presented by the project
 
 
   
-  
-  <div class="article-widget content-widget-hr">
-    <h3>Related</h3>
-    <ul>
-      
-      <li><a href="/project/advanced-r-graphics/">Advanced R Graphics</a></li>
-      
-      <li><a href="/project/r4ds/">R4DS</a></li>
-      
-      <li><a href="/project/ggplot2-tips-and-maps/">ggplot2 tips and beautiful maps in R</a></li>
-      
-    </ul>
-  </div>
   
 
 

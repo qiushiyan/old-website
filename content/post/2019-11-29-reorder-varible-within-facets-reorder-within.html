@@ -80,7 +80,7 @@ common_words %&gt;%
   ggplot(aes(word, n, fill = book)) +
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ book, ncol = 2, scales = &quot;free&quot;) + 
+  facet_wrap(~ book, ncol = 2, scales = &quot;free_y&quot;) + 
   theme_classic() + 
   theme(legend.position = &quot;none&quot;, 
         axis.text.y = element_text(size = 12),
@@ -92,7 +92,7 @@ common_words %&gt;%
   ggplot(aes(fct_reorder(word, n), n, fill = book)) +
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ book, ncol = 2, scales = &quot;free&quot;) + 
+  facet_wrap(~ book, ncol = 2, scales = &quot;free_y&quot;) + 
   theme_classic() + 
   theme(legend.position = &quot;none&quot;, 
         axis.text.y = element_text(size = 12),
@@ -109,14 +109,14 @@ common_words %&gt;%
 - <strong>by</strong>: what we want to reorder by
 - <strong>within</strong>: the groups or categories we want to reorder within</p>
 <p>After that, we use <code>scale_x_reordered()</code>(or <code>scale_y_reordered()</code>) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., <strong>name</strong>, <strong>labels</strong>, <strong>expand</strong>).</p>
-<p>Here is a final example:</p>
+<p>Here is a final plot:</p>
 <pre class="r"><code># reorder word by n, grouped by book
 common_words %&gt;% 
   ggplot(aes(reorder_within(word, n, book), n, fill = book)) +
   geom_col() + 
   coord_flip() + 
   scale_x_reordered() + 
-  facet_wrap(~ book, ncol = 2, scales = &quot;free&quot;) + 
+  facet_wrap(~ book, ncol = 2, scales = &quot;free_y&quot;) + 
   theme_classic() + 
   theme(legend.position = &quot;none&quot;, 
         axis.text.y = element_text(size = 12),
@@ -143,7 +143,8 @@ top_names %&gt;%
   geom_col() + 
   coord_flip() + 
   facet_wrap(~ decade, scales = &quot;free&quot;) + 
-  theme(legend.position = &quot;none&quot;)</code></pre>
+  theme(legend.position = &quot;none&quot;) + 
+  labs(x = NULL, y = NULL)</code></pre>
 <p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="references" class="section level2">

@@ -76,7 +76,7 @@ common_words %&amp;gt;%
   ggplot(aes(word, n, fill = book)) +
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ book, ncol = 2, scales = &amp;quot;free&amp;quot;) + 
+  facet_wrap(~ book, ncol = 2, scales = &amp;quot;free_y&amp;quot;) + 
   theme_classic() + 
   theme(legend.position = &amp;quot;none&amp;quot;, 
         axis.text.y = element_text(size = 12),
@@ -88,7 +88,7 @@ common_words %&amp;gt;%
   ggplot(aes(fct_reorder(word, n), n, fill = book)) +
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ book, ncol = 2, scales = &amp;quot;free&amp;quot;) + 
+  facet_wrap(~ book, ncol = 2, scales = &amp;quot;free_y&amp;quot;) + 
   theme_classic() + 
   theme(legend.position = &amp;quot;none&amp;quot;, 
         axis.text.y = element_text(size = 12),
@@ -105,14 +105,14 @@ common_words %&amp;gt;%
 - &lt;strong&gt;by&lt;/strong&gt;: what we want to reorder by
 - &lt;strong&gt;within&lt;/strong&gt;: the groups or categories we want to reorder within&lt;/p&gt;
 &lt;p&gt;After that, we use &lt;code&gt;scale_x_reordered()&lt;/code&gt;(or &lt;code&gt;scale_y_reordered()&lt;/code&gt;) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., &lt;strong&gt;name&lt;/strong&gt;, &lt;strong&gt;labels&lt;/strong&gt;, &lt;strong&gt;expand&lt;/strong&gt;).&lt;/p&gt;
-&lt;p&gt;Here is a final example:&lt;/p&gt;
+&lt;p&gt;Here is a final plot:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# reorder word by n, grouped by book
 common_words %&amp;gt;% 
   ggplot(aes(reorder_within(word, n, book), n, fill = book)) +
   geom_col() + 
   coord_flip() + 
   scale_x_reordered() + 
-  facet_wrap(~ book, ncol = 2, scales = &amp;quot;free&amp;quot;) + 
+  facet_wrap(~ book, ncol = 2, scales = &amp;quot;free_y&amp;quot;) + 
   theme_classic() + 
   theme(legend.position = &amp;quot;none&amp;quot;, 
         axis.text.y = element_text(size = 12),
@@ -139,7 +139,8 @@ top_names %&amp;gt;%
   geom_col() + 
   coord_flip() + 
   facet_wrap(~ decade, scales = &amp;quot;free&amp;quot;) + 
-  theme(legend.position = &amp;quot;none&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+  theme(legend.position = &amp;quot;none&amp;quot;) + 
+  labs(x = NULL, y = NULL)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;

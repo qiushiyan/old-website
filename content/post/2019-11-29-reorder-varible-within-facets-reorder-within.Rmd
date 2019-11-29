@@ -71,7 +71,7 @@ common_words %>%
   ggplot(aes(word, n, fill = book)) +
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ book, ncol = 2, scales = "free") + 
+  facet_wrap(~ book, ncol = 2, scales = "free_y") + 
   theme_classic() + 
   theme(legend.position = "none", 
         axis.text.y = element_text(size = 12),
@@ -86,7 +86,7 @@ common_words %>%
   ggplot(aes(fct_reorder(word, n), n, fill = book)) +
   geom_col() + 
   coord_flip() + 
-  facet_wrap(~ book, ncol = 2, scales = "free") + 
+  facet_wrap(~ book, ncol = 2, scales = "free_y") + 
   theme_classic() + 
   theme(legend.position = "none", 
         axis.text.y = element_text(size = 12),
@@ -107,7 +107,7 @@ The **tidytext** package provides 2 new functions to reorder a variable on a fac
 
 After that, we use `scale_x_reordered()`(or `scale_y_reordered()`) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., **name**, **labels**, **expand**).
 
-Here is a final example:  
+Here is a final plot:  
 ```{r}
 # reorder word by n, grouped by book
 common_words %>% 
@@ -115,7 +115,7 @@ common_words %>%
   geom_col() + 
   coord_flip() + 
   scale_x_reordered() + 
-  facet_wrap(~ book, ncol = 2, scales = "free") + 
+  facet_wrap(~ book, ncol = 2, scales = "free_y") + 
   theme_classic() + 
   theme(legend.position = "none", 
         axis.text.y = element_text(size = 12),
@@ -146,7 +146,8 @@ top_names %>%
   geom_col() + 
   coord_flip() + 
   facet_wrap(~ decade, scales = "free") + 
-  theme(legend.position = "none")
+  theme(legend.position = "none") + 
+  labs(x = NULL, y = NULL)
 ```
 
 

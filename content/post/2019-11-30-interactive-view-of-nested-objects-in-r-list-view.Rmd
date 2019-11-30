@@ -1,0 +1,157 @@
+---
+title: 'Interactive view of nested objects in R: listviewer'
+author: Qiushi Yan
+date: '2019-11-30'
+slug: interactive-view-of-nested-objects-in-r-list-viewer
+categories:
+  - R
+tags:
+  - JSON
+  - htmlwidgets
+  - visualization
+subtitle: ''
+summary: 'listviewer is a package of R htmlwidgets to interactively view and maybe modify lists'
+authors: []
+lastmod: '2019-11-30T14:04:22+08:00'
+featured: no
+bibliography: bib/listviewer.bib
+biblio-style: apalike
+link-citations: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+
+Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a `SpatialPolygonsDataFrame` object  
+
+```{r,include=F}
+knitr::opts_chunk$set(message=F,warning=F)
+```
+
+
+```{r}
+library(sf)
+nc <- st_read(system.file("shape/nc.shp", package="sf"))
+spdf <- as(nc, "Spatial")
+```
+
+Because `spdf` are highly hierarchical and complicated, we resort to specifying **max.level** in `str()`, otherwise the screen would be flooded with its output:   
+
+```{r}
+str(spdf, max.level = 2)
+```
+
+A problem is that, this is by far where we could go with static output, we cannot tell `str()` to go deeper into one component while others stay in their level , or get a more visually appearing display of the object's structure. We  are either overwhelmed or constained.  
+
+This is when a taste of interactivity might help. The **listviewr** package[@R-listviewer] contains R htmlwidgets to interactively view and maybe modify nested and complicated objects. In fact, listviewer provides an interface to 2 interactive JSON editors: [react-json-view](https://github.com/mac-s-g/react-json-view) and [jsoneditor](https://github.com/josdejong/jsoneditor). They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R's list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in **listviewer**.    
+
+```{r}
+library(listviewer)
+library(magrittr) # for pipeline 
+```
+
+
+{{% alert note %}}
+Before things get technical, I want to mention that the creater of listviewer also authored multiple great htmlwidgets, which can be found at https://github.com/timelyportfolio.  
+{{% /alert %}}
+
+### reactjson  
+
+`reactjson()` provides interface to [react-json-view](https://github.com/mac-s-g/react-json-view) in R, here is a simple example:  
+
+```{r}
+simple_list <- list(
+    array = c(1,2,3),
+    boolean = TRUE,
+    null = NULL,
+    number = 123,
+    object = list( a="b", c="d" ),
+    string = "Hello World"
+  )
+
+reactjson(
+  simple_list,
+)
+```
+
+Here the name of each element of `simple_list` match their counterparts in JavaScript (numerical vector --> array, logcal vector --> boolean, null --> null, integer --> int, list --> object, string --> string).   
+
+We could use **collapsed** to the node at which to collapse(i.e, **max.level** in `str()`):    
+
+```{r}
+reactjson(
+  simple_list,
+  collapsed = 1
+)
+```
+
+If we want to see what's inside one node, just click the :heavy_plus_sign: button.    
+
+Other possibly useful arguments:  
+
+**collapseStringsAfterLength**  	
+integer for the length at which strings will be cut off Collapsed strings are followed by an ellipsis. String content can be expanded and collapsed by clicking on the string value.  
+**groupArraysAfterLength**  	
+integer for the count at which arrays will be displayed in groups. Groups are displayed with bracket notation and can be expanded and collapsed. by clicking on the brackets.  
+
+`reactjson` also works on data frames:  
+```{r}
+reactjson(mtcars, collapsed = 1, groupArraysAfterLength = 20)
+```
+
+Or on JSON-fomat strings. Here we use the `companies` data from the **tidyjson** package[@R-tidyjson], which is just a character vector:  
+
+```{r}
+library(tidyjson)
+companies %>% 
+  head(1)
+```
+
+
+```{r}
+companies[1] %>% 
+  reactjson(collapseStringsAfterLength = 20)
+```
+
+
+Finally, view our `spdf` object:  
+
+```{r}
+reactjson(spdf, collapsed = 2)
+```
+
+
+
+
+### jsoneditor  
+
+[jsoneditor](https://github.com/josdejong/jsoneditor) is another very nice JSON interactive editor. All of the above examples should also work with jsoneditor.  
+
+```{r}
+jsonedit(companies[1])
+```
+
+By default, `jsonedit()` displays the result in "tree" mode, this can be changed by specifying the **mode** argument^[Other available values include `c( 'form', 'text', 'view')`]:  
+
+```{r}
+jsonedit(companies[1], mode = "code")
+```
+
+
+
+
+
+
+
+## Reference
+
+Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector
+  Data. The R Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
+
+Facebook Inc, Michel Weststrate, Kent Russell and Alan Dipert (2019). reactR: React
+  Helpers. R package version 0.4.1. https://CRAN.R-project.org/package=reactR

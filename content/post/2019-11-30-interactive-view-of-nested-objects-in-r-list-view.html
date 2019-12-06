@@ -1,5 +1,5 @@
 ---
-title: 'Interactive view of nested objects in R: listviewer'
+title: 'Interactive view of nested objects in R: {listviewer}'
 author: Qiushi Yan
 date: '2019-11-30'
 slug: interactive-view-of-nested-objects-in-r-list-viewer
@@ -37,15 +37,8 @@ projects: []
 
 <p>Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a <code>SpatialPolygonsDataFrame</code> object</p>
 <pre class="r"><code>library(sf)
-nc &lt;- st_read(system.file(&quot;shape/nc.shp&quot;, package=&quot;sf&quot;))</code></pre>
-<pre><code>## Reading layer `nc&#39; from data source `C:\Users\56570\Documents\R\win-library\3.6\sf\shape\nc.shp&#39; using driver `ESRI Shapefile&#39;
-## Simple feature collection with 100 features and 14 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
-## epsg (SRID):    4267
-## proj4string:    +proj=longlat +datum=NAD27 +no_defs</code></pre>
-<pre class="r"><code>spdf &lt;- as(nc, &quot;Spatial&quot;)</code></pre>
+nc &lt;- st_read(system.file(&quot;shape/nc.shp&quot;, package=&quot;sf&quot;))
+spdf &lt;- as(nc, &quot;Spatial&quot;)</code></pre>
 <p>Because <code>spdf</code> are highly hierarchical and complicated, we resort to specifying <strong>max.level</strong> in <code>str()</code>, otherwise the screen would be flooded with its output:</p>
 <pre class="r"><code>str(spdf, max.level = 2)</code></pre>
 <pre><code>## Formal class &#39;SpatialPolygonsDataFrame&#39; [package &quot;sp&quot;] with 5 slots
@@ -55,8 +48,8 @@ nc &lt;- st_read(system.file(&quot;shape/nc.shp&quot;, package=&quot;sf&quot;))<
 ##   ..@ bbox       : num [1:2, 1:2] -84.3 33.9 -75.5 36.6
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   ..@ proj4string:Formal class &#39;CRS&#39; [package &quot;sp&quot;] with 1 slot</code></pre>
-<p>A problem is that, this is by far where we could go with static output, we cannot tell <code>str()</code> to go deeper into one component while others stay in their level , or get a more visually appearing display of the object’s structure. We are either overwhelmed or constained.</p>
-<p>This is when a taste of interactivity might help. The <strong>listviewr</strong> package<span class="citation">(de Jong, Gainer, and Russell <a href="#ref-R-listviewer" role="doc-biblioref">2019</a>)</span> contains R htmlwidgets to interactively view and maybe modify nested and complicated objects. In fact, listviewer provides an interface to 2 interactive JSON editors: <a href="https://github.com/mac-s-g/react-json-view">react-json-view</a> and <a href="https://github.com/josdejong/jsoneditor">jsoneditor</a>. They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R’s list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in <strong>listviewer</strong>.</p>
+<p>A problem is that, with static output this is by far where we could go , we cannot tell <code>str()</code> to go deeper into one component while others stay in their level , or get a more visually appearing display of the object’s structure. We are either overwhelmed or constrained.</p>
+<p>This is when a taste of interactivity might help. The <strong>listviewr</strong> package<span class="citation">(de Jong, Gainer, and Russell <a href="#ref-R-listviewer" role="doc-biblioref">2019</a>)</span> contains R htmlwidgets designed to view and maybe modify nested and complicated objects in an interactive manner. In fact, underlying this interactivity is that listviewer provides an interface to 2 interactive JSON editors: <a href="https://github.com/mac-s-g/react-json-view">react-json-view</a> and <a href="https://github.com/josdejong/jsoneditor">jsoneditor</a>. They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R’s list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in <strong>listviewer</strong>.</p>
 <pre class="r"><code>library(listviewer)
 library(magrittr) # for pipeline </code></pre>
 <p>{{% alert note %}}

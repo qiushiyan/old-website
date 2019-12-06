@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Interactive view of nested objects in R: listviewer</title>
+      <title>Interactive view of nested objects in R: {listviewer}</title>
       <link>/post/interactive-view-of-nested-objects-in-r-list-viewer/</link>
       <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/post/interactive-view-of-nested-objects-in-r-list-viewer/</guid>
@@ -31,15 +31,8 @@
 
 &lt;p&gt;Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a &lt;code&gt;SpatialPolygonsDataFrame&lt;/code&gt; object&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(sf)
-nc &amp;lt;- st_read(system.file(&amp;quot;shape/nc.shp&amp;quot;, package=&amp;quot;sf&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Reading layer `nc&amp;#39; from data source `C:\Users\56570\Documents\R\win-library\3.6\sf\shape\nc.shp&amp;#39; using driver `ESRI Shapefile&amp;#39;
-## Simple feature collection with 100 features and 14 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
-## epsg (SRID):    4267
-## proj4string:    +proj=longlat +datum=NAD27 +no_defs&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;spdf &amp;lt;- as(nc, &amp;quot;Spatial&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+nc &amp;lt;- st_read(system.file(&amp;quot;shape/nc.shp&amp;quot;, package=&amp;quot;sf&amp;quot;))
+spdf &amp;lt;- as(nc, &amp;quot;Spatial&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Because &lt;code&gt;spdf&lt;/code&gt; are highly hierarchical and complicated, we resort to specifying &lt;strong&gt;max.level&lt;/strong&gt; in &lt;code&gt;str()&lt;/code&gt;, otherwise the screen would be flooded with its output:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(spdf, max.level = 2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Formal class &amp;#39;SpatialPolygonsDataFrame&amp;#39; [package &amp;quot;sp&amp;quot;] with 5 slots
@@ -49,8 +42,8 @@ nc &amp;lt;- st_read(system.file(&amp;quot;shape/nc.shp&amp;quot;, package=&amp;
 ##   ..@ bbox       : num [1:2, 1:2] -84.3 33.9 -75.5 36.6
 ##   .. ..- attr(*, &amp;quot;dimnames&amp;quot;)=List of 2
 ##   ..@ proj4string:Formal class &amp;#39;CRS&amp;#39; [package &amp;quot;sp&amp;quot;] with 1 slot&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A problem is that, this is by far where we could go with static output, we cannot tell &lt;code&gt;str()&lt;/code&gt; to go deeper into one component while others stay in their level , or get a more visually appearing display of the object’s structure. We are either overwhelmed or constained.&lt;/p&gt;
-&lt;p&gt;This is when a taste of interactivity might help. The &lt;strong&gt;listviewr&lt;/strong&gt; package&lt;span class=&#34;citation&#34;&gt;(de Jong, Gainer, and Russell &lt;a href=&#34;#ref-R-listviewer&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains R htmlwidgets to interactively view and maybe modify nested and complicated objects. In fact, listviewer provides an interface to 2 interactive JSON editors: &lt;a href=&#34;https://github.com/mac-s-g/react-json-view&#34;&gt;react-json-view&lt;/a&gt; and &lt;a href=&#34;https://github.com/josdejong/jsoneditor&#34;&gt;jsoneditor&lt;/a&gt;. They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R’s list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in &lt;strong&gt;listviewer&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;A problem is that, with static output this is by far where we could go , we cannot tell &lt;code&gt;str()&lt;/code&gt; to go deeper into one component while others stay in their level , or get a more visually appearing display of the object’s structure. We are either overwhelmed or constrained.&lt;/p&gt;
+&lt;p&gt;This is when a taste of interactivity might help. The &lt;strong&gt;listviewr&lt;/strong&gt; package&lt;span class=&#34;citation&#34;&gt;(de Jong, Gainer, and Russell &lt;a href=&#34;#ref-R-listviewer&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains R htmlwidgets designed to view and maybe modify nested and complicated objects in an interactive manner. In fact, underlying this interactivity is that listviewer provides an interface to 2 interactive JSON editors: &lt;a href=&#34;https://github.com/mac-s-g/react-json-view&#34;&gt;react-json-view&lt;/a&gt; and &lt;a href=&#34;https://github.com/josdejong/jsoneditor&#34;&gt;jsoneditor&lt;/a&gt;. They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R’s list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in &lt;strong&gt;listviewer&lt;/strong&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(listviewer)
 library(magrittr) # for pipeline &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
@@ -421,7 +414,7 @@ london_stage&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Introduction to skimr</title>
+      <title>Introduction to {skimr}</title>
       <link>/post/introduction-to-skimr/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/post/introduction-to-skimr/</guid>

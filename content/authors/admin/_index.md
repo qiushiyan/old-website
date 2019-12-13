@@ -34,5 +34,5 @@ I'm currently a junior majoring in data journalism in [Communication University 
 
 I love sharing and recording what I have learned in [posts](#posts) and [projects](#projects) and the majority of them are of a note-taking nature based on a specific book, online course, paper, blog posts, etc. Any suggestion or sharing is highly appreciated!  
 
-I also have a smattering knowledge of ancient chinese literature, behavioural sicence, nueroscience and economics. My favourite author is Bertrand Russell :black_nib: . 
+I take equal delight in the study of ancient chinese literature, behavioural sicence, nueroscience and economics. My favourite author is Bertrand Russell :black_nib: . 
 

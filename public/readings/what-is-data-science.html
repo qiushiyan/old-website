@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 What is Data Science | Readings in applied data science</title>
+  <meta name="description" content="Chapter 1 What is Data Science | Readings in applied data science" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 What is Data Science | Readings in applied data science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="enixam/data-science-readings" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 What is Data Science | Readings in applied data science" />
+  
+  
+  
+
+<meta name="author" content="Qiushi Yan" />
+
+
+<meta name="date" content="2019-12-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="data-wrangling-and-tidy-data.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings in Applied Data Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="what-is-data-science.html"><a href="what-is-data-science.html"><i class="fa fa-check"></i><b>1</b> What is Data Science</a><ul>
+<li class="chapter" data-level="1.1" data-path="what-is-data-science.html"><a href="what-is-data-science.html#years-of-data-science"><i class="fa fa-check"></i><b>1.1</b> 50 Years of Data Science</a></li>
+<li class="chapter" data-level="1.2" data-path="what-is-data-science.html"><a href="what-is-data-science.html#enterprise-data-analysis-and-visualization-an-interview-study"><i class="fa fa-check"></i><b>1.2</b> Enterprise Data Analysis and Visualization: An Interview Study</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-wrangling-and-tidy-data.html"><a href="data-wrangling-and-tidy-data.html"><i class="fa fa-check"></i><b>2</b> Data Wrangling and Tidy Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-wrangling-and-tidy-data.html"><a href="data-wrangling-and-tidy-data.html#tidy-data"><i class="fa fa-check"></i><b>2.1</b> Tidy Data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-wrangling-and-tidy-data.html"><a href="data-wrangling-and-tidy-data.html#data-organization-in-spreadsheets-nine-simple-ways-to-make-it-easier-to-reuse-your-data"><i class="fa fa-check"></i><b>2.2</b> Data Organization in Spreadsheets &amp; Nine simple ways to make it easier to (re)use your data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Written with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings in applied data science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="what-is-data-science" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> What is Data Science</h1>
+<div id="years-of-data-science" class="section level2">
+<h2><span class="header-section-number">1.1</span> 50 Years of Data Science</h2>
+<p><span class="citation">Donoho (<a href="#ref-doi:10.1080/10618600.2017.1384734" role="doc-biblioref">2017</a>)</span> presents a vision of data science based on the activities of people who are “learning from data, reviews its emergence and development in the past 50 years, and conceives of its future landscape in an eveidence-based manner.</p>
+<hr />
+<p>More than 50 years ago, John Tukey in his renowned “The Future of Dat Analysis” envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently onece again exhorted academic statistics to embrace this so-called “data sicence / analysis” trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Dohono presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.</p>
+<div id="data-science-vs.-statistics" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Data Science vs. Statistics</h3>
+<p>The author first starts to distinguish data science from traditional statistics. Yet 3 commonly used indicators are discredited:</p>
+<ul>
+<li><p>“Big data” is not a credible criterion for meaningful distinction between statistics and data science, for both historical and scientific reasons, viz:</p>
+<ul>
+<li>The very term “statistics” was coined at the beginning of modern efforts to compile census data, roughly the size of today’s big data</li>
+<li>Statisticians have long since delved into large databases, and come up with sufficient measures</li>
+</ul></li>
+<li><p>Although some would tout “new skills” on the part of data scientists, that is another “big data” meme cloaked in another term.</p></li>
+<li><p>Data science programs doesn’t necessarily guide one to a satisfying job, comapared with statistics. Even it does, a data science master degree cannot exempt you from various constraints in real workplace</p></li>
+</ul>
+<p>So, is there any solid case for establishing an new entity called “data science” ? David proposes that data science would be a true science, an enlargement of traditional academic statistics. And the underlying motivation is intellectual rather than commerical. In the next 50 years, scientific publicatiosn in various disciplines will become a body of data that we can analyze and study, and the opportunity to improve the accuracy and validity of all science relies upon this would-be field: data science.</p>
+</div>
+<div id="review-on-the-concept" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Review on the concept</h3>
+<p>Based on the timeline, the author then organizes insights that have been published over the years about data science, as shown below <span class="citation">(Tukey <a href="#ref-tukey1962future" role="doc-biblioref">1962</a>)</span>:</p>
+<blockquote>
+<p>All in all I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data</p>
+</blockquote>
+<p>Tukey identified four driving forces in the new science:</p>
+<ol style="list-style-type: decimal">
+<li>The formal theories of statistics</li>
+<li>Accelerating developments in computers and display devices</li>
+<li>The challenge, in many fields, of more and ever larger bodies of data</li>
+<li>The emphasis on quantification in an ever wider variety of disciplines</li>
+</ol>
+<p>Let’s spend a minute admiring Tukey’s prophecy…</p>
+<p>Among other things, Tukey also pointed out that:</p>
+<blockquote>
+<p>…data analysis is a very difficult field. It must adapt itself to what people can and need to do with data. In the sense that biology is more complex than physics, and the behavioral sciences are more complex than either, it is likely that the general problems of data analysis are more complex than those of all three. It is too much to ask for close and effective guidance for data analysis from any highly formalized structure, either now or in the near future.</p>
+</blockquote>
+<blockquote>
+<p>Data analysis can gain much from formal statistics, but only if the connection is kept adequately loose.</p>
+</blockquote>
+<p>John Chambers presented a choice between “greater” or “lesser” statistics. He argued <span class="citation">(Chambers <a href="#ref-chambers1993greater" role="doc-biblioref">1993</a>)</span>:</p>
+<blockquote>
+<p>The statistics profession faces a choice in its future research between continuing concentration on traditional topics—based largely on data analysis supported by mathematical statistics—and a broader viewpoint—based on an inclusive concept of learning from data. The latter course presents severe challenges as well as exciting opportunities. The former risks seeing statistics become increasingly marginal…</p>
+</blockquote>
+<p>C. F. Jeff Wu characterized statistical work as a trilogy of data collection, data modeling and analysis, and decision making, and called for courses outside out the statistics department.</p>
+<p>William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today’s perspective <span class="citation">(Cleveland <a href="#ref-cleveland2001data" role="doc-biblioref">2001</a>)</span>:</p>
+<ul>
+<li><p>Multidisciplinary investigations (25%)</p></li>
+<li><p>Models and Methods for Data (20%)</p></li>
+<li><p>Computing with Data (15%)</p></li>
+<li><p>Pedagogy (15%)</p></li>
+<li><p>Tool Evaluation (5%)</p></li>
+<li><p>Theory (20%)</p></li>
+</ul>
+<p>UC Berkeley statistician Leo Breiman brought his “two modeling cultures theory” into the exhortation. He asserted <span class="citation">(Breiman and others <a href="#ref-breiman2001statistical" role="doc-biblioref">2001</a>)</span>:</p>
+<blockquote>
+<p>There are two goals in analyzing the data:<br />
+Prediction: To be able to predict what the responses are going to be to future input variables;<br />
+[Inference]: To [infer] how nature is associating the response variables to the input variables.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+</blockquote>
+<p>Proceeding from this basis, Brieman thought that the prdiction emphasis can be described as “predictive modeling” culture", which lay stress on accuracy of prediction made by different algorithm on various datasets. But this culture, according to his estimation, is only practiced by 2% of academic statisticians.</p>
+<p>“Generative modeling culture” corresponds to the latter inference emphasis, and accounted for 98% statistical practices. Brienman said:</p>
+<blockquote>
+<p>If our goal as a field is to use data to solve problems, then we need to move away from exclusive dependence on [generative] models</p>
+</blockquote>
+<p>From today’s standpoint, Breiman’s opinions is fairly justified by reality. But why? <span class="citation">(Donoho <a href="#ref-doi:10.1080/10618600.2017.1384734" role="doc-biblioref">2017</a>)</span> thinks the Common Task Framework played a key role here.</p>
+<p>An instance of the CTF has these ingredients( I actually have never heard the term before. To my mind, it’s just like a usual kaggle contest or a data visualization challenge, yet may not subjected ot choosing the “best” machine learning model or plot):</p>
+<ol style="list-style-type: decimal">
+<li><p>A publicly available training dataset involving, for each observation, a list of (possibly many) feature measurements, and a class label for that observation.</p></li>
+<li><p>Set of enrolled competitors whose common task is to infer a class prediction rule from the training data.</p></li>
+<li><p>A scoring referee, to which competitors can submit their prediction rule. The referee runs the prediction rule against a testing dataset, which is sequestered behind a Chinese wall. The referee objectively and automatically reports the score (prediction accuracy) achieved by the submitted rule.</p></li>
+</ol>
+<p>The synergy of minimizing prediction error with CTF is worth noting. This combination leads directly to a total focus on optimization of empirical performance, allows large numbers of researchers to compete at any given common task challenge, and allows for efficient and unemotional judging of challenge winners.</p>
+</div>
+<div id="the-six-divisions" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> The Six Divisions</h3>
+<p>Further, to dipict an even larger professional on a quest to extract information from data, the author comes up with a classificcation concerning data science practices:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Data Gathering, Preparation, and Exploration</strong></li>
+<li><strong>Data Representation and Transformation:</strong> To tranfrom data collected from a wealth of formats in an attempt to represent them in one format susceptible for analysis.(i.e., get features with acoustic data, one often transforms to the cepstrum or the Fourier transform)<br />
+</li>
+<li><strong>Computing with Data</strong>: Beyond basic knowledge of programming languages, data scientists need to keep current on new idioms for efficiently using those languages and need to understand the deeper issues associated with computational efficiency. Cluster and cloud computing and the ability to run massive numbers of jobs on such clusters has become an overwhelmingly powerful ingredient of the modern computational landscape.</li>
+<li><strong>Data Modeling</strong></li>
+<li><strong>Data Visualization and Presentation</strong></li>
+<li><strong>Science about Data Science</strong>: Data scientists are doing science about data science when they identify commonly occurring analysis/processing workflows, for example, using data about their frequency of occurrence in some scholarly or business domain; when they measure the effectiveness of standard workflows in terms of the human time, the computing resource, the analysis validity, or other performance metric, and when they uncover emergent phenomena in data analysis, for example, new patterns arising in data analysis workflows, or disturbing artifacts in published analysis results.</li>
+</ol>
+<p><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+</div>
+<div id="science-about-data-science" class="section level3">
+<h3><span class="header-section-number">1.1.4</span> Science About Data Science</h3>
+<p>David then elaborates on the 6th part: science about data science, which has made the realm a true branch of science, rather than a broad collection of technical activities. Data science offered a continually evolving, evidence-based approach for analysts, covering:</p>
+<ul>
+<li>Science-Wide Meta Analysis: the idea of “analyzing what people have analyzed” across disciplines<br />
+</li>
+<li>Cross-Study Analysis: To study the validation of different studies on the same dataset. * Cross-Workflow Analysis: To study the impact of analysis workflow on results</li>
+</ul>
+<p>All these 3 approaches, comtribute to enhancing the validity of the scientific literature.</p>
+</div>
+<div id="next-50-years" class="section level3">
+<h3><span class="header-section-number">1.1.5</span> Next 50 years</h3>
+<p>At the end, what about the next 50 years of data science?</p>
+<ul>
+<li>Research will be more open and reproducible. Code sharing, data sharing will allow large numbers of datasets and analysis workflows to be derived from studies science-wide<br />
+</li>
+<li>All scientific publifications will be transformed to data thta can be mined<br />
+</li>
+<li>Ample data will be available to measure the performance of algorithms and models across a whole ensemble of situations</li>
+</ul>
+</div>
+<div id="conclusion" class="section level3">
+<h3><span class="header-section-number">1.1.6</span> Conclusion</h3>
+<p><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>Each proposed notion of data science involves some <strong>enlargement</strong> of academic statistics and machine learning. The “GDS” variant specifically discussed in this article derives from insights about data analysis and modeling stretching back decades. In this variant, the core motivation for the expansion to data science is intellectual. In the future, there may be great industrial demand for the skills inculcated by GDS; however, the core questions which drive the field are scientific, not industrial.</p>
+<p>GDS(initialtive for greater data science) proposes that data science is the science of learning from data; it studies the methods involved in the analysis and processing of data and proposes technology to improve methods in an evidence-based manner. The scope and impact of this science will expand enormously in coming decades as scientific data and data about science itself become ubiquitously available.</p>
+<p>Society already spends tens of billions of dollars yearly on scientific research, and much of that research takes place at universities. GDS inherently works to understand and improve the validity of the conclusions produced by university research, and can play a key role in all campuses where data analysis and modeling are major activities.</p>
+</div>
+</div>
+<div id="enterprise-data-analysis-and-visualization-an-interview-study" class="section level2">
+<h2><span class="header-section-number">1.2</span> Enterprise Data Analysis and Visualization: An Interview Study</h2>
+<p><strong>“Enterprise Data Analysis and Visualization: An Interview Study”</strong> is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, <span class="citation">Heer (<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.</p>
+<hr />
+<p>To get a better appreciation of the day-to-day practices of enterprise analysts, <span class="citation">(<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> interviews 35 analysts from 25 organizations across multiple sectors. The semi-structured interview composes of open-ended questions with a focus on analysis process and tools they used.</p>
+<div id="archetypes" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> 3 Archetypes</h3>
+<p>According to the responses, we can see analysts generally fall into 3 archetypes: <em>hacker</em>, <em>scripter</em> and <em>application user</em>.<br />
+<img src="images/archetypes.png" width="90%" height="80%" /></p>
+<p><strong>Hackers</strong> are faced with the most diverse and complex tasks. They are most literate in terms of programming and thus rarely ask IT staffs fro help. More oftern than not, hackers master more than three languages, R / Matlab for analysis, Python, Perl as an scripting language, and SQL for queries.</p>
+
+<div class="rmdnote">
+I guess for now Python has gained ground also as a data analysis language, and Matlab is less popular among analysts doing “practical” analysis, but more frquently used in labs of nature science.
+</div>
+
+<p>Also note that with their ability to collect, manipulate data, some hackers could be in charge of managing the data warehouse of the company, and dealing with large datasets. In constrast, they perform less statistical models, and spend more time in early-stage analytic activities prior to modeling, if any.</p>
+<p><strong>Scripters</strong> take care of advanced modeling and use a software package such as R or Matlab extensively. They are less proficient when parsing log files or scraping data off the web, and the data susceptible for modeling are often prepared by IT staff.</p>
+<p><strong>Application user</strong> prefer operations done in a spreadsheet( Mostly in Excel ), or other analysis application (e.g., SAS / JMP, SPSS, etc.). Data are also pulled out from several relationald databases prior to their work. They typically worked on smaller datasets than other gorups, advanced application users may wrote scripts using an embedded language such as Visual Basic.</p>
+
+<div class="rmdnote">
+To my mind, application users dipicted here seem to be titled “data analysts” for historical reasons, and there is little case for keeping such a position when there are already hackers and scripters. Perhaps they were traditional bussiness people in charge of analysis or accountants, so they are most comforatble with Microsoft Excel or SPSS. As the “big data” meme started to present itself, all of a sudden their enterprise felr it imperative to set up a “data scientist / analyst” position to keep up with this new trend. Yet I doubt if this archetype could still survive when graduates from data science related master programs flood the talent market.
+</div>
+
+</div>
+<div id="analysts-within-organization" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Analysts within organization</h3>
+<p>Analysts interact closely with IT staff to complete aspects of theire job. For IT staff, his relationship includes data ingesting and acquiring, operationalizing recurring workflows, and serve as a source of documentation when analysts, say, con’t figure out how to wirte a complex SQL statement.</p>
+<p>This reliance on IT staff was particularly true in organizations where data was distributed across many different data sources. Hackers were most likely to use the IT team explicitly for this function, as they were more likely to access data directly from the warehouse. Scripters and application users relied on this function implicitly when receiving data from members of IT.</p>
+<p>Another thread of this topic is distributed data, which are generated from multiple departments of the enterprise. They are often stored in various databases and formats. adding to the diffculty of intergrating them.</p>
+<p>When analysis is finished, analysts typically shared static reports in the form of template documents. In some cases, reports could be interactive dashboards that enabled end users to filter or modify statistics computed. It’s not hard to imagine consumers of the report often give a blurred image of what they want, and hardly could analysts translate them into practical data problems.</p>
+<p>When it comes to collaboration, it is an exception rather than the rule for analysts. They do share some central repository data processing scriptes are kept to oneself as a rule. Ont the other hand, final reports in the form of charts or model summary are commonly shared among analytsts in planning meeting or presentations. These reports, however, are rarely parametrizable or interactive.</p>
+<p><span class="citation">(<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> identifies three impediemnts to collaboration:</p>
+<ul>
+<li>the diversity of tools and programming languages<br />
+</li>
+<li>finding a script or inter-
+mediate data product someone else produced was often more time-
+consumingthanwritingthescriptfromscratch<br />
+</li>
+<li>many analysis process are “ad hoc”, “experimental”</li>
+</ul>
+</div>
+<div id="challenges" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Challenges</h3>
+<p><span class="citation">(<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> identified five high-level tasks in the workflow and challenges within each of them.</p>
+<p><strong>Discovering</strong><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>: As mentioned in <a href="what-is-data-science.html#analysts-within-organization">1.2.2</a>, since data are often distributed across multiple databases and sources, finding the exact data sheet or file needed can be time-consuming, not to mention that some analysts only have restricted access to the data warehhouse. Another problem is field definitions, these definitions were
+often missing in relational databases and non-existent in other types of data stores.</p>
+<p><strong>Wrangling</strong>: Many analysts reported parsing, ingesting semi-structured data(i.e., log files, block data<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>). Another difficulty is integrating the data, after analysts manage to find them in databases. Sometimes identifiers are missing or encoded inconsistantly in some databases, and sometimes there is no column than could be an identifier.</p>
+<p><strong>Profiling</strong><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>: Many analysts (22 / 35) reports issues dealing with missing data and heterogeneous data in a column. When detecting outliers, there is no general agreement between visualization and traditional staistical methods.</p>
+<p><strong>Modeling</strong>: The biggest challenge in constructing an model according to respondents are feature selection, whether to choose a set of variables, which to transfrom and how to transform.</p>
+
+<div class="rmdtip">
+There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: <a href="http://www.feat.engineering/index.html">Feature Engineering and Selection: A Practical Approach for Predictive Models</a>
+</div>
+
+<p>Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help
+explore these models and visualize their output.</p>
+
+<div class="rmdtip">
+R’s package <code>broom</code> <span class="citation">(Robinson and Hayes <a href="#ref-R-broom" role="doc-biblioref">2019</a>)</span> are desgined to facilitate modeling diagnosis, visualization, etc. <code>tidymodels</code> <span class="citation">(Kuhn and Wickham <a href="#ref-R-tidymodels" role="doc-biblioref">2019</a>)</span> contains a burgeoning list of such packages.
+</div>
+
+<p><strong>Reporing</strong>: The two most-cited challenges in reporoting were communicating assumptions and building interactive reports. Documentation that should have been provided alongside the report are often missing or poorly written. Even when assumptions were tracked, they were often treated as footnotes instead of first-class results. Moreover, analysts complained that reports were too
+inflexible and did not allow interactive verification or sensitivity analysis.</p>
+</div>
+<div id="future-trends" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Future trends</h3>
+<p><span class="citation">(<a href="#ref-2012-enterprise-analysis-interviews" role="doc-biblioref">2012</a>)</span> then prophesy future trends in technology and the analytic workforce:</p>
+<p>Public data become more accessible and add to the diffculty of data discovery and intergration.</p>
+<p>The market of Hadoop-like software will continue to increase, allowing analysts to operate on less structured data formats.</p>
+<p>“Hacker-level” analysts will be in demand, analysts therefore need to be adept at both statistical reasoning and writing complex SQL or Map-Reduce code. Those who are comfortable in multiple data processing / analysis frameworks will be competent.</p>
+<p>The size of analytic teams should grow, efficient collaboration will become both increasingly important and difficult.</p>
+
+<div class="rmdnote">
+In the last section, the author move on to discuss improvements that can be made to analytic tools. I figure these suggestions are somehow outdated by today’s standard, and <code>tidyverse</code><span class="citation">(Wickham <a href="#ref-R-tidyverse" role="doc-biblioref">2017</a>)</span>、<code>knitr</code><span class="citation">(Xie <a href="#ref-R-knitr" role="doc-biblioref">2019</a>)</span>、<code>rmarkdown</code><span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown" role="doc-biblioref">2019</a>)</span>、<code>shiny</code><span class="citation">(Chang et al. <a href="#ref-R-shiny" role="doc-biblioref">2019</a>)</span>、<code>sparklyr</code><span class="citation">(Luraschi et al. <a href="#ref-R-sparklyr" role="doc-biblioref">2019</a>)</span> and some other packages in R have already given fine solutions to them, so this section is skipped.
+</div>
+
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-rmarkdown">
+<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
+</div>
+<div id="ref-breiman2001statistical">
+<p>Breiman, Leo, and others. 2001. “Statistical Modeling: The Two Cultures (with Comments and a Rejoinder by the Author).” <em>Statistical Science</em> 16 (3): 199–231.</p>
+</div>
+<div id="ref-chambers1993greater">
+<p>Chambers, John M. 1993. “Greater or Lesser Statistics: A Choice for Future Research.” <em>Statistics and Computing</em> 3 (4): 182–84.</p>
+</div>
+<div id="ref-R-shiny">
+<p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2019. <em>Shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.</p>
+</div>
+<div id="ref-cleveland2001data">
+<p>Cleveland, William S. 2001. “Data Science: An Action Plan for Expanding the Technical Areas of the Field of Statistics.” <em>International Statistical Review</em> 69 (1): 21–26.</p>
+</div>
+<div id="ref-doi:10.1080/10618600.2017.1384734">
+<p>Donoho, David. 2017. “50 Years of Data Science.” <em>Journal of Computational and Graphical Statistics</em> 26 (4): 745–66. <a href="https://doi.org/10.1080/10618600.2017.1384734">https://doi.org/10.1080/10618600.2017.1384734</a>.</p>
+</div>
+<div id="ref-2012-enterprise-analysis-interviews">
+<p>Heer, Sean Kandel AND Andreas Paepcke AND Joseph Hellerstein AND Jeffrey. 2012. “Enterprise Data Analysis and Visualization: An Interview Study.” In <em>IEEE Visual Analytics Science &amp; Technology (Vast)</em>. <a href="http://idl.cs.washington.edu/papers/enterprise-analysis-interviews">http://idl.cs.washington.edu/papers/enterprise-analysis-interviews</a>.</p>
+</div>
+<div id="ref-R-tidymodels">
+<p>Kuhn, Max, and Hadley Wickham. 2019. <em>Tidymodels: Easily Install and Load the ’Tidymodels’ Packages</em>. <a href="https://CRAN.R-project.org/package=tidymodels">https://CRAN.R-project.org/package=tidymodels</a>.</p>
+</div>
+<div id="ref-R-sparklyr">
+<p>Luraschi, Javier, Kevin Kuo, Kevin Ushey, JJ Allaire, and The Apache Software Foundation. 2019. <em>Sparklyr: R Interface to Apache Spark</em>. <a href="https://CRAN.R-project.org/package=sparklyr">https://CRAN.R-project.org/package=sparklyr</a>.</p>
+</div>
+<div id="ref-R-broom">
+<p>Robinson, David, and Alex Hayes. 2019. <em>Broom: Convert Statistical Analysis Objects into Tidy Tibbles</em>. <a href="https://CRAN.R-project.org/package=broom">https://CRAN.R-project.org/package=broom</a>.</p>
+</div>
+<div id="ref-tukey1962future">
+<p>Tukey, John W. 1962. “The Future of Data Analysis.” <em>The Annals of Mathematical Statistics</em> 33 (1): 1–67.</p>
+</div>
+<div id="ref-R-tidyverse">
+<p>Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+</div>
+<div id="ref-R-knitr">
+<p>Xie, Yihui. 2019. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr">https://CRAN.R-project.org/package=knitr</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>The original line was slightly modified by David, the original has “information” in place of [inference] and “extract some information about” in place of [infer]<a href="what-is-data-science.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Here I skipped some discussion related to R as an computing environment, literate programming in <code>knitr</code><span class="citation">(Xie <a href="#ref-R-knitr" role="doc-biblioref">2019</a>)</span> and the “tidy data” concept<a href="what-is-data-science.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>For now, this section is copied from the original article<a href="what-is-data-science.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Here discovering means acquire data necessary to complete analysis tasks<a href="what-is-data-science.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>To verify data qualityand its suitability for the analysis tasks. Example tasks include inspecting outliers, examining distributions<a href="what-is-data-science.html#fnref6" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-wrangling-and-tidy-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

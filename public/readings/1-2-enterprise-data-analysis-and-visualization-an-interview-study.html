@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="1.2 Enterprise Data Analysis and Visualization: An Interview Study | Readings in applied data science" />
+<meta property="og:type" content="book" />
+
+
+
+<meta name="github-repo" content="enixam/data-science-readings" />
+
+<meta name="author" content="Qiushi Yan" />
+
+<meta name="date" content="2019-11-16" />
+
+
+<meta name="description" content="1.2 Enterprise Data Analysis and Visualization: An Interview Study | Readings in applied data science">
+
+<title>1.2 Enterprise Data Analysis and Visualization: An Interview Study | Readings in applied data science</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#preface">Preface</a></li>
+<li class="has-sub"><a href="1-what-is-data-science.html#what-is-data-science"><span class="toc-section-number">1</span> What is Data Science</a><ul>
+<li class="has-sub"><a href="1-1-years-of-data-science.html#years-of-data-science"><span class="toc-section-number">1.1</span> 50 Years of Data Science</a><ul>
+<li><a href="1-1-years-of-data-science.html#data-science-vs.-statistics"><span class="toc-section-number">1.1.1</span> Data Science vs. Statistics</a></li>
+<li><a href="1-1-years-of-data-science.html#review-on-the-concept"><span class="toc-section-number">1.1.2</span> Review on the concept</a></li>
+<li><a href="1-1-years-of-data-science.html#the-six-divisions"><span class="toc-section-number">1.1.3</span> The Six Divisions</a></li>
+<li><a href="1-1-years-of-data-science.html#science-about-data-science"><span class="toc-section-number">1.1.4</span> Science About Data Science</a></li>
+<li><a href="1-1-years-of-data-science.html#next-50-years"><span class="toc-section-number">1.1.5</span> Next 50 years</a></li>
+<li><a href="1-1-years-of-data-science.html#conclusion"><span class="toc-section-number">1.1.6</span> Conclusion</a></li>
+</ul></li>
+<li class="has-sub"><a href="1-2-enterprise-data-analysis-and-visualization-an-interview-study.html#enterprise-data-analysis-and-visualization-an-interview-study"><span class="toc-section-number">1.2</span> Enterprise Data Analysis and Visualization: An Interview Study</a><ul>
+<li><a href="1-2-enterprise-data-analysis-and-visualization-an-interview-study.html#archetypes"><span class="toc-section-number">1.2.1</span> 3 Archetypes</a></li>
+<li><a href="1-2-enterprise-data-analysis-and-visualization-an-interview-study.html#analysts-within-organization"><span class="toc-section-number">1.2.2</span> Analysts within organization</a></li>
+<li><a href="1-2-enterprise-data-analysis-and-visualization-an-interview-study.html#challenges"><span class="toc-section-number">1.2.3</span> Challenges</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="2-data-wrangling-and-tidy-data.html#data-wrangling-and-tidy-data"><span class="toc-section-number">2</span> Data Wrangling and Tidy Data</a><ul>
+<li><a href="2-1-tidy-data.html#tidy-data"><span class="toc-section-number">2.1</span> Tidy Data</a></li>
+<li><a href="2-2-data-organization-in-spreadsheets-nine-simple-ways-to-make-it-easier-to-reuse-your-data.html#data-organization-in-spreadsheets-nine-simple-ways-to-make-it-easier-to-reuse-your-data"><span class="toc-section-number">2.2</span> Data Organization in Spreadsheets &amp; Nine simple ways to make it easier to (re)use your data</a></li>
+</ul></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="enterprise-data-analysis-and-visualization-an-interview-study" class="section level2">
+<h2><span class="header-section-number">1.2</span> Enterprise Data Analysis and Visualization: An Interview Study</h2>
+<p><span class="citation">Heer (<label for="tufte-mn-8" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-8" class="margin-toggle">2012<span class="marginnote">Heer, Sean Kandel AND Andreas Paepcke AND Joseph Hellerstein AND Jeffrey. 2012. “Enterprise Data Analysis and Visualization: An Interview Study.” In <em>IEEE Visual Analytics Science &amp; Technology (Vast)</em>. <a href="http://idl.cs.washington.edu/papers/enterprise-analysis-interviews">http://idl.cs.washington.edu/papers/enterprise-analysis-interviews</a>.</span>)</span> is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, <span class="citation">(<label for="tufte-mn-9" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-9" class="margin-toggle">2012<span class="marginnote">Heer, Sean Kandel AND Andreas Paepcke AND Joseph Hellerstein AND Jeffrey. 2012. “Enterprise Data Analysis and Visualization: An Interview Study.” In <em>IEEE Visual Analytics Science &amp; Technology (Vast)</em>. <a href="http://idl.cs.washington.edu/papers/enterprise-analysis-interviews">http://idl.cs.washington.edu/papers/enterprise-analysis-interviews</a>.</span>)</span> provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.</p>
+<hr />
+<p>To get a better appreciation of the day-to-day practices of enterprise analysts, <span class="citation">(<label for="tufte-mn-10" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-10" class="margin-toggle">2012<span class="marginnote">Heer, Sean Kandel AND Andreas Paepcke AND Joseph Hellerstein AND Jeffrey. 2012. “Enterprise Data Analysis and Visualization: An Interview Study.” In <em>IEEE Visual Analytics Science &amp; Technology (Vast)</em>. <a href="http://idl.cs.washington.edu/papers/enterprise-analysis-interviews">http://idl.cs.washington.edu/papers/enterprise-analysis-interviews</a>.</span>)</span> interviews 35 analysts from 25 organizations across multiple sectors. The semi-structured interview composes of open-ended questions with a focus on analysis process and tools they used.</p>
+<div id="archetypes" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> 3 Archetypes</h3>
+<p>According to the responses, we can see analysts generally fall into 3 archetypes: <em>hacker</em>, <em>scripter</em> and <em>application user</em>.<br />
+<img src="images/archetypes.png" width="90%" height="80%"  /></p>
+<p><strong>Hackers</strong> are faced with the most diverse and complex tasks. They are most literate in terms of programming and thus rarely ask IT staffs fro help. More oftern than not, hackers master more than three languages, R / Matlab for analysis, Python, Perl as an scripting language, and SQL for queries.</p>
+
+<div class="rmdnote">
+I guess for now Python has gained ground also as a data analysis language, and Matlab is less popular among analysts doing “practical” analysis, but more frquently used in labs of nature science.
+</div>
+
+<p>Also note that with their ability to collect, manipulate data, some hackers could be in charge of managing the data warehouse of the company, and dealing with large datasets. In constrast, they perform less statistical models, and spend more time in early-stage analytic activities prior to modeling, if any.</p>
+<p><strong>Scripters</strong> take care of advanced modeling and use a software package such as R or Matlab extensively. They are less proficient when parsing log files or scraping data off the web, and the data susceptible for modeling are often prepared by IT staff.</p>
+<p><strong>Application user</strong> prefer operations done in a spreadsheet( Mostly in Excel ), or other analysis application (e.g., SAS / JMP, SPSS, etc.). Data are also pulled out from several relationald databases prior to their work. They typically worked on smaller datasets than other gorups, advanced application users may wrote scripts using an embedded language such as Visual Basic.</p>
+
+<div class="rmdnote">
+To my mind, application users dipicted here seem to be titled “data analysts” for historical reasons, and there is little case for keeping such a position when there are already hackers and scripters. Perhaps they were traditional bussiness people in charge of analysis or accountants, so they are most comforatble with Microsoft Excel or SPSS. As the “big data” meme started to present itself, all of a sudden their enterprise felr it imperative to set up a “data scientist / analyst” position to keep up with this new trend. Yet I doubt if this archetype could still survive when graduates from data science related master programs flood the talent market.
+</div>
+
+</div>
+<div id="analysts-within-organization" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Analysts within organization</h3>
+<p>Analysts interact closely with IT staff to complete aspects of theire job. For IT staff, his relationship includes data ingesting and acquiring, operationalizing recurring workflows, and serve as a source of documentation when analysts, say, con’t figure out how to wirte a complex SQL statement.</p>
+<p>This reliance on IT staff was particularly true in organizations where data was distributed across many different data sources. Hackers were most likely to use the IT team explicitly for this function, as they were more likely to access data directly from the warehouse. Scripters and application users relied on this function implicitly when receiving data from members of IT.</p>
+<p>Another thread of this topic is distributed data, which are generated from multiple departments of the enterprise. They are often stored in various databases and formats. adding to the diffculty of intergrating them.</p>
+<p>When analysis is finished, analysts typically shared static reports in the form of template documents. In some cases, reports could be interactive dashboards that enabled end users to filter or modify statistics computed. It’s not hard to imagine consumers of the report often give a blurred image of what they want, and hardly could analysts translate them into practical data problems.</p>
+<p>When it comes to collaboration, it is an exception rather than the rule for analysts. They do share some central repository data processing scriptes are kept to oneself as a rule. Ont the other hand, final reports in the form of charts or model summary are commonly shared among analytsts in planning meeting or presentations. These reports, however, are rarely parametrizable or interactive.</p>
+<p><span class="citation">(<label for="tufte-mn-11" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-11" class="margin-toggle">2012<span class="marginnote">Heer, Sean Kandel AND Andreas Paepcke AND Joseph Hellerstein AND Jeffrey. 2012. “Enterprise Data Analysis and Visualization: An Interview Study.” In <em>IEEE Visual Analytics Science &amp; Technology (Vast)</em>. <a href="http://idl.cs.washington.edu/papers/enterprise-analysis-interviews">http://idl.cs.washington.edu/papers/enterprise-analysis-interviews</a>.</span>)</span> identifies three impediemnts to collaboration:</p>
+<ul>
+<li>the diversity of tools and programming languages<br />
+</li>
+<li>finding a script or inter-
+mediate data product someone else produced was often more time-
+consumingthanwritingthescriptfromscratch<br />
+</li>
+<li>many analysis process are “ad hoc”, “experimental”</li>
+</ul>
+</div>
+<div id="challenges" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Challenges</h3>
+<p><span class="citation">(<label for="tufte-mn-12" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-12" class="margin-toggle">2012<span class="marginnote">Heer, Sean Kandel AND Andreas Paepcke AND Joseph Hellerstein AND Jeffrey. 2012. “Enterprise Data Analysis and Visualization: An Interview Study.” In <em>IEEE Visual Analytics Science &amp; Technology (Vast)</em>. <a href="http://idl.cs.washington.edu/papers/enterprise-analysis-interviews">http://idl.cs.washington.edu/papers/enterprise-analysis-interviews</a>.</span>)</span> identified five high-level tasks in the workflow and challenges within each of them.</p>
+<p><strong>Discovering</strong><label for="tufte-sn-4" class="margin-toggle sidenote-number">4</label><input type="checkbox" id="tufte-sn-4" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">4</span> Here discovering means acquire data necessary to complete analysis tasks</span>: As mentioned in <a href="1-2-enterprise-data-analysis-and-visualization-an-interview-study.html#analysts-within-organization">1.2.2</a>, since data are often distributed across multiple databases and sources, finding the exact data sheet or file needed can be time-consuming, not to mention that some analysts only have restricted access to the data warehhouse. Another problem is field definitions, these definitions were
+often missing in relational databases and non-existent in other types of data stores.</p>
+<p><strong>Wranling</strong>: Many analysts reported parsing, ingesting semi-structured data(i.e., log files, block data<label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> In a block format, logical records of data are spread
+across multiple lines of a file. Typically one line (the “header”) con-
+tains metadata about the record, such as how many of the subsequent
+lines (the “payload”) belong to the record</span>). Another difficulty is integrating the data, after analysts manage to find them in databases. Sometimes identifiers are missing or encoded inconsistantly in some databases, and sometimes there is no column than could be an identifier.</p>
+<p><strong>Profiling</strong><label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> To verify data qualityand its suitability for the analysis tasks. Example tasks include inspecting outliers, examining distributions</span>: Many analysts (22 / 35) reports issues dealing with missing data and heterogeneous data in a column. When detecting outliers, there is no general agreement between visualization and traditional staistical methods.</p>
+<p><strong>Modeling</strong>: The biggest challenge in constructing an model according to respondents are feature selection, whether to choose a set of variables, which to transfrom and how to transform.</p>
+
+<div class="rmdnote">
+There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: <a href="http://www.feat.engineering/index.html">Feature Engineering and Selection: A Practical Approach for Predictive Models</a>
+</div>
+
+<p>Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations.</p>
+<p><span class="citation">Robinson and Hayes (<label for="tufte-mn-13" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">2019<span class="marginnote">Robinson, David, and Alex Hayes. 2019. <em>Broom: Convert Statistical Analysis Objects into Tidy Tibbles</em>. <a href="https://CRAN.R-project.org/package=broom">https://CRAN.R-project.org/package=broom</a>.</span>)</span></p>
+
+</div>
+</div>
+<!-- </div> -->
+<p style="text-align: center;">
+<a href="1-1-years-of-data-science.html"><button class="btn btn-default">Previous</button></a>
+<a href="2-data-wrangling-and-tidy-data.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

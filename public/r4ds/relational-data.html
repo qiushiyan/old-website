@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11 WDI | R for data science: tidyverse and beyond</title>
-  <meta name="description" content="11 WDI | R for data science: tidyverse and beyond" />
+  <title>7 relational data | R for data science: tidyverse and beyond</title>
+  <meta name="description" content="7 relational data | R for data science: tidyverse and beyond" />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11 WDI | R for data science: tidyverse and beyond" />
+  <meta property="og:title" content="7 relational data | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="enixam/rfordatascience" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11 WDI | R for data science: tidyverse and beyond" />
+  <meta name="twitter:title" content="7 relational data | R for data science: tidyverse and beyond" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="vroom.html"/>
-<link rel="next" href="skimr.html"/>
+<link rel="prev" href="tidyr.html"/>
+<link rel="next" href="broom.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -339,127 +339,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="wdi" class="section level1">
-<h1><span class="header-section-number">11</span> WDI</h1>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1"><span class="co"># install.packages(&quot;WDI&quot;)</span></a>
-<a class="sourceLine" id="cb395-2" title="2"><span class="kw">library</span>(WDI)</a></code></pre></div>
-<p><a href="http://datatopics.worldbank.org/world-development-indicators/">World Devevlopment Indicators</a>(WDI)是世界银行提供的公开、高质量数据库。指标首先按照领域分类，除了一般常见的统计数据外，还包括农业、气候、贫穷、健康方面的数据。</p>
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
-<img src="images/19.png" alt="Indicators divided by sectors" width="80%" />
-<p class="caption">
-Figure 11.1: Indicators divided by sectors
-</p>
+<div id="relational-data" class="section level1">
+<h1><span class="header-section-number">7</span> relational data</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">7.1</span> introduction</h2>
 </div>
-<p>具体到某领域内，每个数据集都是各个国家在某个指标上的时间序列，时效性一般在两年之内。下面是气候变化分类中电力覆盖率指标(Access to electricity)的一个例子：</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;images/20.png&quot;</span>)</a></code></pre></div>
-<p><img src="images/20.png" width="80%" /></p>
-<p>数据库中包含了超过 1600 个这样的时间序列，很多有效跨度超过了 50 年。<strong>WDI</strong><span class="citation">(Arel-Bundock <a href="#ref-R-WDI" role="doc-biblioref">2019</a>)</span> 包提供了在 WDI 数据库中搜索、提取、格式化信息的接口。</p>
-<div id="wdisearch" class="section level2">
-<h2><span class="header-section-number">11.1</span> <code>WDIsearch()</code></h2>
-<p><code>WDIserach()</code> 用于在 WDI 数据库中搜索可用的指标，是之后用 <code>WDI()</code> 提取相关数据的基础。</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" title="1"><span class="kw">WDIsearch</span>(<span class="dt">string =</span> <span class="st">&quot;gdp&quot;</span>, <span class="dt">field =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">short =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb397-2" title="2">  <span class="dt">cache =</span> <span class="ot">NULL</span>)</a></code></pre></div>
-<ul>
-<li><code>string = "gdp"</code>: 用于搜索的正则表达式<br />
-</li>
-<li><code>field</code>= “name”: 搜索域，可选 “indicator”（编码）、“name”（名称）、“discription”（详细描述）、“sourceDatabase” 和 “sourceOrganization” （来源数据库或组织）<br />
-</li>
-<li><code>short = TRUE</code>：<code>WDIsearch()</code>默认只返回匹配指标的编码和名称，<code>short = FSLE</code> 同时返回详细描述和来源</li>
-</ul>
-<p>如在名称域内中搜索与二氧化碳相关的指标：</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" title="1"><span class="co"># the result of WDIsearch() is a 2D matrix</span></a>
-<a class="sourceLine" id="cb398-2" title="2"><span class="kw">WDIsearch</span>(<span class="st">&quot;CO2&quot;</span>, <span class="dt">short =</span> F) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb398-3" title="3"><span class="st">  </span><span class="kw">as_tibble</span>() </a>
-<a class="sourceLine" id="cb398-4" title="4"><span class="co">#&gt; # A tibble: 45 x 5</span></a>
-<a class="sourceLine" id="cb398-5" title="5"><span class="co">#&gt;   indicator   name       description       sourceDatabase  sourceOrganization   </span></a>
-<a class="sourceLine" id="cb398-6" title="6"><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;             &lt;chr&gt;           &lt;chr&gt;                </span></a>
-<a class="sourceLine" id="cb398-7" title="7"><span class="co">#&gt; 1 EN.ATM.CO2… CO2 emiss… Carbon dioxide e… World Developm… Carbon Dioxide Infor…</span></a>
-<a class="sourceLine" id="cb398-8" title="8"><span class="co">#&gt; 2 EN.ATM.CO2… &quot;CO2 emis… Carbon dioxide e… World Developm… Carbon Dioxide Infor…</span></a>
-<a class="sourceLine" id="cb398-9" title="9"><span class="co">#&gt; 3 EN.ATM.CO2… &quot;CO2 emis… Carbon dioxide e… World Developm… Carbon Dioxide Infor…</span></a>
-<a class="sourceLine" id="cb398-10" title="10"><span class="co">#&gt; 4 EN.ATM.CO2… CO2 emiss… Carbon dioxide e… World Developm… Carbon Dioxide Infor…</span></a>
-<a class="sourceLine" id="cb398-11" title="11"><span class="co">#&gt; 5 EN.ATM.CO2… CO2 emiss… Carbon dioxide e… World Developm… Carbon Dioxide Infor…</span></a>
-<a class="sourceLine" id="cb398-12" title="12"><span class="co">#&gt; 6 EN.ATM.CO2… CO2 emiss… &quot;&quot;                WDI Database A… &quot;&quot;                   </span></a>
-<a class="sourceLine" id="cb398-13" title="13"><span class="co">#&gt; # … with 39 more rows</span></a></code></pre></div>
-<p>改变搜索域：</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1"><span class="kw">WDIsearch</span>(<span class="dt">string =</span> <span class="st">&quot;mortality&quot;</span>, <span class="dt">field =</span> <span class="st">&quot;description&quot;</span>, <span class="dt">short =</span> F) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb399-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
-<a class="sourceLine" id="cb399-3" title="3"><span class="co">#&gt; # A tibble: 383 x 5</span></a>
-<a class="sourceLine" id="cb399-4" title="4"><span class="co">#&gt;   indicator  name         description      sourceDatabase  sourceOrganization   </span></a>
-<a class="sourceLine" id="cb399-5" title="5"><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt;                </span></a>
-<a class="sourceLine" id="cb399-6" title="6"><span class="co">#&gt; 1 5.51.01.0… Maternal he… Births attended… Statistical Ca… World Development In…</span></a>
-<a class="sourceLine" id="cb399-7" title="7"><span class="co">#&gt; 2 5.51.01.0… Immunization The proportion … Statistical Ca… World Development In…</span></a>
-<a class="sourceLine" id="cb399-8" title="8"><span class="co">#&gt; 3 5.51.01.0… Child morta… Under-five mort… Statistical Ca… World Development In…</span></a>
-<a class="sourceLine" id="cb399-9" title="9"><span class="co">#&gt; 4 PRJ.POP.1… Wittgenstei… Total populatio… Education Stat… Wittgenstein Centre …</span></a>
-<a class="sourceLine" id="cb399-10" title="10"><span class="co">#&gt; 5 PRJ.POP.1… Wittgenstei… Total populatio… Education Stat… Wittgenstein Centre …</span></a>
-<a class="sourceLine" id="cb399-11" title="11"><span class="co">#&gt; 6 PRJ.POP.1… Wittgenstei… Total populatio… Education Stat… Wittgenstein Centre …</span></a>
-<a class="sourceLine" id="cb399-12" title="12"><span class="co">#&gt; # … with 377 more rows</span></a></code></pre></div>
-<p><code>WDIsearch()</code> 中的正则表达式背后用 base R 中的 <code>grep()</code> 实现，所以<strong>无视大小写</strong>。</p>
-<p>搜索人均不变价 GDP ：</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" title="1"><span class="kw">WDIsearch</span>(<span class="dt">string =</span> <span class="st">&#39;gdp.*capita.*constant&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb400-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
-<a class="sourceLine" id="cb400-3" title="3"><span class="co">#&gt; # A tibble: 5 x 2</span></a>
-<a class="sourceLine" id="cb400-4" title="4"><span class="co">#&gt;   indicator            name                                                  </span></a>
-<a class="sourceLine" id="cb400-5" title="5"><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;                                                 </span></a>
-<a class="sourceLine" id="cb400-6" title="6"><span class="co">#&gt; 1 6.0.GDPpc_constant   &quot;GDP per capita, PPP (constant 2011 international $) &quot;</span></a>
-<a class="sourceLine" id="cb400-7" title="7"><span class="co">#&gt; 2 NY.GDP.PCAP.PP.KD.87 GDP per capita, PPP (constant 1987 international $)   </span></a>
-<a class="sourceLine" id="cb400-8" title="8"><span class="co">#&gt; 3 NY.GDP.PCAP.PP.KD    GDP per capita, PPP (constant 2011 international $)   </span></a>
-<a class="sourceLine" id="cb400-9" title="9"><span class="co">#&gt; 4 NY.GDP.PCAP.KN       GDP per capita (constant LCU)                         </span></a>
-<a class="sourceLine" id="cb400-10" title="10"><span class="co">#&gt; 5 NY.GDP.PCAP.KD       GDP per capita (constant 2010 US$)</span></a></code></pre></div>
+<div id="mutating-joins" class="section level2">
+<h2><span class="header-section-number">7.2</span> mutating joins</h2>
 </div>
-<div id="wdi-1" class="section level2">
-<h2><span class="header-section-number">11.2</span> <code>WDI</code></h2>
-<p><code>WDIsearch()</code> 得到了指标的<strong>编码</strong>之后，就可以用 <code>WDI()</code> 下载相关数据：</p>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="kw">WDI</span>(<span class="dt">country =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">indicator =</span> <span class="st">&quot;NY.GNS.ICTR.GN.ZS&quot;</span>, <span class="dt">start =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb401-2" title="2">  <span class="dt">end =</span> <span class="ot">NULL</span>, <span class="dt">extra =</span> <span class="ot">FALSE</span>, <span class="dt">cache =</span> <span class="ot">NULL</span>)</a></code></pre></div>
-<ul>
-<li><code>country</code>: 筛选国家或地区。使用 “ISO 3166-1” 两位字母编码，具体可见 <code>mapdata::iso3166</code>。（中国 CN, 美国 US，德国 DE，日本 JP，英国 GB）</li>
-<li><code>indicator</code>: 指标的编码。具名向量可以在重命名该指标<br />
-</li>
-<li><code>start</code> 和 <code>end</code>：时间序列的起始和结束。默认为 1950 年和今年<br />
-</li>
-<li><code>extra = FALSE</code>： 若 <code>extra = RTUE</code>，返回首都经纬度、地区、收入水平等更多信息</li>
-</ul>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" title="1"><span class="kw">WDI</span>(<span class="dt">indicator =</span> <span class="st">&quot;5.51.01.03.mortal&quot;</span>, <span class="dt">country =</span> <span class="kw">c</span>(<span class="st">&quot;US&quot;</span>, <span class="st">&quot;CN&quot;</span>),</a>
-<a class="sourceLine" id="cb402-2" title="2">    <span class="dt">start =</span> <span class="dv">2005</span>,</a>
-<a class="sourceLine" id="cb402-3" title="3">    <span class="dt">end =</span> <span class="dv">2015</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb402-4" title="4"><span class="st">  </span><span class="kw">as_tibble</span>() </a>
-<a class="sourceLine" id="cb402-5" title="5"><span class="co">#&gt; # A tibble: 11 x 4</span></a>
-<a class="sourceLine" id="cb402-6" title="6"><span class="co">#&gt;   iso2c country `5.51.01.03.mortal`  year</span></a>
-<a class="sourceLine" id="cb402-7" title="7"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb402-8" title="8"><span class="co">#&gt; 1 CN    China                     1  2015</span></a>
-<a class="sourceLine" id="cb402-9" title="9"><span class="co">#&gt; 2 CN    China                     1  2014</span></a>
-<a class="sourceLine" id="cb402-10" title="10"><span class="co">#&gt; 3 CN    China                     1  2013</span></a>
-<a class="sourceLine" id="cb402-11" title="11"><span class="co">#&gt; 4 CN    China                     1  2012</span></a>
-<a class="sourceLine" id="cb402-12" title="12"><span class="co">#&gt; 5 CN    China                     1  2011</span></a>
-<a class="sourceLine" id="cb402-13" title="13"><span class="co">#&gt; 6 CN    China                     1  2010</span></a>
-<a class="sourceLine" id="cb402-14" title="14"><span class="co">#&gt; # … with 5 more rows</span></a>
-<a class="sourceLine" id="cb402-15" title="15"></a>
-<a class="sourceLine" id="cb402-16" title="16"><span class="co"># renaming and extra = TRUE</span></a>
-<a class="sourceLine" id="cb402-17" title="17"><span class="kw">WDI</span>(<span class="dt">indicator =</span> <span class="kw">c</span>(<span class="dt">child_motality =</span> <span class="st">&quot;5.51.01.03.mortal&quot;</span>),  <span class="dt">country =</span> <span class="kw">c</span>(<span class="st">&quot;US&quot;</span>, <span class="st">&quot;CN&quot;</span>),</a>
-<a class="sourceLine" id="cb402-18" title="18">    <span class="dt">start =</span> <span class="dv">2005</span>,</a>
-<a class="sourceLine" id="cb402-19" title="19">    <span class="dt">end =</span> <span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb402-20" title="20">    <span class="dt">extra =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb402-21" title="21"><span class="st">  </span><span class="kw">as_tibble</span>() </a>
-<a class="sourceLine" id="cb402-22" title="22"><span class="co">#&gt; # A tibble: 11 x 11</span></a>
-<a class="sourceLine" id="cb402-23" title="23"><span class="co">#&gt;   iso2c country child_motality  year iso3c region capital longitude latitude</span></a>
-<a class="sourceLine" id="cb402-24" title="24"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;   </span></a>
-<a class="sourceLine" id="cb402-25" title="25"><span class="co">#&gt; 1 CN    China                1  2015 CHN   East … Beijing 116.286   40.0495 </span></a>
-<a class="sourceLine" id="cb402-26" title="26"><span class="co">#&gt; 2 CN    China                1  2014 CHN   East … Beijing 116.286   40.0495 </span></a>
-<a class="sourceLine" id="cb402-27" title="27"><span class="co">#&gt; 3 CN    China                1  2013 CHN   East … Beijing 116.286   40.0495 </span></a>
-<a class="sourceLine" id="cb402-28" title="28"><span class="co">#&gt; 4 CN    China                1  2012 CHN   East … Beijing 116.286   40.0495 </span></a>
-<a class="sourceLine" id="cb402-29" title="29"><span class="co">#&gt; 5 CN    China                1  2011 CHN   East … Beijing 116.286   40.0495 </span></a>
-<a class="sourceLine" id="cb402-30" title="30"><span class="co">#&gt; 6 CN    China                1  2010 CHN   East … Beijing 116.286   40.0495 </span></a>
-<a class="sourceLine" id="cb402-31" title="31"><span class="co">#&gt; # … with 5 more rows, and 2 more variables: income &lt;fct&gt;, lending &lt;fct&gt;</span></a></code></pre></div>
-
+<div id="filtering-join" class="section level2">
+<h2><span class="header-section-number">7.3</span> filtering join</h2>
 </div>
-</div>
+<div id="fuzzy-join" class="section level2">
+<h2><span class="header-section-number">7.4</span> fuzzy join</h2>
 
-
-
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-WDI">
-<p>Arel-Bundock, Vincent. 2019. <em>WDI: World Development Indicators (World Bank)</em>. <a href="https://CRAN.R-project.org/package=WDI">https://CRAN.R-project.org/package=WDI</a>.</p>
 </div>
 </div>
             </section>
@@ -467,8 +360,8 @@ Figure 11.1: Indicators divided by sectors
           </div>
         </div>
       </div>
-<a href="vroom.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="skimr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tidyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="broom.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -499,7 +392,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/enixam/rfordatascience/edit/master/WDI.Rmd",
+"link": "https://github.com/enixam/rfordatascience/edit/master/relational.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -1,7 +1,10 @@
 
 
 
-# data.table {#data-table}
+# data.table {#data-table}  
+
+**data.table**[@R-data.table]
+
 https://rdatatable.gitlab.io/data.table/  
 
 https://m-clark.github.io/data-processing-and-visualization/data_table.html   

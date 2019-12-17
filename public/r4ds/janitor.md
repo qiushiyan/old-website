@@ -7,7 +7,7 @@
 
 http://sfirke.github.io/janitor/articles/janitor.html  
 
-**Janitor** 包提供了一些简单易用的函数方便数据清洗和探索流程。  
+**Janitor**[@R-janitor] 包提供了一些简单易用的函数方便数据清洗和探索流程。  
 
 
 

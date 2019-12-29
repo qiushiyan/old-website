@@ -28,12 +28,17 @@ projects: []
 Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a `SpatialPolygonsDataFrame` object  
 
 ```{r,include=F}
-knitr::opts_chunk$set(message=F,warning=F)
+knitr::opts_chunk$set(message = F,warning = F,
+                      comment = "#>", collapse = TRUE)
 ```
 
 
 ```{r,message=F,results="hide"}
 library(sf)
+```
+
+
+```{r}
 nc <- st_read(system.file("shape/nc.shp", package="sf"))
 spdf <- as(nc, "Spatial")
 ```
@@ -71,7 +76,9 @@ simple_list <- list(
     object = list( a="b", c="d" ),
     string = "Hello World"
   )
+```
 
+```{r}
 reactjson(
   simple_list,
 )

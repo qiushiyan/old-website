@@ -686,17 +686,17 @@ tibble(x = c("a,b,c", "d,e,", "h,i,j")) %>%
 #> # A tibble: 3 x 3
 #>   one   two   three
 #>   <chr> <chr> <chr>
-#> 1 a     b     c    
+#> 1 a     b     "c"  
 #> 2 d     e     ""   
-#> 3 h     i     j
+#> 3 h     i     "j"
 tibble(x = c("a,b,c", "d,e,", "h,i,j")) %>% 
   separate(x, c("one", "two", "three"),fill = "right")
 #> # A tibble: 3 x 3
 #>   one   two   three
 #>   <chr> <chr> <chr>
-#> 1 a     b     c    
+#> 1 a     b     "c"  
 #> 2 d     e     ""   
-#> 3 h     i     j
+#> 3 h     i     "j"
 ```
 
 > 2.`unite()`和`separate()`均有一个`remove`参数，它的作用是什么？    

@@ -1,5 +1,6 @@
 
 
+# (PART) Exploring and Wrangling {-}  
 
 # data.table {#data-table}  
 
@@ -88,3 +89,14 @@ https://github.com/gdemin/maditr
 ## tidyfast  
 
 https://github.com/TysonStanley/tidyfast  
+
+## disk.frame  
+
+https://diskframe.com/  
+
+
+
+```r
+# install.packages("disk.frame")  
+```
+

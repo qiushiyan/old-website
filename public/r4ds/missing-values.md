@@ -4,10 +4,6 @@
 # 处理缺失值  {#missing-values}  
 
 
-```r
-library(tidyverse)
-```
-
 
 ## 探索  {#explore-missing}
 
@@ -144,6 +140,17 @@ df$x %>% replace_na(0)
 df$y %>% replace_na("unknown")
 #> [1] "a"       "unknown" "b"
 ```
+
+
+`visdat::vis_missing()`  
+
+
+```r
+library(visdat)
+vis_miss(df)
+```
+
+<img src="missing-values_files/figure-html/unnamed-chunk-9-1.svg" width="80%" />
 
 
 

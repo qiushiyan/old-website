@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Qiushi Yan</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2019</copyright><lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Qiushi Yan</title>
@@ -2452,7 +2452,7 @@ Prediction: To be able to predict what the responses are going to be to future i
     </item>
     
     <item>
-      <title>Advanced R Graphics</title>
+      <title>Advanced ggplot2</title>
       <link>/project/advanced-r-graphics/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/project/advanced-r-graphics/</guid>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 504.00 311.47'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, polygon, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<rect x='0.00' y='0.00' width='504.00' height='311.47' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+<defs>
+  <clipPath id='cpMzAuNDN8NDk4LjUyfDI3MS40Nnw3NS42OA=='>
+    <rect x='30.43' y='75.68' width='468.09' height='195.78' />
+  </clipPath>
+</defs>
+<polyline points='30.43,262.56 498.52,262.56 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDI3MS40Nnw3NS42OA==)' />
+<polyline points='30.43,213.78 498.52,213.78 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDI3MS40Nnw3NS42OA==)' />
+<polyline points='30.43,164.99 498.52,164.99 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDI3MS40Nnw3NS42OA==)' />
+<polyline points='30.43,116.20 498.52,116.20 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDI3MS40Nnw3NS42OA==)' />
+<polyline points='51.71,155.23 90.39,139.25 129.08,154.01 167.76,120.15 206.45,108.59 245.13,106.52 283.82,102.72 322.50,98.45 361.19,95.00 399.87,90.77 438.56,86.86 477.24,84.58 ' style='stroke-width: 2.13; stroke: #1380A1; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDI3MS40Nnw3NS42OA==)' />
+<line x1='30.43' y1='262.56' x2='498.52' y2='262.56' style='stroke-width: 2.13; stroke: #333333; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDI3MS40Nnw3NS42OA==)' />
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA='>
+    <rect x='0.00' y='0.00' width='504.00' height='311.47' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='15.49' y='269.01' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='10.01px' lengthAdjust='spacingAndGlyphs'>0</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='5.48' y='220.22' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>20</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='5.48' y='171.43' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>40</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='5.48' y='122.64' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>60</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='16.21' y='292.07' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1950</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='93.58' y='292.07' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1960</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='170.95' y='292.07' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1970</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='248.32' y='292.07' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1980</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='325.69' y='292.07' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1990</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='403.06' y='292.07' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>2000</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='30.43' y='61.88' style='font-size: 22.00px; font-family: Helvetica;' textLength='351.02px' lengthAdjust='spacingAndGlyphs'>Life expectancy in China 1952-2007</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzExLjQ3fDAuMDA=)'><text x='30.43' y='25.52' style='font-size: 28.00px; font-weight: bold; fill: #222222; font-family: Helvetica;' textLength='175.78px' lengthAdjust='spacingAndGlyphs'>Living longer</text></g>
+</svg>

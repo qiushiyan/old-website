@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 504.00 360.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, polygon, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<rect x='0.00' y='0.00' width='504.00' height='360.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+<defs>
+  <clipPath id='cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg='>
+    <rect x='30.43' y='114.88' width='468.09' height='205.11' />
+  </clipPath>
+</defs>
+<polyline points='30.43,310.67 498.52,310.67 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<polyline points='30.43,263.01 498.52,263.01 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<polyline points='30.43,215.34 498.52,215.34 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<polyline points='30.43,167.68 498.52,167.68 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<polyline points='30.43,120.01 498.52,120.01 ' style='stroke-width: 1.07; stroke: #CBCBCB; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<polyline points='51.71,205.81 90.39,190.20 129.08,204.61 167.76,171.54 206.45,160.24 245.13,158.22 283.82,154.51 322.50,150.34 361.19,146.97 399.87,142.83 438.56,139.01 477.24,136.79 ' style='stroke-width: 1.07; stroke: #FAAB18; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<polyline points='51.71,147.56 90.39,145.06 129.08,143.35 167.76,142.03 206.45,140.65 245.13,135.79 283.82,132.76 322.50,131.88 361.19,129.33 399.87,127.62 438.56,126.42 477.24,124.20 ' style='stroke-width: 1.07; stroke: #1380A1; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<line x1='30.43' y1='310.67' x2='498.52' y2='310.67' style='stroke-width: 2.13; stroke: #333333; stroke-linecap: butt;' clip-path='url(#cpMzAuNDN8NDk4LjUyfDMxOS45OXwxMTQuODg=)' />
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA='>
+    <rect x='0.00' y='0.00' width='504.00' height='360.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='15.49' y='317.11' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='10.01px' lengthAdjust='spacingAndGlyphs'>0</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='5.48' y='269.45' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>20</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='5.48' y='221.78' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>40</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='5.48' y='174.12' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>60</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='5.48' y='126.46' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>80</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='16.21' y='340.60' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1950</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='93.58' y='340.60' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1960</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='170.95' y='340.60' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1970</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='248.32' y='340.60' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1980</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='325.69' y='340.60' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>1990</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='403.06' y='340.60' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>2000</text></g>
+<line x1='165.91' y1='89.80' x2='179.73' y2='89.80' style='stroke-width: 1.07; stroke: #FAAB18; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)' />
+<line x1='241.16' y1='89.80' x2='254.99' y2='89.80' style='stroke-width: 1.07; stroke: #1380A1; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)' />
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='186.94' y='96.24' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='47.03px' lengthAdjust='spacingAndGlyphs'>China</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='262.20' y='96.24' style='font-size: 18.00px; fill: #222222; font-family: Helvetica;' textLength='108.06px' lengthAdjust='spacingAndGlyphs'>United States</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='30.43' y='61.88' style='font-size: 22.00px; font-family: Helvetica;' textLength='355.89px' lengthAdjust='spacingAndGlyphs'>Life expectancy in China and the US</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='30.43' y='25.52' style='font-size: 28.00px; font-weight: bold; fill: #222222; font-family: Helvetica;' textLength='175.78px' lengthAdjust='spacingAndGlyphs'>Living longer</text></g>
+</svg>

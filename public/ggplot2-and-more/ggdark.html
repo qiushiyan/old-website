@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 ggdark | 进阶 R 图形</title>
+  <meta name="description" content="9 ggdark | 进阶 R 图形" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 ggdark | 进阶 R 图形" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="enixam/Advanced_ggplot2" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 ggdark | 进阶 R 图形" />
+  
+  
+  
+
+<meta name="author" content="Maxine" />
+
+
+<meta name="date" content="2020-01-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ggforce.html"/>
+<link rel="next" href="ggthemes.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">GGPLOT2 and MORE</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I Geoms</b></span></li>
+<li class="chapter" data-level="1" data-path="ridges.html"><a href="ridges.html"><i class="fa fa-check"></i><b>1</b> 山峦图</a></li>
+<li class="chapter" data-level="2" data-path="ggpubr.html"><a href="ggpubr.html"><i class="fa fa-check"></i><b>2</b> <code>ggpubr</code></a></li>
+<li class="chapter" data-level="3" data-path="ggpointdensity.html"><a href="ggpointdensity.html"><i class="fa fa-check"></i><b>3</b> ggpointdensity</a></li>
+<li class="chapter" data-level="4" data-path="others.html"><a href="others.html"><i class="fa fa-check"></i><b>4</b> 其他</a></li>
+<li class="part"><span><b>II Colors and sclales</b></span></li>
+<li class="chapter" data-level="5" data-path="colors.html"><a href="colors.html"><i class="fa fa-check"></i><b>5</b> 颜色</a></li>
+<li class="part"><span><b>III Themems and Layouts</b></span></li>
+<li class="chapter" data-level="6" data-path="bbplot.html"><a href="bbplot.html"><i class="fa fa-check"></i><b>6</b> bbplot</a></li>
+<li class="chapter" data-level="7" data-path="patchwork.html"><a href="patchwork.html"><i class="fa fa-check"></i><b>7</b> patchwork</a></li>
+<li class="chapter" data-level="8" data-path="ggforce.html"><a href="ggforce.html"><i class="fa fa-check"></i><b>8</b> ggforce</a></li>
+<li class="chapter" data-level="9" data-path="ggdark.html"><a href="ggdark.html"><i class="fa fa-check"></i><b>9</b> ggdark</a></li>
+<li class="chapter" data-level="10" data-path="ggthemes.html"><a href="ggthemes.html"><i class="fa fa-check"></i><b>10</b> ggthemes</a></li>
+<li class="chapter" data-level="11" data-path="hrbrthemes.html"><a href="hrbrthemes.html"><i class="fa fa-check"></i><b>11</b> hrbrthemes</a></li>
+<li class="chapter" data-level="12" data-path="ggthemr.html"><a href="ggthemr.html"><i class="fa fa-check"></i><b>12</b> ggthemr</a></li>
+<li class="chapter" data-level="13" data-path="ggtech.html"><a href="ggtech.html"><i class="fa fa-check"></i><b>13</b> ggtech</a></li>
+<li class="part"><span><b>IV 实例</b></span></li>
+<li class="chapter" data-level="14" data-path="schizophrenia-births-in-australia.html"><a href="schizophrenia-births-in-australia.html"><i class="fa fa-check"></i><b>14</b> Schizophrenia Births in Australia</a></li>
+<li class="chapter" data-level="15" data-path="Econmist.html"><a href="Econmist.html"><i class="fa fa-check"></i><b>15</b> 经济学人：Corruption and human development</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">进阶 R 图形</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggdark" class="section level1">
+<h1><span class="header-section-number">9</span> ggdark</h1>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb128-2" title="2"><span class="kw">library</span>(ggdark)</a></code></pre></div>
+<p><strong>ggdark</strong> 提供了 ggplot2 内置主题(<code>theme_gray</code>, <code>theme_classic</code>等) 的”暗黑版本(dark version)“，例如 <code>theme_gray</code>(默认主题) 的暗黑版本为 <code>dark_theme_gray</code>。</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1">diamonds_sub &lt;-<span class="st"> </span>diamonds[<span class="kw">sample</span>(<span class="kw">nrow</span>(diamonds), <span class="dv">5000</span>), ]</a>
+<a class="sourceLine" id="cb129-2" title="2"></a>
+<a class="sourceLine" id="cb129-3" title="3">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamonds_sub) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">color =</span> cut)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-5" title="5"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">label =</span> scales<span class="op">::</span>dollar) <span class="op">+</span></a>
+<a class="sourceLine" id="cb129-6" title="6"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb129-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Prices of 5,000 round cut diamonds by carat and cut&quot;</span>,</a>
+<a class="sourceLine" id="cb129-8" title="8">       <span class="dt">x =</span> <span class="st">&quot;Weight (carats)&quot;</span>,</a>
+<a class="sourceLine" id="cb129-9" title="9">       <span class="dt">y =</span> <span class="st">&quot;Price in US dollars&quot;</span>,</a>
+<a class="sourceLine" id="cb129-10" title="10">       <span class="dt">color =</span> <span class="st">&quot;Quality of the cut&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-11" title="11"><span class="st">  </span><span class="kw">theme_gray</span>() <span class="co">## ggplot2 default</span></a>
+<a class="sourceLine" id="cb129-12" title="12"></a>
+<a class="sourceLine" id="cb129-13" title="13">p_dark &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-14" title="14"><span class="st">  </span><span class="kw">dark_theme_gray</span>()  </a>
+<a class="sourceLine" id="cb129-15" title="15"></a>
+<a class="sourceLine" id="cb129-16" title="16">p_dark</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-4-1.svg" width="50%" /></p>
+<p>与在 ggplot2 中一样，我们可以自由修饰 ggdark 提供的主题：</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">p_dark <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb130-2" title="2"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb130-3" title="3">        <span class="dt">plot.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;grey10&quot;</span>),</a>
+<a class="sourceLine" id="cb130-4" title="4">        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb130-5" title="5">        <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">color =</span> <span class="st">&quot;grey30&quot;</span>, <span class="dt">size =</span> <span class="fl">0.2</span>),</a>
+<a class="sourceLine" id="cb130-6" title="6">        <span class="dt">panel.grid.minor =</span> <span class="kw">element_line</span>(<span class="dt">color =</span> <span class="st">&quot;grey30&quot;</span>, <span class="dt">size =</span> <span class="fl">0.2</span>),</a>
+<a class="sourceLine" id="cb130-7" title="7">        <span class="dt">legend.background =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb130-8" title="8">        <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb130-9" title="9">        <span class="dt">legend.key =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb130-10" title="10">        <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.815</span>, <span class="fl">0.27</span>)</a>
+<a class="sourceLine" id="cb130-11" title="11">        )</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-5-1.svg" width="90%" /></p>
+<p>调用任意一个主题的 dark version 过后，一些几何对象的默认图形属性将发生改变（例如 <code>geom_point</code> 中 <code>color</code> 的默认值会变为白色），调用 <code>invert_geom_defaults()</code> 重置。</p>
+<p>其他主题的暗黑版本：</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">mtcars2 &lt;-<span class="st"> </span><span class="kw">within</span>(mtcars, {</a>
+<a class="sourceLine" id="cb131-2" title="2">  vs &lt;-<span class="st"> </span><span class="kw">factor</span>(vs, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;V-shaped&quot;</span>, <span class="st">&quot;Straight&quot;</span>))</a>
+<a class="sourceLine" id="cb131-3" title="3">  am &lt;-<span class="st"> </span><span class="kw">factor</span>(am, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Automatic&quot;</span>, <span class="st">&quot;Manual&quot;</span>))</a>
+<a class="sourceLine" id="cb131-4" title="4">  cyl  &lt;-<span class="st"> </span><span class="kw">factor</span>(cyl)</a>
+<a class="sourceLine" id="cb131-5" title="5">  gear &lt;-<span class="st"> </span><span class="kw">factor</span>(gear)</a>
+<a class="sourceLine" id="cb131-6" title="6">})</a>
+<a class="sourceLine" id="cb131-7" title="7"></a>
+<a class="sourceLine" id="cb131-8" title="8">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars2) <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(wt, mpg, <span class="dt">color =</span> gear)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-10" title="10"><span class="st">  </span><span class="kw">facet_grid</span>(vs <span class="op">~</span><span class="st"> </span>am) <span class="op">+</span></a>
+<a class="sourceLine" id="cb131-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Fuel economy declines as weight increases&quot;</span>,</a>
+<a class="sourceLine" id="cb131-12" title="12">       <span class="dt">subtitle =</span> <span class="st">&quot;(1973-74)&quot;</span>,</a>
+<a class="sourceLine" id="cb131-13" title="13">       <span class="dt">caption =</span> <span class="st">&quot;Data from the 1974 Motor Trend US magazine.&quot;</span>,</a>
+<a class="sourceLine" id="cb131-14" title="14">       <span class="dt">x =</span> <span class="st">&quot;Weight (1000 lbs)&quot;</span>,</a>
+<a class="sourceLine" id="cb131-15" title="15">       <span class="dt">y =</span> <span class="st">&quot;Fuel economy (mpg)&quot;</span>,</a>
+<a class="sourceLine" id="cb131-16" title="16">       <span class="dt">color =</span> <span class="st">&quot;Gears&quot;</span>)  </a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb132-2" title="2"><span class="st">  </span><span class="kw">dark_theme_grey</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb132-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + dark_theme_gray()&quot;</span>)</a>
+<a class="sourceLine" id="cb132-4" title="4"></a>
+<a class="sourceLine" id="cb132-5" title="5">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb132-6" title="6"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb132-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + theme_bw()&quot;</span>)</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-8-1.svg" width="50%" /><img src="ggdark_files/figure-html/unnamed-chunk-8-2.svg" width="50%" /></p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-2" title="2"><span class="st">  </span><span class="kw">dark_theme_linedraw</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + dark_theme_linedraw()&quot;</span>)</a>
+<a class="sourceLine" id="cb133-4" title="4"></a>
+<a class="sourceLine" id="cb133-5" title="5">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-6" title="6"><span class="st">  </span><span class="kw">theme_linedraw</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb133-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + theme_liendraw()&quot;</span>)</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-9-1.svg" width="50%" /><img src="ggdark_files/figure-html/unnamed-chunk-9-2.svg" width="50%" /></p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-2" title="2"><span class="st">  </span><span class="kw">dark_theme_light</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + dark_theme_light()&quot;</span>)</a>
+<a class="sourceLine" id="cb134-4" title="4"></a>
+<a class="sourceLine" id="cb134-5" title="5">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-6" title="6"><span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + theme_light()&quot;</span>)</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-10-1.svg" width="50%" /><img src="ggdark_files/figure-html/unnamed-chunk-10-2.svg" width="50%" /></p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb135-2" title="2"><span class="st">  </span><span class="kw">dark_theme_dark</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb135-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + dark_theme_dark()&quot;</span>)</a>
+<a class="sourceLine" id="cb135-4" title="4"></a>
+<a class="sourceLine" id="cb135-5" title="5">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb135-6" title="6"><span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb135-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + theme_dark()&quot;</span>)</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-11-1.svg" width="50%" /><img src="ggdark_files/figure-html/unnamed-chunk-11-2.svg" width="50%" /></p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb136-2" title="2"><span class="st">  </span><span class="kw">dark_theme_minimal</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb136-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + dark_theme_minimal()&quot;</span>)</a>
+<a class="sourceLine" id="cb136-4" title="4"></a>
+<a class="sourceLine" id="cb136-5" title="5">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb136-6" title="6"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb136-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + theme_minimal()&quot;</span>)</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-12-1.svg" width="50%" /><img src="ggdark_files/figure-html/unnamed-chunk-12-2.svg" width="50%" /></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-2" title="2"><span class="st">  </span><span class="kw">dark_theme_classic</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + dark_theme_classic()&quot;</span>)</a>
+<a class="sourceLine" id="cb137-4" title="4"></a>
+<a class="sourceLine" id="cb137-5" title="5">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-6" title="6"><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + theme_classic()&quot;</span>)</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-13-1.svg" width="50%" /><img src="ggdark_files/figure-html/unnamed-chunk-13-2.svg" width="50%" /></p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-2" title="2"><span class="st">  </span><span class="kw">dark_theme_void</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + dark_theme_void()&quot;</span>)</a>
+<a class="sourceLine" id="cb138-4" title="4"></a>
+<a class="sourceLine" id="cb138-5" title="5">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-6" title="6"><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;p + theme_void()&quot;</span>)</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-14-1.svg" width="50%" /><img src="ggdark_files/figure-html/unnamed-chunk-14-2.svg" width="50%" /></p>
+<div id="dark_mode" class="section level2">
+<h2><span class="header-section-number">9.1</span> <code>dark_mode</code></h2>
+<p><code>dark_mode()</code> 是一个可以作用于任何主题的函数，将其变为对应的暗黑版本。</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="kw">library</span>(ggthemes)</a>
+<a class="sourceLine" id="cb139-2" title="2">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars2, <span class="kw">aes</span>(wt, mpg)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> vs), <span class="dt">shape =</span> <span class="dv">21</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-4" title="4"><span class="st">  </span><span class="kw">theme_fivethirtyeight</span>()</a>
+<a class="sourceLine" id="cb139-5" title="5">p </a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-15-1.svg" width="90%" /></p>
+<p>转变 <code>theme_fivethirtyeight</code>:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1">p <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-2" title="2"><span class="st">  </span><span class="kw">dark_mode</span>(<span class="kw">theme_fivethirtyeight</span>())</a></code></pre></div>
+<p><img src="ggdark_files/figure-html/unnamed-chunk-16-1.svg" width="90%" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ggforce.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggthemes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/enixam/Advanced_ggplot2/edit/master/ggdark.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+},
+"collapse": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

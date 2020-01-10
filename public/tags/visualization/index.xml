@@ -5,7 +5,7 @@
     <link>/tags/visualization/</link>
       <atom:link href="/tags/visualization/index.xml" rel="self" type="application/rss+xml" />
     <description>visualization</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2019</copyright><lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>visualization</title>
@@ -143,7 +143,7 @@ Helpers. R package version 0.4.1. &lt;a href=&#34;https://CRAN.R-project.org/pac
     </item>
     
     <item>
-      <title>Advanced R Graphics</title>
+      <title>Advanced ggplot2</title>
       <link>/project/advanced-r-graphics/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/project/advanced-r-graphics/</guid>

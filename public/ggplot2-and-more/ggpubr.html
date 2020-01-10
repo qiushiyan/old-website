@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 ggpubr | 进阶 R 图形</title>
+  <meta name="description" content="2 ggpubr | 进阶 R 图形" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 ggpubr | 进阶 R 图形" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="enixam/Advanced_ggplot2" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 ggpubr | 进阶 R 图形" />
+  
+  
+  
+
+<meta name="author" content="Maxine" />
+
+
+<meta name="date" content="2020-01-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ridges.html"/>
+<link rel="next" href="ggpointdensity.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">GGPLOT2 and MORE</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I Geoms</b></span></li>
+<li class="chapter" data-level="1" data-path="ridges.html"><a href="ridges.html"><i class="fa fa-check"></i><b>1</b> 山峦图</a></li>
+<li class="chapter" data-level="2" data-path="ggpubr.html"><a href="ggpubr.html"><i class="fa fa-check"></i><b>2</b> <code>ggpubr</code></a></li>
+<li class="chapter" data-level="3" data-path="ggpointdensity.html"><a href="ggpointdensity.html"><i class="fa fa-check"></i><b>3</b> ggpointdensity</a></li>
+<li class="chapter" data-level="4" data-path="others.html"><a href="others.html"><i class="fa fa-check"></i><b>4</b> 其他</a></li>
+<li class="part"><span><b>II Colors and sclales</b></span></li>
+<li class="chapter" data-level="5" data-path="colors.html"><a href="colors.html"><i class="fa fa-check"></i><b>5</b> 颜色</a></li>
+<li class="part"><span><b>III Themems and Layouts</b></span></li>
+<li class="chapter" data-level="6" data-path="bbplot.html"><a href="bbplot.html"><i class="fa fa-check"></i><b>6</b> bbplot</a></li>
+<li class="chapter" data-level="7" data-path="patchwork.html"><a href="patchwork.html"><i class="fa fa-check"></i><b>7</b> patchwork</a></li>
+<li class="chapter" data-level="8" data-path="ggforce.html"><a href="ggforce.html"><i class="fa fa-check"></i><b>8</b> ggforce</a></li>
+<li class="chapter" data-level="9" data-path="ggdark.html"><a href="ggdark.html"><i class="fa fa-check"></i><b>9</b> ggdark</a></li>
+<li class="chapter" data-level="10" data-path="ggthemes.html"><a href="ggthemes.html"><i class="fa fa-check"></i><b>10</b> ggthemes</a></li>
+<li class="chapter" data-level="11" data-path="hrbrthemes.html"><a href="hrbrthemes.html"><i class="fa fa-check"></i><b>11</b> hrbrthemes</a></li>
+<li class="chapter" data-level="12" data-path="ggthemr.html"><a href="ggthemr.html"><i class="fa fa-check"></i><b>12</b> ggthemr</a></li>
+<li class="chapter" data-level="13" data-path="ggtech.html"><a href="ggtech.html"><i class="fa fa-check"></i><b>13</b> ggtech</a></li>
+<li class="part"><span><b>IV 实例</b></span></li>
+<li class="chapter" data-level="14" data-path="schizophrenia-births-in-australia.html"><a href="schizophrenia-births-in-australia.html"><i class="fa fa-check"></i><b>14</b> Schizophrenia Births in Australia</a></li>
+<li class="chapter" data-level="15" data-path="Econmist.html"><a href="Econmist.html"><i class="fa fa-check"></i><b>15</b> 经济学人：Corruption and human development</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">进阶 R 图形</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggpubr" class="section level1">
+<h1><span class="header-section-number">2</span> <code>ggpubr</code></h1>
+<p><code>ggpubr</code> 是一个基于 ggplot2 图形的图表包，全称为全称为“‘ggplot2’ Based Publication Ready Plots”。它并不提供额外的集合对象、统计变换和标度等，而是以 <code>gg*</code> 函数族直接创建图形对象，并将属性映射、标度调整、统计变换、排版、主题设置等功能全部设置在这个函数中, 不过也可以和 ggplot2 函数创建的图层叠加。个人认为这个包其实不太符合 ggplot2 的设计思想，这里只简单介绍几个比较喜欢的函数和可视化方案。</p>
+<p>参考： <a href="https://rpkgs.datanovia.com/ggpubr/index.html" class="uri">https://rpkgs.datanovia.com/ggpubr/index.html</a></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">library</span>(ggpubr)</a></code></pre></div>
+<div id="ggbarplot" class="section level2">
+<h2><span class="header-section-number">2.1</span> <code>ggbarplot</code></h2>
+<p>ggpubr 提供的条形图函数 <code>ggbarplot()</code> 没有默认的统计变换 (类似 <code>geom_col()</code> )，有一个很方便的排序参数 <code>sort.val</code>，这样我们就不必对要呈现的变量事先排序。此外 ggpubr 包还带有一些不错的期刊配色方案(在 <code>palette</code> 中设置)</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co">## 数据</span></a>
+<a class="sourceLine" id="cb46-2" title="2">dfm &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(mtcars, <span class="dt">var =</span> <span class="st">&quot;name&quot;</span>)</a>
+<a class="sourceLine" id="cb46-3" title="3">dfm<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(dfm<span class="op">$</span>cyl)</a>
+<a class="sourceLine" id="cb46-4" title="4"><span class="kw">head</span>(dfm)</a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="co">#&gt;                name  mpg cyl disp  hp drat   wt qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="co">#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 2.62 16.5  0  1    4    4</span></a>
+<a class="sourceLine" id="cb46-7" title="7"><span class="co">#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.88 17.0  0  1    4    4</span></a>
+<a class="sourceLine" id="cb46-8" title="8"><span class="co">#&gt; 3        Datsun 710 22.8   4  108  93 3.85 2.32 18.6  1  1    4    1</span></a>
+<a class="sourceLine" id="cb46-9" title="9"><span class="co">#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.21 19.4  1  0    3    1</span></a>
+<a class="sourceLine" id="cb46-10" title="10"><span class="co">#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.44 17.0  0  0    3    2</span></a>
+<a class="sourceLine" id="cb46-11" title="11"><span class="co">#&gt; 6           Valiant 18.1   6  225 105 2.76 3.46 20.2  1  0    3    1</span></a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="co">## 降序  sort.val = &quot;desc&quot;</span></a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="kw">ggbarplot</span>(dfm, <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb47-3" title="3">          <span class="dt">fill =</span> <span class="st">&quot;cyl&quot;</span>,               <span class="co"># change fill color by cyl</span></a>
+<a class="sourceLine" id="cb47-4" title="4">          <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>,            <span class="co"># Set bar border colors to white</span></a>
+<a class="sourceLine" id="cb47-5" title="5">          <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>,            <span class="co"># jco journal color palett. see ?ggpar</span></a>
+<a class="sourceLine" id="cb47-6" title="6">          <span class="dt">sort.val =</span> <span class="st">&quot;desc&quot;</span>,          <span class="co"># Sort the value in ascending order</span></a>
+<a class="sourceLine" id="cb47-7" title="7">          <span class="dt">x.text.angle =</span> <span class="dv">90</span>           <span class="co"># Rotate vertically x axis texts</span></a>
+<a class="sourceLine" id="cb47-8" title="8">          )</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-4-1.svg" width="90%" /></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co">## 升序  sort.val = &quot;asc&quot;</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="kw">ggbarplot</span>(dfm, <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb48-3" title="3">          <span class="dt">fill =</span> <span class="st">&quot;cyl&quot;</span>,               <span class="co"># change fill color by cyl</span></a>
+<a class="sourceLine" id="cb48-4" title="4">          <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>,            <span class="co"># Set bar border colors to white</span></a>
+<a class="sourceLine" id="cb48-5" title="5">          <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>,            <span class="co"># jco journal color palett. see ?ggpar</span></a>
+<a class="sourceLine" id="cb48-6" title="6">          <span class="dt">sort.val =</span> <span class="st">&quot;asc&quot;</span>,           <span class="co"># Sort the value in ascending order</span></a>
+<a class="sourceLine" id="cb48-7" title="7">          <span class="dt">x.text.angle =</span> <span class="dv">90</span>           <span class="co"># Rotate vertically x axis texts</span></a>
+<a class="sourceLine" id="cb48-8" title="8">          )</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-4-2.svg" width="90%" /></p>
+<p><code>sort.by.groups = TRUE</code> 可以使排序在组内进行，<code>rotate</code> 可以水平 / 竖直颠倒条形图</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">ggbarplot</span>(dfm, <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb49-2" title="2">          <span class="dt">fill =</span> <span class="st">&quot;cyl&quot;</span>,               <span class="co"># change fill color by cyl</span></a>
+<a class="sourceLine" id="cb49-3" title="3">          <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>,            <span class="co"># Set bar border colors to white</span></a>
+<a class="sourceLine" id="cb49-4" title="4">          <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>,            <span class="co"># jco journal color palett. see ?ggpar</span></a>
+<a class="sourceLine" id="cb49-5" title="5">          <span class="dt">sort.val =</span> <span class="st">&quot;desc&quot;</span>,          <span class="co"># Sort the value in ascending order</span></a>
+<a class="sourceLine" id="cb49-6" title="6">          <span class="dt">sort.by.groups =</span> <span class="ot">TRUE</span>,      <span class="co"># Sort inside each group</span></a>
+<a class="sourceLine" id="cb49-7" title="7">          <span class="dt">rotate =</span> <span class="ot">TRUE</span>               <span class="co"># Don&#39;t sort inside each group</span></a>
+<a class="sourceLine" id="cb49-8" title="8">          )</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-5-1.svg" width="90%" /></p>
+<p>上图中的 y 轴标签过大，ggpubr 中的 <code>font()</code> 函数用于调整主标题、副标题、坐标轴标题和标签，调用方式类似于 ggplot2 中的主题函数，直接添加到图形对象上：</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">ggbarplot</span>(dfm, <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb50-2" title="2">          <span class="dt">fill =</span> <span class="st">&quot;cyl&quot;</span>,               <span class="co"># change fill color by cyl</span></a>
+<a class="sourceLine" id="cb50-3" title="3">          <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>,            <span class="co"># Set bar border colors to white</span></a>
+<a class="sourceLine" id="cb50-4" title="4">          <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>,            <span class="co"># jco journal color palett. see ?ggpar</span></a>
+<a class="sourceLine" id="cb50-5" title="5">          <span class="dt">sort.val =</span> <span class="st">&quot;desc&quot;</span>,          <span class="co"># Sort the value in ascending order</span></a>
+<a class="sourceLine" id="cb50-6" title="6">          <span class="dt">sort.by.groups =</span> <span class="ot">TRUE</span>,      <span class="co"># Sort inside each group</span></a>
+<a class="sourceLine" id="cb50-7" title="7">          <span class="dt">rotate =</span> <span class="ot">TRUE</span>,              <span class="co"># Don&#39;t sort inside each group</span></a>
+<a class="sourceLine" id="cb50-8" title="8">          <span class="dt">xlab =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb50-9" title="9">          <span class="dt">ylab =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb50-10" title="10">          ) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb50-11" title="11"><span class="st">  </span><span class="kw">font</span>(<span class="st">&quot;y.text&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb50-12" title="12"><span class="st">  </span><span class="kw">font</span>(<span class="st">&quot;legend.title&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-6-1.svg" width="90%" /></p>
+<p>更多的设置可见： <a href="https://rpkgs.datanovia.com/ggpubr/reference/font.html" class="uri">https://rpkgs.datanovia.com/ggpubr/reference/font.html</a></p>
+</div>
+<div id="ggdotchart" class="section level2">
+<h2><span class="header-section-number">2.2</span> <code>ggdotchart</code></h2>
+<p><code>ggdotchart</code> 是 ggpubr 中用于创建<strong>点图</strong>（一个离散分组变量，一个连续变量，非散点图）的函数：</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co">## 基础用法 </span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">ggdotchart</span>(dfm,</a>
+<a class="sourceLine" id="cb51-3" title="3">           <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>,</a>
+<a class="sourceLine" id="cb51-4" title="4">           <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>)</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-7-1.svg" width="90%" /></p>
+<p>在此基础上，<code>ggdotchart()</code> 可以轻松绘制出 Cleveland 点图（lollipop chart）, 关键是设置参数 <code>add = "segment"</code>：</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">ggdotchart</span>(dfm,</a>
+<a class="sourceLine" id="cb52-2" title="2">           <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>,</a>
+<a class="sourceLine" id="cb52-3" title="3">           <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb52-4" title="4">           <span class="dt">add =</span> <span class="st">&quot;segment&quot;</span>)  <span class="co"># Add segments from y = 0 to dots</span></a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-8-1.svg" width="90%" /></p>
+<ul>
+<li>将 <code>cyl</code> 映射到点的颜色上<br />
+</li>
+<li>用 <code>add.params</code> 改变线段的样式<br />
+</li>
+<li>使用 ggpubr 的主题 <code>theme_pubr()</code></li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">ggdotchart</span>(dfm, <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb53-2" title="2">           <span class="dt">color =</span> <span class="st">&quot;cyl&quot;</span>,             <span class="co"># Color by groups</span></a>
+<a class="sourceLine" id="cb53-3" title="3">           <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), <span class="co"># Custom color palette</span></a>
+<a class="sourceLine" id="cb53-4" title="4">                     </a>
+<a class="sourceLine" id="cb53-5" title="5">           <span class="dt">add =</span> <span class="st">&quot;segments&quot;</span>,                             <span class="co"># Add segments from y = 0 to dots</span></a>
+<a class="sourceLine" id="cb53-6" title="6">           <span class="dt">add.params =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb53-7" title="7">           <span class="dt">ggtheme =</span> <span class="kw">theme_pubr</span>()                        <span class="co"># ggplot2 theme</span></a>
+<a class="sourceLine" id="cb53-8" title="8">           )</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-9-1.svg" width="90%" /></p>
+<p>下面：</p>
+<ul>
+<li><code>ggdotchart</code>默认的排序是升序，更改为<code>sorting = “descending”</code><br />
+</li>
+<li>翻转坐标轴: <code>rotate = TRUE</code><br />
+</li>
+<li>使得 <code>mpg</code> 的值在组内排序，而不是总体排序：<code>group = “cyl”</code></li>
+<li>增大点的大小，为了下一步增加标签 <code>dot.size = 6</code><br />
+</li>
+<li>增加数据标签 <code>label = “mpg”</code> 或者 <code>label = round(dfm$mpg)</code><br />
+</li>
+<li>用 <code>font.label</code> 设置数据标签的格式</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">ggdotchart</span>(dfm, <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb54-2" title="2">           <span class="dt">color =</span> <span class="st">&quot;cyl&quot;</span>,                                <span class="co"># Color by groups</span></a>
+<a class="sourceLine" id="cb54-3" title="3">           <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), <span class="co"># Custom color palette</span></a>
+<a class="sourceLine" id="cb54-4" title="4">           <span class="dt">sorting =</span> <span class="st">&quot;descending&quot;</span>,                       <span class="co"># Sort value in descending order</span></a>
+<a class="sourceLine" id="cb54-5" title="5">           <span class="dt">add =</span> <span class="st">&quot;segments&quot;</span>,                             <span class="co"># Add segments from y = 0 to dots</span></a>
+<a class="sourceLine" id="cb54-6" title="6">           <span class="dt">add.params =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb54-7" title="7">           <span class="dt">rotate =</span> <span class="ot">TRUE</span>,                                <span class="co"># Rotate vertically</span></a>
+<a class="sourceLine" id="cb54-8" title="8">           <span class="dt">group =</span> <span class="st">&quot;cyl&quot;</span>,                                <span class="co"># Order by groups</span></a>
+<a class="sourceLine" id="cb54-9" title="9">           <span class="dt">dot.size =</span> <span class="dv">6</span>,                                 <span class="co"># Large dot size</span></a>
+<a class="sourceLine" id="cb54-10" title="10">           <span class="dt">label =</span> <span class="kw">round</span>(dfm<span class="op">$</span>mpg),                        <span class="co"># Add mpg values as dot labels</span></a>
+<a class="sourceLine" id="cb54-11" title="11">           <span class="dt">font.label =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">9</span>, </a>
+<a class="sourceLine" id="cb54-12" title="12">                             <span class="dt">vjust =</span> <span class="fl">0.5</span>),               <span class="co"># Adjust label parameters</span></a>
+<a class="sourceLine" id="cb54-13" title="13">           <span class="dt">ggtheme =</span> <span class="kw">theme_pubr</span>()                        <span class="co"># ggplot2 theme</span></a>
+<a class="sourceLine" id="cb54-14" title="14">           )</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-10-1.svg" width="90%" /></p>
+<p><code>ggdotchart</code> 还有一大特色： 坐标轴标签的颜色也成为可以映射的变量。在下面的图中设置： <code>y.text.col = TRUE</code> 将当前分组变量映射到 y 轴标签颜色上 ; <code>theme_cleveland()</code> 添加虚线：</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">ggdotchart</span>(dfm, <span class="dt">x =</span> <span class="st">&quot;name&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb55-2" title="2">           <span class="dt">color =</span> <span class="st">&quot;cyl&quot;</span>,                                <span class="co"># Color by groups</span></a>
+<a class="sourceLine" id="cb55-3" title="3">           <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>), <span class="co"># Custom color palette</span></a>
+<a class="sourceLine" id="cb55-4" title="4">           <span class="dt">sorting =</span> <span class="st">&quot;descending&quot;</span>,                       <span class="co"># Sort value in descending order</span></a>
+<a class="sourceLine" id="cb55-5" title="5">           <span class="dt">rotate =</span> <span class="ot">TRUE</span>,                                <span class="co"># Rotate vertically</span></a>
+<a class="sourceLine" id="cb55-6" title="6">           <span class="dt">dot.size =</span> <span class="dv">2</span>,                                 <span class="co"># Large dot size</span></a>
+<a class="sourceLine" id="cb55-7" title="7">           <span class="dt">y.text.col =</span> <span class="ot">TRUE</span>,                            <span class="co"># Color y text by groups</span></a>
+<a class="sourceLine" id="cb55-8" title="8">           <span class="dt">ggtheme =</span> <span class="kw">theme_pubr</span>()                        <span class="co"># ggplot2 theme</span></a>
+<a class="sourceLine" id="cb55-9" title="9">           ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb55-10" title="10"><span class="st">  </span><span class="kw">theme_cleveland</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Add dashed grids + </span></a>
+<a class="sourceLine" id="cb55-11" title="11"><span class="st">  </span><span class="kw">font</span>(<span class="st">&quot;y.text&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>)</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-11-1.svg" width="90%" /></p>
+</div>
+<div id="ggscatter" class="section level2">
+<h2><span class="header-section-number">2.3</span> <code>ggscatter</code></h2>
+<p>参考： <a href="https://rpkgs.datanovia.com/ggpubr/reference/ggscatter.html" class="uri">https://rpkgs.datanovia.com/ggpubr/reference/ggscatter.html</a></p>
+<p><code>ggscatter()</code>用于创建二维散点图（两个连续型变量，区分于之前的点图）：</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">df &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb56-2" title="2">df<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>cyl)</a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="co">## 简单散点图</span></a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="kw">ggscatter</span>(df, <span class="dt">x =</span> <span class="st">&quot;wt&quot;</span>, </a>
+<a class="sourceLine" id="cb56-5" title="5">          <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb56-6" title="6">          <span class="dt">color =</span> <span class="st">&quot;cyl&quot;</span>)</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-12-1.svg" width="90%" /></p>
+<p>这里介绍 <code>ggscatter</code> 的最主要原因是因为它可以很方便地在散点图上添加有关回归模型和相关系数的数据标记：</p>
+<ul>
+<li><code>add = "reg.line"</code> 和 <code>add = "loess"</code> 添加线性回归和局部加权回归拟合线<br />
+</li>
+<li><code>add.params</code>: 设置拟合线的样式，例如 <code>add.params = list(color = "red")</code><br />
+</li>
+<li><code>cor.coef = TRUE</code> 添加数据标记，展示相关系数和其 p value<br />
+</li>
+<li><code>cor.coef.args</code> 指定相关系数算法和呈现细节</li>
+<li><code>cor.method</code>: 指定相关系数的算法，有“pearson”, “kendall” 和 “spearman”<br />
+</li>
+<li><code>cor.coef.size</code>: 调节该标签的大小</li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">ggscatter</span>(df, <span class="dt">x =</span> <span class="st">&quot;wt&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb57-2" title="2">   <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="co"># Points color, shape and size</span></a>
+<a class="sourceLine" id="cb57-3" title="3">   <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>,  <span class="co"># Add regressin line</span></a>
+<a class="sourceLine" id="cb57-4" title="4">   <span class="dt">add.params =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightgray&quot;</span>), <span class="co"># Customize reg. line</span></a>
+<a class="sourceLine" id="cb57-5" title="5">   <span class="dt">conf.int =</span> <span class="ot">TRUE</span>, <span class="co"># Add confidence interval</span></a>
+<a class="sourceLine" id="cb57-6" title="6">   <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="co"># Add correlation coefficient. see ?stat_cor</span></a>
+<a class="sourceLine" id="cb57-7" title="7">   <span class="dt">cor.coeff.args =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="dt">label.x =</span> <span class="dv">3</span>, <span class="dt">label.sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb57-8" title="8">   )</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-13-1.svg" width="90%" /></p>
+<p><code>conf.int = TRUE</code>（默认） 和 <code>conf.int.level</code>（默认 0.95） 可以绘制置信区间：</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">ggscatter</span>(</a>
+<a class="sourceLine" id="cb58-2" title="2">  df,</a>
+<a class="sourceLine" id="cb58-3" title="3">  <span class="dt">x =</span> <span class="st">&quot;wt&quot;</span>,</a>
+<a class="sourceLine" id="cb58-4" title="4">  <span class="dt">y =</span> <span class="st">&quot;mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb58-5" title="5">  <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb58-6" title="6">  <span class="dt">add =</span> <span class="st">&quot;loess&quot;</span>,</a>
+<a class="sourceLine" id="cb58-7" title="7">  <span class="dt">add.params =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>),</a>
+<a class="sourceLine" id="cb58-8" title="8">  <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb58-9" title="9">  <span class="dt">conf.int.level =</span> <span class="fl">0.9</span></a>
+<a class="sourceLine" id="cb58-10" title="10">) </a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-14-1.svg" width="90%" /></p>
+</div>
+<div id="ggscatterhist" class="section level2">
+<h2><span class="header-section-number">2.4</span> <code>ggscatterhist</code></h2>
+<p>ggpubr 中的 <code>ggscatterhist()</code> 函数将散点图与直方图 / 密度图结合在一起：</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co">## 创造数据</span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="kw">set.seed</span>(<span class="dv">20191011</span>)</a>
+<a class="sourceLine" id="cb59-3" title="3">x1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="fl">1.5</span>, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb59-4" title="4">y1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="dv">2</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb59-5" title="5">x2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="fl">2.5</span>, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb59-6" title="6">y2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="fl">2.5</span>, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb59-7" title="7">x3 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="dv">1</span>, <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb59-8" title="8">y3 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>, <span class="fl">1.5</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb59-9" title="9">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(x1, x2, x3),</a>
+<a class="sourceLine" id="cb59-10" title="10">               <span class="dt">y =</span> <span class="kw">c</span>(y1, y2, y3),</a>
+<a class="sourceLine" id="cb59-11" title="11">               <span class="dt">class =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">each =</span> <span class="dv">200</span>))</a>
+<a class="sourceLine" id="cb59-12" title="12"></a>
+<a class="sourceLine" id="cb59-13" title="13"><span class="co">## 绘图</span></a>
+<a class="sourceLine" id="cb59-14" title="14"><span class="kw">ggscatterhist</span>(</a>
+<a class="sourceLine" id="cb59-15" title="15">  <span class="dt">data =</span> data,</a>
+<a class="sourceLine" id="cb59-16" title="16">  <span class="dt">x =</span> <span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb59-17" title="17">  <span class="dt">y =</span> <span class="st">&quot;y&quot;</span>,</a>
+<a class="sourceLine" id="cb59-18" title="18">  <span class="dt">shape =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb59-19" title="19">  <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb59-20" title="20">  <span class="dt">fill =</span> <span class="st">&quot;class&quot;</span>,</a>
+<a class="sourceLine" id="cb59-21" title="21">  <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>)</a>
+<a class="sourceLine" id="cb59-22" title="22">)</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-15-1.svg" width="90%" /></p>
+<p><code>margin.plot = "density"</code>(默认) 绘制核密度估计图，选择 “histogram” 绘制直方图；“boxplot”为直方图：</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">ggscatterhist</span>(</a>
+<a class="sourceLine" id="cb60-2" title="2">  <span class="dt">data =</span> data,</a>
+<a class="sourceLine" id="cb60-3" title="3">  <span class="dt">x =</span> <span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb60-4" title="4">  <span class="dt">y =</span> <span class="st">&quot;y&quot;</span>,</a>
+<a class="sourceLine" id="cb60-5" title="5">  <span class="dt">shape =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb60-6" title="6">  <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb60-7" title="7">  <span class="dt">fill =</span> <span class="st">&quot;class&quot;</span>,</a>
+<a class="sourceLine" id="cb60-8" title="8">  <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb60-9" title="9">  <span class="dt">margin.plot =</span> <span class="st">&quot;histogram&quot;</span></a>
+<a class="sourceLine" id="cb60-10" title="10">)</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-16-1.svg" width="90%" /></p>
+<p><code>margin.params</code> 用一个列表设置边缘图形的参数；<code>ggtheme</code> 设置主题：</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">ggscatterhist</span>(</a>
+<a class="sourceLine" id="cb61-2" title="2">  <span class="dt">data =</span> data,</a>
+<a class="sourceLine" id="cb61-3" title="3">  <span class="dt">x =</span> <span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb61-4" title="4">  <span class="dt">y =</span> <span class="st">&quot;y&quot;</span>,</a>
+<a class="sourceLine" id="cb61-5" title="5">  <span class="dt">shape =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb61-6" title="6">  <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb61-7" title="7">  <span class="dt">fill =</span> <span class="st">&quot;class&quot;</span>,</a>
+<a class="sourceLine" id="cb61-8" title="8">  <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb61-9" title="9">  <span class="dt">margin.plot =</span> <span class="st">&quot;boxplot&quot;</span>,</a>
+<a class="sourceLine" id="cb61-10" title="10">  <span class="dt">margin.params =</span> <span class="kw">list</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">fill =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>),</a>
+<a class="sourceLine" id="cb61-11" title="11">  <span class="dt">ggtheme =</span> <span class="kw">theme_minimal</span>()</a>
+<a class="sourceLine" id="cb61-12" title="12">) </a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-17-1.svg" width="90%" /></p>
+<p><code>xlab</code> 和 <code>ylab</code> 设置坐标轴标签，<code>title</code> 设置图表标题：</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">ggscatterhist</span>(</a>
+<a class="sourceLine" id="cb62-2" title="2">  <span class="dt">data =</span> data,</a>
+<a class="sourceLine" id="cb62-3" title="3">  <span class="dt">x =</span> <span class="st">&quot;x&quot;</span>,</a>
+<a class="sourceLine" id="cb62-4" title="4">  <span class="dt">y =</span> <span class="st">&quot;y&quot;</span>,</a>
+<a class="sourceLine" id="cb62-5" title="5">  <span class="dt">shape =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb62-6" title="6">  <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb62-7" title="7">  <span class="dt">fill =</span> <span class="st">&quot;class&quot;</span>,</a>
+<a class="sourceLine" id="cb62-8" title="8">  <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb62-9" title="9">  <span class="dt">margin.plot =</span> <span class="st">&quot;boxplot&quot;</span>,</a>
+<a class="sourceLine" id="cb62-10" title="10">  <span class="dt">margin.params =</span> <span class="kw">list</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">fill =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>),</a>
+<a class="sourceLine" id="cb62-11" title="11">  <span class="dt">ggtheme =</span> <span class="kw">theme_minimal</span>(),</a>
+<a class="sourceLine" id="cb62-12" title="12">  <span class="dt">xlab =</span> <span class="ot">FALSE</span>,  <span class="co">## 取消标签</span></a>
+<a class="sourceLine" id="cb62-13" title="13">  <span class="dt">ylab =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb62-14" title="14">  <span class="dt">title =</span> <span class="st">&quot;A scatterhist plot&quot;</span></a>
+<a class="sourceLine" id="cb62-15" title="15">) </a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-18-1.svg" width="90%" /></p>
+</div>
+<div id="ggarrange" class="section level2">
+<h2><span class="header-section-number">2.5</span> <code>ggarrange</code></h2>
+<p>参考： <a href="https://www.rdocumentation.org/packages/ggpubr/versions/0.2.3/topics/ggarrange" class="uri">https://www.rdocumentation.org/packages/ggpubr/versions/0.2.3/topics/ggarrange</a></p>
+<p><code>ggarrange()</code> 是用来排版多个 ggplot 图像对象的函数(不止是 ggplot2 的图形才是 ggplot 对象)。最重要的几个参数为：</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">ggarrange</span>(...</a>
+<a class="sourceLine" id="cb63-2" title="2">          nrow,</a>
+<a class="sourceLine" id="cb63-3" title="3">          ncol,</a>
+<a class="sourceLine" id="cb63-4" title="4">          widths,</a>
+<a class="sourceLine" id="cb63-5" title="5">          heights,</a>
+<a class="sourceLine" id="cb63-6" title="6">          label)</a></code></pre></div>
+<ul>
+<li><code>...</code>: 任意数目的 ggplot 对象，传入 <code>NULL</code> 则对应位置为空白<br />
+</li>
+<li><code>nrow</code> 和 <code>ncol</code> 控制多个 ggplot 对象呈现的行数和列数<br />
+</li>
+<li><code>widths</code> 和 <code>heights</code> 控制一行 / 列内图像所占区域的相对大小，如 <code>width = c(2, 1)</code> 将绘图区横向切分为两个部分，宽度比为 2 ： 1<br />
+</li>
+<li>每个子图的标签</li>
+</ul>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">data</span>(<span class="st">&quot;ToothGrowth&quot;</span>)</a>
+<a class="sourceLine" id="cb64-2" title="2">df &lt;-<span class="st"> </span>ToothGrowth</a>
+<a class="sourceLine" id="cb64-3" title="3">df<span class="op">$</span>dose &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>dose)</a>
+<a class="sourceLine" id="cb64-4" title="4"></a>
+<a class="sourceLine" id="cb64-5" title="5"></a>
+<a class="sourceLine" id="cb64-6" title="6"><span class="co"># Box plot</span></a>
+<a class="sourceLine" id="cb64-7" title="7">bxp &lt;-<span class="st"> </span><span class="kw">ggboxplot</span>(df, <span class="dt">x =</span> <span class="st">&quot;dose&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;len&quot;</span>,</a>
+<a class="sourceLine" id="cb64-8" title="8">    <span class="dt">color =</span> <span class="st">&quot;dose&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>)</a>
+<a class="sourceLine" id="cb64-9" title="9"><span class="co"># Dot plot</span></a>
+<a class="sourceLine" id="cb64-10" title="10">dp &lt;-<span class="st"> </span><span class="kw">ggdotplot</span>(df, <span class="dt">x =</span> <span class="st">&quot;dose&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;len&quot;</span>,</a>
+<a class="sourceLine" id="cb64-11" title="11">    <span class="dt">color =</span> <span class="st">&quot;dose&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>)</a>
+<a class="sourceLine" id="cb64-12" title="12"><span class="co"># Density plot</span></a>
+<a class="sourceLine" id="cb64-13" title="13">dens &lt;-<span class="st"> </span><span class="kw">ggdensity</span>(df, <span class="dt">x =</span> <span class="st">&quot;len&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;dose&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;jco&quot;</span>)</a>
+<a class="sourceLine" id="cb64-14" title="14"></a>
+<a class="sourceLine" id="cb64-15" title="15"><span class="co"># Arrange</span></a>
+<a class="sourceLine" id="cb64-16" title="16"><span class="kw">ggarrange</span>(bxp, dp, <span class="ot">NULL</span>, dens, </a>
+<a class="sourceLine" id="cb64-17" title="17">          <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">nrow =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb64-18" title="18">          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>))</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-19-1.svg" width="90%" /></p>
+<p><code>common.legend = TRUE</code> 可以为多个 ggplot 对象 创建统一图例：</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">ggarrange</span>(bxp, dp,</a>
+<a class="sourceLine" id="cb65-2" title="2">          <span class="dt">ncol =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb65-3" title="3">          <span class="dt">common.legend =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="ggpubr_files/figure-html/unnamed-chunk-20-1.svg" width="90%" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ridges.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggpointdensity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/enixam/Advanced_ggplot2/edit/master/ggpubr.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+},
+"collapse": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

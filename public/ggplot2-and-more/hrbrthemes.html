@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11 hrbrthemes | 进阶 R 图形</title>
+  <meta name="description" content="11 hrbrthemes | 进阶 R 图形" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11 hrbrthemes | 进阶 R 图形" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="enixam/Advanced_ggplot2" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11 hrbrthemes | 进阶 R 图形" />
+  
+  
+  
+
+<meta name="author" content="Maxine" />
+
+
+<meta name="date" content="2020-01-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ggthemes.html"/>
+<link rel="next" href="ggthemr.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">GGPLOT2 and MORE</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I Geoms</b></span></li>
+<li class="chapter" data-level="1" data-path="ridges.html"><a href="ridges.html"><i class="fa fa-check"></i><b>1</b> 山峦图</a></li>
+<li class="chapter" data-level="2" data-path="ggpubr.html"><a href="ggpubr.html"><i class="fa fa-check"></i><b>2</b> <code>ggpubr</code></a></li>
+<li class="chapter" data-level="3" data-path="ggpointdensity.html"><a href="ggpointdensity.html"><i class="fa fa-check"></i><b>3</b> ggpointdensity</a></li>
+<li class="chapter" data-level="4" data-path="others.html"><a href="others.html"><i class="fa fa-check"></i><b>4</b> 其他</a></li>
+<li class="part"><span><b>II Colors and sclales</b></span></li>
+<li class="chapter" data-level="5" data-path="colors.html"><a href="colors.html"><i class="fa fa-check"></i><b>5</b> 颜色</a></li>
+<li class="part"><span><b>III Themems and Layouts</b></span></li>
+<li class="chapter" data-level="6" data-path="bbplot.html"><a href="bbplot.html"><i class="fa fa-check"></i><b>6</b> bbplot</a></li>
+<li class="chapter" data-level="7" data-path="patchwork.html"><a href="patchwork.html"><i class="fa fa-check"></i><b>7</b> patchwork</a></li>
+<li class="chapter" data-level="8" data-path="ggforce.html"><a href="ggforce.html"><i class="fa fa-check"></i><b>8</b> ggforce</a></li>
+<li class="chapter" data-level="9" data-path="ggdark.html"><a href="ggdark.html"><i class="fa fa-check"></i><b>9</b> ggdark</a></li>
+<li class="chapter" data-level="10" data-path="ggthemes.html"><a href="ggthemes.html"><i class="fa fa-check"></i><b>10</b> ggthemes</a></li>
+<li class="chapter" data-level="11" data-path="hrbrthemes.html"><a href="hrbrthemes.html"><i class="fa fa-check"></i><b>11</b> hrbrthemes</a></li>
+<li class="chapter" data-level="12" data-path="ggthemr.html"><a href="ggthemr.html"><i class="fa fa-check"></i><b>12</b> ggthemr</a></li>
+<li class="chapter" data-level="13" data-path="ggtech.html"><a href="ggtech.html"><i class="fa fa-check"></i><b>13</b> ggtech</a></li>
+<li class="part"><span><b>IV 实例</b></span></li>
+<li class="chapter" data-level="14" data-path="schizophrenia-births-in-australia.html"><a href="schizophrenia-births-in-australia.html"><i class="fa fa-check"></i><b>14</b> Schizophrenia Births in Australia</a></li>
+<li class="chapter" data-level="15" data-path="Econmist.html"><a href="Econmist.html"><i class="fa fa-check"></i><b>15</b> 经济学人：Corruption and human development</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">进阶 R 图形</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="hrbrthemes" class="section level1">
+<h1><span class="header-section-number">11</span> hrbrthemes</h1>
+<p>参考： <a href="https://github.com/hrbrmstr/hrbrthemes" class="uri">https://github.com/hrbrmstr/hrbrthemes</a></p>
+<p><code>hrbrthemes</code> 为 ggplot2 提供了一些利于印刷的 (typography-centric) 主题、标度、调色板和字体。</p>
+<p><code>theme_ipsum()</code> 是 <code>hrbrthemes</code> 中的核心主题(“ipsum” 在拉丁语中意为 “precise”)，使用了较为紧凑的 Arial Narrow 字体，调整了坐标轴标题的位置，和简洁的背景设置。</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1"><span class="kw">library</span>(hrbrthemes)</a>
+<a class="sourceLine" id="cb141-2" title="2"><span class="kw">library</span>(patchwork)</a></code></pre></div>
+<div id="主题-1" class="section level2">
+<h2><span class="header-section-number">11.1</span> 主题</h2>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb142-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb142-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Fuel efficiency (mpg)&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Weight (tons)&quot;</span>,</a>
+<a class="sourceLine" id="cb142-4" title="4">       <span class="dt">title=</span><span class="st">&quot;Seminal ggplot2 scatterplot example&quot;</span>,</a>
+<a class="sourceLine" id="cb142-5" title="5">       <span class="dt">subtitle=</span><span class="st">&quot;A plot&quot;</span>,</a>
+<a class="sourceLine" id="cb142-6" title="6">       <span class="dt">caption=</span><span class="st">&quot;Brought to you by the letter &#39;g&#39;&quot;</span>)</a>
+<a class="sourceLine" id="cb142-7" title="7"></a>
+<a class="sourceLine" id="cb142-8" title="8">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb142-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb142-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Fuel efficiency (mpg)&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Weight (tons)&quot;</span>,</a>
+<a class="sourceLine" id="cb142-11" title="11">       <span class="dt">title=</span><span class="st">&quot;Seminal ggplot2 scatterplot example&quot;</span>,</a>
+<a class="sourceLine" id="cb142-12" title="12">       <span class="dt">subtitle=</span><span class="st">&quot;A plot&quot;</span>,</a>
+<a class="sourceLine" id="cb142-13" title="13">       <span class="dt">caption=</span><span class="st">&quot;Brought to you by the letter &#39;g&#39;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb142-14" title="14"><span class="st">  </span><span class="kw">theme_ipsum</span>()</a>
+<a class="sourceLine" id="cb142-15" title="15"></a>
+<a class="sourceLine" id="cb142-16" title="16">p1 <span class="op">+</span><span class="st"> </span>p2</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="hrbrthemes_files/figure-html/unnamed-chunk-3-1.svg" alt="theme_grey vs. theme_ipsum" width="90%" />
+<p class="caption">
+Figure 11.1: theme_grey vs. theme_ipsum
+</p>
+</div>
+<p><code>theme_ipsum</code> 有几个变体，主要区别在字体和背景颜色上：</p>
+<ul>
+<li><code>theme_ipsum_es</code>: Ccon Sans Condensed<br />
+</li>
+<li><code>theme_ipsum_rc</code>: Roboto Condensed<br />
+</li>
+<li><code>theme_ipsum_ps</code>: IBM Plex Sans font<br />
+</li>
+<li><code>theme_ipsum_pub</code>: Public Sans<br />
+</li>
+<li><code>theme_ipsum_tw</code>: Titilium Web<br />
+</li>
+<li><code>theme_modern_rc</code>: Roboto Condensed dark theme(暗色)<br />
+</li>
+<li><code>theme_ft_rc</code>: Dark theme based on FT’s dark theme (Roboto Condensed, 暗色)</li>
+</ul>
+<p><strong>Roboto Condensed</strong></p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb143-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb143-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Fuel efficiency (mpg)&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Weight (tons)&quot;</span>,</a>
+<a class="sourceLine" id="cb143-4" title="4">       <span class="dt">title=</span><span class="st">&quot;Seminal ggplot2 scatterplot example&quot;</span>,</a>
+<a class="sourceLine" id="cb143-5" title="5">       <span class="dt">subtitle=</span><span class="st">&quot;A plot that is only useful for demonstration purposes&quot;</span>,</a>
+<a class="sourceLine" id="cb143-6" title="6">       <span class="dt">caption=</span><span class="st">&quot;Brought to you by the letter &#39;g&#39;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-7" title="7"><span class="st">  </span><span class="kw">theme_ipsum_rc</span>()</a></code></pre></div>
+<p><img src="hrbrthemes_files/figure-html/unnamed-chunk-4-1.svg" width="90%" /></p>
+<p><strong>FT Theme</strong></p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb144-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> ft_cols<span class="op">$</span>yellow) <span class="op">+</span></a>
+<a class="sourceLine" id="cb144-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Fuel efficiency (mpg)&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Weight (tons)&quot;</span>,</a>
+<a class="sourceLine" id="cb144-4" title="4">       <span class="dt">title=</span><span class="st">&quot;Seminal ggplot2 scatterplot example&quot;</span>,</a>
+<a class="sourceLine" id="cb144-5" title="5">       <span class="dt">subtitle=</span><span class="st">&quot;A plot that is only useful for demonstration purposes&quot;</span>,</a>
+<a class="sourceLine" id="cb144-6" title="6">       <span class="dt">caption=</span><span class="st">&quot;Brought to you by the letter &#39;g&#39;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb144-7" title="7"><span class="st">  </span><span class="kw">theme_ft_rc</span>()</a></code></pre></div>
+<p><img src="hrbrthemes_files/figure-html/unnamed-chunk-5-1.svg" width="90%" /></p>
+</div>
+<div id="标度" class="section level2">
+<h2><span class="header-section-number">11.2</span> 标度</h2>
+<p><strong>颜色和填充色标度</strong>： <code>scale_color_ipsum</code>、<code>scale_fill_ipsum</code></p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb145-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb145-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fuel efficiency (mpg)&quot;</span>,  <span class="dt">y =</span> <span class="st">&quot;Weight (tons)&quot;</span>,</a>
+<a class="sourceLine" id="cb145-4" title="4">       <span class="dt">title=</span><span class="st">&quot;Seminal ggplot2 scatterplot example&quot;</span>,</a>
+<a class="sourceLine" id="cb145-5" title="5">       <span class="dt">subtitle=</span><span class="st">&quot;A plot that is only useful for demonstration purposes&quot;</span>,</a>
+<a class="sourceLine" id="cb145-6" title="6">       <span class="dt">caption=</span><span class="st">&quot;Brought to you by the letter &#39;g&#39;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb145-7" title="7"><span class="st">  </span><span class="kw">scale_color_ipsum</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb145-8" title="8"><span class="st">  </span><span class="kw">theme_ipsum_rc</span>()</a></code></pre></div>
+<p><img src="hrbrthemes_files/figure-html/unnamed-chunk-6-1.svg" width="90%" /></p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1">mean_lifeExp &lt;-<span class="st"> </span>gapminder<span class="op">::</span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb146-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb146-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(lifeExp, <span class="dt">na.rm =</span> T))</a>
+<a class="sourceLine" id="cb146-4" title="4"></a>
+<a class="sourceLine" id="cb146-5" title="5">mean_lifeExp <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb146-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">fct_reorder</span>(continent, mean), mean)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb146-7" title="7"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb146-8" title="8"><span class="st">  </span><span class="kw">scale_fill_ipsum</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb146-9" title="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">80</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb146-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Contient&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Mean Life Expectancy&quot;</span>,</a>
+<a class="sourceLine" id="cb146-11" title="11">       <span class="dt">title =</span> <span class="st">&quot;Mean Life Expactancy across Continents&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb146-12" title="12"><span class="st">  </span><span class="kw">theme_ipsum</span>(<span class="dt">grid =</span> <span class="st">&quot;Y&quot;</span>)</a></code></pre></div>
+<p><img src="hrbrthemes_files/figure-html/unnamed-chunk-7-1.svg" width="90%" /></p>
+<p><strong>坐标轴标度</strong>： <code>scale_x/y_percent</code>、<code>scale_x/y_comma</code></p>
+<p>涉及数据量级较大时，<code>percent</code> 标度添加千分位标记法：</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1"></a>
+<a class="sourceLine" id="cb147-2" title="2"><span class="kw">count</span>(mpg, class) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> n <span class="op">*</span><span class="st"> </span><span class="dv">2000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(n) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">class=</span><span class="kw">factor</span>(class, <span class="dt">levels=</span>class)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(class, n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb147-7" title="7"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb147-8" title="8"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>scales<span class="op">::</span><span class="kw">comma</span>(n)), <span class="dt">hjust=</span><span class="dv">0</span>, <span class="dt">nudge_y=</span><span class="dv">2000</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb147-9" title="9"><span class="st">  </span><span class="kw">scale_y_comma</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">150000</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb147-10" title="10"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb147-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Fuel efficiency (mpg)&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Weight (tons)&quot;</span>,</a>
+<a class="sourceLine" id="cb147-12" title="12">       <span class="dt">title=</span><span class="st">&quot;Seminal ggplot2 column chart example with commas&quot;</span>,</a>
+<a class="sourceLine" id="cb147-13" title="13">       <span class="dt">subtitle=</span><span class="st">&quot;A plot that is only useful for demonstration purposes, esp since you&#39;d never</span><span class="ch">\n</span><span class="st">really want direct labels and axis labels&quot;</span>,</a>
+<a class="sourceLine" id="cb147-14" title="14">       <span class="dt">caption=</span><span class="st">&quot;Brought to you by the letter &#39;g&#39;&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-15" title="15"><span class="st">  </span><span class="kw">theme_ipsum_rc</span>(<span class="dt">grid=</span><span class="st">&quot;X&quot;</span>)</a></code></pre></div>
+<p><img src="hrbrthemes_files/figure-html/unnamed-chunk-8-1.svg" width="90%" /></p>
+<p>在百分比面积图、条形图中，常采用的一个变换是 <code>scale_y_continuous(labels = scales::percent)</code>， <code>scale_y_percent()</code> 相当于是对这种设置的封装：</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1">uspopage &lt;-<span class="st"> </span>gcookbook<span class="op">::</span>uspopage</a>
+<a class="sourceLine" id="cb148-2" title="2"><span class="kw">ggplot</span>(uspopage, <span class="kw">aes</span>(Year, Thousands, <span class="dt">fill =</span> AgeGroup)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb148-3" title="3"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb148-4" title="4"><span class="st">  </span><span class="kw">scale_fill_ipsum</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb148-5" title="5"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb148-6" title="6"><span class="st">  </span><span class="kw">scale_y_percent</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb148-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Age distribution of population in the U.S., 1900-2002&quot;</span>,</a>
+<a class="sourceLine" id="cb148-8" title="8">       <span class="dt">subtitle=</span><span class="st">&quot;Example data from the R Graphics Cookbook&quot;</span>,</a>
+<a class="sourceLine" id="cb148-9" title="9">       <span class="dt">caption=</span><span class="st">&quot;Source: R Graphics Cookbook&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb148-10" title="10"><span class="st">  </span><span class="kw">theme_ipsum_rc</span>(<span class="dt">grid=</span><span class="st">&quot;XY&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb148-11" title="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">hjust=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb148-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</a></code></pre></div>
+<p><img src="hrbrthemes_files/figure-html/unnamed-chunk-9-1.svg" width="90%" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ggthemes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggthemr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/enixam/Advanced_ggplot2/edit/master/hrbrthemes.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+},
+"collapse": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

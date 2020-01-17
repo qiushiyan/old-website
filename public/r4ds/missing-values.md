@@ -11,19 +11,34 @@
 
 
 ```r
-df <- tibble(x = c(1, 2, NA), y = c("a", NA, "b"))
+df <- tibble(x = c(1, 2, NA), y = c("a", NA, "b"), z = c("1", "2", "3"))
 df %>% drop_na() # df %>% drop_na(x, y)
-#> # A tibble: 1 x 2
-#>       x y    
-#>   <dbl> <chr>
-#> 1     1 a
+#> # A tibble: 1 x 3
+#>       x y     z    
+#>   <dbl> <chr> <chr>
+#> 1     1 a     1
 df %>% drop_na(x)
-#> # A tibble: 2 x 2
-#>       x y    
-#>   <dbl> <chr>
-#> 1     1 a    
-#> 2     2 <NA>
+#> # A tibble: 2 x 3
+#>       x y     z    
+#>   <dbl> <chr> <chr>
+#> 1     1 a     1    
+#> 2     2 <NA>  2
 ```
+
+
+**Janitor** 中的 `tabyl`
+
+
+```r
+janitor::tabyl(df, y)
+#>     y n percent valid_percent
+#>     a 1   0.333           0.5
+#>     b 1   0.333           0.5
+#>  <NA> 1   0.333            NA
+```
+
+
+
 
 
 ## 填充 {#fill-missing}
@@ -150,7 +165,7 @@ library(visdat)
 vis_miss(df)
 ```
 
-<img src="missing-values_files/figure-html/unnamed-chunk-9-1.svg" width="80%" />
+<img src="missing-values_files/figure-html/unnamed-chunk-10-1.svg" width="80%" />
 
 
 

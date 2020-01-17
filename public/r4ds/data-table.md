@@ -1,8 +1,31 @@
 
 
-# (PART) Exploring and Wrangling {-}  
+# (PART) Exploring and Wrangling {-}    
+
+
 
 # data.table {#data-table}  
+
+All C++ code chunks will be combined to the chunk below:
+
+
+
+First we include the header `Rcpp.h`:
+
+
+```cpp
+#include <Rcpp.h>
+```
+
+Then we define a function:
+
+
+```cpp
+// [[Rcpp::export]]
+int timesTwo(int x) {
+  return x * 2;
+}
+```
 
 **data.table**[@R-data.table]
 
@@ -10,6 +33,9 @@ https://rdatatable.gitlab.io/data.table/
 
 https://m-clark.github.io/data-processing-and-visualization/data_table.html   
 
+<center>
+<img src="images/22.png" width="80%" />
+</center>
 
 
 ```r
@@ -17,62 +43,24 @@ library(data.table)
 ```
 
 
-```r
-dt <- data.table(x = rnorm(1000),
-                 y = rnorm(1000))
-dt
-#>             x      y
-#>    1:  0.7877 -0.274
-#>    2: -0.4220  1.587
-#>    3:  0.0569  0.446
-#>    4:  0.7106  1.885
-#>    5: -1.5875 -0.761
-#>   ---               
-#>  996:  0.2178  0.101
-#>  997:  0.1257  1.300
-#>  998:  0.4027 -0.512
-#>  999:  1.6292  0.761
-#> 1000:  1.3437 -0.174
-```
-
-
 
 ```r
-dt[, z := rnorm(1000)]
-dt
-#>             x      y       z
-#>    1:  0.7877 -0.274  0.6987
-#>    2: -0.4220  1.587  0.0828
-#>    3:  0.0569  0.446 -0.9761
-#>    4:  0.7106  1.885 -0.5814
-#>    5: -1.5875 -0.761  0.5285
-#>   ---                       
-#>  996:  0.2178  0.101  1.4036
-#>  997:  0.1257  1.300 -0.8953
-#>  998:  0.4027 -0.512 -0.1449
-#>  999:  1.6292  0.761  1.5657
-#> 1000:  1.3437 -0.174  1.1179
+y = list(id = 1:2, name = c("a", "b"))
+x = as.data.table(y)
+x
+#>    id name
+#> 1:  1    a
+#> 2:  2    b
 ```
 
 
 ```r
-dt2 <- dt
-dt[, z := NULL]
-
-dt2
-#>             x      y
-#>    1:  0.7877 -0.274
-#>    2: -0.4220  1.587
-#>    3:  0.0569  0.446
-#>    4:  0.7106  1.885
-#>    5: -1.5875 -0.761
-#>   ---               
-#>  996:  0.2178  0.101
-#>  997:  0.1257  1.300
-#>  998:  0.4027 -0.512
-#>  999:  1.6292  0.761
-#> 1000:  1.3437 -0.174
+class(x)
+#> [1] "data.table" "data.frame"
 ```
+
+
+## 基本使用 {#data-table-basics}
 
 
 

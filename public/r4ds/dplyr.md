@@ -10,6 +10,7 @@
 
 为了介绍 **dplyr** 中的基本数据操作。可以使用 `nycflights::flights`，这个数据集包含了 2013 年从纽约市处罚的所有 336776 次航班的信息。该数据来自于美国交通统计局。
 
+
 ```r
 library(nycflights13)
 flights
@@ -1680,7 +1681,7 @@ not_cancelled %>%
 
 ### 计数函数  
 
-`n()` 函数是一个与摘要函数`summarize()`配合的计数函数，它不需要任何参数，单独使用时，它计算的就是行计数：  
+`n()` 函数是一个与摘要函数 `summarize()` 配合的计数函数，它不需要任何参数，单独使用时，它计算的就是行计数：  
 
 
 ```r
@@ -1692,7 +1693,7 @@ flights %>%
 #> 1 336776
 ```
 
-和`group_by`联合使用时，它可以计算分组变量的每个水平上各有多少个观测：  
+和 `group_by()` 联合使用时，它可以计算分组变量的每个水平上各有多少个观测：  
 
 
 ```r
@@ -2770,7 +2771,7 @@ flights %>%
 
 ## 作用域  
 
-这里的作用域是指 `dplyr` 函数能影响的变量范围。一般而言，`arrange()`、`mutate()`、`summarize()` 作用的变量需要显式指明，而它们的一些变体 (scoped variants) 有更加复杂的作用域规则。  
+这里的作用域 (scope) 是指 `dplyr` 函数能影响的变量范围。一般而言，`arrange()`、`mutate()`、`summarize()` 作用的变量需要显式指明，而它们的一些变体 (scoped variants) 有更加复杂的作用域规则。  
 
 **Scoped variants of a function operates on a selection of variables.**    
 
@@ -2783,13 +2784,6 @@ https://dplyr.tidyverse.org/reference/mutate_all.html
 https://dplyr.tidyverse.org/reference/summarise_all.html  
 
 https://dplyr.tidyverse.org/reference/filter_all.html  
-
-
-
-```r
-library(tidyverse)
-```
-
 
 ### `arrange()`  
 
@@ -2873,13 +2867,13 @@ starwars %>% mutate_at(c("height", "mass"), scale2, na.rm = T)
 #> # A tibble: 87 x 13
 #>   name   height   mass hair_color skin_color eye_color birth_year gender
 #>   <chr>   <dbl>  <dbl> <chr>      <chr>      <chr>          <dbl> <chr> 
-#> 1 Luke… -0.0678 -0.120 blond      fair       blue            19   male  
+#> 1 Luke~ -0.0678 -0.120 blond      fair       blue            19   male  
 #> 2 C-3PO -0.212  -0.132 <NA>       gold       yellow         112   <NA>  
-#> 3 R2-D2 -2.25   -0.385 <NA>       white, bl… red             33   <NA>  
-#> 4 Dart…  0.795   0.228 none       white      yellow          41.9 male  
-#> 5 Leia… -0.701  -0.285 brown      light      brown           19   female
-#> 6 Owen…  0.105   0.134 brown, gr… light      blue            52   male  
-#> # … with 81 more rows, and 5 more variables: homeworld <chr>, species <chr>,
+#> 3 R2-D2 -2.25   -0.385 <NA>       white, bl~ red             33   <NA>  
+#> 4 Dart~  0.795   0.228 none       white      yellow          41.9 male  
+#> 5 Leia~ -0.701  -0.285 brown      light      brown           19   female
+#> 6 Owen~  0.105   0.134 brown, gr~ light      blue            52   male  
+#> # ... with 81 more rows, and 5 more variables: homeworld <chr>, species <chr>,
 #> #   films <list>, vehicles <list>, starships <list>
 
 # You can also supply selection helpers to _at() functions but you have
@@ -2895,7 +2889,7 @@ iris %>% mutate_at(vars(matches("Sepal")), scale2)
 #> 4       -1.50       0.0979          1.5         0.2 setosa 
 #> 5       -1.02       1.25            1.4         0.2 setosa 
 #> 6       -0.535      1.93            1.7         0.4 setosa 
-#> # … with 144 more rows
+#> # ... with 144 more rows
 iris %>% mutate_at(vars(contains("Length")), scale2)
 #> # A tibble: 150 x 5
 #>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -2906,7 +2900,7 @@ iris %>% mutate_at(vars(contains("Length")), scale2)
 #> 4       -1.50          3.1        -1.28         0.2 setosa 
 #> 5       -1.02          3.6        -1.34         0.2 setosa 
 #> 6       -0.535         3.9        -1.17         0.4 setosa 
-#> # … with 144 more rows
+#> # ... with 144 more rows
 ```
 
 `_if` 变体作用于 predicate function 返回的逻辑值为真的变量，注意这个参数的位置：  
@@ -2920,13 +2914,13 @@ starwars %>% mutate_if(is.numeric, scale2, na.rm = TRUE)
 #> # A tibble: 87 x 13
 #>   name   height   mass hair_color skin_color eye_color birth_year gender
 #>   <chr>   <dbl>  <dbl> <chr>      <chr>      <chr>          <dbl> <chr> 
-#> 1 Luke… -0.0678 -0.120 blond      fair       blue          -0.443 male  
+#> 1 Luke~ -0.0678 -0.120 blond      fair       blue          -0.443 male  
 #> 2 C-3PO -0.212  -0.132 <NA>       gold       yellow         0.158 <NA>  
-#> 3 R2-D2 -2.25   -0.385 <NA>       white, bl… red           -0.353 <NA>  
-#> 4 Dart…  0.795   0.228 none       white      yellow        -0.295 male  
-#> 5 Leia… -0.701  -0.285 brown      light      brown         -0.443 female
-#> 6 Owen…  0.105   0.134 brown, gr… light      blue          -0.230 male  
-#> # … with 81 more rows, and 5 more variables: homeworld <chr>, species <chr>,
+#> 3 R2-D2 -2.25   -0.385 <NA>       white, bl~ red           -0.353 <NA>  
+#> 4 Dart~  0.795   0.228 none       white      yellow        -0.295 male  
+#> 5 Leia~ -0.701  -0.285 brown      light      brown         -0.443 female
+#> 6 Owen~  0.105   0.134 brown, gr~ light      blue          -0.230 male  
+#> # ... with 81 more rows, and 5 more variables: homeworld <chr>, species <chr>,
 #> #   films <list>, vehicles <list>, starships <list>
 ```
 
@@ -2946,7 +2940,7 @@ iris %>% mutate_if(is.factor, as.character)
 #> 4          4.6         3.1          1.5         0.2 setosa 
 #> 5          5           3.6          1.4         0.2 setosa 
 #> 6          5.4         3.9          1.7         0.4 setosa 
-#> # … with 144 more rows
+#> # ... with 144 more rows
 
 ## 双精度转换为整型 
 iris %>% mutate_if(is.double, as.integer)
@@ -2959,7 +2953,7 @@ iris %>% mutate_if(is.double, as.integer)
 #> 4            4           3            1           0 setosa 
 #> 5            5           3            1           0 setosa 
 #> 6            5           3            1           0 setosa 
-#> # … with 144 more rows
+#> # ... with 144 more rows
 ```
 
 
@@ -2978,7 +2972,7 @@ iris %>% mutate_if(is.numeric, list(scale2, log)) %>%
 #> 4           -1.50           0.0979            -1.28           -1.31
 #> 5           -1.02           1.25              -1.34           -1.31
 #> 6           -0.535          1.93              -1.17           -1.05
-#> # … with 144 more rows, and 4 more variables: Sepal.Length_fn2 <dbl>,
+#> # ... with 144 more rows, and 4 more variables: Sepal.Length_fn2 <dbl>,
 #> #   Sepal.Width_fn2 <dbl>, Petal.Length_fn2 <dbl>, Petal.Width_fn2 <dbl>
 ```
 
@@ -2990,7 +2984,7 @@ iris %>% mutate_if(is.numeric, list(scale2, log)) %>%
 iris %>% mutate_if(is.numeric, list(scale = scale2, log = log)) %>%
   select(-(1:5))
 #> # A tibble: 150 x 8
-#>   Sepal.Length_sc… Sepal.Width_sca… Petal.Length_sc… Petal.Width_sca…
+#>   Sepal.Length_sc~ Sepal.Width_sca~ Petal.Length_sc~ Petal.Width_sca~
 #>              <dbl>            <dbl>            <dbl>            <dbl>
 #> 1           -0.898           1.02              -1.34            -1.31
 #> 2           -1.14           -0.132             -1.34            -1.31
@@ -2998,7 +2992,7 @@ iris %>% mutate_if(is.numeric, list(scale = scale2, log = log)) %>%
 #> 4           -1.50            0.0979            -1.28            -1.31
 #> 5           -1.02            1.25              -1.34            -1.31
 #> 6           -0.535           1.93              -1.17            -1.05
-#> # … with 144 more rows, and 4 more variables: Sepal.Length_log <dbl>,
+#> # ... with 144 more rows, and 4 more variables: Sepal.Length_log <dbl>,
 #> #   Sepal.Width_log <dbl>, Petal.Length_log <dbl>, Petal.Width_log <dbl>
 ```
 
@@ -3018,10 +3012,10 @@ iris %>% mutate_if(is.numeric, list(scale2))
 #> 4       -1.50       0.0979        -1.28       -1.31 setosa 
 #> 5       -1.02       1.25          -1.34       -1.31 setosa 
 #> 6       -0.535      1.93          -1.17       -1.05 setosa 
-#> # … with 144 more rows
+#> # ... with 144 more rows
 iris %>% mutate_if(is.numeric, list(scale = scale2))
 #> # A tibble: 150 x 9
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Length_sc…
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Length_sc~
 #>          <dbl>       <dbl>        <dbl>       <dbl> <fct>              <dbl>
 #> 1          5.1         3.5          1.4         0.2 setosa            -0.898
 #> 2          4.9         3            1.4         0.2 setosa            -1.14 
@@ -3029,7 +3023,7 @@ iris %>% mutate_if(is.numeric, list(scale = scale2))
 #> 4          4.6         3.1          1.5         0.2 setosa            -1.50 
 #> 5          5           3.6          1.4         0.2 setosa            -1.02 
 #> 6          5.4         3.9          1.7         0.4 setosa            -0.535
-#> # … with 144 more rows, and 3 more variables: Sepal.Width_scale <dbl>,
+#> # ... with 144 more rows, and 3 more variables: Sepal.Width_scale <dbl>,
 #> #   Petal.Length_scale <dbl>, Petal.Width_scale <dbl>
 ```
 
@@ -3047,11 +3041,11 @@ iris %>%
   group_by(Species) %>% 
   summarize_at(vars(Petal.Length, Petal.Width), list(mean = mean, median = median))
 #> # A tibble: 3 x 5
-#>   Species  Petal.Length_mean Petal.Width_mean Petal.Length_med… Petal.Width_med…
+#>   Species  Petal.Length_mean Petal.Width_mean Petal.Length_med~ Petal.Width_med~
 #>   <fct>                <dbl>            <dbl>             <dbl>            <dbl>
 #> 1 setosa                1.46            0.246              1.5               0.2
-#> 2 versico…              4.26            1.33               4.35              1.3
-#> 3 virgini…              5.55            2.03               5.55              2
+#> 2 versico~              4.26            1.33               4.35              1.3
+#> 3 virgini~              5.55            2.03               5.55              2
 ```
 
 

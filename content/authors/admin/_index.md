@@ -30,9 +30,7 @@ user_groups:
 - Visitors
 ---
 
-I'm currently a junior majoring in data journalism in [Communication University of China](http://www.cuc.edu.cn/). I take particular interest in data wrangling, cleaning, visualizing and modeling in R (especially with the [tidyverse](https://www.tidyverse.org)). I enjoy applied statistics as well as modern "modern" data science initiatives, and aspire for a data science / anlytics master program in days to come.    
-
-I love sharing and recording what I have learned in [posts](#posts) and [projects](#projects) and the majority of them are of a note-taking nature based on a specific book, online course, paper, blog posts, etc. Any suggestion or sharing is highly appreciated!  
+I'm currently a junior majoring in data journalism in [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, cleaning, visualizing and modeling in #rstats, especially when harnessing the magic of [tidyverse](https://www.tidyverse.org)! 
 
 I take equal delight in the study of ancient chinese literature, behavioural sicence, nueroscience and economics. My favourite author is Bertrand Russell :black_nib: . 
 

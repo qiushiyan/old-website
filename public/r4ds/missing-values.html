@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>16 处理缺失值 | R for data science: tidyverse and beyond</title>
-  <meta name="description" content="16 处理缺失值 | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <title>17 处理缺失值 | R for data science: tidyverse and beyond</title>
+  <meta name="description" content="17 处理缺失值 | R for data science: tidyverse and beyond" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="16 处理缺失值 | R for data science: tidyverse and beyond" />
+  <meta property="og:title" content="17 处理缺失值 | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="enixam/rfordatascience" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="16 处理缺失值 | R for data science: tidyverse and beyond" />
+  <meta name="twitter:title" content="17 处理缺失值 | R for data science: tidyverse and beyond" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-01-07" />
+<meta name="date" content="2020-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
+<script src="libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
+<script src="libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
 
 
 <style type="text/css">
@@ -237,28 +241,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="forcats.html"><a href="forcats.html#合并因子"><i class="fa fa-check"></i><b>5.5</b> 合并因子</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tidyr.html"><a href="tidyr.html"><i class="fa fa-check"></i><b>6</b> tidyr</a><ul>
-<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> 简介</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> tidy data 简介</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="tidyr.html"><a href="tidyr.html#练习-11"><i class="fa fa-check"></i><b>6.1.1</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#spread和gather"><i class="fa fa-check"></i><b>6.2</b> <code>spread()</code>和<code>gather()</code></a><ul>
-<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#gather"><i class="fa fa-check"></i><b>6.2.1</b> <code>gather()</code></a></li>
-<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#spread"><i class="fa fa-check"></i><b>6.2.2</b> <code>spread()</code></a></li>
-<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.3</b> 练习</a></li>
+<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#pivoting"><i class="fa fa-check"></i><b>6.2</b> pivoting</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer"><i class="fa fa-check"></i><b>6.2.1</b> <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.2.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#combining-pivot_longer-and-pivot_wider"><i class="fa fa-check"></i><b>6.2.3</b> Combining <code>pivot_longer()</code> and <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.4" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.4</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#separate和untie"><i class="fa fa-check"></i><b>6.3</b> <code>separate()</code>和<code>untie()</code></a><ul>
-<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.3.1</b> <code>separate()</code></a></li>
-<li class="chapter" data-level="6.3.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.3.2</b> <code>unite()</code></a></li>
-<li class="chapter" data-level="6.3.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.3.3</b> 练习</a></li>
+<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#nesting"><i class="fa fa-check"></i><b>6.3</b> nesting</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#nested-data-and-models"><i class="fa fa-check"></i><b>6.3.1</b> nested data and models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.4</b> 缺失值</a></li>
-<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.5</b> Case Study</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.5.1</b> 练习</a></li>
+<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#rectangling"><i class="fa fa-check"></i><b>6.4</b> rectangling</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="tidyr.html"><a href="tidyr.html#github-users"><i class="fa fa-check"></i><b>6.4.1</b> Github users</a></li>
+<li class="chapter" data-level="6.4.2" data-path="tidyr.html"><a href="tidyr.html#github-repos"><i class="fa fa-check"></i><b>6.4.2</b> Github repos</a></li>
+<li class="chapter" data-level="6.4.3" data-path="tidyr.html"><a href="tidyr.html#game-of-throne-characters"><i class="fa fa-check"></i><b>6.4.3</b> Game of Throne characters</a></li>
+<li class="chapter" data-level="6.4.4" data-path="tidyr.html"><a href="tidyr.html#sharla-gelfands-discography"><i class="fa fa-check"></i><b>6.4.4</b> Sharla Gelfand’s discography</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.6</b> 拓展：None-tidy data</a></li>
-<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-1.0.0"><i class="fa fa-check"></i><b>6.7</b> <code>tidyr 1.0.0</code></a><ul>
-<li class="chapter" data-level="6.7.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer-和-pivot_wider"><i class="fa fa-check"></i><b>6.7.1</b> <code>pivot_longer</code> 和 <code>pivot_wider</code></a></li>
-<li class="chapter" data-level="6.7.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.7.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#separate-和-untie"><i class="fa fa-check"></i><b>6.5</b> <code>separate()</code> 和 <code>untie()</code></a><ul>
+<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.5.1</b> <code>separate()</code></a></li>
+<li class="chapter" data-level="6.5.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.5.2</b> <code>unite()</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.5.3</b> 练习</a></li>
 </ul></li>
+<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#miscellanea-functions"><i class="fa fa-check"></i><b>6.6</b> Miscellanea Functions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="tidyr.html"><a href="tidyr.html#uncount"><i class="fa fa-check"></i><b>6.6.1</b> <code>uncount()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.7</b> 缺失值</a></li>
+<li class="chapter" data-level="6.8" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.8</b> Case Study</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.8.1</b> 练习</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.9</b> 拓展：None-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>7</b> relational data</a><ul>
 <li class="chapter" data-level="7.1" data-path="relational-data.html"><a href="relational-data.html#introduction"><i class="fa fa-check"></i><b>7.1</b> introduction</a></li>
@@ -278,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="purrr.html"><a href="purrr.html#group_"><i class="fa fa-check"></i><b>9.4</b> group_</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="purrr.html"><a href="purrr.html#group_mapgroup_modify"><i class="fa fa-check"></i><b>9.4.1</b> group_map、group_modify</a></li>
-<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_split、group_keys、group_data</a></li>
+<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_nestgroup_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_nest、group_split、group_keys、group_data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Importing</b></span></li>
@@ -292,47 +305,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
 <li class="chapter" data-level="12" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>12</b> data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.1</b> dtplyr</a></li>
-<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.2</b> maditr</a></li>
-<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.3</b> tidyfast</a></li>
-<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.4</b> disk.frame</a></li>
+<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#data-table-basics"><i class="fa fa-check"></i><b>12.1</b> 基本使用</a></li>
+<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.2</b> dtplyr</a></li>
+<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.3</b> maditr</a></li>
+<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.4</b> tidyfast</a></li>
+<li class="chapter" data-level="12.5" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.5</b> disk.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="rowwise-operation.html"><a href="rowwise-operation.html"><i class="fa fa-check"></i><b>13</b> rowwise operation</a><ul>
 <li class="chapter" data-level="13.1" data-path="rowwise-operation.html"><a href="rowwise-operation.html#do-rowwise"><i class="fa fa-check"></i><b>13.1</b> do() + rowwise()</a></li>
 <li class="chapter" data-level="13.2" data-path="rowwise-operation.html"><a href="rowwise-operation.html#rap"><i class="fa fa-check"></i><b>13.2</b> rap</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>14</b> Data Summary</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>14.1</b> skimr</a></li>
-<li class="chapter" data-level="14.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>14.2</b> visdat</a></li>
-<li class="chapter" data-level="14.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>14.3</b> summarytools</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>14.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>14.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="14" data-path="sjmisc.html"><a href="sjmisc.html"><i class="fa fa-check"></i><b>14</b> sjmisc</a><ul>
+<li class="chapter" data-level="14.1" data-path="sjmisc.html"><a href="sjmisc.html#frq-和-flat_table-一维和二维频数表"><i class="fa fa-check"></i><b>14.1</b> <code>frq()</code> 和 <code>flat_table()</code> 一维和二维频数表</a></li>
+<li class="chapter" data-level="14.2" data-path="sjmisc.html"><a href="sjmisc.html#rec-重新编码"><i class="fa fa-check"></i><b>14.2</b> <code>rec()</code>: 重新编码</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>15</b> Data Summary</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>15.1</b> skimr</a></li>
+<li class="chapter" data-level="15.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>15.2</b> visdat</a></li>
+<li class="chapter" data-level="15.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>15.3</b> summarytools</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>15.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="15.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>15.3.2</b> <code>descr()</code></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IV Cleaning and Tidying</b></span></li>
-<li class="chapter" data-level="15" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>15</b> Janitor</a><ul>
-<li class="chapter" data-level="15.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>15.1</b> 清洗</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>15.1.1</b> <code>clean_names</code></a></li>
-<li class="chapter" data-level="15.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>15.1.2</b> <code>compare_df_cols</code></a></li>
+<li class="chapter" data-level="16" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>16</b> Janitor</a><ul>
+<li class="chapter" data-level="16.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>16.1</b> 清洗</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>16.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="16.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>16.1.2</b> <code>compare_df_cols</code></a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>15.2</b> 探索</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>15.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>15.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="15.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>15.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="15.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>15.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="15.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>15.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="15.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>15.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="15.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>15.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="16.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>16.2</b> 探索</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>16.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>16.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="16.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>16.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="16.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>16.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="16.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>16.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="16.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>16.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="16.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>16.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>16</b> 处理缺失值</a><ul>
-<li class="chapter" data-level="16.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>16.1</b> 探索</a></li>
-<li class="chapter" data-level="16.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>16.2</b> 填充</a></li>
+<li class="chapter" data-level="17" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>17</b> 处理缺失值</a><ul>
+<li class="chapter" data-level="17.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>17.1</b> 探索</a></li>
+<li class="chapter" data-level="17.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>17.2</b> 填充</a></li>
 </ul></li>
 <li class="part"><span><b>V Modelling</b></span></li>
-<li class="chapter" data-level="17" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>17</b> tidymodels</a></li>
-<li class="chapter" data-level="18" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>18</b> caret</a></li>
-<li class="chapter" data-level="19" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>19</b> vtreat</a></li>
+<li class="chapter" data-level="18" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>18</b> tidymodels</a></li>
+<li class="chapter" data-level="19" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>19</b> caret</a></li>
+<li class="chapter" data-level="20" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>20</b> vtreat</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
@@ -355,106 +373,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1">
-<h1><span class="header-section-number">16</span> 处理缺失值</h1>
+<h1><span class="header-section-number">17</span> 处理缺失值</h1>
 <div id="explore-missing" class="section level2">
-<h2><span class="header-section-number">16.1</span> 探索</h2>
+<h2><span class="header-section-number">17.1</span> 探索</h2>
 <p><code>drop_na()</code> 根据列去除带有缺失值的观测：</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;b&quot;</span>))</a>
-<a class="sourceLine" id="cb463-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>() <span class="co"># df %&gt;% drop_na(x, y)</span></a>
-<a class="sourceLine" id="cb463-3" title="3"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
-<a class="sourceLine" id="cb463-4" title="4"><span class="co">#&gt;       x y    </span></a>
-<a class="sourceLine" id="cb463-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb463-6" title="6"><span class="co">#&gt; 1     1 a</span></a>
-<a class="sourceLine" id="cb463-7" title="7">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(x)</a>
-<a class="sourceLine" id="cb463-8" title="8"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
-<a class="sourceLine" id="cb463-9" title="9"><span class="co">#&gt;       x y    </span></a>
-<a class="sourceLine" id="cb463-10" title="10"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb463-11" title="11"><span class="co">#&gt; 1     1 a    </span></a>
-<a class="sourceLine" id="cb463-12" title="12"><span class="co">#&gt; 2     2 &lt;NA&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;b&quot;</span>), <span class="dt">z =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))</a>
+<a class="sourceLine" id="cb521-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>() <span class="co"># df %&gt;% drop_na(x, y)</span></a>
+<a class="sourceLine" id="cb521-3" title="3"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb521-4" title="4"><span class="co">#&gt;       x y     z    </span></a>
+<a class="sourceLine" id="cb521-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb521-6" title="6"><span class="co">#&gt; 1     1 a     1</span></a>
+<a class="sourceLine" id="cb521-7" title="7">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(x)</a>
+<a class="sourceLine" id="cb521-8" title="8"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
+<a class="sourceLine" id="cb521-9" title="9"><span class="co">#&gt;       x y     z    </span></a>
+<a class="sourceLine" id="cb521-10" title="10"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb521-11" title="11"><span class="co">#&gt; 1     1 a     1    </span></a>
+<a class="sourceLine" id="cb521-12" title="12"><span class="co">#&gt; 2     2 &lt;NA&gt;  2</span></a></code></pre></div>
+<p><strong>Janitor</strong> 中的 <code>tabyl</code></p>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" title="1">janitor<span class="op">::</span><span class="kw">tabyl</span>(df, y)</a>
+<a class="sourceLine" id="cb522-2" title="2"><span class="co">#&gt;     y n percent valid_percent</span></a>
+<a class="sourceLine" id="cb522-3" title="3"><span class="co">#&gt;     a 1   0.333           0.5</span></a>
+<a class="sourceLine" id="cb522-4" title="4"><span class="co">#&gt;     b 1   0.333           0.5</span></a>
+<a class="sourceLine" id="cb522-5" title="5"><span class="co">#&gt;  &lt;NA&gt; 1   0.333            NA</span></a></code></pre></div>
 </div>
 <div id="fill-missing" class="section level2">
-<h2><span class="header-section-number">16.2</span> 填充</h2>
+<h2><span class="header-section-number">17.2</span> 填充</h2>
 <p><a href="https://jiangjun.link/post/2018/12/r-missing-data" class="uri">https://jiangjun.link/post/2018/12/r-missing-data</a></p>
 <p>用中位数或均值填补缺失值</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb464-2" title="2">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb464-3" title="3">             <span class="dt">y =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">20</span>, <span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb464-4" title="4">             <span class="dt">z =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb464-5" title="5"></a>
-<a class="sourceLine" id="cb464-6" title="6"></a>
-<a class="sourceLine" id="cb464-7" title="7">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb464-8" title="8"><span class="st">  </span><span class="kw">mutate_all</span>( <span class="op">~</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(.x), <span class="kw">median</span>(.x, <span class="dt">na.rm =</span> T), .))</a>
-<a class="sourceLine" id="cb464-9" title="9"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
-<a class="sourceLine" id="cb464-10" title="10"><span class="co">#&gt;       x     y     z</span></a>
-<a class="sourceLine" id="cb464-11" title="11"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb464-12" title="12"><span class="co">#&gt; 1   1       5     5</span></a>
-<a class="sourceLine" id="cb464-13" title="13"><span class="co">#&gt; 2   2      20     6</span></a>
-<a class="sourceLine" id="cb464-14" title="14"><span class="co">#&gt; 3   3.5     1     7</span></a>
-<a class="sourceLine" id="cb464-15" title="15"><span class="co">#&gt; 4   5       5     8</span></a>
-<a class="sourceLine" id="cb464-16" title="16"><span class="co">#&gt; 5   9       5     9</span></a>
-<a class="sourceLine" id="cb464-17" title="17"><span class="co">#&gt; 6   3.5     5    10</span></a></code></pre></div>
-<p><a href="missing-values.html#missing-values">16</a> 中的 <code>fill()</code>:</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Month =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="ot">NA</span>, <span class="dv">10</span>), <span class="dt">Year =</span> <span class="kw">c</span>(<span class="dv">2000</span>, <span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">9</span>)), <span class="dt">values =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">12</span><span class="op">:</span><span class="dv">20</span>))</a>
-<a class="sourceLine" id="cb465-2" title="2">df</a>
-<a class="sourceLine" id="cb465-3" title="3"><span class="co">#&gt;    Month Year values</span></a>
-<a class="sourceLine" id="cb465-4" title="4"><span class="co">#&gt; 1      1 2000     NA</span></a>
-<a class="sourceLine" id="cb465-5" title="5"><span class="co">#&gt; 2      2   NA     12</span></a>
-<a class="sourceLine" id="cb465-6" title="6"><span class="co">#&gt; 3      3   NA     13</span></a>
-<a class="sourceLine" id="cb465-7" title="7"><span class="co">#&gt; 4      4   NA     14</span></a>
-<a class="sourceLine" id="cb465-8" title="8"><span class="co">#&gt; 5      5   NA     15</span></a>
-<a class="sourceLine" id="cb465-9" title="9"><span class="co">#&gt; 6      6   NA     16</span></a>
-<a class="sourceLine" id="cb465-10" title="10"><span class="co">#&gt; 7      7   NA     17</span></a>
-<a class="sourceLine" id="cb465-11" title="11"><span class="co">#&gt; 8      8   NA     18</span></a>
-<a class="sourceLine" id="cb465-12" title="12"><span class="co">#&gt; 9     NA   NA     19</span></a>
-<a class="sourceLine" id="cb465-13" title="13"><span class="co">#&gt; 10    10   NA     20</span></a>
-<a class="sourceLine" id="cb465-14" title="14">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fill</span>(<span class="kw">starts_with</span>(<span class="st">&quot;Y&quot;</span>), <span class="dt">.direction =</span> <span class="st">&quot;down&quot;</span>)</a>
-<a class="sourceLine" id="cb465-15" title="15"><span class="co">#&gt;    Month Year values</span></a>
-<a class="sourceLine" id="cb465-16" title="16"><span class="co">#&gt; 1      1 2000     NA</span></a>
-<a class="sourceLine" id="cb465-17" title="17"><span class="co">#&gt; 2      2 2000     12</span></a>
-<a class="sourceLine" id="cb465-18" title="18"><span class="co">#&gt; 3      3 2000     13</span></a>
-<a class="sourceLine" id="cb465-19" title="19"><span class="co">#&gt; 4      4 2000     14</span></a>
-<a class="sourceLine" id="cb465-20" title="20"><span class="co">#&gt; 5      5 2000     15</span></a>
-<a class="sourceLine" id="cb465-21" title="21"><span class="co">#&gt; 6      6 2000     16</span></a>
-<a class="sourceLine" id="cb465-22" title="22"><span class="co">#&gt; 7      7 2000     17</span></a>
-<a class="sourceLine" id="cb465-23" title="23"><span class="co">#&gt; 8      8 2000     18</span></a>
-<a class="sourceLine" id="cb465-24" title="24"><span class="co">#&gt; 9     NA 2000     19</span></a>
-<a class="sourceLine" id="cb465-25" title="25"><span class="co">#&gt; 10    10 2000     20</span></a></code></pre></div>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb523-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb523-2" title="2">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb523-3" title="3">             <span class="dt">y =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">20</span>, <span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb523-4" title="4">             <span class="dt">z =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb523-5" title="5"></a>
+<a class="sourceLine" id="cb523-6" title="6"></a>
+<a class="sourceLine" id="cb523-7" title="7">df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb523-8" title="8"><span class="st">  </span><span class="kw">mutate_all</span>( <span class="op">~</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(.x), <span class="kw">median</span>(.x, <span class="dt">na.rm =</span> T), .))</a>
+<a class="sourceLine" id="cb523-9" title="9"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb523-10" title="10"><span class="co">#&gt;       x     y     z</span></a>
+<a class="sourceLine" id="cb523-11" title="11"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb523-12" title="12"><span class="co">#&gt; 1   1       5     5</span></a>
+<a class="sourceLine" id="cb523-13" title="13"><span class="co">#&gt; 2   2      20     6</span></a>
+<a class="sourceLine" id="cb523-14" title="14"><span class="co">#&gt; 3   3.5     1     7</span></a>
+<a class="sourceLine" id="cb523-15" title="15"><span class="co">#&gt; 4   5       5     8</span></a>
+<a class="sourceLine" id="cb523-16" title="16"><span class="co">#&gt; 5   9       5     9</span></a>
+<a class="sourceLine" id="cb523-17" title="17"><span class="co">#&gt; 6   3.5     5    10</span></a></code></pre></div>
+<p><a href="missing-values.html#missing-values">17</a> 中的 <code>fill()</code>:</p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb524-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Month =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="ot">NA</span>, <span class="dv">10</span>), <span class="dt">Year =</span> <span class="kw">c</span>(<span class="dv">2000</span>, <span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">9</span>)), <span class="dt">values =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">12</span><span class="op">:</span><span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb524-2" title="2">df</a>
+<a class="sourceLine" id="cb524-3" title="3"><span class="co">#&gt;    Month Year values</span></a>
+<a class="sourceLine" id="cb524-4" title="4"><span class="co">#&gt; 1      1 2000     NA</span></a>
+<a class="sourceLine" id="cb524-5" title="5"><span class="co">#&gt; 2      2   NA     12</span></a>
+<a class="sourceLine" id="cb524-6" title="6"><span class="co">#&gt; 3      3   NA     13</span></a>
+<a class="sourceLine" id="cb524-7" title="7"><span class="co">#&gt; 4      4   NA     14</span></a>
+<a class="sourceLine" id="cb524-8" title="8"><span class="co">#&gt; 5      5   NA     15</span></a>
+<a class="sourceLine" id="cb524-9" title="9"><span class="co">#&gt; 6      6   NA     16</span></a>
+<a class="sourceLine" id="cb524-10" title="10"><span class="co">#&gt; 7      7   NA     17</span></a>
+<a class="sourceLine" id="cb524-11" title="11"><span class="co">#&gt; 8      8   NA     18</span></a>
+<a class="sourceLine" id="cb524-12" title="12"><span class="co">#&gt; 9     NA   NA     19</span></a>
+<a class="sourceLine" id="cb524-13" title="13"><span class="co">#&gt; 10    10   NA     20</span></a>
+<a class="sourceLine" id="cb524-14" title="14">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fill</span>(<span class="kw">starts_with</span>(<span class="st">&quot;Y&quot;</span>), <span class="dt">.direction =</span> <span class="st">&quot;down&quot;</span>)</a>
+<a class="sourceLine" id="cb524-15" title="15"><span class="co">#&gt;    Month Year values</span></a>
+<a class="sourceLine" id="cb524-16" title="16"><span class="co">#&gt; 1      1 2000     NA</span></a>
+<a class="sourceLine" id="cb524-17" title="17"><span class="co">#&gt; 2      2 2000     12</span></a>
+<a class="sourceLine" id="cb524-18" title="18"><span class="co">#&gt; 3      3 2000     13</span></a>
+<a class="sourceLine" id="cb524-19" title="19"><span class="co">#&gt; 4      4 2000     14</span></a>
+<a class="sourceLine" id="cb524-20" title="20"><span class="co">#&gt; 5      5 2000     15</span></a>
+<a class="sourceLine" id="cb524-21" title="21"><span class="co">#&gt; 6      6 2000     16</span></a>
+<a class="sourceLine" id="cb524-22" title="22"><span class="co">#&gt; 7      7 2000     17</span></a>
+<a class="sourceLine" id="cb524-23" title="23"><span class="co">#&gt; 8      8 2000     18</span></a>
+<a class="sourceLine" id="cb524-24" title="24"><span class="co">#&gt; 9     NA 2000     19</span></a>
+<a class="sourceLine" id="cb524-25" title="25"><span class="co">#&gt; 10    10 2000     20</span></a></code></pre></div>
 <p>或者 <code>janitor::remove_empty()</code></p>
 <p><code>full_seq()</code>，得到完整的序列：</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" title="1"><span class="kw">full_seq</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">10</span>), <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb466-2" title="2"><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></a></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" title="1"><span class="kw">full_seq</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">10</span>), <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb525-2" title="2"><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></a></code></pre></div>
 <p><code>replace_na()</code> replace missing values:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;b&quot;</span>), <span class="dt">z =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="ot">NULL</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">20</span>))</a>
-<a class="sourceLine" id="cb467-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">x =</span> <span class="kw">replace_na</span>(x, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb467-3" title="3"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
-<a class="sourceLine" id="cb467-4" title="4"><span class="co">#&gt;       x y     z         </span></a>
-<a class="sourceLine" id="cb467-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb467-6" title="6"><span class="co">#&gt; 1     1 a     &lt;int [5]&gt; </span></a>
-<a class="sourceLine" id="cb467-7" title="7"><span class="co">#&gt; 2     2 &lt;NA&gt;  &lt;NULL&gt;    </span></a>
-<a class="sourceLine" id="cb467-8" title="8"><span class="co">#&gt; 3     0 b     &lt;int [11]&gt;</span></a>
-<a class="sourceLine" id="cb467-9" title="9">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="st">&quot;unknown&quot;</span>))</a>
-<a class="sourceLine" id="cb467-10" title="10"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
-<a class="sourceLine" id="cb467-11" title="11"><span class="co">#&gt;       x y       z         </span></a>
-<a class="sourceLine" id="cb467-12" title="12"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb467-13" title="13"><span class="co">#&gt; 1     1 a       &lt;int [5]&gt; </span></a>
-<a class="sourceLine" id="cb467-14" title="14"><span class="co">#&gt; 2     2 unknown &lt;NULL&gt;    </span></a>
-<a class="sourceLine" id="cb467-15" title="15"><span class="co">#&gt; 3     0 b       &lt;int [11]&gt;</span></a></code></pre></div>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" title="1"><span class="co"># NULL are the list-col equivalent of NAs</span></a>
-<a class="sourceLine" id="cb468-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">list</span>(<span class="dt">z =</span> <span class="kw">list</span>(<span class="dv">5</span>)))</a>
-<a class="sourceLine" id="cb468-3" title="3"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
-<a class="sourceLine" id="cb468-4" title="4"><span class="co">#&gt;       x y     z         </span></a>
-<a class="sourceLine" id="cb468-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb468-6" title="6"><span class="co">#&gt; 1     1 a     &lt;int [5]&gt; </span></a>
-<a class="sourceLine" id="cb468-7" title="7"><span class="co">#&gt; 2     2 &lt;NA&gt;  &lt;dbl [1]&gt; </span></a>
-<a class="sourceLine" id="cb468-8" title="8"><span class="co">#&gt; 3    NA b     &lt;int [11]&gt;</span></a></code></pre></div>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" title="1">df<span class="op">$</span>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb469-2" title="2"><span class="co">#&gt; [1] 1 2 0</span></a>
-<a class="sourceLine" id="cb469-3" title="3">df<span class="op">$</span>y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="st">&quot;unknown&quot;</span>)</a>
-<a class="sourceLine" id="cb469-4" title="4"><span class="co">#&gt; [1] &quot;a&quot;       &quot;unknown&quot; &quot;b&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb526-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;b&quot;</span>), <span class="dt">z =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="ot">NULL</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb526-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">x =</span> <span class="kw">replace_na</span>(x, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb526-3" title="3"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
+<a class="sourceLine" id="cb526-4" title="4"><span class="co">#&gt;       x y     z         </span></a>
+<a class="sourceLine" id="cb526-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    </span></a>
+<a class="sourceLine" id="cb526-6" title="6"><span class="co">#&gt; 1     1 a     &lt;int [5]&gt; </span></a>
+<a class="sourceLine" id="cb526-7" title="7"><span class="co">#&gt; 2     2 &lt;NA&gt;  &lt;NULL&gt;    </span></a>
+<a class="sourceLine" id="cb526-8" title="8"><span class="co">#&gt; 3     0 b     &lt;int [11]&gt;</span></a>
+<a class="sourceLine" id="cb526-9" title="9">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="st">&quot;unknown&quot;</span>))</a>
+<a class="sourceLine" id="cb526-10" title="10"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
+<a class="sourceLine" id="cb526-11" title="11"><span class="co">#&gt;       x y       z         </span></a>
+<a class="sourceLine" id="cb526-12" title="12"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;    </span></a>
+<a class="sourceLine" id="cb526-13" title="13"><span class="co">#&gt; 1     1 a       &lt;int [5]&gt; </span></a>
+<a class="sourceLine" id="cb526-14" title="14"><span class="co">#&gt; 2     2 unknown &lt;NULL&gt;    </span></a>
+<a class="sourceLine" id="cb526-15" title="15"><span class="co">#&gt; 3     0 b       &lt;int [11]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" title="1"><span class="co"># NULL are the list-col equivalent of NAs</span></a>
+<a class="sourceLine" id="cb527-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">list</span>(<span class="dt">z =</span> <span class="kw">list</span>(<span class="dv">5</span>)))</a>
+<a class="sourceLine" id="cb527-3" title="3"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
+<a class="sourceLine" id="cb527-4" title="4"><span class="co">#&gt;       x y     z         </span></a>
+<a class="sourceLine" id="cb527-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    </span></a>
+<a class="sourceLine" id="cb527-6" title="6"><span class="co">#&gt; 1     1 a     &lt;int [5]&gt; </span></a>
+<a class="sourceLine" id="cb527-7" title="7"><span class="co">#&gt; 2     2 &lt;NA&gt;  &lt;dbl [1]&gt; </span></a>
+<a class="sourceLine" id="cb527-8" title="8"><span class="co">#&gt; 3    NA b     &lt;int [11]&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" title="1">df<span class="op">$</span>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb528-2" title="2"><span class="co">#&gt; [1] 1 2 0</span></a>
+<a class="sourceLine" id="cb528-3" title="3">df<span class="op">$</span>y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="st">&quot;unknown&quot;</span>)</a>
+<a class="sourceLine" id="cb528-4" title="4"><span class="co">#&gt; [1] &quot;a&quot;       &quot;unknown&quot; &quot;b&quot;</span></a></code></pre></div>
 <p><code>visdat::vis_missing()</code></p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" title="1"><span class="kw">library</span>(visdat)</a>
-<a class="sourceLine" id="cb470-2" title="2"><span class="kw">vis_miss</span>(df)</a></code></pre></div>
-<p><img src="missing-values_files/figure-html/unnamed-chunk-9-1.svg" width="80%" /></p>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" title="1"><span class="kw">library</span>(visdat)</a>
+<a class="sourceLine" id="cb529-2" title="2"><span class="kw">vis_miss</span>(df)</a></code></pre></div>
+<p><img src="missing-values_files/figure-html/unnamed-chunk-10-1.svg" width="80%" /></p>
 <p>more advanced: mice 或 Amelia</p>
 
 </div>

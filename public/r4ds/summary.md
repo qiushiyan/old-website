@@ -175,3 +175,23 @@ descr(iris)
 #>         Pct.Valid         100.00        100.00         100.00        100.00
 ```
 
+## gt and gtsummary  
+
+
+```r
+# devtools::install_github("rstudio/gt")
+# install.packages("gtsummary")
+library(gt)
+library(gtsummary)
+```
+
+
+```r
+t1 <-
+  tbl_summary(
+    data = trial[c("trt", "age", "grade", "response")],
+    by = trt
+  ) %>%
+  add_p() 
+```
+

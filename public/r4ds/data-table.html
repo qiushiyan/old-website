@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 data.table | R for data science: tidyverse and beyond</title>
   <meta name="description" content="12 data.table | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 data.table | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-01-07" />
+<meta name="date" content="2020-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
+<script src="libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
+<script src="libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
 
 
 <style type="text/css">
@@ -237,28 +241,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="forcats.html"><a href="forcats.html#合并因子"><i class="fa fa-check"></i><b>5.5</b> 合并因子</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tidyr.html"><a href="tidyr.html"><i class="fa fa-check"></i><b>6</b> tidyr</a><ul>
-<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> 简介</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> tidy data 简介</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="tidyr.html"><a href="tidyr.html#练习-11"><i class="fa fa-check"></i><b>6.1.1</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#spread和gather"><i class="fa fa-check"></i><b>6.2</b> <code>spread()</code>和<code>gather()</code></a><ul>
-<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#gather"><i class="fa fa-check"></i><b>6.2.1</b> <code>gather()</code></a></li>
-<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#spread"><i class="fa fa-check"></i><b>6.2.2</b> <code>spread()</code></a></li>
-<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.3</b> 练习</a></li>
+<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#pivoting"><i class="fa fa-check"></i><b>6.2</b> pivoting</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer"><i class="fa fa-check"></i><b>6.2.1</b> <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.2.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#combining-pivot_longer-and-pivot_wider"><i class="fa fa-check"></i><b>6.2.3</b> Combining <code>pivot_longer()</code> and <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.4" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.4</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#separate和untie"><i class="fa fa-check"></i><b>6.3</b> <code>separate()</code>和<code>untie()</code></a><ul>
-<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.3.1</b> <code>separate()</code></a></li>
-<li class="chapter" data-level="6.3.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.3.2</b> <code>unite()</code></a></li>
-<li class="chapter" data-level="6.3.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.3.3</b> 练习</a></li>
+<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#nesting"><i class="fa fa-check"></i><b>6.3</b> nesting</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#nested-data-and-models"><i class="fa fa-check"></i><b>6.3.1</b> nested data and models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.4</b> 缺失值</a></li>
-<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.5</b> Case Study</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.5.1</b> 练习</a></li>
+<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#rectangling"><i class="fa fa-check"></i><b>6.4</b> rectangling</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="tidyr.html"><a href="tidyr.html#github-users"><i class="fa fa-check"></i><b>6.4.1</b> Github users</a></li>
+<li class="chapter" data-level="6.4.2" data-path="tidyr.html"><a href="tidyr.html#github-repos"><i class="fa fa-check"></i><b>6.4.2</b> Github repos</a></li>
+<li class="chapter" data-level="6.4.3" data-path="tidyr.html"><a href="tidyr.html#game-of-throne-characters"><i class="fa fa-check"></i><b>6.4.3</b> Game of Throne characters</a></li>
+<li class="chapter" data-level="6.4.4" data-path="tidyr.html"><a href="tidyr.html#sharla-gelfands-discography"><i class="fa fa-check"></i><b>6.4.4</b> Sharla Gelfand’s discography</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.6</b> 拓展：None-tidy data</a></li>
-<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-1.0.0"><i class="fa fa-check"></i><b>6.7</b> <code>tidyr 1.0.0</code></a><ul>
-<li class="chapter" data-level="6.7.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer-和-pivot_wider"><i class="fa fa-check"></i><b>6.7.1</b> <code>pivot_longer</code> 和 <code>pivot_wider</code></a></li>
-<li class="chapter" data-level="6.7.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.7.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#separate-和-untie"><i class="fa fa-check"></i><b>6.5</b> <code>separate()</code> 和 <code>untie()</code></a><ul>
+<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.5.1</b> <code>separate()</code></a></li>
+<li class="chapter" data-level="6.5.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.5.2</b> <code>unite()</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.5.3</b> 练习</a></li>
 </ul></li>
+<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#miscellanea-functions"><i class="fa fa-check"></i><b>6.6</b> Miscellanea Functions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="tidyr.html"><a href="tidyr.html#uncount"><i class="fa fa-check"></i><b>6.6.1</b> <code>uncount()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.7</b> 缺失值</a></li>
+<li class="chapter" data-level="6.8" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.8</b> Case Study</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.8.1</b> 练习</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.9</b> 拓展：None-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>7</b> relational data</a><ul>
 <li class="chapter" data-level="7.1" data-path="relational-data.html"><a href="relational-data.html#introduction"><i class="fa fa-check"></i><b>7.1</b> introduction</a></li>
@@ -278,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="purrr.html"><a href="purrr.html#group_"><i class="fa fa-check"></i><b>9.4</b> group_</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="purrr.html"><a href="purrr.html#group_mapgroup_modify"><i class="fa fa-check"></i><b>9.4.1</b> group_map、group_modify</a></li>
-<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_split、group_keys、group_data</a></li>
+<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_nestgroup_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_nest、group_split、group_keys、group_data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Importing</b></span></li>
@@ -292,47 +305,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
 <li class="chapter" data-level="12" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>12</b> data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.1</b> dtplyr</a></li>
-<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.2</b> maditr</a></li>
-<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.3</b> tidyfast</a></li>
-<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.4</b> disk.frame</a></li>
+<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#data-table-basics"><i class="fa fa-check"></i><b>12.1</b> 基本使用</a></li>
+<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.2</b> dtplyr</a></li>
+<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.3</b> maditr</a></li>
+<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.4</b> tidyfast</a></li>
+<li class="chapter" data-level="12.5" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.5</b> disk.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="rowwise-operation.html"><a href="rowwise-operation.html"><i class="fa fa-check"></i><b>13</b> rowwise operation</a><ul>
 <li class="chapter" data-level="13.1" data-path="rowwise-operation.html"><a href="rowwise-operation.html#do-rowwise"><i class="fa fa-check"></i><b>13.1</b> do() + rowwise()</a></li>
 <li class="chapter" data-level="13.2" data-path="rowwise-operation.html"><a href="rowwise-operation.html#rap"><i class="fa fa-check"></i><b>13.2</b> rap</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>14</b> Data Summary</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>14.1</b> skimr</a></li>
-<li class="chapter" data-level="14.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>14.2</b> visdat</a></li>
-<li class="chapter" data-level="14.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>14.3</b> summarytools</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>14.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>14.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="14" data-path="sjmisc.html"><a href="sjmisc.html"><i class="fa fa-check"></i><b>14</b> sjmisc</a><ul>
+<li class="chapter" data-level="14.1" data-path="sjmisc.html"><a href="sjmisc.html#frq-和-flat_table-一维和二维频数表"><i class="fa fa-check"></i><b>14.1</b> <code>frq()</code> 和 <code>flat_table()</code> 一维和二维频数表</a></li>
+<li class="chapter" data-level="14.2" data-path="sjmisc.html"><a href="sjmisc.html#rec-重新编码"><i class="fa fa-check"></i><b>14.2</b> <code>rec()</code>: 重新编码</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>15</b> Data Summary</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>15.1</b> skimr</a></li>
+<li class="chapter" data-level="15.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>15.2</b> visdat</a></li>
+<li class="chapter" data-level="15.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>15.3</b> summarytools</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>15.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="15.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>15.3.2</b> <code>descr()</code></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IV Cleaning and Tidying</b></span></li>
-<li class="chapter" data-level="15" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>15</b> Janitor</a><ul>
-<li class="chapter" data-level="15.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>15.1</b> 清洗</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>15.1.1</b> <code>clean_names</code></a></li>
-<li class="chapter" data-level="15.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>15.1.2</b> <code>compare_df_cols</code></a></li>
+<li class="chapter" data-level="16" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>16</b> Janitor</a><ul>
+<li class="chapter" data-level="16.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>16.1</b> 清洗</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>16.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="16.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>16.1.2</b> <code>compare_df_cols</code></a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>15.2</b> 探索</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>15.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>15.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="15.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>15.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="15.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>15.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="15.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>15.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="15.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>15.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="15.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>15.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="16.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>16.2</b> 探索</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>16.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>16.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="16.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>16.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="16.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>16.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="16.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>16.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="16.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>16.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="16.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>16.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>16</b> 处理缺失值</a><ul>
-<li class="chapter" data-level="16.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>16.1</b> 探索</a></li>
-<li class="chapter" data-level="16.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>16.2</b> 填充</a></li>
+<li class="chapter" data-level="17" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>17</b> 处理缺失值</a><ul>
+<li class="chapter" data-level="17.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>17.1</b> 探索</a></li>
+<li class="chapter" data-level="17.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>17.2</b> 填充</a></li>
 </ul></li>
 <li class="part"><span><b>V Modelling</b></span></li>
-<li class="chapter" data-level="17" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>17</b> tidymodels</a></li>
-<li class="chapter" data-level="18" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>18</b> caret</a></li>
-<li class="chapter" data-level="19" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>19</b> vtreat</a></li>
+<li class="chapter" data-level="18" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>18</b> tidymodels</a></li>
+<li class="chapter" data-level="19" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>19</b> caret</a></li>
+<li class="chapter" data-level="20" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>20</b> vtreat</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
@@ -356,71 +374,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-table" class="section level1">
 <h1><span class="header-section-number">12</span> data.table</h1>
+<p>All C++ code chunks will be combined to the chunk below:</p>
+<p>First we include the header <code>Rcpp.h</code>:</p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb453-1" title="1"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></a></code></pre></div>
+<p>Then we define a function:</p>
+<div class="sourceCode" id="cb454"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb454-1" title="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb454-2" title="2"><span class="dt">int</span> timesTwo(<span class="dt">int</span> x) {</a>
+<a class="sourceLine" id="cb454-3" title="3">  <span class="cf">return</span> x * <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb454-4" title="4">}</a></code></pre></div>
 <p><strong>data.table</strong><span class="citation">(Dowle and Srinivasan <a href="references.html#ref-R-data.table" role="doc-biblioref">2019</a>)</span></p>
 <p><a href="https://rdatatable.gitlab.io/data.table/" class="uri">https://rdatatable.gitlab.io/data.table/</a></p>
 <p><a href="https://m-clark.github.io/data-processing-and-visualization/data_table.html" class="uri">https://m-clark.github.io/data-processing-and-visualization/data_table.html</a></p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb404-1" title="1"><span class="kw">library</span>(data.table)</a></code></pre></div>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1">dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">1000</span>),</a>
-<a class="sourceLine" id="cb405-2" title="2">                 <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">1000</span>))</a>
-<a class="sourceLine" id="cb405-3" title="3">dt</a>
-<a class="sourceLine" id="cb405-4" title="4"><span class="co">#&gt;             x      y</span></a>
-<a class="sourceLine" id="cb405-5" title="5"><span class="co">#&gt;    1:  0.7877 -0.274</span></a>
-<a class="sourceLine" id="cb405-6" title="6"><span class="co">#&gt;    2: -0.4220  1.587</span></a>
-<a class="sourceLine" id="cb405-7" title="7"><span class="co">#&gt;    3:  0.0569  0.446</span></a>
-<a class="sourceLine" id="cb405-8" title="8"><span class="co">#&gt;    4:  0.7106  1.885</span></a>
-<a class="sourceLine" id="cb405-9" title="9"><span class="co">#&gt;    5: -1.5875 -0.761</span></a>
-<a class="sourceLine" id="cb405-10" title="10"><span class="co">#&gt;   ---               </span></a>
-<a class="sourceLine" id="cb405-11" title="11"><span class="co">#&gt;  996:  0.2178  0.101</span></a>
-<a class="sourceLine" id="cb405-12" title="12"><span class="co">#&gt;  997:  0.1257  1.300</span></a>
-<a class="sourceLine" id="cb405-13" title="13"><span class="co">#&gt;  998:  0.4027 -0.512</span></a>
-<a class="sourceLine" id="cb405-14" title="14"><span class="co">#&gt;  999:  1.6292  0.761</span></a>
-<a class="sourceLine" id="cb405-15" title="15"><span class="co">#&gt; 1000:  1.3437 -0.174</span></a></code></pre></div>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb406-1" title="1">dt[, z <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)]</a>
-<a class="sourceLine" id="cb406-2" title="2">dt</a>
-<a class="sourceLine" id="cb406-3" title="3"><span class="co">#&gt;             x      y       z</span></a>
-<a class="sourceLine" id="cb406-4" title="4"><span class="co">#&gt;    1:  0.7877 -0.274  0.6987</span></a>
-<a class="sourceLine" id="cb406-5" title="5"><span class="co">#&gt;    2: -0.4220  1.587  0.0828</span></a>
-<a class="sourceLine" id="cb406-6" title="6"><span class="co">#&gt;    3:  0.0569  0.446 -0.9761</span></a>
-<a class="sourceLine" id="cb406-7" title="7"><span class="co">#&gt;    4:  0.7106  1.885 -0.5814</span></a>
-<a class="sourceLine" id="cb406-8" title="8"><span class="co">#&gt;    5: -1.5875 -0.761  0.5285</span></a>
-<a class="sourceLine" id="cb406-9" title="9"><span class="co">#&gt;   ---                       </span></a>
-<a class="sourceLine" id="cb406-10" title="10"><span class="co">#&gt;  996:  0.2178  0.101  1.4036</span></a>
-<a class="sourceLine" id="cb406-11" title="11"><span class="co">#&gt;  997:  0.1257  1.300 -0.8953</span></a>
-<a class="sourceLine" id="cb406-12" title="12"><span class="co">#&gt;  998:  0.4027 -0.512 -0.1449</span></a>
-<a class="sourceLine" id="cb406-13" title="13"><span class="co">#&gt;  999:  1.6292  0.761  1.5657</span></a>
-<a class="sourceLine" id="cb406-14" title="14"><span class="co">#&gt; 1000:  1.3437 -0.174  1.1179</span></a></code></pre></div>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" title="1">dt2 &lt;-<span class="st"> </span>dt</a>
-<a class="sourceLine" id="cb407-2" title="2">dt[, z <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>]</a>
-<a class="sourceLine" id="cb407-3" title="3"></a>
-<a class="sourceLine" id="cb407-4" title="4">dt2</a>
-<a class="sourceLine" id="cb407-5" title="5"><span class="co">#&gt;             x      y</span></a>
-<a class="sourceLine" id="cb407-6" title="6"><span class="co">#&gt;    1:  0.7877 -0.274</span></a>
-<a class="sourceLine" id="cb407-7" title="7"><span class="co">#&gt;    2: -0.4220  1.587</span></a>
-<a class="sourceLine" id="cb407-8" title="8"><span class="co">#&gt;    3:  0.0569  0.446</span></a>
-<a class="sourceLine" id="cb407-9" title="9"><span class="co">#&gt;    4:  0.7106  1.885</span></a>
-<a class="sourceLine" id="cb407-10" title="10"><span class="co">#&gt;    5: -1.5875 -0.761</span></a>
-<a class="sourceLine" id="cb407-11" title="11"><span class="co">#&gt;   ---               </span></a>
-<a class="sourceLine" id="cb407-12" title="12"><span class="co">#&gt;  996:  0.2178  0.101</span></a>
-<a class="sourceLine" id="cb407-13" title="13"><span class="co">#&gt;  997:  0.1257  1.300</span></a>
-<a class="sourceLine" id="cb407-14" title="14"><span class="co">#&gt;  998:  0.4027 -0.512</span></a>
-<a class="sourceLine" id="cb407-15" title="15"><span class="co">#&gt;  999:  1.6292  0.761</span></a>
-<a class="sourceLine" id="cb407-16" title="16"><span class="co">#&gt; 1000:  1.3437 -0.174</span></a></code></pre></div>
+<center>
+<img src="images/22.png" width="80%" />
+</center>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" title="1"><span class="kw">library</span>(data.table)</a></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" title="1">y =<span class="st"> </span><span class="kw">list</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</a>
+<a class="sourceLine" id="cb456-2" title="2">x =<span class="st"> </span><span class="kw">as.data.table</span>(y)</a>
+<a class="sourceLine" id="cb456-3" title="3">x</a>
+<a class="sourceLine" id="cb456-4" title="4"><span class="co">#&gt;    id name</span></a>
+<a class="sourceLine" id="cb456-5" title="5"><span class="co">#&gt; 1:  1    a</span></a>
+<a class="sourceLine" id="cb456-6" title="6"><span class="co">#&gt; 2:  2    b</span></a></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" title="1"><span class="kw">class</span>(x)</a>
+<a class="sourceLine" id="cb457-2" title="2"><span class="co">#&gt; [1] &quot;data.table&quot; &quot;data.frame&quot;</span></a></code></pre></div>
+<div id="data-table-basics" class="section level2">
+<h2><span class="header-section-number">12.1</span> 基本使用</h2>
+</div>
 <div id="dtplyr" class="section level2">
-<h2><span class="header-section-number">12.1</span> dtplyr</h2>
+<h2><span class="header-section-number">12.2</span> dtplyr</h2>
 <p><a href="https://dtplyr.tidyverse.org/" class="uri">https://dtplyr.tidyverse.org/</a></p>
 </div>
 <div id="maditr" class="section level2">
-<h2><span class="header-section-number">12.2</span> maditr</h2>
+<h2><span class="header-section-number">12.3</span> maditr</h2>
 <p><a href="https://github.com/gdemin/maditr" class="uri">https://github.com/gdemin/maditr</a></p>
 </div>
 <div id="tidyfast" class="section level2">
-<h2><span class="header-section-number">12.3</span> tidyfast</h2>
+<h2><span class="header-section-number">12.4</span> tidyfast</h2>
 <p><a href="https://github.com/TysonStanley/tidyfast" class="uri">https://github.com/TysonStanley/tidyfast</a></p>
 </div>
 <div id="disk.frame" class="section level2">
-<h2><span class="header-section-number">12.4</span> disk.frame</h2>
+<h2><span class="header-section-number">12.5</span> disk.frame</h2>
 <p><a href="https://diskframe.com/" class="uri">https://diskframe.com/</a></p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" title="1"><span class="co"># install.packages(&quot;disk.frame&quot;)  </span></a></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" title="1"><span class="co"># install.packages(&quot;disk.frame&quot;)  </span></a></code></pre></div>
 
 </div>
 </div>

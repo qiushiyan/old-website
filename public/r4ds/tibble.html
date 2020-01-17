@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 tibble | R for data science: tidyverse and beyond</title>
   <meta name="description" content="2 tibble | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 tibble | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-01-07" />
+<meta name="date" content="2020-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
+<script src="libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
+<script src="libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
 
 
 <style type="text/css">
@@ -237,28 +241,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="forcats.html"><a href="forcats.html#合并因子"><i class="fa fa-check"></i><b>5.5</b> 合并因子</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tidyr.html"><a href="tidyr.html"><i class="fa fa-check"></i><b>6</b> tidyr</a><ul>
-<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> 简介</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> tidy data 简介</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="tidyr.html"><a href="tidyr.html#练习-11"><i class="fa fa-check"></i><b>6.1.1</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#spread和gather"><i class="fa fa-check"></i><b>6.2</b> <code>spread()</code>和<code>gather()</code></a><ul>
-<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#gather"><i class="fa fa-check"></i><b>6.2.1</b> <code>gather()</code></a></li>
-<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#spread"><i class="fa fa-check"></i><b>6.2.2</b> <code>spread()</code></a></li>
-<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.3</b> 练习</a></li>
+<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#pivoting"><i class="fa fa-check"></i><b>6.2</b> pivoting</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer"><i class="fa fa-check"></i><b>6.2.1</b> <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.2.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#combining-pivot_longer-and-pivot_wider"><i class="fa fa-check"></i><b>6.2.3</b> Combining <code>pivot_longer()</code> and <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.4" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.4</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#separate和untie"><i class="fa fa-check"></i><b>6.3</b> <code>separate()</code>和<code>untie()</code></a><ul>
-<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.3.1</b> <code>separate()</code></a></li>
-<li class="chapter" data-level="6.3.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.3.2</b> <code>unite()</code></a></li>
-<li class="chapter" data-level="6.3.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.3.3</b> 练习</a></li>
+<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#nesting"><i class="fa fa-check"></i><b>6.3</b> nesting</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#nested-data-and-models"><i class="fa fa-check"></i><b>6.3.1</b> nested data and models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.4</b> 缺失值</a></li>
-<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.5</b> Case Study</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.5.1</b> 练习</a></li>
+<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#rectangling"><i class="fa fa-check"></i><b>6.4</b> rectangling</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="tidyr.html"><a href="tidyr.html#github-users"><i class="fa fa-check"></i><b>6.4.1</b> Github users</a></li>
+<li class="chapter" data-level="6.4.2" data-path="tidyr.html"><a href="tidyr.html#github-repos"><i class="fa fa-check"></i><b>6.4.2</b> Github repos</a></li>
+<li class="chapter" data-level="6.4.3" data-path="tidyr.html"><a href="tidyr.html#game-of-throne-characters"><i class="fa fa-check"></i><b>6.4.3</b> Game of Throne characters</a></li>
+<li class="chapter" data-level="6.4.4" data-path="tidyr.html"><a href="tidyr.html#sharla-gelfands-discography"><i class="fa fa-check"></i><b>6.4.4</b> Sharla Gelfand’s discography</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.6</b> 拓展：None-tidy data</a></li>
-<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-1.0.0"><i class="fa fa-check"></i><b>6.7</b> <code>tidyr 1.0.0</code></a><ul>
-<li class="chapter" data-level="6.7.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer-和-pivot_wider"><i class="fa fa-check"></i><b>6.7.1</b> <code>pivot_longer</code> 和 <code>pivot_wider</code></a></li>
-<li class="chapter" data-level="6.7.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.7.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#separate-和-untie"><i class="fa fa-check"></i><b>6.5</b> <code>separate()</code> 和 <code>untie()</code></a><ul>
+<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.5.1</b> <code>separate()</code></a></li>
+<li class="chapter" data-level="6.5.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.5.2</b> <code>unite()</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.5.3</b> 练习</a></li>
 </ul></li>
+<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#miscellanea-functions"><i class="fa fa-check"></i><b>6.6</b> Miscellanea Functions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="tidyr.html"><a href="tidyr.html#uncount"><i class="fa fa-check"></i><b>6.6.1</b> <code>uncount()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.7</b> 缺失值</a></li>
+<li class="chapter" data-level="6.8" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.8</b> Case Study</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.8.1</b> 练习</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.9</b> 拓展：None-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>7</b> relational data</a><ul>
 <li class="chapter" data-level="7.1" data-path="relational-data.html"><a href="relational-data.html#introduction"><i class="fa fa-check"></i><b>7.1</b> introduction</a></li>
@@ -278,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="purrr.html"><a href="purrr.html#group_"><i class="fa fa-check"></i><b>9.4</b> group_</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="purrr.html"><a href="purrr.html#group_mapgroup_modify"><i class="fa fa-check"></i><b>9.4.1</b> group_map、group_modify</a></li>
-<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_split、group_keys、group_data</a></li>
+<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_nestgroup_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_nest、group_split、group_keys、group_data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Importing</b></span></li>
@@ -292,47 +305,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
 <li class="chapter" data-level="12" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>12</b> data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.1</b> dtplyr</a></li>
-<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.2</b> maditr</a></li>
-<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.3</b> tidyfast</a></li>
-<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.4</b> disk.frame</a></li>
+<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#data-table-basics"><i class="fa fa-check"></i><b>12.1</b> 基本使用</a></li>
+<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.2</b> dtplyr</a></li>
+<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.3</b> maditr</a></li>
+<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.4</b> tidyfast</a></li>
+<li class="chapter" data-level="12.5" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.5</b> disk.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="rowwise-operation.html"><a href="rowwise-operation.html"><i class="fa fa-check"></i><b>13</b> rowwise operation</a><ul>
 <li class="chapter" data-level="13.1" data-path="rowwise-operation.html"><a href="rowwise-operation.html#do-rowwise"><i class="fa fa-check"></i><b>13.1</b> do() + rowwise()</a></li>
 <li class="chapter" data-level="13.2" data-path="rowwise-operation.html"><a href="rowwise-operation.html#rap"><i class="fa fa-check"></i><b>13.2</b> rap</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>14</b> Data Summary</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>14.1</b> skimr</a></li>
-<li class="chapter" data-level="14.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>14.2</b> visdat</a></li>
-<li class="chapter" data-level="14.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>14.3</b> summarytools</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>14.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>14.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="14" data-path="sjmisc.html"><a href="sjmisc.html"><i class="fa fa-check"></i><b>14</b> sjmisc</a><ul>
+<li class="chapter" data-level="14.1" data-path="sjmisc.html"><a href="sjmisc.html#frq-和-flat_table-一维和二维频数表"><i class="fa fa-check"></i><b>14.1</b> <code>frq()</code> 和 <code>flat_table()</code> 一维和二维频数表</a></li>
+<li class="chapter" data-level="14.2" data-path="sjmisc.html"><a href="sjmisc.html#rec-重新编码"><i class="fa fa-check"></i><b>14.2</b> <code>rec()</code>: 重新编码</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>15</b> Data Summary</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>15.1</b> skimr</a></li>
+<li class="chapter" data-level="15.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>15.2</b> visdat</a></li>
+<li class="chapter" data-level="15.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>15.3</b> summarytools</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>15.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="15.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>15.3.2</b> <code>descr()</code></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IV Cleaning and Tidying</b></span></li>
-<li class="chapter" data-level="15" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>15</b> Janitor</a><ul>
-<li class="chapter" data-level="15.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>15.1</b> 清洗</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>15.1.1</b> <code>clean_names</code></a></li>
-<li class="chapter" data-level="15.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>15.1.2</b> <code>compare_df_cols</code></a></li>
+<li class="chapter" data-level="16" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>16</b> Janitor</a><ul>
+<li class="chapter" data-level="16.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>16.1</b> 清洗</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>16.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="16.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>16.1.2</b> <code>compare_df_cols</code></a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>15.2</b> 探索</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>15.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>15.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="15.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>15.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="15.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>15.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="15.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>15.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="15.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>15.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="15.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>15.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="16.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>16.2</b> 探索</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>16.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>16.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="16.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>16.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="16.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>16.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="16.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>16.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="16.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>16.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="16.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>16.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>16</b> 处理缺失值</a><ul>
-<li class="chapter" data-level="16.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>16.1</b> 探索</a></li>
-<li class="chapter" data-level="16.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>16.2</b> 填充</a></li>
+<li class="chapter" data-level="17" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>17</b> 处理缺失值</a><ul>
+<li class="chapter" data-level="17.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>17.1</b> 探索</a></li>
+<li class="chapter" data-level="17.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>17.2</b> 填充</a></li>
 </ul></li>
 <li class="part"><span><b>V Modelling</b></span></li>
-<li class="chapter" data-level="17" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>17</b> tidymodels</a></li>
-<li class="chapter" data-level="18" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>18</b> caret</a></li>
-<li class="chapter" data-level="19" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>19</b> vtreat</a></li>
+<li class="chapter" data-level="18" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>18</b> tidymodels</a></li>
+<li class="chapter" data-level="19" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>19</b> caret</a></li>
+<li class="chapter" data-level="20" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>20</b> vtreat</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
@@ -360,21 +378,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tibble-intro" class="section level2">
 <h2><span class="header-section-number">2.1</span> 简介</h2>
 <p>之前介绍的所有函数几乎都将返回一个<code>tibble</code>，<code>filter()、arrange()、select()、mutate()、summarize()</code>等函数最后的结果都是一个<code>tibble</code>，因为它是<code>tidyverse</code>最底层的功能之一。由于多数其他R包使用的是标准数据框，因此经常需要将data.frame转换为tibble，可以使用<code>as_tibble()</code>函数来完成转换：</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1"><span class="co">## iris数据集是一个data.frame</span></a>
-<a class="sourceLine" id="cb141-2" title="2"><span class="kw">class</span>(iris)</a>
-<a class="sourceLine" id="cb141-3" title="3"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
-<a class="sourceLine" id="cb141-4" title="4"><span class="co">## 转换为tibble</span></a>
-<a class="sourceLine" id="cb141-5" title="5">(iris_tibble &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(iris))</a>
-<a class="sourceLine" id="cb141-6" title="6"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
-<a class="sourceLine" id="cb141-7" title="7"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
-<a class="sourceLine" id="cb141-8" title="8"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
-<a class="sourceLine" id="cb141-9" title="9"><span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb141-10" title="10"><span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb141-11" title="11"><span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa </span></a>
-<a class="sourceLine" id="cb141-12" title="12"><span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa </span></a>
-<a class="sourceLine" id="cb141-13" title="13"><span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb141-14" title="14"><span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa </span></a>
-<a class="sourceLine" id="cb141-15" title="15"><span class="co">#&gt; # … with 144 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1"><span class="co">## iris数据集是一个data.frame</span></a>
+<a class="sourceLine" id="cb140-2" title="2"><span class="kw">class</span>(iris)</a>
+<a class="sourceLine" id="cb140-3" title="3"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
+<a class="sourceLine" id="cb140-4" title="4"><span class="co">## 转换为tibble</span></a>
+<a class="sourceLine" id="cb140-5" title="5">(iris_tibble &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(iris))</a>
+<a class="sourceLine" id="cb140-6" title="6"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
+<a class="sourceLine" id="cb140-7" title="7"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
+<a class="sourceLine" id="cb140-8" title="8"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
+<a class="sourceLine" id="cb140-9" title="9"><span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb140-10" title="10"><span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb140-11" title="11"><span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa </span></a>
+<a class="sourceLine" id="cb140-12" title="12"><span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa </span></a>
+<a class="sourceLine" id="cb140-13" title="13"><span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb140-14" title="14"><span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa </span></a>
+<a class="sourceLine" id="cb140-15" title="15"><span class="co">#&gt; # … with 144 more rows</span></a></code></pre></div>
 <p>相比于 <code>data.frame()</code> 函数，<code>tibble()</code>函数的功能要少的多：它不能改变输入的类型（例如，不能将字符串转变为因子)、变量的名称,也不能创建行名称。</p>
 <p>有些比较旧的函数不支持<code>tibble</code>，如果遇到这种函数，可以使用<code>as.data.frame()</code>转换<code>到</code>data.frame`上。</p>
 </div>
@@ -384,79 +402,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="创建" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> 创建</h3>
 <p><code>tibble()</code>函数用于创建现代数据框：<code>tibble</code> ：</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb142-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb142-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>)</a>
-<a class="sourceLine" id="cb142-4" title="4">)</a>
-<a class="sourceLine" id="cb142-5" title="5">df</a>
-<a class="sourceLine" id="cb142-6" title="6"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
-<a class="sourceLine" id="cb142-7" title="7"><span class="co">#&gt;       x y    </span></a>
-<a class="sourceLine" id="cb142-8" title="8"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb142-9" title="9"><span class="co">#&gt; 1     1 a    </span></a>
-<a class="sourceLine" id="cb142-10" title="10"><span class="co">#&gt; 2     2 b    </span></a>
-<a class="sourceLine" id="cb142-11" title="11"><span class="co">#&gt; 3     3 c</span></a></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb141-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb141-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb141-4" title="4">)</a>
+<a class="sourceLine" id="cb141-5" title="5">df</a>
+<a class="sourceLine" id="cb141-6" title="6"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
+<a class="sourceLine" id="cb141-7" title="7"><span class="co">#&gt;       x y    </span></a>
+<a class="sourceLine" id="cb141-8" title="8"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb141-9" title="9"><span class="co">#&gt; 1     1 a    </span></a>
+<a class="sourceLine" id="cb141-10" title="10"><span class="co">#&gt; 2     2 b    </span></a>
+<a class="sourceLine" id="cb141-11" title="11"><span class="co">#&gt; 3     3 c</span></a></code></pre></div>
 <p>可以发现 <code>tibble()</code> 不会自作聪明地更改 <code>y</code> 的 <code>class</code> 属性，它将原原本本地被当做一个字符向量处理。</p>
 <p>而 <code>data.frame()</code> 函数用于创建一个传统数据框：</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb143-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
-<a class="sourceLine" id="cb143-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
-<a class="sourceLine" id="cb143-4" title="4">)</a>
-<a class="sourceLine" id="cb143-5" title="5"></a>
-<a class="sourceLine" id="cb143-6" title="6"><span class="kw">str</span>(df)</a>
-<a class="sourceLine" id="cb143-7" title="7"><span class="co">#&gt; &#39;data.frame&#39;:    3 obs. of  2 variables:</span></a>
-<a class="sourceLine" id="cb143-8" title="8"><span class="co">#&gt;  $ x: int  1 2 3</span></a>
-<a class="sourceLine" id="cb143-9" title="9"><span class="co">#&gt;  $ y: Factor w/ 3 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;: 1 2 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb142-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb142-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb142-4" title="4">)</a>
+<a class="sourceLine" id="cb142-5" title="5"></a>
+<a class="sourceLine" id="cb142-6" title="6"><span class="kw">str</span>(df)</a>
+<a class="sourceLine" id="cb142-7" title="7"><span class="co">#&gt; &#39;data.frame&#39;:    3 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb142-8" title="8"><span class="co">#&gt;  $ x: int  1 2 3</span></a>
+<a class="sourceLine" id="cb142-9" title="9"><span class="co">#&gt;  $ y: Factor w/ 3 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;: 1 2 3</span></a></code></pre></div>
 <div id="强制转换" class="section level4">
 <h4><span class="header-section-number">2.2.1.1</span> 强制转换</h4>
 <p>在 <code>data.frame</code> 中，为了防止 <code>y</code> 被强制转换为因子，必须设置 <code>stringAsFactors = FALSE</code></p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb144-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
-<a class="sourceLine" id="cb144-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</a>
-<a class="sourceLine" id="cb144-4" title="4">  <span class="dt">stringsAsFactors =</span> F</a>
-<a class="sourceLine" id="cb144-5" title="5">)</a>
-<a class="sourceLine" id="cb144-6" title="6"></a>
-<a class="sourceLine" id="cb144-7" title="7"><span class="kw">str</span>(df)</a>
-<a class="sourceLine" id="cb144-8" title="8"><span class="co">#&gt; &#39;data.frame&#39;:    3 obs. of  2 variables:</span></a>
-<a class="sourceLine" id="cb144-9" title="9"><span class="co">#&gt;  $ x: int  1 2 3</span></a>
-<a class="sourceLine" id="cb144-10" title="10"><span class="co">#&gt;  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb143-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb143-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</a>
+<a class="sourceLine" id="cb143-4" title="4">  <span class="dt">stringsAsFactors =</span> F</a>
+<a class="sourceLine" id="cb143-5" title="5">)</a>
+<a class="sourceLine" id="cb143-6" title="6"></a>
+<a class="sourceLine" id="cb143-7" title="7"><span class="kw">str</span>(df)</a>
+<a class="sourceLine" id="cb143-8" title="8"><span class="co">#&gt; &#39;data.frame&#39;:    3 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb143-9" title="9"><span class="co">#&gt;  $ x: int  1 2 3</span></a>
+<a class="sourceLine" id="cb143-10" title="10"><span class="co">#&gt;  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot;</span></a></code></pre></div>
 <p>By the way, 创建<code>tibble</code>的另一种方法是使用<code>tribble()</code>函数，tribble是 transposed tibble 的缩写。<code>tribble()</code>是高度定制化的，就像在 Markdown 中创建表格一样，一个一个填入元素：列标题以波浪线<code>~</code>开头，不同列的元素之间以逗号分隔，这样就可以用易读的方式对少量数据创建一个 <code>tibble</code> 类型：</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1"><span class="kw">tribble</span>(</a>
-<a class="sourceLine" id="cb145-2" title="2">  <span class="op">~</span>x, <span class="op">~</span>y, <span class="op">~</span>z,</a>
-<a class="sourceLine" id="cb145-3" title="3">  <span class="st">&quot;a&quot;</span>, <span class="dv">1</span>, <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb145-4" title="4">  <span class="st">&quot;b&quot;</span>, <span class="dv">1</span>, <span class="fl">8.5</span></a>
-<a class="sourceLine" id="cb145-5" title="5">)</a>
-<a class="sourceLine" id="cb145-6" title="6"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
-<a class="sourceLine" id="cb145-7" title="7"><span class="co">#&gt;   x         y     z</span></a>
-<a class="sourceLine" id="cb145-8" title="8"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb145-9" title="9"><span class="co">#&gt; 1 a         1   2  </span></a>
-<a class="sourceLine" id="cb145-10" title="10"><span class="co">#&gt; 2 b         1   8.5</span></a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb144-2" title="2">  <span class="op">~</span>x, <span class="op">~</span>y, <span class="op">~</span>z,</a>
+<a class="sourceLine" id="cb144-3" title="3">  <span class="st">&quot;a&quot;</span>, <span class="dv">1</span>, <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb144-4" title="4">  <span class="st">&quot;b&quot;</span>, <span class="dv">1</span>, <span class="fl">8.5</span></a>
+<a class="sourceLine" id="cb144-5" title="5">)</a>
+<a class="sourceLine" id="cb144-6" title="6"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
+<a class="sourceLine" id="cb144-7" title="7"><span class="co">#&gt;   x         y     z</span></a>
+<a class="sourceLine" id="cb144-8" title="8"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb144-9" title="9"><span class="co">#&gt; 1 a         1   2  </span></a>
+<a class="sourceLine" id="cb144-10" title="10"><span class="co">#&gt; 2 b         1   8.5</span></a></code></pre></div>
 </div>
 <div id="行标签" class="section level4">
 <h4><span class="header-section-number">2.2.1.2</span> 行标签</h4>
 <p><code>data.frame</code> 支持提供一个不包含重复元素的字符向量给每行打上标签：</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb146-2" title="2">  <span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">35</span>, <span class="dv">27</span>, <span class="dv">18</span>),</a>
-<a class="sourceLine" id="cb146-3" title="3">  <span class="dt">hair =</span> <span class="kw">c</span>(<span class="st">&quot;blond&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;black&quot;</span>),</a>
-<a class="sourceLine" id="cb146-4" title="4">  <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Susan&quot;</span>, <span class="st">&quot;Sam&quot;</span>)</a>
-<a class="sourceLine" id="cb146-5" title="5">)</a>
-<a class="sourceLine" id="cb146-6" title="6"></a>
-<a class="sourceLine" id="cb146-7" title="7">df</a>
-<a class="sourceLine" id="cb146-8" title="8"><span class="co">#&gt;       age  hair</span></a>
-<a class="sourceLine" id="cb146-9" title="9"><span class="co">#&gt; Bob    35 blond</span></a>
-<a class="sourceLine" id="cb146-10" title="10"><span class="co">#&gt; Susan  27 brown</span></a>
-<a class="sourceLine" id="cb146-11" title="11"><span class="co">#&gt; Sam    18 black</span></a>
-<a class="sourceLine" id="cb146-12" title="12"><span class="kw">attributes</span>(df)</a>
-<a class="sourceLine" id="cb146-13" title="13"><span class="co">#&gt; $names</span></a>
-<a class="sourceLine" id="cb146-14" title="14"><span class="co">#&gt; [1] &quot;age&quot;  &quot;hair&quot;</span></a>
-<a class="sourceLine" id="cb146-15" title="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb146-16" title="16"><span class="co">#&gt; $class</span></a>
-<a class="sourceLine" id="cb146-17" title="17"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
-<a class="sourceLine" id="cb146-18" title="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb146-19" title="19"><span class="co">#&gt; $row.names</span></a>
-<a class="sourceLine" id="cb146-20" title="20"><span class="co">#&gt; [1] &quot;Bob&quot;   &quot;Susan&quot; &quot;Sam&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb145-2" title="2">  <span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">35</span>, <span class="dv">27</span>, <span class="dv">18</span>),</a>
+<a class="sourceLine" id="cb145-3" title="3">  <span class="dt">hair =</span> <span class="kw">c</span>(<span class="st">&quot;blond&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;black&quot;</span>),</a>
+<a class="sourceLine" id="cb145-4" title="4">  <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Susan&quot;</span>, <span class="st">&quot;Sam&quot;</span>)</a>
+<a class="sourceLine" id="cb145-5" title="5">)</a>
+<a class="sourceLine" id="cb145-6" title="6"></a>
+<a class="sourceLine" id="cb145-7" title="7">df</a>
+<a class="sourceLine" id="cb145-8" title="8"><span class="co">#&gt;       age  hair</span></a>
+<a class="sourceLine" id="cb145-9" title="9"><span class="co">#&gt; Bob    35 blond</span></a>
+<a class="sourceLine" id="cb145-10" title="10"><span class="co">#&gt; Susan  27 brown</span></a>
+<a class="sourceLine" id="cb145-11" title="11"><span class="co">#&gt; Sam    18 black</span></a>
+<a class="sourceLine" id="cb145-12" title="12"><span class="kw">attributes</span>(df)</a>
+<a class="sourceLine" id="cb145-13" title="13"><span class="co">#&gt; $names</span></a>
+<a class="sourceLine" id="cb145-14" title="14"><span class="co">#&gt; [1] &quot;age&quot;  &quot;hair&quot;</span></a>
+<a class="sourceLine" id="cb145-15" title="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb145-16" title="16"><span class="co">#&gt; $class</span></a>
+<a class="sourceLine" id="cb145-17" title="17"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
+<a class="sourceLine" id="cb145-18" title="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb145-19" title="19"><span class="co">#&gt; $row.names</span></a>
+<a class="sourceLine" id="cb145-20" title="20"><span class="co">#&gt; [1] &quot;Bob&quot;   &quot;Susan&quot; &quot;Sam&quot;</span></a></code></pre></div>
 <p><code>row.names</code>参数为<code>data.frame</code>创建了一个同名的属性，<code>rownames()</code>函数可以提取这个属性：</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1"><span class="kw">rownames</span>(df)</a>
-<a class="sourceLine" id="cb147-2" title="2"><span class="co">#&gt; [1] &quot;Bob&quot;   &quot;Susan&quot; &quot;Sam&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1"><span class="kw">rownames</span>(df)</a>
+<a class="sourceLine" id="cb146-2" title="2"><span class="co">#&gt; [1] &quot;Bob&quot;   &quot;Susan&quot; &quot;Sam&quot;</span></a></code></pre></div>
 <p>如果我们认为数据框是二维矩阵的自然拓展(不止包含数值)，那么行标签的存在似乎是很自然的，毕竟矩阵有<code>i</code>、<code>j</code>两个索引。但是矩阵和数据框有本质区别，矩阵是添加了维度属性的原子向量，数据框则是列表，我们可以对矩阵取转置，因为它们的行和列可以互换，一个矩阵的转置是另一个矩阵。数据框则是不可转置的，它的行列互换之后就不再是数据框(一行未必能构成一个原子向量)。</p>
 <p>出于以下三个原因，我们不应该使用<code>row.names</code>这一属性，也不应该考虑在任何场合添加行标签：</p>
 <ol style="list-style-type: decimal">
@@ -484,243 +502,243 @@ Name of column to use for rownames.</p>
 <p><em>Value</em><br />
 <code>column_to_rownames()</code> always returns a data frame. <code>has_rownames()</code> returns a scalar logical. All other functions return an object of the same class as the input.</p>
 <p>一些示例：</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb148-2" title="2"><span class="st">  </span><span class="kw">has_rownames</span>()</a>
-<a class="sourceLine" id="cb148-3" title="3"><span class="co">#&gt; [1] TRUE</span></a>
-<a class="sourceLine" id="cb148-4" title="4"></a>
-<a class="sourceLine" id="cb148-5" title="5">mtcars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb148-6" title="6"><span class="st">  </span><span class="kw">remove_rownames</span>()</a>
-<a class="sourceLine" id="cb148-7" title="7"><span class="co">#&gt;     mpg cyl  disp  hp drat   wt qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb148-8" title="8"><span class="co">#&gt; 1  21.0   6 160.0 110 3.90 2.62 16.5  0  1    4    4</span></a>
-<a class="sourceLine" id="cb148-9" title="9"><span class="co">#&gt; 2  21.0   6 160.0 110 3.90 2.88 17.0  0  1    4    4</span></a>
-<a class="sourceLine" id="cb148-10" title="10"><span class="co">#&gt; 3  22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-11" title="11"><span class="co">#&gt; 4  21.4   6 258.0 110 3.08 3.21 19.4  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-12" title="12"><span class="co">#&gt; 5  18.7   8 360.0 175 3.15 3.44 17.0  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-13" title="13"><span class="co">#&gt; 6  18.1   6 225.0 105 2.76 3.46 20.2  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-14" title="14"><span class="co">#&gt; 7  14.3   8 360.0 245 3.21 3.57 15.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-15" title="15"><span class="co">#&gt; 8  24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span></a>
-<a class="sourceLine" id="cb148-16" title="16"><span class="co">#&gt; 9  22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span></a>
-<a class="sourceLine" id="cb148-17" title="17"><span class="co">#&gt; 10 19.2   6 167.6 123 3.92 3.44 18.3  1  0    4    4</span></a>
-<a class="sourceLine" id="cb148-18" title="18"><span class="co">#&gt; 11 17.8   6 167.6 123 3.92 3.44 18.9  1  0    4    4</span></a>
-<a class="sourceLine" id="cb148-19" title="19"><span class="co">#&gt; 12 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-20" title="20"><span class="co">#&gt; 13 17.3   8 275.8 180 3.07 3.73 17.6  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-21" title="21"><span class="co">#&gt; 14 15.2   8 275.8 180 3.07 3.78 18.0  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-22" title="22"><span class="co">#&gt; 15 10.4   8 472.0 205 2.93 5.25 18.0  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-23" title="23"><span class="co">#&gt; 16 10.4   8 460.0 215 3.00 5.42 17.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-24" title="24"><span class="co">#&gt; 17 14.7   8 440.0 230 3.23 5.34 17.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-25" title="25"><span class="co">#&gt; 18 32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-26" title="26"><span class="co">#&gt; 19 30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span></a>
-<a class="sourceLine" id="cb148-27" title="27"><span class="co">#&gt; 20 33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-28" title="28"><span class="co">#&gt; 21 21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-29" title="29"><span class="co">#&gt; 22 15.5   8 318.0 150 2.76 3.52 16.9  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-30" title="30"><span class="co">#&gt; 23 15.2   8 304.0 150 3.15 3.44 17.3  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-31" title="31"><span class="co">#&gt; 24 13.3   8 350.0 245 3.73 3.84 15.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-32" title="32"><span class="co">#&gt; 25 19.2   8 400.0 175 3.08 3.85 17.1  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-33" title="33"><span class="co">#&gt; 26 27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-34" title="34"><span class="co">#&gt; 27 26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span></a>
-<a class="sourceLine" id="cb148-35" title="35"><span class="co">#&gt; 28 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span></a>
-<a class="sourceLine" id="cb148-36" title="36"><span class="co">#&gt; 29 15.8   8 351.0 264 4.22 3.17 14.5  0  1    5    4</span></a>
-<a class="sourceLine" id="cb148-37" title="37"><span class="co">#&gt; 30 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6</span></a>
-<a class="sourceLine" id="cb148-38" title="38"><span class="co">#&gt; 31 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8</span></a>
-<a class="sourceLine" id="cb148-39" title="39"><span class="co">#&gt; 32 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></a>
-<a class="sourceLine" id="cb148-40" title="40"></a>
-<a class="sourceLine" id="cb148-41" title="41"></a>
-<a class="sourceLine" id="cb148-42" title="42">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb148-43" title="43"><span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;car_type&quot;</span>)</a>
-<a class="sourceLine" id="cb148-44" title="44"><span class="co">#&gt;               car_type  mpg cyl  disp  hp drat   wt qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb148-45" title="45"><span class="co">#&gt; 1            Mazda RX4 21.0   6 160.0 110 3.90 2.62 16.5  0  1    4    4</span></a>
-<a class="sourceLine" id="cb148-46" title="46"><span class="co">#&gt; 2        Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.88 17.0  0  1    4    4</span></a>
-<a class="sourceLine" id="cb148-47" title="47"><span class="co">#&gt; 3           Datsun 710 22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-48" title="48"><span class="co">#&gt; 4       Hornet 4 Drive 21.4   6 258.0 110 3.08 3.21 19.4  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-49" title="49"><span class="co">#&gt; 5    Hornet Sportabout 18.7   8 360.0 175 3.15 3.44 17.0  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-50" title="50"><span class="co">#&gt; 6              Valiant 18.1   6 225.0 105 2.76 3.46 20.2  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-51" title="51"><span class="co">#&gt; 7           Duster 360 14.3   8 360.0 245 3.21 3.57 15.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-52" title="52"><span class="co">#&gt; 8            Merc 240D 24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span></a>
-<a class="sourceLine" id="cb148-53" title="53"><span class="co">#&gt; 9             Merc 230 22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span></a>
-<a class="sourceLine" id="cb148-54" title="54"><span class="co">#&gt; 10            Merc 280 19.2   6 167.6 123 3.92 3.44 18.3  1  0    4    4</span></a>
-<a class="sourceLine" id="cb148-55" title="55"><span class="co">#&gt; 11           Merc 280C 17.8   6 167.6 123 3.92 3.44 18.9  1  0    4    4</span></a>
-<a class="sourceLine" id="cb148-56" title="56"><span class="co">#&gt; 12          Merc 450SE 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-57" title="57"><span class="co">#&gt; 13          Merc 450SL 17.3   8 275.8 180 3.07 3.73 17.6  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-58" title="58"><span class="co">#&gt; 14         Merc 450SLC 15.2   8 275.8 180 3.07 3.78 18.0  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-59" title="59"><span class="co">#&gt; 15  Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.25 18.0  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-60" title="60"><span class="co">#&gt; 16 Lincoln Continental 10.4   8 460.0 215 3.00 5.42 17.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-61" title="61"><span class="co">#&gt; 17   Chrysler Imperial 14.7   8 440.0 230 3.23 5.34 17.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-62" title="62"><span class="co">#&gt; 18            Fiat 128 32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-63" title="63"><span class="co">#&gt; 19         Honda Civic 30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span></a>
-<a class="sourceLine" id="cb148-64" title="64"><span class="co">#&gt; 20      Toyota Corolla 33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-65" title="65"><span class="co">#&gt; 21       Toyota Corona 21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-66" title="66"><span class="co">#&gt; 22    Dodge Challenger 15.5   8 318.0 150 2.76 3.52 16.9  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-67" title="67"><span class="co">#&gt; 23         AMC Javelin 15.2   8 304.0 150 3.15 3.44 17.3  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-68" title="68"><span class="co">#&gt; 24          Camaro Z28 13.3   8 350.0 245 3.73 3.84 15.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-69" title="69"><span class="co">#&gt; 25    Pontiac Firebird 19.2   8 400.0 175 3.08 3.85 17.1  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-70" title="70"><span class="co">#&gt; 26           Fiat X1-9 27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-71" title="71"><span class="co">#&gt; 27       Porsche 914-2 26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span></a>
-<a class="sourceLine" id="cb148-72" title="72"><span class="co">#&gt; 28        Lotus Europa 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span></a>
-<a class="sourceLine" id="cb148-73" title="73"><span class="co">#&gt; 29      Ford Pantera L 15.8   8 351.0 264 4.22 3.17 14.5  0  1    5    4</span></a>
-<a class="sourceLine" id="cb148-74" title="74"><span class="co">#&gt; 30        Ferrari Dino 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6</span></a>
-<a class="sourceLine" id="cb148-75" title="75"><span class="co">#&gt; 31       Maserati Bora 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8</span></a>
-<a class="sourceLine" id="cb148-76" title="76"><span class="co">#&gt; 32          Volvo 142E 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></a>
-<a class="sourceLine" id="cb148-77" title="77"></a>
-<a class="sourceLine" id="cb148-78" title="78">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb148-79" title="79"><span class="st">  </span><span class="kw">rowid_to_column</span>()</a>
-<a class="sourceLine" id="cb148-80" title="80"><span class="co">#&gt;    rowid  mpg cyl  disp  hp drat   wt qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb148-81" title="81"><span class="co">#&gt; 1      1 21.0   6 160.0 110 3.90 2.62 16.5  0  1    4    4</span></a>
-<a class="sourceLine" id="cb148-82" title="82"><span class="co">#&gt; 2      2 21.0   6 160.0 110 3.90 2.88 17.0  0  1    4    4</span></a>
-<a class="sourceLine" id="cb148-83" title="83"><span class="co">#&gt; 3      3 22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-84" title="84"><span class="co">#&gt; 4      4 21.4   6 258.0 110 3.08 3.21 19.4  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-85" title="85"><span class="co">#&gt; 5      5 18.7   8 360.0 175 3.15 3.44 17.0  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-86" title="86"><span class="co">#&gt; 6      6 18.1   6 225.0 105 2.76 3.46 20.2  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-87" title="87"><span class="co">#&gt; 7      7 14.3   8 360.0 245 3.21 3.57 15.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-88" title="88"><span class="co">#&gt; 8      8 24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span></a>
-<a class="sourceLine" id="cb148-89" title="89"><span class="co">#&gt; 9      9 22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span></a>
-<a class="sourceLine" id="cb148-90" title="90"><span class="co">#&gt; 10    10 19.2   6 167.6 123 3.92 3.44 18.3  1  0    4    4</span></a>
-<a class="sourceLine" id="cb148-91" title="91"><span class="co">#&gt; 11    11 17.8   6 167.6 123 3.92 3.44 18.9  1  0    4    4</span></a>
-<a class="sourceLine" id="cb148-92" title="92"><span class="co">#&gt; 12    12 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-93" title="93"><span class="co">#&gt; 13    13 17.3   8 275.8 180 3.07 3.73 17.6  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-94" title="94"><span class="co">#&gt; 14    14 15.2   8 275.8 180 3.07 3.78 18.0  0  0    3    3</span></a>
-<a class="sourceLine" id="cb148-95" title="95"><span class="co">#&gt; 15    15 10.4   8 472.0 205 2.93 5.25 18.0  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-96" title="96"><span class="co">#&gt; 16    16 10.4   8 460.0 215 3.00 5.42 17.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-97" title="97"><span class="co">#&gt; 17    17 14.7   8 440.0 230 3.23 5.34 17.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-98" title="98"><span class="co">#&gt; 18    18 32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-99" title="99"><span class="co">#&gt; 19    19 30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span></a>
-<a class="sourceLine" id="cb148-100" title="100"><span class="co">#&gt; 20    20 33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-101" title="101"><span class="co">#&gt; 21    21 21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span></a>
-<a class="sourceLine" id="cb148-102" title="102"><span class="co">#&gt; 22    22 15.5   8 318.0 150 2.76 3.52 16.9  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-103" title="103"><span class="co">#&gt; 23    23 15.2   8 304.0 150 3.15 3.44 17.3  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-104" title="104"><span class="co">#&gt; 24    24 13.3   8 350.0 245 3.73 3.84 15.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb148-105" title="105"><span class="co">#&gt; 25    25 19.2   8 400.0 175 3.08 3.85 17.1  0  0    3    2</span></a>
-<a class="sourceLine" id="cb148-106" title="106"><span class="co">#&gt; 26    26 27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb148-107" title="107"><span class="co">#&gt; 27    27 26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span></a>
-<a class="sourceLine" id="cb148-108" title="108"><span class="co">#&gt; 28    28 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span></a>
-<a class="sourceLine" id="cb148-109" title="109"><span class="co">#&gt; 29    29 15.8   8 351.0 264 4.22 3.17 14.5  0  1    5    4</span></a>
-<a class="sourceLine" id="cb148-110" title="110"><span class="co">#&gt; 30    30 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6</span></a>
-<a class="sourceLine" id="cb148-111" title="111"><span class="co">#&gt; 31    31 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8</span></a>
-<a class="sourceLine" id="cb148-112" title="112"><span class="co">#&gt; 32    32 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-2" title="2"><span class="st">  </span><span class="kw">has_rownames</span>()</a>
+<a class="sourceLine" id="cb147-3" title="3"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb147-4" title="4"></a>
+<a class="sourceLine" id="cb147-5" title="5">mtcars <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb147-6" title="6"><span class="st">  </span><span class="kw">remove_rownames</span>()</a>
+<a class="sourceLine" id="cb147-7" title="7"><span class="co">#&gt;     mpg cyl  disp  hp drat   wt qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb147-8" title="8"><span class="co">#&gt; 1  21.0   6 160.0 110 3.90 2.62 16.5  0  1    4    4</span></a>
+<a class="sourceLine" id="cb147-9" title="9"><span class="co">#&gt; 2  21.0   6 160.0 110 3.90 2.88 17.0  0  1    4    4</span></a>
+<a class="sourceLine" id="cb147-10" title="10"><span class="co">#&gt; 3  22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-11" title="11"><span class="co">#&gt; 4  21.4   6 258.0 110 3.08 3.21 19.4  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-12" title="12"><span class="co">#&gt; 5  18.7   8 360.0 175 3.15 3.44 17.0  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-13" title="13"><span class="co">#&gt; 6  18.1   6 225.0 105 2.76 3.46 20.2  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-14" title="14"><span class="co">#&gt; 7  14.3   8 360.0 245 3.21 3.57 15.8  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-15" title="15"><span class="co">#&gt; 8  24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span></a>
+<a class="sourceLine" id="cb147-16" title="16"><span class="co">#&gt; 9  22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span></a>
+<a class="sourceLine" id="cb147-17" title="17"><span class="co">#&gt; 10 19.2   6 167.6 123 3.92 3.44 18.3  1  0    4    4</span></a>
+<a class="sourceLine" id="cb147-18" title="18"><span class="co">#&gt; 11 17.8   6 167.6 123 3.92 3.44 18.9  1  0    4    4</span></a>
+<a class="sourceLine" id="cb147-19" title="19"><span class="co">#&gt; 12 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-20" title="20"><span class="co">#&gt; 13 17.3   8 275.8 180 3.07 3.73 17.6  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-21" title="21"><span class="co">#&gt; 14 15.2   8 275.8 180 3.07 3.78 18.0  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-22" title="22"><span class="co">#&gt; 15 10.4   8 472.0 205 2.93 5.25 18.0  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-23" title="23"><span class="co">#&gt; 16 10.4   8 460.0 215 3.00 5.42 17.8  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-24" title="24"><span class="co">#&gt; 17 14.7   8 440.0 230 3.23 5.34 17.4  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-25" title="25"><span class="co">#&gt; 18 32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-26" title="26"><span class="co">#&gt; 19 30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span></a>
+<a class="sourceLine" id="cb147-27" title="27"><span class="co">#&gt; 20 33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-28" title="28"><span class="co">#&gt; 21 21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-29" title="29"><span class="co">#&gt; 22 15.5   8 318.0 150 2.76 3.52 16.9  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-30" title="30"><span class="co">#&gt; 23 15.2   8 304.0 150 3.15 3.44 17.3  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-31" title="31"><span class="co">#&gt; 24 13.3   8 350.0 245 3.73 3.84 15.4  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-32" title="32"><span class="co">#&gt; 25 19.2   8 400.0 175 3.08 3.85 17.1  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-33" title="33"><span class="co">#&gt; 26 27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-34" title="34"><span class="co">#&gt; 27 26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span></a>
+<a class="sourceLine" id="cb147-35" title="35"><span class="co">#&gt; 28 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span></a>
+<a class="sourceLine" id="cb147-36" title="36"><span class="co">#&gt; 29 15.8   8 351.0 264 4.22 3.17 14.5  0  1    5    4</span></a>
+<a class="sourceLine" id="cb147-37" title="37"><span class="co">#&gt; 30 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6</span></a>
+<a class="sourceLine" id="cb147-38" title="38"><span class="co">#&gt; 31 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8</span></a>
+<a class="sourceLine" id="cb147-39" title="39"><span class="co">#&gt; 32 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></a>
+<a class="sourceLine" id="cb147-40" title="40"></a>
+<a class="sourceLine" id="cb147-41" title="41"></a>
+<a class="sourceLine" id="cb147-42" title="42">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-43" title="43"><span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;car_type&quot;</span>)</a>
+<a class="sourceLine" id="cb147-44" title="44"><span class="co">#&gt;               car_type  mpg cyl  disp  hp drat   wt qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb147-45" title="45"><span class="co">#&gt; 1            Mazda RX4 21.0   6 160.0 110 3.90 2.62 16.5  0  1    4    4</span></a>
+<a class="sourceLine" id="cb147-46" title="46"><span class="co">#&gt; 2        Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.88 17.0  0  1    4    4</span></a>
+<a class="sourceLine" id="cb147-47" title="47"><span class="co">#&gt; 3           Datsun 710 22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-48" title="48"><span class="co">#&gt; 4       Hornet 4 Drive 21.4   6 258.0 110 3.08 3.21 19.4  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-49" title="49"><span class="co">#&gt; 5    Hornet Sportabout 18.7   8 360.0 175 3.15 3.44 17.0  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-50" title="50"><span class="co">#&gt; 6              Valiant 18.1   6 225.0 105 2.76 3.46 20.2  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-51" title="51"><span class="co">#&gt; 7           Duster 360 14.3   8 360.0 245 3.21 3.57 15.8  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-52" title="52"><span class="co">#&gt; 8            Merc 240D 24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span></a>
+<a class="sourceLine" id="cb147-53" title="53"><span class="co">#&gt; 9             Merc 230 22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span></a>
+<a class="sourceLine" id="cb147-54" title="54"><span class="co">#&gt; 10            Merc 280 19.2   6 167.6 123 3.92 3.44 18.3  1  0    4    4</span></a>
+<a class="sourceLine" id="cb147-55" title="55"><span class="co">#&gt; 11           Merc 280C 17.8   6 167.6 123 3.92 3.44 18.9  1  0    4    4</span></a>
+<a class="sourceLine" id="cb147-56" title="56"><span class="co">#&gt; 12          Merc 450SE 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-57" title="57"><span class="co">#&gt; 13          Merc 450SL 17.3   8 275.8 180 3.07 3.73 17.6  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-58" title="58"><span class="co">#&gt; 14         Merc 450SLC 15.2   8 275.8 180 3.07 3.78 18.0  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-59" title="59"><span class="co">#&gt; 15  Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.25 18.0  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-60" title="60"><span class="co">#&gt; 16 Lincoln Continental 10.4   8 460.0 215 3.00 5.42 17.8  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-61" title="61"><span class="co">#&gt; 17   Chrysler Imperial 14.7   8 440.0 230 3.23 5.34 17.4  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-62" title="62"><span class="co">#&gt; 18            Fiat 128 32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-63" title="63"><span class="co">#&gt; 19         Honda Civic 30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span></a>
+<a class="sourceLine" id="cb147-64" title="64"><span class="co">#&gt; 20      Toyota Corolla 33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-65" title="65"><span class="co">#&gt; 21       Toyota Corona 21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-66" title="66"><span class="co">#&gt; 22    Dodge Challenger 15.5   8 318.0 150 2.76 3.52 16.9  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-67" title="67"><span class="co">#&gt; 23         AMC Javelin 15.2   8 304.0 150 3.15 3.44 17.3  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-68" title="68"><span class="co">#&gt; 24          Camaro Z28 13.3   8 350.0 245 3.73 3.84 15.4  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-69" title="69"><span class="co">#&gt; 25    Pontiac Firebird 19.2   8 400.0 175 3.08 3.85 17.1  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-70" title="70"><span class="co">#&gt; 26           Fiat X1-9 27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-71" title="71"><span class="co">#&gt; 27       Porsche 914-2 26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span></a>
+<a class="sourceLine" id="cb147-72" title="72"><span class="co">#&gt; 28        Lotus Europa 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span></a>
+<a class="sourceLine" id="cb147-73" title="73"><span class="co">#&gt; 29      Ford Pantera L 15.8   8 351.0 264 4.22 3.17 14.5  0  1    5    4</span></a>
+<a class="sourceLine" id="cb147-74" title="74"><span class="co">#&gt; 30        Ferrari Dino 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6</span></a>
+<a class="sourceLine" id="cb147-75" title="75"><span class="co">#&gt; 31       Maserati Bora 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8</span></a>
+<a class="sourceLine" id="cb147-76" title="76"><span class="co">#&gt; 32          Volvo 142E 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></a>
+<a class="sourceLine" id="cb147-77" title="77"></a>
+<a class="sourceLine" id="cb147-78" title="78">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb147-79" title="79"><span class="st">  </span><span class="kw">rowid_to_column</span>()</a>
+<a class="sourceLine" id="cb147-80" title="80"><span class="co">#&gt;    rowid  mpg cyl  disp  hp drat   wt qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb147-81" title="81"><span class="co">#&gt; 1      1 21.0   6 160.0 110 3.90 2.62 16.5  0  1    4    4</span></a>
+<a class="sourceLine" id="cb147-82" title="82"><span class="co">#&gt; 2      2 21.0   6 160.0 110 3.90 2.88 17.0  0  1    4    4</span></a>
+<a class="sourceLine" id="cb147-83" title="83"><span class="co">#&gt; 3      3 22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-84" title="84"><span class="co">#&gt; 4      4 21.4   6 258.0 110 3.08 3.21 19.4  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-85" title="85"><span class="co">#&gt; 5      5 18.7   8 360.0 175 3.15 3.44 17.0  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-86" title="86"><span class="co">#&gt; 6      6 18.1   6 225.0 105 2.76 3.46 20.2  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-87" title="87"><span class="co">#&gt; 7      7 14.3   8 360.0 245 3.21 3.57 15.8  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-88" title="88"><span class="co">#&gt; 8      8 24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span></a>
+<a class="sourceLine" id="cb147-89" title="89"><span class="co">#&gt; 9      9 22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span></a>
+<a class="sourceLine" id="cb147-90" title="90"><span class="co">#&gt; 10    10 19.2   6 167.6 123 3.92 3.44 18.3  1  0    4    4</span></a>
+<a class="sourceLine" id="cb147-91" title="91"><span class="co">#&gt; 11    11 17.8   6 167.6 123 3.92 3.44 18.9  1  0    4    4</span></a>
+<a class="sourceLine" id="cb147-92" title="92"><span class="co">#&gt; 12    12 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-93" title="93"><span class="co">#&gt; 13    13 17.3   8 275.8 180 3.07 3.73 17.6  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-94" title="94"><span class="co">#&gt; 14    14 15.2   8 275.8 180 3.07 3.78 18.0  0  0    3    3</span></a>
+<a class="sourceLine" id="cb147-95" title="95"><span class="co">#&gt; 15    15 10.4   8 472.0 205 2.93 5.25 18.0  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-96" title="96"><span class="co">#&gt; 16    16 10.4   8 460.0 215 3.00 5.42 17.8  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-97" title="97"><span class="co">#&gt; 17    17 14.7   8 440.0 230 3.23 5.34 17.4  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-98" title="98"><span class="co">#&gt; 18    18 32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-99" title="99"><span class="co">#&gt; 19    19 30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span></a>
+<a class="sourceLine" id="cb147-100" title="100"><span class="co">#&gt; 20    20 33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-101" title="101"><span class="co">#&gt; 21    21 21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span></a>
+<a class="sourceLine" id="cb147-102" title="102"><span class="co">#&gt; 22    22 15.5   8 318.0 150 2.76 3.52 16.9  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-103" title="103"><span class="co">#&gt; 23    23 15.2   8 304.0 150 3.15 3.44 17.3  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-104" title="104"><span class="co">#&gt; 24    24 13.3   8 350.0 245 3.73 3.84 15.4  0  0    3    4</span></a>
+<a class="sourceLine" id="cb147-105" title="105"><span class="co">#&gt; 25    25 19.2   8 400.0 175 3.08 3.85 17.1  0  0    3    2</span></a>
+<a class="sourceLine" id="cb147-106" title="106"><span class="co">#&gt; 26    26 27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span></a>
+<a class="sourceLine" id="cb147-107" title="107"><span class="co">#&gt; 27    27 26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span></a>
+<a class="sourceLine" id="cb147-108" title="108"><span class="co">#&gt; 28    28 30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span></a>
+<a class="sourceLine" id="cb147-109" title="109"><span class="co">#&gt; 29    29 15.8   8 351.0 264 4.22 3.17 14.5  0  1    5    4</span></a>
+<a class="sourceLine" id="cb147-110" title="110"><span class="co">#&gt; 30    30 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6</span></a>
+<a class="sourceLine" id="cb147-111" title="111"><span class="co">#&gt; 31    31 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8</span></a>
+<a class="sourceLine" id="cb147-112" title="112"><span class="co">#&gt; 32    32 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></a></code></pre></div>
 </div>
 <div id="循环" class="section level4">
 <h4><span class="header-section-number">2.2.1.3</span> 循环</h4>
 <p><code>tibble()</code>会循环使用那些长度为1的列，将其自动扩展到最长的列的长度。而长度不为1，且和其他列元素个数不同的列不会被循环 ； <code>data.frame()</code>会自动循环长度可被最长一列的长度整除的列：</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb149-2" title="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
-<a class="sourceLine" id="cb149-3" title="3"><span class="co">#&gt;       x     y</span></a>
-<a class="sourceLine" id="cb149-4" title="4"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb149-5" title="5"><span class="co">#&gt; 1     1     1</span></a>
-<a class="sourceLine" id="cb149-6" title="6"><span class="co">#&gt; 2     2     1</span></a>
-<a class="sourceLine" id="cb149-7" title="7"><span class="co">#&gt; 3     3     1</span></a>
-<a class="sourceLine" id="cb149-8" title="8"><span class="co">#&gt; 4     4     1</span></a>
-<a class="sourceLine" id="cb149-9" title="9"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb149-10" title="10"><span class="co">#&gt; Error: Tibble columns must have consistent lengths, only values of length one are recycled:</span></a>
-<a class="sourceLine" id="cb149-11" title="11"><span class="co">#&gt; * Length 2: Column `y`</span></a>
-<a class="sourceLine" id="cb149-12" title="12"><span class="co">#&gt; * Length 4: Column `x`</span></a>
-<a class="sourceLine" id="cb149-13" title="13"></a>
-<a class="sourceLine" id="cb149-14" title="14"><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb149-15" title="15"><span class="co">#&gt;   x y</span></a>
-<a class="sourceLine" id="cb149-16" title="16"><span class="co">#&gt; 1 1 1</span></a>
-<a class="sourceLine" id="cb149-17" title="17"><span class="co">#&gt; 2 2 2</span></a>
-<a class="sourceLine" id="cb149-18" title="18"><span class="co">#&gt; 3 3 1</span></a>
-<a class="sourceLine" id="cb149-19" title="19"><span class="co">#&gt; 4 4 2</span></a>
-<a class="sourceLine" id="cb149-20" title="20"><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb149-21" title="21"><span class="co">#&gt; Error in data.frame(x = 1:4, y = 1:3): arguments imply differing number of rows: 4, 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb148-2" title="2"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb148-3" title="3"><span class="co">#&gt;       x     y</span></a>
+<a class="sourceLine" id="cb148-4" title="4"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb148-5" title="5"><span class="co">#&gt; 1     1     1</span></a>
+<a class="sourceLine" id="cb148-6" title="6"><span class="co">#&gt; 2     2     1</span></a>
+<a class="sourceLine" id="cb148-7" title="7"><span class="co">#&gt; 3     3     1</span></a>
+<a class="sourceLine" id="cb148-8" title="8"><span class="co">#&gt; 4     4     1</span></a>
+<a class="sourceLine" id="cb148-9" title="9"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb148-10" title="10"><span class="co">#&gt; Error: Tibble columns must have consistent lengths, only values of length one are recycled:</span></a>
+<a class="sourceLine" id="cb148-11" title="11"><span class="co">#&gt; * Length 2: Column `y`</span></a>
+<a class="sourceLine" id="cb148-12" title="12"><span class="co">#&gt; * Length 4: Column `x`</span></a>
+<a class="sourceLine" id="cb148-13" title="13"></a>
+<a class="sourceLine" id="cb148-14" title="14"><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb148-15" title="15"><span class="co">#&gt;   x y</span></a>
+<a class="sourceLine" id="cb148-16" title="16"><span class="co">#&gt; 1 1 1</span></a>
+<a class="sourceLine" id="cb148-17" title="17"><span class="co">#&gt; 2 2 2</span></a>
+<a class="sourceLine" id="cb148-18" title="18"><span class="co">#&gt; 3 3 1</span></a>
+<a class="sourceLine" id="cb148-19" title="19"><span class="co">#&gt; 4 4 2</span></a>
+<a class="sourceLine" id="cb148-20" title="20"><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb148-21" title="21"><span class="co">#&gt; Error in data.frame(x = 1:4, y = 1:3): arguments imply differing number of rows: 4, 3</span></a></code></pre></div>
 </div>
 <div id="无效变量名称" class="section level4">
 <h4><span class="header-section-number">2.2.1.4</span> 无效变量名称</h4>
 <p><code>tibble</code>的一个很大特色是可以使用在R中无效的变量名称，即不符合变量命名规定的名称可以在tibble中成为列名，实际上这个规则约束了R中所有“名称”的设定。R规定名称只能包含字母、数字、点<code>.</code>和下划线<code>_</code>，必须以字母开头，数字不能跟在<code>.</code>之后，也不能和R中保留的关键字重名(see <code>?Reserved</code>)。</p>
 <p>如果想创建不合法的列名，可以用反引号```将它们括起来：</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">tb &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb150-2" title="2">  <span class="st">`</span><span class="dt">:)</span><span class="st">`</span> =<span class="st"> &quot;smile&quot;</span>,</a>
-<a class="sourceLine" id="cb150-3" title="3">  <span class="st">`</span><span class="dt"> </span><span class="st">`</span> =<span class="st"> &quot;space&quot;</span>,</a>
-<a class="sourceLine" id="cb150-4" title="4">  <span class="st">`</span><span class="dt">2000</span><span class="st">`</span> =<span class="st"> &quot;number&quot;</span></a>
-<a class="sourceLine" id="cb150-5" title="5">)</a>
-<a class="sourceLine" id="cb150-6" title="6">tb</a>
-<a class="sourceLine" id="cb150-7" title="7"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb150-8" title="8"><span class="co">#&gt;   `:)`  ` `   `2000`</span></a>
-<a class="sourceLine" id="cb150-9" title="9"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb150-10" title="10"><span class="co">#&gt; 1 smile space number</span></a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1">tb &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb149-2" title="2">  <span class="st">`</span><span class="dt">:)</span><span class="st">`</span> =<span class="st"> &quot;smile&quot;</span>,</a>
+<a class="sourceLine" id="cb149-3" title="3">  <span class="st">`</span><span class="dt"> </span><span class="st">`</span> =<span class="st"> &quot;space&quot;</span>,</a>
+<a class="sourceLine" id="cb149-4" title="4">  <span class="st">`</span><span class="dt">2000</span><span class="st">`</span> =<span class="st"> &quot;number&quot;</span></a>
+<a class="sourceLine" id="cb149-5" title="5">)</a>
+<a class="sourceLine" id="cb149-6" title="6">tb</a>
+<a class="sourceLine" id="cb149-7" title="7"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb149-8" title="8"><span class="co">#&gt;   `:)`  ` `   `2000`</span></a>
+<a class="sourceLine" id="cb149-9" title="9"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb149-10" title="10"><span class="co">#&gt; 1 smile space number</span></a></code></pre></div>
 <p>类似地，如果想要在 <code>ggolot2</code> 或者其他<code>tidyverse</code>包中使用这些名称特殊的变量，也需要用反引号括起来。</p>
 <p>相比之下，<code>data.frame()</code>会依据<code>make.names()</code>的规则自行更改无效的列名称(除非设置<code>check.names = FALSE</code>)。如果你的名称不以字母开头(字母的界定依据当前电脑的地域设置，但不能超越ASCII字符集)，这个函数会地添加<code>X</code>作为前缀；如果包含特殊字符，用<code>.</code>代替；未给出的名称用<code>NA</code>代替；与R的保留关键字重名的，在后面添加<code>.</code>:</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="kw">names</span>(<span class="kw">data.frame</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb151-2" title="2"><span class="co">#&gt; [1] &quot;X1&quot;</span></a>
-<a class="sourceLine" id="cb151-3" title="3"><span class="kw">names</span>(<span class="kw">data.frame</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>,<span class="dt">check.names =</span> F))</a>
-<a class="sourceLine" id="cb151-4" title="4"><span class="co">#&gt; [1] &quot;1&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1"><span class="kw">names</span>(<span class="kw">data.frame</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb150-2" title="2"><span class="co">#&gt; [1] &quot;X1&quot;</span></a>
+<a class="sourceLine" id="cb150-3" title="3"><span class="kw">names</span>(<span class="kw">data.frame</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>,<span class="dt">check.names =</span> F))</a>
+<a class="sourceLine" id="cb150-4" title="4"><span class="co">#&gt; [1] &quot;1&quot;</span></a></code></pre></div>
 </div>
 <div id="变量引用" class="section level4">
 <h4><span class="header-section-number">2.2.1.5</span> 变量引用</h4>
 <p>最后，我们可以在创建<code>tibble</code>创建过程中就引用其中的变量，因为变量在<code>tibble</code>中是被从左到右依次添加的(而<code>data.frame()</code>不支持这一点)：</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb152-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb152-3" title="3">  <span class="dt">y =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb152-4" title="4">)</a>
-<a class="sourceLine" id="cb152-5" title="5"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
-<a class="sourceLine" id="cb152-6" title="6"><span class="co">#&gt;       x     y</span></a>
-<a class="sourceLine" id="cb152-7" title="7"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb152-8" title="8"><span class="co">#&gt; 1     1     2</span></a>
-<a class="sourceLine" id="cb152-9" title="9"><span class="co">#&gt; 2     2     4</span></a>
-<a class="sourceLine" id="cb152-10" title="10"><span class="co">#&gt; 3     3     6</span></a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb151-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb151-3" title="3">  <span class="dt">y =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb151-4" title="4">)</a>
+<a class="sourceLine" id="cb151-5" title="5"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
+<a class="sourceLine" id="cb151-6" title="6"><span class="co">#&gt;       x     y</span></a>
+<a class="sourceLine" id="cb151-7" title="7"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb151-8" title="8"><span class="co">#&gt; 1     1     2</span></a>
+<a class="sourceLine" id="cb151-9" title="9"><span class="co">#&gt; 2     2     4</span></a>
+<a class="sourceLine" id="cb151-10" title="10"><span class="co">#&gt; 3     3     6</span></a></code></pre></div>
 </div>
 </div>
 <div id="打印" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> 打印</h3>
 <p>tibble 的打印方法进行了优化，只显示前 10 行结果，显示列的数目将自动适应屏幕的宽度，这种打印方式非常适合大数据集。除了打印列名，tibble 还会第一行的下面打印出列的类型，这项功能有些类似于 <code>str()</code> 函数</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb153-2" title="2">  <span class="dt">a =</span> lubridate<span class="op">::</span><span class="kw">now</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">96400</span>,</a>
-<a class="sourceLine" id="cb153-3" title="3">  <span class="dt">b =</span> lubridate<span class="op">::</span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">30</span>,</a>
-<a class="sourceLine" id="cb153-4" title="4">  <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="fl">1e3</span>,</a>
-<a class="sourceLine" id="cb153-5" title="5">  <span class="dt">d =</span> <span class="kw">runif</span>(<span class="fl">1e3</span>),</a>
-<a class="sourceLine" id="cb153-6" title="6">  <span class="dt">e =</span> <span class="kw">sample</span>(letters,<span class="fl">1e3</span>, <span class="dt">replace =</span> T)</a>
-<a class="sourceLine" id="cb153-7" title="7">)</a>
-<a class="sourceLine" id="cb153-8" title="8"><span class="co">#&gt; # A tibble: 1,000 x 5</span></a>
-<a class="sourceLine" id="cb153-9" title="9"><span class="co">#&gt;   a                   b              c     d e    </span></a>
-<a class="sourceLine" id="cb153-10" title="10"><span class="co">#&gt;   &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb153-11" title="11"><span class="co">#&gt; 1 2019-12-12 21:49:54 2019-12-14     1 0.392 i    </span></a>
-<a class="sourceLine" id="cb153-12" title="12"><span class="co">#&gt; 2 2019-12-12 14:53:28 2019-12-16     2 0.409 p    </span></a>
-<a class="sourceLine" id="cb153-13" title="13"><span class="co">#&gt; 3 2019-12-12 09:50:02 2019-12-27     3 0.944 t    </span></a>
-<a class="sourceLine" id="cb153-14" title="14"><span class="co">#&gt; 4 2019-12-12 14:34:31 2020-01-05     4 0.614 z    </span></a>
-<a class="sourceLine" id="cb153-15" title="15"><span class="co">#&gt; 5 2019-12-12 14:49:10 2019-12-28     5 0.672 f    </span></a>
-<a class="sourceLine" id="cb153-16" title="16"><span class="co">#&gt; 6 2019-12-12 15:43:59 2019-12-22     6 0.113 q    </span></a>
-<a class="sourceLine" id="cb153-17" title="17"><span class="co">#&gt; # … with 994 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb152-2" title="2">  <span class="dt">a =</span> lubridate<span class="op">::</span><span class="kw">now</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">96400</span>,</a>
+<a class="sourceLine" id="cb152-3" title="3">  <span class="dt">b =</span> lubridate<span class="op">::</span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb152-4" title="4">  <span class="dt">c =</span> <span class="dv">1</span><span class="op">:</span><span class="fl">1e3</span>,</a>
+<a class="sourceLine" id="cb152-5" title="5">  <span class="dt">d =</span> <span class="kw">runif</span>(<span class="fl">1e3</span>),</a>
+<a class="sourceLine" id="cb152-6" title="6">  <span class="dt">e =</span> <span class="kw">sample</span>(letters,<span class="fl">1e3</span>, <span class="dt">replace =</span> T)</a>
+<a class="sourceLine" id="cb152-7" title="7">)</a>
+<a class="sourceLine" id="cb152-8" title="8"><span class="co">#&gt; # A tibble: 1,000 x 5</span></a>
+<a class="sourceLine" id="cb152-9" title="9"><span class="co">#&gt;   a                   b              c     d e    </span></a>
+<a class="sourceLine" id="cb152-10" title="10"><span class="co">#&gt;   &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb152-11" title="11"><span class="co">#&gt; 1 2019-12-12 21:49:54 2019-12-14     1 0.392 i    </span></a>
+<a class="sourceLine" id="cb152-12" title="12"><span class="co">#&gt; 2 2019-12-12 14:53:28 2019-12-16     2 0.409 p    </span></a>
+<a class="sourceLine" id="cb152-13" title="13"><span class="co">#&gt; 3 2019-12-12 09:50:02 2019-12-27     3 0.944 t    </span></a>
+<a class="sourceLine" id="cb152-14" title="14"><span class="co">#&gt; 4 2019-12-12 14:34:31 2020-01-05     4 0.614 z    </span></a>
+<a class="sourceLine" id="cb152-15" title="15"><span class="co">#&gt; 5 2019-12-12 14:49:10 2019-12-28     5 0.672 f    </span></a>
+<a class="sourceLine" id="cb152-16" title="16"><span class="co">#&gt; 6 2019-12-12 15:43:59 2019-12-22     6 0.113 q    </span></a>
+<a class="sourceLine" id="cb152-17" title="17"><span class="co">#&gt; # … with 994 more rows</span></a></code></pre></div>
 <p>在打印大数据框时，<code>tibble</code>的这种设计避免了输出一下子占据控制台的很多行。</p>
 <p>有时需要比默认显示更多的输出，这是要设置几个参数。<br />
 首先，可以明确使用<code>print()</code>函数来打印数据框（实际上是<code>print.tbl()</code>)，并控制打印的行数（n）和显示的宽度（width）。<code>width = Inf</code>可以显示出所有列:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb154-2" title="2"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)</a>
-<a class="sourceLine" id="cb154-3" title="3"><span class="co">#&gt; # A tibble: 336,776 x 19</span></a>
-<a class="sourceLine" id="cb154-4" title="4"><span class="co">#&gt;     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time</span></a>
-<a class="sourceLine" id="cb154-5" title="5"><span class="co">#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb154-6" title="6"><span class="co">#&gt;  1  2013     1     1      517            515         2      830            819</span></a>
-<a class="sourceLine" id="cb154-7" title="7"><span class="co">#&gt;  2  2013     1     1      533            529         4      850            830</span></a>
-<a class="sourceLine" id="cb154-8" title="8"><span class="co">#&gt;  3  2013     1     1      542            540         2      923            850</span></a>
-<a class="sourceLine" id="cb154-9" title="9"><span class="co">#&gt;  4  2013     1     1      544            545        -1     1004           1022</span></a>
-<a class="sourceLine" id="cb154-10" title="10"><span class="co">#&gt;  5  2013     1     1      554            600        -6      812            837</span></a>
-<a class="sourceLine" id="cb154-11" title="11"><span class="co">#&gt;  6  2013     1     1      554            558        -4      740            728</span></a>
-<a class="sourceLine" id="cb154-12" title="12"><span class="co">#&gt;  7  2013     1     1      555            600        -5      913            854</span></a>
-<a class="sourceLine" id="cb154-13" title="13"><span class="co">#&gt;  8  2013     1     1      557            600        -3      709            723</span></a>
-<a class="sourceLine" id="cb154-14" title="14"><span class="co">#&gt;  9  2013     1     1      557            600        -3      838            846</span></a>
-<a class="sourceLine" id="cb154-15" title="15"><span class="co">#&gt; 10  2013     1     1      558            600        -2      753            745</span></a>
-<a class="sourceLine" id="cb154-16" title="16"><span class="co">#&gt;    arr_delay carrier flight tailnum origin dest  air_time distance  hour minute</span></a>
-<a class="sourceLine" id="cb154-17" title="17"><span class="co">#&gt;        &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb154-18" title="18"><span class="co">#&gt;  1        11 UA        1545 N14228  EWR    IAH        227     1400     5     15</span></a>
-<a class="sourceLine" id="cb154-19" title="19"><span class="co">#&gt;  2        20 UA        1714 N24211  LGA    IAH        227     1416     5     29</span></a>
-<a class="sourceLine" id="cb154-20" title="20"><span class="co">#&gt;  3        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40</span></a>
-<a class="sourceLine" id="cb154-21" title="21"><span class="co">#&gt;  4       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45</span></a>
-<a class="sourceLine" id="cb154-22" title="22"><span class="co">#&gt;  5       -25 DL         461 N668DN  LGA    ATL        116      762     6      0</span></a>
-<a class="sourceLine" id="cb154-23" title="23"><span class="co">#&gt;  6        12 UA        1696 N39463  EWR    ORD        150      719     5     58</span></a>
-<a class="sourceLine" id="cb154-24" title="24"><span class="co">#&gt;  7        19 B6         507 N516JB  EWR    FLL        158     1065     6      0</span></a>
-<a class="sourceLine" id="cb154-25" title="25"><span class="co">#&gt;  8       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0</span></a>
-<a class="sourceLine" id="cb154-26" title="26"><span class="co">#&gt;  9        -8 B6          79 N593JB  JFK    MCO        140      944     6      0</span></a>
-<a class="sourceLine" id="cb154-27" title="27"><span class="co">#&gt; 10         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0</span></a>
-<a class="sourceLine" id="cb154-28" title="28"><span class="co">#&gt;    time_hour          </span></a>
-<a class="sourceLine" id="cb154-29" title="29"><span class="co">#&gt;    &lt;dttm&gt;             </span></a>
-<a class="sourceLine" id="cb154-30" title="30"><span class="co">#&gt;  1 2013-01-01 05:00:00</span></a>
-<a class="sourceLine" id="cb154-31" title="31"><span class="co">#&gt;  2 2013-01-01 05:00:00</span></a>
-<a class="sourceLine" id="cb154-32" title="32"><span class="co">#&gt;  3 2013-01-01 05:00:00</span></a>
-<a class="sourceLine" id="cb154-33" title="33"><span class="co">#&gt;  4 2013-01-01 05:00:00</span></a>
-<a class="sourceLine" id="cb154-34" title="34"><span class="co">#&gt;  5 2013-01-01 06:00:00</span></a>
-<a class="sourceLine" id="cb154-35" title="35"><span class="co">#&gt;  6 2013-01-01 05:00:00</span></a>
-<a class="sourceLine" id="cb154-36" title="36"><span class="co">#&gt;  7 2013-01-01 06:00:00</span></a>
-<a class="sourceLine" id="cb154-37" title="37"><span class="co">#&gt;  8 2013-01-01 06:00:00</span></a>
-<a class="sourceLine" id="cb154-38" title="38"><span class="co">#&gt;  9 2013-01-01 06:00:00</span></a>
-<a class="sourceLine" id="cb154-39" title="39"><span class="co">#&gt; 10 2013-01-01 06:00:00</span></a>
-<a class="sourceLine" id="cb154-40" title="40"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1">nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb153-2" title="2"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb153-3" title="3"><span class="co">#&gt; # A tibble: 336,776 x 19</span></a>
+<a class="sourceLine" id="cb153-4" title="4"><span class="co">#&gt;     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time</span></a>
+<a class="sourceLine" id="cb153-5" title="5"><span class="co">#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb153-6" title="6"><span class="co">#&gt;  1  2013     1     1      517            515         2      830            819</span></a>
+<a class="sourceLine" id="cb153-7" title="7"><span class="co">#&gt;  2  2013     1     1      533            529         4      850            830</span></a>
+<a class="sourceLine" id="cb153-8" title="8"><span class="co">#&gt;  3  2013     1     1      542            540         2      923            850</span></a>
+<a class="sourceLine" id="cb153-9" title="9"><span class="co">#&gt;  4  2013     1     1      544            545        -1     1004           1022</span></a>
+<a class="sourceLine" id="cb153-10" title="10"><span class="co">#&gt;  5  2013     1     1      554            600        -6      812            837</span></a>
+<a class="sourceLine" id="cb153-11" title="11"><span class="co">#&gt;  6  2013     1     1      554            558        -4      740            728</span></a>
+<a class="sourceLine" id="cb153-12" title="12"><span class="co">#&gt;  7  2013     1     1      555            600        -5      913            854</span></a>
+<a class="sourceLine" id="cb153-13" title="13"><span class="co">#&gt;  8  2013     1     1      557            600        -3      709            723</span></a>
+<a class="sourceLine" id="cb153-14" title="14"><span class="co">#&gt;  9  2013     1     1      557            600        -3      838            846</span></a>
+<a class="sourceLine" id="cb153-15" title="15"><span class="co">#&gt; 10  2013     1     1      558            600        -2      753            745</span></a>
+<a class="sourceLine" id="cb153-16" title="16"><span class="co">#&gt;    arr_delay carrier flight tailnum origin dest  air_time distance  hour minute</span></a>
+<a class="sourceLine" id="cb153-17" title="17"><span class="co">#&gt;        &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb153-18" title="18"><span class="co">#&gt;  1        11 UA        1545 N14228  EWR    IAH        227     1400     5     15</span></a>
+<a class="sourceLine" id="cb153-19" title="19"><span class="co">#&gt;  2        20 UA        1714 N24211  LGA    IAH        227     1416     5     29</span></a>
+<a class="sourceLine" id="cb153-20" title="20"><span class="co">#&gt;  3        33 AA        1141 N619AA  JFK    MIA        160     1089     5     40</span></a>
+<a class="sourceLine" id="cb153-21" title="21"><span class="co">#&gt;  4       -18 B6         725 N804JB  JFK    BQN        183     1576     5     45</span></a>
+<a class="sourceLine" id="cb153-22" title="22"><span class="co">#&gt;  5       -25 DL         461 N668DN  LGA    ATL        116      762     6      0</span></a>
+<a class="sourceLine" id="cb153-23" title="23"><span class="co">#&gt;  6        12 UA        1696 N39463  EWR    ORD        150      719     5     58</span></a>
+<a class="sourceLine" id="cb153-24" title="24"><span class="co">#&gt;  7        19 B6         507 N516JB  EWR    FLL        158     1065     6      0</span></a>
+<a class="sourceLine" id="cb153-25" title="25"><span class="co">#&gt;  8       -14 EV        5708 N829AS  LGA    IAD         53      229     6      0</span></a>
+<a class="sourceLine" id="cb153-26" title="26"><span class="co">#&gt;  9        -8 B6          79 N593JB  JFK    MCO        140      944     6      0</span></a>
+<a class="sourceLine" id="cb153-27" title="27"><span class="co">#&gt; 10         8 AA         301 N3ALAA  LGA    ORD        138      733     6      0</span></a>
+<a class="sourceLine" id="cb153-28" title="28"><span class="co">#&gt;    time_hour          </span></a>
+<a class="sourceLine" id="cb153-29" title="29"><span class="co">#&gt;    &lt;dttm&gt;             </span></a>
+<a class="sourceLine" id="cb153-30" title="30"><span class="co">#&gt;  1 2013-01-01 05:00:00</span></a>
+<a class="sourceLine" id="cb153-31" title="31"><span class="co">#&gt;  2 2013-01-01 05:00:00</span></a>
+<a class="sourceLine" id="cb153-32" title="32"><span class="co">#&gt;  3 2013-01-01 05:00:00</span></a>
+<a class="sourceLine" id="cb153-33" title="33"><span class="co">#&gt;  4 2013-01-01 05:00:00</span></a>
+<a class="sourceLine" id="cb153-34" title="34"><span class="co">#&gt;  5 2013-01-01 06:00:00</span></a>
+<a class="sourceLine" id="cb153-35" title="35"><span class="co">#&gt;  6 2013-01-01 05:00:00</span></a>
+<a class="sourceLine" id="cb153-36" title="36"><span class="co">#&gt;  7 2013-01-01 06:00:00</span></a>
+<a class="sourceLine" id="cb153-37" title="37"><span class="co">#&gt;  8 2013-01-01 06:00:00</span></a>
+<a class="sourceLine" id="cb153-38" title="38"><span class="co">#&gt;  9 2013-01-01 06:00:00</span></a>
+<a class="sourceLine" id="cb153-39" title="39"><span class="co">#&gt; 10 2013-01-01 06:00:00</span></a>
+<a class="sourceLine" id="cb153-40" title="40"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
 </div>
 <div id="取子集" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> 取子集</h3>
@@ -729,105 +747,105 @@ Name of column to use for rownames.</p>
 <ul>
 <li>当想用<code>df[, vars]</code>在<code>data.frame</code>中提取变量时，如果<code>vars</code>包含多个变量，则返回一个数据框；如果<code>vars</code>只包含一个变量，则返回一个向量(因为<code>[</code>不要求必须提取多于一个元素)。这种不一致性有时这会导致很多bug，因为很多函数不能作用于向量。</li>
 </ul>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb155-2" title="2">  <span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb155-3" title="3">  <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb155-4" title="4">  <span class="dt">z =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb155-5" title="5">)</a>
-<a class="sourceLine" id="cb155-6" title="6"></a>
-<a class="sourceLine" id="cb155-7" title="7"><span class="co">## 向量</span></a>
-<a class="sourceLine" id="cb155-8" title="8">df[,<span class="st">&quot;x&quot;</span>]</a>
-<a class="sourceLine" id="cb155-9" title="9"><span class="co">#&gt;  [1] -1.5723  0.8783 -0.0461 -0.0778  0.1201  0.7874 -0.7307 -0.3133 -0.6744</span></a>
-<a class="sourceLine" id="cb155-10" title="10"><span class="co">#&gt; [10] -0.9759</span></a>
-<a class="sourceLine" id="cb155-11" title="11"><span class="co">## 数据框</span></a>
-<a class="sourceLine" id="cb155-12" title="12">df[,<span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)]</a>
-<a class="sourceLine" id="cb155-13" title="13"><span class="co">#&gt;          x      y</span></a>
-<a class="sourceLine" id="cb155-14" title="14"><span class="co">#&gt; 1  -1.5723  1.442</span></a>
-<a class="sourceLine" id="cb155-15" title="15"><span class="co">#&gt; 2   0.8783 -0.738</span></a>
-<a class="sourceLine" id="cb155-16" title="16"><span class="co">#&gt; 3  -0.0461 -0.280</span></a>
-<a class="sourceLine" id="cb155-17" title="17"><span class="co">#&gt; 4  -0.0778  0.451</span></a>
-<a class="sourceLine" id="cb155-18" title="18"><span class="co">#&gt; 5   0.1201  1.437</span></a>
-<a class="sourceLine" id="cb155-19" title="19"><span class="co">#&gt; 6   0.7874  1.531</span></a>
-<a class="sourceLine" id="cb155-20" title="20"><span class="co">#&gt; 7  -0.7307  0.728</span></a>
-<a class="sourceLine" id="cb155-21" title="21"><span class="co">#&gt; 8  -0.3133  0.018</span></a>
-<a class="sourceLine" id="cb155-22" title="22"><span class="co">#&gt; 9  -0.6744 -0.108</span></a>
-<a class="sourceLine" id="cb155-23" title="23"><span class="co">#&gt; 10 -0.9759  1.533</span></a>
-<a class="sourceLine" id="cb155-24" title="24"><span class="co">## drop = FALSE始终返回数据框</span></a>
-<a class="sourceLine" id="cb155-25" title="25">df[,<span class="st">&quot;x&quot;</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb155-26" title="26"><span class="co">#&gt;          x</span></a>
-<a class="sourceLine" id="cb155-27" title="27"><span class="co">#&gt; 1  -1.5723</span></a>
-<a class="sourceLine" id="cb155-28" title="28"><span class="co">#&gt; 2   0.8783</span></a>
-<a class="sourceLine" id="cb155-29" title="29"><span class="co">#&gt; 3  -0.0461</span></a>
-<a class="sourceLine" id="cb155-30" title="30"><span class="co">#&gt; 4  -0.0778</span></a>
-<a class="sourceLine" id="cb155-31" title="31"><span class="co">#&gt; 5   0.1201</span></a>
-<a class="sourceLine" id="cb155-32" title="32"><span class="co">#&gt; 6   0.7874</span></a>
-<a class="sourceLine" id="cb155-33" title="33"><span class="co">#&gt; 7  -0.7307</span></a>
-<a class="sourceLine" id="cb155-34" title="34"><span class="co">#&gt; 8  -0.3133</span></a>
-<a class="sourceLine" id="cb155-35" title="35"><span class="co">#&gt; 9  -0.6744</span></a>
-<a class="sourceLine" id="cb155-36" title="36"><span class="co">#&gt; 10 -0.9759</span></a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb154-2" title="2">  <span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb154-3" title="3">  <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb154-4" title="4">  <span class="dt">z =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb154-5" title="5">)</a>
+<a class="sourceLine" id="cb154-6" title="6"></a>
+<a class="sourceLine" id="cb154-7" title="7"><span class="co">## 向量</span></a>
+<a class="sourceLine" id="cb154-8" title="8">df[,<span class="st">&quot;x&quot;</span>]</a>
+<a class="sourceLine" id="cb154-9" title="9"><span class="co">#&gt;  [1] -1.5723  0.8783 -0.0461 -0.0778  0.1201  0.7874 -0.7307 -0.3133 -0.6744</span></a>
+<a class="sourceLine" id="cb154-10" title="10"><span class="co">#&gt; [10] -0.9759</span></a>
+<a class="sourceLine" id="cb154-11" title="11"><span class="co">## 数据框</span></a>
+<a class="sourceLine" id="cb154-12" title="12">df[,<span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)]</a>
+<a class="sourceLine" id="cb154-13" title="13"><span class="co">#&gt;          x      y</span></a>
+<a class="sourceLine" id="cb154-14" title="14"><span class="co">#&gt; 1  -1.5723  1.442</span></a>
+<a class="sourceLine" id="cb154-15" title="15"><span class="co">#&gt; 2   0.8783 -0.738</span></a>
+<a class="sourceLine" id="cb154-16" title="16"><span class="co">#&gt; 3  -0.0461 -0.280</span></a>
+<a class="sourceLine" id="cb154-17" title="17"><span class="co">#&gt; 4  -0.0778  0.451</span></a>
+<a class="sourceLine" id="cb154-18" title="18"><span class="co">#&gt; 5   0.1201  1.437</span></a>
+<a class="sourceLine" id="cb154-19" title="19"><span class="co">#&gt; 6   0.7874  1.531</span></a>
+<a class="sourceLine" id="cb154-20" title="20"><span class="co">#&gt; 7  -0.7307  0.728</span></a>
+<a class="sourceLine" id="cb154-21" title="21"><span class="co">#&gt; 8  -0.3133  0.018</span></a>
+<a class="sourceLine" id="cb154-22" title="22"><span class="co">#&gt; 9  -0.6744 -0.108</span></a>
+<a class="sourceLine" id="cb154-23" title="23"><span class="co">#&gt; 10 -0.9759  1.533</span></a>
+<a class="sourceLine" id="cb154-24" title="24"><span class="co">## drop = FALSE始终返回数据框</span></a>
+<a class="sourceLine" id="cb154-25" title="25">df[,<span class="st">&quot;x&quot;</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
+<a class="sourceLine" id="cb154-26" title="26"><span class="co">#&gt;          x</span></a>
+<a class="sourceLine" id="cb154-27" title="27"><span class="co">#&gt; 1  -1.5723</span></a>
+<a class="sourceLine" id="cb154-28" title="28"><span class="co">#&gt; 2   0.8783</span></a>
+<a class="sourceLine" id="cb154-29" title="29"><span class="co">#&gt; 3  -0.0461</span></a>
+<a class="sourceLine" id="cb154-30" title="30"><span class="co">#&gt; 4  -0.0778</span></a>
+<a class="sourceLine" id="cb154-31" title="31"><span class="co">#&gt; 5   0.1201</span></a>
+<a class="sourceLine" id="cb154-32" title="32"><span class="co">#&gt; 6   0.7874</span></a>
+<a class="sourceLine" id="cb154-33" title="33"><span class="co">#&gt; 7  -0.7307</span></a>
+<a class="sourceLine" id="cb154-34" title="34"><span class="co">#&gt; 8  -0.3133</span></a>
+<a class="sourceLine" id="cb154-35" title="35"><span class="co">#&gt; 9  -0.6744</span></a>
+<a class="sourceLine" id="cb154-36" title="36"><span class="co">#&gt; 10 -0.9759</span></a></code></pre></div>
 <ul>
 <li>当想用<code>df$x</code>提取出变量<code>x</code>时，如果<code>x</code>不在<code>data.frame</code>中，<code>data.frame</code>会返回一个名字以<code>x</code>开始的变量(这种行为被称为部分匹配(partial matching))，如果不存在这样的变量，则返回<code>NULL</code>。这使得我们很容易选取到错误的变量</li>
 </ul>
 <p><code>tibble</code> 在这两点缺陷上做了改进。首先，当 <code>df[, vars]</code>作用于<code>tibble</code> 时，无论 <code>vars</code> 包含多少个变量，返回值总是一个<code>tibble</code>:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb156-2" title="2">  <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb156-3" title="3">  <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb156-4" title="4">)</a>
-<a class="sourceLine" id="cb156-5" title="5"></a>
-<a class="sourceLine" id="cb156-6" title="6">df[, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)]</a>
-<a class="sourceLine" id="cb156-7" title="7"><span class="co">#&gt; # A tibble: 5 x 2</span></a>
-<a class="sourceLine" id="cb156-8" title="8"><span class="co">#&gt;       x      y</span></a>
-<a class="sourceLine" id="cb156-9" title="9"><span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb156-10" title="10"><span class="co">#&gt; 1 0.548  0.281</span></a>
-<a class="sourceLine" id="cb156-11" title="11"><span class="co">#&gt; 2 0.804 -0.272</span></a>
-<a class="sourceLine" id="cb156-12" title="12"><span class="co">#&gt; 3 0.837  0.388</span></a>
-<a class="sourceLine" id="cb156-13" title="13"><span class="co">#&gt; 4 0.930  1.79 </span></a>
-<a class="sourceLine" id="cb156-14" title="14"><span class="co">#&gt; 5 0.785 -0.308</span></a>
-<a class="sourceLine" id="cb156-15" title="15">df[, <span class="st">&quot;x&quot;</span>]</a>
-<a class="sourceLine" id="cb156-16" title="16"><span class="co">#&gt; # A tibble: 5 x 1</span></a>
-<a class="sourceLine" id="cb156-17" title="17"><span class="co">#&gt;       x</span></a>
-<a class="sourceLine" id="cb156-18" title="18"><span class="co">#&gt;   &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb156-19" title="19"><span class="co">#&gt; 1 0.548</span></a>
-<a class="sourceLine" id="cb156-20" title="20"><span class="co">#&gt; 2 0.804</span></a>
-<a class="sourceLine" id="cb156-21" title="21"><span class="co">#&gt; 3 0.837</span></a>
-<a class="sourceLine" id="cb156-22" title="22"><span class="co">#&gt; 4 0.930</span></a>
-<a class="sourceLine" id="cb156-23" title="23"><span class="co">#&gt; 5 0.785</span></a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb155-2" title="2">  <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb155-3" title="3">  <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb155-4" title="4">)</a>
+<a class="sourceLine" id="cb155-5" title="5"></a>
+<a class="sourceLine" id="cb155-6" title="6">df[, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)]</a>
+<a class="sourceLine" id="cb155-7" title="7"><span class="co">#&gt; # A tibble: 5 x 2</span></a>
+<a class="sourceLine" id="cb155-8" title="8"><span class="co">#&gt;       x      y</span></a>
+<a class="sourceLine" id="cb155-9" title="9"><span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb155-10" title="10"><span class="co">#&gt; 1 0.548  0.281</span></a>
+<a class="sourceLine" id="cb155-11" title="11"><span class="co">#&gt; 2 0.804 -0.272</span></a>
+<a class="sourceLine" id="cb155-12" title="12"><span class="co">#&gt; 3 0.837  0.388</span></a>
+<a class="sourceLine" id="cb155-13" title="13"><span class="co">#&gt; 4 0.930  1.79 </span></a>
+<a class="sourceLine" id="cb155-14" title="14"><span class="co">#&gt; 5 0.785 -0.308</span></a>
+<a class="sourceLine" id="cb155-15" title="15">df[, <span class="st">&quot;x&quot;</span>]</a>
+<a class="sourceLine" id="cb155-16" title="16"><span class="co">#&gt; # A tibble: 5 x 1</span></a>
+<a class="sourceLine" id="cb155-17" title="17"><span class="co">#&gt;       x</span></a>
+<a class="sourceLine" id="cb155-18" title="18"><span class="co">#&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb155-19" title="19"><span class="co">#&gt; 1 0.548</span></a>
+<a class="sourceLine" id="cb155-20" title="20"><span class="co">#&gt; 2 0.804</span></a>
+<a class="sourceLine" id="cb155-21" title="21"><span class="co">#&gt; 3 0.837</span></a>
+<a class="sourceLine" id="cb155-22" title="22"><span class="co">#&gt; 4 0.930</span></a>
+<a class="sourceLine" id="cb155-23" title="23"><span class="co">#&gt; 5 0.785</span></a></code></pre></div>
 <p>其次，使用<code>$</code>或者<code>[[]]</code>时,<code>tibble</code>不会进行部分匹配，如果该变量不存在，直接报错：</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1">df_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">xyz =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb157-2" title="2">df_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">xyz =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb157-3" title="3"></a>
-<a class="sourceLine" id="cb157-4" title="4">df_<span class="dv">1</span><span class="op">$</span>xy</a>
-<a class="sourceLine" id="cb157-5" title="5"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb157-6" title="6">df_<span class="dv">2</span><span class="op">$</span>xy</a>
-<a class="sourceLine" id="cb157-7" title="7"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">df_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">xyz =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb156-2" title="2">df_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">xyz =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb156-3" title="3"></a>
+<a class="sourceLine" id="cb156-4" title="4">df_<span class="dv">1</span><span class="op">$</span>xy</a>
+<a class="sourceLine" id="cb156-5" title="5"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb156-6" title="6">df_<span class="dv">2</span><span class="op">$</span>xy</a>
+<a class="sourceLine" id="cb156-7" title="7"><span class="co">#&gt; NULL</span></a></code></pre></div>
 <p>另外，<code>[[</code>可以按名称和位置提取变量，<code>$</code>只能按名称提取变量，但可以减少一些输入：</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="co">## 按名称提取</span></a>
-<a class="sourceLine" id="cb158-2" title="2">df<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb158-3" title="3"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a>
-<a class="sourceLine" id="cb158-4" title="4">df[[<span class="st">&quot;x&quot;</span>]]</a>
-<a class="sourceLine" id="cb158-5" title="5"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a>
-<a class="sourceLine" id="cb158-6" title="6"></a>
-<a class="sourceLine" id="cb158-7" title="7"><span class="co">## 按位置提取</span></a>
-<a class="sourceLine" id="cb158-8" title="8">df[[<span class="dv">1</span>]]  <span class="co">## 提取第一列</span></a>
-<a class="sourceLine" id="cb158-9" title="9"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="co">## 按名称提取</span></a>
+<a class="sourceLine" id="cb157-2" title="2">df<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb157-3" title="3"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a>
+<a class="sourceLine" id="cb157-4" title="4">df[[<span class="st">&quot;x&quot;</span>]]</a>
+<a class="sourceLine" id="cb157-5" title="5"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a>
+<a class="sourceLine" id="cb157-6" title="6"></a>
+<a class="sourceLine" id="cb157-7" title="7"><span class="co">## 按位置提取</span></a>
+<a class="sourceLine" id="cb157-8" title="8">df[[<span class="dv">1</span>]]  <span class="co">## 提取第一列</span></a>
+<a class="sourceLine" id="cb157-9" title="9"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a></code></pre></div>
 
 <div class="rmdtip">
 如果想在管道中使用这些取子集操作，需要使用特殊的占位符 <strong>.</strong>
 </div>
 
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span>.[, <span class="st">&quot;x&quot;</span>]</a>
-<a class="sourceLine" id="cb159-2" title="2"><span class="co">#&gt; # A tibble: 5 x 1</span></a>
-<a class="sourceLine" id="cb159-3" title="3"><span class="co">#&gt;       x</span></a>
-<a class="sourceLine" id="cb159-4" title="4"><span class="co">#&gt;   &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb159-5" title="5"><span class="co">#&gt; 1 0.548</span></a>
-<a class="sourceLine" id="cb159-6" title="6"><span class="co">#&gt; 2 0.804</span></a>
-<a class="sourceLine" id="cb159-7" title="7"><span class="co">#&gt; 3 0.837</span></a>
-<a class="sourceLine" id="cb159-8" title="8"><span class="co">#&gt; 4 0.930</span></a>
-<a class="sourceLine" id="cb159-9" title="9"><span class="co">#&gt; 5 0.785</span></a>
-<a class="sourceLine" id="cb159-10" title="10">df <span class="op">%&gt;%</span><span class="st"> </span>.<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb159-11" title="11"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a>
-<a class="sourceLine" id="cb159-12" title="12">df <span class="op">%&gt;%</span><span class="st"> </span>.[[<span class="st">&quot;x&quot;</span>]]</a>
-<a class="sourceLine" id="cb159-13" title="13"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span>.[, <span class="st">&quot;x&quot;</span>]</a>
+<a class="sourceLine" id="cb158-2" title="2"><span class="co">#&gt; # A tibble: 5 x 1</span></a>
+<a class="sourceLine" id="cb158-3" title="3"><span class="co">#&gt;       x</span></a>
+<a class="sourceLine" id="cb158-4" title="4"><span class="co">#&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb158-5" title="5"><span class="co">#&gt; 1 0.548</span></a>
+<a class="sourceLine" id="cb158-6" title="6"><span class="co">#&gt; 2 0.804</span></a>
+<a class="sourceLine" id="cb158-7" title="7"><span class="co">#&gt; 3 0.837</span></a>
+<a class="sourceLine" id="cb158-8" title="8"><span class="co">#&gt; 4 0.930</span></a>
+<a class="sourceLine" id="cb158-9" title="9"><span class="co">#&gt; 5 0.785</span></a>
+<a class="sourceLine" id="cb158-10" title="10">df <span class="op">%&gt;%</span><span class="st"> </span>.<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb158-11" title="11"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a>
+<a class="sourceLine" id="cb158-12" title="12">df <span class="op">%&gt;%</span><span class="st"> </span>.[[<span class="st">&quot;x&quot;</span>]]</a>
+<a class="sourceLine" id="cb158-13" title="13"><span class="co">#&gt; [1] 0.548 0.804 0.837 0.930 0.785</span></a></code></pre></div>
 </div>
 </div>
 <div id="tibble-exercise" class="section level2">
@@ -839,89 +857,89 @@ Name of column to use for rownames.</p>
 
 <p>可以直接根据打印时的显示来判断。</p>
 <p>更一般地，直接使用 <code>class()</code> 函数进行判断, 一个传统数据框将返回“<code>data.frame</code>” ，而tibble返回<code>c("tbl_df", "tbl", "data.frame")</code></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">class</span>(mtcars)</a>
-<a class="sourceLine" id="cb160-2" title="2"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
-<a class="sourceLine" id="cb160-3" title="3"><span class="kw">class</span>(ggplot2<span class="op">::</span>diamonds)</a>
-<a class="sourceLine" id="cb160-4" title="4"><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></a>
-<a class="sourceLine" id="cb160-5" title="5"><span class="kw">class</span>(nycflights13<span class="op">::</span>flights)</a>
-<a class="sourceLine" id="cb160-6" title="6"><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="kw">class</span>(mtcars)</a>
+<a class="sourceLine" id="cb159-2" title="2"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
+<a class="sourceLine" id="cb159-3" title="3"><span class="kw">class</span>(ggplot2<span class="op">::</span>diamonds)</a>
+<a class="sourceLine" id="cb159-4" title="4"><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></a>
+<a class="sourceLine" id="cb159-5" title="5"><span class="kw">class</span>(nycflights13<span class="op">::</span>flights)</a>
+<a class="sourceLine" id="cb159-6" title="6"><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></a></code></pre></div>
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercise 2.2  </strong></span>在以下的数据框中练习如何引用不符合语法规则的变量名</p>
 </div>
 
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1">annoying &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb161-2" title="2">  <span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb161-3" title="3">  <span class="st">`</span><span class="dt">2</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span><span class="op">*</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span>))</a>
-<a class="sourceLine" id="cb161-4" title="4">)</a>
-<a class="sourceLine" id="cb161-5" title="5"></a>
-<a class="sourceLine" id="cb161-6" title="6"><span class="co">## 提取名称为1的变量（不可以用annoying[[`1`]]）</span></a>
-<a class="sourceLine" id="cb161-7" title="7">annoying<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb161-8" title="8"><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></a>
-<a class="sourceLine" id="cb161-9" title="9"><span class="co">## 绘制表示变量1和变量2关系的散点图</span></a>
-<a class="sourceLine" id="cb161-10" title="10"><span class="kw">ggplot</span>(annoying,<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-11" title="11"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-12" title="12"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,<span class="dt">se =</span> F)</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1">annoying &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb160-2" title="2">  <span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb160-3" title="3">  <span class="st">`</span><span class="dt">2</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span><span class="op">*</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span>))</a>
+<a class="sourceLine" id="cb160-4" title="4">)</a>
+<a class="sourceLine" id="cb160-5" title="5"></a>
+<a class="sourceLine" id="cb160-6" title="6"><span class="co">## 提取名称为1的变量（不可以用annoying[[`1`]]）</span></a>
+<a class="sourceLine" id="cb160-7" title="7">annoying<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb160-8" title="8"><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></a>
+<a class="sourceLine" id="cb160-9" title="9"><span class="co">## 绘制表示变量1和变量2关系的散点图</span></a>
+<a class="sourceLine" id="cb160-10" title="10"><span class="kw">ggplot</span>(annoying,<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb160-11" title="11"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb160-12" title="12"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,<span class="dt">se =</span> F)</a></code></pre></div>
 <p><img src="tibble_files/figure-html/unnamed-chunk-26-1.svg" width="80%" /></p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="co">## 创建一个名称为3的新列，其值为列2除以列1</span></a>
-<a class="sourceLine" id="cb162-2" title="2"><span class="kw">mutate</span>(annoying,<span class="st">`</span><span class="dt">3</span><span class="st">`</span>=<span class="st"> `</span><span class="dt">2</span><span class="st">`</span><span class="op">/</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb162-3" title="3"><span class="co">#&gt; # A tibble: 10 x 3</span></a>
-<a class="sourceLine" id="cb162-4" title="4"><span class="co">#&gt;     `1`   `2`   `3`</span></a>
-<a class="sourceLine" id="cb162-5" title="5"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb162-6" title="6"><span class="co">#&gt; 1     1  2.17  2.17</span></a>
-<a class="sourceLine" id="cb162-7" title="7"><span class="co">#&gt; 2     2  3.85  1.93</span></a>
-<a class="sourceLine" id="cb162-8" title="8"><span class="co">#&gt; 3     3  5.58  1.86</span></a>
-<a class="sourceLine" id="cb162-9" title="9"><span class="co">#&gt; 4     4  7.20  1.80</span></a>
-<a class="sourceLine" id="cb162-10" title="10"><span class="co">#&gt; 5     5  9.12  1.82</span></a>
-<a class="sourceLine" id="cb162-11" title="11"><span class="co">#&gt; 6     6 12.1   2.02</span></a>
-<a class="sourceLine" id="cb162-12" title="12"><span class="co">#&gt; # … with 4 more rows</span></a>
-<a class="sourceLine" id="cb162-13" title="13"><span class="co">## 将前两列重新命名为one、two</span></a>
-<a class="sourceLine" id="cb162-14" title="14">(annoying &lt;-<span class="st"> </span><span class="kw">rename</span>(annoying,<span class="dt">one =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="dt">two =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>))</a>
-<a class="sourceLine" id="cb162-15" title="15"><span class="co">#&gt; # A tibble: 10 x 2</span></a>
-<a class="sourceLine" id="cb162-16" title="16"><span class="co">#&gt;     one   two</span></a>
-<a class="sourceLine" id="cb162-17" title="17"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb162-18" title="18"><span class="co">#&gt; 1     1  2.17</span></a>
-<a class="sourceLine" id="cb162-19" title="19"><span class="co">#&gt; 2     2  3.85</span></a>
-<a class="sourceLine" id="cb162-20" title="20"><span class="co">#&gt; 3     3  5.58</span></a>
-<a class="sourceLine" id="cb162-21" title="21"><span class="co">#&gt; 4     4  7.20</span></a>
-<a class="sourceLine" id="cb162-22" title="22"><span class="co">#&gt; 5     5  9.12</span></a>
-<a class="sourceLine" id="cb162-23" title="23"><span class="co">#&gt; 6     6 12.1 </span></a>
-<a class="sourceLine" id="cb162-24" title="24"><span class="co">#&gt; # … with 4 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1"><span class="co">## 创建一个名称为3的新列，其值为列2除以列1</span></a>
+<a class="sourceLine" id="cb161-2" title="2"><span class="kw">mutate</span>(annoying,<span class="st">`</span><span class="dt">3</span><span class="st">`</span>=<span class="st"> `</span><span class="dt">2</span><span class="st">`</span><span class="op">/</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb161-3" title="3"><span class="co">#&gt; # A tibble: 10 x 3</span></a>
+<a class="sourceLine" id="cb161-4" title="4"><span class="co">#&gt;     `1`   `2`   `3`</span></a>
+<a class="sourceLine" id="cb161-5" title="5"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb161-6" title="6"><span class="co">#&gt; 1     1  2.17  2.17</span></a>
+<a class="sourceLine" id="cb161-7" title="7"><span class="co">#&gt; 2     2  3.85  1.93</span></a>
+<a class="sourceLine" id="cb161-8" title="8"><span class="co">#&gt; 3     3  5.58  1.86</span></a>
+<a class="sourceLine" id="cb161-9" title="9"><span class="co">#&gt; 4     4  7.20  1.80</span></a>
+<a class="sourceLine" id="cb161-10" title="10"><span class="co">#&gt; 5     5  9.12  1.82</span></a>
+<a class="sourceLine" id="cb161-11" title="11"><span class="co">#&gt; 6     6 12.1   2.02</span></a>
+<a class="sourceLine" id="cb161-12" title="12"><span class="co">#&gt; # … with 4 more rows</span></a>
+<a class="sourceLine" id="cb161-13" title="13"><span class="co">## 将前两列重新命名为one、two</span></a>
+<a class="sourceLine" id="cb161-14" title="14">(annoying &lt;-<span class="st"> </span><span class="kw">rename</span>(annoying,<span class="dt">one =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="dt">two =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>))</a>
+<a class="sourceLine" id="cb161-15" title="15"><span class="co">#&gt; # A tibble: 10 x 2</span></a>
+<a class="sourceLine" id="cb161-16" title="16"><span class="co">#&gt;     one   two</span></a>
+<a class="sourceLine" id="cb161-17" title="17"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb161-18" title="18"><span class="co">#&gt; 1     1  2.17</span></a>
+<a class="sourceLine" id="cb161-19" title="19"><span class="co">#&gt; 2     2  3.85</span></a>
+<a class="sourceLine" id="cb161-20" title="20"><span class="co">#&gt; 3     3  5.58</span></a>
+<a class="sourceLine" id="cb161-21" title="21"><span class="co">#&gt; 4     4  7.20</span></a>
+<a class="sourceLine" id="cb161-22" title="22"><span class="co">#&gt; 5     5  9.12</span></a>
+<a class="sourceLine" id="cb161-23" title="23"><span class="co">#&gt; 6     6 12.1 </span></a>
+<a class="sourceLine" id="cb161-24" title="24"><span class="co">#&gt; # … with 4 more rows</span></a></code></pre></div>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercise 2.3  </strong></span><code>tibble::enframe()</code>函数的功能是什么？什么时候可以使用这个函数？
 </div>
 
 <p><code>enframe()</code>接受一个具名向量(named vectors)转换为一个tibble：</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">5</span>, <span class="dt">b =</span> <span class="dv">7</span>))</a>
-<a class="sourceLine" id="cb163-2" title="2"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
-<a class="sourceLine" id="cb163-3" title="3"><span class="co">#&gt;   name  value</span></a>
-<a class="sourceLine" id="cb163-4" title="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb163-5" title="5"><span class="co">#&gt; 1 a         5</span></a>
-<a class="sourceLine" id="cb163-6" title="6"><span class="co">#&gt; 2 b         7</span></a>
-<a class="sourceLine" id="cb163-7" title="7"><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">c =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb163-8" title="8"><span class="co">#&gt; # A tibble: 9 x 2</span></a>
-<a class="sourceLine" id="cb163-9" title="9"><span class="co">#&gt;   name  value</span></a>
-<a class="sourceLine" id="cb163-10" title="10"><span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb163-11" title="11"><span class="co">#&gt; 1 a1        1</span></a>
-<a class="sourceLine" id="cb163-12" title="12"><span class="co">#&gt; 2 a2        2</span></a>
-<a class="sourceLine" id="cb163-13" title="13"><span class="co">#&gt; 3 a3        3</span></a>
-<a class="sourceLine" id="cb163-14" title="14"><span class="co">#&gt; 4 b1        2</span></a>
-<a class="sourceLine" id="cb163-15" title="15"><span class="co">#&gt; 5 b2        3</span></a>
-<a class="sourceLine" id="cb163-16" title="16"><span class="co">#&gt; 6 b3        4</span></a>
-<a class="sourceLine" id="cb163-17" title="17"><span class="co">#&gt; # … with 3 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">5</span>, <span class="dt">b =</span> <span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
+<a class="sourceLine" id="cb162-3" title="3"><span class="co">#&gt;   name  value</span></a>
+<a class="sourceLine" id="cb162-4" title="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb162-5" title="5"><span class="co">#&gt; 1 a         5</span></a>
+<a class="sourceLine" id="cb162-6" title="6"><span class="co">#&gt; 2 b         7</span></a>
+<a class="sourceLine" id="cb162-7" title="7"><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">c =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb162-8" title="8"><span class="co">#&gt; # A tibble: 9 x 2</span></a>
+<a class="sourceLine" id="cb162-9" title="9"><span class="co">#&gt;   name  value</span></a>
+<a class="sourceLine" id="cb162-10" title="10"><span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb162-11" title="11"><span class="co">#&gt; 1 a1        1</span></a>
+<a class="sourceLine" id="cb162-12" title="12"><span class="co">#&gt; 2 a2        2</span></a>
+<a class="sourceLine" id="cb162-13" title="13"><span class="co">#&gt; 3 a3        3</span></a>
+<a class="sourceLine" id="cb162-14" title="14"><span class="co">#&gt; 4 b1        2</span></a>
+<a class="sourceLine" id="cb162-15" title="15"><span class="co">#&gt; 5 b2        3</span></a>
+<a class="sourceLine" id="cb162-16" title="16"><span class="co">#&gt; 6 b3        4</span></a>
+<a class="sourceLine" id="cb162-17" title="17"><span class="co">#&gt; # … with 3 more rows</span></a></code></pre></div>
 <p><code>tibble()</code> 在这种情况下只会识别一个完整的向量</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">tibble</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">c =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb164-2" title="2"><span class="co">#&gt; # A tibble: 9 x 1</span></a>
-<a class="sourceLine" id="cb164-3" title="3"><span class="co">#&gt;   `c(a = 1:3, b = 2:4, c = 3:5)`</span></a>
-<a class="sourceLine" id="cb164-4" title="4"><span class="co">#&gt;                            &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb164-5" title="5"><span class="co">#&gt; 1                              1</span></a>
-<a class="sourceLine" id="cb164-6" title="6"><span class="co">#&gt; 2                              2</span></a>
-<a class="sourceLine" id="cb164-7" title="7"><span class="co">#&gt; 3                              3</span></a>
-<a class="sourceLine" id="cb164-8" title="8"><span class="co">#&gt; 4                              2</span></a>
-<a class="sourceLine" id="cb164-9" title="9"><span class="co">#&gt; 5                              3</span></a>
-<a class="sourceLine" id="cb164-10" title="10"><span class="co">#&gt; 6                              4</span></a>
-<a class="sourceLine" id="cb164-11" title="11"><span class="co">#&gt; # … with 3 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="kw">tibble</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">c =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb163-2" title="2"><span class="co">#&gt; # A tibble: 9 x 1</span></a>
+<a class="sourceLine" id="cb163-3" title="3"><span class="co">#&gt;   `c(a = 1:3, b = 2:4, c = 3:5)`</span></a>
+<a class="sourceLine" id="cb163-4" title="4"><span class="co">#&gt;                            &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb163-5" title="5"><span class="co">#&gt; 1                              1</span></a>
+<a class="sourceLine" id="cb163-6" title="6"><span class="co">#&gt; 2                              2</span></a>
+<a class="sourceLine" id="cb163-7" title="7"><span class="co">#&gt; 3                              3</span></a>
+<a class="sourceLine" id="cb163-8" title="8"><span class="co">#&gt; 4                              2</span></a>
+<a class="sourceLine" id="cb163-9" title="9"><span class="co">#&gt; 5                              3</span></a>
+<a class="sourceLine" id="cb163-10" title="10"><span class="co">#&gt; 6                              4</span></a>
+<a class="sourceLine" id="cb163-11" title="11"><span class="co">#&gt; # … with 3 more rows</span></a></code></pre></div>
 
 </div>
 </div>

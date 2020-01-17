@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 lubridate | R for data science: tidyverse and beyond</title>
   <meta name="description" content="4 lubridate | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 lubridate | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-01-07" />
+<meta name="date" content="2020-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
+<script src="libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
+<script src="libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
 
 
 <style type="text/css">
@@ -237,28 +241,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="forcats.html"><a href="forcats.html#合并因子"><i class="fa fa-check"></i><b>5.5</b> 合并因子</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tidyr.html"><a href="tidyr.html"><i class="fa fa-check"></i><b>6</b> tidyr</a><ul>
-<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> 简介</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> tidy data 简介</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="tidyr.html"><a href="tidyr.html#练习-11"><i class="fa fa-check"></i><b>6.1.1</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#spread和gather"><i class="fa fa-check"></i><b>6.2</b> <code>spread()</code>和<code>gather()</code></a><ul>
-<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#gather"><i class="fa fa-check"></i><b>6.2.1</b> <code>gather()</code></a></li>
-<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#spread"><i class="fa fa-check"></i><b>6.2.2</b> <code>spread()</code></a></li>
-<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.3</b> 练习</a></li>
+<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#pivoting"><i class="fa fa-check"></i><b>6.2</b> pivoting</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer"><i class="fa fa-check"></i><b>6.2.1</b> <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.2.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#combining-pivot_longer-and-pivot_wider"><i class="fa fa-check"></i><b>6.2.3</b> Combining <code>pivot_longer()</code> and <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.4" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.4</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#separate和untie"><i class="fa fa-check"></i><b>6.3</b> <code>separate()</code>和<code>untie()</code></a><ul>
-<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.3.1</b> <code>separate()</code></a></li>
-<li class="chapter" data-level="6.3.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.3.2</b> <code>unite()</code></a></li>
-<li class="chapter" data-level="6.3.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.3.3</b> 练习</a></li>
+<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#nesting"><i class="fa fa-check"></i><b>6.3</b> nesting</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#nested-data-and-models"><i class="fa fa-check"></i><b>6.3.1</b> nested data and models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.4</b> 缺失值</a></li>
-<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.5</b> Case Study</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.5.1</b> 练习</a></li>
+<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#rectangling"><i class="fa fa-check"></i><b>6.4</b> rectangling</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="tidyr.html"><a href="tidyr.html#github-users"><i class="fa fa-check"></i><b>6.4.1</b> Github users</a></li>
+<li class="chapter" data-level="6.4.2" data-path="tidyr.html"><a href="tidyr.html#github-repos"><i class="fa fa-check"></i><b>6.4.2</b> Github repos</a></li>
+<li class="chapter" data-level="6.4.3" data-path="tidyr.html"><a href="tidyr.html#game-of-throne-characters"><i class="fa fa-check"></i><b>6.4.3</b> Game of Throne characters</a></li>
+<li class="chapter" data-level="6.4.4" data-path="tidyr.html"><a href="tidyr.html#sharla-gelfands-discography"><i class="fa fa-check"></i><b>6.4.4</b> Sharla Gelfand’s discography</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.6</b> 拓展：None-tidy data</a></li>
-<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-1.0.0"><i class="fa fa-check"></i><b>6.7</b> <code>tidyr 1.0.0</code></a><ul>
-<li class="chapter" data-level="6.7.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer-和-pivot_wider"><i class="fa fa-check"></i><b>6.7.1</b> <code>pivot_longer</code> 和 <code>pivot_wider</code></a></li>
-<li class="chapter" data-level="6.7.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.7.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#separate-和-untie"><i class="fa fa-check"></i><b>6.5</b> <code>separate()</code> 和 <code>untie()</code></a><ul>
+<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.5.1</b> <code>separate()</code></a></li>
+<li class="chapter" data-level="6.5.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.5.2</b> <code>unite()</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.5.3</b> 练习</a></li>
 </ul></li>
+<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#miscellanea-functions"><i class="fa fa-check"></i><b>6.6</b> Miscellanea Functions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="tidyr.html"><a href="tidyr.html#uncount"><i class="fa fa-check"></i><b>6.6.1</b> <code>uncount()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.7</b> 缺失值</a></li>
+<li class="chapter" data-level="6.8" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.8</b> Case Study</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.8.1</b> 练习</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.9</b> 拓展：None-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>7</b> relational data</a><ul>
 <li class="chapter" data-level="7.1" data-path="relational-data.html"><a href="relational-data.html#introduction"><i class="fa fa-check"></i><b>7.1</b> introduction</a></li>
@@ -278,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="purrr.html"><a href="purrr.html#group_"><i class="fa fa-check"></i><b>9.4</b> group_</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="purrr.html"><a href="purrr.html#group_mapgroup_modify"><i class="fa fa-check"></i><b>9.4.1</b> group_map、group_modify</a></li>
-<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_split、group_keys、group_data</a></li>
+<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_nestgroup_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_nest、group_split、group_keys、group_data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Importing</b></span></li>
@@ -292,47 +305,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
 <li class="chapter" data-level="12" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>12</b> data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.1</b> dtplyr</a></li>
-<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.2</b> maditr</a></li>
-<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.3</b> tidyfast</a></li>
-<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.4</b> disk.frame</a></li>
+<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#data-table-basics"><i class="fa fa-check"></i><b>12.1</b> 基本使用</a></li>
+<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.2</b> dtplyr</a></li>
+<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.3</b> maditr</a></li>
+<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.4</b> tidyfast</a></li>
+<li class="chapter" data-level="12.5" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.5</b> disk.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="rowwise-operation.html"><a href="rowwise-operation.html"><i class="fa fa-check"></i><b>13</b> rowwise operation</a><ul>
 <li class="chapter" data-level="13.1" data-path="rowwise-operation.html"><a href="rowwise-operation.html#do-rowwise"><i class="fa fa-check"></i><b>13.1</b> do() + rowwise()</a></li>
 <li class="chapter" data-level="13.2" data-path="rowwise-operation.html"><a href="rowwise-operation.html#rap"><i class="fa fa-check"></i><b>13.2</b> rap</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>14</b> Data Summary</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>14.1</b> skimr</a></li>
-<li class="chapter" data-level="14.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>14.2</b> visdat</a></li>
-<li class="chapter" data-level="14.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>14.3</b> summarytools</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>14.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>14.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="14" data-path="sjmisc.html"><a href="sjmisc.html"><i class="fa fa-check"></i><b>14</b> sjmisc</a><ul>
+<li class="chapter" data-level="14.1" data-path="sjmisc.html"><a href="sjmisc.html#frq-和-flat_table-一维和二维频数表"><i class="fa fa-check"></i><b>14.1</b> <code>frq()</code> 和 <code>flat_table()</code> 一维和二维频数表</a></li>
+<li class="chapter" data-level="14.2" data-path="sjmisc.html"><a href="sjmisc.html#rec-重新编码"><i class="fa fa-check"></i><b>14.2</b> <code>rec()</code>: 重新编码</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>15</b> Data Summary</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>15.1</b> skimr</a></li>
+<li class="chapter" data-level="15.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>15.2</b> visdat</a></li>
+<li class="chapter" data-level="15.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>15.3</b> summarytools</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>15.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="15.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>15.3.2</b> <code>descr()</code></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IV Cleaning and Tidying</b></span></li>
-<li class="chapter" data-level="15" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>15</b> Janitor</a><ul>
-<li class="chapter" data-level="15.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>15.1</b> 清洗</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>15.1.1</b> <code>clean_names</code></a></li>
-<li class="chapter" data-level="15.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>15.1.2</b> <code>compare_df_cols</code></a></li>
+<li class="chapter" data-level="16" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>16</b> Janitor</a><ul>
+<li class="chapter" data-level="16.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>16.1</b> 清洗</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>16.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="16.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>16.1.2</b> <code>compare_df_cols</code></a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>15.2</b> 探索</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>15.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>15.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="15.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>15.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="15.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>15.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="15.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>15.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="15.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>15.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="15.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>15.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="16.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>16.2</b> 探索</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>16.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>16.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="16.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>16.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="16.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>16.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="16.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>16.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="16.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>16.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="16.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>16.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>16</b> 处理缺失值</a><ul>
-<li class="chapter" data-level="16.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>16.1</b> 探索</a></li>
-<li class="chapter" data-level="16.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>16.2</b> 填充</a></li>
+<li class="chapter" data-level="17" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>17</b> 处理缺失值</a><ul>
+<li class="chapter" data-level="17.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>17.1</b> 探索</a></li>
+<li class="chapter" data-level="17.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>17.2</b> 填充</a></li>
 </ul></li>
 <li class="part"><span><b>V Modelling</b></span></li>
-<li class="chapter" data-level="17" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>17</b> tidymodels</a></li>
-<li class="chapter" data-level="18" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>18</b> caret</a></li>
-<li class="chapter" data-level="19" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>19</b> vtreat</a></li>
+<li class="chapter" data-level="18" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>18</b> tidymodels</a></li>
+<li class="chapter" data-level="19" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>19</b> caret</a></li>
+<li class="chapter" data-level="20" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>20</b> vtreat</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
@@ -376,8 +394,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>因为地球自转正在逐渐变慢，所以有时候要增加一个“闰秒”，有些分钟就变成了61秒。目前，全球已经进行了27次闰秒，均为正闰秒。最近一次闰秒在北京时间2017年1月1日7时59分59秒（时钟显示07:59:60）出现。这也是本世纪的第五次闰秒。</p>
 </blockquote>
 <p>日期和时间非常复杂，因为它们要兼顾两种物理现象（地球的自转以及围绕太阳的公转）和一系列地理政治现象（包括月份、市区和夏时制）。本章主要讨论 <strong>lubridate</strong> 包，它可以使得R对日期和时间的处理更加容易。lubridate 不是 tidyverse 的核心 R 包，故需要手动加载。此外还需要 <code>nycflights</code> 作为练习数据。</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb210-2" title="2"><span class="kw">library</span>(nycflights13)</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb209-2" title="2"><span class="kw">library</span>(nycflights13)</a></code></pre></div>
 <div id="创建日期和时间" class="section level2">
 <h2><span class="header-section-number">4.1</span> 创建日期和时间</h2>
 <p>表示日期或时间的数据有3种类型:</p>
@@ -390,10 +408,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>如果能够满足需要，就应该使用最简单的数据类型。这意味着只要能够使用日期型数据，那么就不应该使用日期时间型数据。日期时间型数据要复杂很多，因为要处理时期，我们会在本章末尾继续讨论这个问题。</p>
 <p>要想得到当前日期或当前时期时间，可以使用 <code>today()</code> 或 <code>now()</code> 函数：</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="kw">today</span>()</a>
-<a class="sourceLine" id="cb211-2" title="2"><span class="co">#&gt; [1] &quot;2019-12-12&quot;</span></a>
-<a class="sourceLine" id="cb211-3" title="3"><span class="kw">now</span>()</a>
-<a class="sourceLine" id="cb211-4" title="4"><span class="co">#&gt; [1] &quot;2019-12-12 00:49:31 CST&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="kw">today</span>()</a>
+<a class="sourceLine" id="cb210-2" title="2"><span class="co">#&gt; [1] &quot;2019-12-12&quot;</span></a>
+<a class="sourceLine" id="cb210-3" title="3"><span class="kw">now</span>()</a>
+<a class="sourceLine" id="cb210-4" title="4"><span class="co">#&gt; [1] &quot;2019-12-12 00:49:31 CST&quot;</span></a></code></pre></div>
 <p>除此之外，以下3种方法也可以创建日期或时间：</p>
 <ul>
 <li>通过字符串创建<br />
@@ -405,131 +423,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="通过字符串创建" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> 通过字符串创建</h3>
 <p>日期时间数据经常用字符串表示。在事先知晓各个组成部分顺序的前提下，通过 <code>lubridate</code> 中的一些辅助函数，可以轻松将字符串转换为日期时间格式。因为要想使用函数，需要先确定年、月、日在日期数据中的顺序，然后按照同样的顺讯排列字母 y、m、d，这样就可以组成能够创建日期格式的 lubridate 函数名称，例如：</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="kw">ymd</span>(<span class="st">&quot;2017-03-01&quot;</span>)</a>
-<a class="sourceLine" id="cb212-2" title="2"><span class="co">#&gt; [1] &quot;2017-03-01&quot;</span></a>
-<a class="sourceLine" id="cb212-3" title="3"><span class="kw">mdy</span>(<span class="st">&quot;January 1st,2017&quot;</span>)</a>
-<a class="sourceLine" id="cb212-4" title="4"><span class="co">#&gt; [1] &quot;2017-01-01&quot;</span></a>
-<a class="sourceLine" id="cb212-5" title="5"><span class="kw">dmy</span>(<span class="st">&quot;31-Jan-2017&quot;</span>)</a>
-<a class="sourceLine" id="cb212-6" title="6"><span class="co">#&gt; [1] &quot;2017-01-31&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="kw">ymd</span>(<span class="st">&quot;2017-03-01&quot;</span>)</a>
+<a class="sourceLine" id="cb211-2" title="2"><span class="co">#&gt; [1] &quot;2017-03-01&quot;</span></a>
+<a class="sourceLine" id="cb211-3" title="3"><span class="kw">mdy</span>(<span class="st">&quot;January 1st,2017&quot;</span>)</a>
+<a class="sourceLine" id="cb211-4" title="4"><span class="co">#&gt; [1] &quot;2017-01-01&quot;</span></a>
+<a class="sourceLine" id="cb211-5" title="5"><span class="kw">dmy</span>(<span class="st">&quot;31-Jan-2017&quot;</span>)</a>
+<a class="sourceLine" id="cb211-6" title="6"><span class="co">#&gt; [1] &quot;2017-01-31&quot;</span></a></code></pre></div>
 <p>这些函数也可以接受不带引号的数值，这是创建单个时期时间对象的最简单的方法。在筛选日期时间数据时，就可以使用这种方法：</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="kw">ymd</span>(<span class="dv">20190731</span>)</a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="co">#&gt; [1] &quot;2019-07-31&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="kw">ymd</span>(<span class="dv">20190731</span>)</a>
+<a class="sourceLine" id="cb212-2" title="2"><span class="co">#&gt; [1] &quot;2019-07-31&quot;</span></a></code></pre></div>
 <p><code>ymd()</code>和其他类似函数可以创建日期数据。想要创建日期时间型数据，可以在后面加一个下划线，以及h、m、s之中的一个或多个字母（依然要遵循顺序），这样就可以得到解析日期时间数据的函数了：</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">ymd_hms</span>(<span class="st">&quot;2017-01-31 20:11:59&quot;</span>)</a>
-<a class="sourceLine" id="cb214-2" title="2"><span class="co">#&gt; [1] &quot;2017-01-31 20:11:59 UTC&quot;</span></a>
-<a class="sourceLine" id="cb214-3" title="3"><span class="kw">mdy_hm</span>(<span class="st">&quot;01/31/2017 08:01&quot;</span>)</a>
-<a class="sourceLine" id="cb214-4" title="4"><span class="co">#&gt; [1] &quot;2017-01-31 08:01:00 UTC&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="kw">ymd_hms</span>(<span class="st">&quot;2017-01-31 20:11:59&quot;</span>)</a>
+<a class="sourceLine" id="cb213-2" title="2"><span class="co">#&gt; [1] &quot;2017-01-31 20:11:59 UTC&quot;</span></a>
+<a class="sourceLine" id="cb213-3" title="3"><span class="kw">mdy_hm</span>(<span class="st">&quot;01/31/2017 08:01&quot;</span>)</a>
+<a class="sourceLine" id="cb213-4" title="4"><span class="co">#&gt; [1] &quot;2017-01-31 08:01:00 UTC&quot;</span></a></code></pre></div>
 <p>如果用类似函数尝试解析包含无效内容的字符串，将会返回 NA ：</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">ymd</span>(<span class="st">&quot;2010-10-10&quot;</span>, <span class="st">&quot;bananas&quot;</span>)</a>
-<a class="sourceLine" id="cb215-2" title="2"><span class="co">#&gt; [1] &quot;2010-10-10&quot; NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">ymd</span>(<span class="st">&quot;2010-10-10&quot;</span>, <span class="st">&quot;bananas&quot;</span>)</a>
+<a class="sourceLine" id="cb214-2" title="2"><span class="co">#&gt; [1] &quot;2010-10-10&quot; NA</span></a></code></pre></div>
 <p>通过添加一个时区参数，可以将一个时期强制转换为日期时间：</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="co">## 这是一个日期时间型变量</span></a>
-<a class="sourceLine" id="cb216-2" title="2"><span class="kw">ymd</span>(<span class="dv">20170131</span>, <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>) </a>
-<a class="sourceLine" id="cb216-3" title="3"><span class="co">#&gt; [1] &quot;2017-01-31 UTC&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="co">## 这是一个日期时间型变量</span></a>
+<a class="sourceLine" id="cb215-2" title="2"><span class="kw">ymd</span>(<span class="dv">20170131</span>, <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>) </a>
+<a class="sourceLine" id="cb215-3" title="3"><span class="co">#&gt; [1] &quot;2017-01-31 UTC&quot;</span></a></code></pre></div>
 </div>
 <div id="通过各个成分创建" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> 通过各个成分创建</h3>
 <p>除了单个字符串，日期时间数据的各个成分还经常分布在表格的多个列中。flights 数据就是这样的：</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(year, month, day, hour, minute)</a>
-<a class="sourceLine" id="cb217-2" title="2"><span class="co">#&gt; # A tibble: 336,776 x 5</span></a>
-<a class="sourceLine" id="cb217-3" title="3"><span class="co">#&gt;    year month   day  hour minute</span></a>
-<a class="sourceLine" id="cb217-4" title="4"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb217-5" title="5"><span class="co">#&gt; 1  2013     1     1     5     15</span></a>
-<a class="sourceLine" id="cb217-6" title="6"><span class="co">#&gt; 2  2013     1     1     5     29</span></a>
-<a class="sourceLine" id="cb217-7" title="7"><span class="co">#&gt; 3  2013     1     1     5     40</span></a>
-<a class="sourceLine" id="cb217-8" title="8"><span class="co">#&gt; 4  2013     1     1     5     45</span></a>
-<a class="sourceLine" id="cb217-9" title="9"><span class="co">#&gt; 5  2013     1     1     6      0</span></a>
-<a class="sourceLine" id="cb217-10" title="10"><span class="co">#&gt; 6  2013     1     1     5     58</span></a>
-<a class="sourceLine" id="cb217-11" title="11"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(year, month, day, hour, minute)</a>
+<a class="sourceLine" id="cb216-2" title="2"><span class="co">#&gt; # A tibble: 336,776 x 5</span></a>
+<a class="sourceLine" id="cb216-3" title="3"><span class="co">#&gt;    year month   day  hour minute</span></a>
+<a class="sourceLine" id="cb216-4" title="4"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb216-5" title="5"><span class="co">#&gt; 1  2013     1     1     5     15</span></a>
+<a class="sourceLine" id="cb216-6" title="6"><span class="co">#&gt; 2  2013     1     1     5     29</span></a>
+<a class="sourceLine" id="cb216-7" title="7"><span class="co">#&gt; 3  2013     1     1     5     40</span></a>
+<a class="sourceLine" id="cb216-8" title="8"><span class="co">#&gt; 4  2013     1     1     5     45</span></a>
+<a class="sourceLine" id="cb216-9" title="9"><span class="co">#&gt; 5  2013     1     1     6      0</span></a>
+<a class="sourceLine" id="cb216-10" title="10"><span class="co">#&gt; 6  2013     1     1     5     58</span></a>
+<a class="sourceLine" id="cb216-11" title="11"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
 <p>想要用这样的多个变量创建一个完整的日期或时间数据，可以使用<code>make_date(year,month.day,hour,min,sec,tz)</code>(创建日期)或<code>make_datetime(year,month.day,hour,min,sec,tz)</code>（创建日期时间）函数:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="co">## 使用make_datetime</span></a>
-<a class="sourceLine" id="cb218-2" title="2">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb218-3" title="3"><span class="st">  </span><span class="kw">select</span>(year, month, day, hour, minute) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb218-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">departure =</span> <span class="kw">make_datetime</span>(year, month, day, hour, minute))</a>
-<a class="sourceLine" id="cb218-5" title="5"><span class="co">#&gt; # A tibble: 336,776 x 6</span></a>
-<a class="sourceLine" id="cb218-6" title="6"><span class="co">#&gt;    year month   day  hour minute departure          </span></a>
-<a class="sourceLine" id="cb218-7" title="7"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;             </span></a>
-<a class="sourceLine" id="cb218-8" title="8"><span class="co">#&gt; 1  2013     1     1     5     15 2013-01-01 05:15:00</span></a>
-<a class="sourceLine" id="cb218-9" title="9"><span class="co">#&gt; 2  2013     1     1     5     29 2013-01-01 05:29:00</span></a>
-<a class="sourceLine" id="cb218-10" title="10"><span class="co">#&gt; 3  2013     1     1     5     40 2013-01-01 05:40:00</span></a>
-<a class="sourceLine" id="cb218-11" title="11"><span class="co">#&gt; 4  2013     1     1     5     45 2013-01-01 05:45:00</span></a>
-<a class="sourceLine" id="cb218-12" title="12"><span class="co">#&gt; 5  2013     1     1     6      0 2013-01-01 06:00:00</span></a>
-<a class="sourceLine" id="cb218-13" title="13"><span class="co">#&gt; 6  2013     1     1     5     58 2013-01-01 05:58:00</span></a>
-<a class="sourceLine" id="cb218-14" title="14"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="co">## 使用make_datetime</span></a>
+<a class="sourceLine" id="cb217-2" title="2">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb217-3" title="3"><span class="st">  </span><span class="kw">select</span>(year, month, day, hour, minute) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb217-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">departure =</span> <span class="kw">make_datetime</span>(year, month, day, hour, minute))</a>
+<a class="sourceLine" id="cb217-5" title="5"><span class="co">#&gt; # A tibble: 336,776 x 6</span></a>
+<a class="sourceLine" id="cb217-6" title="6"><span class="co">#&gt;    year month   day  hour minute departure          </span></a>
+<a class="sourceLine" id="cb217-7" title="7"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;             </span></a>
+<a class="sourceLine" id="cb217-8" title="8"><span class="co">#&gt; 1  2013     1     1     5     15 2013-01-01 05:15:00</span></a>
+<a class="sourceLine" id="cb217-9" title="9"><span class="co">#&gt; 2  2013     1     1     5     29 2013-01-01 05:29:00</span></a>
+<a class="sourceLine" id="cb217-10" title="10"><span class="co">#&gt; 3  2013     1     1     5     40 2013-01-01 05:40:00</span></a>
+<a class="sourceLine" id="cb217-11" title="11"><span class="co">#&gt; 4  2013     1     1     5     45 2013-01-01 05:45:00</span></a>
+<a class="sourceLine" id="cb217-12" title="12"><span class="co">#&gt; 5  2013     1     1     6      0 2013-01-01 06:00:00</span></a>
+<a class="sourceLine" id="cb217-13" title="13"><span class="co">#&gt; 6  2013     1     1     5     58 2013-01-01 05:58:00</span></a>
+<a class="sourceLine" id="cb217-14" title="14"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
 <p>因为这里没有给出分钟，所以 <code>make_datetime()</code> 默认其 为0.</p>
 <p>flights 数据集中的 <code>hour</code> 和 <code>time</code> 均是航班起飞时间的预计值。为了算出实际起飞、到达时间，我们需要使用<code>dep_time</code>和<code>arr_time</code>这两个变量，不过，它们同时包括了小时和分钟数：</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(dep_time,</a>
-<a class="sourceLine" id="cb219-2" title="2">                   arr_time,</a>
-<a class="sourceLine" id="cb219-3" title="3">                   sched_dep_time,</a>
-<a class="sourceLine" id="cb219-4" title="4">                   sched_arr_time)</a>
-<a class="sourceLine" id="cb219-5" title="5"><span class="co">#&gt; # A tibble: 336,776 x 4</span></a>
-<a class="sourceLine" id="cb219-6" title="6"><span class="co">#&gt;   dep_time arr_time sched_dep_time sched_arr_time</span></a>
-<a class="sourceLine" id="cb219-7" title="7"><span class="co">#&gt;      &lt;int&gt;    &lt;int&gt;          &lt;int&gt;          &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb219-8" title="8"><span class="co">#&gt; 1      517      830            515            819</span></a>
-<a class="sourceLine" id="cb219-9" title="9"><span class="co">#&gt; 2      533      850            529            830</span></a>
-<a class="sourceLine" id="cb219-10" title="10"><span class="co">#&gt; 3      542      923            540            850</span></a>
-<a class="sourceLine" id="cb219-11" title="11"><span class="co">#&gt; 4      544     1004            545           1022</span></a>
-<a class="sourceLine" id="cb219-12" title="12"><span class="co">#&gt; 5      554      812            600            837</span></a>
-<a class="sourceLine" id="cb219-13" title="13"><span class="co">#&gt; 6      554      740            558            728</span></a>
-<a class="sourceLine" id="cb219-14" title="14"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(dep_time,</a>
+<a class="sourceLine" id="cb218-2" title="2">                   arr_time,</a>
+<a class="sourceLine" id="cb218-3" title="3">                   sched_dep_time,</a>
+<a class="sourceLine" id="cb218-4" title="4">                   sched_arr_time)</a>
+<a class="sourceLine" id="cb218-5" title="5"><span class="co">#&gt; # A tibble: 336,776 x 4</span></a>
+<a class="sourceLine" id="cb218-6" title="6"><span class="co">#&gt;   dep_time arr_time sched_dep_time sched_arr_time</span></a>
+<a class="sourceLine" id="cb218-7" title="7"><span class="co">#&gt;      &lt;int&gt;    &lt;int&gt;          &lt;int&gt;          &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb218-8" title="8"><span class="co">#&gt; 1      517      830            515            819</span></a>
+<a class="sourceLine" id="cb218-9" title="9"><span class="co">#&gt; 2      533      850            529            830</span></a>
+<a class="sourceLine" id="cb218-10" title="10"><span class="co">#&gt; 3      542      923            540            850</span></a>
+<a class="sourceLine" id="cb218-11" title="11"><span class="co">#&gt; 4      544     1004            545           1022</span></a>
+<a class="sourceLine" id="cb218-12" title="12"><span class="co">#&gt; 5      554      812            600            837</span></a>
+<a class="sourceLine" id="cb218-13" title="13"><span class="co">#&gt; 6      554      740            558            728</span></a>
+<a class="sourceLine" id="cb218-14" title="14"><span class="co">#&gt; # … with 3.368e+05 more rows</span></a></code></pre></div>
 <p>为了创建出表示实际出发和到达时间的日期时间型数据，我们首先编写一个函数以使<code>make_datetime</code>函数适应<code>dep_time</code>和<code>arr_time</code>这种比较奇怪的表示方式，思想是使用模运算将小时成分与分钟成分分离。一旦创建了日期时间变量，我们就在本章剩余部分使用这些变量进行讨论：</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">make_datetime_<span class="dv">100</span> &lt;-<span class="st"> </span><span class="cf">function</span>(year, month, day, time) {</a>
-<a class="sourceLine" id="cb220-2" title="2">  hour =<span class="st"> </span>time <span class="op">%/%</span><span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb220-3" title="3">  minute =<span class="st"> </span>time <span class="op">%%</span><span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb220-4" title="4">  <span class="kw">make_datetime</span>(year, month, day, hour, minute)</a>
-<a class="sourceLine" id="cb220-5" title="5">}</a>
-<a class="sourceLine" id="cb220-6" title="6"></a>
-<a class="sourceLine" id="cb220-7" title="7">(flights_dt &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb220-8" title="8"><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dep_time), <span class="op">!</span><span class="kw">is.na</span>(arr_time)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb220-9" title="9"><span class="st">    </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb220-10" title="10">      <span class="dt">dep_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, dep_time),</a>
-<a class="sourceLine" id="cb220-11" title="11">      <span class="dt">arr_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, arr_time),</a>
-<a class="sourceLine" id="cb220-12" title="12">      <span class="dt">sched_dep_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, sched_dep_time),</a>
-<a class="sourceLine" id="cb220-13" title="13">      <span class="dt">sched_arr_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, sched_arr_time))  <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb220-14" title="14"><span class="st">    </span><span class="kw">select</span>(origin,dest,<span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>), <span class="kw">ends_with</span>(<span class="st">&quot;time&quot;</span>))</a>
-<a class="sourceLine" id="cb220-15" title="15">)</a>
-<a class="sourceLine" id="cb220-16" title="16"><span class="co">#&gt; # A tibble: 328,063 x 9</span></a>
-<a class="sourceLine" id="cb220-17" title="17"><span class="co">#&gt;   origin dest  dep_delay arr_delay dep_time            sched_dep_time     </span></a>
-<a class="sourceLine" id="cb220-18" title="18"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
-<a class="sourceLine" id="cb220-19" title="19"><span class="co">#&gt; 1 EWR    IAH           2        11 2013-01-01 05:17:00 2013-01-01 05:15:00</span></a>
-<a class="sourceLine" id="cb220-20" title="20"><span class="co">#&gt; 2 LGA    IAH           4        20 2013-01-01 05:33:00 2013-01-01 05:29:00</span></a>
-<a class="sourceLine" id="cb220-21" title="21"><span class="co">#&gt; 3 JFK    MIA           2        33 2013-01-01 05:42:00 2013-01-01 05:40:00</span></a>
-<a class="sourceLine" id="cb220-22" title="22"><span class="co">#&gt; 4 JFK    BQN          -1       -18 2013-01-01 05:44:00 2013-01-01 05:45:00</span></a>
-<a class="sourceLine" id="cb220-23" title="23"><span class="co">#&gt; 5 LGA    ATL          -6       -25 2013-01-01 05:54:00 2013-01-01 06:00:00</span></a>
-<a class="sourceLine" id="cb220-24" title="24"><span class="co">#&gt; 6 EWR    ORD          -4        12 2013-01-01 05:54:00 2013-01-01 05:58:00</span></a>
-<a class="sourceLine" id="cb220-25" title="25"><span class="co">#&gt; # … with 3.281e+05 more rows, and 3 more variables: arr_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb220-26" title="26"><span class="co">#&gt; #   sched_arr_time &lt;dttm&gt;, air_time &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">make_datetime_<span class="dv">100</span> &lt;-<span class="st"> </span><span class="cf">function</span>(year, month, day, time) {</a>
+<a class="sourceLine" id="cb219-2" title="2">  hour =<span class="st"> </span>time <span class="op">%/%</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb219-3" title="3">  minute =<span class="st"> </span>time <span class="op">%%</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb219-4" title="4">  <span class="kw">make_datetime</span>(year, month, day, hour, minute)</a>
+<a class="sourceLine" id="cb219-5" title="5">}</a>
+<a class="sourceLine" id="cb219-6" title="6"></a>
+<a class="sourceLine" id="cb219-7" title="7">(flights_dt &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb219-8" title="8"><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dep_time), <span class="op">!</span><span class="kw">is.na</span>(arr_time)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb219-9" title="9"><span class="st">    </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb219-10" title="10">      <span class="dt">dep_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, dep_time),</a>
+<a class="sourceLine" id="cb219-11" title="11">      <span class="dt">arr_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, arr_time),</a>
+<a class="sourceLine" id="cb219-12" title="12">      <span class="dt">sched_dep_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, sched_dep_time),</a>
+<a class="sourceLine" id="cb219-13" title="13">      <span class="dt">sched_arr_time =</span> <span class="kw">make_datetime_100</span>(year, month, day, sched_arr_time))  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb219-14" title="14"><span class="st">    </span><span class="kw">select</span>(origin,dest,<span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>), <span class="kw">ends_with</span>(<span class="st">&quot;time&quot;</span>))</a>
+<a class="sourceLine" id="cb219-15" title="15">)</a>
+<a class="sourceLine" id="cb219-16" title="16"><span class="co">#&gt; # A tibble: 328,063 x 9</span></a>
+<a class="sourceLine" id="cb219-17" title="17"><span class="co">#&gt;   origin dest  dep_delay arr_delay dep_time            sched_dep_time     </span></a>
+<a class="sourceLine" id="cb219-18" title="18"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
+<a class="sourceLine" id="cb219-19" title="19"><span class="co">#&gt; 1 EWR    IAH           2        11 2013-01-01 05:17:00 2013-01-01 05:15:00</span></a>
+<a class="sourceLine" id="cb219-20" title="20"><span class="co">#&gt; 2 LGA    IAH           4        20 2013-01-01 05:33:00 2013-01-01 05:29:00</span></a>
+<a class="sourceLine" id="cb219-21" title="21"><span class="co">#&gt; 3 JFK    MIA           2        33 2013-01-01 05:42:00 2013-01-01 05:40:00</span></a>
+<a class="sourceLine" id="cb219-22" title="22"><span class="co">#&gt; 4 JFK    BQN          -1       -18 2013-01-01 05:44:00 2013-01-01 05:45:00</span></a>
+<a class="sourceLine" id="cb219-23" title="23"><span class="co">#&gt; 5 LGA    ATL          -6       -25 2013-01-01 05:54:00 2013-01-01 06:00:00</span></a>
+<a class="sourceLine" id="cb219-24" title="24"><span class="co">#&gt; 6 EWR    ORD          -4        12 2013-01-01 05:54:00 2013-01-01 05:58:00</span></a>
+<a class="sourceLine" id="cb219-25" title="25"><span class="co">#&gt; # … with 3.281e+05 more rows, and 3 more variables: arr_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb219-26" title="26"><span class="co">#&gt; #   sched_arr_time &lt;dttm&gt;, air_time &lt;dbl&gt;</span></a></code></pre></div>
 <p>我们还可以使用这些数据做出一年间出发时间或某一天内出发时间的可视化分布（精确到分钟）。<strong>注意，当将日期时间型数据当做数值使用时（比如在直方图中），1 表示一秒，因此分箱宽度 86400 才能够表示一天。对于日期型数据(通过 <code>make_date()</code>创建)，1则表示一天。</strong>：</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1"><span class="co">## 一年内起飞时间的分布</span></a>
-<a class="sourceLine" id="cb221-2" title="2">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb221-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb221-4" title="4"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dep_time),<span class="dt">binwidth =</span> <span class="dv">86400</span>)  <span class="co">## 86000秒= 1天</span></a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="co">## 一年内起飞时间的分布</span></a>
+<a class="sourceLine" id="cb220-2" title="2">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb220-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb220-4" title="4"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dep_time),<span class="dt">binwidth =</span> <span class="dv">86400</span>)  <span class="co">## 86000秒= 1天</span></a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-14-1.svg" width="80%" /></p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1"></a>
-<a class="sourceLine" id="cb222-2" title="2"><span class="co">## 1月1日起飞时间的分布</span></a>
-<a class="sourceLine" id="cb222-3" title="3">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb222-4" title="4"><span class="st">  </span><span class="kw">filter</span>(dep_time <span class="op">&lt;</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">20130102</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb222-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dep_time))<span class="op">+</span></a>
-<a class="sourceLine" id="cb222-6" title="6"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">600</span>)   <span class="co">## 600秒 = 10分钟</span></a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1"></a>
+<a class="sourceLine" id="cb221-2" title="2"><span class="co">## 1月1日起飞时间的分布</span></a>
+<a class="sourceLine" id="cb221-3" title="3">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb221-4" title="4"><span class="st">  </span><span class="kw">filter</span>(dep_time <span class="op">&lt;</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">20130102</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb221-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dep_time))<span class="op">+</span></a>
+<a class="sourceLine" id="cb221-6" title="6"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">600</span>)   <span class="co">## 600秒 = 10分钟</span></a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-14-2.svg" width="80%" /></p>
 </div>
 <div id="日期时间型和日期型数据的相互转换" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> 日期时间型和日期型数据的相互转换</h3>
 <p>有时候需要在日期时间和日期型数据之间进行转换，这正是<code>as_datetime()</code>和<code>as_date()</code>函数的功能：</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"><span class="kw">today</span>()</a>
-<a class="sourceLine" id="cb223-2" title="2"><span class="co">#&gt; [1] &quot;2019-12-12&quot;</span></a>
-<a class="sourceLine" id="cb223-3" title="3"><span class="kw">as_datetime</span>(<span class="kw">today</span>())</a>
-<a class="sourceLine" id="cb223-4" title="4"><span class="co">#&gt; [1] &quot;2019-12-12 UTC&quot;</span></a>
-<a class="sourceLine" id="cb223-5" title="5"></a>
-<a class="sourceLine" id="cb223-6" title="6"><span class="kw">now</span>()</a>
-<a class="sourceLine" id="cb223-7" title="7"><span class="co">#&gt; [1] &quot;2019-12-12 00:49:34 CST&quot;</span></a>
-<a class="sourceLine" id="cb223-8" title="8"><span class="kw">as_date</span>(<span class="kw">now</span>())</a>
-<a class="sourceLine" id="cb223-9" title="9"><span class="co">#&gt; [1] &quot;2019-12-12&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1"><span class="kw">today</span>()</a>
+<a class="sourceLine" id="cb222-2" title="2"><span class="co">#&gt; [1] &quot;2019-12-12&quot;</span></a>
+<a class="sourceLine" id="cb222-3" title="3"><span class="kw">as_datetime</span>(<span class="kw">today</span>())</a>
+<a class="sourceLine" id="cb222-4" title="4"><span class="co">#&gt; [1] &quot;2019-12-12 UTC&quot;</span></a>
+<a class="sourceLine" id="cb222-5" title="5"></a>
+<a class="sourceLine" id="cb222-6" title="6"><span class="kw">now</span>()</a>
+<a class="sourceLine" id="cb222-7" title="7"><span class="co">#&gt; [1] &quot;2019-12-12 00:49:34 CST&quot;</span></a>
+<a class="sourceLine" id="cb222-8" title="8"><span class="kw">as_date</span>(<span class="kw">now</span>())</a>
+<a class="sourceLine" id="cb222-9" title="9"><span class="co">#&gt; [1] &quot;2019-12-12&quot;</span></a></code></pre></div>
 <p>有时人们会使用距离”Unix时间戳“（即1970-01-01）的偏移量来表示日期时间。如果偏移量单位是秒，就用<code>as_datetime()</code>函数来转换 ； 如果偏移量单位是天，就用<code>as_date()</code>函数来转换：</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1"><span class="kw">as_datetime</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span>)</a>
-<a class="sourceLine" id="cb224-2" title="2"><span class="co">#&gt; [1] &quot;1970-01-02 UTC&quot;</span></a>
-<a class="sourceLine" id="cb224-3" title="3"><span class="kw">as_date</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb224-4" title="4"><span class="co">#&gt; [1] &quot;1970-01-02&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"><span class="kw">as_datetime</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb223-2" title="2"><span class="co">#&gt; [1] &quot;1970-01-02 UTC&quot;</span></a>
+<a class="sourceLine" id="cb223-3" title="3"><span class="kw">as_date</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb223-4" title="4"><span class="co">#&gt; [1] &quot;1970-01-02&quot;</span></a></code></pre></div>
 </div>
 <div id="练习-7" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> 练习</h3>
@@ -538,25 +556,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="exr:unnamed-chunk-17" class="exercise"><strong>Exercise 4.1  </strong></span>使用恰当的 lubridate 函数来解析以下每个日期：
 </div>
 
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">d1 &lt;-<span class="st"> &quot;January 1,2010&quot;</span></a>
-<a class="sourceLine" id="cb225-2" title="2"><span class="kw">mdy</span>(d1)</a>
-<a class="sourceLine" id="cb225-3" title="3"><span class="co">#&gt; [1] &quot;2010-01-01&quot;</span></a>
-<a class="sourceLine" id="cb225-4" title="4"></a>
-<a class="sourceLine" id="cb225-5" title="5">d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span></a>
-<a class="sourceLine" id="cb225-6" title="6"><span class="kw">ymd</span>(d2)</a>
-<a class="sourceLine" id="cb225-7" title="7"><span class="co">#&gt; [1] &quot;2015-03-07&quot;</span></a>
-<a class="sourceLine" id="cb225-8" title="8"></a>
-<a class="sourceLine" id="cb225-9" title="9">d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span></a>
-<a class="sourceLine" id="cb225-10" title="10"><span class="kw">dmy</span>(d3)</a>
-<a class="sourceLine" id="cb225-11" title="11"><span class="co">#&gt; [1] &quot;2017-06-06&quot;</span></a>
-<a class="sourceLine" id="cb225-12" title="12"></a>
-<a class="sourceLine" id="cb225-13" title="13">d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>,<span class="st">&quot;July 1 (2015)&quot;</span>)</a>
-<a class="sourceLine" id="cb225-14" title="14"><span class="kw">mdy</span>(d4)</a>
-<a class="sourceLine" id="cb225-15" title="15"><span class="co">#&gt; [1] &quot;2015-08-19&quot; &quot;2015-07-01&quot;</span></a>
-<a class="sourceLine" id="cb225-16" title="16"></a>
-<a class="sourceLine" id="cb225-17" title="17">d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span>  <span class="co"># 2014年12月30日</span></a>
-<a class="sourceLine" id="cb225-18" title="18"><span class="kw">mdy</span>(d5)</a>
-<a class="sourceLine" id="cb225-19" title="19"><span class="co">#&gt; [1] &quot;2014-12-30&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1">d1 &lt;-<span class="st"> &quot;January 1,2010&quot;</span></a>
+<a class="sourceLine" id="cb224-2" title="2"><span class="kw">mdy</span>(d1)</a>
+<a class="sourceLine" id="cb224-3" title="3"><span class="co">#&gt; [1] &quot;2010-01-01&quot;</span></a>
+<a class="sourceLine" id="cb224-4" title="4"></a>
+<a class="sourceLine" id="cb224-5" title="5">d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span></a>
+<a class="sourceLine" id="cb224-6" title="6"><span class="kw">ymd</span>(d2)</a>
+<a class="sourceLine" id="cb224-7" title="7"><span class="co">#&gt; [1] &quot;2015-03-07&quot;</span></a>
+<a class="sourceLine" id="cb224-8" title="8"></a>
+<a class="sourceLine" id="cb224-9" title="9">d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span></a>
+<a class="sourceLine" id="cb224-10" title="10"><span class="kw">dmy</span>(d3)</a>
+<a class="sourceLine" id="cb224-11" title="11"><span class="co">#&gt; [1] &quot;2017-06-06&quot;</span></a>
+<a class="sourceLine" id="cb224-12" title="12"></a>
+<a class="sourceLine" id="cb224-13" title="13">d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>,<span class="st">&quot;July 1 (2015)&quot;</span>)</a>
+<a class="sourceLine" id="cb224-14" title="14"><span class="kw">mdy</span>(d4)</a>
+<a class="sourceLine" id="cb224-15" title="15"><span class="co">#&gt; [1] &quot;2015-08-19&quot; &quot;2015-07-01&quot;</span></a>
+<a class="sourceLine" id="cb224-16" title="16"></a>
+<a class="sourceLine" id="cb224-17" title="17">d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span>  <span class="co"># 2014年12月30日</span></a>
+<a class="sourceLine" id="cb224-18" title="18"><span class="kw">mdy</span>(d5)</a>
+<a class="sourceLine" id="cb224-19" title="19"><span class="co">#&gt; [1] &quot;2014-12-30&quot;</span></a></code></pre></div>
 </div>
 </div>
 <div id="日期时间成分" class="section level2">
@@ -565,115 +583,115 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="获取成分" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> 获取成分</h3>
 <p>如果想要提取出日其中的独立成分，可以使用以下访问器函数（accessor function）： <code>year()</code>、<code>month()</code>、<code>mday()</code>(一个月中的第几天)、<code>yday()</code>(一年中的第几天)、<code>wday()</code>(一周中的第几天，即星期几)、<code>hour()</code>、<code>minute()</code>、<code>second()</code> ：</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1"><span class="co">## 创建一个日期时间型数据</span></a>
-<a class="sourceLine" id="cb226-2" title="2">datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08 12:34:56&quot;</span>)</a>
-<a class="sourceLine" id="cb226-3" title="3"></a>
-<a class="sourceLine" id="cb226-4" title="4"><span class="kw">year</span>(datetime)</a>
-<a class="sourceLine" id="cb226-5" title="5"><span class="co">#&gt; [1] 2016</span></a>
-<a class="sourceLine" id="cb226-6" title="6"><span class="kw">month</span>(datetime)</a>
-<a class="sourceLine" id="cb226-7" title="7"><span class="co">#&gt; [1] 7</span></a>
-<a class="sourceLine" id="cb226-8" title="8"><span class="kw">mday</span>(datetime)</a>
-<a class="sourceLine" id="cb226-9" title="9"><span class="co">#&gt; [1] 8</span></a>
-<a class="sourceLine" id="cb226-10" title="10"><span class="kw">yday</span>(datetime)</a>
-<a class="sourceLine" id="cb226-11" title="11"><span class="co">#&gt; [1] 190</span></a>
-<a class="sourceLine" id="cb226-12" title="12"><span class="kw">wday</span>(datetime)</a>
-<a class="sourceLine" id="cb226-13" title="13"><span class="co">#&gt; [1] 6</span></a>
-<a class="sourceLine" id="cb226-14" title="14"><span class="kw">hour</span>(datetime)</a>
-<a class="sourceLine" id="cb226-15" title="15"><span class="co">#&gt; [1] 12</span></a>
-<a class="sourceLine" id="cb226-16" title="16"><span class="kw">minute</span>(datetime)</a>
-<a class="sourceLine" id="cb226-17" title="17"><span class="co">#&gt; [1] 34</span></a>
-<a class="sourceLine" id="cb226-18" title="18"><span class="kw">second</span>(datetime)</a>
-<a class="sourceLine" id="cb226-19" title="19"><span class="co">#&gt; [1] 56</span></a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1"><span class="co">## 创建一个日期时间型数据</span></a>
+<a class="sourceLine" id="cb225-2" title="2">datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08 12:34:56&quot;</span>)</a>
+<a class="sourceLine" id="cb225-3" title="3"></a>
+<a class="sourceLine" id="cb225-4" title="4"><span class="kw">year</span>(datetime)</a>
+<a class="sourceLine" id="cb225-5" title="5"><span class="co">#&gt; [1] 2016</span></a>
+<a class="sourceLine" id="cb225-6" title="6"><span class="kw">month</span>(datetime)</a>
+<a class="sourceLine" id="cb225-7" title="7"><span class="co">#&gt; [1] 7</span></a>
+<a class="sourceLine" id="cb225-8" title="8"><span class="kw">mday</span>(datetime)</a>
+<a class="sourceLine" id="cb225-9" title="9"><span class="co">#&gt; [1] 8</span></a>
+<a class="sourceLine" id="cb225-10" title="10"><span class="kw">yday</span>(datetime)</a>
+<a class="sourceLine" id="cb225-11" title="11"><span class="co">#&gt; [1] 190</span></a>
+<a class="sourceLine" id="cb225-12" title="12"><span class="kw">wday</span>(datetime)</a>
+<a class="sourceLine" id="cb225-13" title="13"><span class="co">#&gt; [1] 6</span></a>
+<a class="sourceLine" id="cb225-14" title="14"><span class="kw">hour</span>(datetime)</a>
+<a class="sourceLine" id="cb225-15" title="15"><span class="co">#&gt; [1] 12</span></a>
+<a class="sourceLine" id="cb225-16" title="16"><span class="kw">minute</span>(datetime)</a>
+<a class="sourceLine" id="cb225-17" title="17"><span class="co">#&gt; [1] 34</span></a>
+<a class="sourceLine" id="cb225-18" title="18"><span class="kw">second</span>(datetime)</a>
+<a class="sourceLine" id="cb225-19" title="19"><span class="co">#&gt; [1] 56</span></a></code></pre></div>
 <p>对于<code>wday()</code>和<code>month()</code>函数，可以设置 <code>label = T</code> 来返回月份名称和星期数的缩写，还可以设置<code>abbr = F</code>来返回全名 ; 这样做还有一个重要意义，<strong>它将返回的字符串变为有序因子</strong>, 否则 ggplot2 将其作为连续型变量对待：</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1"><span class="kw">month</span>(datetime, <span class="dt">label =</span> T)</a>
-<a class="sourceLine" id="cb227-2" title="2"><span class="co">#&gt; [1] Jul</span></a>
-<a class="sourceLine" id="cb227-3" title="3"><span class="co">#&gt; 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</span></a>
-<a class="sourceLine" id="cb227-4" title="4"><span class="kw">wday</span>(datetime, <span class="dt">label =</span> T, <span class="dt">abbr =</span> F)</a>
-<a class="sourceLine" id="cb227-5" title="5"><span class="co">#&gt; [1] Friday</span></a>
-<a class="sourceLine" id="cb227-6" title="6"><span class="co">#&gt; 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</span></a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1"><span class="kw">month</span>(datetime, <span class="dt">label =</span> T)</a>
+<a class="sourceLine" id="cb226-2" title="2"><span class="co">#&gt; [1] Jul</span></a>
+<a class="sourceLine" id="cb226-3" title="3"><span class="co">#&gt; 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</span></a>
+<a class="sourceLine" id="cb226-4" title="4"><span class="kw">wday</span>(datetime, <span class="dt">label =</span> T, <span class="dt">abbr =</span> F)</a>
+<a class="sourceLine" id="cb226-5" title="5"><span class="co">#&gt; [1] Friday</span></a>
+<a class="sourceLine" id="cb226-6" title="6"><span class="co">#&gt; 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</span></a></code></pre></div>
 <p>通过<code>wday()</code>函数，我们可以知道在工作日出发的航班要多于周末出发的航班：</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb228-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">wday</span>(dep_time, <span class="dt">label =</span> T)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb228-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(weekday)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb228-4" title="4"><span class="st">  </span><span class="kw">geom_bar</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb227-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">wday</span>(dep_time, <span class="dt">label =</span> T)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb227-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(weekday)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb227-4" title="4"><span class="st">  </span><span class="kw">geom_bar</span>()</a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-21-1.svg" width="80%" /></p>
 <p>再看一个使用<code>minute()</code>函数获取分钟成分的例子。比如我们想知道出发时间的分钟数与平均到达延误时间的关系：</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb229-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">minute =</span> <span class="kw">minute</span>(dep_time)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb229-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(minute) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb229-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb229-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(minute, avg_delay))<span class="op">+</span></a>
-<a class="sourceLine" id="cb229-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb228-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">minute =</span> <span class="kw">minute</span>(dep_time)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb228-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(minute) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb228-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb228-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(minute, avg_delay))<span class="op">+</span></a>
+<a class="sourceLine" id="cb228-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-22-1.svg" width="80%" /></p>
 <p>我们可以发现一个有趣的趋势，似乎在20<sub>30分钟和第50</sub>60分钟出发的航班的到达延误时间远远低于其他时间出发的航班。</p>
 </div>
 <div id="舍入rouding" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 舍入（Rouding）</h3>
 <p>另一种获取日期成分的办法是将日期时间型数据近似到一个邻近的时间单位上，这要通过 <code>round_date()、floor_date()、ceiling_date()</code> 等函数。这些函数的参数都包括一个待调整的日期时间型数据（可以是向量），以及希望近似到的时间单位。函数会将这个日期时间型数据舍下 <code>floor_date()</code>、入上<code>ceiling_date()</code>或者四舍五入 <code>round_date()</code> 到这个时间单位。例如，以下代码可以绘制出每周的航班数量：</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb230-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">week =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;week&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb230-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(week))<span class="op">+</span></a>
-<a class="sourceLine" id="cb230-4" title="4"><span class="st">  </span><span class="kw">geom_bar</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb229-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">week =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;week&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb229-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(week))<span class="op">+</span></a>
+<a class="sourceLine" id="cb229-4" title="4"><span class="st">  </span><span class="kw">geom_bar</span>()</a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-23-1.svg" width="80%" /></p>
 <p>下面的例子可以更深入地了解这个函数族的用法：</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2009-08-03 12:01:59.23&quot;</span>)</a>
-<a class="sourceLine" id="cb231-2" title="2"><span class="kw">round_date</span>(x, <span class="st">&quot;.5s&quot;</span>)</a>
-<a class="sourceLine" id="cb231-3" title="3"><span class="co">#&gt; [1] &quot;2009-08-03 12:01:59 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-4" title="4"><span class="kw">round_date</span>(x, <span class="st">&quot;sec&quot;</span>)</a>
-<a class="sourceLine" id="cb231-5" title="5"><span class="co">#&gt; [1] &quot;2009-08-03 12:01:59 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-6" title="6"><span class="kw">round_date</span>(x, <span class="st">&quot;second&quot;</span>)</a>
-<a class="sourceLine" id="cb231-7" title="7"><span class="co">#&gt; [1] &quot;2009-08-03 12:01:59 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-8" title="8"><span class="kw">round_date</span>(x, <span class="st">&quot;minute&quot;</span>)</a>
-<a class="sourceLine" id="cb231-9" title="9"><span class="co">#&gt; [1] &quot;2009-08-03 12:02:00 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-10" title="10"><span class="kw">round_date</span>(x, <span class="st">&quot;5 mins&quot;</span>)</a>
-<a class="sourceLine" id="cb231-11" title="11"><span class="co">#&gt; [1] &quot;2009-08-03 12:00:00 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-12" title="12"><span class="kw">round_date</span>(x, <span class="st">&quot;hour&quot;</span>)</a>
-<a class="sourceLine" id="cb231-13" title="13"><span class="co">#&gt; [1] &quot;2009-08-03 12:00:00 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-14" title="14"><span class="kw">round_date</span>(x, <span class="st">&quot;2 hours&quot;</span>)</a>
-<a class="sourceLine" id="cb231-15" title="15"><span class="co">#&gt; [1] &quot;2009-08-03 12:00:00 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-16" title="16"><span class="kw">round_date</span>(x, <span class="st">&quot;day&quot;</span>)</a>
-<a class="sourceLine" id="cb231-17" title="17"><span class="co">#&gt; [1] &quot;2009-08-04 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-18" title="18"><span class="kw">round_date</span>(x, <span class="st">&quot;week&quot;</span>)</a>
-<a class="sourceLine" id="cb231-19" title="19"><span class="co">#&gt; [1] &quot;2009-08-02 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-20" title="20"><span class="kw">round_date</span>(x, <span class="st">&quot;month&quot;</span>)</a>
-<a class="sourceLine" id="cb231-21" title="21"><span class="co">#&gt; [1] &quot;2009-08-01 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-22" title="22"><span class="kw">round_date</span>(x, <span class="st">&quot;bimonth&quot;</span>)   <span class="co">## 舍入到1月、3月、5月、7月、9月和11月上</span></a>
-<a class="sourceLine" id="cb231-23" title="23"><span class="co">#&gt; [1] &quot;2009-09-01 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-24" title="24"><span class="kw">round_date</span>(x, <span class="st">&quot;quarter&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="kw">round_date</span>(x, <span class="st">&quot;3 months&quot;</span>)</a>
-<a class="sourceLine" id="cb231-25" title="25"><span class="co">#&gt; [1] TRUE</span></a>
-<a class="sourceLine" id="cb231-26" title="26"><span class="kw">round_date</span>(x, <span class="st">&quot;halfyear&quot;</span>)</a>
-<a class="sourceLine" id="cb231-27" title="27"><span class="co">#&gt; [1] &quot;2009-07-01 UTC&quot;</span></a>
-<a class="sourceLine" id="cb231-28" title="28"><span class="kw">round_date</span>(x, <span class="st">&quot;year&quot;</span>)</a>
-<a class="sourceLine" id="cb231-29" title="29"><span class="co">#&gt; [1] &quot;2010-01-01 UTC&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2009-08-03 12:01:59.23&quot;</span>)</a>
+<a class="sourceLine" id="cb230-2" title="2"><span class="kw">round_date</span>(x, <span class="st">&quot;.5s&quot;</span>)</a>
+<a class="sourceLine" id="cb230-3" title="3"><span class="co">#&gt; [1] &quot;2009-08-03 12:01:59 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-4" title="4"><span class="kw">round_date</span>(x, <span class="st">&quot;sec&quot;</span>)</a>
+<a class="sourceLine" id="cb230-5" title="5"><span class="co">#&gt; [1] &quot;2009-08-03 12:01:59 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-6" title="6"><span class="kw">round_date</span>(x, <span class="st">&quot;second&quot;</span>)</a>
+<a class="sourceLine" id="cb230-7" title="7"><span class="co">#&gt; [1] &quot;2009-08-03 12:01:59 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-8" title="8"><span class="kw">round_date</span>(x, <span class="st">&quot;minute&quot;</span>)</a>
+<a class="sourceLine" id="cb230-9" title="9"><span class="co">#&gt; [1] &quot;2009-08-03 12:02:00 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-10" title="10"><span class="kw">round_date</span>(x, <span class="st">&quot;5 mins&quot;</span>)</a>
+<a class="sourceLine" id="cb230-11" title="11"><span class="co">#&gt; [1] &quot;2009-08-03 12:00:00 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-12" title="12"><span class="kw">round_date</span>(x, <span class="st">&quot;hour&quot;</span>)</a>
+<a class="sourceLine" id="cb230-13" title="13"><span class="co">#&gt; [1] &quot;2009-08-03 12:00:00 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-14" title="14"><span class="kw">round_date</span>(x, <span class="st">&quot;2 hours&quot;</span>)</a>
+<a class="sourceLine" id="cb230-15" title="15"><span class="co">#&gt; [1] &quot;2009-08-03 12:00:00 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-16" title="16"><span class="kw">round_date</span>(x, <span class="st">&quot;day&quot;</span>)</a>
+<a class="sourceLine" id="cb230-17" title="17"><span class="co">#&gt; [1] &quot;2009-08-04 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-18" title="18"><span class="kw">round_date</span>(x, <span class="st">&quot;week&quot;</span>)</a>
+<a class="sourceLine" id="cb230-19" title="19"><span class="co">#&gt; [1] &quot;2009-08-02 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-20" title="20"><span class="kw">round_date</span>(x, <span class="st">&quot;month&quot;</span>)</a>
+<a class="sourceLine" id="cb230-21" title="21"><span class="co">#&gt; [1] &quot;2009-08-01 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-22" title="22"><span class="kw">round_date</span>(x, <span class="st">&quot;bimonth&quot;</span>)   <span class="co">## 舍入到1月、3月、5月、7月、9月和11月上</span></a>
+<a class="sourceLine" id="cb230-23" title="23"><span class="co">#&gt; [1] &quot;2009-09-01 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-24" title="24"><span class="kw">round_date</span>(x, <span class="st">&quot;quarter&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="kw">round_date</span>(x, <span class="st">&quot;3 months&quot;</span>)</a>
+<a class="sourceLine" id="cb230-25" title="25"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb230-26" title="26"><span class="kw">round_date</span>(x, <span class="st">&quot;halfyear&quot;</span>)</a>
+<a class="sourceLine" id="cb230-27" title="27"><span class="co">#&gt; [1] &quot;2009-07-01 UTC&quot;</span></a>
+<a class="sourceLine" id="cb230-28" title="28"><span class="kw">round_date</span>(x, <span class="st">&quot;year&quot;</span>)</a>
+<a class="sourceLine" id="cb230-29" title="29"><span class="co">#&gt; [1] &quot;2010-01-01 UTC&quot;</span></a></code></pre></div>
 </div>
 <div id="设置成分" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> 设置成分</h3>
 <p>还可以使用访问器函数来指定日期时间型数据中的成分：</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">(datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08,12:34:56&quot;</span>))</a>
-<a class="sourceLine" id="cb232-2" title="2"><span class="co">#&gt; [1] &quot;2016-07-08 12:34:56 UTC&quot;</span></a>
-<a class="sourceLine" id="cb232-3" title="3"></a>
-<a class="sourceLine" id="cb232-4" title="4"><span class="kw">year</span>(datetime) &lt;-<span class="st"> </span><span class="dv">2020</span></a>
-<a class="sourceLine" id="cb232-5" title="5"><span class="kw">month</span>(datetime) &lt;-<span class="st"> </span><span class="dv">11</span></a>
-<a class="sourceLine" id="cb232-6" title="6"><span class="kw">mday</span>(datetime) &lt;-<span class="st"> </span><span class="dv">05</span></a>
-<a class="sourceLine" id="cb232-7" title="7"><span class="kw">hour</span>(datetime) &lt;-<span class="st"> </span><span class="dv">01</span></a>
-<a class="sourceLine" id="cb232-8" title="8"></a>
-<a class="sourceLine" id="cb232-9" title="9">datetime</a>
-<a class="sourceLine" id="cb232-10" title="10"><span class="co">#&gt; [1] &quot;2020-11-05 01:34:56 UTC&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">(datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08,12:34:56&quot;</span>))</a>
+<a class="sourceLine" id="cb231-2" title="2"><span class="co">#&gt; [1] &quot;2016-07-08 12:34:56 UTC&quot;</span></a>
+<a class="sourceLine" id="cb231-3" title="3"></a>
+<a class="sourceLine" id="cb231-4" title="4"><span class="kw">year</span>(datetime) &lt;-<span class="st"> </span><span class="dv">2020</span></a>
+<a class="sourceLine" id="cb231-5" title="5"><span class="kw">month</span>(datetime) &lt;-<span class="st"> </span><span class="dv">11</span></a>
+<a class="sourceLine" id="cb231-6" title="6"><span class="kw">mday</span>(datetime) &lt;-<span class="st"> </span><span class="dv">05</span></a>
+<a class="sourceLine" id="cb231-7" title="7"><span class="kw">hour</span>(datetime) &lt;-<span class="st"> </span><span class="dv">01</span></a>
+<a class="sourceLine" id="cb231-8" title="8"></a>
+<a class="sourceLine" id="cb231-9" title="9">datetime</a>
+<a class="sourceLine" id="cb231-10" title="10"><span class="co">#&gt; [1] &quot;2020-11-05 01:34:56 UTC&quot;</span></a></code></pre></div>
 <p>除了直接修改，还可以通过<code>update()</code>函数来更新一个日期时间型数据，只需要在参数中指定各个成分的新值。这样也可以同时设置多个成分的更改：</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1">datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08,12:34:56&quot;</span>)</a>
-<a class="sourceLine" id="cb233-2" title="2"><span class="kw">update</span>(datetime,<span class="dt">year =</span> <span class="dv">2000</span>, <span class="dt">month =</span> <span class="dv">11</span>, <span class="dt">mday =</span> <span class="dv">05</span>, <span class="dt">hour =</span> <span class="dv">01</span>)</a>
-<a class="sourceLine" id="cb233-3" title="3"><span class="co">#&gt; [1] &quot;2000-11-05 01:34:56 UTC&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08,12:34:56&quot;</span>)</a>
+<a class="sourceLine" id="cb232-2" title="2"><span class="kw">update</span>(datetime,<span class="dt">year =</span> <span class="dv">2000</span>, <span class="dt">month =</span> <span class="dv">11</span>, <span class="dt">mday =</span> <span class="dv">05</span>, <span class="dt">hour =</span> <span class="dv">01</span>)</a>
+<a class="sourceLine" id="cb232-3" title="3"><span class="co">#&gt; [1] &quot;2000-11-05 01:34:56 UTC&quot;</span></a></code></pre></div>
 <p>如果修改<code>yday</code>，相当于同时修改<code>mday</code>和<code>month</code>:</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08,12:34:56&quot;</span>)</a>
-<a class="sourceLine" id="cb234-2" title="2"><span class="kw">update</span>(datetime, <span class="dt">yday =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb234-3" title="3"><span class="co">#&gt; [1] &quot;2016-01-01 12:34:56 UTC&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1">datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-07-08,12:34:56&quot;</span>)</a>
+<a class="sourceLine" id="cb233-2" title="2"><span class="kw">update</span>(datetime, <span class="dt">yday =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb233-3" title="3"><span class="co">#&gt; [1] &quot;2016-01-01 12:34:56 UTC&quot;</span></a></code></pre></div>
 <p><code>update()</code>函数还有一种比较巧妙的用法，比如我们想可视化一年中所有航班的的出发时间在一天中的分布：</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb235-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dep_hour =</span> <span class="kw">update</span>(dep_time, <span class="dt">yday =</span> <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb235-3" title="3"><span class="st">  </span><span class="co">## 将所有出发时间都转为在1月1号的</span></a>
-<a class="sourceLine" id="cb235-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dep_hour)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb235-5" title="5"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">300</span>) <span class="op">+</span><span class="st"> </span><span class="co">## 五分钟一个分箱</span></a>
-<a class="sourceLine" id="cb235-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;将日期中较大的成分设定为常数来探索其中较小成分的模式&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb234-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dep_hour =</span> <span class="kw">update</span>(dep_time, <span class="dt">yday =</span> <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb234-3" title="3"><span class="st">  </span><span class="co">## 将所有出发时间都转为在1月1号的</span></a>
+<a class="sourceLine" id="cb234-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dep_hour)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb234-5" title="5"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">300</span>) <span class="op">+</span><span class="st"> </span><span class="co">## 五分钟一个分箱</span></a>
+<a class="sourceLine" id="cb234-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;将日期中较大的成分设定为常数来探索其中较小成分的模式&quot;</span>)</a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-28-1.svg" width="80%" /></p>
 <p>如果不用 <code>update()</code> 函数，我们可能需要先用<code>hour()、minute()、second()</code>获取三种成分，然后再用<code>make_datetime()</code>对这三种成分进行合并。</p>
 </div>
@@ -684,36 +702,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 4.2  </strong></span>以月份作为分组变量，在一年的范围内，航班时间在一天中的分布是如何变化的？</p>
 </div>
 
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb236-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">factor</span>(<span class="kw">month</span>(dep_time)), </a>
-<a class="sourceLine" id="cb236-3" title="3">        <span class="dt">dep_time =</span> <span class="kw">update</span>(dep_time,<span class="dt">yday =</span> <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb236-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dep_time,<span class="dt">color =</span> month)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb236-5" title="5"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">600</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">factor</span>(<span class="kw">month</span>(dep_time)), </a>
+<a class="sourceLine" id="cb235-3" title="3">        <span class="dt">dep_time =</span> <span class="kw">update</span>(dep_time,<span class="dt">yday =</span> <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dep_time,<span class="dt">color =</span> month)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb235-5" title="5"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">600</span>)</a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-30-1.svg" width="80%" /></p>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-31" class="exercise"><strong>Exercise 1.2  </strong></span>如果想要再将延误的几率降至最低，那么应该在星期几搭乘航班？
 </div>
 
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb237-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">wday</span>(dep_time, <span class="dt">label =</span> T, <span class="dt">abbr =</span> T)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb237-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(weekday) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb237-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">delay_prob =</span> <span class="kw">mean</span>(arr_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb237-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(weekday,delay_prob)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb237-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb236-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">wday</span>(dep_time, <span class="dt">label =</span> T, <span class="dt">abbr =</span> T)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb236-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(weekday) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb236-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">delay_prob =</span> <span class="kw">mean</span>(arr_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb236-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(weekday,delay_prob)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb236-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-32-1.svg" width="80%" /></p>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-33" class="exercise"><strong>Exercise 4.3  </strong></span>航班预计起飞的小时对应的平均延误时间在一天的范围内是如何变化的？
 </div>
 
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">hour =</span> <span class="kw">hour</span>(sched_dep_time)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(hour) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(dep_delay, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(hour, avg_delay))<span class="op">+</span></a>
-<a class="sourceLine" id="cb238-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb238-7" title="7"><span class="st">  </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb237-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">hour =</span> <span class="kw">hour</span>(sched_dep_time)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb237-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(hour) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb237-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(dep_delay, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb237-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(hour, avg_delay))<span class="op">+</span></a>
+<a class="sourceLine" id="cb237-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb237-7" title="7"><span class="st">  </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
 <p><img src="lubridate_files/figure-html/unnamed-chunk-34-1.svg" width="80%" /></p>
 </div>
 </div>
@@ -730,137 +748,137 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="时期-durations" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> 时期 Durations</h3>
 <p>默认情况下，如果我们将两个日期相间，将得到一个 <code>difftime</code> 类对象：</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">h_age &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">-</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">19981112</span>) <span class="co">## 年龄</span></a>
-<a class="sourceLine" id="cb239-2" title="2">h_age</a>
-<a class="sourceLine" id="cb239-3" title="3"><span class="co">#&gt; Time difference of 7700 days</span></a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">h_age &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">-</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">19981112</span>) <span class="co">## 年龄</span></a>
+<a class="sourceLine" id="cb238-2" title="2">h_age</a>
+<a class="sourceLine" id="cb238-3" title="3"><span class="co">#&gt; Time difference of 7700 days</span></a></code></pre></div>
 <p><code>difftime</code>对象的单位可以是秒、分钟、小时、日或周。这种模棱两可的对象处理起来非常困难，，所以 lubridate提供了总是以秒为单位的另一种时间间隔：<strong>时期</strong>。</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1"><span class="kw">as.duration</span>(h_age)</a>
-<a class="sourceLine" id="cb240-2" title="2"><span class="co">#&gt; [1] &quot;665280000s (~21.08 years)&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1"><span class="kw">as.duration</span>(h_age)</a>
+<a class="sourceLine" id="cb239-2" title="2"><span class="co">#&gt; [1] &quot;665280000s (~21.08 years)&quot;</span></a></code></pre></div>
 <p>可以用很多方便的函数来构造时期，它们有统一的格式<code>d + 时间单位（复数）</code>：</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1"><span class="kw">dseconds</span>(<span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb241-2" title="2"><span class="co">#&gt; [1] &quot;15s&quot;</span></a>
-<a class="sourceLine" id="cb241-3" title="3"><span class="kw">dminutes</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb241-4" title="4"><span class="co">#&gt; [1] &quot;600s (~10 minutes)&quot;</span></a>
-<a class="sourceLine" id="cb241-5" title="5"><span class="kw">dhours</span>(<span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">24</span>))</a>
-<a class="sourceLine" id="cb241-6" title="6"><span class="co">#&gt; [1] &quot;43200s (~12 hours)&quot; &quot;86400s (~1 days)&quot;</span></a>
-<a class="sourceLine" id="cb241-7" title="7"></a>
-<a class="sourceLine" id="cb241-8" title="8"><span class="kw">ddays</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb241-9" title="9"><span class="co">#&gt; [1] &quot;0s&quot;                &quot;86400s (~1 days)&quot;  &quot;172800s (~2 days)&quot;</span></a>
-<a class="sourceLine" id="cb241-10" title="10"><span class="co">#&gt; [4] &quot;259200s (~3 days)&quot; &quot;345600s (~4 days)&quot; &quot;432000s (~5 days)&quot;</span></a>
-<a class="sourceLine" id="cb241-11" title="11"><span class="kw">dweeks</span>(<span class="dv">3</span>)  <span class="co">## 没有dmonths()</span></a>
-<a class="sourceLine" id="cb241-12" title="12"><span class="co">#&gt; [1] &quot;1814400s (~3 weeks)&quot;</span></a>
-<a class="sourceLine" id="cb241-13" title="13"><span class="kw">dyears</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb241-14" title="14"><span class="co">#&gt; [1] &quot;31536000s (~52.14 weeks)&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1"><span class="kw">dseconds</span>(<span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb240-2" title="2"><span class="co">#&gt; [1] &quot;15s&quot;</span></a>
+<a class="sourceLine" id="cb240-3" title="3"><span class="kw">dminutes</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb240-4" title="4"><span class="co">#&gt; [1] &quot;600s (~10 minutes)&quot;</span></a>
+<a class="sourceLine" id="cb240-5" title="5"><span class="kw">dhours</span>(<span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">24</span>))</a>
+<a class="sourceLine" id="cb240-6" title="6"><span class="co">#&gt; [1] &quot;43200s (~12 hours)&quot; &quot;86400s (~1 days)&quot;</span></a>
+<a class="sourceLine" id="cb240-7" title="7"></a>
+<a class="sourceLine" id="cb240-8" title="8"><span class="kw">ddays</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb240-9" title="9"><span class="co">#&gt; [1] &quot;0s&quot;                &quot;86400s (~1 days)&quot;  &quot;172800s (~2 days)&quot;</span></a>
+<a class="sourceLine" id="cb240-10" title="10"><span class="co">#&gt; [4] &quot;259200s (~3 days)&quot; &quot;345600s (~4 days)&quot; &quot;432000s (~5 days)&quot;</span></a>
+<a class="sourceLine" id="cb240-11" title="11"><span class="kw">dweeks</span>(<span class="dv">3</span>)  <span class="co">## 没有dmonths()</span></a>
+<a class="sourceLine" id="cb240-12" title="12"><span class="co">#&gt; [1] &quot;1814400s (~3 weeks)&quot;</span></a>
+<a class="sourceLine" id="cb240-13" title="13"><span class="kw">dyears</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb240-14" title="14"><span class="co">#&gt; [1] &quot;31536000s (~52.14 weeks)&quot;</span></a></code></pre></div>
 <p>时期 Durations 总是以秒为单位来记录时间间隔。使用标准比率（1 分钟为 60 秒，1 小时为 60 分钟，1 天为 24 小时，1 周为 7 天，一年为 365 天）将分钟、小时、周和年转换为秒，从而建立具有更大值的对象。出于相同的原因，没有<code>dmonths()</code>函数, 因为一个月可能有 31 天、30 天、29 天或 28 天，所以 lubridate 不能将它转换为一个确切的秒数。</p>
 <p>可以对时期进行加法和乘法操作：</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb242-2" title="2"><span class="co">#&gt; [1] &quot;345600s (~4 days)&quot;</span></a>
-<a class="sourceLine" id="cb242-3" title="3"></a>
-<a class="sourceLine" id="cb242-4" title="4"><span class="kw">dyears</span>(<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">dweeks</span>(<span class="dv">12</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb242-5" title="5"><span class="co">#&gt; [1] &quot;39657600s (~1.26 years)&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb241-2" title="2"><span class="co">#&gt; [1] &quot;345600s (~4 days)&quot;</span></a>
+<a class="sourceLine" id="cb241-3" title="3"></a>
+<a class="sourceLine" id="cb241-4" title="4"><span class="kw">dyears</span>(<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">dweeks</span>(<span class="dv">12</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb241-5" title="5"><span class="co">#&gt; [1] &quot;39657600s (~1.26 years)&quot;</span></a></code></pre></div>
 <p>最重要的，<strong>时期可以和日期时间型数据进行运算</strong> ：</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1">(tomorrow &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb243-2" title="2"><span class="co">#&gt; [1] &quot;2019-12-13&quot;</span></a>
-<a class="sourceLine" id="cb243-3" title="3"></a>
-<a class="sourceLine" id="cb243-4" title="4">(last_year &lt;-<span class="st"> </span><span class="kw">now</span>() <span class="op">-</span><span class="st"> </span><span class="kw">dyears</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb243-5" title="5"><span class="co">#&gt; [1] &quot;2018-12-12 00:49:40 CST&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1">(tomorrow &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb242-2" title="2"><span class="co">#&gt; [1] &quot;2019-12-13&quot;</span></a>
+<a class="sourceLine" id="cb242-3" title="3"></a>
+<a class="sourceLine" id="cb242-4" title="4">(last_year &lt;-<span class="st"> </span><span class="kw">now</span>() <span class="op">-</span><span class="st"> </span><span class="kw">dyears</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb242-5" title="5"><span class="co">#&gt; [1] &quot;2018-12-12 00:49:40 CST&quot;</span></a></code></pre></div>
 <p>然而，因为时期表示的是秒为单位的一个精确数值，有时我们会得到意想不到的结果：</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1">one_pm &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-03-12 13:00:00&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;America/New_York&quot;</span>)</a>
-<a class="sourceLine" id="cb244-2" title="2"></a>
-<a class="sourceLine" id="cb244-3" title="3">one_pm</a>
-<a class="sourceLine" id="cb244-4" title="4"><span class="co">#&gt; [1] &quot;2016-03-12 13:00:00 EST&quot;</span></a>
-<a class="sourceLine" id="cb244-5" title="5">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb244-6" title="6"><span class="co">#&gt; [1] &quot;2016-03-13 14:00:00 EDT&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1">one_pm &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2016-03-12 13:00:00&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;America/New_York&quot;</span>)</a>
+<a class="sourceLine" id="cb243-2" title="2"></a>
+<a class="sourceLine" id="cb243-3" title="3">one_pm</a>
+<a class="sourceLine" id="cb243-4" title="4"><span class="co">#&gt; [1] &quot;2016-03-12 13:00:00 EST&quot;</span></a>
+<a class="sourceLine" id="cb243-5" title="5">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb243-6" title="6"><span class="co">#&gt; [1] &quot;2016-03-13 14:00:00 EDT&quot;</span></a></code></pre></div>
 <p>为什么3月12日下午1点加上一天后变成了下午2点？如果仔细观察，就会发现时区发生了变化。因为夏时制，3月12日只有23个小时，但我们告诉R“加上24个小时代表的秒数”，所以得到了一个不正确的时间。</p>
 </div>
 <div id="阶段-periods" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> 阶段 Periods</h3>
 <p>为了解决时期对象的问题，lubridate 提供了 <strong>阶段</strong> 对象。阶段也是一种 time span，但是它不以秒为单位 ； 相反，它使用“人工”时间，比如日和月。这使得阶段使用起来更加符合习惯</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1">one_pm</a>
-<a class="sourceLine" id="cb245-2" title="2"><span class="co">#&gt; [1] &quot;2016-03-12 13:00:00 EST&quot;</span></a>
-<a class="sourceLine" id="cb245-3" title="3">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)  <span class="co">## 阶段对象</span></a>
-<a class="sourceLine" id="cb245-4" title="4"><span class="co">#&gt; [1] &quot;2016-03-13 13:00:00 EDT&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1">one_pm</a>
+<a class="sourceLine" id="cb244-2" title="2"><span class="co">#&gt; [1] &quot;2016-03-12 13:00:00 EST&quot;</span></a>
+<a class="sourceLine" id="cb244-3" title="3">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)  <span class="co">## 阶段对象</span></a>
+<a class="sourceLine" id="cb244-4" title="4"><span class="co">#&gt; [1] &quot;2016-03-13 13:00:00 EDT&quot;</span></a></code></pre></div>
 <p><code>one_pm + days(1)</code>告诉 R，加上一天，而不是加上多少秒。</p>
 <p>创建阶段对象的函数与时期很类似，只是前面少个“d”，不要把创建阶段的函数与获取时间日期成分的函数搞混了，创建 Periods 的函数都是复数形式：</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1"><span class="kw">seconds</span>(<span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb246-2" title="2"><span class="co">#&gt; [1] &quot;15S&quot;</span></a>
-<a class="sourceLine" id="cb246-3" title="3"><span class="kw">minutes</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb246-4" title="4"><span class="co">#&gt; [1] &quot;10M 0S&quot;</span></a>
-<a class="sourceLine" id="cb246-5" title="5"><span class="kw">hours</span>(<span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">24</span>))</a>
-<a class="sourceLine" id="cb246-6" title="6"><span class="co">#&gt; [1] &quot;12H 0M 0S&quot; &quot;24H 0M 0S&quot;</span></a>
-<a class="sourceLine" id="cb246-7" title="7"></a>
-<a class="sourceLine" id="cb246-8" title="8"><span class="kw">days</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb246-9" title="9"><span class="co">#&gt; [1] &quot;7d 0H 0M 0S&quot;</span></a>
-<a class="sourceLine" id="cb246-10" title="10"><span class="kw">months</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb246-11" title="11"><span class="co">#&gt; [1] &quot;1m 0d 0H 0M 0S&quot; &quot;2m 0d 0H 0M 0S&quot; &quot;3m 0d 0H 0M 0S&quot; &quot;4m 0d 0H 0M 0S&quot;</span></a>
-<a class="sourceLine" id="cb246-12" title="12"><span class="co">#&gt; [5] &quot;5m 0d 0H 0M 0S&quot; &quot;6m 0d 0H 0M 0S&quot;</span></a>
-<a class="sourceLine" id="cb246-13" title="13"><span class="kw">weeks</span>(<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb246-14" title="14"><span class="co">#&gt; [1] &quot;21d 0H 0M 0S&quot;</span></a>
-<a class="sourceLine" id="cb246-15" title="15"><span class="kw">years</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb246-16" title="16"><span class="co">#&gt; [1] &quot;1y 0m 0d 0H 0M 0S&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1"><span class="kw">seconds</span>(<span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb245-2" title="2"><span class="co">#&gt; [1] &quot;15S&quot;</span></a>
+<a class="sourceLine" id="cb245-3" title="3"><span class="kw">minutes</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb245-4" title="4"><span class="co">#&gt; [1] &quot;10M 0S&quot;</span></a>
+<a class="sourceLine" id="cb245-5" title="5"><span class="kw">hours</span>(<span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">24</span>))</a>
+<a class="sourceLine" id="cb245-6" title="6"><span class="co">#&gt; [1] &quot;12H 0M 0S&quot; &quot;24H 0M 0S&quot;</span></a>
+<a class="sourceLine" id="cb245-7" title="7"></a>
+<a class="sourceLine" id="cb245-8" title="8"><span class="kw">days</span>(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb245-9" title="9"><span class="co">#&gt; [1] &quot;7d 0H 0M 0S&quot;</span></a>
+<a class="sourceLine" id="cb245-10" title="10"><span class="kw">months</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb245-11" title="11"><span class="co">#&gt; [1] &quot;1m 0d 0H 0M 0S&quot; &quot;2m 0d 0H 0M 0S&quot; &quot;3m 0d 0H 0M 0S&quot; &quot;4m 0d 0H 0M 0S&quot;</span></a>
+<a class="sourceLine" id="cb245-12" title="12"><span class="co">#&gt; [5] &quot;5m 0d 0H 0M 0S&quot; &quot;6m 0d 0H 0M 0S&quot;</span></a>
+<a class="sourceLine" id="cb245-13" title="13"><span class="kw">weeks</span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb245-14" title="14"><span class="co">#&gt; [1] &quot;21d 0H 0M 0S&quot;</span></a>
+<a class="sourceLine" id="cb245-15" title="15"><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb245-16" title="16"><span class="co">#&gt; [1] &quot;1y 0m 0d 0H 0M 0S&quot;</span></a></code></pre></div>
 <p>可以对阶段进行加法和乘法操作：</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1"><span class="dv">10</span> <span class="op">*</span><span class="st"> </span>(<span class="kw">months</span>(<span class="dv">6</span>) <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb247-2" title="2"><span class="co">#&gt; [1] &quot;60m 100d 0H 0M 0S&quot;</span></a>
-<a class="sourceLine" id="cb247-3" title="3"><span class="kw">days</span>(<span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">25</span>) <span class="op">+</span><span class="st"> </span><span class="kw">minutes</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb247-4" title="4"><span class="co">#&gt; [1] &quot;50d 25H 2M 0S&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1"><span class="dv">10</span> <span class="op">*</span><span class="st"> </span>(<span class="kw">months</span>(<span class="dv">6</span>) <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb246-2" title="2"><span class="co">#&gt; [1] &quot;60m 100d 0H 0M 0S&quot;</span></a>
+<a class="sourceLine" id="cb246-3" title="3"><span class="kw">days</span>(<span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">25</span>) <span class="op">+</span><span class="st"> </span><span class="kw">minutes</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb246-4" title="4"><span class="co">#&gt; [1] &quot;50d 25H 2M 0S&quot;</span></a></code></pre></div>
 <p>当然，阶段也可以和日期时间型数据进行运算。与 Durations 相比，使用 Periods 得到的计算结果更符合我们的预期：</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1"><span class="co">## 闰年</span></a>
-<a class="sourceLine" id="cb248-2" title="2"><span class="kw">ymd</span>(<span class="st">&quot;2016-01-01&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">dyears</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb248-3" title="3"><span class="co">#&gt; [1] &quot;2016-12-31&quot;</span></a>
-<a class="sourceLine" id="cb248-4" title="4"><span class="kw">ymd</span>(<span class="st">&quot;2016-01-01&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb248-5" title="5"><span class="co">#&gt; [1] &quot;2017-01-01&quot;</span></a>
-<a class="sourceLine" id="cb248-6" title="6"></a>
-<a class="sourceLine" id="cb248-7" title="7"><span class="co">## 夏时制</span></a>
-<a class="sourceLine" id="cb248-8" title="8">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb248-9" title="9"><span class="co">#&gt; [1] &quot;2016-03-13 14:00:00 EDT&quot;</span></a>
-<a class="sourceLine" id="cb248-10" title="10">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb248-11" title="11"><span class="co">#&gt; [1] &quot;2016-03-13 13:00:00 EDT&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1"><span class="co">## 闰年</span></a>
+<a class="sourceLine" id="cb247-2" title="2"><span class="kw">ymd</span>(<span class="st">&quot;2016-01-01&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">dyears</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb247-3" title="3"><span class="co">#&gt; [1] &quot;2016-12-31&quot;</span></a>
+<a class="sourceLine" id="cb247-4" title="4"><span class="kw">ymd</span>(<span class="st">&quot;2016-01-01&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb247-5" title="5"><span class="co">#&gt; [1] &quot;2017-01-01&quot;</span></a>
+<a class="sourceLine" id="cb247-6" title="6"></a>
+<a class="sourceLine" id="cb247-7" title="7"><span class="co">## 夏时制</span></a>
+<a class="sourceLine" id="cb247-8" title="8">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb247-9" title="9"><span class="co">#&gt; [1] &quot;2016-03-13 14:00:00 EDT&quot;</span></a>
+<a class="sourceLine" id="cb247-10" title="10">one_pm <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb247-11" title="11"><span class="co">#&gt; [1] &quot;2016-03-13 13:00:00 EDT&quot;</span></a></code></pre></div>
 <p>下面我们使用 Periods 来解决与航班日期有关的一个怪现象。有些飞机似乎从纽约市起飞前就到达了目的地：</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb249-2" title="2"><span class="st">  </span><span class="kw">filter</span>(arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb249-3" title="3"><span class="st">  </span><span class="kw">select</span>(arr_time, dep_time)</a>
-<a class="sourceLine" id="cb249-4" title="4"><span class="co">#&gt; # A tibble: 10,633 x 2</span></a>
-<a class="sourceLine" id="cb249-5" title="5"><span class="co">#&gt;   arr_time            dep_time           </span></a>
-<a class="sourceLine" id="cb249-6" title="6"><span class="co">#&gt;   &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
-<a class="sourceLine" id="cb249-7" title="7"><span class="co">#&gt; 1 2013-01-01 00:03:00 2013-01-01 19:29:00</span></a>
-<a class="sourceLine" id="cb249-8" title="8"><span class="co">#&gt; 2 2013-01-01 00:29:00 2013-01-01 19:39:00</span></a>
-<a class="sourceLine" id="cb249-9" title="9"><span class="co">#&gt; 3 2013-01-01 00:08:00 2013-01-01 20:58:00</span></a>
-<a class="sourceLine" id="cb249-10" title="10"><span class="co">#&gt; 4 2013-01-01 01:46:00 2013-01-01 21:02:00</span></a>
-<a class="sourceLine" id="cb249-11" title="11"><span class="co">#&gt; 5 2013-01-01 00:25:00 2013-01-01 21:08:00</span></a>
-<a class="sourceLine" id="cb249-12" title="12"><span class="co">#&gt; 6 2013-01-01 00:16:00 2013-01-01 21:20:00</span></a>
-<a class="sourceLine" id="cb249-13" title="13"><span class="co">#&gt; # … with 1.063e+04 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb248-2" title="2"><span class="st">  </span><span class="kw">filter</span>(arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb248-3" title="3"><span class="st">  </span><span class="kw">select</span>(arr_time, dep_time)</a>
+<a class="sourceLine" id="cb248-4" title="4"><span class="co">#&gt; # A tibble: 10,633 x 2</span></a>
+<a class="sourceLine" id="cb248-5" title="5"><span class="co">#&gt;   arr_time            dep_time           </span></a>
+<a class="sourceLine" id="cb248-6" title="6"><span class="co">#&gt;   &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
+<a class="sourceLine" id="cb248-7" title="7"><span class="co">#&gt; 1 2013-01-01 00:03:00 2013-01-01 19:29:00</span></a>
+<a class="sourceLine" id="cb248-8" title="8"><span class="co">#&gt; 2 2013-01-01 00:29:00 2013-01-01 19:39:00</span></a>
+<a class="sourceLine" id="cb248-9" title="9"><span class="co">#&gt; 3 2013-01-01 00:08:00 2013-01-01 20:58:00</span></a>
+<a class="sourceLine" id="cb248-10" title="10"><span class="co">#&gt; 4 2013-01-01 01:46:00 2013-01-01 21:02:00</span></a>
+<a class="sourceLine" id="cb248-11" title="11"><span class="co">#&gt; 5 2013-01-01 00:25:00 2013-01-01 21:08:00</span></a>
+<a class="sourceLine" id="cb248-12" title="12"><span class="co">#&gt; 6 2013-01-01 00:16:00 2013-01-01 21:20:00</span></a>
+<a class="sourceLine" id="cb248-13" title="13"><span class="co">#&gt; # … with 1.063e+04 more rows</span></a></code></pre></div>
 <p>这些都是过夜航班。我们使用了同一种日期来表示出发时间和到达时间，但这些航班是在第二天到达的。将每个过夜航班的到达时间加上一个<code>days(1)</code>，就可以解决这个问题了：</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1">flights_dt &lt;-<span class="st"> </span>flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb250-2" title="2"><span class="st">              </span><span class="kw">mutate</span>(<span class="dt">overnight =</span> arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time,</a>
-<a class="sourceLine" id="cb250-3" title="3">                      <span class="dt">arr_time =</span> arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb250-4" title="4"></a>
-<a class="sourceLine" id="cb250-5" title="5"><span class="co">## 这样一来，航班数据就符合常理了</span></a>
-<a class="sourceLine" id="cb250-6" title="6">flights_dt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(overnight, arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time)</a>
-<a class="sourceLine" id="cb250-7" title="7"><span class="co">#&gt; # A tibble: 0 x 10</span></a>
-<a class="sourceLine" id="cb250-8" title="8"><span class="co">#&gt; # … with 10 variables: origin &lt;chr&gt;, dest &lt;chr&gt;, dep_delay &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb250-9" title="9"><span class="co">#&gt; #   arr_delay &lt;dbl&gt;, dep_time &lt;dttm&gt;, sched_dep_time &lt;dttm&gt;, arr_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb250-10" title="10"><span class="co">#&gt; #   sched_arr_time &lt;dttm&gt;, air_time &lt;dbl&gt;, overnight &lt;lgl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1">flights_dt &lt;-<span class="st"> </span>flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb249-2" title="2"><span class="st">              </span><span class="kw">mutate</span>(<span class="dt">overnight =</span> arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time,</a>
+<a class="sourceLine" id="cb249-3" title="3">                      <span class="dt">arr_time =</span> arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb249-4" title="4"></a>
+<a class="sourceLine" id="cb249-5" title="5"><span class="co">## 这样一来，航班数据就符合常理了</span></a>
+<a class="sourceLine" id="cb249-6" title="6">flights_dt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(overnight, arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time)</a>
+<a class="sourceLine" id="cb249-7" title="7"><span class="co">#&gt; # A tibble: 0 x 10</span></a>
+<a class="sourceLine" id="cb249-8" title="8"><span class="co">#&gt; # … with 10 variables: origin &lt;chr&gt;, dest &lt;chr&gt;, dep_delay &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb249-9" title="9"><span class="co">#&gt; #   arr_delay &lt;dbl&gt;, dep_time &lt;dttm&gt;, sched_dep_time &lt;dttm&gt;, arr_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb249-10" title="10"><span class="co">#&gt; #   sched_arr_time &lt;dttm&gt;, air_time &lt;dbl&gt;, overnight &lt;lgl&gt;</span></a></code></pre></div>
 </div>
 <div id="区间-intervals" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> 区间 Intervals</h3>
 <p>显然，<code>dyears(1)/ddays(365)</code>应该返回1，因为时期总是以秒来表示的，表示1年的时间就定义为相当于365天的秒数。<br />
 那么<code>years(1) / days(1)</code>应该返回什么呢？如果年份 是 2015 年，那么结果就是 365，但如果年份是 2016 年，那么结果就是 366！没有足够的信息让 lubridate 返回一个明确的结果。lubridate 的做法是给出一个估计值，同时给出一条警告：</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="kw">years</span>(<span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb251-2" title="2"><span class="co">#&gt; [1] 365</span></a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1"><span class="kw">years</span>(<span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb250-2" title="2"><span class="co">#&gt; [1] 365</span></a></code></pre></div>
 <p>如果需要更精确的测量方式，那么就必须使用<strong>区间</strong>。区间是带有明确起点和终点的时期，这使得它非常精确,可以用<code>interval()</code>来创建一个区间：</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1"><span class="kw">interval</span>(<span class="kw">ymd</span>(<span class="dv">20090201</span>), <span class="kw">ymd</span>(<span class="dv">20090101</span>))</a>
-<a class="sourceLine" id="cb252-2" title="2"><span class="co">#&gt; [1] 2009-02-01 UTC--2009-01-01 UTC</span></a></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="kw">interval</span>(<span class="kw">ymd</span>(<span class="dv">20090201</span>), <span class="kw">ymd</span>(<span class="dv">20090101</span>))</a>
+<a class="sourceLine" id="cb251-2" title="2"><span class="co">#&gt; [1] 2009-02-01 UTC--2009-01-01 UTC</span></a></code></pre></div>
 <p>一种更简单的创建区间的方式是使用操作符<code>%--%</code></p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1">next_year &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb253-2" title="2"><span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year </a>
-<a class="sourceLine" id="cb253-3" title="3"><span class="co">#&gt; [1] 2019-12-12 UTC--2020-12-12 UTC</span></a></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1">next_year &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb252-2" title="2"><span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year </a>
+<a class="sourceLine" id="cb252-3" title="3"><span class="co">#&gt; [1] 2019-12-12 UTC--2020-12-12 UTC</span></a></code></pre></div>
 <p>要想知道一个区间内有多少个阶段，需要使用整数除法。利用区间进行精确计算：</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1"><span class="co">## 闰年</span></a>
-<a class="sourceLine" id="cb254-2" title="2">(<span class="kw">ymd</span>(<span class="dv">20160101</span>) <span class="op">%--%</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">20170101</span>)) <span class="op">/</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb254-3" title="3"><span class="co">#&gt; [1] 366</span></a>
-<a class="sourceLine" id="cb254-4" title="4"><span class="co">## 平年</span></a>
-<a class="sourceLine" id="cb254-5" title="5">(<span class="kw">ymd</span>(<span class="dv">20170101</span>) <span class="op">%--%</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">20180101</span>)) <span class="op">/</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb254-6" title="6"><span class="co">#&gt; [1] 365</span></a></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1"><span class="co">## 闰年</span></a>
+<a class="sourceLine" id="cb253-2" title="2">(<span class="kw">ymd</span>(<span class="dv">20160101</span>) <span class="op">%--%</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">20170101</span>)) <span class="op">/</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb253-3" title="3"><span class="co">#&gt; [1] 366</span></a>
+<a class="sourceLine" id="cb253-4" title="4"><span class="co">## 平年</span></a>
+<a class="sourceLine" id="cb253-5" title="5">(<span class="kw">ymd</span>(<span class="dv">20170101</span>) <span class="op">%--%</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">20180101</span>)) <span class="op">/</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb253-6" title="6"><span class="co">#&gt; [1] 365</span></a></code></pre></div>
 </div>
 <div id="小结" class="section level3">
 <h3><span class="header-section-number">4.3.4</span> 小结</h3>
@@ -875,28 +893,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="exr:unnamed-chunk-51" class="exercise"><strong>Exercise 4.4  </strong></span>创建一个日期向量来给出 2015 年每个月的第一天
 </div>
 
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1"><span class="kw">ymd</span>(<span class="dv">20150101</span>) <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
-<a class="sourceLine" id="cb255-2" title="2"><span class="co">#&gt;  [1] &quot;2015-01-01&quot; &quot;2015-02-01&quot; &quot;2015-03-01&quot; &quot;2015-04-01&quot; &quot;2015-05-01&quot;</span></a>
-<a class="sourceLine" id="cb255-3" title="3"><span class="co">#&gt;  [6] &quot;2015-06-01&quot; &quot;2015-07-01&quot; &quot;2015-08-01&quot; &quot;2015-09-01&quot; &quot;2015-10-01&quot;</span></a>
-<a class="sourceLine" id="cb255-4" title="4"><span class="co">#&gt; [11] &quot;2015-11-01&quot; &quot;2015-12-01&quot;</span></a>
-<a class="sourceLine" id="cb255-5" title="5"></a>
-<a class="sourceLine" id="cb255-6" title="6"><span class="co">## To get the vector of the first day of the month for this year, we first need to figure out what this year is, and get January 1st of it</span></a>
-<a class="sourceLine" id="cb255-7" title="7"><span class="kw">floor_date</span>(<span class="kw">today</span>(),<span class="st">&quot;year&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
-<a class="sourceLine" id="cb255-8" title="8"><span class="co">#&gt;  [1] &quot;2019-01-01&quot; &quot;2019-02-01&quot; &quot;2019-03-01&quot; &quot;2019-04-01&quot; &quot;2019-05-01&quot;</span></a>
-<a class="sourceLine" id="cb255-9" title="9"><span class="co">#&gt;  [6] &quot;2019-06-01&quot; &quot;2019-07-01&quot; &quot;2019-08-01&quot; &quot;2019-09-01&quot; &quot;2019-10-01&quot;</span></a>
-<a class="sourceLine" id="cb255-10" title="10"><span class="co">#&gt; [11] &quot;2019-11-01&quot; &quot;2019-12-01&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1"><span class="kw">ymd</span>(<span class="dv">20150101</span>) <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb254-2" title="2"><span class="co">#&gt;  [1] &quot;2015-01-01&quot; &quot;2015-02-01&quot; &quot;2015-03-01&quot; &quot;2015-04-01&quot; &quot;2015-05-01&quot;</span></a>
+<a class="sourceLine" id="cb254-3" title="3"><span class="co">#&gt;  [6] &quot;2015-06-01&quot; &quot;2015-07-01&quot; &quot;2015-08-01&quot; &quot;2015-09-01&quot; &quot;2015-10-01&quot;</span></a>
+<a class="sourceLine" id="cb254-4" title="4"><span class="co">#&gt; [11] &quot;2015-11-01&quot; &quot;2015-12-01&quot;</span></a>
+<a class="sourceLine" id="cb254-5" title="5"></a>
+<a class="sourceLine" id="cb254-6" title="6"><span class="co">## To get the vector of the first day of the month for this year, we first need to figure out what this year is, and get January 1st of it</span></a>
+<a class="sourceLine" id="cb254-7" title="7"><span class="kw">floor_date</span>(<span class="kw">today</span>(),<span class="st">&quot;year&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb254-8" title="8"><span class="co">#&gt;  [1] &quot;2019-01-01&quot; &quot;2019-02-01&quot; &quot;2019-03-01&quot; &quot;2019-04-01&quot; &quot;2019-05-01&quot;</span></a>
+<a class="sourceLine" id="cb254-9" title="9"><span class="co">#&gt;  [6] &quot;2019-06-01&quot; &quot;2019-07-01&quot; &quot;2019-08-01&quot; &quot;2019-09-01&quot; &quot;2019-10-01&quot;</span></a>
+<a class="sourceLine" id="cb254-10" title="10"><span class="co">#&gt; [11] &quot;2019-11-01&quot; &quot;2019-12-01&quot;</span></a></code></pre></div>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-53" class="exercise"><strong>Exercise 4.5  </strong></span>编写一个函数，输入你的生日（日期型），返回你的年龄（以年为单位）：
 </div>
 
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1">age &lt;-<span class="st"> </span><span class="cf">function</span>(birth) {</a>
-<a class="sourceLine" id="cb256-2" title="2">  birth &lt;-<span class="st"> </span><span class="kw">ymd</span>(birth)</a>
-<a class="sourceLine" id="cb256-3" title="3">  (birth <span class="op">%--%</span><span class="st"> </span><span class="kw">today</span>()) <span class="op">%/%</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb256-4" title="4">}</a>
-<a class="sourceLine" id="cb256-5" title="5"></a>
-<a class="sourceLine" id="cb256-6" title="6"><span class="kw">age</span>(<span class="st">&quot;19981112&quot;</span>)</a>
-<a class="sourceLine" id="cb256-7" title="7"><span class="co">#&gt; [1] 21</span></a></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1">age &lt;-<span class="st"> </span><span class="cf">function</span>(birth) {</a>
+<a class="sourceLine" id="cb255-2" title="2">  birth &lt;-<span class="st"> </span><span class="kw">ymd</span>(birth)</a>
+<a class="sourceLine" id="cb255-3" title="3">  (birth <span class="op">%--%</span><span class="st"> </span><span class="kw">today</span>()) <span class="op">%/%</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb255-4" title="4">}</a>
+<a class="sourceLine" id="cb255-5" title="5"></a>
+<a class="sourceLine" id="cb255-6" title="6"><span class="kw">age</span>(<span class="st">&quot;19981112&quot;</span>)</a>
+<a class="sourceLine" id="cb255-7" title="7"><span class="co">#&gt; [1] 21</span></a></code></pre></div>
 
 </div>
 </div>

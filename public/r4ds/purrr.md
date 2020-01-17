@@ -367,7 +367,27 @@ iris %>%
 ```
 
 
-### group_split、group_keys、group_data
+### group_nest、group_split、group_keys、group_data
+
+
+`group_nest()` is similar to `tidyr::nest()`, but focuses on the variables to **nest** by instead of the nested columns.  
+
+
+```r
+iris %>% 
+  as_tibble() %>%
+  group_nest(Species)
+#> # A tibble: 3 x 2
+#>   Species    data             
+#>   <fct>      <list>           
+#> 1 setosa     <tibble [50 x 4]>
+#> 2 versicolor <tibble [50 x 4]>
+#> 3 virginica  <tibble [50 x 4]>
+```
+
+
+`group_split()` is a tidy version of `base::split()`. In particular, it respects a group_by()-like grouping specification, and refuses to name its result.
+
 
 
 ```r
@@ -384,7 +404,7 @@ iris %>%
 #> 4          4.6         3.1          1.5         0.2 setosa 
 #> 5          5           3.6          1.4         0.2 setosa 
 #> 6          5.4         3.9          1.7         0.4 setosa 
-#> # … with 44 more rows
+#> # ... with 44 more rows
 #> 
 #> [[2]]
 #> # A tibble: 50 x 5
@@ -396,7 +416,7 @@ iris %>%
 #> 4          5.5         2.3          4           1.3 versicolor
 #> 5          6.5         2.8          4.6         1.5 versicolor
 #> 6          5.7         2.8          4.5         1.3 versicolor
-#> # … with 44 more rows
+#> # ... with 44 more rows
 #> 
 #> [[3]]
 #> # A tibble: 50 x 5
@@ -408,11 +428,11 @@ iris %>%
 #> 4          6.3         2.9          5.6         1.8 virginica
 #> 5          6.5         3            5.8         2.2 virginica
 #> 6          7.6         3            6.6         2.1 virginica
-#> # … with 44 more rows
+#> # ... with 44 more rows
 #> 
 #> attr(,"ptype")
 #> # A tibble: 0 x 5
-#> # … with 5 variables: Sepal.Length <dbl>, Sepal.Width <dbl>,
+#> # ... with 5 variables: Sepal.Length <dbl>, Sepal.Width <dbl>,
 #> #   Petal.Length <dbl>, Petal.Width <dbl>, Species <fct>
 ```
 

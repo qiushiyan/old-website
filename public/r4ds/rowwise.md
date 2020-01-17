@@ -126,7 +126,7 @@ df_done
 #> 4 <int [2]>
 #> 5 <int [1]>
 #> 6 <int [2]>
-#> # … with 3 more rows
+#> # ... with 3 more rows
 ```
 
 
@@ -142,7 +142,7 @@ df_done %>%
 #> 4     2
 #> 5     1
 #> 6     2
-#> # … with 3 more rows
+#> # ... with 3 more rows
 ```
 
 
@@ -180,8 +180,8 @@ tbl %>%
 #> # A tibble: 3 x 3
 #>   cyl_threshold mpg_threshold x                  
 #>           <dbl>         <dbl> <list>             
-#> 1             4            30 <df[,11] [7 × 11]> 
-#> 2             6            25 <df[,11] [7 × 11]> 
-#> 3             8            20 <df[,11] [14 × 11]>
+#> 1             4            30 <df[,11] [7 x 11]> 
+#> 2             6            25 <df[,11] [7 x 11]> 
+#> 3             8            20 <df[,11] [14 x 11]>
 ```
 

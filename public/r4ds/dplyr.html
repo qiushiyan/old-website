@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 dplyr | R for data science: tidyverse and beyond</title>
   <meta name="description" content="1 dplyr | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 dplyr | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-01-07" />
+<meta name="date" content="2020-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
+<script src="libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
+<script src="libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
 
 
 <style type="text/css">
@@ -237,28 +241,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="forcats.html"><a href="forcats.html#合并因子"><i class="fa fa-check"></i><b>5.5</b> 合并因子</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tidyr.html"><a href="tidyr.html"><i class="fa fa-check"></i><b>6</b> tidyr</a><ul>
-<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> 简介</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidyr.html"><a href="tidyr.html#tidyr-intro"><i class="fa fa-check"></i><b>6.1</b> tidy data 简介</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="tidyr.html"><a href="tidyr.html#练习-11"><i class="fa fa-check"></i><b>6.1.1</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#spread和gather"><i class="fa fa-check"></i><b>6.2</b> <code>spread()</code>和<code>gather()</code></a><ul>
-<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#gather"><i class="fa fa-check"></i><b>6.2.1</b> <code>gather()</code></a></li>
-<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#spread"><i class="fa fa-check"></i><b>6.2.2</b> <code>spread()</code></a></li>
-<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.3</b> 练习</a></li>
+<li class="chapter" data-level="6.2" data-path="tidyr.html"><a href="tidyr.html#pivoting"><i class="fa fa-check"></i><b>6.2</b> pivoting</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer"><i class="fa fa-check"></i><b>6.2.1</b> <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.2.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.3" data-path="tidyr.html"><a href="tidyr.html#combining-pivot_longer-and-pivot_wider"><i class="fa fa-check"></i><b>6.2.3</b> Combining <code>pivot_longer()</code> and <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.2.4" data-path="tidyr.html"><a href="tidyr.html#练习-12"><i class="fa fa-check"></i><b>6.2.4</b> 练习</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#separate和untie"><i class="fa fa-check"></i><b>6.3</b> <code>separate()</code>和<code>untie()</code></a><ul>
-<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.3.1</b> <code>separate()</code></a></li>
-<li class="chapter" data-level="6.3.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.3.2</b> <code>unite()</code></a></li>
-<li class="chapter" data-level="6.3.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.3.3</b> 练习</a></li>
+<li class="chapter" data-level="6.3" data-path="tidyr.html"><a href="tidyr.html#nesting"><i class="fa fa-check"></i><b>6.3</b> nesting</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyr.html"><a href="tidyr.html#nested-data-and-models"><i class="fa fa-check"></i><b>6.3.1</b> nested data and models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.4</b> 缺失值</a></li>
-<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.5</b> Case Study</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.5.1</b> 练习</a></li>
+<li class="chapter" data-level="6.4" data-path="tidyr.html"><a href="tidyr.html#rectangling"><i class="fa fa-check"></i><b>6.4</b> rectangling</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="tidyr.html"><a href="tidyr.html#github-users"><i class="fa fa-check"></i><b>6.4.1</b> Github users</a></li>
+<li class="chapter" data-level="6.4.2" data-path="tidyr.html"><a href="tidyr.html#github-repos"><i class="fa fa-check"></i><b>6.4.2</b> Github repos</a></li>
+<li class="chapter" data-level="6.4.3" data-path="tidyr.html"><a href="tidyr.html#game-of-throne-characters"><i class="fa fa-check"></i><b>6.4.3</b> Game of Throne characters</a></li>
+<li class="chapter" data-level="6.4.4" data-path="tidyr.html"><a href="tidyr.html#sharla-gelfands-discography"><i class="fa fa-check"></i><b>6.4.4</b> Sharla Gelfand’s discography</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.6</b> 拓展：None-tidy data</a></li>
-<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-1.0.0"><i class="fa fa-check"></i><b>6.7</b> <code>tidyr 1.0.0</code></a><ul>
-<li class="chapter" data-level="6.7.1" data-path="tidyr.html"><a href="tidyr.html#pivot_longer-和-pivot_wider"><i class="fa fa-check"></i><b>6.7.1</b> <code>pivot_longer</code> 和 <code>pivot_wider</code></a></li>
-<li class="chapter" data-level="6.7.2" data-path="tidyr.html"><a href="tidyr.html#pivot_wider"><i class="fa fa-check"></i><b>6.7.2</b> <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="6.5" data-path="tidyr.html"><a href="tidyr.html#separate-和-untie"><i class="fa fa-check"></i><b>6.5</b> <code>separate()</code> 和 <code>untie()</code></a><ul>
+<li class="chapter" data-level="6.5.1" data-path="tidyr.html"><a href="tidyr.html#separate"><i class="fa fa-check"></i><b>6.5.1</b> <code>separate()</code></a></li>
+<li class="chapter" data-level="6.5.2" data-path="tidyr.html"><a href="tidyr.html#unite"><i class="fa fa-check"></i><b>6.5.2</b> <code>unite()</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="tidyr.html"><a href="tidyr.html#练习-13"><i class="fa fa-check"></i><b>6.5.3</b> 练习</a></li>
 </ul></li>
+<li class="chapter" data-level="6.6" data-path="tidyr.html"><a href="tidyr.html#miscellanea-functions"><i class="fa fa-check"></i><b>6.6</b> Miscellanea Functions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="tidyr.html"><a href="tidyr.html#uncount"><i class="fa fa-check"></i><b>6.6.1</b> <code>uncount()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="tidyr.html"><a href="tidyr.html#tidyr-missing"><i class="fa fa-check"></i><b>6.7</b> 缺失值</a></li>
+<li class="chapter" data-level="6.8" data-path="tidyr.html"><a href="tidyr.html#case-study"><i class="fa fa-check"></i><b>6.8</b> Case Study</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="tidyr.html"><a href="tidyr.html#练习-14"><i class="fa fa-check"></i><b>6.8.1</b> 练习</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="tidyr.html"><a href="tidyr.html#non-tidy"><i class="fa fa-check"></i><b>6.9</b> 拓展：None-tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>7</b> relational data</a><ul>
 <li class="chapter" data-level="7.1" data-path="relational-data.html"><a href="relational-data.html#introduction"><i class="fa fa-check"></i><b>7.1</b> introduction</a></li>
@@ -278,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="purrr.html"><a href="purrr.html#group_"><i class="fa fa-check"></i><b>9.4</b> group_</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="purrr.html"><a href="purrr.html#group_mapgroup_modify"><i class="fa fa-check"></i><b>9.4.1</b> group_map、group_modify</a></li>
-<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_split、group_keys、group_data</a></li>
+<li class="chapter" data-level="9.4.2" data-path="purrr.html"><a href="purrr.html#group_nestgroup_splitgroup_keysgroup_data"><i class="fa fa-check"></i><b>9.4.2</b> group_nest、group_split、group_keys、group_data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Importing</b></span></li>
@@ -292,47 +305,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
 <li class="chapter" data-level="12" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>12</b> data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.1</b> dtplyr</a></li>
-<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.2</b> maditr</a></li>
-<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.3</b> tidyfast</a></li>
-<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.4</b> disk.frame</a></li>
+<li class="chapter" data-level="12.1" data-path="data-table.html"><a href="data-table.html#data-table-basics"><i class="fa fa-check"></i><b>12.1</b> 基本使用</a></li>
+<li class="chapter" data-level="12.2" data-path="data-table.html"><a href="data-table.html#dtplyr"><i class="fa fa-check"></i><b>12.2</b> dtplyr</a></li>
+<li class="chapter" data-level="12.3" data-path="data-table.html"><a href="data-table.html#maditr"><i class="fa fa-check"></i><b>12.3</b> maditr</a></li>
+<li class="chapter" data-level="12.4" data-path="data-table.html"><a href="data-table.html#tidyfast"><i class="fa fa-check"></i><b>12.4</b> tidyfast</a></li>
+<li class="chapter" data-level="12.5" data-path="data-table.html"><a href="data-table.html#disk.frame"><i class="fa fa-check"></i><b>12.5</b> disk.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="rowwise-operation.html"><a href="rowwise-operation.html"><i class="fa fa-check"></i><b>13</b> rowwise operation</a><ul>
 <li class="chapter" data-level="13.1" data-path="rowwise-operation.html"><a href="rowwise-operation.html#do-rowwise"><i class="fa fa-check"></i><b>13.1</b> do() + rowwise()</a></li>
 <li class="chapter" data-level="13.2" data-path="rowwise-operation.html"><a href="rowwise-operation.html#rap"><i class="fa fa-check"></i><b>13.2</b> rap</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>14</b> Data Summary</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>14.1</b> skimr</a></li>
-<li class="chapter" data-level="14.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>14.2</b> visdat</a></li>
-<li class="chapter" data-level="14.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>14.3</b> summarytools</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>14.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>14.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="14" data-path="sjmisc.html"><a href="sjmisc.html"><i class="fa fa-check"></i><b>14</b> sjmisc</a><ul>
+<li class="chapter" data-level="14.1" data-path="sjmisc.html"><a href="sjmisc.html#frq-和-flat_table-一维和二维频数表"><i class="fa fa-check"></i><b>14.1</b> <code>frq()</code> 和 <code>flat_table()</code> 一维和二维频数表</a></li>
+<li class="chapter" data-level="14.2" data-path="sjmisc.html"><a href="sjmisc.html#rec-重新编码"><i class="fa fa-check"></i><b>14.2</b> <code>rec()</code>: 重新编码</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>15</b> Data Summary</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-summary.html"><a href="data-summary.html#skimr"><i class="fa fa-check"></i><b>15.1</b> skimr</a></li>
+<li class="chapter" data-level="15.2" data-path="data-summary.html"><a href="data-summary.html#visdat"><i class="fa fa-check"></i><b>15.2</b> visdat</a></li>
+<li class="chapter" data-level="15.3" data-path="data-summary.html"><a href="data-summary.html#summarytools"><i class="fa fa-check"></i><b>15.3</b> summarytools</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="data-summary.html"><a href="data-summary.html#freq"><i class="fa fa-check"></i><b>15.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="15.3.2" data-path="data-summary.html"><a href="data-summary.html#descr"><i class="fa fa-check"></i><b>15.3.2</b> <code>descr()</code></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IV Cleaning and Tidying</b></span></li>
-<li class="chapter" data-level="15" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>15</b> Janitor</a><ul>
-<li class="chapter" data-level="15.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>15.1</b> 清洗</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>15.1.1</b> <code>clean_names</code></a></li>
-<li class="chapter" data-level="15.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>15.1.2</b> <code>compare_df_cols</code></a></li>
+<li class="chapter" data-level="16" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>16</b> Janitor</a><ul>
+<li class="chapter" data-level="16.1" data-path="janitor.html"><a href="janitor.html#qingxi"><i class="fa fa-check"></i><b>16.1</b> 清洗</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="janitor.html"><a href="janitor.html#clean_names"><i class="fa fa-check"></i><b>16.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="16.1.2" data-path="janitor.html"><a href="janitor.html#compare_df_cols"><i class="fa fa-check"></i><b>16.1.2</b> <code>compare_df_cols</code></a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>15.2</b> 探索</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>15.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>15.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="15.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>15.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="15.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>15.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="15.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>15.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="15.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>15.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="15.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>15.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="16.2" data-path="janitor.html"><a href="janitor.html#tansuo"><i class="fa fa-check"></i><b>16.2</b> 探索</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="janitor.html"><a href="janitor.html#tabyl"><i class="fa fa-check"></i><b>16.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="janitor.html"><a href="janitor.html#get_dupes"><i class="fa fa-check"></i><b>16.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="16.2.3" data-path="janitor.html"><a href="janitor.html#remove_"><i class="fa fa-check"></i><b>16.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="16.2.4" data-path="janitor.html"><a href="janitor.html#round_half_up"><i class="fa fa-check"></i><b>16.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="16.2.5" data-path="janitor.html"><a href="janitor.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>16.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="16.2.6" data-path="janitor.html"><a href="janitor.html#top_levels"><i class="fa fa-check"></i><b>16.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="16.2.7" data-path="janitor.html"><a href="janitor.html#row_to_names"><i class="fa fa-check"></i><b>16.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>16</b> 处理缺失值</a><ul>
-<li class="chapter" data-level="16.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>16.1</b> 探索</a></li>
-<li class="chapter" data-level="16.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>16.2</b> 填充</a></li>
+<li class="chapter" data-level="17" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>17</b> 处理缺失值</a><ul>
+<li class="chapter" data-level="17.1" data-path="missing-values.html"><a href="missing-values.html#explore-missing"><i class="fa fa-check"></i><b>17.1</b> 探索</a></li>
+<li class="chapter" data-level="17.2" data-path="missing-values.html"><a href="missing-values.html#fill-missing"><i class="fa fa-check"></i><b>17.2</b> 填充</a></li>
 </ul></li>
 <li class="part"><span><b>V Modelling</b></span></li>
-<li class="chapter" data-level="17" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>17</b> tidymodels</a></li>
-<li class="chapter" data-level="18" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>18</b> caret</a></li>
-<li class="chapter" data-level="19" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>19</b> vtreat</a></li>
+<li class="chapter" data-level="18" data-path="tidymodels.html"><a href="tidymodels.html"><i class="fa fa-check"></i><b>18</b> tidymodels</a></li>
+<li class="chapter" data-level="19" data-path="caret.html"><a href="caret.html"><i class="fa fa-check"></i><b>19</b> caret</a></li>
+<li class="chapter" data-level="20" data-path="vtreat.html"><a href="vtreat.html"><i class="fa fa-check"></i><b>20</b> vtreat</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">written with bookdown</a></li>
@@ -1704,14 +1722,14 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 </div>
 <div id="计数函数" class="section level3">
 <h3><span class="header-section-number">1.6.2</span> 计数函数</h3>
-<p><code>n()</code> 函数是一个与摘要函数<code>summarize()</code>配合的计数函数，它不需要任何参数，单独使用时，它计算的就是行计数：</p>
+<p><code>n()</code> 函数是一个与摘要函数 <code>summarize()</code> 配合的计数函数，它不需要任何参数，单独使用时，它计算的就是行计数：</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb88-2" title="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a>
 <a class="sourceLine" id="cb88-3" title="3"><span class="co">#&gt; # A tibble: 1 x 1</span></a>
 <a class="sourceLine" id="cb88-4" title="4"><span class="co">#&gt;        n</span></a>
 <a class="sourceLine" id="cb88-5" title="5"><span class="co">#&gt;    &lt;int&gt;</span></a>
 <a class="sourceLine" id="cb88-6" title="6"><span class="co">#&gt; 1 336776</span></a></code></pre></div>
-<p>和<code>group_by</code>联合使用时，它可以计算分组变量的每个水平上各有多少个观测：</p>
+<p>和 <code>group_by()</code> 联合使用时，它可以计算分组变量的每个水平上各有多少个观测：</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="co">## 每个月各有多少趟航班</span></a>
 <a class="sourceLine" id="cb89-2" title="2">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb89-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -2602,13 +2620,12 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 </div>
 <div id="作用域" class="section level2">
 <h2><span class="header-section-number">1.9</span> 作用域</h2>
-<p>这里的作用域是指 <code>dplyr</code> 函数能影响的变量范围。一般而言，<code>arrange()</code>、<code>mutate()</code>、<code>summarize()</code> 作用的变量需要显式指明，而它们的一些变体 (scoped variants) 有更加复杂的作用域规则。</p>
+<p>这里的作用域 (scope) 是指 <code>dplyr</code> 函数能影响的变量范围。一般而言，<code>arrange()</code>、<code>mutate()</code>、<code>summarize()</code> 作用的变量需要显式指明，而它们的一些变体 (scoped variants) 有更加复杂的作用域规则。</p>
 <p><strong>Scoped variants of a function operates on a selection of variables.</strong></p>
 <p>The variants suffixed with <code>_if</code>, <code>_at</code> or <code>_all</code> apply an expression (sometimes several) to all variables <strong>within a specified subset</strong>. This subset can contain all variables (<code>_all</code> variants), a vars() selection (<code>_at</code> variants), or variables selected with a predicate (<code>_if</code> variants).</p>
 <p><a href="https://dplyr.tidyverse.org/reference/mutate_all.html" class="uri">https://dplyr.tidyverse.org/reference/mutate_all.html</a></p>
 <p><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="uri">https://dplyr.tidyverse.org/reference/summarise_all.html</a></p>
 <p><a href="https://dplyr.tidyverse.org/reference/filter_all.html" class="uri">https://dplyr.tidyverse.org/reference/filter_all.html</a></p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 <div id="arrange" class="section level3">
 <h3><span class="header-section-number">1.9.1</span> <code>arrange()</code></h3>
 </div>
@@ -2620,17 +2637,17 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 <li><p><code>_at</code> affects variables selected with a character vector or <code>vars()</code></p></li>
 <li><p>_if affects variables selected with a predicate function</p></li>
 </ul>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="kw">mutate_all</span>(.tbl, .funs, ...)</a>
-<a class="sourceLine" id="cb130-2" title="2"></a>
-<a class="sourceLine" id="cb130-3" title="3"><span class="kw">mutate_if</span>(.tbl, .predicate, .funs, ...)</a>
-<a class="sourceLine" id="cb130-4" title="4"></a>
-<a class="sourceLine" id="cb130-5" title="5"><span class="kw">mutate_at</span>(.tbl, .vars, .funs, ..., <span class="dt">.cols =</span> <span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb130-6" title="6"></a>
-<a class="sourceLine" id="cb130-7" title="7"><span class="kw">transmute_all</span>(.tbl, .funs, ...)</a>
-<a class="sourceLine" id="cb130-8" title="8"></a>
-<a class="sourceLine" id="cb130-9" title="9"><span class="kw">transmute_if</span>(.tbl, .predicate, .funs, ...)</a>
-<a class="sourceLine" id="cb130-10" title="10"></a>
-<a class="sourceLine" id="cb130-11" title="11"><span class="kw">transmute_at</span>(.tbl, .vars, .funs, ..., <span class="dt">.cols =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">mutate_all</span>(.tbl, .funs, ...)</a>
+<a class="sourceLine" id="cb129-2" title="2"></a>
+<a class="sourceLine" id="cb129-3" title="3"><span class="kw">mutate_if</span>(.tbl, .predicate, .funs, ...)</a>
+<a class="sourceLine" id="cb129-4" title="4"></a>
+<a class="sourceLine" id="cb129-5" title="5"><span class="kw">mutate_at</span>(.tbl, .vars, .funs, ..., <span class="dt">.cols =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb129-6" title="6"></a>
+<a class="sourceLine" id="cb129-7" title="7"><span class="kw">transmute_all</span>(.tbl, .funs, ...)</a>
+<a class="sourceLine" id="cb129-8" title="8"></a>
+<a class="sourceLine" id="cb129-9" title="9"><span class="kw">transmute_if</span>(.tbl, .predicate, .funs, ...)</a>
+<a class="sourceLine" id="cb129-10" title="10"></a>
+<a class="sourceLine" id="cb129-11" title="11"><span class="kw">transmute_at</span>(.tbl, .vars, .funs, ..., <span class="dt">.cols =</span> <span class="ot">NULL</span>)</a></code></pre></div>
 <p><strong>Arguments</strong></p>
 <ul>
 <li><code>tbl</code>: A tbl object<br />
@@ -2643,159 +2660,159 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 </ul>
 <hr />
 <p><code>_all()</code> 影响所有变量：</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="ot">NA</span>, <span class="dv">10000</span>))</a>
-<a class="sourceLine" id="cb131-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_all</span>(log10)</a>
-<a class="sourceLine" id="cb131-3" title="3"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
-<a class="sourceLine" id="cb131-4" title="4"><span class="co">#&gt;       x     y</span></a>
-<a class="sourceLine" id="cb131-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb131-6" title="6"><span class="co">#&gt; 1     1     3</span></a>
-<a class="sourceLine" id="cb131-7" title="7"><span class="co">#&gt; 2     2    NA</span></a>
-<a class="sourceLine" id="cb131-8" title="8"><span class="co">#&gt; 3    NA     4</span></a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="ot">NA</span>, <span class="dv">10000</span>))</a>
+<a class="sourceLine" id="cb130-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_all</span>(log10)</a>
+<a class="sourceLine" id="cb130-3" title="3"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
+<a class="sourceLine" id="cb130-4" title="4"><span class="co">#&gt;       x     y</span></a>
+<a class="sourceLine" id="cb130-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb130-6" title="6"><span class="co">#&gt; 1     1     3</span></a>
+<a class="sourceLine" id="cb130-7" title="7"><span class="co">#&gt; 2     2    NA</span></a>
+<a class="sourceLine" id="cb130-8" title="8"><span class="co">#&gt; 3    NA     4</span></a></code></pre></div>
 <p>所有 scoped variants 都可以传入任何函数及其参数：</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">scale2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>) (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> na.rm)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x, na.rm)</a>
-<a class="sourceLine" id="cb132-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb132-3" title="3"><span class="st">  </span><span class="kw">mutate_all</span>(scale2, <span class="dt">na.rm =</span> T)</a>
-<a class="sourceLine" id="cb132-4" title="4"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
-<a class="sourceLine" id="cb132-5" title="5"><span class="co">#&gt;        x      y</span></a>
-<a class="sourceLine" id="cb132-6" title="6"><span class="co">#&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb132-7" title="7"><span class="co">#&gt; 1 -0.707 -0.707</span></a>
-<a class="sourceLine" id="cb132-8" title="8"><span class="co">#&gt; 2  0.707 NA    </span></a>
-<a class="sourceLine" id="cb132-9" title="9"><span class="co">#&gt; 3 NA      0.707</span></a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">scale2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>) (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> na.rm)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x, na.rm)</a>
+<a class="sourceLine" id="cb131-2" title="2">df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb131-3" title="3"><span class="st">  </span><span class="kw">mutate_all</span>(scale2, <span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb131-4" title="4"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
+<a class="sourceLine" id="cb131-5" title="5"><span class="co">#&gt;        x      y</span></a>
+<a class="sourceLine" id="cb131-6" title="6"><span class="co">#&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb131-7" title="7"><span class="co">#&gt; 1 -0.707 -0.707</span></a>
+<a class="sourceLine" id="cb131-8" title="8"><span class="co">#&gt; 2  0.707 NA    </span></a>
+<a class="sourceLine" id="cb131-9" title="9"><span class="co">#&gt; 3 NA      0.707</span></a></code></pre></div>
 <p><code>_at</code> 变体作用于变量的某个子集，可以用一个字符向量指定，也可以使用 <a href="dplyr.html#使用select选择列">使用<code>select()</code>选择列</a> 中的帮助函数，但这些帮助函数必须包裹在 <code>vars()</code> 之内，可以把 <code>vars()</code> 看作是 scoped variants 内部的 <code>select()</code></p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1">starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;mass&quot;</span>), scale2, <span class="dt">na.rm =</span> T)</a>
-<a class="sourceLine" id="cb133-2" title="2"><span class="co">#&gt; # A tibble: 87 x 13</span></a>
-<a class="sourceLine" id="cb133-3" title="3"><span class="co">#&gt;   name   height   mass hair_color skin_color eye_color birth_year gender</span></a>
-<a class="sourceLine" id="cb133-4" title="4"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb133-5" title="5"><span class="co">#&gt; 1 Luke… -0.0678 -0.120 blond      fair       blue            19   male  </span></a>
-<a class="sourceLine" id="cb133-6" title="6"><span class="co">#&gt; 2 C-3PO -0.212  -0.132 &lt;NA&gt;       gold       yellow         112   &lt;NA&gt;  </span></a>
-<a class="sourceLine" id="cb133-7" title="7"><span class="co">#&gt; 3 R2-D2 -2.25   -0.385 &lt;NA&gt;       white, bl… red             33   &lt;NA&gt;  </span></a>
-<a class="sourceLine" id="cb133-8" title="8"><span class="co">#&gt; 4 Dart…  0.795   0.228 none       white      yellow          41.9 male  </span></a>
-<a class="sourceLine" id="cb133-9" title="9"><span class="co">#&gt; 5 Leia… -0.701  -0.285 brown      light      brown           19   female</span></a>
-<a class="sourceLine" id="cb133-10" title="10"><span class="co">#&gt; 6 Owen…  0.105   0.134 brown, gr… light      blue            52   male  </span></a>
-<a class="sourceLine" id="cb133-11" title="11"><span class="co">#&gt; # … with 81 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb133-12" title="12"><span class="co">#&gt; #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</span></a>
-<a class="sourceLine" id="cb133-13" title="13"></a>
-<a class="sourceLine" id="cb133-14" title="14"><span class="co"># You can also supply selection helpers to _at() functions but you have</span></a>
-<a class="sourceLine" id="cb133-15" title="15"><span class="co"># to quote them with vars():</span></a>
-<a class="sourceLine" id="cb133-16" title="16">iris &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(iris)</a>
-<a class="sourceLine" id="cb133-17" title="17">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">matches</span>(<span class="st">&quot;Sepal&quot;</span>)), scale2)</a>
-<a class="sourceLine" id="cb133-18" title="18"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
-<a class="sourceLine" id="cb133-19" title="19"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
-<a class="sourceLine" id="cb133-20" title="20"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
-<a class="sourceLine" id="cb133-21" title="21"><span class="co">#&gt; 1       -0.898      1.02            1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-22" title="22"><span class="co">#&gt; 2       -1.14      -0.132           1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-23" title="23"><span class="co">#&gt; 3       -1.38       0.327           1.3         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-24" title="24"><span class="co">#&gt; 4       -1.50       0.0979          1.5         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-25" title="25"><span class="co">#&gt; 5       -1.02       1.25            1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-26" title="26"><span class="co">#&gt; 6       -0.535      1.93            1.7         0.4 setosa </span></a>
-<a class="sourceLine" id="cb133-27" title="27"><span class="co">#&gt; # … with 144 more rows</span></a>
-<a class="sourceLine" id="cb133-28" title="28">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">contains</span>(<span class="st">&quot;Length&quot;</span>)), scale2)</a>
-<a class="sourceLine" id="cb133-29" title="29"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
-<a class="sourceLine" id="cb133-30" title="30"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
-<a class="sourceLine" id="cb133-31" title="31"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
-<a class="sourceLine" id="cb133-32" title="32"><span class="co">#&gt; 1       -0.898         3.5        -1.34         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-33" title="33"><span class="co">#&gt; 2       -1.14          3          -1.34         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-34" title="34"><span class="co">#&gt; 3       -1.38          3.2        -1.39         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-35" title="35"><span class="co">#&gt; 4       -1.50          3.1        -1.28         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-36" title="36"><span class="co">#&gt; 5       -1.02          3.6        -1.34         0.2 setosa </span></a>
-<a class="sourceLine" id="cb133-37" title="37"><span class="co">#&gt; 6       -0.535         3.9        -1.17         0.4 setosa </span></a>
-<a class="sourceLine" id="cb133-38" title="38"><span class="co">#&gt; # … with 144 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;mass&quot;</span>), scale2, <span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb132-2" title="2"><span class="co">#&gt; # A tibble: 87 x 13</span></a>
+<a class="sourceLine" id="cb132-3" title="3"><span class="co">#&gt;   name   height   mass hair_color skin_color eye_color birth_year gender</span></a>
+<a class="sourceLine" id="cb132-4" title="4"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb132-5" title="5"><span class="co">#&gt; 1 Luke~ -0.0678 -0.120 blond      fair       blue            19   male  </span></a>
+<a class="sourceLine" id="cb132-6" title="6"><span class="co">#&gt; 2 C-3PO -0.212  -0.132 &lt;NA&gt;       gold       yellow         112   &lt;NA&gt;  </span></a>
+<a class="sourceLine" id="cb132-7" title="7"><span class="co">#&gt; 3 R2-D2 -2.25   -0.385 &lt;NA&gt;       white, bl~ red             33   &lt;NA&gt;  </span></a>
+<a class="sourceLine" id="cb132-8" title="8"><span class="co">#&gt; 4 Dart~  0.795   0.228 none       white      yellow          41.9 male  </span></a>
+<a class="sourceLine" id="cb132-9" title="9"><span class="co">#&gt; 5 Leia~ -0.701  -0.285 brown      light      brown           19   female</span></a>
+<a class="sourceLine" id="cb132-10" title="10"><span class="co">#&gt; 6 Owen~  0.105   0.134 brown, gr~ light      blue            52   male  </span></a>
+<a class="sourceLine" id="cb132-11" title="11"><span class="co">#&gt; # ... with 81 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb132-12" title="12"><span class="co">#&gt; #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</span></a>
+<a class="sourceLine" id="cb132-13" title="13"></a>
+<a class="sourceLine" id="cb132-14" title="14"><span class="co"># You can also supply selection helpers to _at() functions but you have</span></a>
+<a class="sourceLine" id="cb132-15" title="15"><span class="co"># to quote them with vars():</span></a>
+<a class="sourceLine" id="cb132-16" title="16">iris &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(iris)</a>
+<a class="sourceLine" id="cb132-17" title="17">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">matches</span>(<span class="st">&quot;Sepal&quot;</span>)), scale2)</a>
+<a class="sourceLine" id="cb132-18" title="18"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
+<a class="sourceLine" id="cb132-19" title="19"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
+<a class="sourceLine" id="cb132-20" title="20"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
+<a class="sourceLine" id="cb132-21" title="21"><span class="co">#&gt; 1       -0.898      1.02            1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-22" title="22"><span class="co">#&gt; 2       -1.14      -0.132           1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-23" title="23"><span class="co">#&gt; 3       -1.38       0.327           1.3         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-24" title="24"><span class="co">#&gt; 4       -1.50       0.0979          1.5         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-25" title="25"><span class="co">#&gt; 5       -1.02       1.25            1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-26" title="26"><span class="co">#&gt; 6       -0.535      1.93            1.7         0.4 setosa </span></a>
+<a class="sourceLine" id="cb132-27" title="27"><span class="co">#&gt; # ... with 144 more rows</span></a>
+<a class="sourceLine" id="cb132-28" title="28">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">contains</span>(<span class="st">&quot;Length&quot;</span>)), scale2)</a>
+<a class="sourceLine" id="cb132-29" title="29"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
+<a class="sourceLine" id="cb132-30" title="30"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
+<a class="sourceLine" id="cb132-31" title="31"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
+<a class="sourceLine" id="cb132-32" title="32"><span class="co">#&gt; 1       -0.898         3.5        -1.34         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-33" title="33"><span class="co">#&gt; 2       -1.14          3          -1.34         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-34" title="34"><span class="co">#&gt; 3       -1.38          3.2        -1.39         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-35" title="35"><span class="co">#&gt; 4       -1.50          3.1        -1.28         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-36" title="36"><span class="co">#&gt; 5       -1.02          3.6        -1.34         0.2 setosa </span></a>
+<a class="sourceLine" id="cb132-37" title="37"><span class="co">#&gt; 6       -0.535         3.9        -1.17         0.4 setosa </span></a>
+<a class="sourceLine" id="cb132-38" title="38"><span class="co">#&gt; # ... with 144 more rows</span></a></code></pre></div>
 <p><code>_if</code> 变体作用于 predicate function 返回的逻辑值为真的变量，注意这个参数的位置：</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="co"># The _if() variants apply a predicate function (a function that</span></a>
-<a class="sourceLine" id="cb134-2" title="2"><span class="co"># returns TRUE or FALSE) to determine the relevant subset of</span></a>
-<a class="sourceLine" id="cb134-3" title="3"><span class="co"># columns. Here we divide all the numeric columns by 100:</span></a>
-<a class="sourceLine" id="cb134-4" title="4">starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, scale2, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb134-5" title="5"><span class="co">#&gt; # A tibble: 87 x 13</span></a>
-<a class="sourceLine" id="cb134-6" title="6"><span class="co">#&gt;   name   height   mass hair_color skin_color eye_color birth_year gender</span></a>
-<a class="sourceLine" id="cb134-7" title="7"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb134-8" title="8"><span class="co">#&gt; 1 Luke… -0.0678 -0.120 blond      fair       blue          -0.443 male  </span></a>
-<a class="sourceLine" id="cb134-9" title="9"><span class="co">#&gt; 2 C-3PO -0.212  -0.132 &lt;NA&gt;       gold       yellow         0.158 &lt;NA&gt;  </span></a>
-<a class="sourceLine" id="cb134-10" title="10"><span class="co">#&gt; 3 R2-D2 -2.25   -0.385 &lt;NA&gt;       white, bl… red           -0.353 &lt;NA&gt;  </span></a>
-<a class="sourceLine" id="cb134-11" title="11"><span class="co">#&gt; 4 Dart…  0.795   0.228 none       white      yellow        -0.295 male  </span></a>
-<a class="sourceLine" id="cb134-12" title="12"><span class="co">#&gt; 5 Leia… -0.701  -0.285 brown      light      brown         -0.443 female</span></a>
-<a class="sourceLine" id="cb134-13" title="13"><span class="co">#&gt; 6 Owen…  0.105   0.134 brown, gr… light      blue          -0.230 male  </span></a>
-<a class="sourceLine" id="cb134-14" title="14"><span class="co">#&gt; # … with 81 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb134-15" title="15"><span class="co">#&gt; #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="co"># The _if() variants apply a predicate function (a function that</span></a>
+<a class="sourceLine" id="cb133-2" title="2"><span class="co"># returns TRUE or FALSE) to determine the relevant subset of</span></a>
+<a class="sourceLine" id="cb133-3" title="3"><span class="co"># columns. Here we divide all the numeric columns by 100:</span></a>
+<a class="sourceLine" id="cb133-4" title="4">starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, scale2, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb133-5" title="5"><span class="co">#&gt; # A tibble: 87 x 13</span></a>
+<a class="sourceLine" id="cb133-6" title="6"><span class="co">#&gt;   name   height   mass hair_color skin_color eye_color birth_year gender</span></a>
+<a class="sourceLine" id="cb133-7" title="7"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb133-8" title="8"><span class="co">#&gt; 1 Luke~ -0.0678 -0.120 blond      fair       blue          -0.443 male  </span></a>
+<a class="sourceLine" id="cb133-9" title="9"><span class="co">#&gt; 2 C-3PO -0.212  -0.132 &lt;NA&gt;       gold       yellow         0.158 &lt;NA&gt;  </span></a>
+<a class="sourceLine" id="cb133-10" title="10"><span class="co">#&gt; 3 R2-D2 -2.25   -0.385 &lt;NA&gt;       white, bl~ red           -0.353 &lt;NA&gt;  </span></a>
+<a class="sourceLine" id="cb133-11" title="11"><span class="co">#&gt; 4 Dart~  0.795   0.228 none       white      yellow        -0.295 male  </span></a>
+<a class="sourceLine" id="cb133-12" title="12"><span class="co">#&gt; 5 Leia~ -0.701  -0.285 brown      light      brown         -0.443 female</span></a>
+<a class="sourceLine" id="cb133-13" title="13"><span class="co">#&gt; 6 Owen~  0.105   0.134 brown, gr~ light      blue          -0.230 male  </span></a>
+<a class="sourceLine" id="cb133-14" title="14"><span class="co">#&gt; # ... with 81 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb133-15" title="15"><span class="co">#&gt; #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</span></a></code></pre></div>
 <p>当需要转换某些变量的类型时，<code>mutate_if</code> 会很方便：</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1"><span class="co">## 解决 data.frame 的强制转换  </span></a>
-<a class="sourceLine" id="cb135-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.factor, as.character)</a>
-<a class="sourceLine" id="cb135-3" title="3"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
-<a class="sourceLine" id="cb135-4" title="4"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
-<a class="sourceLine" id="cb135-5" title="5"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  </span></a>
-<a class="sourceLine" id="cb135-6" title="6"><span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb135-7" title="7"><span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb135-8" title="8"><span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa </span></a>
-<a class="sourceLine" id="cb135-9" title="9"><span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa </span></a>
-<a class="sourceLine" id="cb135-10" title="10"><span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa </span></a>
-<a class="sourceLine" id="cb135-11" title="11"><span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa </span></a>
-<a class="sourceLine" id="cb135-12" title="12"><span class="co">#&gt; # … with 144 more rows</span></a>
-<a class="sourceLine" id="cb135-13" title="13"></a>
-<a class="sourceLine" id="cb135-14" title="14"><span class="co">## 双精度转换为整型 </span></a>
-<a class="sourceLine" id="cb135-15" title="15">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.double, as.integer)</a>
-<a class="sourceLine" id="cb135-16" title="16"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
-<a class="sourceLine" id="cb135-17" title="17"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
-<a class="sourceLine" id="cb135-18" title="18"><span class="co">#&gt;          &lt;int&gt;       &lt;int&gt;        &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  </span></a>
-<a class="sourceLine" id="cb135-19" title="19"><span class="co">#&gt; 1            5           3            1           0 setosa </span></a>
-<a class="sourceLine" id="cb135-20" title="20"><span class="co">#&gt; 2            4           3            1           0 setosa </span></a>
-<a class="sourceLine" id="cb135-21" title="21"><span class="co">#&gt; 3            4           3            1           0 setosa </span></a>
-<a class="sourceLine" id="cb135-22" title="22"><span class="co">#&gt; 4            4           3            1           0 setosa </span></a>
-<a class="sourceLine" id="cb135-23" title="23"><span class="co">#&gt; 5            5           3            1           0 setosa </span></a>
-<a class="sourceLine" id="cb135-24" title="24"><span class="co">#&gt; 6            5           3            1           0 setosa </span></a>
-<a class="sourceLine" id="cb135-25" title="25"><span class="co">#&gt; # … with 144 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="co">## 解决 data.frame 的强制转换  </span></a>
+<a class="sourceLine" id="cb134-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.factor, as.character)</a>
+<a class="sourceLine" id="cb134-3" title="3"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
+<a class="sourceLine" id="cb134-4" title="4"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
+<a class="sourceLine" id="cb134-5" title="5"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  </span></a>
+<a class="sourceLine" id="cb134-6" title="6"><span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb134-7" title="7"><span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb134-8" title="8"><span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa </span></a>
+<a class="sourceLine" id="cb134-9" title="9"><span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa </span></a>
+<a class="sourceLine" id="cb134-10" title="10"><span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa </span></a>
+<a class="sourceLine" id="cb134-11" title="11"><span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa </span></a>
+<a class="sourceLine" id="cb134-12" title="12"><span class="co">#&gt; # ... with 144 more rows</span></a>
+<a class="sourceLine" id="cb134-13" title="13"></a>
+<a class="sourceLine" id="cb134-14" title="14"><span class="co">## 双精度转换为整型 </span></a>
+<a class="sourceLine" id="cb134-15" title="15">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.double, as.integer)</a>
+<a class="sourceLine" id="cb134-16" title="16"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
+<a class="sourceLine" id="cb134-17" title="17"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
+<a class="sourceLine" id="cb134-18" title="18"><span class="co">#&gt;          &lt;int&gt;       &lt;int&gt;        &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  </span></a>
+<a class="sourceLine" id="cb134-19" title="19"><span class="co">#&gt; 1            5           3            1           0 setosa </span></a>
+<a class="sourceLine" id="cb134-20" title="20"><span class="co">#&gt; 2            4           3            1           0 setosa </span></a>
+<a class="sourceLine" id="cb134-21" title="21"><span class="co">#&gt; 3            4           3            1           0 setosa </span></a>
+<a class="sourceLine" id="cb134-22" title="22"><span class="co">#&gt; 4            4           3            1           0 setosa </span></a>
+<a class="sourceLine" id="cb134-23" title="23"><span class="co">#&gt; 5            5           3            1           0 setosa </span></a>
+<a class="sourceLine" id="cb134-24" title="24"><span class="co">#&gt; 6            5           3            1           0 setosa </span></a>
+<a class="sourceLine" id="cb134-25" title="25"><span class="co">#&gt; # ... with 144 more rows</span></a></code></pre></div>
 <p>某些情况下，可能希望进行多种数据函数，可以在 <code>,funs</code> 中传入一个函数列表，则列表中的每个函数均会作用于所有符合筛选条件的变量。有多个函数时，<code>mutate</code> 的 scoped vairiants 生成新列，而非就地修改原来的变量</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(scale2, log)) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(scale2, log)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb135-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb135-3" title="3"><span class="co">#&gt; # A tibble: 150 x 8</span></a>
+<a class="sourceLine" id="cb135-4" title="4"><span class="co">#&gt;   Sepal.Length_fn1 Sepal.Width_fn1 Petal.Length_fn1 Petal.Width_fn1</span></a>
+<a class="sourceLine" id="cb135-5" title="5"><span class="co">#&gt;              &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb135-6" title="6"><span class="co">#&gt; 1           -0.898          1.02              -1.34           -1.31</span></a>
+<a class="sourceLine" id="cb135-7" title="7"><span class="co">#&gt; 2           -1.14          -0.132             -1.34           -1.31</span></a>
+<a class="sourceLine" id="cb135-8" title="8"><span class="co">#&gt; 3           -1.38           0.327             -1.39           -1.31</span></a>
+<a class="sourceLine" id="cb135-9" title="9"><span class="co">#&gt; 4           -1.50           0.0979            -1.28           -1.31</span></a>
+<a class="sourceLine" id="cb135-10" title="10"><span class="co">#&gt; 5           -1.02           1.25              -1.34           -1.31</span></a>
+<a class="sourceLine" id="cb135-11" title="11"><span class="co">#&gt; 6           -0.535          1.93              -1.17           -1.05</span></a>
+<a class="sourceLine" id="cb135-12" title="12"><span class="co">#&gt; # ... with 144 more rows, and 4 more variables: Sepal.Length_fn2 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb135-13" title="13"><span class="co">#&gt; #   Sepal.Width_fn2 &lt;dbl&gt;, Petal.Length_fn2 &lt;dbl&gt;, Petal.Width_fn2 &lt;dbl&gt;</span></a></code></pre></div>
+<p>通过具名列表，可以控制生成的新列的名称：</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(<span class="dt">scale =</span> scale2, <span class="dt">log =</span> log)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb136-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
 <a class="sourceLine" id="cb136-3" title="3"><span class="co">#&gt; # A tibble: 150 x 8</span></a>
-<a class="sourceLine" id="cb136-4" title="4"><span class="co">#&gt;   Sepal.Length_fn1 Sepal.Width_fn1 Petal.Length_fn1 Petal.Width_fn1</span></a>
-<a class="sourceLine" id="cb136-5" title="5"><span class="co">#&gt;              &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb136-6" title="6"><span class="co">#&gt; 1           -0.898          1.02              -1.34           -1.31</span></a>
-<a class="sourceLine" id="cb136-7" title="7"><span class="co">#&gt; 2           -1.14          -0.132             -1.34           -1.31</span></a>
-<a class="sourceLine" id="cb136-8" title="8"><span class="co">#&gt; 3           -1.38           0.327             -1.39           -1.31</span></a>
-<a class="sourceLine" id="cb136-9" title="9"><span class="co">#&gt; 4           -1.50           0.0979            -1.28           -1.31</span></a>
-<a class="sourceLine" id="cb136-10" title="10"><span class="co">#&gt; 5           -1.02           1.25              -1.34           -1.31</span></a>
-<a class="sourceLine" id="cb136-11" title="11"><span class="co">#&gt; 6           -0.535          1.93              -1.17           -1.05</span></a>
-<a class="sourceLine" id="cb136-12" title="12"><span class="co">#&gt; # … with 144 more rows, and 4 more variables: Sepal.Length_fn2 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb136-13" title="13"><span class="co">#&gt; #   Sepal.Width_fn2 &lt;dbl&gt;, Petal.Length_fn2 &lt;dbl&gt;, Petal.Width_fn2 &lt;dbl&gt;</span></a></code></pre></div>
-<p>通过具名列表，可以控制生成的新列的名称：</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(<span class="dt">scale =</span> scale2, <span class="dt">log =</span> log)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb137-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb137-3" title="3"><span class="co">#&gt; # A tibble: 150 x 8</span></a>
-<a class="sourceLine" id="cb137-4" title="4"><span class="co">#&gt;   Sepal.Length_sc… Sepal.Width_sca… Petal.Length_sc… Petal.Width_sca…</span></a>
-<a class="sourceLine" id="cb137-5" title="5"><span class="co">#&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb137-6" title="6"><span class="co">#&gt; 1           -0.898           1.02              -1.34            -1.31</span></a>
-<a class="sourceLine" id="cb137-7" title="7"><span class="co">#&gt; 2           -1.14           -0.132             -1.34            -1.31</span></a>
-<a class="sourceLine" id="cb137-8" title="8"><span class="co">#&gt; 3           -1.38            0.327             -1.39            -1.31</span></a>
-<a class="sourceLine" id="cb137-9" title="9"><span class="co">#&gt; 4           -1.50            0.0979            -1.28            -1.31</span></a>
-<a class="sourceLine" id="cb137-10" title="10"><span class="co">#&gt; 5           -1.02            1.25              -1.34            -1.31</span></a>
-<a class="sourceLine" id="cb137-11" title="11"><span class="co">#&gt; 6           -0.535           1.93              -1.17            -1.05</span></a>
-<a class="sourceLine" id="cb137-12" title="12"><span class="co">#&gt; # … with 144 more rows, and 4 more variables: Sepal.Length_log &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb137-13" title="13"><span class="co">#&gt; #   Sepal.Width_log &lt;dbl&gt;, Petal.Length_log &lt;dbl&gt;, Petal.Width_log &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb136-4" title="4"><span class="co">#&gt;   Sepal.Length_sc~ Sepal.Width_sca~ Petal.Length_sc~ Petal.Width_sca~</span></a>
+<a class="sourceLine" id="cb136-5" title="5"><span class="co">#&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb136-6" title="6"><span class="co">#&gt; 1           -0.898           1.02              -1.34            -1.31</span></a>
+<a class="sourceLine" id="cb136-7" title="7"><span class="co">#&gt; 2           -1.14           -0.132             -1.34            -1.31</span></a>
+<a class="sourceLine" id="cb136-8" title="8"><span class="co">#&gt; 3           -1.38            0.327             -1.39            -1.31</span></a>
+<a class="sourceLine" id="cb136-9" title="9"><span class="co">#&gt; 4           -1.50            0.0979            -1.28            -1.31</span></a>
+<a class="sourceLine" id="cb136-10" title="10"><span class="co">#&gt; 5           -1.02            1.25              -1.34            -1.31</span></a>
+<a class="sourceLine" id="cb136-11" title="11"><span class="co">#&gt; 6           -0.535           1.93              -1.17            -1.05</span></a>
+<a class="sourceLine" id="cb136-12" title="12"><span class="co">#&gt; # ... with 144 more rows, and 4 more variables: Sepal.Length_log &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb136-13" title="13"><span class="co">#&gt; #   Sepal.Width_log &lt;dbl&gt;, Petal.Length_log &lt;dbl&gt;, Petal.Width_log &lt;dbl&gt;</span></a></code></pre></div>
 <p>若列表中只有一个函数，scoped variants 还是会就地修改原变量，传入具名列表可以避免这一点：</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="co"># When there&#39;s only one function in the list, it modifies existing</span></a>
-<a class="sourceLine" id="cb138-2" title="2"><span class="co"># variables in place. Give it a name to instead create new variables:</span></a>
-<a class="sourceLine" id="cb138-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(scale2))</a>
-<a class="sourceLine" id="cb138-4" title="4"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
-<a class="sourceLine" id="cb138-5" title="5"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
-<a class="sourceLine" id="cb138-6" title="6"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
-<a class="sourceLine" id="cb138-7" title="7"><span class="co">#&gt; 1       -0.898      1.02          -1.34       -1.31 setosa </span></a>
-<a class="sourceLine" id="cb138-8" title="8"><span class="co">#&gt; 2       -1.14      -0.132         -1.34       -1.31 setosa </span></a>
-<a class="sourceLine" id="cb138-9" title="9"><span class="co">#&gt; 3       -1.38       0.327         -1.39       -1.31 setosa </span></a>
-<a class="sourceLine" id="cb138-10" title="10"><span class="co">#&gt; 4       -1.50       0.0979        -1.28       -1.31 setosa </span></a>
-<a class="sourceLine" id="cb138-11" title="11"><span class="co">#&gt; 5       -1.02       1.25          -1.34       -1.31 setosa </span></a>
-<a class="sourceLine" id="cb138-12" title="12"><span class="co">#&gt; 6       -0.535      1.93          -1.17       -1.05 setosa </span></a>
-<a class="sourceLine" id="cb138-13" title="13"><span class="co">#&gt; # … with 144 more rows</span></a>
-<a class="sourceLine" id="cb138-14" title="14">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(<span class="dt">scale =</span> scale2))</a>
-<a class="sourceLine" id="cb138-15" title="15"><span class="co">#&gt; # A tibble: 150 x 9</span></a>
-<a class="sourceLine" id="cb138-16" title="16"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Length_sc…</span></a>
-<a class="sourceLine" id="cb138-17" title="17"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb138-18" title="18"><span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa            -0.898</span></a>
-<a class="sourceLine" id="cb138-19" title="19"><span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa            -1.14 </span></a>
-<a class="sourceLine" id="cb138-20" title="20"><span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa            -1.38 </span></a>
-<a class="sourceLine" id="cb138-21" title="21"><span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa            -1.50 </span></a>
-<a class="sourceLine" id="cb138-22" title="22"><span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa            -1.02 </span></a>
-<a class="sourceLine" id="cb138-23" title="23"><span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa            -0.535</span></a>
-<a class="sourceLine" id="cb138-24" title="24"><span class="co">#&gt; # … with 144 more rows, and 3 more variables: Sepal.Width_scale &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb138-25" title="25"><span class="co">#&gt; #   Petal.Length_scale &lt;dbl&gt;, Petal.Width_scale &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1"><span class="co"># When there&#39;s only one function in the list, it modifies existing</span></a>
+<a class="sourceLine" id="cb137-2" title="2"><span class="co"># variables in place. Give it a name to instead create new variables:</span></a>
+<a class="sourceLine" id="cb137-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(scale2))</a>
+<a class="sourceLine" id="cb137-4" title="4"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
+<a class="sourceLine" id="cb137-5" title="5"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
+<a class="sourceLine" id="cb137-6" title="6"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></a>
+<a class="sourceLine" id="cb137-7" title="7"><span class="co">#&gt; 1       -0.898      1.02          -1.34       -1.31 setosa </span></a>
+<a class="sourceLine" id="cb137-8" title="8"><span class="co">#&gt; 2       -1.14      -0.132         -1.34       -1.31 setosa </span></a>
+<a class="sourceLine" id="cb137-9" title="9"><span class="co">#&gt; 3       -1.38       0.327         -1.39       -1.31 setosa </span></a>
+<a class="sourceLine" id="cb137-10" title="10"><span class="co">#&gt; 4       -1.50       0.0979        -1.28       -1.31 setosa </span></a>
+<a class="sourceLine" id="cb137-11" title="11"><span class="co">#&gt; 5       -1.02       1.25          -1.34       -1.31 setosa </span></a>
+<a class="sourceLine" id="cb137-12" title="12"><span class="co">#&gt; 6       -0.535      1.93          -1.17       -1.05 setosa </span></a>
+<a class="sourceLine" id="cb137-13" title="13"><span class="co">#&gt; # ... with 144 more rows</span></a>
+<a class="sourceLine" id="cb137-14" title="14">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">list</span>(<span class="dt">scale =</span> scale2))</a>
+<a class="sourceLine" id="cb137-15" title="15"><span class="co">#&gt; # A tibble: 150 x 9</span></a>
+<a class="sourceLine" id="cb137-16" title="16"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Length_sc~</span></a>
+<a class="sourceLine" id="cb137-17" title="17"><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb137-18" title="18"><span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa            -0.898</span></a>
+<a class="sourceLine" id="cb137-19" title="19"><span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa            -1.14 </span></a>
+<a class="sourceLine" id="cb137-20" title="20"><span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa            -1.38 </span></a>
+<a class="sourceLine" id="cb137-21" title="21"><span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa            -1.50 </span></a>
+<a class="sourceLine" id="cb137-22" title="22"><span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa            -1.02 </span></a>
+<a class="sourceLine" id="cb137-23" title="23"><span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa            -0.535</span></a>
+<a class="sourceLine" id="cb137-24" title="24"><span class="co">#&gt; # ... with 144 more rows, and 3 more variables: Sepal.Width_scale &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb137-25" title="25"><span class="co">#&gt; #   Petal.Length_scale &lt;dbl&gt;, Petal.Width_scale &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="summarize" class="section level3">
 <h3><span class="header-section-number">1.9.3</span> <code>summarize()</code></h3>
@@ -2803,29 +2820,29 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 <div id="dance" class="section level3">
 <h3><span class="header-section-number">1.9.4</span> dance</h3>
 <p><code>summarize_()</code> 不能对某些列执行一个action，另一些列执行另一个action，必须同时执行:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-3" title="3"><span class="st">  </span><span class="kw">summarize_at</span>(<span class="kw">vars</span>(Petal.Length, Petal.Width), <span class="kw">list</span>(<span class="dt">mean =</span> mean, <span class="dt">median =</span> median))</a>
-<a class="sourceLine" id="cb139-4" title="4"><span class="co">#&gt; # A tibble: 3 x 5</span></a>
-<a class="sourceLine" id="cb139-5" title="5"><span class="co">#&gt;   Species  Petal.Length_mean Petal.Width_mean Petal.Length_med… Petal.Width_med…</span></a>
-<a class="sourceLine" id="cb139-6" title="6"><span class="co">#&gt;   &lt;fct&gt;                &lt;dbl&gt;            &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb139-7" title="7"><span class="co">#&gt; 1 setosa                1.46            0.246              1.5               0.2</span></a>
-<a class="sourceLine" id="cb139-8" title="8"><span class="co">#&gt; 2 versico…              4.26            1.33               4.35              1.3</span></a>
-<a class="sourceLine" id="cb139-9" title="9"><span class="co">#&gt; 3 virgini…              5.55            2.03               5.55              2</span></a></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1"><span class="co"># devtools::install_github(&quot;romainfrancois/dance&quot;)</span></a>
-<a class="sourceLine" id="cb140-2" title="2"><span class="kw">library</span>(dance)</a>
-<a class="sourceLine" id="cb140-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-5" title="5"><span class="st">  </span><span class="kw">tango</span>(</a>
-<a class="sourceLine" id="cb140-6" title="6">    <span class="kw">swing</span>(mean, <span class="kw">starts_with</span>(<span class="st">&quot;Petal&quot;</span>)),</a>
-<a class="sourceLine" id="cb140-7" title="7">    <span class="kw">swing</span>(median, <span class="kw">starts_with</span>(<span class="st">&quot;Sepal&quot;</span>))</a>
-<a class="sourceLine" id="cb140-8" title="8">  )</a>
-<a class="sourceLine" id="cb140-9" title="9"><span class="co">#&gt; # A tibble: 3 x 5</span></a>
-<a class="sourceLine" id="cb140-10" title="10"><span class="co">#&gt;   Species    Petal.Length Petal.Width Sepal.Length Sepal.Width</span></a>
-<a class="sourceLine" id="cb140-11" title="11"><span class="co">#&gt;   &lt;fct&gt;             &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb140-12" title="12"><span class="co">#&gt; 1 setosa             1.46       0.246          5           3.4</span></a>
-<a class="sourceLine" id="cb140-13" title="13"><span class="co">#&gt; 2 versicolor         4.26       1.33           5.9         2.8</span></a>
-<a class="sourceLine" id="cb140-14" title="14"><span class="co">#&gt; 3 virginica          5.55       2.03           6.5         3</span></a></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-3" title="3"><span class="st">  </span><span class="kw">summarize_at</span>(<span class="kw">vars</span>(Petal.Length, Petal.Width), <span class="kw">list</span>(<span class="dt">mean =</span> mean, <span class="dt">median =</span> median))</a>
+<a class="sourceLine" id="cb138-4" title="4"><span class="co">#&gt; # A tibble: 3 x 5</span></a>
+<a class="sourceLine" id="cb138-5" title="5"><span class="co">#&gt;   Species  Petal.Length_mean Petal.Width_mean Petal.Length_med~ Petal.Width_med~</span></a>
+<a class="sourceLine" id="cb138-6" title="6"><span class="co">#&gt;   &lt;fct&gt;                &lt;dbl&gt;            &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb138-7" title="7"><span class="co">#&gt; 1 setosa                1.46            0.246              1.5               0.2</span></a>
+<a class="sourceLine" id="cb138-8" title="8"><span class="co">#&gt; 2 versico~              4.26            1.33               4.35              1.3</span></a>
+<a class="sourceLine" id="cb138-9" title="9"><span class="co">#&gt; 3 virgini~              5.55            2.03               5.55              2</span></a></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="co"># devtools::install_github(&quot;romainfrancois/dance&quot;)</span></a>
+<a class="sourceLine" id="cb139-2" title="2"><span class="kw">library</span>(dance)</a>
+<a class="sourceLine" id="cb139-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-5" title="5"><span class="st">  </span><span class="kw">tango</span>(</a>
+<a class="sourceLine" id="cb139-6" title="6">    <span class="kw">swing</span>(mean, <span class="kw">starts_with</span>(<span class="st">&quot;Petal&quot;</span>)),</a>
+<a class="sourceLine" id="cb139-7" title="7">    <span class="kw">swing</span>(median, <span class="kw">starts_with</span>(<span class="st">&quot;Sepal&quot;</span>))</a>
+<a class="sourceLine" id="cb139-8" title="8">  )</a>
+<a class="sourceLine" id="cb139-9" title="9"><span class="co">#&gt; # A tibble: 3 x 5</span></a>
+<a class="sourceLine" id="cb139-10" title="10"><span class="co">#&gt;   Species    Petal.Length Petal.Width Sepal.Length Sepal.Width</span></a>
+<a class="sourceLine" id="cb139-11" title="11"><span class="co">#&gt;   &lt;fct&gt;             &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb139-12" title="12"><span class="co">#&gt; 1 setosa             1.46       0.246          5           3.4</span></a>
+<a class="sourceLine" id="cb139-13" title="13"><span class="co">#&gt; 2 versicolor         4.26       1.33           5.9         2.8</span></a>
+<a class="sourceLine" id="cb139-14" title="14"><span class="co">#&gt; 3 virginica          5.55       2.03           6.5         3</span></a></code></pre></div>
 
 </div>
 </div>

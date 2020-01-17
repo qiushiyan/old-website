@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10 vroom | R for data science: tidyverse and beyond</title>
-  <meta name="description" content="10 vroom | R for data science: tidyverse and beyond" />
+  <title>14 sjmisc | R for data science: tidyverse and beyond</title>
+  <meta name="description" content="14 sjmisc | R for data science: tidyverse and beyond" />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10 vroom | R for data science: tidyverse and beyond" />
+  <meta property="og:title" content="14 sjmisc | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="enixam/rfordatascience" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10 vroom | R for data science: tidyverse and beyond" />
+  <meta name="twitter:title" content="14 sjmisc | R for data science: tidyverse and beyond" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="purrr.html"/>
-<link rel="next" href="data-apis.html"/>
+<link rel="prev" href="rowwise-operation.html"/>
+<link rel="next" href="data-summary.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -372,104 +372,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vroom" class="section level1">
-<h1><span class="header-section-number">10</span> vroom</h1>
-<p><strong>vroom</strong><span class="citation">(Hester and Wickham <a href="references.html#ref-R-vroom" role="doc-biblioref">2019</a>)</span></p>
-<p><a href="https://vroom.r-lib.org/" class="uri">https://vroom.r-lib.org/</a></p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1"><span class="kw">library</span>(vroom)</a></code></pre></div>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" title="1">file_path &lt;-<span class="st"> </span><span class="kw">vroom_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb439-2" title="2"><span class="kw">vroom</span>(file_path)</a>
-<a class="sourceLine" id="cb439-3" title="3"><span class="co">#&gt; # A tibble: 32 x 12</span></a>
-<a class="sourceLine" id="cb439-4" title="4"><span class="co">#&gt;   model          mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></a>
-<a class="sourceLine" id="cb439-5" title="5"><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb439-6" title="6"><span class="co">#&gt; 1 Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4     4</span></a>
-<a class="sourceLine" id="cb439-7" title="7"><span class="co">#&gt; 2 Mazda RX4 W…  21       6   160   110  3.9   2.88  17.0     0     1     4     4</span></a>
-<a class="sourceLine" id="cb439-8" title="8"><span class="co">#&gt; 3 Datsun 710    22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span></a>
-<a class="sourceLine" id="cb439-9" title="9"><span class="co">#&gt; 4 Hornet 4 Dr…  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span></a>
-<a class="sourceLine" id="cb439-10" title="10"><span class="co">#&gt; 5 Hornet Spor…  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2</span></a>
-<a class="sourceLine" id="cb439-11" title="11"><span class="co">#&gt; 6 Valiant       18.1     6   225   105  2.76  3.46  20.2     1     0     3     1</span></a>
-<a class="sourceLine" id="cb439-12" title="12"><span class="co">#&gt; # … with 26 more rows</span></a></code></pre></div>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1"><span class="kw">spec</span>(<span class="kw">vroom</span>(file_path))</a>
-<a class="sourceLine" id="cb440-2" title="2"><span class="co">#&gt; cols(</span></a>
-<a class="sourceLine" id="cb440-3" title="3"><span class="co">#&gt;   model = col_character(),</span></a>
-<a class="sourceLine" id="cb440-4" title="4"><span class="co">#&gt;   mpg = col_double(),</span></a>
-<a class="sourceLine" id="cb440-5" title="5"><span class="co">#&gt;   cyl = col_double(),</span></a>
-<a class="sourceLine" id="cb440-6" title="6"><span class="co">#&gt;   disp = col_double(),</span></a>
-<a class="sourceLine" id="cb440-7" title="7"><span class="co">#&gt;   hp = col_double(),</span></a>
-<a class="sourceLine" id="cb440-8" title="8"><span class="co">#&gt;   drat = col_double(),</span></a>
-<a class="sourceLine" id="cb440-9" title="9"><span class="co">#&gt;   wt = col_double(),</span></a>
-<a class="sourceLine" id="cb440-10" title="10"><span class="co">#&gt;   qsec = col_double(),</span></a>
-<a class="sourceLine" id="cb440-11" title="11"><span class="co">#&gt;   vs = col_double(),</span></a>
-<a class="sourceLine" id="cb440-12" title="12"><span class="co">#&gt;   am = col_double(),</span></a>
-<a class="sourceLine" id="cb440-13" title="13"><span class="co">#&gt;   gear = col_double(),</span></a>
-<a class="sourceLine" id="cb440-14" title="14"><span class="co">#&gt;   carb = col_double()</span></a>
-<a class="sourceLine" id="cb440-15" title="15"><span class="co">#&gt; )</span></a></code></pre></div>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" title="1">compressed &lt;-<span class="st"> </span><span class="kw">vroom_example</span>(<span class="st">&quot;mtcars.csv.zip&quot;</span>)</a>
-<a class="sourceLine" id="cb441-2" title="2"><span class="kw">vroom</span>(compressed)</a>
-<a class="sourceLine" id="cb441-3" title="3"><span class="co">#&gt; # A tibble: 32 x 12</span></a>
-<a class="sourceLine" id="cb441-4" title="4"><span class="co">#&gt;   model          mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></a>
-<a class="sourceLine" id="cb441-5" title="5"><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb441-6" title="6"><span class="co">#&gt; 1 Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4     4</span></a>
-<a class="sourceLine" id="cb441-7" title="7"><span class="co">#&gt; 2 Mazda RX4 W…  21       6   160   110  3.9   2.88  17.0     0     1     4     4</span></a>
-<a class="sourceLine" id="cb441-8" title="8"><span class="co">#&gt; 3 Datsun 710    22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span></a>
-<a class="sourceLine" id="cb441-9" title="9"><span class="co">#&gt; 4 Hornet 4 Dr…  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span></a>
-<a class="sourceLine" id="cb441-10" title="10"><span class="co">#&gt; 5 Hornet Spor…  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2</span></a>
-<a class="sourceLine" id="cb441-11" title="11"><span class="co">#&gt; 6 Valiant       18.1     6   225   105  2.76  3.46  20.2     1     0     3     1</span></a>
-<a class="sourceLine" id="cb441-12" title="12"><span class="co">#&gt; # … with 26 more rows</span></a></code></pre></div>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" title="1"><span class="kw">vroom</span>(compressed, <span class="dt">col_select =</span> <span class="kw">c</span>(model, cyl, gear))</a>
-<a class="sourceLine" id="cb442-2" title="2"><span class="co">#&gt; # A tibble: 32 x 3</span></a>
-<a class="sourceLine" id="cb442-3" title="3"><span class="co">#&gt;   model               cyl  gear</span></a>
-<a class="sourceLine" id="cb442-4" title="4"><span class="co">#&gt;   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb442-5" title="5"><span class="co">#&gt; 1 Mazda RX4             6     4</span></a>
-<a class="sourceLine" id="cb442-6" title="6"><span class="co">#&gt; 2 Mazda RX4 Wag         6     4</span></a>
-<a class="sourceLine" id="cb442-7" title="7"><span class="co">#&gt; 3 Datsun 710            4     4</span></a>
-<a class="sourceLine" id="cb442-8" title="8"><span class="co">#&gt; 4 Hornet 4 Drive        6     3</span></a>
-<a class="sourceLine" id="cb442-9" title="9"><span class="co">#&gt; 5 Hornet Sportabout     8     3</span></a>
-<a class="sourceLine" id="cb442-10" title="10"><span class="co">#&gt; 6 Valiant               6     3</span></a>
-<a class="sourceLine" id="cb442-11" title="11"><span class="co">#&gt; # … with 26 more rows</span></a></code></pre></div>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" title="1">mtcars</a>
-<a class="sourceLine" id="cb443-2" title="2"><span class="co">#&gt;                      mpg cyl  disp  hp drat   wt qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb443-3" title="3"><span class="co">#&gt; Mazda RX4           21.0   6 160.0 110 3.90 2.62 16.5  0  1    4    4</span></a>
-<a class="sourceLine" id="cb443-4" title="4"><span class="co">#&gt; Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.88 17.0  0  1    4    4</span></a>
-<a class="sourceLine" id="cb443-5" title="5"><span class="co">#&gt; Datsun 710          22.8   4 108.0  93 3.85 2.32 18.6  1  1    4    1</span></a>
-<a class="sourceLine" id="cb443-6" title="6"><span class="co">#&gt; Hornet 4 Drive      21.4   6 258.0 110 3.08 3.21 19.4  1  0    3    1</span></a>
-<a class="sourceLine" id="cb443-7" title="7"><span class="co">#&gt; Hornet Sportabout   18.7   8 360.0 175 3.15 3.44 17.0  0  0    3    2</span></a>
-<a class="sourceLine" id="cb443-8" title="8"><span class="co">#&gt; Valiant             18.1   6 225.0 105 2.76 3.46 20.2  1  0    3    1</span></a>
-<a class="sourceLine" id="cb443-9" title="9"><span class="co">#&gt; Duster 360          14.3   8 360.0 245 3.21 3.57 15.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb443-10" title="10"><span class="co">#&gt; Merc 240D           24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2</span></a>
-<a class="sourceLine" id="cb443-11" title="11"><span class="co">#&gt; Merc 230            22.8   4 140.8  95 3.92 3.15 22.9  1  0    4    2</span></a>
-<a class="sourceLine" id="cb443-12" title="12"><span class="co">#&gt; Merc 280            19.2   6 167.6 123 3.92 3.44 18.3  1  0    4    4</span></a>
-<a class="sourceLine" id="cb443-13" title="13"><span class="co">#&gt; Merc 280C           17.8   6 167.6 123 3.92 3.44 18.9  1  0    4    4</span></a>
-<a class="sourceLine" id="cb443-14" title="14"><span class="co">#&gt; Merc 450SE          16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3</span></a>
-<a class="sourceLine" id="cb443-15" title="15"><span class="co">#&gt; Merc 450SL          17.3   8 275.8 180 3.07 3.73 17.6  0  0    3    3</span></a>
-<a class="sourceLine" id="cb443-16" title="16"><span class="co">#&gt; Merc 450SLC         15.2   8 275.8 180 3.07 3.78 18.0  0  0    3    3</span></a>
-<a class="sourceLine" id="cb443-17" title="17"><span class="co">#&gt; Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.25 18.0  0  0    3    4</span></a>
-<a class="sourceLine" id="cb443-18" title="18"><span class="co">#&gt; Lincoln Continental 10.4   8 460.0 215 3.00 5.42 17.8  0  0    3    4</span></a>
-<a class="sourceLine" id="cb443-19" title="19"><span class="co">#&gt; Chrysler Imperial   14.7   8 440.0 230 3.23 5.34 17.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb443-20" title="20"><span class="co">#&gt; Fiat 128            32.4   4  78.7  66 4.08 2.20 19.5  1  1    4    1</span></a>
-<a class="sourceLine" id="cb443-21" title="21"><span class="co">#&gt; Honda Civic         30.4   4  75.7  52 4.93 1.61 18.5  1  1    4    2</span></a>
-<a class="sourceLine" id="cb443-22" title="22"><span class="co">#&gt; Toyota Corolla      33.9   4  71.1  65 4.22 1.83 19.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb443-23" title="23"><span class="co">#&gt; Toyota Corona       21.5   4 120.1  97 3.70 2.46 20.0  1  0    3    1</span></a>
-<a class="sourceLine" id="cb443-24" title="24"><span class="co">#&gt; Dodge Challenger    15.5   8 318.0 150 2.76 3.52 16.9  0  0    3    2</span></a>
-<a class="sourceLine" id="cb443-25" title="25"><span class="co">#&gt; AMC Javelin         15.2   8 304.0 150 3.15 3.44 17.3  0  0    3    2</span></a>
-<a class="sourceLine" id="cb443-26" title="26"><span class="co">#&gt; Camaro Z28          13.3   8 350.0 245 3.73 3.84 15.4  0  0    3    4</span></a>
-<a class="sourceLine" id="cb443-27" title="27"><span class="co">#&gt; Pontiac Firebird    19.2   8 400.0 175 3.08 3.85 17.1  0  0    3    2</span></a>
-<a class="sourceLine" id="cb443-28" title="28"><span class="co">#&gt; Fiat X1-9           27.3   4  79.0  66 4.08 1.94 18.9  1  1    4    1</span></a>
-<a class="sourceLine" id="cb443-29" title="29"><span class="co">#&gt; Porsche 914-2       26.0   4 120.3  91 4.43 2.14 16.7  0  1    5    2</span></a>
-<a class="sourceLine" id="cb443-30" title="30"><span class="co">#&gt; Lotus Europa        30.4   4  95.1 113 3.77 1.51 16.9  1  1    5    2</span></a>
-<a class="sourceLine" id="cb443-31" title="31"><span class="co">#&gt; Ford Pantera L      15.8   8 351.0 264 4.22 3.17 14.5  0  1    5    4</span></a>
-<a class="sourceLine" id="cb443-32" title="32"><span class="co">#&gt; Ferrari Dino        19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6</span></a>
-<a class="sourceLine" id="cb443-33" title="33"><span class="co">#&gt; Maserati Bora       15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8</span></a>
-<a class="sourceLine" id="cb443-34" title="34"><span class="co">#&gt; Volvo 142E          21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2</span></a></code></pre></div>
+<div id="sjmisc" class="section level1">
+<h1><span class="header-section-number">14</span> sjmisc</h1>
+<p><a href="https://strengejacke.github.io/sjmisc/articles/exploringdatasets.html" class="uri">https://strengejacke.github.io/sjmisc/articles/exploringdatasets.html</a></p>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" title="1"><span class="kw">library</span>(sjmisc)</a></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" title="1"><span class="kw">data</span>(efc)</a>
+<a class="sourceLine" id="cb472-2" title="2">(efc &lt;-<span class="st"> </span>efc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>())</a>
+<a class="sourceLine" id="cb472-3" title="3"><span class="co">#&gt; # A tibble: 908 x 26</span></a>
+<a class="sourceLine" id="cb472-4" title="4"><span class="co">#&gt;   c12hour e15relat e16sex e17age e42dep c82cop1 c83cop2 c84cop3 c85cop4 c86cop5</span></a>
+<a class="sourceLine" id="cb472-5" title="5"><span class="co">#&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb472-6" title="6"><span class="co">#&gt; 1      16        2      2     83      3       3       2       2       2       1</span></a>
+<a class="sourceLine" id="cb472-7" title="7"><span class="co">#&gt; 2     148        2      2     88      3       3       3       3       3       4</span></a>
+<a class="sourceLine" id="cb472-8" title="8"><span class="co">#&gt; 3      70        1      2     82      3       2       2       1       4       1</span></a>
+<a class="sourceLine" id="cb472-9" title="9"><span class="co">#&gt; 4     168        1      2     67      4       4       1       3       1       1</span></a>
+<a class="sourceLine" id="cb472-10" title="10"><span class="co">#&gt; 5     168        2      2     84      4       3       2       1       2       2</span></a>
+<a class="sourceLine" id="cb472-11" title="11"><span class="co">#&gt; 6      16        2      2     85      4       2       2       3       3       3</span></a>
+<a class="sourceLine" id="cb472-12" title="12"><span class="co">#&gt; # ... with 902 more rows, and 16 more variables: c87cop6 &lt;dbl&gt;, c88cop7 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb472-13" title="13"><span class="co">#&gt; #   c89cop8 &lt;dbl&gt;, c90cop9 &lt;dbl&gt;, c160age &lt;dbl&gt;, c161sex &lt;dbl&gt;, c172code &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb472-14" title="14"><span class="co">#&gt; #   c175empl &lt;dbl&gt;, barthtot &lt;dbl&gt;, neg_c_7 &lt;dbl&gt;, pos_v_4 &lt;dbl&gt;, quol_5 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb472-15" title="15"><span class="co">#&gt; #   resttotn &lt;dbl&gt;, tot_sc_e &lt;dbl&gt;, n4pstu &lt;dbl&gt;, nur_pst &lt;dbl&gt;</span></a></code></pre></div>
+<div id="frq-和-flat_table-一维和二维频数表" class="section level2">
+<h2><span class="header-section-number">14.1</span> <code>frq()</code> 和 <code>flat_table()</code> 一维和二维频数表</h2>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" title="1">efc <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb473-2" title="2"><span class="st">  </span><span class="kw">frq</span>(c161sex)</a>
+<a class="sourceLine" id="cb473-3" title="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb473-4" title="4"><span class="co">#&gt; carer&#39;s gender (c161sex) &lt;numeric&gt;</span></a>
+<a class="sourceLine" id="cb473-5" title="5"><span class="co">#&gt; # total N=908  valid N=901  mean=1.76  sd=0.43</span></a>
+<a class="sourceLine" id="cb473-6" title="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb473-7" title="7"><span class="co">#&gt;  val  label frq raw.prc valid.prc cum.prc</span></a>
+<a class="sourceLine" id="cb473-8" title="8"><span class="co">#&gt;    1   Male 215   23.68      23.9    23.9</span></a>
+<a class="sourceLine" id="cb473-9" title="9"><span class="co">#&gt;    2 Female 686   75.55      76.1   100.0</span></a>
+<a class="sourceLine" id="cb473-10" title="10"><span class="co">#&gt;   NA   &lt;NA&gt;   7    0.77        NA      NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" title="1">efc <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb474-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(e42dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb474-3" title="3"><span class="st">  </span><span class="kw">frq</span>(c161sex)</a>
+<a class="sourceLine" id="cb474-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-5" title="5"><span class="co">#&gt; carer&#39;s gender (c161sex) &lt;numeric&gt;</span></a>
+<a class="sourceLine" id="cb474-6" title="6"><span class="co">#&gt; # grouped by: independent</span></a>
+<a class="sourceLine" id="cb474-7" title="7"><span class="co">#&gt; # total N=66  valid N=66  mean=1.73  sd=0.45</span></a>
+<a class="sourceLine" id="cb474-8" title="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-9" title="9"><span class="co">#&gt;  val  label frq raw.prc valid.prc cum.prc</span></a>
+<a class="sourceLine" id="cb474-10" title="10"><span class="co">#&gt;    1   Male  18    27.3      27.3    27.3</span></a>
+<a class="sourceLine" id="cb474-11" title="11"><span class="co">#&gt;    2 Female  48    72.7      72.7   100.0</span></a>
+<a class="sourceLine" id="cb474-12" title="12"><span class="co">#&gt;   NA   &lt;NA&gt;   0     0.0        NA      NA</span></a>
+<a class="sourceLine" id="cb474-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-14" title="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-15" title="15"><span class="co">#&gt; carer&#39;s gender (c161sex) &lt;numeric&gt;</span></a>
+<a class="sourceLine" id="cb474-16" title="16"><span class="co">#&gt; # grouped by: slightly dependent</span></a>
+<a class="sourceLine" id="cb474-17" title="17"><span class="co">#&gt; # total N=225  valid N=224  mean=1.76  sd=0.43</span></a>
+<a class="sourceLine" id="cb474-18" title="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-19" title="19"><span class="co">#&gt;  val  label frq raw.prc valid.prc cum.prc</span></a>
+<a class="sourceLine" id="cb474-20" title="20"><span class="co">#&gt;    1   Male  54   24.00      24.1    24.1</span></a>
+<a class="sourceLine" id="cb474-21" title="21"><span class="co">#&gt;    2 Female 170   75.56      75.9   100.0</span></a>
+<a class="sourceLine" id="cb474-22" title="22"><span class="co">#&gt;   NA   &lt;NA&gt;   1    0.44        NA      NA</span></a>
+<a class="sourceLine" id="cb474-23" title="23"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-24" title="24"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-25" title="25"><span class="co">#&gt; carer&#39;s gender (c161sex) &lt;numeric&gt;</span></a>
+<a class="sourceLine" id="cb474-26" title="26"><span class="co">#&gt; # grouped by: moderately dependent</span></a>
+<a class="sourceLine" id="cb474-27" title="27"><span class="co">#&gt; # total N=306  valid N=306  mean=1.74  sd=0.44</span></a>
+<a class="sourceLine" id="cb474-28" title="28"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-29" title="29"><span class="co">#&gt;  val  label frq raw.prc valid.prc cum.prc</span></a>
+<a class="sourceLine" id="cb474-30" title="30"><span class="co">#&gt;    1   Male  80    26.1      26.1    26.1</span></a>
+<a class="sourceLine" id="cb474-31" title="31"><span class="co">#&gt;    2 Female 226    73.9      73.9   100.0</span></a>
+<a class="sourceLine" id="cb474-32" title="32"><span class="co">#&gt;   NA   &lt;NA&gt;   0     0.0        NA      NA</span></a>
+<a class="sourceLine" id="cb474-33" title="33"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-34" title="34"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-35" title="35"><span class="co">#&gt; carer&#39;s gender (c161sex) &lt;numeric&gt;</span></a>
+<a class="sourceLine" id="cb474-36" title="36"><span class="co">#&gt; # grouped by: severely dependent</span></a>
+<a class="sourceLine" id="cb474-37" title="37"><span class="co">#&gt; # total N=304  valid N=304  mean=1.79  sd=0.41</span></a>
+<a class="sourceLine" id="cb474-38" title="38"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb474-39" title="39"><span class="co">#&gt;  val  label frq raw.prc valid.prc cum.prc</span></a>
+<a class="sourceLine" id="cb474-40" title="40"><span class="co">#&gt;    1   Male  63    20.7      20.7    20.7</span></a>
+<a class="sourceLine" id="cb474-41" title="41"><span class="co">#&gt;    2 Female 241    79.3      79.3   100.0</span></a>
+<a class="sourceLine" id="cb474-42" title="42"><span class="co">#&gt;   NA   &lt;NA&gt;   0     0.0        NA      NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" title="1"><span class="kw">flat_table</span>(efc, e42dep, c161sex)</a>
+<a class="sourceLine" id="cb475-2" title="2"><span class="co">#&gt;                      c161sex Male Female</span></a>
+<a class="sourceLine" id="cb475-3" title="3"><span class="co">#&gt; e42dep                                  </span></a>
+<a class="sourceLine" id="cb475-4" title="4"><span class="co">#&gt; independent                    18     48</span></a>
+<a class="sourceLine" id="cb475-5" title="5"><span class="co">#&gt; slightly dependent             54    170</span></a>
+<a class="sourceLine" id="cb475-6" title="6"><span class="co">#&gt; moderately dependent           80    226</span></a>
+<a class="sourceLine" id="cb475-7" title="7"><span class="co">#&gt; severely dependent             63    241</span></a></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" title="1"><span class="kw">flat_table</span>(efc, e42dep, c161sex, <span class="dt">margin =</span> <span class="st">&quot;col&quot;</span>)</a>
+<a class="sourceLine" id="cb476-2" title="2"><span class="co">#&gt;                      c161sex  Male Female</span></a>
+<a class="sourceLine" id="cb476-3" title="3"><span class="co">#&gt; e42dep                                   </span></a>
+<a class="sourceLine" id="cb476-4" title="4"><span class="co">#&gt; independent                   8.37   7.01</span></a>
+<a class="sourceLine" id="cb476-5" title="5"><span class="co">#&gt; slightly dependent           25.12  24.82</span></a>
+<a class="sourceLine" id="cb476-6" title="6"><span class="co">#&gt; moderately dependent         37.21  32.99</span></a>
+<a class="sourceLine" id="cb476-7" title="7"><span class="co">#&gt; severely dependent           29.30  35.18</span></a></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" title="1"><span class="kw">library</span>(janitor)</a>
+<a class="sourceLine" id="cb477-2" title="2">efc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tabyl</span>(e42dep, c161sex, <span class="dt">show_na =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb477-3" title="3"><span class="co">#&gt;  e42dep  1   2</span></a>
+<a class="sourceLine" id="cb477-4" title="4"><span class="co">#&gt;       1 18  48</span></a>
+<a class="sourceLine" id="cb477-5" title="5"><span class="co">#&gt;       2 54 170</span></a>
+<a class="sourceLine" id="cb477-6" title="6"><span class="co">#&gt;       3 80 226</span></a>
+<a class="sourceLine" id="cb477-7" title="7"><span class="co">#&gt;       4 63 241</span></a></code></pre></div>
+</div>
+<div id="rec-重新编码" class="section level2">
+<h2><span class="header-section-number">14.2</span> <code>rec()</code>: 重新编码</h2>
+<p><a href="https://strengejacke.github.io/sjmisc/articles/recodingvariables.html" class="uri">https://strengejacke.github.io/sjmisc/articles/recodingvariables.html</a></p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" title="1">efc<span class="op">$</span>burden &lt;-<span class="st"> </span><span class="kw">rec</span>(</a>
+<a class="sourceLine" id="cb478-2" title="2">  efc<span class="op">$</span>neg_c_<span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb478-3" title="3">  <span class="dt">rec =</span> <span class="kw">c</span>(<span class="st">&quot;min:9=1 [low]; 10:12=2 [moderate]; 13:max=3 [high]; else=NA&quot;</span>),</a>
+<a class="sourceLine" id="cb478-4" title="4">  <span class="dt">var.label =</span> <span class="st">&quot;Subjective burden&quot;</span>,</a>
+<a class="sourceLine" id="cb478-5" title="5">  <span class="dt">as.num =</span> <span class="ot">FALSE</span> <span class="co"># we want a factor</span></a>
+<a class="sourceLine" id="cb478-6" title="6">)</a>
+<a class="sourceLine" id="cb478-7" title="7"><span class="co"># print frequencies</span></a>
+<a class="sourceLine" id="cb478-8" title="8"><span class="kw">frq</span>(efc<span class="op">$</span>burden)</a>
+<a class="sourceLine" id="cb478-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb478-10" title="10"><span class="co">#&gt; Subjective burden (x) &lt;categorical&gt;</span></a>
+<a class="sourceLine" id="cb478-11" title="11"><span class="co">#&gt; # total N=908  valid N=892  mean=2.03  sd=0.81</span></a>
+<a class="sourceLine" id="cb478-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb478-13" title="13"><span class="co">#&gt;  val    label frq raw.prc valid.prc cum.prc</span></a>
+<a class="sourceLine" id="cb478-14" title="14"><span class="co">#&gt;    1      low 280   30.84      31.4    31.4</span></a>
+<a class="sourceLine" id="cb478-15" title="15"><span class="co">#&gt;    2 moderate 301   33.15      33.7    65.1</span></a>
+<a class="sourceLine" id="cb478-16" title="16"><span class="co">#&gt;    3     high 311   34.25      34.9   100.0</span></a>
+<a class="sourceLine" id="cb478-17" title="17"><span class="co">#&gt;   NA     &lt;NA&gt;  16    1.76        NA      NA</span></a></code></pre></div>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="purrr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-apis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rowwise-operation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -500,7 +527,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/enixam/rfordatascience/edit/master/vroom.Rmd",
+"link": "https://github.com/enixam/rfordatascience/edit/master/sjmisc.Rmd",
 "text": "Edit"
 },
 "history": {

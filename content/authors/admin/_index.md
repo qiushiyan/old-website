@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: 不堪其忧，不改其乐
+bio: Everything about "#rstats"!
 education:
   courses:
   - course: BA in Data Journalism

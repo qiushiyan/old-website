@@ -1,5 +1,5 @@
 ---
-title: Introduction to {skimr}
+title: Skimming through {skimr}
 author: Qiushi Yan
 date: '2019-11-22'
 slug: introduction-to-skimr
@@ -22,19 +22,20 @@ image:
 projects: []
 ---
 
-## Table of Contents 
+## Table of Contents   
 
-1.[`skim()` basics](#intro)  
-2.[Manipulating the results](#manipulation)  
-3.[Customizing `skim()`](#customization)   
-4.[Skimming non-data frames](#other)  
-5.[References](#ref)
+```{r, include=F}
+knitr::opts_chunk$set(message = F, collapse = TRUE, comment = "#>")
+source("render_toc.R")
+```
+
+
+```{r, echo = FALSE}
+render_toc("2019-11-22-introduction-to-skimr.Rmd")
+```
 
 ## `skim()` basics  {#intro}
 
-```{r, include=F}
-knitr::opts_chunk$set(message=F)
-```
 
 The **skimr**[@R-skimr] package is developed by the [rOpenSci](https://github.com/ropensci) cummunity, with its core function `skim()` as an enhanced version of `summary()`, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its [vignette](https://docs.ropensci.org/skimr/index.html). ^[In the sense that `skim()` provides useful, tidy summary statistics and displays it in a pretty form for exploratory analysis based on data frames. `skim()` cannot supplant `summary()` in terms of model interpretation, viewing geospatial objects, etc.] 
 

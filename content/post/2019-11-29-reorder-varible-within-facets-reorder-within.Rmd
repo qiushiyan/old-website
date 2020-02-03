@@ -29,7 +29,7 @@ Reordering and facetting for ggplot2
 ## Most common words in Jane Austen's books  
 
 ```{r,echo=F}
-knitr::opts_chunk$set(message=F,fig.height=10,fig.asp=1,
+knitr::opts_chunk$set(message = F,fig.height = 10,fig.asp = 1,
                       comment = "#>", collapse = TRUE)
 ```
 

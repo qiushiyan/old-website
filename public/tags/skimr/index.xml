@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Introduction to {skimr}</title>
+      <title>Skimming through {skimr}</title>
       <link>/post/introduction-to-skimr/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/post/introduction-to-skimr/</guid>
@@ -22,11 +22,13 @@
 
 &lt;div id=&#34;table-of-contents&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
-&lt;p&gt;1.&lt;a href=&#34;#intro&#34;&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/a&gt;&lt;br /&gt;
-2.&lt;a href=&#34;#manipulation&#34;&gt;Manipulating the results&lt;/a&gt;&lt;br /&gt;
-3.&lt;a href=&#34;#customization&#34;&gt;Customizing &lt;code&gt;skim()&lt;/code&gt;&lt;/a&gt;&lt;br /&gt;
-4.&lt;a href=&#34;#other&#34;&gt;Skimming non-data frames&lt;/a&gt;&lt;br /&gt;
-5.&lt;a href=&#34;#ref&#34;&gt;References&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#intro&#34;&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#manipulation&#34;&gt;Manipulating the results&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#customization&#34;&gt;Customizing &lt;code&gt;skim()&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other&#34;&gt;Skimming non-data frames&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ref&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;intro&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/h2&gt;
@@ -41,7 +43,7 @@
 library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-3&#34;&gt;Table 1: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-4&#34;&gt;Table 1: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -179,7 +181,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The second argument &lt;code&gt;...&lt;/code&gt; in &lt;code&gt;skim()&lt;/code&gt; could specify any number of variables to be included, similar to &lt;code&gt;dplyr::select()&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris, Sepal.Width, Species)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-4&#34;&gt;Table 2: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-5&#34;&gt;Table 2: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -278,7 +280,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;or with common &lt;code&gt;select()&lt;/code&gt; helpers:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris, contains(&amp;quot;Length&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-5&#34;&gt;Table 3: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-6&#34;&gt;Table 3: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -364,7 +366,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   summary()&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-6&#34;&gt;Table 4: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-7&#34;&gt;Table 4: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -409,7 +411,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
   group_by(Species) %&amp;gt;%
   skim()&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-7&#34;&gt;Table 5: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-8&#34;&gt;Table 5: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -640,31 +642,31 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;skim_variable: name of the original variable&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;is_skim_df()&lt;/code&gt; function is used to assert that an object is a skim_df.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;class(skim(iris))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;skim_df&amp;quot;    &amp;quot;tbl_df&amp;quot;     &amp;quot;tbl&amp;quot;        &amp;quot;data.frame&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;is_skim_df(skim(iris))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] TRUE&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;class(skim(iris))
+#&amp;gt; [1] &amp;quot;skim_df&amp;quot;    &amp;quot;tbl_df&amp;quot;     &amp;quot;tbl&amp;quot;        &amp;quot;data.frame&amp;quot;
+is_skim_df(skim(iris))
+#&amp;gt; [1] TRUE&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To explicitly show 2 columns &lt;code&gt;skim_type&lt;/code&gt; and &lt;code&gt;skim_variable&lt;/code&gt; and see the nature of this &lt;code&gt;skim_df&lt;/code&gt; object, we can transfrom it to a &lt;code&gt;tibble&lt;/code&gt; or &lt;code&gt;data.frame&lt;/code&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;iris %&amp;gt;% 
   skim() %&amp;gt;% 
-  as_tibble()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 15
-##   skim_type skim_variable n_missing complete_rate factor.ordered factor.n_unique
-##   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;             &amp;lt;int&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;                    &amp;lt;int&amp;gt;
-## 1 factor    Species               0             1 FALSE                        3
-## 2 numeric   Sepal.Length          0             1 NA                          NA
-## 3 numeric   Sepal.Width           0             1 NA                          NA
-## 4 numeric   Petal.Length          0             1 NA                          NA
-## 5 numeric   Petal.Width           0             1 NA                          NA
-## # ... with 9 more variables: factor.top_counts &amp;lt;chr&amp;gt;, numeric.mean &amp;lt;dbl&amp;gt;,
-## #   numeric.sd &amp;lt;dbl&amp;gt;, numeric.p0 &amp;lt;dbl&amp;gt;, numeric.p25 &amp;lt;dbl&amp;gt;, numeric.p50 &amp;lt;dbl&amp;gt;,
-## #   numeric.p75 &amp;lt;dbl&amp;gt;, numeric.p100 &amp;lt;dbl&amp;gt;, numeric.hist &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+  as_tibble()
+#&amp;gt; # A tibble: 5 x 15
+#&amp;gt;   skim_type skim_variable n_missing complete_rate factor.ordered factor.n_unique
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;             &amp;lt;int&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;                    &amp;lt;int&amp;gt;
+#&amp;gt; 1 factor    Species               0             1 FALSE                        3
+#&amp;gt; 2 numeric   Sepal.Length          0             1 NA                          NA
+#&amp;gt; 3 numeric   Sepal.Width           0             1 NA                          NA
+#&amp;gt; 4 numeric   Petal.Length          0             1 NA                          NA
+#&amp;gt; 5 numeric   Petal.Width           0             1 NA                          NA
+#&amp;gt; # ... with 9 more variables: factor.top_counts &amp;lt;chr&amp;gt;, numeric.mean &amp;lt;dbl&amp;gt;,
+#&amp;gt; #   numeric.sd &amp;lt;dbl&amp;gt;, numeric.p0 &amp;lt;dbl&amp;gt;, numeric.p25 &amp;lt;dbl&amp;gt;, numeric.p50 &amp;lt;dbl&amp;gt;,
+#&amp;gt; #   numeric.p75 &amp;lt;dbl&amp;gt;, numeric.p100 &amp;lt;dbl&amp;gt;, numeric.hist &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;As you can see, the &lt;strong&gt;Data Summary&lt;/strong&gt; part are excluded after the transformation, and the wide data frame are left. This is in contrast to &lt;code&gt;summary.data.frame()&lt;/code&gt;, which stores statistics in a table. The distinction is important, &lt;strong&gt;because the &lt;code&gt;skim_df object&lt;/code&gt; is pipeable and easy to use for additional manipulation&lt;/strong&gt;: for example, the user could select all of the &lt;code&gt;variable&lt;/code&gt; means, or all summary statistics for a specific variable (Note that we don’t have to really transform it before such manipulation).&lt;/p&gt;
 &lt;p&gt;Filtering by column types:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   filter(skim_type == &amp;quot;numeric&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-10&#34;&gt;Table 6: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-11&#34;&gt;Table 6: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -775,7 +777,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   filter(skim_variable == &amp;quot;Sepal.Length&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-11&#34;&gt;Table 7: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-12&#34;&gt;Table 7: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -849,7 +851,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 skim(iris) %&amp;gt;% 
   select(skim_variable, skim_type, n_missing, complete_rate)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-12&#34;&gt;Table 8: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-13&#34;&gt;Table 8: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -942,27 +944,27 @@ skim(iris) %&amp;gt;%
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# extract the mean and median with a prefix
 skim(iris) %&amp;gt;% 
   filter(skim_type == &amp;quot;numeric&amp;quot;) %&amp;gt;%
-  select(skim_variable, numeric.mean, numeric.p50)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 3
-##   skim_variable numeric.mean numeric.p50
-##   &amp;lt;chr&amp;gt;                &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
-## 1 Sepal.Length          5.84        5.8 
-## 2 Sepal.Width           3.06        3   
-## 3 Petal.Length          3.76        4.35
-## 4 Petal.Width           1.20        1.3&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# extract top levels of a factor
+  select(skim_variable, numeric.mean, numeric.p50)
+#&amp;gt; # A tibble: 4 x 3
+#&amp;gt;   skim_variable numeric.mean numeric.p50
+#&amp;gt;   &amp;lt;chr&amp;gt;                &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Sepal.Length          5.84        5.8 
+#&amp;gt; 2 Sepal.Width           3.06        3   
+#&amp;gt; 3 Petal.Length          3.76        4.35
+#&amp;gt; 4 Petal.Width           1.20        1.3
+# extract top levels of a factor
 skim(iris) %&amp;gt;% 
   filter(skim_type == &amp;quot;factor&amp;quot;) %&amp;gt;% 
-  select(skim_variable, factor.top_counts)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 2
-##   skim_variable factor.top_counts        
-##   &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;                    
-## 1 Species       set: 50, ver: 50, vir: 50&lt;/code&gt;&lt;/pre&gt;
+  select(skim_variable, factor.top_counts)
+#&amp;gt; # A tibble: 1 x 2
+#&amp;gt;   skim_variable factor.top_counts        
+#&amp;gt;   &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;                    
+#&amp;gt; 1 Species       set: 50, ver: 50, vir: 50&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Finally, just for fun, what statistics or which variable we choose to use will not affect the &lt;code&gt;skim_df&lt;/code&gt; variable type, yet this is not the case for &lt;code&gt;skim_variable&lt;/code&gt; and &lt;code&gt;skim_type&lt;/code&gt;, which are intrinsic to &lt;code&gt;skim_df&lt;/code&gt; objects. If we exclude these two, the &lt;code&gt;skim_df&lt;/code&gt; object will be automatically coerced to a tibble:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   select(-skim_type, -skim_variable) %&amp;gt;%
-  is_skim_df&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] FALSE&lt;/code&gt;&lt;/pre&gt;
+  is_skim_df
+#&amp;gt; [1] FALSE&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;manipulation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Manipulating the results&lt;/h2&gt;
@@ -1070,12 +1072,12 @@ skim(iris) %&amp;gt;%
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;iris %&amp;gt;%
   skim() %&amp;gt;%
   partition() %&amp;gt;%
-  map(class)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## $factor
-## [1] &amp;quot;one_skim_df&amp;quot; &amp;quot;tbl_df&amp;quot;      &amp;quot;tbl&amp;quot;         &amp;quot;data.frame&amp;quot; 
-## 
-## $numeric
-## [1] &amp;quot;one_skim_df&amp;quot; &amp;quot;tbl_df&amp;quot;      &amp;quot;tbl&amp;quot;         &amp;quot;data.frame&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+  map(class)
+#&amp;gt; $factor
+#&amp;gt; [1] &amp;quot;one_skim_df&amp;quot; &amp;quot;tbl_df&amp;quot;      &amp;quot;tbl&amp;quot;         &amp;quot;data.frame&amp;quot; 
+#&amp;gt; 
+#&amp;gt; $numeric
+#&amp;gt; [1] &amp;quot;one_skim_df&amp;quot; &amp;quot;tbl_df&amp;quot;      &amp;quot;tbl&amp;quot;         &amp;quot;data.frame&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is useful when we only want to look at certain data types, we can subset that component out of the partitioned result, coerce it to a tibble, and then manipulate it. We don’t have to put a prefix before column names now, since rows in every component are of identical data types, and therefore share same statistics:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# subset
 iris_numeric &amp;lt;- iris %&amp;gt;%
@@ -1085,15 +1087,15 @@ iris_numeric &amp;lt;- iris %&amp;gt;%
   as_tibble()
 
 iris_numeric %&amp;gt;% 
-  arrange(sd)  ## no more numeric.sd&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 11
-##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
-##   &amp;lt;chr&amp;gt;             &amp;lt;int&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
-## 1 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3
-## 2 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8
-## 3 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4
-## 4 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1
-## # ... with 2 more variables: p100 &amp;lt;dbl&amp;gt;, hist &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+  arrange(sd)  ## no more numeric.sd
+#&amp;gt; # A tibble: 4 x 11
+#&amp;gt;   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
+#&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;int&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3
+#&amp;gt; 2 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8
+#&amp;gt; 3 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4
+#&amp;gt; 4 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1
+#&amp;gt; # ... with 2 more variables: p100 &amp;lt;dbl&amp;gt;, hist &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Second, &lt;code&gt;yank()&lt;/code&gt; selects only specified variables base on their type, this can be viewed as a shortcut to &lt;code&gt;partition()&lt;/code&gt; and subsetting:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;iris %&amp;gt;% 
   skim() %&amp;gt;% 
@@ -1126,7 +1128,7 @@ iris_numeric %&amp;gt;%
   skim() %&amp;gt;%
   focus(n_missing, numeric.mean)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-19&#34;&gt;Table 9: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-20&#34;&gt;Table 9: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1333,9 +1335,10 @@ my_skim &amp;lt;- skim_with(numeric = sfl(&amp;quot;3rd_central_moment&amp;quot;
 &lt;h2&gt;Skimming non-data frames&lt;/h2&gt;
 &lt;p&gt;In &lt;strong&gt;skimr&lt;/strong&gt; &lt;a href=&#34;https://github.com/ropensci/skimr/releases&#34;&gt;v2&lt;/a&gt;, &lt;code&gt;skim()&lt;/code&gt; will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in as.data.frame().&lt;/p&gt;
 &lt;p&gt;Skimming charactor vector:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(letters)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+skim(letters)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-22&#34;&gt;Table 10: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-23&#34;&gt;Table 10: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1397,7 +1400,7 @@ my_skim &amp;lt;- skim_with(numeric = sfl(&amp;quot;3rd_central_moment&amp;quot;
 &lt;p&gt;This is same to:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(as.data.frame(letters))&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-23&#34;&gt;Table 11: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-24&#34;&gt;Table 11: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1460,7 +1463,7 @@ my_skim &amp;lt;- skim_with(numeric = sfl(&amp;quot;3rd_central_moment&amp;quot;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;my_list &amp;lt;- list(a = 1:10, b = letters[1:10], c = factor(1:10))
 skim(my_list)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-24&#34;&gt;Table 12: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-25&#34;&gt;Table 12: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1565,23 +1568,23 @@ skim(my_list)&lt;/code&gt;&lt;/pre&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;skimming &lt;code&gt;ts&lt;/code&gt; object:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lynx&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Time Series:
-## Start = 1821 
-## End = 1934 
-## Frequency = 1 
-##   [1]  269  321  585  871 1475 2821 3928 5943 4950 2577  523   98  184  279  409
-##  [16] 2285 2685 3409 1824  409  151   45   68  213  546 1033 2129 2536  957  361
-##  [31]  377  225  360  731 1638 2725 2871 2119  684  299  236  245  552 1623 3311
-##  [46] 6721 4254  687  255  473  358  784 1594 1676 2251 1426  756  299  201  229
-##  [61]  469  736 2042 2811 4431 2511  389   73   39   49   59  188  377 1292 4031
-##  [76] 3495  587  105  153  387  758 1307 3465 6991 6313 3794 1836  345  382  808
-##  [91] 1388 2713 3800 3091 2985 3790  674   81   80  108  229  399 1132 2432 3574
-## [106] 2935 1537  529  485  662 1000 1590 2657 3396&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# note the last inline line graph, pretty cute
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lynx
+#&amp;gt; Time Series:
+#&amp;gt; Start = 1821 
+#&amp;gt; End = 1934 
+#&amp;gt; Frequency = 1 
+#&amp;gt;   [1]  269  321  585  871 1475 2821 3928 5943 4950 2577  523   98  184  279  409
+#&amp;gt;  [16] 2285 2685 3409 1824  409  151   45   68  213  546 1033 2129 2536  957  361
+#&amp;gt;  [31]  377  225  360  731 1638 2725 2871 2119  684  299  236  245  552 1623 3311
+#&amp;gt;  [46] 6721 4254  687  255  473  358  784 1594 1676 2251 1426  756  299  201  229
+#&amp;gt;  [61]  469  736 2042 2811 4431 2511  389   73   39   49   59  188  377 1292 4031
+#&amp;gt;  [76] 3495  587  105  153  387  758 1307 3465 6991 6313 3794 1836  345  382  808
+#&amp;gt;  [91] 1388 2713 3800 3091 2985 3790  674   81   80  108  229  399 1132 2432 3574
+#&amp;gt; [106] 2935 1537  529  485  662 1000 1590 2657 3396
+# note the last inline line graph, pretty cute
 skim(lynx)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-25&#34;&gt;Table 13: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-26&#34;&gt;Table 13: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1656,15 +1659,15 @@ skim(lynx)&lt;/code&gt;&lt;/pre&gt;
 &lt;/table&gt;
 &lt;p&gt;when skimming matrices, columns and treated as variables and rows as observations, so statistics are calculated on a column basis:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;m &amp;lt;- matrix(1:12, nrow = 4, ncol = 3)
-m&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      [,1] [,2] [,3]
-## [1,]    1    5    9
-## [2,]    2    6   10
-## [3,]    3    7   11
-## [4,]    4    8   12&lt;/code&gt;&lt;/pre&gt;
+m
+#&amp;gt;      [,1] [,2] [,3]
+#&amp;gt; [1,]    1    5    9
+#&amp;gt; [2,]    2    6   10
+#&amp;gt; [3,]    3    7   11
+#&amp;gt; [4,]    4    8   12&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(m)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-27&#34;&gt;Table 14: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-28&#34;&gt;Table 14: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1762,7 +1765,7 @@ m&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Transpose the matrix:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(t(m))&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-28&#34;&gt;Table 15: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-29&#34;&gt;Table 15: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;

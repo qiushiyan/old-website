@@ -74,7 +74,6 @@ skim(iris) %>%
 ```
 
 
-
 `skim()` also supports grouped data created by `dplyr::group_by()`(and later we will see that `skim()` workes seamlessly in a typical **tidyverse**[@tidyverse2019] workflow). In the grouped case, one additional column for each grouping variable is added.
 
 ```{r}
@@ -139,6 +138,17 @@ skim(iris) %>%
   filter(skim_type == "factor") %>% 
   select(skim_variable, factor.top_counts)
 ```
+
+Or we can combine `select_if()` with `skim()`  
+
+```{r}
+iris %>% 
+  select_if(is.numeric) %>% 
+  skim()
+```
+
+
+
 
 Finally, just for fun, what statistics or which variable we choose to use will not affect the `skim_df` variable type, yet this is not the case for `skim_variable` and `skim_type`, which are intrinsic to `skim_df` objects. If we exclude these two, the `skim_df` object will be automatically coerced to a tibble:
 

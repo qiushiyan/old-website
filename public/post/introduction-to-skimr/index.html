@@ -1458,10 +1458,123 @@ skim(iris) %&gt;%
 #&gt;   skim_variable factor.top_counts        
 #&gt;   &lt;chr&gt;         &lt;chr&gt;                    
 #&gt; 1 Species       set: 50, ver: 50, vir: 50</code></pre>
+<p>Or we can combine <code>select_if()</code> with <code>skim()</code></p>
+<pre class="r"><code>iris %&gt;% 
+  select_if(is.numeric) %&gt;% 
+  skim()</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-15">Table 9: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.00</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.20</td>
+<td align="right">0.76</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
+<td align="right">1.30</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="left">▇▁▇▅▃</td>
+</tr>
+</tbody>
+</table>
 <p>Finally, just for fun, what statistics or which variable we choose to use will not affect the <code>skim_df</code> variable type, yet this is not the case for <code>skim_variable</code> and <code>skim_type</code>, which are intrinsic to <code>skim_df</code> objects. If we exclude these two, the <code>skim_df</code> object will be automatically coerced to a tibble:</p>
 <pre class="r"><code>skim(iris) %&gt;% 
   select(-skim_type, -skim_variable) %&gt;%
-  is_skim_df
+  is_skim_df()
 #&gt; [1] FALSE</code></pre>
 </div>
 <div id="manipulation" class="section level2">
@@ -1626,7 +1739,7 @@ iris_numeric %&gt;%
   skim() %&gt;%
   focus(n_missing, numeric.mean)</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-20">Table 9: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-21">Table 10: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -1836,7 +1949,7 @@ my_skim &lt;- skim_with(numeric = sfl(&quot;3rd_central_moment&quot; = skewness,
 <pre class="r"><code>
 skim(letters)</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-23">Table 10: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-24">Table 11: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -1898,7 +2011,7 @@ skim(letters)</code></pre>
 <p>This is same to:</p>
 <pre class="r"><code>skim(as.data.frame(letters))</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-24">Table 11: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-25">Table 12: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -1961,7 +2074,7 @@ skim(letters)</code></pre>
 <pre class="r"><code>my_list &lt;- list(a = 1:10, b = letters[1:10], c = factor(1:10))
 skim(my_list)</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-25">Table 12: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-26">Table 13: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -2082,7 +2195,7 @@ skim(my_list)</code></pre>
 # note the last inline line graph, pretty cute
 skim(lynx)</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-26">Table 13: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-27">Table 14: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -2165,7 +2278,7 @@ m
 #&gt; [4,]    4    8   12</code></pre>
 <pre class="r"><code>skim(m)</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-28">Table 14: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-29">Table 15: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -2263,7 +2376,7 @@ m
 <p>Transpose the matrix:</p>
 <pre class="r"><code>skim(t(m))</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-29">Table 15: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-30">Table 16: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -2523,7 +2636,7 @@ m
     <div class="media-body">
       <h5 class="card-title"><a href="/">Qiushi Yan</a></h5>
       <h6 class="card-subtitle">Student, Data Journalism</h6>
-      <p class="card-text">不堪其忧，不改其乐</p>
+      <p class="card-text">Everything about</p>
       <ul class="network-icon" aria-hidden="true">
   
     

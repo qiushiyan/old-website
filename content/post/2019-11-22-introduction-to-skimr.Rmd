@@ -155,7 +155,7 @@ Finally, just for fun, what statistics or which variable we choose to use will n
 ```{r}
 skim(iris) %>% 
   select(-skim_type, -skim_variable) %>%
-  is_skim_df
+  is_skim_df()
 ```
 
 

@@ -18,7 +18,7 @@ day_night = true
 #   Latest font sets (may require updating): https://sourcethemes.com/academic/themes/
 #   Browse built-in font sets in `themes/academic/data/fonts/`
 #   Browse user installed font sets in `data/fonts/`
-font = "Minimal"
+font = "Classic"
 
 # Choose a font size.
 # Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
@@ -112,8 +112,8 @@ office_hours = []
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
-  {icon = "twitter", icon_pack = "fab", name = "Twitter", link = "https://twitter.com/Qiushi14252698"},
-  {icon = "weibo", icon_pack = "fab", name = "微博", link = "https://weibo.com/5539639708/"}
+  {icon = "twitter", icon_pack = "fab", name = "Twitter", link = "https://twitter.com/qiushizzzz"},
+  # {icon = "weibo", icon_pack = "fab", name = "微博", link = "https://weibo.com/5539639708/"}
   # { icon = "skype", icon_pack = "fab", name = "Skype Me", link = "skype:echo123?call"},
   # { icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/"},
   # { icon = "comments", icon_pack = "fas", name = "Discuss on Forum", link = "https://discourse.gohugo.io"},
@@ -128,7 +128,7 @@ contact_links = [
 sharing_image = ""
 
 # Twitter username (without @). Used when a visitor shares your site on Twitter.
-twitter = "Qiushi14252698"
+twitter = "qiushizzzz"
 
 ############################
 ## Regional Settings

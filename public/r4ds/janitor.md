@@ -1,13 +1,13 @@
 
 
-# (PART) Cleaning and Tidying {-}
+# (PART) Manipulating {-}
 
 
 # Janitor  
 
-http://sfirke.github.io/janitor/articles/janitor.html  
+blog: http://sfirke.github.io/janitor/articles/janitor.html  
 
-**Janitor**[@R-janitor] 包提供了一些简单易用的函数方便数据清洗和探索流程。  
+**janitor**[@R-janitor] 提供了一些简单易用的函数方便数据清洗和探索流程。  
 
 
 
@@ -18,7 +18,7 @@ library(janitor)
 ```
 
 
-## 清洗  {#qingxi}
+## cleaning  {#janitor-cleaning}
 
 
 ### `clean_names`  
@@ -58,7 +58,7 @@ test_df %>%
 
 
 
-与 Base R 中的 `make.names()` 对比 (注意这个函数不是基于数据框的)：  
+与 Base R 中的 `make.names()` 对比 (注意这个函数是基于字符向量的)：  
 
 
 ```r
@@ -72,13 +72,13 @@ names(test_df) %>%
 
 
 ```r
-## snake_case  
+# snake_case  
 test_df %>% 
   clean_names()
 #>   first_name abc percent_successful_2009 repeat_value repeat_value_2  x
 #> 1         NA  NA                      NA           NA             NA NA
 
-## lower_camel and upper_camel  
+# lower_camel and upper_camel  
 test_df %>% 
   clean_names(case = "lower_camel")
 #>   firstName abc percentSuccessful2009 repeatValue repeatValue_2  x
@@ -90,19 +90,169 @@ test_df %>%
 ```
 
 
-`make_clean_names()` 是 `clean_names()` 的向量版本，它还可以传入 `as_tibble()` 中的 `.name_repair` 参数中：  
+`clean_names()` 只能适用于于数据框 ，而 `make_clean_names()` 适用于向量，这使后者可以作为很多函数的参数，进行有效的 functional programming， 例如以下四种修改列名的方式是等效的：  
 
 
 ```r
-names(test_df) %>% 
-  make_clean_names()
-#> [1] "first_name"              "abc"                    
-#> [3] "percent_successful_2009" "repeat_value"           
-#> [5] "repeat_value_2"          "x"
+iris %>% clean_names()
+#>     sepal_length sepal_width petal_length petal_width    species
+#> 1            5.1         3.5          1.4         0.2     setosa
+#> 2            4.9         3.0          1.4         0.2     setosa
+#> 3            4.7         3.2          1.3         0.2     setosa
+#> 4            4.6         3.1          1.5         0.2     setosa
+#> 5            5.0         3.6          1.4         0.2     setosa
+#> 6            5.4         3.9          1.7         0.4     setosa
+#> 7            4.6         3.4          1.4         0.3     setosa
+#> 8            5.0         3.4          1.5         0.2     setosa
+#> 9            4.4         2.9          1.4         0.2     setosa
+#> 10           4.9         3.1          1.5         0.1     setosa
+#> 11           5.4         3.7          1.5         0.2     setosa
+#> 12           4.8         3.4          1.6         0.2     setosa
+#> 13           4.8         3.0          1.4         0.1     setosa
+#> 14           4.3         3.0          1.1         0.1     setosa
+#> 15           5.8         4.0          1.2         0.2     setosa
+#> 16           5.7         4.4          1.5         0.4     setosa
+#> 17           5.4         3.9          1.3         0.4     setosa
+#> 18           5.1         3.5          1.4         0.3     setosa
+#> 19           5.7         3.8          1.7         0.3     setosa
+#> 20           5.1         3.8          1.5         0.3     setosa
+#> 21           5.4         3.4          1.7         0.2     setosa
+#> 22           5.1         3.7          1.5         0.4     setosa
+#> 23           4.6         3.6          1.0         0.2     setosa
+#> 24           5.1         3.3          1.7         0.5     setosa
+#> 25           4.8         3.4          1.9         0.2     setosa
+#> 26           5.0         3.0          1.6         0.2     setosa
+#> 27           5.0         3.4          1.6         0.4     setosa
+#> 28           5.2         3.5          1.5         0.2     setosa
+#> 29           5.2         3.4          1.4         0.2     setosa
+#> 30           4.7         3.2          1.6         0.2     setosa
+#> 31           4.8         3.1          1.6         0.2     setosa
+#> 32           5.4         3.4          1.5         0.4     setosa
+#> 33           5.2         4.1          1.5         0.1     setosa
+#> 34           5.5         4.2          1.4         0.2     setosa
+#> 35           4.9         3.1          1.5         0.2     setosa
+#> 36           5.0         3.2          1.2         0.2     setosa
+#> 37           5.5         3.5          1.3         0.2     setosa
+#> 38           4.9         3.6          1.4         0.1     setosa
+#> 39           4.4         3.0          1.3         0.2     setosa
+#> 40           5.1         3.4          1.5         0.2     setosa
+#> 41           5.0         3.5          1.3         0.3     setosa
+#> 42           4.5         2.3          1.3         0.3     setosa
+#> 43           4.4         3.2          1.3         0.2     setosa
+#> 44           5.0         3.5          1.6         0.6     setosa
+#> 45           5.1         3.8          1.9         0.4     setosa
+#> 46           4.8         3.0          1.4         0.3     setosa
+#> 47           5.1         3.8          1.6         0.2     setosa
+#> 48           4.6         3.2          1.4         0.2     setosa
+#> 49           5.3         3.7          1.5         0.2     setosa
+#> 50           5.0         3.3          1.4         0.2     setosa
+#> 51           7.0         3.2          4.7         1.4 versicolor
+#> 52           6.4         3.2          4.5         1.5 versicolor
+#> 53           6.9         3.1          4.9         1.5 versicolor
+#> 54           5.5         2.3          4.0         1.3 versicolor
+#> 55           6.5         2.8          4.6         1.5 versicolor
+#> 56           5.7         2.8          4.5         1.3 versicolor
+#> 57           6.3         3.3          4.7         1.6 versicolor
+#> 58           4.9         2.4          3.3         1.0 versicolor
+#> 59           6.6         2.9          4.6         1.3 versicolor
+#> 60           5.2         2.7          3.9         1.4 versicolor
+#> 61           5.0         2.0          3.5         1.0 versicolor
+#> 62           5.9         3.0          4.2         1.5 versicolor
+#> 63           6.0         2.2          4.0         1.0 versicolor
+#> 64           6.1         2.9          4.7         1.4 versicolor
+#> 65           5.6         2.9          3.6         1.3 versicolor
+#> 66           6.7         3.1          4.4         1.4 versicolor
+#> 67           5.6         3.0          4.5         1.5 versicolor
+#> 68           5.8         2.7          4.1         1.0 versicolor
+#> 69           6.2         2.2          4.5         1.5 versicolor
+#> 70           5.6         2.5          3.9         1.1 versicolor
+#> 71           5.9         3.2          4.8         1.8 versicolor
+#> 72           6.1         2.8          4.0         1.3 versicolor
+#> 73           6.3         2.5          4.9         1.5 versicolor
+#> 74           6.1         2.8          4.7         1.2 versicolor
+#> 75           6.4         2.9          4.3         1.3 versicolor
+#> 76           6.6         3.0          4.4         1.4 versicolor
+#> 77           6.8         2.8          4.8         1.4 versicolor
+#> 78           6.7         3.0          5.0         1.7 versicolor
+#> 79           6.0         2.9          4.5         1.5 versicolor
+#> 80           5.7         2.6          3.5         1.0 versicolor
+#> 81           5.5         2.4          3.8         1.1 versicolor
+#> 82           5.5         2.4          3.7         1.0 versicolor
+#> 83           5.8         2.7          3.9         1.2 versicolor
+#> 84           6.0         2.7          5.1         1.6 versicolor
+#> 85           5.4         3.0          4.5         1.5 versicolor
+#> 86           6.0         3.4          4.5         1.6 versicolor
+#> 87           6.7         3.1          4.7         1.5 versicolor
+#> 88           6.3         2.3          4.4         1.3 versicolor
+#> 89           5.6         3.0          4.1         1.3 versicolor
+#> 90           5.5         2.5          4.0         1.3 versicolor
+#> 91           5.5         2.6          4.4         1.2 versicolor
+#> 92           6.1         3.0          4.6         1.4 versicolor
+#> 93           5.8         2.6          4.0         1.2 versicolor
+#> 94           5.0         2.3          3.3         1.0 versicolor
+#> 95           5.6         2.7          4.2         1.3 versicolor
+#> 96           5.7         3.0          4.2         1.2 versicolor
+#> 97           5.7         2.9          4.2         1.3 versicolor
+#> 98           6.2         2.9          4.3         1.3 versicolor
+#> 99           5.1         2.5          3.0         1.1 versicolor
+#> 100          5.7         2.8          4.1         1.3 versicolor
+#> 101          6.3         3.3          6.0         2.5  virginica
+#> 102          5.8         2.7          5.1         1.9  virginica
+#> 103          7.1         3.0          5.9         2.1  virginica
+#> 104          6.3         2.9          5.6         1.8  virginica
+#> 105          6.5         3.0          5.8         2.2  virginica
+#> 106          7.6         3.0          6.6         2.1  virginica
+#> 107          4.9         2.5          4.5         1.7  virginica
+#> 108          7.3         2.9          6.3         1.8  virginica
+#> 109          6.7         2.5          5.8         1.8  virginica
+#> 110          7.2         3.6          6.1         2.5  virginica
+#> 111          6.5         3.2          5.1         2.0  virginica
+#> 112          6.4         2.7          5.3         1.9  virginica
+#> 113          6.8         3.0          5.5         2.1  virginica
+#> 114          5.7         2.5          5.0         2.0  virginica
+#> 115          5.8         2.8          5.1         2.4  virginica
+#> 116          6.4         3.2          5.3         2.3  virginica
+#> 117          6.5         3.0          5.5         1.8  virginica
+#> 118          7.7         3.8          6.7         2.2  virginica
+#> 119          7.7         2.6          6.9         2.3  virginica
+#> 120          6.0         2.2          5.0         1.5  virginica
+#> 121          6.9         3.2          5.7         2.3  virginica
+#> 122          5.6         2.8          4.9         2.0  virginica
+#> 123          7.7         2.8          6.7         2.0  virginica
+#> 124          6.3         2.7          4.9         1.8  virginica
+#> 125          6.7         3.3          5.7         2.1  virginica
+#> 126          7.2         3.2          6.0         1.8  virginica
+#> 127          6.2         2.8          4.8         1.8  virginica
+#> 128          6.1         3.0          4.9         1.8  virginica
+#> 129          6.4         2.8          5.6         2.1  virginica
+#> 130          7.2         3.0          5.8         1.6  virginica
+#> 131          7.4         2.8          6.1         1.9  virginica
+#> 132          7.9         3.8          6.4         2.0  virginica
+#> 133          6.4         2.8          5.6         2.2  virginica
+#> 134          6.3         2.8          5.1         1.5  virginica
+#> 135          6.1         2.6          5.6         1.4  virginica
+#> 136          7.7         3.0          6.1         2.3  virginica
+#> 137          6.3         3.4          5.6         2.4  virginica
+#> 138          6.4         3.1          5.5         1.8  virginica
+#> 139          6.0         3.0          4.8         1.8  virginica
+#> 140          6.9         3.1          5.4         2.1  virginica
+#> 141          6.7         3.1          5.6         2.4  virginica
+#> 142          6.9         3.1          5.1         2.3  virginica
+#> 143          5.8         2.7          5.1         1.9  virginica
+#> 144          6.8         3.2          5.9         2.3  virginica
+#> 145          6.7         3.3          5.7         2.5  virginica
+#> 146          6.7         3.0          5.2         2.3  virginica
+#> 147          6.3         2.5          5.0         1.9  virginica
+#> 148          6.5         3.0          5.2         2.0  virginica
+#> 149          6.2         3.4          5.4         2.3  virginica
+#> 150          5.9         3.0          5.1         1.8  virginica
 
-as_tibble(iris, .name_repair  = janitor::make_clean_names)
+iris %>% names() %>% make_clean_names()
+#> [1] "sepal_length" "sepal_width"  "petal_length" "petal_width"  "species"
+
+iris %>% as_tibble(name_repair = make_clean_names)
 #> # A tibble: 150 x 5
-#>   sepal_length sepal_width petal_length petal_width species
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #>          <dbl>       <dbl>        <dbl>       <dbl> <fct>  
 #> 1          5.1         3.5          1.4         0.2 setosa 
 #> 2          4.9         3            1.4         0.2 setosa 
@@ -110,65 +260,167 @@ as_tibble(iris, .name_repair  = janitor::make_clean_names)
 #> 4          4.6         3.1          1.5         0.2 setosa 
 #> 5          5           3.6          1.4         0.2 setosa 
 #> 6          5.4         3.9          1.7         0.4 setosa 
-#> # … with 144 more rows
+#> # ... with 144 more rows
+
+iris %>% rename_all(make_clean_names) 
+#>     sepal_length sepal_width petal_length petal_width    species
+#> 1            5.1         3.5          1.4         0.2     setosa
+#> 2            4.9         3.0          1.4         0.2     setosa
+#> 3            4.7         3.2          1.3         0.2     setosa
+#> 4            4.6         3.1          1.5         0.2     setosa
+#> 5            5.0         3.6          1.4         0.2     setosa
+#> 6            5.4         3.9          1.7         0.4     setosa
+#> 7            4.6         3.4          1.4         0.3     setosa
+#> 8            5.0         3.4          1.5         0.2     setosa
+#> 9            4.4         2.9          1.4         0.2     setosa
+#> 10           4.9         3.1          1.5         0.1     setosa
+#> 11           5.4         3.7          1.5         0.2     setosa
+#> 12           4.8         3.4          1.6         0.2     setosa
+#> 13           4.8         3.0          1.4         0.1     setosa
+#> 14           4.3         3.0          1.1         0.1     setosa
+#> 15           5.8         4.0          1.2         0.2     setosa
+#> 16           5.7         4.4          1.5         0.4     setosa
+#> 17           5.4         3.9          1.3         0.4     setosa
+#> 18           5.1         3.5          1.4         0.3     setosa
+#> 19           5.7         3.8          1.7         0.3     setosa
+#> 20           5.1         3.8          1.5         0.3     setosa
+#> 21           5.4         3.4          1.7         0.2     setosa
+#> 22           5.1         3.7          1.5         0.4     setosa
+#> 23           4.6         3.6          1.0         0.2     setosa
+#> 24           5.1         3.3          1.7         0.5     setosa
+#> 25           4.8         3.4          1.9         0.2     setosa
+#> 26           5.0         3.0          1.6         0.2     setosa
+#> 27           5.0         3.4          1.6         0.4     setosa
+#> 28           5.2         3.5          1.5         0.2     setosa
+#> 29           5.2         3.4          1.4         0.2     setosa
+#> 30           4.7         3.2          1.6         0.2     setosa
+#> 31           4.8         3.1          1.6         0.2     setosa
+#> 32           5.4         3.4          1.5         0.4     setosa
+#> 33           5.2         4.1          1.5         0.1     setosa
+#> 34           5.5         4.2          1.4         0.2     setosa
+#> 35           4.9         3.1          1.5         0.2     setosa
+#> 36           5.0         3.2          1.2         0.2     setosa
+#> 37           5.5         3.5          1.3         0.2     setosa
+#> 38           4.9         3.6          1.4         0.1     setosa
+#> 39           4.4         3.0          1.3         0.2     setosa
+#> 40           5.1         3.4          1.5         0.2     setosa
+#> 41           5.0         3.5          1.3         0.3     setosa
+#> 42           4.5         2.3          1.3         0.3     setosa
+#> 43           4.4         3.2          1.3         0.2     setosa
+#> 44           5.0         3.5          1.6         0.6     setosa
+#> 45           5.1         3.8          1.9         0.4     setosa
+#> 46           4.8         3.0          1.4         0.3     setosa
+#> 47           5.1         3.8          1.6         0.2     setosa
+#> 48           4.6         3.2          1.4         0.2     setosa
+#> 49           5.3         3.7          1.5         0.2     setosa
+#> 50           5.0         3.3          1.4         0.2     setosa
+#> 51           7.0         3.2          4.7         1.4 versicolor
+#> 52           6.4         3.2          4.5         1.5 versicolor
+#> 53           6.9         3.1          4.9         1.5 versicolor
+#> 54           5.5         2.3          4.0         1.3 versicolor
+#> 55           6.5         2.8          4.6         1.5 versicolor
+#> 56           5.7         2.8          4.5         1.3 versicolor
+#> 57           6.3         3.3          4.7         1.6 versicolor
+#> 58           4.9         2.4          3.3         1.0 versicolor
+#> 59           6.6         2.9          4.6         1.3 versicolor
+#> 60           5.2         2.7          3.9         1.4 versicolor
+#> 61           5.0         2.0          3.5         1.0 versicolor
+#> 62           5.9         3.0          4.2         1.5 versicolor
+#> 63           6.0         2.2          4.0         1.0 versicolor
+#> 64           6.1         2.9          4.7         1.4 versicolor
+#> 65           5.6         2.9          3.6         1.3 versicolor
+#> 66           6.7         3.1          4.4         1.4 versicolor
+#> 67           5.6         3.0          4.5         1.5 versicolor
+#> 68           5.8         2.7          4.1         1.0 versicolor
+#> 69           6.2         2.2          4.5         1.5 versicolor
+#> 70           5.6         2.5          3.9         1.1 versicolor
+#> 71           5.9         3.2          4.8         1.8 versicolor
+#> 72           6.1         2.8          4.0         1.3 versicolor
+#> 73           6.3         2.5          4.9         1.5 versicolor
+#> 74           6.1         2.8          4.7         1.2 versicolor
+#> 75           6.4         2.9          4.3         1.3 versicolor
+#> 76           6.6         3.0          4.4         1.4 versicolor
+#> 77           6.8         2.8          4.8         1.4 versicolor
+#> 78           6.7         3.0          5.0         1.7 versicolor
+#> 79           6.0         2.9          4.5         1.5 versicolor
+#> 80           5.7         2.6          3.5         1.0 versicolor
+#> 81           5.5         2.4          3.8         1.1 versicolor
+#> 82           5.5         2.4          3.7         1.0 versicolor
+#> 83           5.8         2.7          3.9         1.2 versicolor
+#> 84           6.0         2.7          5.1         1.6 versicolor
+#> 85           5.4         3.0          4.5         1.5 versicolor
+#> 86           6.0         3.4          4.5         1.6 versicolor
+#> 87           6.7         3.1          4.7         1.5 versicolor
+#> 88           6.3         2.3          4.4         1.3 versicolor
+#> 89           5.6         3.0          4.1         1.3 versicolor
+#> 90           5.5         2.5          4.0         1.3 versicolor
+#> 91           5.5         2.6          4.4         1.2 versicolor
+#> 92           6.1         3.0          4.6         1.4 versicolor
+#> 93           5.8         2.6          4.0         1.2 versicolor
+#> 94           5.0         2.3          3.3         1.0 versicolor
+#> 95           5.6         2.7          4.2         1.3 versicolor
+#> 96           5.7         3.0          4.2         1.2 versicolor
+#> 97           5.7         2.9          4.2         1.3 versicolor
+#> 98           6.2         2.9          4.3         1.3 versicolor
+#> 99           5.1         2.5          3.0         1.1 versicolor
+#> 100          5.7         2.8          4.1         1.3 versicolor
+#> 101          6.3         3.3          6.0         2.5  virginica
+#> 102          5.8         2.7          5.1         1.9  virginica
+#> 103          7.1         3.0          5.9         2.1  virginica
+#> 104          6.3         2.9          5.6         1.8  virginica
+#> 105          6.5         3.0          5.8         2.2  virginica
+#> 106          7.6         3.0          6.6         2.1  virginica
+#> 107          4.9         2.5          4.5         1.7  virginica
+#> 108          7.3         2.9          6.3         1.8  virginica
+#> 109          6.7         2.5          5.8         1.8  virginica
+#> 110          7.2         3.6          6.1         2.5  virginica
+#> 111          6.5         3.2          5.1         2.0  virginica
+#> 112          6.4         2.7          5.3         1.9  virginica
+#> 113          6.8         3.0          5.5         2.1  virginica
+#> 114          5.7         2.5          5.0         2.0  virginica
+#> 115          5.8         2.8          5.1         2.4  virginica
+#> 116          6.4         3.2          5.3         2.3  virginica
+#> 117          6.5         3.0          5.5         1.8  virginica
+#> 118          7.7         3.8          6.7         2.2  virginica
+#> 119          7.7         2.6          6.9         2.3  virginica
+#> 120          6.0         2.2          5.0         1.5  virginica
+#> 121          6.9         3.2          5.7         2.3  virginica
+#> 122          5.6         2.8          4.9         2.0  virginica
+#> 123          7.7         2.8          6.7         2.0  virginica
+#> 124          6.3         2.7          4.9         1.8  virginica
+#> 125          6.7         3.3          5.7         2.1  virginica
+#> 126          7.2         3.2          6.0         1.8  virginica
+#> 127          6.2         2.8          4.8         1.8  virginica
+#> 128          6.1         3.0          4.9         1.8  virginica
+#> 129          6.4         2.8          5.6         2.1  virginica
+#> 130          7.2         3.0          5.8         1.6  virginica
+#> 131          7.4         2.8          6.1         1.9  virginica
+#> 132          7.9         3.8          6.4         2.0  virginica
+#> 133          6.4         2.8          5.6         2.2  virginica
+#> 134          6.3         2.8          5.1         1.5  virginica
+#> 135          6.1         2.6          5.6         1.4  virginica
+#> 136          7.7         3.0          6.1         2.3  virginica
+#> 137          6.3         3.4          5.6         2.4  virginica
+#> 138          6.4         3.1          5.5         1.8  virginica
+#> 139          6.0         3.0          4.8         1.8  virginica
+#> 140          6.9         3.1          5.4         2.1  virginica
+#> 141          6.7         3.1          5.6         2.4  virginica
+#> 142          6.9         3.1          5.1         2.3  virginica
+#> 143          5.8         2.7          5.1         1.9  virginica
+#> 144          6.8         3.2          5.9         2.3  virginica
+#> 145          6.7         3.3          5.7         2.5  virginica
+#> 146          6.7         3.0          5.2         2.3  virginica
+#> 147          6.3         2.5          5.0         1.9  virginica
+#> 148          6.5         3.0          5.2         2.0  virginica
+#> 149          6.2         3.4          5.4         2.3  virginica
+#> 150          5.9         3.0          5.1         1.8  virginica
 ```
 
 
 
-### `compare_df_cols`  
-
-使用 `dplyr::bind_rows()` 或者 `rbind()，或者存在子集关系。 `compare_df_cols()` 检查多个数据框或者数据框列表，并检查其各个列是否一致：  
 
 
-```r
-df1 <- data.frame(a = 1:2, b = c("big", "small")) # a factor by default
-df2 <- data.frame(a = 10:12, b = c("medium", "small", "big"), c = 0, stringsAsFactors = FALSE)
-df3 <- df1 %>%
-  mutate(b = as.character(b))
-```
-
-
-```r
-compare_df_cols(df1, df2, df3)
-#>   column_name     df1       df2       df3
-#> 1           a integer   integer   integer
-#> 2           b  factor character character
-#> 3           c    <NA>   numeric      <NA>
-```
-
-
-```r
-compare_df_cols(df1, df2, df3, return = "mismatch")
-#>   column_name    df1       df2       df3
-#> 1           b factor character character
-```
-
-`dplyr::bind_rows()` 比 `rbind()` 的合并要宽松，允许某些数据框的列集合是其余数据框的子集：  
-
-
-```r
-compare_df_cols(df1, df2, df3, return = "mismatch", bind_method = "rbind") 
-#>   column_name    df1       df2       df3
-#> 1           b factor character character
-#> 2           c   <NA>   numeric      <NA>
-# default is dplyr::bind_rows
-```
-
-
-`compare_df_cols_same` 返回 `TRUE` 或 `FALSE`:  
-
-
-```r
-compare_df_cols_same(df1, df3)
-#>   column_name    ..1       ..2
-#> 1           b factor character
-#> [1] FALSE
-compare_df_cols_same(df2, df3)
-#> [1] TRUE
-```
-
-
-## 探索 {#tansuo}
+## Exploring {#janitor-explore}
 
   
 ### `tabyl`  

@@ -2,11 +2,11 @@
 
 # forcats
 
-## 简介  
+## 简介  {#forcats-intro}
 
-因子(factor)在 R 中用于处理分类变量。从历史上看，因子远比字符串容易处理。因此，R基础包的很多函数都自动将字符串转换为因子。这意味着因子经常出现在并不真正适合他们的地方。好在我们不用担心`tidyverse`中出现这种问题，可以将注意力集中于真正需要因子类型的地方。 
+因子(factor)在 R 中用于处理分类变量。从历史上看，因子远比字符串容易处理。因此，R 基础包的很多函数都自动将字符串转换为因子。这意味着因子经常出现在并不真正适合他们的地方。好在我们不用担心 tidyverse 中出现这种问题，可以将注意力集中于真正需要因子类型的地方。 
 
-*Roger Peng*的文章["stringsAsFactors: An unauthorized bigraphy](https://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/)和*Thomas Lumley*的文章[stringsAsFactors = sigh ](https://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh)介绍了有关因子和字符串的一些历史背景。  
+*Roger Peng* 的文章["stringsAsFactors: An unauthorized bigraphy](https://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/)和*Thomas Lumley*的文章[stringsAsFactors = sigh ](https://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh)介绍了有关因子和字符串的一些历史背景。  
 
 2006 年, `stringsAsFactors` 这一设置的前身 `charToFactor` 被引入了 `data.frame()` 函数中，后来被纳入到 `read.table()` 里。默认情况下，`stringsAsFactors`被设置为`True`，R便会自动把字符串转换为因子型变量。在当时，这种设置是不难理解的。早期R的用户几乎都是统计科班出身的研究者，他们所用数据集里的字符串几乎都代表了一个定性变量，例如`年龄(male/female)`,`国家(US/other)`，`地区(East/West)`。进一步地，由于统计学家们的工作重点几乎都集中在构建各种统计模型上，而像`lm()`和`glm()`的函数只有当一个变量是 `factor` 类型的时候才开始对其编码，在统计模型中构建虚拟变量。  
 
@@ -125,13 +125,13 @@ starwars
 #> # A tibble: 87 x 13
 #>   name  height  mass hair_color skin_color eye_color birth_year gender homeworld
 #>   <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr>  <chr>    
-#> 1 Luke…    172    77 blond      fair       blue            19   male   Tatooine 
+#> 1 Luke~    172    77 blond      fair       blue            19   male   Tatooine 
 #> 2 C-3PO    167    75 <NA>       gold       yellow         112   <NA>   Tatooine 
-#> 3 R2-D2     96    32 <NA>       white, bl… red             33   <NA>   Naboo    
-#> 4 Dart…    202   136 none       white      yellow          41.9 male   Tatooine 
-#> 5 Leia…    150    49 brown      light      brown           19   female Alderaan 
-#> 6 Owen…    178   120 brown, gr… light      blue            52   male   Tatooine 
-#> # … with 81 more rows, and 4 more variables: species <chr>, films <list>,
+#> 3 R2-D2     96    32 <NA>       white, bl~ red             33   <NA>   Naboo    
+#> 4 Dart~    202   136 none       white      yellow          41.9 male   Tatooine 
+#> 5 Leia~    150    49 brown      light      brown           19   female Alderaan 
+#> 6 Owen~    178   120 brown, gr~ light      blue            52   male   Tatooine 
+#> # ... with 81 more rows, and 4 more variables: species <chr>, films <list>,
 #> #   vehicles <list>, starships <list>
 
 ggplot(starwars, aes(hair_color)) +
@@ -139,7 +139,7 @@ ggplot(starwars, aes(hair_color)) +
   coord_flip()
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-14-1.svg" width="80%" />
+<img src="forcats_files/figure-html/unnamed-chunk-14-1.svg" width="80%" style="display: block; margin: auto;" />
 
 对于这种条形图的常见调整是让因子的水平按照其在数据中出现的频次排列，`fct_infreq()`函数可以很轻松地完成这一任务(缺失值总会被排在最后)：
 
@@ -149,7 +149,7 @@ ggplot(starwars,aes(fct_infreq(hair_color))) +
   coord_flip()
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-15-1.svg" width="80%" />
+<img src="forcats_files/figure-html/unnamed-chunk-15-1.svg" width="80%" style="display: block; margin: auto;" />
 
 如果返回`starwars`数据集，你会发现`hair_color`其实是字符串变量，但是完全适用于`fct_infreq()`的操作。  
 
@@ -172,7 +172,7 @@ ggplot(starwars,aes(fct_infreq(hair_color))) +
 #> 4 black                NA 
 #> 5 blond               177.
 #> 6 blonde              168 
-#> # … with 7 more rows
+#> # ... with 7 more rows
 
 ggplot(avg_height,aes(x=hair_color,y=avg_height))+
   geom_bar(aes(hair_color, avg_height), stat="identity")
@@ -182,7 +182,7 @@ ggplot(avg_height,aes(fct_reorder(hair_color, avg_height), avg_height))+
 
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-16-1.svg" width="50%" /><img src="forcats_files/figure-html/unnamed-chunk-16-2.svg" width="50%" />
+<img src="forcats_files/figure-html/unnamed-chunk-16-1.svg" width="50%" style="display: block; margin: auto;" /><img src="forcats_files/figure-html/unnamed-chunk-16-2.svg" width="50%" style="display: block; margin: auto;" />
 
 
 ### 人工指定顺序  
@@ -196,13 +196,13 @@ gss_cat
 #> # A tibble: 21,483 x 9
 #>    year marital      age race  rincome    partyid     relig     denom    tvhours
 #>   <int> <fct>      <int> <fct> <fct>      <fct>       <fct>     <fct>      <int>
-#> 1  2000 Never mar…    26 White $8000 to … Ind,near r… Protesta… Souther…      12
-#> 2  2000 Divorced      48 White $8000 to … Not str re… Protesta… Baptist…      NA
-#> 3  2000 Widowed       67 White Not appli… Independent Protesta… No deno…       2
-#> 4  2000 Never mar…    39 White Not appli… Ind,near r… Orthodox… Not app…       4
-#> 5  2000 Divorced      25 White Not appli… Not str de… None      Not app…       1
-#> 6  2000 Married       25 White $20000 - … Strong dem… Protesta… Souther…      NA
-#> # … with 2.148e+04 more rows
+#> 1  2000 Never mar~    26 White $8000 to ~ Ind,near r~ Protesta~ Souther~      12
+#> 2  2000 Divorced      48 White $8000 to ~ Not str re~ Protesta~ Baptist~      NA
+#> 3  2000 Widowed       67 White Not appli~ Independent Protesta~ No deno~       2
+#> 4  2000 Never mar~    39 White Not appli~ Ind,near r~ Orthodox~ Not app~       4
+#> 5  2000 Divorced      25 White Not appli~ Not str de~ None      Not app~       1
+#> 6  2000 Married       25 White $20000 - ~ Strong dem~ Protesta~ Souther~      NA
+#> # ... with 2.148e+04 more rows
 
 levels(gss_cat$rincome)
 #>  [1] "No answer"      "Don't know"     "Refused"        "$25000 or more"
@@ -245,11 +245,11 @@ fct_relevel(reshuffled_income, c("Lt $1000", "$1000 to 2999"), after = 1) %>%
 
 
 
-## 改变水平个数
+## 改变水平个数 {#forcats-levles}
 
 ### 合并水平  
 
-`forcats`包提供了`fct_count()`函数可以很方便地查看因子各水平分布的情况，使用`count()`函数也可以达到同样的效果
+`fct_count()`函数可以很方便地查看因子各水平分布的情况，使用`count()`函数也可以达到同样的效果
 
 ```r
 fct_count(starwars$skin_color, sort = T)
@@ -262,11 +262,11 @@ fct_count(starwars$skin_color, sort = T)
 #> 4 green     6
 #> 5 grey      6
 #> 6 pale      5
-#> # … with 25 more rows
+#> # ... with 25 more rows
 ```
 
-因子`skin_color`总共有31个水平，但绝大部分的频次都集中在前5、6个水平上，这时候我们可能想把余下的水平合并为一个水平，即创建一个"其他"水平。
-`fct_lump(f,n,prop)`函数用于合并因子中那些低频次的水平，参数`n`和`prop`采用不同的表示方法，指定哪些变量保留下来（被合并）:
+因子`skin_color`总共有 31 个水平，但绝大部分的频次都集中在前 5、6 个水平上，这时候我们可能想把余下的水平合并为一个水平，即创建一个"其他"水平。
+`fct_lump(f, n, prop)` 用于合并因子中那些低频次的水平，参数 `n` 和 `prop` 采用不同的表示方法，指定哪些变量保留下来（或者被合并）:
 
 
 ```r
@@ -296,7 +296,7 @@ starwars %>%
 #> 3 light         11
 ```
 
-默认情况下，合并生成的新水平被命名为"Other"，可以通过`other_level`参数为其设定一个名字：
+默认情况下，合并生成的新水平被命名为"Other"，可以通过 `other_level` 参数为其设定一个名字：
 
 ```r
 ## 将合并水平命名为“extra”
@@ -312,8 +312,8 @@ starwars %>%
 #> 3 light         11
 ```
 
-
-如果给参数`n`或者`prop`指定一个复数，则频数最多的水平将被合并：  
+ 
+如果给 `n` 或者 `prop` 指定一个负数，则频数最多的一些水平将被合并：  
 
 
 ```r
@@ -330,7 +330,7 @@ starwars %>%
 #> 4 fair, green, yellow     1
 #> 5 gold                    1
 #> 6 green-tan, brown        1
-#> # … with 11 more rows
+#> # ... with 11 more rows
 ## 占据频数超过90%的水平被合并为other
 starwars %>%
   mutate(skin_color = fct_lump(skin_color, prop = -0.1)) %>%
@@ -344,10 +344,10 @@ starwars %>%
 #> 4 grey           6
 #> 5 pale           5
 #> 6 brown          4
-#> # … with 24 more rows
+#> # ... with 24 more rows
 ```
 
-如果想人为地对水平进行合并，而不考虑频次，可以使用`fct_other(f,keep,drop,other_level = "Other)`函数，`keep`指定保留水平，`drop`指定合并水平：  
+如果想人为地对水平进行合并，而不考虑频次，可以使用`fct_other(f, keep, drop, other_level = "Other)`，`keep` 指定保留水平，`drop` 指定合并水平：  
 
 
 ```r
@@ -362,7 +362,7 @@ fct_count(x,sort=T)
 #> 4 C         5
 #> 5 E         1
 #> 6 F         1
-#> # … with 3 more rows
+#> # ... with 3 more rows
 
 fct_other(x, keep = c("A", "B"))
 #>  [1] A     A     A     A     A     A     A     A     A     A     A     A    
@@ -447,7 +447,7 @@ fct_count(starwars$hair_color)
 #> 4 black            13
 #> 5 blond             3
 #> 6 blonde            1
-#> # … with 7 more rows
+#> # ... with 7 more rows
 
 ## 筛选重量在70~135的角色，得到一个子集
 (starwars_sub <- starwars %>%
@@ -455,13 +455,13 @@ fct_count(starwars$hair_color)
 #> # A tibble: 34 x 13
 #>   name  height  mass hair_color skin_color eye_color birth_year gender homeworld
 #>   <chr>  <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr>  <chr>    
-#> 1 Luke…    172    77 blond      fair       blue              19 male   Tatooine 
+#> 1 Luke~    172    77 blond      fair       blue              19 male   Tatooine 
 #> 2 C-3PO    167    75 <NA>       gold       yellow           112 <NA>   Tatooine 
-#> 3 Owen…    178   120 brown, gr… light      blue              52 male   Tatooine 
-#> 4 Beru…    165    75 brown      light      blue              47 female Tatooine 
-#> 5 Bigg…    183    84 black      light      brown             24 male   Tatooine 
-#> 6 Obi-…    182    77 auburn, w… fair       blue-gray         57 male   Stewjon  
-#> # … with 28 more rows, and 4 more variables: species <chr>, films <list>,
+#> 3 Owen~    178   120 brown, gr~ light      blue              52 male   Tatooine 
+#> 4 Beru~    165    75 brown      light      blue              47 female Tatooine 
+#> 5 Bigg~    183    84 black      light      brown             24 male   Tatooine 
+#> 6 Obi-~    182    77 auburn, w~ fair       blue-gray         57 male   Stewjon  
+#> # ... with 28 more rows, and 4 more variables: species <chr>, films <list>,
 #> #   vehicles <list>, starships <list>
 
 ## 现在hair_color只在8个有效水平上有记录，但是总的水平个数没有改变 
@@ -477,7 +477,7 @@ fct_count(starwars_sub$hair_color)
 #> 4 brown             7
 #> 5 brown, grey       1
 #> 6 grey              1
-#> # … with 3 more rows
+#> # ... with 3 more rows
 
 ## 用fct_drop()舍弃频次为0的那些水平
 starwars_sub$hair_color %>%
@@ -508,7 +508,7 @@ fct_drop(f, only = "c")
 
 
 
-## 编码  
+## 编码  {#forcats-recode}
 
 比修改因子水平顺序、改变水平个数更强大的操作时修改水平的值。修改水平的值不仅可以使图形标签更为美观清晰，以满足出版发行的要求，还可以将水平汇集成更高层次的显示。修改水平最常用、最强大的工具是`fct_recode()`函数，它可以对每个水平进行修改或重新编码。例如，我们来看一下综合社会调查数据中的因子变量`partyid`:  
 
@@ -523,7 +523,7 @@ fct_count(gss_cat$partyid)
 #> 4 Strong republican   2314
 #> 5 Not str republican  3032
 #> 6 Ind,near rep        1791
-#> # … with 4 more rows
+#> # ... with 4 more rows
 ```
 
 在这个因子中，对水平的描述太过简单，而且不一致，我们用`fct_recode()`将其修改为较为详细的排比结构，格式为`fct_recode(f,level_new = level_old)`:
@@ -547,7 +547,7 @@ gss_cat %>%
 #> 4 Republican,strong     2314
 #> 5 Republican weak       3032
 #> 6 Independent,near rep  1791
-#> # … with 4 more rows
+#> # ... with 4 more rows
 ```
 
 `fct_recode()`函数会让没有明确提及的水平保持原样，如果不小心修改了一个不存在的水平，那么它也会给出警告。  
@@ -577,7 +577,7 @@ gss_cat %>% mutate(partyid_recode = fct_recode( partyid,
 #> 4 Independent,near rep  1791
 #> 5 Independent           4119
 #> 6 Independent,near dem  2499
-#> # … with 2 more rows
+#> # ... with 2 more rows
 ```
 
 如果想要合并多个水平，那么可以使用`fct_recode()`函数的变体`fct_collapse()`函数。对于每个新水平，你都可以提供一个包含原水平的向量：  
@@ -620,12 +620,12 @@ gss_cat_collapse %>%
   geom_point(size = 2, shape= 1)
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-32-1.svg" width="80%" />
+<img src="forcats_files/figure-html/unnamed-chunk-32-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
-## 合并因子
-`fct_c()`
-函数用于将因子合并，使用`gapminder::gapminder`数据，首先创建两个子集：
+## 合并因子 {#forcats-combine}
+
+`fct_c()` 用于将因子合并，使用 `gapminder::gapminder` 数据，首先创建两个子集：
 
 ```r
 library(gapminder)
@@ -640,17 +640,18 @@ gapminder
 #> 4 Afghanistan Asia       1967    34.0 11537966      836.
 #> 5 Afghanistan Asia       1972    36.1 13079460      740.
 #> 6 Afghanistan Asia       1977    38.4 14880372      786.
-#> # … with 1,698 more rows
+#> # ... with 1,698 more rows
 
 df1 <- gapminder %>%
   filter(country %in% c("United States", "Mexico"), year > 2000)
 
 df2 <- gapminder %>%
   filter(country %in% c("France", "Germany"), year > 2000)
-  
 ```
 
-舍弃`country`中频次为 0 的水平：
+舍弃
+`country`
+中频次为 0 的水平：
 
 ```r
 df1$country <- fct_drop(df1$country)
@@ -662,7 +663,7 @@ levels(df2$country)
 #> [1] "France"  "Germany"
 ```
 
-用`fct_c()`将两个数据集中不同的因子`country`拼接起来
+用 `fct_c()` 将两个数据集中不同的因子`country`拼接起来
 
 
 ```r

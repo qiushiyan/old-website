@@ -7,11 +7,7 @@
 
 
 
-
-
-
-
-## base R 中的数据读取 
+## base R 中的数据读取 {#base-import}
 
 base R中有 3 个最主要的数据导入函数：
 
@@ -83,9 +79,9 @@ head(hotdogs)
 ```
 
 
-## readr 简介
+## readr 简介 {#readr-intro}
 
-<img src="images/6.png" width="80%" />
+<img src="images/6.png" width="80%" style="display: block; margin: auto;" />
 
 
 **readr** 是 tidyverse 的核心 R 包之一，作用是将平面数据(flat files)快速读取至 R 中，并转换为易用的 tibble 格式。相对于 base R 中有的数据读取函数，它有以下的优点：  
@@ -138,7 +134,7 @@ potatoes
 #> 4     1     1     1       1      4     2.1    2.9       2.4
 #> 5     1     1     1       1      5     1.9    2.8       2.2
 #> 6     1     1     1       2      1     1.8    3         1.7
-#> # … with 154 more rows
+#> # ... with 154 more rows
 ```
 
 当运行`readr`中的数据导入函数时，会打印出一份数据了说明，给出每个列的名称和类型。后面我们学习解析时，还会继续讨论这项功能。  
@@ -164,7 +160,7 @@ potatoes
 #> 4     1     1     1       1      4     2.1    2.9       2.4
 #> 5     1     1     1       1      5     1.9    2.8       2.2
 #> 6     1     1     1       2      1     1.8    3         1.7
-#> # … with 154 more rows
+#> # ... with 154 more rows
 ```
 
 
@@ -255,7 +251,7 @@ write_csv(x = gapminder, path = "data\\gapminder.csv")
 ```r
 fwf_sample <- readr_example("fwf-sample.txt")
 fwf_sample
-#> [1] "C:/Users/56570/Documents/R/win-library/3.6/readr/extdata/fwf-sample.txt"
+#> [1] "C:/Users/Lenovo/Documents/R/win-library/3.6/readr/extdata/fwf-sample.txt"
 ```
 
 txt 文件内的内容：
@@ -314,7 +310,7 @@ read_fwf(fwf_sample,
 ```
 
 
-## 解析向量(Parsing a vector)  
+## 解析向量 {#parse-vector} 
 
 在详细介绍 `readr` 如何从磁盘读取文件之前，我们需要先讨论一下 `parse_*()`函数族。这些函数接受一个字符向量（因为文件中的数据全部是以字符串的形式进入 R 的），并返回一个特定向量，如逻辑、整数或日期向量：  
 
@@ -416,13 +412,13 @@ parse_number("It cost $123.45")
 ```r
 ## 适用于美国，忽略分组符号
 parse_number("123,456,789")
-#> [1] 1.23e+08
+#> [1] 123456789
 ## 适用于多数欧洲国家，需要用locale设置分组符号，因为.被默认为小数点
 parse_number("123.456.789", locale = locale(grouping_mark = "."))
-#> [1] 1.23e+08
+#> [1] 123456789
 ## 适用于瑞士
 parse_number("123'456'789", locale = locale(grouping_mark = "'"))
-#> [1] 1.23e+08
+#> [1] 123456789
 ```
 
 ### 字符串  
@@ -655,7 +651,7 @@ parse_time(t2,"%I:%M:%OS %p")
 #> 23:15:10.12
 ```
 
-## 解析文件  
+## 解析文件 {#parse-file}
 
 现在我们已经学会了如何用 `parse_*()` 函数族解析单个向量，接下来就能回到本章的最初目标，研究`readr`是如何解析文件的。我们将关注以下两点：  
 
@@ -718,13 +714,13 @@ problems(challenge)
 #> # A tibble: 1,000 x 5
 #>     row col   expected       actual   file                                      
 #>   <int> <chr> <chr>          <chr>    <chr>                                     
-#> 1  1001 y     1/0/T/F/TRUE/… 2015-01… 'C:/Users/56570/Documents/R/win-library/3…
-#> 2  1002 y     1/0/T/F/TRUE/… 2018-05… 'C:/Users/56570/Documents/R/win-library/3…
-#> 3  1003 y     1/0/T/F/TRUE/… 2015-09… 'C:/Users/56570/Documents/R/win-library/3…
-#> 4  1004 y     1/0/T/F/TRUE/… 2012-11… 'C:/Users/56570/Documents/R/win-library/3…
-#> 5  1005 y     1/0/T/F/TRUE/… 2020-01… 'C:/Users/56570/Documents/R/win-library/3…
-#> 6  1006 y     1/0/T/F/TRUE/… 2016-04… 'C:/Users/56570/Documents/R/win-library/3…
-#> # … with 994 more rows
+#> 1  1001 y     1/0/T/F/TRUE/~ 2015-01~ 'C:/Users/Lenovo/Documents/R/win-library/~
+#> 2  1002 y     1/0/T/F/TRUE/~ 2018-05~ 'C:/Users/Lenovo/Documents/R/win-library/~
+#> 3  1003 y     1/0/T/F/TRUE/~ 2015-09~ 'C:/Users/Lenovo/Documents/R/win-library/~
+#> 4  1004 y     1/0/T/F/TRUE/~ 2012-11~ 'C:/Users/Lenovo/Documents/R/win-library/~
+#> 5  1005 y     1/0/T/F/TRUE/~ 2020-01~ 'C:/Users/Lenovo/Documents/R/win-library/~
+#> 6  1006 y     1/0/T/F/TRUE/~ 2016-04~ 'C:/Users/Lenovo/Documents/R/win-library/~
+#> # ... with 994 more rows
 ```
 
 可以使用`spec_csv()` 函数来直接查看 `readr` 在默认情况下用那种类型的解析函数解析数据：
@@ -784,7 +780,7 @@ tail(challenge)
 
 我们再介绍其他几种有注意解析文件的通用技巧：  
 
-* 在前面的示例中，如果比默认方式再多检查一行，我们就能一蹴而就，解析成功：  
+* 在前面的示例中，如果比默认方式再多检查一行，就可以解析成功：  
 
 ```r
 challenge <- read_csv(readr_example("challenge.csv"),
@@ -869,13 +865,13 @@ deaths
 #> # A tibble: 18 x 6
 #>   `Lots of people`           ...2      ...3  ...4    ...5        ...6           
 #>   <chr>                      <chr>     <chr> <chr>   <chr>       <chr>          
-#> 1 simply cannot resist writ… <NA>      <NA>  <NA>    <NA>        some notes     
-#> 2 at                         the       top   <NA>    of          their spreadsh…
+#> 1 simply cannot resist writ~ <NA>      <NA>  <NA>    <NA>        some notes     
+#> 2 at                         the       top   <NA>    of          their spreadsh~
 #> 3 or                         merging   <NA>  <NA>    <NA>        cells          
-#> 4 Name                       Professi… Age   Has ki… Date of bi… Date of death  
+#> 4 Name                       Professi~ Age   Has ki~ Date of bi~ Date of death  
 #> 5 David Bowie                musician  69    TRUE    17175       42379          
 #> 6 Carrie Fisher              actor     60    TRUE    20749       42731          
-#> # … with 12 more rows
+#> # ... with 12 more rows
 ```
 
 一个很有用的方法是通过Rstudio的File$\rightarrow$Import Dataset$\rightarrow$From Excel 接口导入数据，我们可以通过预览来观察导入后的数据，还可以对`read_excel()`的导入参数进行设置：
@@ -892,13 +888,13 @@ read_excel(path,  skip= 4, n_max = 10)
 #> # A tibble: 10 x 6
 #>   Name       Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>   <chr>      <chr>      <dbl> <lgl>      <dttm>              <dttm>             
-#> 1 David Bow… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
-#> 2 Carrie Fi… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
-#> 3 Chuck Ber… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
-#> 4 Bill Paxt… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
+#> 1 David Bow~ musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#> 2 Carrie Fi~ actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#> 3 Chuck Ber~ musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
+#> 4 Bill Paxt~ actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
 #> 5 Prince     musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00
-#> 6 Alan Rick… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
-#> # … with 4 more rows
+#> 6 Alan Rick~ actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
+#> # ... with 4 more rows
 ```
 
 `read_excel()`中另一个很有用的参数是`range`，用于指定一块Excel表中要读取的区域：
@@ -908,25 +904,25 @@ read_excel(path, sheet = "arts", range = "A5:F15")
 #> # A tibble: 10 x 6
 #>   Name       Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>   <chr>      <chr>      <dbl> <lgl>      <dttm>              <dttm>             
-#> 1 David Bow… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
-#> 2 Carrie Fi… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
-#> 3 Chuck Ber… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
-#> 4 Bill Paxt… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
+#> 1 David Bow~ musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#> 2 Carrie Fi~ actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#> 3 Chuck Ber~ musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
+#> 4 Bill Paxt~ actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
 #> 5 Prince     musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00
-#> 6 Alan Rick… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
-#> # … with 4 more rows
+#> 6 Alan Rick~ actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
+#> # ... with 4 more rows
 ## 还可以在range中指定列名
 read_excel(path, range = "arts!A5:F15")
 #> # A tibble: 10 x 6
 #>   Name       Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>   <chr>      <chr>      <dbl> <lgl>      <dttm>              <dttm>             
-#> 1 David Bow… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
-#> 2 Carrie Fi… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
-#> 3 Chuck Ber… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
-#> 4 Bill Paxt… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
+#> 1 David Bow~ musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#> 2 Carrie Fi~ actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#> 3 Chuck Ber~ musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
+#> 4 Bill Paxt~ actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
 #> 5 Prince     musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00
-#> 6 Alan Rick… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
-#> # … with 4 more rows
+#> 6 Alan Rick~ actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
+#> # ... with 4 more rows
 ```
 
 与`range`相关的帮助函数`cell_rows()`、`cell_cols()`和`cell_limits()`可以为区域选择提供更大的自由度，下面的示例中使用文件`geometry.xls`，读取预览：  

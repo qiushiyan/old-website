@@ -16,7 +16,7 @@ name: Qiushi Yan
 organizations:
 - name: Communication University of China
   url: "http://www.cuc.edu.cn/"
-role: Student, Data Journalism
+role: Junior student, Data Journalism
 social:
 - icon: envelope
   icon_pack: fas
@@ -30,7 +30,7 @@ user_groups:
 - Visitors
 ---
 
-I'm currently a junior majoring in data journalism in [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, cleaning, visualizing and modeling in #rstats, especially when harnessing the magic of [tidyverse](https://www.tidyverse.org)! 
+I'm currently a junior majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in #rstats, especially when harnessing the magic of [tidyverse](https://www.tidyverse.org)! 
 
 I take equal delight in the study of ancient chinese literature, behavioural sicence, nueroscience and economics. My favourite author is Bertrand Russell :black_nib: . 
 

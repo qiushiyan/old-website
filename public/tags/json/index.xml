@@ -55,7 +55,7 @@ spdf &amp;lt;- as(nc, &amp;quot;Spatial&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 library(magrittr) # for pipeline &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    Before things get technical, I want to mention that the creater of listviewer also authored multiple great htmlwidgets, which can be found at &lt;a href=&#34;https://github.com/timelyportfolio&#34; class=&#34;uri&#34;&gt;&lt;a href=&#34;https://github.com/timelyportfolio&#34; target=&#34;_blank&#34;&gt;https://github.com/timelyportfolio&lt;/a&gt;&lt;/a&gt;.&lt;br /&gt;
+    Before things get technical, I want to mention that the creater of listviewer also authored multiple great htmlwidgets, which can be found at &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://github.com/timelyportfolio&#34;&gt;https://github.com/timelyportfolio&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;.&lt;!-- raw HTML omitted --&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;

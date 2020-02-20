@@ -10,7 +10,7 @@ purrr tutorial : https://jennybc.github.io/purrr-tutorial/
 
 
 
-<img src="images/map.png" width="80%" />
+<img src="images/map.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -92,7 +92,7 @@ mtcars %>%
 
 
 
-<img src="images/map_2.png" width="80%" />
+<img src="images/map_2.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -309,7 +309,7 @@ df %>%
 #>  $ chr1: chr  "A" "B" "C"
 ```
 
-## group_
+## group functions
 
 ### group_map、group_modify
 
@@ -332,7 +332,6 @@ iris %>%
 #> 5 (Intercept)    3.91     0.757       5.16 4.66e- 6
 #> 6 Sepal.Width    0.902    0.253       3.56 8.43e- 4
 ```
-
 
 
 ```r
@@ -370,7 +369,7 @@ iris %>%
 ### group_nest、group_split、group_keys、group_data
 
 
-`group_nest()` is similar to `tidyr::nest()`, but focuses on the variables to **nest** by instead of the nested columns.  
+`group_nest()` is similar to `group_by() + tidyr::nest()`: 
 
 
 ```r
@@ -491,3 +490,184 @@ iris %>%
 #> [20] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138
 #> [39] 139 140 141 142 143 144 145 146 147 148 149 150
 ```
+
+## Other useful tools  
+
+### `imap()`  
+
+`imap_xxx(x, ...)` is short hand for `map2(x, names(x), ...)`if `x` has names, or `map2(x, seq_along(x), ...)` if it does not. This is useful if you need to compute on both the value and the position of an element.  
+
+Note that when using the formula shortcut, `.x` is the value, and the `.y` is the position:  
+
+
+```r
+x <- c("sheldon" = 150, "leonard" = 140, "raj" = 145, "howard" = 140)
+imap(x, str_c)
+#> $sheldon
+#> [1] "150sheldon"
+#> 
+#> $leonard
+#> [1] "140leonard"
+#> 
+#> $raj
+#> [1] "145raj"
+#> 
+#> $howard
+#> [1] "140howard"
+imap(x, ~ str_c(.y, .x))
+#> $sheldon
+#> [1] "sheldon150"
+#> 
+#> $leonard
+#> [1] "leonard140"
+#> 
+#> $raj
+#> [1] "raj145"
+#> 
+#> $howard
+#> [1] "howard140"
+
+# on a tibble
+imap_chr(mtcars, ~ str_c(.y, "median:", median(.x), sep = " "))
+#>                  mpg                  cyl                 disp 
+#>   "mpg median: 19.2"      "cyl median: 6" "disp median: 196.3" 
+#>                   hp                 drat                   wt 
+#>     "hp median: 123" "drat median: 3.695"   "wt median: 3.325" 
+#>                 qsec                   vs                   am 
+#> "qsec median: 17.71"       "vs median: 0"       "am median: 0" 
+#>                 gear                 carb 
+#>     "gear median: 4"     "carb median: 2"
+```
+
+
+
+
+
+### adverbs 
+
+`partial` wraps a function:  
+
+
+```r
+mean(c(10, NA, 5, 7), na.rm = TRUE)
+#> [1] 7.33
+
+my_mean <- partial(mean, na.rm = TRUE)
+my_mean(c(10, NA, 5, 7))
+#> [1] 7.33
+```
+
+`negate()` negates a predicate function:  
+
+
+```r
+lst <- list("a", 3, 22, NULL, "q", NULL)
+map_lgl(lst, ~ !is.null(.))
+#> [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE
+```
+
+
+
+```r
+is_not_null <- negate(is.null)
+map_lgl(lst, is_not_null)
+#> [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE
+```
+
+`safely()` and `possibly()`:  
+
+
+```r
+add_ten <- function(x) {
+  x + 10
+}
+
+add_ten_safely <- safely(add_ten)
+map(lst, add_ten_safely)
+#> [[1]]
+#> [[1]]$result
+#> NULL
+#> 
+#> [[1]]$error
+#> <simpleError in x + 10: non-numeric argument to binary operator>
+#> 
+#> 
+#> [[2]]
+#> [[2]]$result
+#> [1] 13
+#> 
+#> [[2]]$error
+#> NULL
+#> 
+#> 
+#> [[3]]
+#> [[3]]$result
+#> [1] 32
+#> 
+#> [[3]]$error
+#> NULL
+#> 
+#> 
+#> [[4]]
+#> [[4]]$result
+#> numeric(0)
+#> 
+#> [[4]]$error
+#> NULL
+#> 
+#> 
+#> [[5]]
+#> [[5]]$result
+#> NULL
+#> 
+#> [[5]]$error
+#> <simpleError in x + 10: non-numeric argument to binary operator>
+#> 
+#> 
+#> [[6]]
+#> [[6]]$result
+#> numeric(0)
+#> 
+#> [[6]]$error
+#> NULL
+```
+
+
+```r
+# If you’re not interested in what the error is
+add_ten_possibly <- possibly(add_ten, otherwise = "not numeric")
+map(lst, add_ten_possibly)
+#> [[1]]
+#> [1] "not numeric"
+#> 
+#> [[2]]
+#> [1] 13
+#> 
+#> [[3]]
+#> [1] 32
+#> 
+#> [[4]]
+#> numeric(0)
+#> 
+#> [[5]]
+#> [1] "not numeric"
+#> 
+#> [[6]]
+#> numeric(0)
+```
+
+`compose()` lets you string together multiple functions  
+
+
+```r
+add_ten_log_and_round <- compose(round, log, add_ten)
+c(1, 5, 100) %>% add_ten_log_and_round()
+#> [1] 2 3 5
+# is equal to
+c(1, 5, 10) %>% 
+  add_ten() %>% 
+  log() %>% 
+  round()
+#> [1] 2 3 3
+```
+

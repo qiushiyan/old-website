@@ -11,3 +11,23 @@ library(broom)
 https://broom.tidyverse.org/index.html  
 
 broom and updated dplyr  https://broom.tidyverse.org/articles/broom_and_dplyr.html  
+
+
+## Visualizing many models  {#viz-many-models}
+
+
+```r
+gapminder <- gapminder::gapminder
+gapminder %>% 
+  group_by(continent) %>% 
+  summarize(t_test = list(t.test(lifeExp))) %>% 
+  mutate(tidied = map(t_test, broom::tidy)) %>%
+  unnest(tidied) %>% 
+  ggplot() + 
+  geom_errorbarh(aes(xmin = conf.low,
+                    xmax = conf.high,
+                    y = continent))
+```
+
+<img src="broom_files/figure-html/unnamed-chunk-3-1.svg" width="80%" style="display: block; margin: auto;" />
+

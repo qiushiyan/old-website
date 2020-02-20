@@ -169,21 +169,21 @@ Prediction: To be able to predict what the responses are going to be to future i
     
     <item>
       <title>Enterprise Data Analysis and Visualization: An Interview Study</title>
-      <link>/post/enterprise-data-analysis-and-visualization-an-interview-study/</link>
+      <link>/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/enterprise-data-analysis-and-visualization-an-interview-study/</guid>
+      <guid>/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</guid>
       <description>
 
 
 &lt;p&gt;&lt;strong&gt;“Enterprise Data Analysis and Visualization: An Interview Study”&lt;/strong&gt; is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, &lt;span class=&#34;citation&#34;&gt;Heer (&lt;a href=&#34;#ref-2012-enterprise-analysis-interviews&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt; provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.&lt;/p&gt;
 &lt;div id=&#34;archetypes&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;3 Archetypes&lt;/h1&gt;
-&lt;p&gt;According to the responses, we can see analysts generally fall into 3 archetypes: &lt;em&gt;hacker&lt;/em&gt;, &lt;em&gt;scripter&lt;/em&gt; and &lt;em&gt;application user&lt;/em&gt;.&lt;br /&gt;
-&lt;img src=&#34;/img/archetypes.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;According to the responses, we can see analysts generally fall into 3 archetypes: &lt;em&gt;hacker&lt;/em&gt;, &lt;em&gt;scripter&lt;/em&gt; and &lt;em&gt;application user&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/archetypes.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Hackers&lt;/strong&gt; are faced with the most diverse and complex tasks. They are most literate in terms of programming and thus rarely ask IT staffs fro help. More oftern than not, hackers master more than three languages, R / Matlab for analysis, Python, Perl as an scripting language, and SQL for queries.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    I guess for now Python has gained ground also as a data analysis language, and Matlab is less popular among analysts doing “practical” analysis, but more frquently used in labs of nature science.
+    I guess for now Python has gained ground also as a data analysis language, and Matlab is less popular among business analysts, but more frquently used in labs of nature science.
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -225,14 +225,14 @@ often missing in relational databases and non-existent in other types of data st
 &lt;p&gt;&lt;strong&gt;Modeling&lt;/strong&gt;: The biggest challenge in constructing an model according to respondents are feature selection, whether to choose a set of variables, which to transfrom and how to transform.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: &lt;a href=&#34;http://www.feat.engineering/index.html&#34;&gt;Feature Engineering and Selection: A Practical Approach for Predictive Models&lt;/a&gt;
+    There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: &lt;!-- raw HTML omitted --&gt;Feature Engineering and Selection: A Practical Approach for Predictive Models&lt;!-- raw HTML omitted --&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;p&gt;Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help explore these models and visualize their output.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    R’s package &lt;strong&gt;broom&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Robinson and Hayes &lt;a href=&#34;#ref-R-broom&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; are desgined to facilitate modeling diagnosis, visualization, etc. &lt;strong&gt;tidymodels&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Kuhn and Wickham &lt;a href=&#34;#ref-R-tidymodels&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains a burgeoning list of such packages.
+    R’s package &lt;!-- raw HTML omitted --&gt;broom&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;(Robinson and Hayes &lt;!-- raw HTML omitted --&gt;2019&lt;!-- raw HTML omitted --&gt;)&lt;!-- raw HTML omitted --&gt; are desgined to facilitate modeling diagnosis, visualization, etc. &lt;!-- raw HTML omitted --&gt;tidymodels&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;(Kuhn and Wickham &lt;!-- raw HTML omitted --&gt;2019&lt;!-- raw HTML omitted --&gt;)&lt;!-- raw HTML omitted --&gt; contains a burgeoning list of such packages.
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;

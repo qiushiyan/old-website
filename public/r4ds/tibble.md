@@ -2,23 +2,23 @@
 # tibble
 
 
-tidyverse 的设计理念之一是用 `tibble` 代替传统的 R 数据框(`data.frame`类)。tibble 是一种更简单的数据框，它对传统数据框的功能进行了一些修改，以便更易于使用。多数情况下，我们不再区分 tibble 和数据框这两个词 ； 如果想要强调 R 内置的传统数据框，用 `data. frame` 来表示。除了这里展示的知识以外，使用 `vignette("tibble")` 可以获得更多关于 tibble 的信息。  
+**tidyverse** 的设计理念之一是用 `tibble` 代替传统的 R 数据框(`data.frame`类)。tibble 是一种更简单的数据框，它对传统数据框的功能进行了一些修改，以便更易于使用。多数情况下，我们不再区分 tibble 和数据框这两个词 ； 如果想要强调 R 内置的传统数据框，用 `data. frame` 来表示。 `vignette("tibble")` 可以获得更多关于 tibble 的信息。  
 
 
 
 
-## 简介  {#tibble-intro}
+## Introduction  {#tibble-intro}
 
 
 
-之前介绍的所有函数几乎都将返回一个`tibble`，`filter()、arrange()、select()、mutate()、summarize()`等函数最后的结果都是一个`tibble`，因为它是`tidyverse`最底层的功能之一。由于多数其他R包使用的是标准数据框，因此经常需要将data.frame转换为tibble，可以使用`as_tibble()`函数来完成转换：  
+tidyverse 作用于数据框的函数几乎都将返回一个 `tibble`, `filter()`, `arrange()`, `select()`, `mutate()` 呵 `summarize()`等函数最后的结果都是一个 `tibble`，因为它是`tidyverse`最底层的功能之一。由于多数其他 R 包使用的是标准数据框，因此经常需要将 `data.frame` 转换为 `tibble`，可以使用 `as_tibble()` 函数来完成转换：  
 
 
 ```r
-## iris数据集是一个data.frame
+## iris 数据集是一个data.frame
 class(iris)
 #> [1] "data.frame"
-## 转换为tibble
+## 转换为 tibble
 (iris_tibble <- as_tibble(iris))
 #> # A tibble: 150 x 5
 #>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -29,32 +29,157 @@ class(iris)
 #> 4          4.6         3.1          1.5         0.2 setosa 
 #> 5          5           3.6          1.4         0.2 setosa 
 #> 6          5.4         3.9          1.7         0.4 setosa 
-#> # … with 144 more rows
+#> # ... with 144 more rows
 ```
 
 
-相比于 `data.frame()` 函数，`tibble()`函数的功能要少的多：它不能改变输入的类型（例如，不能将字符串转变为因子)、变量的名称,也不能创建行名称。  
+相比于 `data.frame()` ，`tibble()` 创建数据矿的附加操作要少的多：它不能改变输入的类型（例如，不会默认将字符串转变为因子)、变量的名称,也不能创建行名称。  
 
 
-有些比较旧的函数不支持`tibble`，如果遇到这种函数，可以使用`as.data.frame()`转换`到`data.frame`上。  
+有些比较旧的函数不支持`tibble`，如果遇到这种函数，可以使用 `as_data_frame()` 转换到传统的 `data.frame` 上。  
+
+`add_row(.data, ..., .before = NULL, .after = NULL)` s a convenient way to add one or more rows of data to an existing data frame. `...` should be name-value pairs corresponding to column names and its value. By default new row are added after the last row.   
+
+
+```r
+# add_row ---------------------------------
+df <- tibble(x = 1:3, y = 3:1)
+
+add_row(df, x = 4, y = 0)
+#> # A tibble: 4 x 2
+#>       x     y
+#>   <dbl> <dbl>
+#> 1     1     3
+#> 2     2     2
+#> 3     3     1
+#> 4     4     0
+
+# You can specify where to add the new rows
+add_row(df, x = 4, y = 0, .before = 2)
+#> # A tibble: 4 x 2
+#>       x     y
+#>   <dbl> <dbl>
+#> 1     1     3
+#> 2     4     0
+#> 3     2     2
+#> 4     3     1
+
+
+# You can supply vectors, to add multiple rows (this isn't
+# recommended because it's a bit hard to read)
+add_row(df, x = 4:5, y = 0:-1)
+#> # A tibble: 5 x 2
+#>       x     y
+#>   <int> <int>
+#> 1     1     3
+#> 2     2     2
+#> 3     3     1
+#> 4     4     0
+#> 5     5    -1
+
+# Absent variables get missing values
+add_row(df, x = 4)
+#> # A tibble: 4 x 2
+#>       x     y
+#>   <dbl> <int>
+#> 1     1     3
+#> 2     2     2
+#> 3     3     1
+#> 4     4    NA
+```
+
+Yet we cannoto create new variables:  
+
+
+```r
+add_row(df, z = 0)
+#> Error: New rows in `add_row()` must use columns that already exist:
+#> * Can't find column `z` in `.data`.
+```
+
+
+`enframe()` converts named atomic vectors or lists to one- or two-column data frames . For vectors with more than 2 elements, a list column is created.  
+
+
+```r
+enframe(c(a = 1, b = 2))
+#> # A tibble: 2 x 2
+#>   name  value
+#>   <chr> <dbl>
+#> 1 a         1
+#> 2 b         2
+# For unnamed vectors, the natural sequence is used as name column.
+enframe(1:2)
+#> # A tibble: 2 x 2
+#>    name value
+#>   <int> <int>
+#> 1     1     1
+#> 2     2     2
+# vectors with more than 2 elements
+enframe(1:3)
+#> # A tibble: 3 x 2
+#>    name value
+#>   <int> <int>
+#> 1     1     1
+#> 2     2     2
+#> 3     3     3
+```
+
+
+For a list, the result will also be a list column.  
+
+
+```r
+enframe(list(one = 1, two = 2:3, three = 4:6, four = "four"))
+#> # A tibble: 4 x 2
+#>   name  value    
+#>   <chr> <list>   
+#> 1 one   <dbl [1]>
+#> 2 two   <int [2]>
+#> 3 three <int [3]>
+#> 4 four  <chr [1]>
+```
 
 
 
-## 对比 tibble 和 data.frame {#tibble-data.frame}
 
-tibble 和传统 data.frame 的机理主要有三处不同：创建、打印和取子集。
-
+`deframe()` is the opposite of `enframe()`  
 
 
-### 创建  
+```r
+list(one = 1, two = 2:3, three = 4:6, four = "four") %>%
+  enframe() %>% 
+  deframe()
+#> $one
+#> [1] 1
+#> 
+#> $two
+#> [1] 2 3
+#> 
+#> $three
+#> [1] 4 5 6
+#> 
+#> $four
+#> [1] "four"
+```
 
-`tibble()`函数用于创建现代数据框：`tibble` ：
+
+## Comparing tibble and data.frame {#tibble-data.frame}
+
+`tibble` 和传统 `data.frame` 的机理主要有三处不同：创建、打印和取子集。
+
+
+
+### Creating  
+
+`tibble()` 创建一个 `tibble`
 
 ```r
 df <- tibble(
   x = 1:3,
   y = c("a","b","c")
 )
+
 df
 #> # A tibble: 3 x 2
 #>       x y    
@@ -64,10 +189,10 @@ df
 #> 3     3 c
 ```
 
-可以发现 `tibble()` 不会自作聪明地更改 `y` 的 `class` 属性，它将原原本本地被当做一个字符向量处理。
+可以发现 `tibble()` 不会默认更改 `y` 类型，它将原原本本地被当做一个字符向量处理。
 
 
-而 `data.frame()` 函数用于创建一个传统数据框：  
+而 `data.frame()` 用于创建一个传统数据框：  
 
 
 ```r
@@ -82,7 +207,7 @@ str(df)
 #>  $ y: Factor w/ 3 levels "a","b","c": 1 2 3
 ```
 
-#### 强制转换  
+#### Coersion  
 
 在 `data.frame` 中，为了防止 `y` 被强制转换为因子，必须设置 `stringAsFactors = FALSE`  
 
@@ -101,7 +226,7 @@ str(df)
 ```
 
 
-By the way, 创建`tibble`的另一种方法是使用`tribble()`函数，tribble是 transposed tibble 的缩写。`tribble()`是高度定制化的，就像在 Markdown 中创建表格一样，一个一个填入元素：列标题以波浪线`~`开头，不同列的元素之间以逗号分隔，这样就可以用易读的方式对少量数据创建一个 `tibble` 类型：    
+By the way, 创建 `tibble` 的另一种方法是使用`tribble()`，transposed tibble 的缩写。`tribble()` 是高度定制化的，就像在 Markdown 中创建表格一样，一个一个填入元素：列标题以波浪线 `~` 开头，不同列的元素之间以逗号分隔，这样就可以用易读的方式对少量数据创建一个 `tibble` ：    
 
 ```r
 tribble(
@@ -118,9 +243,9 @@ tribble(
 
 
 
-#### 行标签  
+#### Row labels  
 
-`data.frame` 支持提供一个不包含重复元素的字符向量给每行打上标签：  
+`data.frame` 支持提供一个不包含重复元素的字符向量作为行标签：  
 
 
 ```r
@@ -161,10 +286,10 @@ rownames(df)
 出于以下三个原因，我们不应该使用`row.names`这一属性，也不应该考虑在任何场合添加行标签：  
 
 1. 元数据也是数据，所以把行标签从其他变量中抽出来单独对待不是个好主意。否则我们可能要对行标签单独发展出一套操作工具，而不能直接应用我们已经习惯的对变量的操作方法  
-2. 行标签很多时候不能完成唯一标识观测的任务，因为`row.names`要求只能传入数值或者字符串向量。如果我们想要用时间日期型数据标识观测呢？或者需要传入不止一个向量(例如标识位置同时需要经度和纬度)  
+2. 行标签很多时候不能完成唯一标识观测的任务，因为 `row.names` 要求只能传入数值或者字符串向量。如果我们想要用时间日期型数据标识观测呢？或者需要传入不止一个向量(例如标识位置同时需要经度和纬度)  
 3. 行标签中的元素必须是唯一的，但很多场合(比如bootstrapping)中同一个对象也可能有多条记录  
 
-所以，`tibble`的设计思想就是不支持添加行标签，且提供了一套很方便的、处理已有行标签的工具，要么移除它，要么把它直接变成`tibble`中的一列： 
+所以，`tibble` 的设计思想就是不支持添加行标签，且提供了一套很方便的、处理已有行标签的工具，要么移除它，要么把它直接变成`tibble`中的一列： 
 
 **Tools for working with row names**  
 *Description*  
@@ -312,7 +437,7 @@ mtcars %>%
 
 
 
-#### 循环  
+#### Recycling  
 
 `tibble()`会循环使用那些长度为1的列，将其自动扩展到最长的列的长度。而长度不为1，且和其他列元素个数不同的列不会被循环 ； `data.frame()`会自动循环长度可被最长一列的长度整除的列： 
 
@@ -344,9 +469,9 @@ data.frame(x = 1:4, y = 1:3)
 
 
 
-#### 无效变量名称
+#### Invalid column names
 
-`tibble`的一个很大特色是可以使用在R中无效的变量名称，即不符合变量命名规定的名称可以在tibble中成为列名，实际上这个规则约束了R中所有“名称”的设定。R规定名称只能包含字母、数字、点`.`和下划线`_`，必须以字母开头，数字不能跟在`.`之后，也不能和R中保留的关键字重名(see `?Reserved`)。
+`tibble`的一个很大特色是可以使用在 R 中无效的变量名称，即不符合变量命名规定的名称可以在 tibble 中成为列名，实际上这个规则约束了 R 中所有“名称”的设定。R 规定名称只能包含字母、数字、点`.`和下划线`_`，必须以字母开头，数字不能跟在`.`之后，也不能和R中保留的关键字重名(see `?Reserved`)。
 
 
 如果想创建不合法的列名，可以用反引号```将它们括起来：  
@@ -379,10 +504,10 @@ names(data.frame(`1` = 1,check.names = F))
 
 
 
-#### 变量引用
+#### Referencing a column
 
 
-最后，我们可以在创建`tibble`创建过程中就引用其中的变量，因为变量在`tibble`中是被从左到右依次添加的(而`data.frame()`不支持这一点)：
+最后，我们可以在创建 tibble 创建过程中就引用其中的变量，因为变量在 tibble 中是被从左到右依次添加的(而 `data.frame()` 不支持这一点)：
 
 ```r
 tibble(
@@ -398,7 +523,7 @@ tibble(
 ```
 
 
-### 打印  
+### Printing  
 
 tibble 的打印方法进行了优化，只显示前 10 行结果，显示列的数目将自动适应屏幕的宽度，这种打印方式非常适合大数据集。除了打印列名，tibble 还会第一行的下面打印出列的类型，这项功能有些类似于 `str()` 函数
 
@@ -413,13 +538,13 @@ tibble(
 #> # A tibble: 1,000 x 5
 #>   a                   b              c     d e    
 #>   <dttm>              <date>     <int> <dbl> <chr>
-#> 1 2019-12-12 21:49:54 2019-12-14     1 0.392 i    
-#> 2 2019-12-12 14:53:28 2019-12-16     2 0.409 p    
-#> 3 2019-12-12 09:50:02 2019-12-27     3 0.944 t    
-#> 4 2019-12-12 14:34:31 2020-01-05     4 0.614 z    
-#> 5 2019-12-12 14:49:10 2019-12-28     5 0.672 f    
-#> 6 2019-12-12 15:43:59 2019-12-22     6 0.113 q    
-#> # … with 994 more rows
+#> 1 2020-02-19 12:43:11 2020-02-20     1 0.392 i    
+#> 2 2020-02-19 05:46:45 2020-02-22     2 0.409 p    
+#> 3 2020-02-19 00:43:19 2020-03-04     3 0.944 t    
+#> 4 2020-02-19 05:27:48 2020-03-13     4 0.614 z    
+#> 5 2020-02-19 05:42:27 2020-03-05     5 0.672 f    
+#> 6 2020-02-19 06:37:16 2020-02-28     6 0.113 q    
+#> # ... with 994 more rows
 ```
 
 在打印大数据框时，`tibble`的这种设计避免了输出一下子占据控制台的很多行。  
@@ -468,10 +593,10 @@ nycflights13::flights %>%
 #>  8 2013-01-01 06:00:00
 #>  9 2013-01-01 06:00:00
 #> 10 2013-01-01 06:00:00
-#> # … with 3.368e+05 more rows
+#> # ... with 3.368e+05 more rows
 ```
 
-### 取子集  
+### Subsetting  
 
 
 取子集(Subsetting)时的行为又是区分`data.frame`和`tibble`很重要的一个特性。简单来讲，R中有两种取子集的系统。一种是用`[`在原子向量、列表、矩阵、数组和数据框中提取**任意数量**的元素，一种是用`[[`或者`$`在以上对象中提取**单个元素**。  
@@ -602,14 +727,367 @@ df %>% .[["x"]]
 ```
 
 
-## 练习  {#tibble-exercise}
+## Comparing two data frames (tibbles)  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-23"><strong>(\#exr:unnamed-chunk-23) </strong></span>如何识别一个数据框是否为`tibble`？</div>\EndKnitrBlock{exercise}
+https://sharla.party/post/comparing-two-dfs/  
+
+A summary table from the blog:  
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">  </th>
+   <th style="text-align:center;"> dplyr::all_equal() </th>
+   <th style="text-align:center;"> janitor::compare_df_cols() </th>
+   <th style="text-align:center;"> vetr::alike() </th>
+   <th style="text-align:center;"> diffdf::diffdf() </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> iris is iris </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> column swapped iris is iris </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ❌ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> missing columns </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> extra columns </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> missing *and* extra columns </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ❌ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> difference in class </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> different columns *and* classes </td>
+   <td style="text-align:center;"> ❌ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ❌ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nice strings to use for messages </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ❌ </td>
+   <td style="text-align:center;"> ✅❌ </td>
+   <td style="text-align:center;"> ❌ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> returns data on differences </td>
+   <td style="text-align:center;"> ❌ </td>
+   <td style="text-align:center;"> ✅ </td>
+   <td style="text-align:center;"> ❌ </td>
+   <td style="text-align:center;"> ✅ </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+First, take `iris` data as a reference for comparison:  
+
+
+```r
+df <- iris %>% as_tibble()
+```
+
+Then create some `iris` variants for the purpose of comparison:
+
+- `df_missing` and `df_extra` for less or more columns 
+- `df_class` for wrong class
+- `df_order` for new order of same set of columns  
+
+
+```r
+df_missing <- df %>% select(-Species)
+df_extra <- df %>% mutate(extra = "extra")
+df_class <- df %>% mutate(Species = as.character(Species))
+df_order <- df %>% select(Species, everything())
+```
+
+
+
+### `dplyr::all_equal()`  
+
+`dplyr::all_equal(target, current)` compare if `current` and `target` are identical ,and it  could only compares 2 data frames at the same time, with several other arguments: 
+
+- `ignore_col_order = TRUE`: Should order of columns be ignored?  
+- `ignore_row_order = TRUE`: Should order of rows be ignored?  
+- `convert = FALSE`: Should similar classes be converted? Currently this will convert factor to character and integer to double.  
+
+if there are missing and extra columns?  
+
+
+```r
+all_equal(df, df_missing)
+#> [1] "Cols in x but not y: `Species`. "
+all_equal(df, df_extra)
+#> [1] "Cols in y but not x: `extra`. "
+```
+
+if there’s an incorrect variable class?  
+
+
+```r
+all_equal(df, df_class)
+#> [1] "Incompatible type for column `Species`: x factor, y character"
+all_equal(df, df_class, convert = TRUE)
+#> [1] TRUE
+```
+
+
+
+### `janitor::compare_df_cols()`  
+
+Unlike `dplyr::all_equal`, `janitor::compare_df_cols()` returns a comparison of the **columns** in data frames being compared (what’s in both data frames, and their classes in each). It does not cares about rows, since it mean to show wheather several data frames can be row-binded, instead of identity(Although here we have the same rows).  
+
+
+```r
+library(janitor)
+compare_df_cols(df, df_missing, df_extra, df_class, df_order)
+#>    column_name      df df_missing  df_extra  df_class df_order
+#> 1        extra    <NA>       <NA> character      <NA>     <NA>
+#> 2 Petal.Length numeric    numeric   numeric   numeric  numeric
+#> 3  Petal.Width numeric    numeric   numeric   numeric  numeric
+#> 4 Sepal.Length numeric    numeric   numeric   numeric  numeric
+#> 5  Sepal.Width numeric    numeric   numeric   numeric  numeric
+#> 6      Species  factor       <NA>    factor character   factor
+```
+
+We can set an option `return` only to return things that *don’t* match (or things that do):
+
+
+```r
+compare_df_cols(df, df_missing, df_extra, df_class, df_order, return = "mismatch")
+#>   column_name     df df_missing df_extra  df_class df_order
+#> 1     Species factor       <NA>   factor character   factor
+```
+
+Here only the wrong class case is returned, and `df_missing`, `df_extra`, `df_order` are considered matching when compared to `df`.That is because `compare_df_cols()` won't be affected by order of columns, and it use either of `dplyr::bind_rows()` or `rbind()` to decide mathcing. `bind_rows()` are looser in the sense that columns missing from a data frame would be considered a matching (i.e, `select()` on a data frame will not generate a "new" one). with `rbind()`, columns missing from a data.frame would be considered a mismatch
+
+
+```r
+# missing column is considered a sort of "matching" when bind_method = "bind_rows"
+compare_df_cols(df, df_missing, df_extra, df_class, df_order, return = "match")
+#>    column_name      df df_missing  df_extra df_class df_order
+#> 1        extra    <NA>       <NA> character     <NA>     <NA>
+#> 2 Petal.Length numeric    numeric   numeric  numeric  numeric
+#> 3  Petal.Width numeric    numeric   numeric  numeric  numeric
+#> 4 Sepal.Length numeric    numeric   numeric  numeric  numeric
+#> 5  Sepal.Width numeric    numeric   numeric  numeric  numeric
+# method = "rbind"
+compare_df_cols(df, df_missing, df_extra, df_class, df_order, return = "match",
+                bind_method = "rbind")
+#>    column_name      df df_missing df_extra df_class df_order
+#> 1 Petal.Length numeric    numeric  numeric  numeric  numeric
+#> 2  Petal.Width numeric    numeric  numeric  numeric  numeric
+#> 3 Sepal.Length numeric    numeric  numeric  numeric  numeric
+#> 4  Sepal.Width numeric    numeric  numeric  numeric  numeric
+```
+
+Note that `janitor::compare_df_cols()` returns a data frame, which can be easily incorporated into custom message using the **glue** package:  
+
+
+```r
+compare_df_cols(df, df_missing, df_extra, df_class, df_order) %>% 
+  mutate(comparison = glue::glue("Column: {column_name}: {df} in df,{df_missing} in df_missing, {df_extra} in df_extra,{df_order} in df_order")) %>% 
+  select(comparison)
+#>                                                                                           comparison
+#> 1                     Column: extra: NA in df,NA in df_missing, character in df_extra,NA in df_order
+#> 2 Column: Petal.Length: numeric in df,numeric in df_missing, numeric in df_extra,numeric in df_order
+#> 3  Column: Petal.Width: numeric in df,numeric in df_missing, numeric in df_extra,numeric in df_order
+#> 4 Column: Sepal.Length: numeric in df,numeric in df_missing, numeric in df_extra,numeric in df_order
+#> 5  Column: Sepal.Width: numeric in df,numeric in df_missing, numeric in df_extra,numeric in df_order
+#> 6              Column: Species: factor in df,NA in df_missing, factor in df_extra,factor in df_order
+```
+
+
+and the resulting data frame can be filtered manually when the filters from `return` aren’t what i want, to see all differences:  
+
+
+```r
+compare_df_cols(df, df_missing, df_extra, df_class, df_order) %>% 
+  filter(is.na(df) | df_class != df_order)
+#>   column_name     df df_missing  df_extra  df_class df_order
+#> 1       extra   <NA>       <NA> character      <NA>     <NA>
+#> 2     Species factor       <NA>    factor character   factor
+```
+
+To get a binary message to see whether a set of data.frames are row-bindable, use `janitor::compare_df_cols_sames()`
+
+
+```r
+compare_df_cols_same(df, df_missing)
+#> [1] TRUE
+compare_df_cols_same(df, df_missing, bind_method = "rbind")
+#>   column_name    ..1  ..2
+#> 1     Species factor <NA>
+#> [1] FALSE
+```
+
+### `vetr::alike()`  
+
+`vetr::alike(target, current)` is similar to `base::all.equal()` (`dplyr::all_equal()`'s conuterparts in base R), but it only compares object structure. In the case of data frames, `vetr::alike()` compares columns and ignores rows. It is useful for all kinds of objects, but we focus on comparing data frames here.  
+
+
+```r
+library(vetr)
+alike(df, df_missing)
+#> [1] "`df_missing` should have 5 columns (has 4)"
+alike(df, df_extra)
+#> [1] "`df_extra` should have 5 columns (has 6)"
+alike(df, df_class)
+#> [1] "`df_class$Species` should be class \"factor\" (is \"character\")"
+alike(df, df_order)
+#> [1] "`names(df_order)[1]` should be \"Sepal.Length\" (is \"Species\")"
+```
+
+
+As it turns out, `vetr::alike()` detects all differences, and makes a declarative comparison.  
+
+
+### `diffdf::diffdf()`  
+
+`diffdf` is a package dedicated to providing tools for working with data frame difference. `diffdf(base, compare)` comapres 2 data frames (`compare` against `base`) and outputs any differences  :  
+
+
+```r
+library(diffdf)
+diffdf(df, df_missing)
+#> Warning in diffdf(df, df_missing): 
+#> There are columns in BASE that are not in COMPARE !!
+#> Differences found between the objects!
+#> 
+#> A summary is given below.
+#> 
+#> There are columns in BASE that are not in COMPARE !!
+#> All rows are shown in table below
+#> 
+#>   =========
+#>    COLUMNS 
+#>   ---------
+#>    Species 
+#>   ---------
+diffdf(df, df_extra)
+#> Warning in diffdf(df, df_extra): 
+#> There are columns in COMPARE that are not in BASE !!
+#> Differences found between the objects!
+#> 
+#> A summary is given below.
+#> 
+#> There are columns in COMPARE that are not in BASE !!
+#> All rows are shown in table below
+#> 
+#>   =========
+#>    COLUMNS 
+#>   ---------
+#>     extra  
+#>   ---------
+diffdf(df, df_class)
+#> Warning in diffdf(df, df_class): 
+#> There are columns in BASE and COMPARE with different modes !!
+#> There are columns in BASE and COMPARE with different classes !!
+#> Differences found between the objects!
+#> 
+#> A summary is given below.
+#> 
+#> There are columns in BASE and COMPARE with different modes !!
+#> All rows are shown in table below
+#> 
+#>   ================================
+#>    VARIABLE  MODE.BASE  MODE.COMP 
+#>   --------------------------------
+#>    Species    numeric   character 
+#>   --------------------------------
+#> 
+#> There are columns in BASE and COMPARE with different classes !!
+#> All rows are shown in table below
+#> 
+#>   ==================================
+#>    VARIABLE  CLASS.BASE  CLASS.COMP 
+#>   ----------------------------------
+#>    Species     factor    character  
+#>   ----------------------------------
+diffdf(df, df_order)
+#> No issues were found!
+```
+
+
+`diffdf()` is sensitive to missing or extra columns, wrong classes and not to order.
+
+This function also returns a list of data frames with issues **invisibly**, similar to `janitor::compare_df_cols()`:  
+
+
+```r
+issues <- diffdf(df, df_missing)
+#> Warning in diffdf(df, df_missing): 
+#> There are columns in BASE that are not in COMPARE !!
+issues$ExtColsBase
+#> # A tibble: 1 x 1
+#>   COLUMNS
+#> * <chr>  
+#> 1 Species
+
+issues <- diffdf(df, df_extra)
+#> Warning in diffdf(df, df_extra): 
+#> There are columns in COMPARE that are not in BASE !!
+issues$ExtColsComp
+#> # A tibble: 1 x 1
+#>   COLUMNS
+#> * <chr>  
+#> 1 extra
+
+issues <- diffdf(df, df_class)
+#> Warning in diffdf(df, df_class): 
+#> There are columns in BASE and COMPARE with different modes !!
+#> There are columns in BASE and COMPARE with different classes !!
+issues$VarModeDiffs
+#>   VARIABLE MODE.BASE MODE.COMP
+#> 6  Species   numeric character
+issues$VarClassDiffs %>% unnest(CLASS.BASE) %>% unnest(CLASS.COMP)
+#> # A tibble: 1 x 3
+#>   VARIABLE CLASS.BASE CLASS.COMP
+#>   <chr>    <chr>      <chr>     
+#> 1 Species  factor     character
+```
+
+
+## Exercise  {#tibble-exercise}
+
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-42"><strong>(\#exr:unnamed-chunk-42) </strong></span>如何识别一个数据框是否为 `tibble`？</div>\EndKnitrBlock{exercise}
 
 
 可以直接根据打印时的显示来判断。  
 
-更一般地，直接使用 `class()` 函数进行判断, 一个传统数据框将返回"`data.frame`" ，而tibble返回`c("tbl_df", "tbl", "data.frame")`   
+更一般地，直接使用 `class()` 函数进行判断, 一个传统数据框将返回"`data.frame`" ，而 tibble 返回`c("tbl_df", "tbl", "data.frame")`   
 
 ```r
 class(mtcars)
@@ -621,8 +1099,7 @@ class(nycflights13::flights)
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-25"><strong>(\#exr:unnamed-chunk-25) </strong></span>在以下的数据框中练习如何引用不符合语法规则的变量名  
-</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-44"><strong>(\#exr:unnamed-chunk-44) </strong></span>在以下的数据框中练习如何引用不符合语法规则的变量名  </div>\EndKnitrBlock{exercise}
 
 
 
@@ -642,7 +1119,7 @@ ggplot(annoying,mapping = aes(x = `1`, y = `2`)) +
   geom_smooth(method = "lm",se = F)
 ```
 
-<img src="tibble_files/figure-html/unnamed-chunk-26-1.svg" width="80%" />
+<img src="tibble_files/figure-html/unnamed-chunk-45-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 ## 创建一个名称为3的新列，其值为列2除以列1
@@ -656,7 +1133,7 @@ mutate(annoying,`3`= `2`/`1`)
 #> 4     4  7.20  1.80
 #> 5     5  9.12  1.82
 #> 6     6 12.1   2.02
-#> # … with 4 more rows
+#> # ... with 4 more rows
 ## 将前两列重新命名为one、two
 (annoying <- rename(annoying,one = `1`, two = `2`))
 #> # A tibble: 10 x 2
@@ -668,51 +1145,9 @@ mutate(annoying,`3`= `2`/`1`)
 #> 4     4  7.20
 #> 5     5  9.12
 #> 6     6 12.1 
-#> # … with 4 more rows
+#> # ... with 4 more rows
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-27"><strong>(\#exr:unnamed-chunk-27) </strong></span>`tibble::enframe()`函数的功能是什么？什么时候可以使用这个函数？</div>\EndKnitrBlock{exercise}
-
-
-`enframe()`接受一个具名向量(named vectors)转换为一个tibble：  
-
-```r
-enframe(c(a = 5, b = 7))
-#> # A tibble: 2 x 2
-#>   name  value
-#>   <chr> <dbl>
-#> 1 a         5
-#> 2 b         7
-enframe(c(a = 1:3, b = 2:4, c = 3:5))
-#> # A tibble: 9 x 2
-#>   name  value
-#>   <chr> <int>
-#> 1 a1        1
-#> 2 a2        2
-#> 3 a3        3
-#> 4 b1        2
-#> 5 b2        3
-#> 6 b3        4
-#> # … with 3 more rows
-```
-
-`tibble()` 在这种情况下只会识别一个完整的向量
-
-
-
-```r
-tibble(c(a = 1:3, b = 2:4, c = 3:5))
-#> # A tibble: 9 x 1
-#>   `c(a = 1:3, b = 2:4, c = 3:5)`
-#>                            <int>
-#> 1                              1
-#> 2                              2
-#> 3                              3
-#> 4                              2
-#> 5                              3
-#> 6                              4
-#> # … with 3 more rows
-```
 
 

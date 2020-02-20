@@ -3,37 +3,22 @@
 
 # lubridate  
 
-本章将介绍如何在 R 中处理日期和时间。乍看起来，日期和时间非常容易，但是随着对他们的了解越来越多，我们就会越来越发现其复杂之处。思考一下下面三个看似很简单的问题：   
-
-1. 确定闰年的完整规则是什么？  
-
-> “四年一闰，百年不闰，四百年再闰”    
-
-2. 每一天都是24小时吗？   
-
-> 世界上很多地区使用夏时制（不包括中国），因此很多天是23个小时，有些天则是25个小时。     
-
-3. 每分钟都是60秒吗？   
-
-> 因为地球自转正在逐渐变慢，所以有时候要增加一个“闰秒”，有些分钟就变成了61秒。目前，全球已经进行了27次闰秒，均为正闰秒。最近一次闰秒在北京时间2017年1月1日7时59分59秒（时钟显示07:59:60）出现。这也是本世纪的第五次闰秒。  
-
-日期和时间非常复杂，因为它们要兼顾两种物理现象（地球的自转以及围绕太阳的公转）和一系列地理政治现象（包括月份、市区和夏时制）。本章主要讨论 **lubridate** 包，它可以使得R对日期和时间的处理更加容易。lubridate 不是 tidyverse 的核心 R 包，故需要手动加载。此外还需要 `nycflights` 作为练习数据。  
-
 
 
 
 
 ```r
+# lubridate 不是 tidyverse 的核心包，需要手动加载
 library(lubridate)
 library(nycflights13)
 ```
 
-## 创建日期和时间  
-表示日期或时间的数据有3种类型: 
+## 创建日期和时间  {#create-datetime}
+表示日期或时间的数据有 3 种类型: 
 
-* **日期**： 用年月日表示，在tibble中显示为`<date>`  
-* **时间**： 一天中的某个时刻，用24小时制表示，在tibble中显示为`<time>`  
-* **日期时间**: 可以唯一标识某个时刻（通常精确到秒）的日期+时间，在tibble中显示为`<dttm>`。而这种类型在R语言的其他地方被称作`POSIXct`  
+* **日期**： 用年月日表示，在 tibble 中显示为`<date>`  
+* **时间**： 一天中的某个时刻，用 24 小时制表示，在 tibble 中显示为 `<time>`  
+* **日期时间**: 可以唯一标识某个时刻（通常精确到秒）的日期+时间，在 tibble 中显示为`<dttm>`。而这种类型在 R 语言的其他地方被称作 `POSIXct`  
 
 
 如果能够满足需要，就应该使用最简单的数据类型。这意味着只要能够使用日期型数据，那么就不应该使用日期时间型数据。日期时间型数据要复杂很多，因为要处理时期，我们会在本章末尾继续讨论这个问题。    
@@ -42,12 +27,12 @@ library(nycflights13)
 
 ```r
 today()
-#> [1] "2019-12-12"
+#> [1] "2020-02-06"
 now()
-#> [1] "2019-12-12 00:49:31 CST"
+#> [1] "2020-02-06 22:16:15 CST"
 ```
 
-除此之外，以下3种方法也可以创建日期或时间：  
+除此之外，以下 3 种方法也可以创建日期或时间：  
 
 * 通过字符串创建  
 * 通过日期时间的各个成分创建  
@@ -55,7 +40,7 @@ now()
 
 
 ### 通过字符串创建  
-日期时间数据经常用字符串表示。在事先知晓各个组成部分顺序的前提下，通过 `lubridate` 中的一些辅助函数，可以轻松将字符串转换为日期时间格式。因为要想使用函数，需要先确定年、月、日在日期数据中的顺序，然后按照同样的顺讯排列字母 y、m、d，这样就可以组成能够创建日期格式的 lubridate 函数名称，例如：  
+日期时间数据经常用字符串表示。在事先知晓各个组成部分顺序的前提下，通过 `lubridate` 中的一些辅助函数，可以轻松将字符串转换为日期时间格式。因为要想使用函数，需要先确定年、月、日在日期数据中的顺序，然后按照同样的顺讯排列字母 y、m、d，这样就可以组成能够创建日期格式的 `lubridate` 函数名称，例如：  
 
 ```r
 ymd("2017-03-01")
@@ -113,7 +98,7 @@ flights %>% select(year, month, day, hour, minute)
 #> 4  2013     1     1     5     45
 #> 5  2013     1     1     6      0
 #> 6  2013     1     1     5     58
-#> # … with 3.368e+05 more rows
+#> # ... with 3.368e+05 more rows
 ```
 
 想要用这样的多个变量创建一个完整的日期或时间数据，可以使用`make_date(year,month.day,hour,min,sec,tz)`(创建日期)或`make_datetime(year,month.day,hour,min,sec,tz)`（创建日期时间）函数:  
@@ -132,7 +117,7 @@ flights %>%
 #> 4  2013     1     1     5     45 2013-01-01 05:45:00
 #> 5  2013     1     1     6      0 2013-01-01 06:00:00
 #> 6  2013     1     1     5     58 2013-01-01 05:58:00
-#> # … with 3.368e+05 more rows
+#> # ... with 3.368e+05 more rows
 ```
 
 因为这里没有给出分钟，所以 `make_datetime()` 默认其 为0.    
@@ -154,7 +139,7 @@ flights %>% select(dep_time,
 #> 4      544     1004            545           1022
 #> 5      554      812            600            837
 #> 6      554      740            558            728
-#> # … with 3.368e+05 more rows
+#> # ... with 3.368e+05 more rows
 ```
 
 为了创建出表示实际出发和到达时间的日期时间型数据，我们首先编写一个函数以使`make_datetime`函数适应`dep_time`和`arr_time`这种比较奇怪的表示方式，思想是使用模运算将小时成分与分钟成分分离。一旦创建了日期时间变量，我们就在本章剩余部分使用这些变量进行讨论：  
@@ -184,7 +169,7 @@ make_datetime_100 <- function(year, month, day, time) {
 #> 4 JFK    BQN          -1       -18 2013-01-01 05:44:00 2013-01-01 05:45:00
 #> 5 LGA    ATL          -6       -25 2013-01-01 05:54:00 2013-01-01 06:00:00
 #> 6 EWR    ORD          -4        12 2013-01-01 05:54:00 2013-01-01 05:58:00
-#> # … with 3.281e+05 more rows, and 3 more variables: arr_time <dttm>,
+#> # ... with 3.281e+05 more rows, and 3 more variables: arr_time <dttm>,
 #> #   sched_arr_time <dttm>, air_time <dbl>
 ```
 
@@ -198,7 +183,7 @@ flights_dt %>%
   geom_freqpoly(aes(x = dep_time),binwidth = 86400)  ## 86000秒= 1天
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-14-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-14-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -209,7 +194,7 @@ flights_dt %>%
   geom_freqpoly(binwidth = 600)   ## 600秒 = 10分钟
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-14-2.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-14-2.svg" width="80%" style="display: block; margin: auto;" />
 
 ### 日期时间型和日期型数据的相互转换  
 
@@ -217,14 +202,14 @@ flights_dt %>%
 
 ```r
 today()
-#> [1] "2019-12-12"
+#> [1] "2020-02-06"
 as_datetime(today())
-#> [1] "2019-12-12 UTC"
+#> [1] "2020-02-06 UTC"
 
 now()
-#> [1] "2019-12-12 00:49:34 CST"
+#> [1] "2020-02-06 22:16:31 CST"
 as_date(now())
-#> [1] "2019-12-12"
+#> [1] "2020-02-06"
 ```
 
 有时人们会使用距离”Unix时间戳“（即1970-01-01）的偏移量来表示日期时间。如果偏移量单位是秒，就用`as_datetime()`函数来转换 ； 如果偏移量单位是天，就用`as_date()`函数来转换：  
@@ -266,7 +251,7 @@ mdy(d5)
 ```
 
 
-## 日期时间成分   
+## 日期时间成分   {#date-component}
 
 现在我们知道了如何将日期时间型数据保存在 R 的相应数据结构中。接下来我们研究一下能够对这些数据进行何种处理。本节将重点关注如何获取日期时间型或者日期型数据中的成分，例如如何从一个日期中获得相应的年、月、日。  
 
@@ -319,7 +304,7 @@ flights_dt %>%
   geom_bar()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-21-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-21-1.svg" width="80%" style="display: block; margin: auto;" />
 
 再看一个使用`minute()`函数获取分钟成分的例子。比如我们想知道出发时间的分钟数与平均到达延误时间的关系：  
 
@@ -332,7 +317,7 @@ flights_dt %>%
   geom_line()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-22-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-22-1.svg" width="80%" style="display: block; margin: auto;" />
 
 我们可以发现一个有趣的趋势，似乎在20~30分钟和第50~60分钟出发的航班的到达延误时间远远低于其他时间出发的航班。  
 
@@ -348,7 +333,7 @@ flights_dt %>%
   geom_bar()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-23-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-23-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 下面的例子可以更深入地了解这个函数族的用法：  
@@ -430,7 +415,7 @@ flights_dt %>%
   ggtitle("将日期中较大的成分设定为常数来探索其中较小成分的模式")
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-28-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-28-1.svg" width="80%" style="display: block; margin: auto;" />
 
 如果不用 `update()` 函数，我们可能需要先用`hour()、minute()、second()`获取三种成分，然后再用`make_datetime()`对这三种成分进行合并。  
 
@@ -450,7 +435,7 @@ flights_dt %>%
   geom_freqpoly(binwidth = 600)
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-30-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-30-1.svg" width="80%" style="display: block; margin: auto;" />
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-31"><strong>(\#exr:unnamed-chunk-31) </strong></span>如果想要再将延误的几率降至最低，那么应该在星期几搭乘航班？  </div>\EndKnitrBlock{exercise}
 
@@ -465,7 +450,7 @@ flights_dt %>%
   geom_line(aes(group = 1))
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-32-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-32-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-33"><strong>(\#exr:unnamed-chunk-33) </strong></span>航班预计起飞的小时对应的平均延误时间在一天的范围内是如何变化的？ </div>\EndKnitrBlock{exercise}
@@ -482,11 +467,11 @@ flights_dt %>%
   geom_smooth()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-34-1.svg" width="80%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-34-1.svg" width="80%" style="display: block; margin: auto;" />
 
-## 时间间隔（Time Span）  
+## 时间间隔 {#time-span}
 
-接下来我们将讨论如何对时间进行数学运算，其中包括减法、加法和除法。我们可以把用于进行数学运算的时间称为时间间隔，它表示一种跨度，而不是某个静态的时间。本节将介绍3种用于表示时间间隔的重要类：   
+接下来我们将讨论如何对时间进行数学运算，其中包括减法、加法和除法。我们可以把用于进行数学运算的时间称为时间间隔(time span)，它表示一种跨度，而不是某个静态的时间。本节将介绍3种用于表示时间间隔的重要类：   
 
 * **时期（Durations）**：以秒为单位表示一段精确的时间  
 * **阶段(Periods)**： 用人类单位定义的时间间隔，如几周或几个月  
@@ -500,7 +485,7 @@ flights_dt %>%
 ```r
 h_age <- today() - ymd(19981112) ## 年龄
 h_age
-#> Time difference of 7700 days
+#> Time difference of 7756 days
 ```
 
 `difftime`对象的单位可以是秒、分钟、小时、日或周。这种模棱两可的对象处理起来非常困难，，所以 lubridate提供了总是以秒为单位的另一种时间间隔：**时期**。
@@ -508,7 +493,7 @@ h_age
 
 ```r
 as.duration(h_age)
-#> [1] "665280000s (~21.08 years)"
+#> [1] "670118400s (~21.23 years)"
 ```
 
 可以用很多方便的函数来构造时期，它们有统一的格式`d + 时间单位（复数）`：  
@@ -547,10 +532,10 @@ dyears(1) + dweeks(12) + ddays(10)
 
 ```r
 (tomorrow <- today() + ddays(1))
-#> [1] "2019-12-13"
+#> [1] "2020-02-07"
 
 (last_year <- now() - dyears(1))
-#> [1] "2018-12-12 00:49:40 CST"
+#> [1] "2019-02-06 22:16:56 CST"
 ```
 
 然而，因为时期表示的是秒为单位的一个精确数值，有时我们会得到意想不到的结果：  
@@ -644,7 +629,7 @@ flights_dt %>%
 #> 4 2013-01-01 01:46:00 2013-01-01 21:02:00
 #> 5 2013-01-01 00:25:00 2013-01-01 21:08:00
 #> 6 2013-01-01 00:16:00 2013-01-01 21:20:00
-#> # … with 1.063e+04 more rows
+#> # ... with 1.063e+04 more rows
 ```
 
 这些都是过夜航班。我们使用了同一种日期来表示出发时间和到达时间，但这些航班是在第二天到达的。将每个过夜航班的到达时间加上一个`days(1)`，就可以解决这个问题了：  
@@ -657,7 +642,7 @@ flights_dt <- flights_dt %>%
 ## 这样一来，航班数据就符合常理了
 flights_dt %>% filter(overnight, arr_time < dep_time)
 #> # A tibble: 0 x 10
-#> # … with 10 variables: origin <chr>, dest <chr>, dep_delay <dbl>,
+#> # ... with 10 variables: origin <chr>, dest <chr>, dep_delay <dbl>,
 #> #   arr_delay <dbl>, dep_time <dttm>, sched_dep_time <dttm>, arr_time <dttm>,
 #> #   sched_arr_time <dttm>, air_time <dbl>, overnight <lgl>
 ```
@@ -684,7 +669,7 @@ interval(ymd(20090201), ymd(20090101))
 ```r
 next_year <- today() + years(1)
 today() %--% next_year 
-#> [1] 2019-12-12 UTC--2020-12-12 UTC
+#> [1] 2020-02-06 UTC--2021-02-06 UTC
 ```
 
 要想知道一个区间内有多少个阶段，需要使用整数除法。利用区间进行精确计算：
@@ -719,9 +704,9 @@ ymd(20150101) + months(0:11)
 
 ## To get the vector of the first day of the month for this year, we first need to figure out what this year is, and get January 1st of it
 floor_date(today(),"year") + months(0:11)
-#>  [1] "2019-01-01" "2019-02-01" "2019-03-01" "2019-04-01" "2019-05-01"
-#>  [6] "2019-06-01" "2019-07-01" "2019-08-01" "2019-09-01" "2019-10-01"
-#> [11] "2019-11-01" "2019-12-01"
+#>  [1] "2020-01-01" "2020-02-01" "2020-03-01" "2020-04-01" "2020-05-01"
+#>  [6] "2020-06-01" "2020-07-01" "2020-08-01" "2020-09-01" "2020-10-01"
+#> [11] "2020-11-01" "2020-12-01"
 ```
 
 

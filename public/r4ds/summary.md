@@ -1,5 +1,5 @@
 
-
+# (PART) Exploring and Wrangling {-} 
 
 # Data Summary
 
@@ -117,6 +117,8 @@ opts_chunk$set(comment = NA,
 
 ```r
 freq(iris$Species, plain.ascii = FALSE, style = "rmarkdown", headings = FALSE)
+```
+
 
 |         &nbsp; | Freq | % Valid | % Valid Cum. | % Total | % Total Cum. |
 |---------------:|-----:|--------:|-------------:|--------:|-------------:|
@@ -125,32 +127,32 @@ freq(iris$Species, plain.ascii = FALSE, style = "rmarkdown", headings = FALSE)
 |  **virginica** |   50 |   33.33 |       100.00 |   33.33 |       100.00 |
 |     **\<NA\>** |    0 |         |              |    0.00 |       100.00 |
 |      **Total** |  150 |  100.00 |       100.00 |  100.00 |       100.00 |
-```
 
 
 
 ```r
 freq(iris$Species, report.nas = FALSE, headings = FALSE)
-#> 
-#>                    Freq        %   % Cum.
-#> ---------------- ------ -------- --------
-#>           setosa     50    33.33    33.33
-#>       versicolor     50    33.33    66.67
-#>        virginica     50    33.33   100.00
-#>            Total    150   100.00   100.00
 ```
+
+                   Freq        %   % Cum.
+---------------- ------ -------- --------
+          setosa     50    33.33    33.33
+      versicolor     50    33.33    66.67
+       virginica     50    33.33   100.00
+           Total    150   100.00   100.00
 
 
 ```r
 freq(iris$Species, report.nas = FALSE, totals = FALSE,
      cumul = FALSE, style = "rmarkdown", headings = FALSE)
-#> 
-#> |         &nbsp; | Freq |     % |
-#> |---------------:|-----:|------:|
-#> |     **setosa** |   50 | 33.33 |
-#> | **versicolor** |   50 | 33.33 |
-#> |  **virginica** |   50 | 33.33 |
 ```
+
+
+|         &nbsp; | Freq |     % |
+|---------------:|-----:|------:|
+|     **setosa** |   50 | 33.33 |
+| **versicolor** |   50 | 33.33 |
+|  **virginica** |   50 | 33.33 |
 
 
 ### `descr()`  

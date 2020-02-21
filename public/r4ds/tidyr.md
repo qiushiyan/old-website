@@ -1,6 +1,6 @@
 
 
-# tidyr  
+# tidyr: Tidy data 
 
 
 
@@ -148,7 +148,7 @@ ggplot(table1, aes(year, cases)) +
 
 <img src="tidyr_files/figure-html/unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
 
-### Exercise  
+### Exercises  
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-7"><strong>(\#exr:unnamed-chunk-7) </strong></span>用 `table2` 计算发病率 (`rate` = `cases` / `population`), 需要进行以下四步操作：
   * 得到每个国家每年的`cases`  
@@ -1221,7 +1221,7 @@ multi2 %>%
 ```
 
 
-### Exercise  
+### Exercises  
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-52"><strong>(\#exr:unnamed-chunk-52) </strong></span>在下面的例子中，研究为什么 `pivot_longer()` 和 `pivot_wider()` 不是完美对称的</div>\EndKnitrBlock{exercise}
 
@@ -1324,7 +1324,7 @@ people %>%
 #> 5 Jessica Cordero     5    NA    156
 ```
 
-## Nesting  
+## Nesting
 
 Nesting creates **a list-column of data frames**; unnesting flattens it back out into regular columns. Nesting is a *implicitly  summarising operation*: you get one row for each group defined by the non-nested columns. This is useful in conjunction with other summaries that work with whole datasets, most notably models.
 
@@ -1442,7 +1442,7 @@ df2 %>% group_split(g)
 ```
 
 
-### Case Study: Managing multiple models
+### Example: Managing multiple models
 
 Nested data is a great fit for problems where you have one of something for each group. A common place this arises is when you’re **fitting multiple models**.  
 
@@ -1570,7 +1570,7 @@ gapminder_summary %>%
 
 A similar case can be found at \@ref(viz-many-models)
 
-### Case Study:  Multicple hoice data  {#multi-choice}
+### Example: Multicple hoice data  {#multi-choice}
 
 
 ```r
@@ -2292,7 +2292,7 @@ table5
 #> 6 China       20      00    213766/1280428583
 ```
 
-### Exercise  
+### Exercises  
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-104"><strong>(\#exr:unnamed-chunk-104) </strong></span>`separate()`中的`extra`和`fill`参数的作用是什么？用下面两个数据框进行实验： </div>\EndKnitrBlock{exercise}
 
@@ -2718,21 +2718,22 @@ Chopping and unchopping **preserve the width of a data frame, changing its lengt
 
 **Note that we get one row of output for each unique combination of non-chopped variables**: 
 
+`chop()` differs from `nest()` in section \@ref(nesting) in that it does not collpase columns into a tibble, but into a list:   
+
 
 ```r
-df <- tibble(x = c(1, 1, 1, 2, 2, 3), y = 1:6, z = 6:1)
-df %>% chop(c(y, z))
+df <- tibble(x = c(1, 1, 1, 2, 2, 3), 
+             y = 1:6, 
+             z = 6:1)
+
+df %>% chop(cols = c(y, z))
 #> # A tibble: 3 x 3
 #>       x y         z        
 #>   <dbl> <list>    <list>   
 #> 1     1 <int [3]> <int [3]>
 #> 2     2 <int [2]> <int [2]>
 #> 3     3 <int [1]> <int [1]>
-```
 
-`chop()` differs from `nest` in \@ref(nest) in that it does not collpase columns, just turns them into a list:  
-
-```r
 df %>% nest(data = c(y, z))
 #> # A tibble: 3 x 2
 #>       x data            
@@ -2741,6 +2742,8 @@ df %>% nest(data = c(y, z))
 #> 2     2 <tibble [2 x 2]>
 #> 3     3 <tibble [1 x 2]>
 ```
+
+
 
 `unchop()`:  
 
@@ -2914,7 +2917,7 @@ fiber[rep(1:nrow(fiber), fiber$count), -3]
 
 
 
-### Exercise 
+### Exercises 
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:redundancy"><strong>(\#exr:redundancy) </strong></span>在清理 `who` 数据集时，我们说`iso2`和`iso3`是冗余的，证明这一点</div>\EndKnitrBlock{exercise}
 

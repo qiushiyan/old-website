@@ -1,14 +1,14 @@
 
 
-# relational data  
+# Relational data  
 
-## introduction
-
-
-## mutating joins
+## Introduction
 
 
-## filtering join  
+## Mutating joins
+
+
+## Filtering join  
 
 
 

@@ -1,7 +1,7 @@
 
 
 
-# lubridate  
+# lubridate: Dates and times
 
 
 
@@ -222,7 +222,7 @@ as_date(1)
 #> [1] "1970-01-02"
 ```
 
-### 练习  
+### Exercises  
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-17"><strong>(\#exr:unnamed-chunk-17) </strong></span>使用恰当的 lubridate 函数来解析以下每个日期：</div>\EndKnitrBlock{exercise}
 
@@ -420,7 +420,7 @@ flights_dt %>%
 如果不用 `update()` 函数，我们可能需要先用`hour()、minute()、second()`获取三种成分，然后再用`make_datetime()`对这三种成分进行合并。  
 
 
-### 练习    
+### Exercises   
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-29"><strong>(\#exr:unnamed-chunk-29) </strong></span>以月份作为分组变量，在一年的范围内，航班时间在一天中的分布是如何变化的？ 
 </div>\EndKnitrBlock{exercise}
 
@@ -690,7 +690,7 @@ today() %--% next_year
 ![](images/1.png)
 
 
-### 练习  
+### Exercises  
 
 \BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-51"><strong>(\#exr:unnamed-chunk-51) </strong></span>创建一个日期向量来给出 2015 年每个月的第一天 </div>\EndKnitrBlock{exercise}
 

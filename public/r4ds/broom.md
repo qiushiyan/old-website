@@ -1,7 +1,7 @@
 
 
 
-# broom  
+# broom: Tidy representation of models
 
 
 ```r

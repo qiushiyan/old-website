@@ -1,10 +1,10 @@
 
 
-# (PART) Exploring and Wrangling {-}    
+   
 
 
 
-# data.table {#data-table}  
+# data.table  {#data-table}
 
 
 
@@ -71,7 +71,7 @@ class(mtcars_dt)
 ```
 
 
-## 基本使用 {#data-table-basics}
+## Introduction {#data-table-intro}
 
 
 

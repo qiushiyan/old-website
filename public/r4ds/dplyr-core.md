@@ -2,7 +2,7 @@
 
 # (PART) R for data science {-}
 
-# dplyr core functions 
+# dplyr: Data transformation
 
  
 
@@ -121,7 +121,8 @@ flights %>%
 
 
 
-### 运算符
+### Operators
+
 为了有效地进行筛选，R 提供了一套标准的运算符，包括比较运算符和逻辑运算符。  
 
 **比较运算符**： `==、！= 、 > 、 >= 、 < 、 <= `
@@ -228,7 +229,7 @@ flights %>% filter(between(month, 11, 12))
 
 \BeginKnitrBlock{rmdcaution}<div class="rmdcaution">& and && indicate logical AND and | and || indicate logical OR. The shorter form performs elementwise comparisons in much the same way as arithmetic operators. The longer form evaluates left to right examining only the first element of each vector. Evaluation proceeds only until the result is determined. The longer form is appropriate for programming control-flow and typically preferred in if clauses.</div>\EndKnitrBlock{rmdcaution}
 
-### 缺失值
+### Missing values
 NA (not available)表示未知的值、缺失值，缺失值一个很重要的特点是它是“可传染的”。如果运算中包含了缺失值，那么运算结果一般来说也会是缺失值。
 
 ```r
@@ -277,9 +278,11 @@ df %>% filter(is.na(x) | x > 1)
 #> 2     3
 ```
 
-### 练习
+For more topics on missing values, see section \@ref(tidyr-missing) and Chapter \@ref(dealing-with-missing-values). 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-18"><strong>(\#exr:unnamed-chunk-18) </strong></span>找出满足以下条件的所有航班: </div>\EndKnitrBlock{exercise}
+### Exercises
+
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-17"><strong>(\#exr:unnamed-chunk-17) </strong></span>找出满足以下条件的所有航班: </div>\EndKnitrBlock{exercise}
 
 > 到达时间延误两小时或更多的航班 
   
@@ -481,7 +484,7 @@ flights %>%  filter(dep_time <= 600 | dep_time == 2400)
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-30"><strong>(\#exr:unnamed-chunk-30) </strong></span>dep_time`有缺失值的航班有多少？其他变量的缺失值情况如何？</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-29"><strong>(\#exr:unnamed-chunk-29) </strong></span>dep_time`有缺失值的航班有多少？其他变量的缺失值情况如何？</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -518,7 +521,7 @@ flights %>%
 #> #   hour <int>, minute <int>, time_hour <int>
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-33"><strong>(\#exr:unnamed-chunk-33) </strong></span>为什么`NA ^ 0`的值不是NA，而`NA * 0`的值是NA ？为什么NA | TRUE 的值不是NA？为什么FALSE & NA的值不是NA，能找出一般规律吗？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-32"><strong>(\#exr:unnamed-chunk-32) </strong></span>为什么`NA ^ 0`的值不是NA，而`NA * 0`的值是NA ？为什么NA | TRUE 的值不是NA？为什么FALSE & NA的值不是NA，能找出一般规律吗？  </div>\EndKnitrBlock{exercise}
 
 
 **只要表达式的值被NA背后的未知量所决定，就返回NA**
@@ -751,9 +754,9 @@ flights %>% arrange(desc(arr_delay + dep_delay))
 
 
 
-### 练习  
+### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-45"><strong>(\#exr:unnamed-chunk-45) </strong></span>如何使用 `arrange()` 将缺失值排在最前面？（提示：使用`is.na()`)  
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-44"><strong>(\#exr:unnamed-chunk-44) </strong></span>如何使用 `arrange()` 将缺失值排在最前面？（提示：使用`is.na()`)  
 例：把 flights 数据集中`dep_time`上的 NA 值排在最前面( to sort the data frame by departure time (dep_time) in ascending order but NA values first)  </div>\EndKnitrBlock{exercise}
 
 
@@ -778,7 +781,7 @@ flights %>%
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-47"><strong>(\#exr:unnamed-chunk-47) </strong></span>对 `flights` 排序以找出延误时间最长的航班。找出出发时间最早的航班。 </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-46"><strong>(\#exr:unnamed-chunk-46) </strong></span>对 `flights` 排序以找出延误时间最长的航班。找出出发时间最早的航班。 </div>\EndKnitrBlock{exercise}
 
 
 
@@ -819,7 +822,7 @@ flights %>% arrange(dep_time)
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-50"><strong>(\#exr:unnamed-chunk-50) </strong></span>对 `flights` 排序以找出速度最快的航班     </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-49"><strong>(\#exr:unnamed-chunk-49) </strong></span>对 `flights` 排序以找出速度最快的航班     </div>\EndKnitrBlock{exercise}
 
 
 这个排序条件需要用到表达式，`速度 = distance / air_time`
@@ -1175,7 +1178,7 @@ flights %>%
 
 ### 练习
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-68"><strong>(\#exr:unnamed-chunk-68) </strong></span>从 `flights` 中选择 `dep_time`、`dep_delay`、`arr_time`、`arr_delay`，找出尽可能多的方法</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-67"><strong>(\#exr:unnamed-chunk-67) </strong></span>从 `flights` 中选择 `dep_time`、`dep_delay`、`arr_time`、`arr_delay`，找出尽可能多的方法</div>\EndKnitrBlock{exercise}
 
 
 先查看这些变量的位置：
@@ -1256,7 +1259,7 @@ flights %>% select(starts_with("arr_"), starts_with("dep_"))
 #> # ... with 3.368e+05 more rows
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-73"><strong>(\#exr:unnamed-chunk-73) </strong></span>如果在`select()`中多次计入一个变量名，会发生什么情况？   </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-72"><strong>(\#exr:unnamed-chunk-72) </strong></span>如果在`select()`中多次计入一个变量名，会发生什么情况？   </div>\EndKnitrBlock{exercise}
 
 `select()`函数将会忽略重复出现的变量，只选出一列，同时也不会报错：
 
@@ -1482,9 +1485,9 @@ ntile(x,n=3)
 #> [1] 1 1 2 2 3 3
 ```
 
-### 练习  
+### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-87"><strong>(\#exr:unnamed-chunk-87) </strong></span>虽然现在的`dep_time`和`sched_dep_time`变量方便阅读，但不适合计算，因为它们实际上并不是连续型数值。将它们转换为一种更方便的表示形式，即从 0 点开始的分钟数</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-86"><strong>(\#exr:unnamed-chunk-86) </strong></span>虽然现在的`dep_time`和`sched_dep_time`变量方便阅读，但不适合计算，因为它们实际上并不是连续型数值。将它们转换为一种更方便的表示形式，即从 0 点开始的分钟数</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -1649,8 +1652,9 @@ aggregate(dep_delay~year+month+day,
 
 比较这两个结果，我们可以发现`group_by()`中越靠后的参数是越基本的单位，`group_by(year,month,day)`将按照 day, month, year 的顺序开始循环 ； 而 `aggregate()` 函数则正好相反     
 
-### 缺失值  
-在按照日期计算平均出发延误时间的例子中，使用`mean()`时设置了参数`na.rm =  T`，如果没有这样做，很多日期的平均延误时间将是缺失值：  
+### Missing values in `summarize()`
+
+在按照日期计算平均出发延误时间的例子中，使用 `mean()` 时设置了参数`na.rm =  T`，如果没有这样做，很多日期的平均延误时间将是缺失值：  
 
 ```r
 flights %>% 
@@ -1911,7 +1915,7 @@ ggplot(delays) +
   geom_histogram(aes(delay))
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-105-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-104-1.svg" width="80%" style="display: block; margin: auto;" />
 
 有些飞机的**平均**到达延误事件竟然接近 300 分钟，我们可以画一张航班数量和平均延误时间的散点图，一遍获得更深刻的理解:    
 
@@ -1927,7 +1931,7 @@ delays <- not_cancelled %>%
 ggplot(delays) + geom_point(aes(x = n,y = delay),alpha = 0.1)
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-106-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-105-1.svg" width="80%" style="display: block; margin: auto;" />
 
 从散点图可以看出，如果航班对应的出航次数非常少时，平均延误时间的变动特别大，所有延误时间较长的航班的出航次数几乎都在 0 右边一点点。这张图的形状非常能说明问题:当绘制均值（或其他摘要统计量）和分组规模的关系时，总能看到样本量的增加，变动在不断减小。（样本统计量的方差随样本数变小）。    
 
@@ -1948,7 +1952,7 @@ batters %>%
   geom_smooth(se = FALSE)
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-107-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-106-1.svg" width="80%" style="display: block; margin: auto;" />
   
 当绘制击球手的能力（用打击率 ba 衡量）与击球机会数量（用总打数ab衡量）之间的关系时，可以看到两个趋势：  
 
@@ -2168,7 +2172,7 @@ daily %>%
 
 在循序渐进地进行摘要分析的时候，需要小心：使用求和与计数操作是没有问题的，但如果想要使用加权平均和方差的话，就要仔细考虑一下，任何基于秩的统计数据（如中位数，分为差）都不支持这样的操作。换句话说，对分组结果再求和就是对整体求和，但各分组中的中位数的中位数可不是整体的中位数。  
 
-## `group_by()` 结合其他函数  
+## `group_by()` combined with other functions  
 
 
 虽然与 `summarize()` 结合起来使用是最常见的，但分组也可以和 `mutate()` , `filter()` 和 `arrange()` 结合使用,以完成非常便捷的操作。
@@ -2421,9 +2425,9 @@ df %>%
 
 
 
-## 练习 {#dplyr-exercise}
+## Exercises {#dplyr-exercise}
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-124"><strong>(\#exr:unnamed-chunk-124) </strong></span>找到每个日期分组中到达时间延迟最长的10条记录  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-123"><strong>(\#exr:unnamed-chunk-123) </strong></span>找到每个日期分组中到达时间延迟最长的10条记录  </div>\EndKnitrBlock{exercise}
 
 
 
@@ -2446,7 +2450,7 @@ not_cancelled %>%
 #> # ... with 3,603 more rows
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-126"><strong>(\#exr:unnamed-chunk-126) </strong></span>找出一年中到达航班多于 365 次的目的地：</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-125"><strong>(\#exr:unnamed-chunk-125) </strong></span>找出一年中到达航班多于 365 次的目的地：</div>\EndKnitrBlock{exercise}
 
 
 
@@ -2483,7 +2487,7 @@ not_cancelled %>%
 #> # ... with 69 more rows
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-128"><strong>(\#exr:unnamed-chunk-128) </strong></span>哪一架飞机(`tailnum`)具有最差的准点记录：  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-127"><strong>(\#exr:unnamed-chunk-127) </strong></span>哪一架飞机(`tailnum`)具有最差的准点记录：  </div>\EndKnitrBlock{exercise}
 
 衡量一个飞机的准点情况有很多种可能的选择，这里只提供两个方向：   
 
@@ -2531,7 +2535,7 @@ flights %>%
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-131"><strong>(\#exr:unnamed-chunk-131) </strong></span>如果想要尽量避免航班延误，应该在一天中的哪个时间搭乘飞机？   
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-130"><strong>(\#exr:unnamed-chunk-130) </strong></span>如果想要尽量避免航班延误，应该在一天中的哪个时间搭乘飞机？   
 </div>\EndKnitrBlock{exercise}
 
 
@@ -2555,7 +2559,7 @@ flights %>%
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-133"><strong>(\#exr:unnamed-chunk-133) </strong></span>计算每个目的地的到达延误总时间的分钟数，以及每条记录到每个目的地的延误时间比例 </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-132"><strong>(\#exr:unnamed-chunk-132) </strong></span>计算每个目的地的到达延误总时间的分钟数，以及每条记录到每个目的地的延误时间比例 </div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -2585,7 +2589,7 @@ flights %>%
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-135"><strong>(\#exr:unnamed-chunk-135) </strong></span>延误通常是由临时原因造成的：即使最初引起延误的问题已经解决，但因为要让前面的航班先起飞，所以后面的航班也会延误。使用`lag()` 探究一架航班延误与前一架航班延误之间的关系。</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-134"><strong>(\#exr:unnamed-chunk-134) </strong></span>延误通常是由临时原因造成的：即使最初引起延误的问题已经解决，但因为要让前面的航班先起飞，所以后面的航班也会延误。使用`lag()` 探究一架航班延误与前一架航班延误之间的关系。</div>\EndKnitrBlock{exercise}
 
 
 
@@ -2624,14 +2628,14 @@ lagged_delays %>%
   theme_classic()
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-136-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-135-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
     
 ## This plots the relationship between the mean delay of a flight for all values of the previous flight. For delays less than two hours, the relationship between the delay of the preceding flight and the current flight is nearly a line. After that the relationship becomes more variable, as long-delayed flights are interspersed with flights leaving on-time. After about 8-hours, a delayed flight is likely to be followed by a flight leaving on time.
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-137"><strong>(\#exr:unnamed-chunk-137) </strong></span>根据到达地点的数量，对航空公司进行排序 ; 找出至少有两个航空公司的目的地</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-136"><strong>(\#exr:unnamed-chunk-136) </strong></span>根据到达地点的数量，对航空公司进行排序 ; 找出至少有两个航空公司的目的地</div>\EndKnitrBlock{exercise}
 
 
 
@@ -2672,7 +2676,7 @@ flights %>%
 
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-139"><strong>(\#exr:unnamed-chunk-139) </strong></span>每天取消的航班数量和总航班数量存在什么关系？每天的平均到达延误时间和取消航班的比例有什么关系？</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-138"><strong>(\#exr:unnamed-chunk-138) </strong></span>每天取消的航班数量和总航班数量存在什么关系？每天的平均到达延误时间和取消航班的比例有什么关系？</div>\EndKnitrBlock{exercise}
 
    
 
@@ -2688,7 +2692,7 @@ flights %>%
   ggplot(aes(x = n_total,y = n_cancelled)) + geom_point()
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-140-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-139-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -2700,9 +2704,9 @@ flights %>%
   ggplot() + geom_point(aes(x = avg_arr_delay,y = cancelled_prop))
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-140-2.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-139-2.svg" width="80%" style="display: block; margin: auto;" />
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-141"><strong>(\#exr:unnamed-chunk-141) </strong></span>
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-140"><strong>(\#exr:unnamed-chunk-140) </strong></span>
 哪个航空公司的延误情况最严重？你能否分清这是因为糟糕的机场设备，还是航空公司的问题？（考虑一下`flights %>% group_by(carrier,dest) %>% summarize(n())`  </div>\EndKnitrBlock{exercise}
  
 

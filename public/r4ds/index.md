@@ -3,7 +3,7 @@
 title: "R for data science: tidyverse and beyond"
 knit: "bookdown::render_book"
 author: "Maxine"
-date: "2020-02-21"
+date: "2020-03-04"
 site: bookdown::bookdown_site
 documentclass: book
 github-repo: enixam/rfordatascience

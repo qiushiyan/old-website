@@ -5,10 +5,11 @@
 
 
 ```r
-library(tidylog)
+library(tidylog) # Tidylog provides feedback about dplyr and tidyr operations.
 library(lubridate)
-knitr::opts_chunk$set(message = TRUE)
 ```
+
+
 
 
 
@@ -146,11 +147,11 @@ ggplot(table1, aes(year, cases)) +
   scale_x_continuous(breaks = c(1999,2000),labels = c("1999","2000"))
 ```
 
-<img src="tidyr_files/figure-html/unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="tidyr_files/figure-html/unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-7"><strong>(\#exr:unnamed-chunk-7) </strong></span>用 `table2` 计算发病率 (`rate` = `cases` / `population`), 需要进行以下四步操作：
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-8"><strong>(\#exr:unnamed-chunk-8) </strong></span>用 `table2` 计算发病率 (`rate` = `cases` / `population`), 需要进行以下四步操作：
   * 得到每个国家每年的`cases`  
   * 得到每个国家每年的`population`  
   * 计算 `rate` = `cases` / `population`  
@@ -252,7 +253,7 @@ t2_cases_per_cap %>%
 <center>
 <div class="figure" style="text-align: center">
 <img src="images/12.jpg" alt="More images at https://www.garrickadenbuie.com/project/tidyexplain/#spread-and-gather" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-10)More images at https://www.garrickadenbuie.com/project/tidyexplain/#spread-and-gather</p>
+<p class="caption">(\#fig:unnamed-chunk-11)More images at https://www.garrickadenbuie.com/project/tidyexplain/#spread-and-gather</p>
 </div>
 </center>
 
@@ -1223,7 +1224,7 @@ multi2 %>%
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-52"><strong>(\#exr:unnamed-chunk-52) </strong></span>在下面的例子中，研究为什么 `pivot_longer()` 和 `pivot_wider()` 不是完美对称的</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-53"><strong>(\#exr:unnamed-chunk-53) </strong></span>在下面的例子中，研究为什么 `pivot_longer()` 和 `pivot_wider()` 不是完美对称的</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -1273,7 +1274,7 @@ stocks %>%
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-55"><strong>(\#exr:unnamed-chunk-55) </strong></span>为什么下面的数据框不能应用 `pivot_wider()`？可以添加一列解决这个问题吗？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-56"><strong>(\#exr:unnamed-chunk-56) </strong></span>为什么下面的数据框不能应用 `pivot_wider()`？可以添加一列解决这个问题吗？  </div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -2294,7 +2295,7 @@ table5
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-104"><strong>(\#exr:unnamed-chunk-104) </strong></span>`separate()`中的`extra`和`fill`参数的作用是什么？用下面两个数据框进行实验： </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-105"><strong>(\#exr:unnamed-chunk-105) </strong></span>`separate()`中的`extra`和`fill`参数的作用是什么？用下面两个数据框进行实验： </div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -2389,7 +2390,7 @@ table5 %>% unite(col = year_unite,century,year,sep = "",remove = F)
 #> 6 China       2000       20      00    213766/1280428583
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-110"><strong>(\#exr:unnamed-chunk-110) </strong></span>探究 **tidyr** 中一个与 `separate()` 类似的函数 `extract()` 的用法  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-111"><strong>(\#exr:unnamed-chunk-111) </strong></span>探究 **tidyr** 中一个与 `separate()` 类似的函数 `extract()` 的用法  </div>\EndKnitrBlock{exercise}
 
 
 `separate()`函数的分列操作是基于参数 `sep` 的，无论是给 `sep` 传入字符串指定分隔符，还是用数值指定分隔的位置，`separate()` 必须要有一个分隔符才能正常运作（可以把`sep = n`看做第 n 个和第 n+1 个元素之间的一个空白分隔符）  

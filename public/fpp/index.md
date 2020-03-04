@@ -1,0 +1,29 @@
+
+--- 
+title: 'Notes for "Forecasting: Principles and Practice, 3rd edition"'
+author: "Qiushi Yan"
+date: "2020-03-01"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [references.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: enixam/fpp
+#nocite: '@*'
+description: '"Reproducing "Forecasting: Principles and Practice, 3rd edition"'
+---
+
+# Preface {-}
+
+This project contains my learning notes and code for [*Forecasting: Principles and Practice, 3rd edition*](https://otexts.com/fpp3/), which heavliy draws on packages **tsibble**[@R-tsibble], **feasts**[@R-feasts], **fable**[@R-fable] and **tidyverse**[@R-tidyverse] .  
+
+Another reference is [*Applied Time Series Analysis for Fisheries and Environmental Sciences*](https://nwfsc-timeseries.github.io/atsa-labs/)  
+
+Other references include a video tutorial on time series concepts presented in this [youtube watchlist](https://www.youtube.com/playlist?list=PLvcbYUQ5t0UHOLnBzl46_Q6QKtFgfMGc3) by [ritvikmath](https://www.youtube.com/channel/UCUcpVoi5KkJmnE3bvEhHR0Q); a [online course](https://online.stat.psu.edu/stat510) offered by the Department of Statistics at PennState. 
+
+Tidyverse is automatically loaded before each chapter.
+
+
+```r
+library(tidyverse)
+```

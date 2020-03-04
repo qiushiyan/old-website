@@ -1,0 +1,467 @@
+
+
+# ARIMA models 
+
+
+
+```r
+library(tsibble)
+library(tsibbledata)
+library(fable)
+library(feasts)
+library(lubridate)
+library(pins)
+library(slider)
+```
+
+## Stationarity and differencing  
+
+3 rules 
+
+1. Constant Mean (local compared to global)
+2. Constant variance  (local compared to global)
+3. No seasonality  
+
+Don't confuse stationarity with **white noise**. In particular, white noise can be considered a special, unpredictable case of stationary time series. It has **zero mean**, constant variance and no seasonality. White noise are often used as a measure against which we test our models. If residuals $\epsilon_1, \epsilon_2, \dots, \epsilon_t$ violates any of the rules of white noise, then there is still valuable information buried under the resiuals, which we will imporve our models to capture. We have not a 'best' model at hand until residuals become unpredictable, in other words, white noise.  
+
+
+```r
+PBS %>%
+  filter(ATC2 == "H02") %>%
+  summarize(Cost = sum(Cost) / 1e6) %>%
+  transmute(
+     sales = Cost,
+     sales_log = log(Cost),
+     seasonal_difference = log(Cost) %>% difference(lag = 12),
+     double_difference = log(Cost) %>% difference(lag = 12) %>% difference(lag = 1)
+  ) %>% 
+  pivot_longer(-Month, names_to = "measure") %>% 
+  mutate(measure = fct_relevel(measure, 
+                               c("sales", "sales_log", "seasonal_difference", "double_difference"))) %>%
+  ggplot() + 
+  geom_line(aes(Month, value)) + 
+  facet_wrap(~ measure, ncol = 1, scales = "free_y") + 
+  labs(title = "Corticosteroid drug sales", x = "Year", y = NULL)
+```
+
+<img src="ch9_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+https://towardsdatascience.com/stationarity-in-time-series-analysis-90c94f27322
+
+Why does stationarity matter ?  
+
+In the most intuitive sense, stationarity means that the statistical properties of a process generating a time series do not change over time.
+
+## Backshift notation  
+
+The backward shift operator $B$ (or $L$ in some references) is a useful notational device when working with time series lags:  
+
+$$
+By_t = y_{t-1}
+$$
+
+$B$ can be treated as a number in arithmetic.Two applications of $B$ to $y_t$ shifts the data back two periods:   
+
+$$
+B(By_t) = B^2y_t
+$$
+
+The backward shift operator is convenient for describing the process of differencing. A first difference can be written as   
+
+$$
+y'_t = y_t - y_{t-1} = y_t  - By_{y-1} = (1 - B)y_t
+$$
+Similarly, the second-order difference would be 
+
+$$
+\begin{split}
+y_t'' &= (y_t - y_{t-1}) - (y_{t-1} - y_{t - 2})  \\ 
+      &= By_t - 2By_{t} + B^2y_t \\ 
+      &= (1-B)^2y_t
+\end{split}
+$$
+
+In general, a $d$th-order difference can be written as 
+
+$$
+(1 - B)^dy_t
+$$
+
+Backshift notation is particularly useful when combining differences, as the operator can be treated using ordinary algebraic rules. In particular, terms involving $B$ can be multiplied together.
+
+For example, a seasonal difference followed by a first difference can be written as 
+
+$$
+\begin{split}
+(1 - B)(1 - B^m) &= (1 - B^m - B + B^{m + 1})y_t \\
+                 &= y_t - y_{t-m} - y_{t-1} + y_{t-m-1}
+\end{split}
+$$
+
+
+## Autoregressive models   
+
+In an autoregression model, we forecast the variable of interest using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus, an autoregressive model of order $p$ can be written as 
+
+$$
+y_t =  c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t
+$$
+
+where $\epsilon_t$ is white noise. We refer to this model as **AR(p) model**, a autoregressive model with order $p$ 
+
+We can write out an AR(p) model using the backshift operator: 
+
+$$
+\begin{aligned}
+y_t - \phi_1y_{t-1} - \phi_2y_{t-2} - \cdots - \phi_py_{t-p} &= \epsilon_t + c\\ 
+(1 - \phi_1B - \phi_2B^2 - \cdots - \phi_pB^p)y_t &= \epsilon_t + c\\
+\phi_p(B)y_t &= \epsilon_t + c
+\end{aligned}
+$$
+
+AR models generally require the time series to be stationary.  
+
+\BeginKnitrBlock{todo}<div class="todo">The relationship between AR models and stationarity,</div>\EndKnitrBlock{todo}
+
+When autoregressive models are confined to stationary data, some constraints on the values of the parameters are required.  
+
+* For an AR(1) model: $-1 < \phi_1 < -1$ (Consider the denominator of the sum of a inifite geometric series) 
+
+* For an AR(2) model: $-1 < \phi_2 < 1$, $\phi_1 + \phi_2 < 1, \phi_2 - \phi_1 < 1$  
+
+
+Generally, if we treat **B** as number (or numbers), we can write out the the formula ($\phi_p(B)$ below) as 
+
+$$
+\begin{aligned}
+\phi_p(B)y_t &= \epsilon_t + c\\
+&\Downarrow \\
+\phi_p(B) &= 0
+\end{aligned}
+$$
+To be stationary, all roots ($B_1$, $B_2$, ..., $B_p$) of the characteristic equation $\Phi(B) = 1 - \phi_1B - \phi_2B^2 - \cdots - \phi_pB^p$ must **exceed** 1 in absolute value (actually all of them should lie ouside of the unit circle). We can thus derive conditions on the valuse of $\phi_1, \cdots, \phi_p$, but it's quite complicated, and R takes care of these restrictions when estimating a model. 
+
+For example, consider this AR(1) model :
+
+$$
+\begin{aligned}
+y_t &= 0.5y_{t-1} + \epsilon_t \\
+y_t - 0.5y_{t-1} &= \epsilon_t \\
+(1 - 0.5B)y_t &= \epsilon_t \\
+&\Downarrow \\
+1 - 0.5B &= 0 \\
+B &= 2
+\end{aligned}
+$$
+This model is indeed stationary because $|B| > 1$. From this we can also derive $|\phi_1| < 1$ for AR(1) model.  
+
+
+ 
+
+### Decision of order
+
+How do we decide the order $p $of a AR model? A rule of thumb is to look at **partial autocorrelation coefficients**, PACF. PACF measures the direct effect of a lagged value on its previous value. Suppose we want to measure the effect of $y_{t-2}$ on $y_{t}$, while $r_2$ could be high, it could also carry the effect of $y_{t-2} \rightarrow y_{t-1} \rightarrow y_t$, especially when $r_1$ is also high. This is when partial autocorrelation come to resuce, consider a AR(2) model (if we ignore any observation earlier than $y_{t-2}$, assuming that they are too distant to exert an effect)
+
+$$
+y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \epsilon_t
+$$
+
+Then a partial autocorrelation coefficient between $y_t$ and $y_{t-2}$ is defined as the square root of partial determinant coefficient 
+
+$$
+\sqrt{\frac{SSE_{y_{t-2}} - SSE_{y_{t-2}, y_{t-1}}}{SSE_{y_{t-2}}}}
+$$
+Where $SSE_{y_{t-2}, y_{t-1}}$ and  $SSE_{y_{t-2}}$ are sum of squared errors when $y_t$ is regressed on $y_{t-2}, y_{t-1}$ and only $y_{t-1}$ respectively.  
+
+A useful tool is partial correlation coefficient: 
+
+
+```r
+fpp3::aus_airpassengers %>% 
+  PACF(lag_max = 10) %>% 
+  autoplot()
+```
+
+<img src="ch9_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" />
+
+This tells us only PAC at $\text{lag} = 1$ is significantly different than 0. As such only among $y_{t-1}, y_{t-2}, \dots, y_{t-10}$, only $y_{t-1}$ has a significant **direct** effect on the response, so a AR(1) model may be appropriate. We can compare this to the ACF plot 
+
+
+```r
+fpp3::aus_airpassengers %>% 
+  ACF(lag_max = 10) %>% 
+  autoplot()
+```
+
+<img src="ch9_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" />
+
+Another characteristic of AR(p) is that ACF plots tails slowly.  
+
+<img src="images/AR_1.png" width="80%" style="display: block; margin: auto;" /><img src="images/AR_2.png" width="80%" style="display: block; margin: auto;" />
+
+
+### Random walk 
+
+Random walk is a special case of autoregressive process, namely AR(1). A time series is a random walk if 
+
+$$
+y_t = y_{t-1} + \epsilon_t \\
+\epsilon_t \;\text{is white noise}
+$$
+
+We often set a initial, fixed state $y_0 = 0$ at the beginning of white noise. And the following apply to random walks (with a fixed $y_1$)
+
+$$
+\text{mean}:  \text{E}(\epsilon_t) = 0 \\
+\text{ACF}: r_k(t) = \frac{t\sigma^2}{\sqrt{t\sigma^2(t+k)\sigma^2}}
+$$
+
+Note that a random walk process has its ACF both related to $k$ and $t$, meaning that it is not a white noise. 
+
+Random walk can be extende by adding a **drift** $\mu$, which would be the new expectation of the process. Random walk with a drift (also called a *biased random walk*) is the process behind a drift model 
+
+$$
+\begin{split}
+y_t &= \mu + y_{t-1} + \epsilon_t \\ 
+    &= \mu + \mu + y_{t-2} + \epsilon_t + \epsilon_{t-1}\\ 
+    \vdots \\
+    &= \mu t + y_0 + \sum_{i=1}^{t}\epsilon_i 
+\end{split}
+$$
+
+With little effort, we can show that for a drift process $\text{E}(y_t) = \mu$, $\text{Var}(y_t) = t\sigma^2$, and ACF stays still. A random walk with drift can be considered as a curve fluctuating around line $y = \mu t$ with increasing volatility as $t$ increases. 
+
+
+```r
+# stimulate a random walk with drift
+RW <- function(N, x0, mu, variance) {
+  z<-cumsum(rnorm(n = N, 
+                  mean = 0, 
+                  sd=sqrt(variance)))
+  t <- 1:N
+  x <- x0 + t*mu+z
+  
+  x
+  }
+# mu is the drift
+
+rw <- RW(500, 0, 1, 1) %>%
+  enframe() %>% 
+  as_tsibble(index = name)
+
+rw %>% autoplot()
+```
+
+<img src="ch9_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" />
+
+```r
+rw %>% ACF() %>% autoplot()
+```
+
+<img src="ch9_files/figure-html/unnamed-chunk-8-2.png" width="80%" style="display: block; margin: auto;" />
+
+
+
+
+## Moving average models   
+
+
+
+Rather than using past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model ^[Many textbooks and software programs define the model with negative signs before the $\theta$ terms (R uses positive signs). This doesn’t change the general theoretical properties of the model, although it does flip the algebraic signs of estimated coefficient values and (unsquared) $\theta$ terms in formulas for ACFs and variances]. 
+
+$$
+y_t = \theta_1\epsilon_{t-1} + \theta_2\epsilon_{t-2} + \dots + \theta_q\epsilon_{t-q} + \epsilon_{t}
+$$
+
+where $\epsilon_t$ is white noise. We refer to this as a MA(q) model, a moving average model of order $q$. Of course, we do not observe the values of $\epsilon_t$, so it is not really a regression in the usual sense.
+
+
+Notice that each value of $y_t$ can be thought of as a weighted moving average of the past few forecast errors. However, moving average models should not be confused with the moving average smoothing we discussed in Section \@ref(moving-averages). A moving average model is used for forecasting future values, while moving average smoothing is used for estimating the trend-cycle of past values.
+
+It is easy to show that a time series that does follow a MA model is **stationary**. A MA(1) process has the following properties 
+
+$$
+\begin{aligned}
+\text{Constant mean}: \text{E}(y_t) &= c \\
+\text{Constant variance}:\text{Var}(y_t) &= (1 + \theta_1^2)\sigma^2 \\
+\text{No seasonality}:\text{ACF} &= 
+\begin{cases}
+\frac{\theta_1}{1 + \theta_1^2} & \text{lag} = 1\\  
+0 & \text{otherwise}
+\end{cases}
+\end{aligned}
+$$
+
+Proof for ACF :
+$$
+\begin{split}
+\text{ACF}(1) &= \frac{\text{Covariance for lag} 1}{\text{variance for lag}1} \\
+           &= \frac{E[(y_t - E(y_t))(y_{t-1} - E(y_{t-1}))]}{(1 + \theta_1^2)\sigma^2} \\ 
+           &= \frac{E[(\epsilon_{t} + \theta_1\epsilon_{t-1})(\epsilon_{t-1} + \theta_1\epsilon_{t-2})]}{(1 + \theta_1^2)\sigma^2} \\
+           &= \frac{E(\epsilon_t \epsilon_{t-1} + \theta_1\epsilon_t\epsilon_{t-2} + \theta_1 \epsilon_{t-1}^2 + \theta_1^2\epsilon_{t-1}\epsilon_{t-2})}{(1 + \theta_1^2)\sigma^2} \\
+           &= \frac{\theta_1E(\epsilon_{t-1}^2)}{(1 + \theta_1^2)\sigma^2} \\
+           &= \frac{\theta_1\sigma^2}{(1 + \theta_1^2)\sigma^2} \\
+           &= \frac{\theta_1}{1 + \theta_1^2}
+\end{split}
+$$
+For $\text{lag} > 1$, there will be no square term like $\epsilon_{t-k}^2$, but only cross terms like $\epsilon_t\epsilon_{t-k}$，whose expectation would be zero by defination, so that ACF will be zero.  
+
+
+### Decision of order
+
+The derivation of the ACF function has shed light on how we would decide the order $q$. For a MA(2) process, ACF would be 0 for $k = 3, 4, \dots$. In general, for a MA(q) process, ACF will be nonzero for $k = 1, 2, \dots,q$ and zero after $q$.
+
+Let's prove this, a MA(q) model can be written as: 
+$$
+y_{t-k} = c + \theta_1\epsilon_{t-k -1} + \theta_2\epsilon_{t- k - 2} + \dots + \theta_q\epsilon_{t-k -q} + \epsilon_{t-q}
+$$
+To see at which point ACF will be zero, consider the covariance (if covariance between $y_t$ and $y_{t-k}$ is zero, then $r_k$ is zero)
+$$
+\text{Cov}(y_t, y_{t-k}) = \text{E}(y_ty_{t-k}) - \text{E}(y_t)\text{E}(y_{t-k})
+$$
+
+We know that $\text{E}(y_t)\text{E}(y_{t-k}) = c^2$.  So the problem is, what is included in $E(y_ty_{t-k})$, and when will it be $c^2$, so that the covariance would be zero? 
+
+Follow MA(q), $y_t$ includes $(c, \epsilon_t, \epsilon_{t-1}, \epsilon_{t-2}, \dots, \epsilon_{t-q})$, and $y_{t-k}$ includes $(c, \epsilon_{t-k}, \epsilon_{t-k -1}, \epsilon_{t-k -2}, \dots, \epsilon_{t - k -q})$. When they are multiplied together, there will be 
+
+$$
+\begin{aligned}
+\text{constant} &: c^2 \rightarrow E(c^2) = c^2 \\
+\text{cross terms} &: \epsilon_i\epsilon_j, i \not= j \rightarrow E(\epsilon_i\epsilon_j) = 0 \\
+\text{square terms} &: \epsilon_i^2 \rightarrow E(\epsilon_i^2) = \text{Var}(\epsilon_i) + \text{E}(\epsilon_i)^2 = \sigma^2 > 0
+\end{aligned}
+$$
+Now everything is clear, ACF will be zero, if and only if there is no **square term**. That is to say, there is no same error term when we decompose $y_t$ and $y_{t-k}$. This means the earliest error in $(\epsilon_t, \epsilon_{t-1}, \epsilon_{t-2}, \dots, \epsilon_{t-q})$ is still earlier than the latest error term in  of $(\epsilon_{t-k}, \epsilon_{t-k -1}, \epsilon_{t-k -2}, \dots, \epsilon_{t - k -q})$ 
+
+$$
+\begin{aligned}
+t - q &> t - k \\
+k &> q
+\end{aligned}
+$$
+
+Now that we have proved that when $k > q$, ACF would be zero and otherwise non-zero. So, a sample ACF with significant autocorrelations at lag 1 to lag q, but non-significant autocorrelations for after q indicates a possible MA(q) model(i.e., an ACF plot that cuts off at lag q).
+
+### Koyck transformation and Invertibility 
+
+*Koyck transformation* is one that converts a AR(p) model to MA($\infty$) model . Take an AR(1) model for example, which can be written as 
+
+
+
+$$
+\begin{aligned}
+(1 - \phi_1B)y_t &= \epsilon_t + c \\
+y_t &= \frac{\epsilon_t + c}{1 - \phi_1B} 
+\end{aligned}
+$$
+
+Note that the infinite sum of a geometric series is 
+
+$$
+\begin{aligned}
+s &= a + ar + ar^2 + \cdots \\
+  &= \frac{a}{1 - r} \quad (|r| < 1)
+\end{aligned}
+$$
+
+It follows that we can rewritten our formula as (backshift operator on a constant is still that constant, so $|\phi_1B| < 1$ ):
+
+$$
+\begin{aligned}
+y_t &= (\epsilon_t + c) + (\epsilon_t + c)\phi_1B + (\epsilon_t + c)(\phi_1B)^2 + \cdots \\
+    &= \epsilon_t + (c + \phi_1c + \phi_1^2c + \dots) + (\phi_1\epsilon_{t-1} + \phi_1^2\epsilon_{t-2} + \cdots) 
+\end{aligned}
+$$
+
+For a AR(1) model, we have $|\phi_1| < 1$. so that $(c + \phi_1c + \phi_1^2c + c\dots)$ will converge to a constant. And what we derived is exactly a MA($\infty$) model. 
+
+
+*Invertibility* is like the opposite of Koyck transformation. It describes the fact that it is possible to write any stationary MA($\infty$) model as a AR(p) model. Again, we demonstrate this with an MA(1) model (here I put a negative sign on $\theta_1$ just for convenience): 
+
+$$
+\begin{aligned}
+y_t &= c -  \theta_1\epsilon_{t-1} + \epsilon_t \\
+y_t &= (1 - \theta_1B)\epsilon_t + c\\
+\epsilon_t &= \frac{y_t - c}{1 - \theta_1B}
+\end{aligned}
+$$
+The rest is the same, $\frac{y_t - c}{1 - \theta_1B}$ can be considered as the infinite sum of a geometric series, when $|\theta_1| < 1$. And the final equation is 
+
+$$
+y_t = (c + \theta_1c + \theta_1^2c + \cdots) + (\theta_1y_{t-1} + \theta_1^2y_{t-2} + \cdots) + \epsilon_t
+$$
+With $|\theta_1| < 1$, $(c + \theta_1c + \theta_1^2c + \cdots)$ will converge to a constant and the equation qualifies for a AR($\infty$) model. Thus, when $|\theta_1| < 1$ the MA model is **invertible**. (From another perspective, if $|\theta_1| > 1$ $\phi_1, ... ,\phi_p$ in MA($\infty$) model will not met stationary conditions)
+
+
+
+## ARMA models 
+
+
+If we combine differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for **A**uto**R**egressive **I**ntegrated **M**oving **A**verage (in this context, “integration” is the reverse of differencing). The full model can be written as   
+
+\begin{equation}
+(\#eq:arima)
+y'_t =c + \phi_1y_{t-1} + \cdots + \phi_py_{t-p} + \theta_1\epsilon_{t-1} + \cdots \theta_q\epsilon_{t-q} + \epsilon_t  
+\end{equation}
+
+We call this an ARIMA(p,d,q) model, where 
+$$
+\begin{aligned}
+p &= \text{order of the autoregressive part} \\
+d &= \text{degree of first differencing involved} \\
+q &= \text{order of the moving average part}
+\end{aligned}
+$$
+
+The same stationarity and invertibility conditions that are used for autoregressive and moving average models also apply to an ARIMA model.
+
+Many of the models we have already discussed are special cases of the ARIMA model
+
+<img src="images/arima_special.png" width="80%" style="display: block; margin: auto;" />
+Once we start combining components in this way to form more complicated models, it is much easier to work with the backshift notation. For example, Equation \@ref(eq:arima) can be written in backshift notation as 
+
+$$
+(1 - \phi_1B - \cdots - \phi_pB^p)(1 - B)^dy_t = c + (1 + \theta_1B + \cdots + \theta_1B^q)\epsilon_t
+$$
+
+## Non-seasonal ARIMA models  
+
+
+
+```r
+us_change <- read_csv(pin("https://otexts.com/fpp3/extrafiles/us_change.csv")) %>% 
+  mutate(time = yearquarter(Time)) %>% 
+  as_tsibble(index = time)  
+
+us_change %>% autoplot(Consumption) +
+  labs(x = "Year", 
+       y = "Quarterly percentage change", 
+       title = "US consumption")
+```
+
+<img src="ch9_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+```r
+us_change_fit <- us_change %>% 
+  model(ARIMA(Consumption ~ PDQ(0, 0, 0)))
+
+us_change_fit %>% report()
+#> Series: Consumption 
+#> Model: ARIMA(1,0,3) w/ mean 
+#> 
+#> Coefficients:
+#>         ar1     ma1     ma2     ma3  constant
+#>       0.589  -0.353  0.0846  0.1739    0.3067
+#> s.e.  0.154   0.166  0.0818  0.0843    0.0383
+#> 
+#> sigma^2 estimated as 0.3499:  log likelihood=-165
+#> AIC=342   AICc=342   BIC=361
+```
+
+This is an ARIMA(1,0,3) model:   
+
+$$
+y_t = 0.307 + 0.589y_{t-1} - 0.352\epsilon_{t-1} + 0.085 \epsilon_{t-2} + 0.174 \epsilon_{t-3} + \epsilon_t
+$$

@@ -1,6 +1,7 @@
 
 
 
+
 # lubridate: Dates and times
 
 
@@ -8,28 +9,29 @@
 
 
 ```r
-# lubridate 不是 tidyverse 的核心包，需要手动加载
+# lubridate has to be manually loaded
 library(lubridate)
 library(nycflights13)
+library(patchwork)
 ```
 
-## 创建日期和时间  {#create-datetime}
-表示日期或时间的数据有 3 种类型: 
+## Creating dates and times
 
-* **日期**： 用年月日表示，在 tibble 中显示为`<date>`  
-* **时间**： 一天中的某个时刻，用 24 小时制表示，在 tibble 中显示为 `<time>`  
-* **日期时间**: 可以唯一标识某个时刻（通常精确到秒）的日期+时间，在 tibble 中显示为`<dttm>`。而这种类型在 R 语言的其他地方被称作 `POSIXct`  
+There are generally 3 types of date / time data :
 
+* **date**: Often specified by year, month and day. Tibble prints this as `<date>`  
+* **time**：A time within a day, specified by hour, minutes and seconds. Tibble prints this as `<time>`  
+* **date-time**: is a date plus a time. Tibbles print this as `<dttm>`. Elsewhere in R these are called `POSIXct`
 
-如果能够满足需要，就应该使用最简单的数据类型。这意味着只要能够使用日期型数据，那么就不应该使用日期时间型数据。日期时间型数据要复杂很多，因为要处理时期，我们会在本章末尾继续讨论这个问题。    
+如果能够满足需要，就应该使用最简单的数据类型。这意味着只要能够使用日期型数据，那么就不应该使用日期时间型数据。 
 
-要想得到当前日期或当前时期时间，可以使用 `today()` 或 `now()` 函数：  
+要想得到当前日期或当前时期时间，可以使用 `today()` 或 `now()` ：  
 
 ```r
 today()
-#> [1] "2020-02-06"
+#> [1] "2020-03-04"
 now()
-#> [1] "2020-02-06 22:16:15 CST"
+#> [1] "2020-03-04 00:46:10 CST"
 ```
 
 除此之外，以下 3 种方法也可以创建日期或时间：  
@@ -39,7 +41,7 @@ now()
 * 通过现有的日期时间对象创建  
 
 
-### 通过字符串创建  
+### From strings  
 日期时间数据经常用字符串表示。在事先知晓各个组成部分顺序的前提下，通过 `lubridate` 中的一些辅助函数，可以轻松将字符串转换为日期时间格式。因为要想使用函数，需要先确定年、月、日在日期数据中的顺序，然后按照同样的顺讯排列字母 y、m、d，这样就可以组成能够创建日期格式的 `lubridate` 函数名称，例如：  
 
 ```r
@@ -58,7 +60,7 @@ ymd(20190731)
 #> [1] "2019-07-31"
 ```
 
-`ymd()`和其他类似函数可以创建日期数据。想要创建日期时间型数据，可以在后面加一个下划线，以及h、m、s之中的一个或多个字母（依然要遵循顺序），这样就可以得到解析日期时间数据的函数了：
+`ymd()` 和其他类似函数可以创建日期数据。想要创建日期时间型数据，可以在后面加一个下划线，以及h、m、s之中的一个或多个字母（依然要遵循顺序），这样就可以得到解析日期时间数据的函数了：
 
 ```r
 ymd_hms("2017-01-31 20:11:59")
@@ -84,30 +86,30 @@ ymd(20170131, tz = "UTC")
 #> [1] "2017-01-31 UTC"
 ```
 
-### 通过各个成分创建  
-除了单个字符串，日期时间数据的各个成分还经常分布在表格的多个列中。flights 数据就是这样的：  
+### From individual components   
+
+  
+
+
+To create a date/time from this sort of input, use` make_date()` for dates, or `make_datetime()` for date-times. Input vectors are silently recycled: 
+ 
 
 ```r
-flights %>% select(year, month, day, hour, minute)
-#> # A tibble: 336,776 x 5
-#>    year month   day  hour minute
-#>   <int> <int> <int> <dbl>  <dbl>
-#> 1  2013     1     1     5     15
-#> 2  2013     1     1     5     29
-#> 3  2013     1     1     5     40
-#> 4  2013     1     1     5     45
-#> 5  2013     1     1     6      0
-#> 6  2013     1     1     5     58
-#> # ... with 3.368e+05 more rows
+make_datetime(year = 1999, month = 12, day = 22, sec = c(10, 11))
+#> [1] "1999-12-22 00:00:10 UTC" "1999-12-22 00:00:11 UTC"
 ```
 
-想要用这样的多个变量创建一个完整的日期或时间数据，可以使用`make_date(year,month.day,hour,min,sec,tz)`(创建日期)或`make_datetime(year,month.day,hour,min,sec,tz)`（创建日期时间）函数:  
+
+This is useful when individual components of data / time is seprated across multiple columns, as in `flights`:   
 
 ```r
-## 使用make_datetime
 flights %>% 
   select(year, month, day, hour, minute) %>%
-  mutate(departure = make_datetime(year, month, day, hour, minute))
+  mutate(departure = make_datetime(year = year, 
+                                   month = month, 
+                                   day = day, 
+                                   hour = hour, 
+                                   min = minute))
 #> # A tibble: 336,776 x 6
 #>    year month   day  hour minute departure          
 #>   <int> <int> <int> <dbl>  <dbl> <dttm>             
@@ -120,10 +122,18 @@ flights %>%
 #> # ... with 3.368e+05 more rows
 ```
 
-因为这里没有给出分钟，所以 `make_datetime()` 默认其 为0.    
+`sec` in `make_datetime()` is unassigned so it defualts to base level 0. This is also how `make_date()` workds 
 
 
-flights 数据集中的 `hour` 和 `time` 均是航班起飞时间的预计值。为了算出实际起飞、到达时间，我们需要使用`dep_time`和`arr_time`这两个变量，不过，它们同时包括了小时和分钟数：  
+```r
+make_date(year = 2020, day = 20)
+#> [1] "2020-01-20"
+make_date(month = 12, day = 20)  # year starts in 1970
+#> [1] "1970-12-20"
+```
+
+
+`flights` 中 `hour` 和 `time` 均是航班起飞时间的预计值。为了算出实际起飞、到达时间，我们需要使用 `dep_time` 和 `arr_time` 这两个变量，不过，它们同时包括了小时和分钟数：  
 
 ```r
 flights %>% select(dep_time,
@@ -173,7 +183,7 @@ make_datetime_100 <- function(year, month, day, time) {
 #> #   sched_arr_time <dttm>, air_time <dbl>
 ```
 
-我们还可以使用这些数据做出一年间出发时间或某一天内出发时间的可视化分布（精确到分钟）。**注意，当将日期时间型数据当做数值使用时（比如在直方图中），1 表示一秒，因此分箱宽度 86400 才能够表示一天。对于日期型数据(通过 `make_date()`创建)，1则表示一天。**：    
+我们还可以使用这些数据做出一年间出发时间或某一天内出发时间的可视化分布（精确到分钟）。注意在直方图的分箱宽度中，日期时间数据的单位是秒，而日期数据则是天     
 
 
 ```r
@@ -183,7 +193,7 @@ flights_dt %>%
   geom_freqpoly(aes(x = dep_time),binwidth = 86400)  ## 86000秒= 1天
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-14-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-16-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -194,38 +204,48 @@ flights_dt %>%
   geom_freqpoly(binwidth = 600)   ## 600秒 = 10分钟
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-14-2.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-16-2.svg" width="80%" style="display: block; margin: auto;" />
 
-### 日期时间型和日期型数据的相互转换  
+### From other times  
 
-有时候需要在日期时间和日期型数据之间进行转换，这正是`as_datetime()`和`as_date()`函数的功能：  
+You may want to switch between a date-time and a date. That’s the job of `as_datetime()` and `as_date()`:
+
 
 ```r
-today()
-#> [1] "2020-02-06"
-as_datetime(today())
-#> [1] "2020-02-06 UTC"
+today() %>% as_datetime()
+#> [1] "2020-03-04 UTC"
 
-now()
-#> [1] "2020-02-06 22:16:31 CST"
-as_date(now())
-#> [1] "2020-02-06"
+now() %>% as_date()
+#> [1] "2020-03-04"
 ```
 
-有时人们会使用距离”Unix时间戳“（即1970-01-01）的偏移量来表示日期时间。如果偏移量单位是秒，就用`as_datetime()`函数来转换 ； 如果偏移量单位是天，就用`as_date()`函数来转换：  
+Sometimes you’ll get date/times as numeric offsets from the “Unix Epoch”, 1970-01-01. If the offset is in seconds, use `as_datetime()`; if it’s in days, use `as_date()`.  
 
 
 ```r
-as_datetime(24 * 60 * 60)
-#> [1] "1970-01-02 UTC"
+# 1 day
+as_datetime(60 * 60 * 25)
+#> [1] "1970-01-02 01:00:00 UTC"
 as_date(1)
 #> [1] "1970-01-02"
 ```
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-17"><strong>(\#exr:unnamed-chunk-17) </strong></span>使用恰当的 lubridate 函数来解析以下每个日期：</div>\EndKnitrBlock{exercise}
 
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-19"><strong>(\#exr:unnamed-chunk-19) </strong></span>What happens if you parse a string that contains invalid dates?</div>\EndKnitrBlock{exercise}
+
+If returns `NA` and throws a warning:
+
+
+```r
+ymd(c("2010-10-10", "bananas"))
+#> Warning: 1 failed to parse.
+#> [1] "2010-10-10" NA
+```
+
+
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-21"><strong>(\#exr:unnamed-chunk-21) </strong></span>Use the appropriate lubridate function to parse each of the following dates:</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -251,18 +271,16 @@ mdy(d5)
 ```
 
 
-## 日期时间成分   {#date-component}
+## Date-time components  
 
-现在我们知道了如何将日期时间型数据保存在 R 的相应数据结构中。接下来我们研究一下能够对这些数据进行何种处理。本节将重点关注如何获取日期时间型或者日期型数据中的成分，例如如何从一个日期中获得相应的年、月、日。  
+This section will focus on the accessor functions that let you get and set individual components of a date / datetime. 
+
+### Accessing components  
 
 
-### 获取成分  
-
-
-如果想要提取出日其中的独立成分，可以使用以下访问器函数（accessor function）： `year()`、`month()`、`mday()`(一个月中的第几天)、`yday()`(一年中的第几天)、`wday()`(一周中的第几天，即星期几)、`hour()`、`minute()`、`second()` ：  
+To pull out individual parts of the date with the accessor functions, use： `year()`, `month()`, `mday()`(day of month), `yday()`(day of year), `wday()`(day of week), `hour()`, `minute()`, `second()` ：  
 
 ```r
-## 创建一个日期时间型数据
 datetime <- ymd_hms("2016-07-08 12:34:56")
 
 year(datetime)
@@ -283,19 +301,18 @@ second(datetime)
 #> [1] 56
 ```
 
-对于`wday()`和`month()`函数，可以设置 `label = T` 来返回月份名称和星期数的缩写，还可以设置`abbr = F`来返回全名 ; 这样做还有一个重要意义，**它将返回的字符串变为有序因子**, 否则 ggplot2 将其作为连续型变量对待：  
-
+For `month()` and `wday()` you can set `label = TRUE` to return the abbreviated name of the month or day of the week and convert it to a factor. Set `abbr = FALSE` to return the full name. This is useful when plotting in ggplot2 because you want a certain order  
 
 ```r
 month(datetime, label = T)
-#> [1] Jul
-#> 12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < ... < Dec
+#> [1] 7月
+#> 12 Levels: 1月 < 2月 < 3月 < 4月 < 5月 < 6月 < 7月 < 8月 < 9月 < ... < 12月
 wday(datetime, label = T, abbr = F)
-#> [1] Friday
-#> 7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
+#> [1] 星期五
+#> Levels: 星期日 < 星期一 < 星期二 < 星期三 < 星期四 < 星期五 < 星期六
 ```
 
-通过`wday()`函数，我们可以知道在工作日出发的航班要多于周末出发的航班：  
+通过 `wday()`函数，我们可以知道在工作日出发的航班要多于周末出发的航班：  
 
 ```r
 flights_dt %>% 
@@ -304,9 +321,9 @@ flights_dt %>%
   geom_bar()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-21-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-25-1.svg" width="80%" style="display: block; margin: auto;" />
 
-再看一个使用`minute()`函数获取分钟成分的例子。比如我们想知道出发时间的分钟数与平均到达延误时间的关系：  
+再看一个使用 `minute()` 函数获取分钟成分的例子。比如我们想知道出发时间的分钟数与平均到达延误时间的关系：  
 
 ```r
 flights_dt %>% 
@@ -317,26 +334,27 @@ flights_dt %>%
   geom_line()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-22-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-26-1.svg" width="80%" style="display: block; margin: auto;" />
 
-我们可以发现一个有趣的趋势，似乎在20~30分钟和第50~60分钟出发的航班的到达延误时间远远低于其他时间出发的航班。  
+我们可以发现一个有趣的趋势，似乎在 20 ~ 30 分钟和第 50 ~ 60 分钟出发的航班的到达延误时间远远低于其他时间出发的航班。  
 
 
-### 舍入（Rouding）  
-
-另一种获取日期成分的办法是将日期时间型数据近似到一个邻近的时间单位上，这要通过 `round_date()、floor_date()、ceiling_date()` 等函数。这些函数的参数都包括一个待调整的日期时间型数据（可以是向量），以及希望近似到的时间单位。函数会将这个日期时间型数据舍下 `floor_date()`、入上`ceiling_date()`或者四舍五入 `round_date()` 到这个时间单位。例如，以下代码可以绘制出每周的航班数量：
+### Rounding  
+An alternative approach to plotting individual components is to round the date to a nearby unit of time, with  `round_date()`, `floor_date()` and `ceiling_date()`. Each function takes a vector of dates to adjust and then the name of the unit round down (floor), round up (ceiling), or round to. This, for example, allows us to plot the number of flights per week:
 
 ```r
 flights_dt %>%
-  mutate(week = floor_date(dep_time, "week")) %>%
+  transmute(dep_time,
+            week = floor_date(dep_time, "week")) %>%
   ggplot(aes(week))+
   geom_bar()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-23-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-27-1.svg" width="80%" style="display: block; margin: auto;" />
 
+Note that unlike accessor functions, rounding functions still return a complte time unit, not individual components. 
 
-下面的例子可以更深入地了解这个函数族的用法：  
+More examples:    
 
 ```r
 x <- ymd_hms("2009-08-03 12:01:59.23")
@@ -370,13 +388,12 @@ round_date(x, "year")
 #> [1] "2010-01-01 UTC"
 ```
 
-### 设置成分  
+### Setting components    
 
-还可以使用访问器函数来指定日期时间型数据中的成分：  
+You can also use each accessor function to set the components of a date/time:：  
 
 ```r
-(datetime <- ymd_hms("2016-07-08,12:34:56"))
-#> [1] "2016-07-08 12:34:56 UTC"
+datetime <- ymd_hms("2016-07-08,12:34:56")
 
 year(datetime) <- 2020
 month(datetime) <- 11
@@ -387,7 +404,7 @@ datetime
 #> [1] "2020-11-05 01:34:56 UTC"
 ```
 
-除了直接修改，还可以通过`update()`函数来更新一个日期时间型数据，只需要在参数中指定各个成分的新值。这样也可以同时设置多个成分的更改：  
+Alternatively, rather than modifying in place, you can create a new date-time with `update()`. This also allows you to set multiple values at once, the api is similar to `make_datetime()`.
 
 ```r
 datetime <- ymd_hms("2016-07-08,12:34:56")
@@ -395,7 +412,7 @@ update(datetime,year = 2000, month = 11, mday = 05, hour = 01)
 #> [1] "2000-11-05 01:34:56 UTC"
 ```
 
-如果修改`yday`，相当于同时修改`mday`和`month`:
+如果修改`yday`，相当于同时修改 `mday` 和 `month`:
 
 ```r
 datetime <- ymd_hms("2016-07-08,12:34:56")
@@ -404,40 +421,57 @@ update(datetime, yday = 1)
 ```
 
 
-`update()`函数还有一种比较巧妙的用法，比如我们想可视化一年中所有航班的的出发时间在一天中的分布：  
+If values are too big, they will roll-over: 
+
+
+```r
+ymd("2015-02-01") %>% 
+  update(mday = 30)
+#> [1] "2015-03-02"
+
+ymd("2015-02-01") %>% 
+  update(hour = 400)
+#> [1] "2015-02-17 16:00:00 UTC"
+```
+
+
+`update()` 函数还有一种比较巧妙的用法，比如我们想可视化一年中所有航班的的出发时间在一天中的分布：  
 
 ```r
 flights_dt %>%
-  mutate(dep_hour = update(dep_time, yday = 1)) %>%
-  ## 将所有出发时间都转为在1月1号的
-  ggplot(aes(x=dep_hour)) +
-  geom_freqpoly(binwidth = 300) + ## 五分钟一个分箱
-  ggtitle("将日期中较大的成分设定为常数来探索其中较小成分的模式")
+  transmute(dep_hour = update(dep_time, yday = 1)) %>%
+  ggplot(aes(dep_hour)) +
+  geom_freqpoly(binwidth = 60 * 5) + # 1 bin per 5 minutes
+  scale_x_datetime(breaks = scales::breaks_width("3 hours"),
+               label = scales::label_date_short()) + 
+  labs(title = "All flight dep time in a day")
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-28-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-33-1.svg" width="80%" style="display: block; margin: auto;" />
 
-如果不用 `update()` 函数，我们可能需要先用`hour()、minute()、second()`获取三种成分，然后再用`make_datetime()`对这三种成分进行合并。  
+如果不用 `update()` ，我们可能需要先用`hour()、minute()、second()`获取三种成分，然后再用`make_datetime()`对这三种成分进行合并。  
 
 
 ### Exercises   
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-29"><strong>(\#exr:unnamed-chunk-29) </strong></span>以月份作为分组变量，在一年的范围内，航班时间在一天中的分布是如何变化的？ 
-</div>\EndKnitrBlock{exercise}
+
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-34"><strong>(\#exr:unnamed-chunk-34) </strong></span>以月份作为分组变量，在一年的范围内，航班时间在一天中的分布是如何变化的？ </div>\EndKnitrBlock{exercise}
 
 
 
 
 ```r
 flights_dt %>%
-  mutate(month = factor(month(dep_time)), 
-        dep_time = update(dep_time,yday = 1)) %>%
-  ggplot(aes(x=dep_time,color = month)) +
-  geom_freqpoly(binwidth = 600)
+  mutate(month = month(dep_time, label = TRUE), # this means month is now a factor 
+        dep_time = update(dep_time, yday = 1)) %>% # yday can be an arbitary number
+  ggplot(aes(dep_time)) +
+  geom_freqpoly(binwidth = 60 * 60) + 
+  scale_x_time(labels = scales::label_time()) +
+  facet_wrap(vars(month), nrow = 4)
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-30-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-35-1.svg" width="80%" style="display: block; margin: auto;" />
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-31"><strong>(\#exr:unnamed-chunk-31) </strong></span>如果想要再将延误的几率降至最低，那么应该在星期几搭乘航班？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-36"><strong>(\#exr:unnamed-chunk-36) </strong></span>如果想要再将延误的几率降至最低，那么应该在星期几搭乘航班？  </div>\EndKnitrBlock{exercise}
 
 
 
@@ -450,10 +484,10 @@ flights_dt %>%
   geom_line(aes(group = 1))
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-32-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-37-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-33"><strong>(\#exr:unnamed-chunk-33) </strong></span>航班预计起飞的小时对应的平均延误时间在一天的范围内是如何变化的？ </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-38"><strong>(\#exr:unnamed-chunk-38) </strong></span>航班预计起飞的小时对应的平均延误时间在一天的范围内是如何变化的？ </div>\EndKnitrBlock{exercise}
 
 
 
@@ -467,9 +501,9 @@ flights_dt %>%
   geom_smooth()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-34-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-39-1.svg" width="80%" style="display: block; margin: auto;" />
 
-## 时间间隔 {#time-span}
+## Time span {#time-span}
 
 接下来我们将讨论如何对时间进行数学运算，其中包括减法、加法和除法。我们可以把用于进行数学运算的时间称为时间间隔(time span)，它表示一种跨度，而不是某个静态的时间。本节将介绍3种用于表示时间间隔的重要类：   
 
@@ -483,17 +517,17 @@ flights_dt %>%
 
 
 ```r
-h_age <- today() - ymd(19981112) ## 年龄
-h_age
-#> Time difference of 7756 days
+my_age <- today() - ymd(19981112) 
+my_age
+#> Time difference of 7783 days
 ```
 
-`difftime`对象的单位可以是秒、分钟、小时、日或周。这种模棱两可的对象处理起来非常困难，，所以 lubridate提供了总是以秒为单位的另一种时间间隔：**时期**。
+`difftime` 对象的单位可以是秒、分钟、小时、日或周。这种模棱两可的对象处理起来非常困难，，所以 lubridate提供了总是以秒为单位的另一种时间间隔：**时期**。
 
 
 ```r
-as.duration(h_age)
-#> [1] "670118400s (~21.23 years)"
+as.duration(my_age)
+#> [1] "672451200s (~21.31 years)"
 ```
 
 可以用很多方便的函数来构造时期，它们有统一的格式`d + 时间单位（复数）`：  
@@ -532,10 +566,10 @@ dyears(1) + dweeks(12) + ddays(10)
 
 ```r
 (tomorrow <- today() + ddays(1))
-#> [1] "2020-02-07"
+#> [1] "2020-03-05"
 
 (last_year <- now() - dyears(1))
-#> [1] "2019-02-06 22:16:56 CST"
+#> [1] "2019-03-05 00:46:46 CST"
 ```
 
 然而，因为时期表示的是秒为单位的一个精确数值，有时我们会得到意想不到的结果：  
@@ -549,12 +583,12 @@ one_pm + ddays(1)
 #> [1] "2016-03-13 14:00:00 EDT"
 ```
 
-为什么3月12日下午1点加上一天后变成了下午2点？如果仔细观察，就会发现时区发生了变化。因为夏时制，3月12日只有23个小时，但我们告诉R"加上24个小时代表的秒数"，所以得到了一个不正确的时间。  
+为什么3月12日下午 1 点加上一天后变成了下午 2 点？如果仔细观察，就会发现时区发生了变化。因为夏时制，3 月 12 日只有 23 个小时，但我们告诉 R "加上 24 个小时代表的秒数"，所以得到了一个不正确的时间。  
 
 
 
 ### 阶段 Periods  
-为了解决时期对象的问题，lubridate 提供了 **阶段** 对象。阶段也是一种 time span，但是它不以秒为单位 ； 相反，它使用“人工”时间，比如日和月。这使得阶段使用起来更加符合习惯  
+为了解决时期对象的问题，`lubridate` 提供了 **阶段** 对象。阶段也是一种 time span，但是它不以秒为单位 ； 相反，它使用“人工”时间，比如日和月。这使得阶段使用起来更加符合习惯  
 
 
 
@@ -614,6 +648,37 @@ one_pm + days(1)
 ```
 
 
+There is still one specific problem worth mentioning. That is adding months. Adding months frustrates basic arithmetic because consecutive months have different lengths. With other elements, it is helpful for arithmetic to perform automatic roll over. For example, 12:00:00 + 61 seconds becomes 12:01:01. However, people often prefer that this behavior *NOT* occur with months. For example, we sometimes want January 31 + 1 month = February 28 and not March 3. `%m+%` performs this type of arithmetic. `Date %m+% months(n)` always returns a date in the nth month after Date. If you want minus, `%m-%` does the job.  
+
+
+```r
+jan <- ymd("2010-01-31")
+
+jan + months(1:3) # Feb 31 and April 31 returned as NA, because there is no such date
+#> [1] NA           "2010-03-31" NA
+jan %m+% months(1:3)
+#> [1] "2010-02-28" "2010-03-31" "2010-04-30"
+jan %m-% months(1:3)
+#> [1] "2009-12-31" "2009-11-30" "2009-10-31"
+```
+
+
+`%m+%` can be also applied to other time span. For example, it is useful when performing arithmetic around a leap year:  
+
+
+```r
+leap <- ymd(20200229)
+# test if it is a leap year
+leap_year(leap)
+#> [1] TRUE
+
+leap + years(c(-1, 1))
+#> [1] NA NA
+leap %m+% years(c(-1, 1))
+#> [1] "2019-02-28" "2021-02-28"
+```
+
+
 下面我们使用 Periods 来解决与航班日期有关的一个怪现象。有些飞机似乎从纽约市起飞前就到达了目的地：  
 
 ```r
@@ -649,27 +714,27 @@ flights_dt %>% filter(overnight, arr_time < dep_time)
 
 ### 区间 Intervals   
 
-显然，`dyears(1)/ddays(365)`应该返回1，因为时期总是以秒来表示的，表示1年的时间就定义为相当于365天的秒数。  
-那么`years(1) / days(1)`应该返回什么呢？如果年份 是 2015 年，那么结果就是 365，但如果年份是 2016 年，那么结果就是 366！没有足够的信息让 lubridate 返回一个明确的结果。lubridate 的做法是给出一个估计值，同时给出一条警告：  
+显然，`dyears(1) / ddays(365)`应该返回1，因为时期总是以秒来表示的，表示 1 年的时间就定义为相当于 365 天的秒数。  
+那么`years(1) / days(1)`应该返回什么呢？如果年份 是 2015 年，那么结果就是 365，但如果年份是 2016 年，那么结果就是 366！没有足够的信息让 `lubridate` 返回一个明确的结果。`lubridate` 的做法是给出一个估计值，同时给出一条警告：  
 
 ```r
 years(1) / days(1)
 #> [1] 365
 ```
 
-如果需要更精确的测量方式，那么就必须使用**区间**。区间是带有明确起点和终点的时期，这使得它非常精确,可以用`interval()`来创建一个区间：  
+如果需要更精确的测量方式，那么就必须使用**区间**。区间是带有明确起点和终点的时期，这使得它非常精确, 可以用 `interval()` 来创建一个区间：  
 
 ```r
 interval(ymd(20090201), ymd(20090101))
 #> [1] 2009-02-01 UTC--2009-01-01 UTC
 ```
 
-一种更简单的创建区间的方式是使用操作符`%--%`
+一种更简单的创建区间的方式是使用操作符 `%--%`
 
 ```r
 next_year <- today() + years(1)
 today() %--% next_year 
-#> [1] 2020-02-06 UTC--2021-02-06 UTC
+#> [1] 2020-03-04 UTC--2021-03-04 UTC
 ```
 
 要想知道一个区间内有多少个阶段，需要使用整数除法。利用区间进行精确计算：
@@ -683,16 +748,20 @@ today() %--% next_year
 #> [1] 365
 ```
 
-### 小结  
+### Conclusion
+
+
 如何在时期、阶段和区间中进行选择呢？只要能够解决问题，我们就应该选择最简单的数据结构。如果只关心物理时间，那么就使用时期 Durations ； 如果还需要考虑人工时间，那么就使用阶段 Periods ； 如果需要找出人工时间范围内有多长的时间间隔，那么就使用区间。  
 
 下图总结了不同数据类型之间可以进行的数学运算： 
-![](images/1.png)
+
+<img src="images/1.png" width="80%" style="display: block; margin: auto;" />
+
 
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-51"><strong>(\#exr:unnamed-chunk-51) </strong></span>创建一个日期向量来给出 2015 年每个月的第一天 </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-59"><strong>(\#exr:unnamed-chunk-59) </strong></span>创建一个日期向量来给出 2015 年每个月的第一天 </div>\EndKnitrBlock{exercise}
 
 
 
@@ -703,14 +772,14 @@ ymd(20150101) + months(0:11)
 #> [11] "2015-11-01" "2015-12-01"
 
 ## To get the vector of the first day of the month for this year, we first need to figure out what this year is, and get January 1st of it
-floor_date(today(),"year") + months(0:11)
+floor_date(today(), "year") + months(0:11)
 #>  [1] "2020-01-01" "2020-02-01" "2020-03-01" "2020-04-01" "2020-05-01"
 #>  [6] "2020-06-01" "2020-07-01" "2020-08-01" "2020-09-01" "2020-10-01"
 #> [11] "2020-11-01" "2020-12-01"
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-53"><strong>(\#exr:unnamed-chunk-53) </strong></span>编写一个函数，输入你的生日（日期型），返回你的年龄（以年为单位）：  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-61"><strong>(\#exr:unnamed-chunk-61) </strong></span>编写一个函数，输入你的生日（日期型），返回你的年龄（以年为单位）：  </div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -724,4 +793,285 @@ age("19981112")
 ```
 
 
+## hms
+
+
+```r
+library(hms)
+```
+
+The `hms` package provides a simple class for storing durations or time-of-day values and displaying them in the hh:mm:ss format. 
+
+
+```r
+# order: seconds, minutes, hours
+hms(56, 34, 12)
+#> 12:34:56
+hms(56, 34, 12) %>% class
+#> [1] "hms"      "difftime"
+
+data.frame(hours = 1:3, hms = hms(hours = 1:3))
+#>   hours      hms
+#> 1     1 01:00:00
+#> 2     2 02:00:00
+#> 3     3 03:00:00
+
+as_hms(1)
+#> 00:00:01
+as_hms("12:34:56")
+#> 12:34:56
+```
+
+`hms()` is a constructor that accepts second, minute, hour and day components as numeric vectors.
+
+
+`round_hms()` and `trunc_hms()` are onvenience functions to round or truncate to a multiple of seconds. They are similar to `floor_date()` and `ceiling_date()` in Section \@ref(rounding), but the time unit can only be seconds 
+
+
+```r
+round_hms(as_hms("12:34:56"), sec = 5)
+#> 12:34:55
+round_hms(as_hms("12:34:56"), sec = 60)
+#> 12:35:00
+trunc_hms(as_hms("12:34:56"), 60)
+#> 12:34:00
+```
+
+## dint 
+
+While `lubridate` can handle date & time data in an effective manner, currently it requires the largest unit of a date to be days. This means it does not cover functionality for working with year-quarter, year-month and year-isoweek dates.  
+
+In contrast, `dint` provides a toolkit for these 3 types of date. It stores them in an easily human readable integer format, e.q `20141` for the first quarter of 2014 and so forth. Additionally, it goes hand in hand with `lubridate` in more ways than one. `dint` is implemented in base R and comes with zero external dependencies. Even if you don’t work with such special dates directly, dint can still help you at formatting dates, labelling plot axes, or getting first / last days of calendar periods (quarters, months, isoweeks).   
+
+`dint` provides 4 different S3 classes that inherit from `date_xx` (a superclass for package development purpose).
+
+- `date_yq()` for year-quarter dates  
+
+- `date_ym` for year-month dates 
+
+- `date_yw` for year-isoweek dates  
+
+- `date_y()` for storing years. This is for development purpose, and does not provide notable advantage over storing year as integers.    
+
+
+```r
+library(dint)
+```
+
+
+### Creation  
+
+`date_xx` vectors can be created using explicit constructors  
+
+
+```r
+date_yq(2015, 1)
+#> [1] "2015-Q1"
+# vectorized 
+date_ym(c(2015, 2016), c(1, 2))
+#> [1] "2015-M01" "2016-M02"
+date_yw(c(2008, 2009), 1)
+#> [1] "2008-W01" "2009-W01"
+```
+
+It is worth mentioning that `tsibble` also provides similar functions like `yearquarter()`, `yearmonth()` and `yearweek()`. But I think they are generally not flexible in this use case. 
+
+`as_date_xx` coerce other classes (mainly `Date`,  `POSIXct`(time) and `integer`) into `date_xx` objects  
+
+
+```r
+as_date_yq(Sys.time())
+#> [1] "2020-Q1"
+as_date_yq(20141)
+#> [1] "2014-Q1"
+as_date_ym(201412) 
+#> [1] "2014-M12"
+as_date_yw("2018-01-01")  # anything else that can be parsed by as.Date() works
+#> [1] "2018-W01"
+```
+
+### Arithmetic and Sequences
+
+All `date_xx` support addition, subtraction and sequence generation.  
+
+
+```r
+q <- date_yq(2014, 4)
+q + 1
+#> [1] "2015-Q1"
+q - 1
+#> [1] "2014-Q3"
+seq(q - 2, q + 2)
+#> [1] "2014-Q2" "2014-Q3" "2014-Q4" "2015-Q1" "2015-Q2"
+```
+
+
+### Accessors  
+
+We can access components of `date_xx` (e.g the quarter of a `date_yq`) with accessor functions. You can also use these functions to convert between `date_xx` vectors.
+
+
+```r
+q <- date_yq(2014, 4)
+get_year(q)
+#> [1] 2014
+get_month(q)
+#> [1] 10
+get_isoweek(q)
+#> [1] 40
+```
+
+Accessor functions in `dint` are compatible with `Date`, `POSIXct` classes, so are `year()`, `month()` and `day()` in `lubridate` with `date_xx` classes.  
+
+
+```r
+# dint accessor functions on other classes
+get_quarter(Sys.Date())
+#> [1] 1
+get_month(ymd(20200303))
+#> [1] 3
+get_isoweek(Sys.time())
+#> [1] 10
+
+# lubridate accessor functions on date_xx classes 
+year(q)
+#> [1] 2014
+quarter(q) # default to first month in 4th quarter
+#> [1] 4
+month(q)
+#> [1] 10
+day(q) # default to 1st day in that month
+#> [1] 1
+```
+
+`first_of_xx`, `last_of_xx` are 2 helper functions to access the first or last **day** within a specifit span from a `date_xx`, `Date` and `POSIX` object.  
+
+
+```r
+q <- date_yq(2015, 1)
+
+ # the same as as.Date(q), but more explicit
+first_of_quarter(q) 
+#> [1] "2015-01-01"
+
+last_of_quarter(q) 
+#> [1] "2015-03-31"
+
+d <- ymd("20200303")
+# first locate the date in a isoweek, then find the first day in that isoweek
+first_of_isoweek(d) 
+#> [1] "2020-03-02"
+
+last_of_month(d)
+#> [1] "2020-03-31"
+```
+
+
+```r
+# Alternativeley you can use these:
+first_of_yq(2012, 2)
+#> [1] "2012-04-01"
+last_of_ym(2012, 2)
+#> [1] "2012-02-29"
+last_of_yw(2012, 2)
+#> [1] "2012-01-15"
+```
+
+### Formatting  
+
+Formatting date_xx vectors is easy and uses a subset of the placeholders of `base::strptime()`(plus `%q` for quarters)  
+
+
+```r
+q <- date_yq(2014, 4)
+
+format(q, "%Y Q%q")
+#> [1] "2014 Q4"
+format(q, "%Y.%q")
+#> [1] "2014.4"
+format(q, "%y.%q")
+#> [1] "14.4"
+
+m <- date_ym(2014, 12)
+format(m, "%Y-M%m")
+#> [1] "2014-M12"
+
+w <- date_yw(2014, 1)
+format(w, "%Y-W%V")
+#> [1] "2014-W01"
+```
+
+There are some shorthands functions for formatting 
+
+
+```r
+format_yq(Sys.Date())
+#> [1] "2020-Q1"
+format_yq_short(Sys.Date())
+#> [1] "2020.1"
+format_yq_shorter(Sys.Date())
+#> [1] "20.1"
+
+format_ym(Sys.Date())
+#> [1] "2020-M03"
+format_ym_short(Sys.Date())
+#> [1] "2020.03"
+format_ym_shorter(Sys.Date())
+#> [1] "20.03"
+```
+
+
+### Labelling functions in ggplot2  
+
+There are two ways of making use of `dint` functionality when working with date axis in `ggplot2`  
+
+- use scale `scale_date_**()`, this is implemented by default 
+- pass shorthand `format_**` functions to argument `labels` in any scale, this is also applicable to `Date` axes.  
+
+
+
+```r
+q <- tibble(
+  time  = seq(date_yq(2016, 1), date_yq(2016, 4)),
+  value = rnorm(4)
+)
+
+ggplot(q) + 
+  geom_line(aes(time, value)) +
+  scale_x_date_ym() + 
+  ggtitle("scale_x_yq() by default") -> p1
+
+ggplot(q) + 
+  geom_line(aes(time, value)) +
+  scale_x_date_ym(labels = format_ym_iso) + 
+  ggtitle("labels = format_ym_iso") -> p2
+
+p1 + p2
+```
+
+<img src="lubridate_files/figure-html/unnamed-chunk-76-1.svg" width="80%" style="display: block; margin: auto;" />
+
+Use `format_**` in `Date` axes   
+
+
+```r
+x <- data.frame(
+  time  = seq(as.Date("2016-01-01"), as.Date("2016-08-08"), by = "day"),
+  value = rnorm(221)
+)
+
+p <- ggplot(
+  x,
+  aes(
+    x = time, 
+    y = value)
+  ) + geom_point()
+
+p + ggtitle("default")
+p + scale_x_date(labels = format_yq_iso) + ggtitle("date_yq_iso")
+p + scale_x_date(labels = format_ym_short) + ggtitle("date_ym_short")
+p + scale_x_date(labels = format_yw_shorter) + ggtitle("date_yw_shorter")
+```
+
+<img src="lubridate_files/figure-html/unnamed-chunk-77-1.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-77-2.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-77-3.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-77-4.svg" width="50%" />
 

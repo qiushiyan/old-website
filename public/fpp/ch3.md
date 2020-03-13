@@ -1,5 +1,4 @@
 
-
 # Time series decomposition
 
 
@@ -58,7 +57,7 @@ print_retail %>%
   facet_wrap(~ type, scales = "free_y")
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ### Mathematical transformation (Box-Cox)  {#box-cox}
@@ -100,7 +99,7 @@ aus_production %>%
   facet_wrap(~ type, scales = "free")
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-5-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -171,11 +170,11 @@ aus_exports %>%
   scale_color_manual(values = c("red", "black"))
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" />
 
 Notice that the trend-cycle (in <span style="color: red;">red</span>) is smoother than the original data and captures the main movement of the time series without all of the minor fluctuations. The order of the moving average determines the smoothness of the trend-cycle estimate. In general, a larger order means a smoother curve. Figure below shows the effect of changing the order of the moving average for the Australian exports data.  
 
-<img src="images/ma.png" width="80%" style="display: block; margin: auto;" />
+<img src="images/ma.png" width="90%" style="display: block; margin: auto;" />
 
 Simple moving averages such as these are usually of an odd order (e.g., $3$, $5$, $7$, etc.). This is so they are symmetric: in a moving average of order $m = 2k + 1$, the middle observation, and $k$ observations on either side, are averaged. But if m was even, it would no longer be symmetric.  
 
@@ -238,7 +237,7 @@ aus_livestock %>%
   filter(Animal == "Pigs", State == "Australian Capital Territory") %>%
   gg_season()
 ```
-<img src="images/livestock.png" width="80%" style="display: block; margin: auto;" />
+<img src="images/livestock.png" width="90%" style="display: block; margin: auto;" />
 
 
 Since it is collected monthly, we can use a $2\times12-MA$ to average out the seasonality:  
@@ -258,7 +257,7 @@ capital_livestock_ma %>%
   scale_color_manual(values = c("red", "gray"))
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -294,7 +293,7 @@ classical_dcmp <- us_retail_employment %>%
 classical_dcmp %>% autoplot()
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -317,12 +316,12 @@ x11_dcmp
 #> # X11 Decomposition: Employed = trend + seasonal + irregular
 #>   .model    Month Employed  trend seasonal irregular season_adjust
 #>   <chr>     <mth>    <dbl>  <dbl>    <dbl>     <dbl>         <dbl>
-#> 1 x11    1990 Jan   13256. 13260.    -20.5    16.0          13276.
-#> 2 x11    1990 Feb   12966. 13248.   -253.    -29.1          13219.
-#> 3 x11    1990 Mar   12938. 13237.   -291.     -7.47         13229.
-#> 4 x11    1990 Apr   13012. 13227.   -217.      2.31         13229.
-#> 5 x11    1990 May   13108. 13217.   -111.      2.40         13219.
-#> 6 x11    1990 Jun   13183. 13204.    -21.0    -0.192        13204.
+#> 1 x11    1990 1月   13256. 13260.    -20.5    16.0          13276.
+#> 2 x11    1990 2月   12966. 13248.   -253.    -29.1          13219.
+#> 3 x11    1990 3月   12938. 13237.   -291.     -7.47         13229.
+#> 4 x11    1990 4月   13012. 13227.   -217.      2.31         13229.
+#> 5 x11    1990 5月   13108. 13217.   -111.      2.40         13219.
+#> 6 x11    1990 6月   13183. 13204.    -21.0    -0.192        13204.
 #> # ... with 351 more rows
 ```
 
@@ -343,7 +342,7 @@ x11_dcmp %>%
              breaks = c("Data","Seasonally Adjusted","Trend"))
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -352,7 +351,7 @@ x11_dcmp %>%
 x11_dcmp %>% autoplot()
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-15-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 It can be useful to use seasonal plots and seasonal sub-series plots of the seasonal component. These help us to visualise the variation in the seasonal component over time. In this case, there are only small changes over time.  
@@ -363,7 +362,7 @@ x11_dcmp %>%
   gg_subseries(seasonal)
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -378,7 +377,7 @@ us_retail_employment %>%
     autoplot()
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## SEATS decomposition  
 
@@ -399,7 +398,7 @@ seats_dcmp %>%
   ggtitle("SEATS decomposition of total US retail employment")
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-18-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## STL decomposition  
 
@@ -421,7 +420,7 @@ us_retail_employment %>%
   autoplot()
 ```
 
-<img src="ch3_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch3_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 

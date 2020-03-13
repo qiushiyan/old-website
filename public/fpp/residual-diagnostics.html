@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.4 Residual diagnostics | Notes for “Forecasting: Principles and Practice, 3rd edition”</title>
   <meta name="description" content="“Reproducing”Forecasting: Principles and Practice, 3rd edition"" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.4 Residual diagnostics | Notes for “Forecasting: Principles and Practice, 3rd edition”" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-01" />
+<meta name="date" content="2020-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.1" data-path="lag-plots.html"><a href="lag-plots.html#autocorrelation"><i class="fa fa-check"></i><b>2.7.1</b> Autocorrelation</a></li>
 <li class="chapter" data-level="2.7.2" data-path="lag-plots.html"><a href="lag-plots.html#trend-and-seasonality-in-acf-plots"><i class="fa fa-check"></i><b>2.7.2</b> Trend and seasonality in ACF plots</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="white-noise.html"><a href="white-noise.html"><i class="fa fa-check"></i><b>2.8</b> White noise</a></li>
+<li class="chapter" data-level="2.8" data-path="calendar-plots.html"><a href="calendar-plots.html"><i class="fa fa-check"></i><b>2.8</b> Calendar plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>3</b> Time series decomposition</a><ul>
 <li class="chapter" data-level="3.1" data-path="transformation-and-adjustments.html"><a href="transformation-and-adjustments.html"><i class="fa fa-check"></i><b>3.1</b> Transformation and adjustments</a><ul>
@@ -200,8 +200,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="fitted-values-and-residuals.html"><a href="fitted-values-and-residuals.html#residuals"><i class="fa fa-check"></i><b>5.3.1</b> Residuals</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html"><i class="fa fa-check"></i><b>5.4</b> Residual diagnostics</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.1</b> Example: Forecasting the Google daily closing stock price</a></li>
-<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.2</b> Portmanteau tests for autocorrelation</a></li>
+<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#white-noise"><i class="fa fa-check"></i><b>5.4.1</b> White noise</a></li>
+<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.2</b> Example: Forecasting the Google daily closing stock price</a></li>
+<li class="chapter" data-level="5.4.3" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.3</b> Portmanteau tests for autocorrelation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="predict-interval.html"><a href="predict-interval.html"><i class="fa fa-check"></i><b>5.5</b> Prediction intervals</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="predict-interval.html"><a href="predict-interval.html#one-step-prediction-intervals"><i class="fa fa-check"></i><b>5.5.1</b> One-step prediction intervals</a></li>
@@ -266,7 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-predictors"><i class="fa fa-check"></i><b>7.3.1</b> Residual plots against predictors</a></li>
 <li class="chapter" data-level="7.3.2" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-fitted-values"><i class="fa fa-check"></i><b>7.3.2</b> Residual plots against fitted values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#outliers-and-influential-observations"><i class="fa fa-check"></i><b>7.3.3</b> Outliers and influential observations</a></li>
-<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.4</b> Spurious regression</a></li>
+<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#the-performance-package"><i class="fa fa-check"></i><b>7.3.4</b> The <code>performance</code> package</a></li>
+<li class="chapter" data-level="7.3.5" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.5</b> Spurious regression</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Some useful predictors</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html#trend"><i class="fa fa-check"></i><b>7.4.1</b> Trend</a></li>
@@ -338,21 +340,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.2" data-path="forecasting-with-ets-models.html"><a href="forecasting-with-ets-models.html#prediction-intervals-1"><i class="fa fa-check"></i><b>8.6.2</b> Prediction intervals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>9</b> ARIMA models</a><ul>
-<li class="chapter" data-level="9.1" data-path="stationarity-and-differencing.html"><a href="stationarity-and-differencing.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity and differencing</a></li>
+<li class="chapter" data-level="9" data-path="univariate-stationary-processes.html"><a href="univariate-stationary-processes.html"><i class="fa fa-check"></i><b>9</b> Univariate stationary processes</a><ul>
+<li class="chapter" data-level="9.1" data-path="stationarity.html"><a href="stationarity.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="stationarity.html"><a href="stationarity.html#ch9-white-noise"><i class="fa fa-check"></i><b>9.1.1</b> White noise</a></li>
+<li class="chapter" data-level="9.1.2" data-path="stationarity.html"><a href="stationarity.html#tests-for-autocorrelation-and-normality"><i class="fa fa-check"></i><b>9.1.2</b> Tests for autocorrelation and normality</a></li>
+<li class="chapter" data-level="9.1.3" data-path="stationarity.html"><a href="stationarity.html#the-wold-decomposition"><i class="fa fa-check"></i><b>9.1.3</b> The Wold Decomposition</a></li>
+</ul></li>
 <li class="chapter" data-level="9.2" data-path="backshift-notation.html"><a href="backshift-notation.html"><i class="fa fa-check"></i><b>9.2</b> Backshift notation</a></li>
 <li class="chapter" data-level="9.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html"><i class="fa fa-check"></i><b>9.3</b> Autoregressive models</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order"><i class="fa fa-check"></i><b>9.3.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.2</b> Random walk</a></li>
+<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#stimulating-an-arp-process"><i class="fa fa-check"></i><b>9.3.1</b> Stimulating an AR(p) process</a></li>
+<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order-p"><i class="fa fa-check"></i><b>9.3.2</b> Decision of order p</a></li>
+<li class="chapter" data-level="9.3.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.3</b> Random walk</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="moving-average-models.html"><a href="moving-average-models.html"><i class="fa fa-check"></i><b>9.4</b> Moving average models</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-1"><i class="fa fa-check"></i><b>9.4.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.2</b> Koyck transformation and Invertibility</a></li>
+<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#simulating-an-maq-process"><i class="fa fa-check"></i><b>9.4.1</b> Simulating an MA(q) process</a></li>
+<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
+<li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
-<li class="chapter" data-level="9.6" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>9.6</b> Non-seasonal ARIMA models</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>10</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
+<li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="differencing.html"><a href="differencing.html#second-order-differencing"><i class="fa fa-check"></i><b>10.1.1</b> Second-order differencing</a></li>
+<li class="chapter" data-level="10.1.2" data-path="differencing.html"><a href="differencing.html#seasonal-differencing"><i class="fa fa-check"></i><b>10.1.2</b> Seasonal differencing</a></li>
+<li class="chapter" data-level="10.1.3" data-path="differencing.html"><a href="differencing.html#unit-root-tests"><i class="fa fa-check"></i><b>10.1.3</b> Unit root tests</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.2</b> Non-seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html#understanding-arima-models"><i class="fa fa-check"></i><b>10.2.1</b> Understanding ARIMA models</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html"><i class="fa fa-check"></i><b>10.3</b> Estimation and order selection</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#mle"><i class="fa fa-check"></i><b>10.3.1</b> MLE</a></li>
+<li class="chapter" data-level="10.3.2" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#information-criteria"><i class="fa fa-check"></i><b>10.3.2</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="the-arima-function.html"><a href="the-arima-function.html"><i class="fa fa-check"></i><b>10.4</b> The <code>ARIMA()</code> function</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="the-arima-function.html"><a href="the-arima-function.html#algorithm"><i class="fa fa-check"></i><b>10.4.1</b> Algorithm</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-arima-function.html"><a href="the-arima-function.html#modelling-procedure"><i class="fa fa-check"></i><b>10.4.2</b> Modelling procedure</a></li>
+<li class="chapter" data-level="10.4.3" data-path="the-arima-function.html"><a href="the-arima-function.html#example-seasonally-adjusted-electrical-equipment-orders"><i class="fa fa-check"></i><b>10.4.3</b> Example: Seasonally adjusted electrical equipment orders</a></li>
+<li class="chapter" data-level="10.4.4" data-path="the-arima-function.html"><a href="the-arima-function.html#plotting-the-characteristic-roots"><i class="fa fa-check"></i><b>10.4.4</b> Plotting the characteristic roots</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html"><i class="fa fa-check"></i><b>10.5</b> Forecasting with ARIMA models</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#point-forecasts"><i class="fa fa-check"></i><b>10.5.1</b> Point forecasts</a></li>
+<li class="chapter" data-level="10.5.2" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#prediction-intervals-2"><i class="fa fa-check"></i><b>10.5.2</b> Prediction intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.6</b> Seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#acf-and-pacf"><i class="fa fa-check"></i><b>10.6.1</b> ACF and PACF</a></li>
+<li class="chapter" data-level="10.6.2" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-european-quarterly-retail-trade"><i class="fa fa-check"></i><b>10.6.2</b> Example: European quarterly retail trade</a></li>
+<li class="chapter" data-level="10.6.3" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-corticosteroid-drug-sales-in-australia"><i class="fa fa-check"></i><b>10.6.3</b> Example: Corticosteroid drug sales in Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="ets-and-arima.html"><a href="ets-and-arima.html"><i class="fa fa-check"></i><b>10.7</b> ETS and ARIMA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-non-seasonal-data"><i class="fa fa-check"></i><b>10.7.1</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on non-seasonal data</a></li>
+<li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -380,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>The residuals are <strong>uncorrelated.</strong> If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.<br />
 </li>
-<li>The residuals have <strong>zero mean</strong>(i.e., <span class="math inline">\(E(e) = 0\)</span>. If the residuals have a mean other than zero, then the forecasts are biased.</li>
+<li>The residuals have <strong>zero mean</strong>(i.e., <span class="math inline">\(E(e_t) = 0\)</span>. If the residuals have a mean other than zero, then the forecasts are biased.</li>
 </ol>
 <p>Any forecasting method that does not satisfy these properties can be improved. However, that does not mean that forecasting methods that satisfy these properties cannot be improved. It is possible to have several different forecasting methods for the same data set, all of which satisfy these properties. Checking these properties is important in order to see whether a method is using all of the available information, but it is not a good way to select a forecasting method.</p>
 <p>If either of these properties is not satisfied, then the forecasting method can be modified to give better forecasts. Adjusting for bias is easy: if the residuals have mean <span class="math inline">\(m\)</span>
@@ -394,69 +434,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </blockquote>
 <p>These two properties make the calculation of prediction intervals easier (see Section 5.5 for an example). However, a forecasting method that does not satisfy these properties cannot necessarily be improved. Sometimes applying a Box-Cox transformation may assist with these properties, but otherwise there is usually little that you can do to ensure that your residuals have constant variance and a normal distribution. Instead, an alternative approach to obtaining prediction intervals is necessary. Again, we will not address how to do this until later in the book.</p>
+<div id="white-noise" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> White noise</h3>
+<p>A time series is (discrete) white noise if its values are (see mathematical definition in Section <a href="stationarity.html#ch9-white-noise">9.1.1</a>):</p>
+<ol style="list-style-type: decimal">
+<li>independent</li>
+<li>identically distributed with a mean of zero</li>
+</ol>
+<p>Using time series terms, a white noise should have mean 0, no autocorrelation and no seasonality.</p>
+<p>We often assume a more stringent form of white noise, that is <strong>Gaussian white noise</strong>:</p>
+<p><span class="math display">\[
+\epsilon_t \stackrel{iid}{\sim} N(0, \sigma^2)
+\]</span></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="co"># stimulate Guassian and other white nosie</span></a>
+<a class="sourceLine" id="cb82-2" title="2"><span class="kw">set.seed</span>(<span class="dv">2020</span>)</a>
+<a class="sourceLine" id="cb82-3" title="3">y &lt;-<span class="st"> </span><span class="kw">tsibble</span>(<span class="dt">sample =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, <span class="dt">wn =</span> <span class="kw">rnorm</span>(<span class="dv">50</span>), <span class="dt">index =</span> sample)</a>
+<a class="sourceLine" id="cb82-4" title="4">z &lt;-<span class="st"> </span><span class="kw">tsibble</span>(<span class="dt">sample =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, </a>
+<a class="sourceLine" id="cb82-5" title="5">             <span class="dt">wn =</span> <span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">50</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>) <span class="dv">-1</span> , </a>
+<a class="sourceLine" id="cb82-6" title="6">             <span class="dt">index =</span> sample)</a>
+<a class="sourceLine" id="cb82-7" title="7"></a>
+<a class="sourceLine" id="cb82-8" title="8">y <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-9" title="9"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-10" title="10"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Gaussian white noise&quot;</span>)</a>
+<a class="sourceLine" id="cb82-11" title="11"></a>
+<a class="sourceLine" id="cb82-12" title="12"></a>
+<a class="sourceLine" id="cb82-13" title="13">z <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-14" title="14"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-15" title="15"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Other white noise&quot;</span>)</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-18-1.png" width="50%" /><img src="ch5_files/figure-html/unnamed-chunk-18-2.png" width="50%" /></p>
+<p>Let’s check the autocorrelation of a white noise:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">p1 &lt;-<span class="st"> </span>y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_lag</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lag plot forGaussian white noise&quot;</span>)</a>
+<a class="sourceLine" id="cb83-2" title="2">p2 &lt;-<span class="st"> </span>y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ACF</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;ACF plot for Gaussian white noise&quot;</span>)</a>
+<a class="sourceLine" id="cb83-3" title="3">p3 &lt;-<span class="st"> </span>z <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_lag</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lag plot for Other white noise&quot;</span>)</a>
+<a class="sourceLine" id="cb83-4" title="4">p4 &lt;-<span class="st"> </span>z <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ACF</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;ACF plot Other white noise&quot;</span>)</a>
+<a class="sourceLine" id="cb83-5" title="5"></a>
+<a class="sourceLine" id="cb83-6" title="6">p1 <span class="op">+</span><span class="st"> </span>p2 <span class="op">+</span><span class="st"> </span>p3 <span class="op">+</span><span class="st"> </span>p4 </a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Since white noise are uncoorelated, we expect each autocorrelation coefficient of any order to be close to zero. Of course, they will not be exactly equal to zero as there is some random variation. For a white noise series, we expect <span class="math inline">\(95%\)</span> of the spikes in the <code>ACF</code> plot to lie within <span class="math inline">\(±2/\sqrt{T}\)</span> where <span class="math inline">\(T\)</span> is the length of the time series. It is common to plot these bounds on a graph of the <code>ACF</code> (the blue dashed lines above). If one or more large spikes are outside these bounds, or if substantially more than <span class="math inline">\(5\%\)</span> of spikes are outside these bounds, then the series is probably not white noise.</p>
+<p>In this example, <span class="math inline">\(T = 50\)</span> and so the bounds are at <span class="math inline">\(±2/\sqrt{50} = \pm 0.28\)</span>. All of the autocorrelation coefficients lie within these limits, confirming that the data are white noise.</p>
+<p>Why white noise matters? Researchers generally assume that white noise is not predictable, and contains no information related to the respose of interest. It follows that we would expect that residuals computed according to a specific model to be white noise. This means the valuable part of model extract information from the data to such an extent that we do not care what’s left.</p>
+<p>If residuals <span class="math inline">\(\epsilon_1, \epsilon_2, \dots, \epsilon_t\)</span> violates any of the rules of white noise, then there is still valuable information buried under the resiuals, which we will imporve our models to capture. We have not a ‘best’ model at hand until residuals become unpredictable, in other words, white noise.</p>
+</div>
 <div id="example-forecasting-the-google-daily-closing-stock-price" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> Example: Forecasting the Google daily closing stock price</h3>
+<h3><span class="header-section-number">5.4.2</span> Example: Forecasting the Google daily closing stock price</h3>
 <p>We will continue with the Google daily closing stock price example from the previous chapter. For stock market prices and indexes, the best forecasting method is often the naïve method. That is, each forecast is simply equal to the last observed value, or <span class="math inline">\(\hat{y}_t = y_{t−1}\)</span>. Hence, the residuals are simply equal to the difference between consecutive observations:</p>
 <p><span class="math display">\[
 e_t = y_t - \hat{y}_t = y_t - y_{t-1} 
 \]</span></p>
 <p>The following graph shows the Google daily closing stock price for trading days during 2015. The large jump corresponds to 17 July 2015 when the price jumped 16% due to unexpectedly strong second quarter results.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">google_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>(Close) <span class="op">+</span></a>
-<a class="sourceLine" id="cb77-2" title="2"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Closing Price (US$)&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Google Stock in 2015&quot;</span>)</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">aug &lt;-<span class="st"> </span>google_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">model</span>(<span class="kw">NAIVE</span>(Close)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>()</a>
-<a class="sourceLine" id="cb78-2" title="2">aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>(.resid) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb78-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residuals from naïve method&quot;</span>)</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"></a>
-<a class="sourceLine" id="cb79-2" title="2">aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb79-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb79-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(.resid))</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-20-2.png" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"></a>
-<a class="sourceLine" id="cb80-2" title="2">aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb80-3" title="3"><span class="st">  </span><span class="kw">ACF</span>(.resid) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb80-4" title="4"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-20-3.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">google_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>(Close) <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Day&quot;</span>,</a>
+<a class="sourceLine" id="cb84-3" title="3">       <span class="dt">y =</span> <span class="st">&quot;Closing Price (US$)&quot;</span>,</a>
+<a class="sourceLine" id="cb84-4" title="4">       <span class="dt">title =</span> <span class="st">&quot;Google Stock in 2015&quot;</span>)</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-20-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Remeber what an ideal set of residuals shoule be like: they should have mean 0 and constant variance, and behave uncorrelated. In most cases we also want residuals to be normally distributed:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">aug &lt;-<span class="st"> </span>google_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">NAIVE</span>(Close)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-3" title="3"><span class="st">  </span><span class="kw">augment</span>()</a>
+<a class="sourceLine" id="cb85-4" title="4"></a>
+<a class="sourceLine" id="cb85-5" title="5"><span class="co"># mean, variance</span></a>
+<a class="sourceLine" id="cb85-6" title="6">aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-7" title="7"><span class="st">  </span><span class="kw">autoplot</span>(.resid) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residuals from naïve method&quot;</span>,</a>
+<a class="sourceLine" id="cb85-9" title="9">       <span class="dt">x =</span> <span class="st">&quot;Day&quot;</span>,</a>
+<a class="sourceLine" id="cb85-10" title="10">       <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"></a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="co"># distribution</span></a>
+<a class="sourceLine" id="cb86-3" title="3">aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-5" title="5"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(.resid))</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-21-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="co"># correlation</span></a>
+<a class="sourceLine" id="cb87-3" title="3">aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb87-4" title="4"><span class="st">  </span><span class="kw">ACF</span>(.resid) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb87-5" title="5"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-21-3.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>Shorthand function <code>gg_tsresiduals()</code>:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1">google_<span class="dv">2015</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="dt">naive =</span> <span class="kw">NAIVE</span>(Close)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb81-3" title="3"><span class="st">  </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">google_<span class="dv">2015</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="dt">naive =</span> <span class="kw">NAIVE</span>(Close)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb88-3" title="3"><span class="st">  </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>A qq plot to detect distribution:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">sample =</span> .resid)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-3" title="3"><span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-4" title="4"><span class="st">  </span><span class="kw">stat_qq_line</span>()</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1">aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">sample =</span> .resid)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb89-3" title="3"><span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb89-4" title="4"><span class="st">  </span><span class="kw">stat_qq_line</span>()</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Some useful functions for general diagonisis from the <a href="https://easystats.github.io/performance/">performance</a> are mentioned in Section <a href="evaluating-a-regression-model.html#the-performance-package">7.3.4</a></p>
 </div>
 <div id="portmanteau-tests-for-autocorrelation" class="section level3">
-<h3><span class="header-section-number">5.4.2</span> Portmanteau tests for autocorrelation</h3>
-<p>In order to overcome this problem, we test whether the first h autocorrelations are significantly different from what would be expected from a white noise process. A test for a group of autocorrelations is called a <strong>portmanteau test</strong>, from a French word describing a suitcase containing a number of items.</p>
+<h3><span class="header-section-number">5.4.3</span> Portmanteau tests for autocorrelation</h3>
+<p>In order to evaluate estimated time series models, it is important to know
+whether the residuals of the model really have the properties of a white noise, in particular, whether they are uncorrelated. Thus, the null hypothesis to be tested is</p>
+<p><span class="math display">\[
+H_0 : r_k = 0, k = 1, 2, ...
+\]</span></p>
+<p>In order to build formal statistical tests to overcome undue reliance on ACF plots, we test whether the first <span class="math inline">\(h\)</span> autocorrelations are significantly different from what would be expected from a white noise process. A test for a group of autocorrelations is called a <strong>portmanteau test</strong>, from a French word describing a suitcase containing a number of items.</p>
 <p>One such test is the <strong>Box-Pierce</strong> test, based on the following statistic:</p>
 <p><span class="math display">\[
 Q = T \sum_{k = 1}^{h}{r^2_k}
 \]</span></p>
-<p>where <span class="math inline">\(h\)</span> is the maximum lag being considered and <span class="math inline">\(T\)</span> is the number of observations. If each <span class="math inline">\(r_k\)</span> is close to zero, then <span class="math inline">\(Q\)</span> will be small. If some <span class="math inline">\(r_k\)</span> values are large (positive or negative), then <span class="math inline">\(Q\)</span> will be large. We suggest using <span class="math inline">\(h = 10\)</span> for non-seasonal data and <span class="math inline">\(h = 2m\)</span> for seasonal data, where <span class="math inline">\(m\)</span> is the period of seasonality. However, the test is not good when <span class="math inline">\(h\)</span> is large, so if these values are larger than <span class="math inline">\(T/5\)</span>, then use <span class="math inline">\(h=T/5\)</span>.</p>
+<p>where <span class="math inline">\(h\)</span> is the maximum lag being considered and <span class="math inline">\(T\)</span> is the number of observations. If each <span class="math inline">\(r_k\)</span> is close to zero, then <span class="math inline">\(Q\)</span> will be small. If some <span class="math inline">\(r_k\)</span> values are large (positive or negative), then <span class="math inline">\(Q\)</span> will be large. It is suggested that use <span class="math inline">\(h = 10\)</span> for non-seasonal data and <span class="math inline">\(h = 2m\)</span> for seasonal data, where <span class="math inline">\(m\)</span> is the period of seasonality. However, the test is not good when <span class="math inline">\(h\)</span> is large, so if these values are larger than <span class="math inline">\(T/5\)</span>, then use <span class="math inline">\(h=T/5\)</span>.</p>
 <p>A related (and more accurate) test is the <strong>Ljung-Box test</strong>, based on</p>
 <p><span class="math display">\[
 Q^* = T(T + 2)\sum_{k = 1}^{h}{(T-K)^{-1}}r_k^2
 \]</span></p>
-<p>If the autocorrelations did come from a white noise series, then both <span class="math inline">\(Q\)</span> and <span class="math inline">\(Q^*\)</span> follows a distribution of <span class="math inline">\(\chi^2_{h - K}\)</span> where <span class="math inline">\(K\)</span> is the number of parameters in the model. For naive model where there is no parameter to estimate, we simply set <span class="math inline">\(K = 0\)</span>.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="co"># lag = h and fitdf = K</span></a>
-<a class="sourceLine" id="cb83-2" title="2">aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">features</span>(.resid, box_pierce, <span class="dt">lag =</span> <span class="dv">10</span>, <span class="dt">dof =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb83-3" title="3"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
-<a class="sourceLine" id="cb83-4" title="4"><span class="co">#&gt;   Symbol .model       bp_stat bp_pvalue</span></a>
-<a class="sourceLine" id="cb83-5" title="5"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb83-6" title="6"><span class="co">#&gt; 1 GOOG   NAIVE(Close)    7.74     0.654</span></a>
-<a class="sourceLine" id="cb83-7" title="7"></a>
-<a class="sourceLine" id="cb83-8" title="8">aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">10</span>, <span class="dt">dof =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb83-9" title="9"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
-<a class="sourceLine" id="cb83-10" title="10"><span class="co">#&gt;   Symbol .model       lb_stat lb_pvalue</span></a>
-<a class="sourceLine" id="cb83-11" title="11"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb83-12" title="12"><span class="co">#&gt; 1 GOOG   NAIVE(Close)    7.91     0.637</span></a></code></pre></div>
+<p>If the autocorrelations did come from a white noise series, then both <span class="math inline">\(Q\)</span> and <span class="math inline">\(Q^*\)</span> follows a distribution of <span class="math inline">\(\chi^2_{h - K}\)</span> where <span class="math inline">\(K\)</span> is the number of parameters in the model. For model where there is no parameter to estimate (such as naive model), we simply set <span class="math inline">\(K = 0\)</span>. For a regular time series rather than residuals that come from a particular model, we also set <span class="math inline">\(K = 0\)</span>. Note that in <code>ljung_box()</code>, argument <code>dof</code> specifies <code>K</code>, rather than <code>h - K</code></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="co"># lag = h and dof = K</span></a>
+<a class="sourceLine" id="cb90-2" title="2">aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">features</span>(.resid, box_pierce, <span class="dt">lag =</span> <span class="dv">10</span>, <span class="dt">dof =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb90-3" title="3"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
+<a class="sourceLine" id="cb90-4" title="4"><span class="co">#&gt;   Symbol .model       bp_stat bp_pvalue</span></a>
+<a class="sourceLine" id="cb90-5" title="5"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb90-6" title="6"><span class="co">#&gt; 1 GOOG   NAIVE(Close)    7.74     0.654</span></a>
+<a class="sourceLine" id="cb90-7" title="7"></a>
+<a class="sourceLine" id="cb90-8" title="8">aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">10</span>, <span class="dt">dof =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb90-9" title="9"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
+<a class="sourceLine" id="cb90-10" title="10"><span class="co">#&gt;   Symbol .model       lb_stat lb_pvalue</span></a>
+<a class="sourceLine" id="cb90-11" title="11"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb90-12" title="12"><span class="co">#&gt; 1 GOOG   NAIVE(Close)    7.91     0.637</span></a></code></pre></div>
 <p>For both <span class="math inline">\(Q\)</span> and <span class="math inline">\(Q^∗\)</span>, the results are not significant. Thus, we can conclude that the residuals are not distinguishable from a white noise series.</p>
+<p>To see details of these tests, see Section <a href="stationarity.html#tests-for-autocorrelation-and-normality">9.1.2</a></p>
 </div>
 </div>
             </section>

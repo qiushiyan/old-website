@@ -1,5 +1,4 @@
 
-
 # The forecaster's toolbox   
 
 
@@ -9,6 +8,7 @@ library(tsibbledata)
 library(fable)
 library(feasts)
 library(lubridate)
+library(patchwork)
 ```
 
 
@@ -17,7 +17,7 @@ library(lubridate)
 
 
 
-<img src="images/workflow.png" width="80%" style="display: block; margin: auto;" />
+<img src="images/workflow.png" width="90%" style="display: block; margin: auto;" />
 
 
 ### Data preparation (tidy)  
@@ -35,7 +35,7 @@ global_economy %>%
   ggtitle("GDP for Sweden") + ylab("$US billions")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Define a model (specify)  
 
@@ -122,7 +122,7 @@ ge_forecast %>%
   ggtitle("GDP for Sweden")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Some simple forecasting methods  
 
@@ -164,7 +164,7 @@ bricks %>%
   autoplot(bricks)
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Naive method
 
@@ -176,7 +176,7 @@ $$
 
 This method works remarkably well for many economic and financial time series. 
  
-Because a naive forecast is optimal when data follow a random walk (see Section \@ref(stationarity-and-differencing)), these are also called **random walk** forecasts.   
+Because a naive forecast is optimal when data follow a random walk (see Section \@ref(stationarity)), these are also called **random walk** forecasts.   
 
 `NAIVE()` specifies a naive model:  
 
@@ -188,7 +188,7 @@ bricks %>%
   autoplot(bricks)
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Seasonal naive method  
 
@@ -210,7 +210,7 @@ bricks %>%
   autoplot(bricks, level = NULL)
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 The `lag()` function is optional here as bricks is monthly data and so a seasonal naïve model will need a one-year lag. However, for some time series there is more than one seasonal period, and then the required lag must be specified.  
@@ -238,7 +238,7 @@ bricks %>%
   autoplot(bricks, level = NULL)
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ### Australian quarterly beer production  
@@ -257,7 +257,7 @@ beer_fit %>%
   autolayer(aus_production %>% filter_index("2007 Q1" ~ .), color = "black")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-15-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 In this case, only the seasonal naïve forecasts are close to the observed values from 2007 onwards.
@@ -300,7 +300,7 @@ google_fc %>%
     guides(colour=guide_legend(title="Forecast"))
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;" />
 Sometimes one of these simple methods will be the best forecasting method available; but in many cases, **these methods will serve as benchmarks rather than the method of choice**. That is, any forecasting methods we develop will be compared to these simple methods to ensure that the new method is better than these simple alternatives. If not, the new method is not worth considering.  
 
 
@@ -352,7 +352,7 @@ augment(beer_fit)
 A good forecasting method will yield residuals with the following properties:  
 
 1. The residuals are **uncorrelated.** If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.  
-2. The residuals have **zero mean**(i.e., $E(e) = 0$. If the residuals have a mean other than zero, then the forecasts are biased.  
+2. The residuals have **zero mean**(i.e., $E(e_t) = 0$. If the residuals have a mean other than zero, then the forecasts are biased.  
 
 Any forecasting method that does not satisfy these properties can be improved. However, that does not mean that forecasting methods that satisfy these properties cannot be improved. It is possible to have several different forecasting methods for the same data set, all of which satisfy these properties. Checking these properties is important in order to see whether a method is using all of the available information, but it is not a good way to select a forecasting method.
 
@@ -365,6 +365,65 @@ In addition to these essential properties, it is useful (but not necessary) for 
 > 4. The residuals are **normally distributed**.
 
 These two properties make the calculation of prediction intervals easier (see Section 5.5 for an example). However, a forecasting method that does not satisfy these properties cannot necessarily be improved. Sometimes applying a Box-Cox transformation may assist with these properties, but otherwise there is usually little that you can do to ensure that your residuals have constant variance and a normal distribution. Instead, an alternative approach to obtaining prediction intervals is necessary. Again, we will not address how to do this until later in the book.  
+
+### White noise
+
+A time series is (discrete) white noise if its values are (see mathematical definition in Section \@ref(ch9-white-noise)): 
+
+1. independent
+2. identically distributed with a mean of zero  
+
+Using time series terms, a white noise should have mean 0, no autocorrelation and no seasonality.  
+
+We often assume a more stringent form of white noise, that is **Gaussian white noise**:  
+
+$$
+\epsilon_t \stackrel{iid}{\sim} N(0, \sigma^2)
+$$
+
+
+
+```r
+# stimulate Guassian and other white nosie
+set.seed(2020)
+y <- tsibble(sample = 1:50, wn = rnorm(50), index = sample)
+z <- tsibble(sample = 1:50, 
+             wn = 2 * rbinom(50, size = 1, prob = 0.5) -1 , 
+             index = sample)
+
+y %>% 
+  autoplot() + 
+  ggtitle("Gaussian white noise")
+
+
+z %>% 
+  autoplot() + 
+  ggtitle("Other white noise")
+```
+
+<img src="ch5_files/figure-html/unnamed-chunk-18-1.png" width="50%" /><img src="ch5_files/figure-html/unnamed-chunk-18-2.png" width="50%" />
+
+Let's check the autocorrelation of a white noise:  
+
+
+```r
+p1 <- y %>% gg_lag(geom = "point") + ggtitle("Lag plot forGaussian white noise")
+p2 <- y %>% ACF() %>% autoplot() + ggtitle("ACF plot for Gaussian white noise")
+p3 <- z %>% gg_lag(geom = "point") + ggtitle("Lag plot for Other white noise")
+p4 <- z %>% ACF() %>% autoplot() + ggtitle("ACF plot Other white noise")
+
+p1 + p2 + p3 + p4 
+```
+
+<img src="ch5_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" />
+
+Since white noise are uncoorelated, we expect each autocorrelation coefficient of any order to be close to zero. Of course, they will not be exactly equal to zero as there is some random variation. For a white noise series, we expect $95%$ of the spikes in the `ACF` plot to lie within $±2/\sqrt{T}$ where $T$  is the length of the time series. It is common to plot these bounds on a graph of the `ACF` (the blue dashed lines above). If one or more large spikes are outside these bounds, or if substantially more than $5\%$ of spikes are outside these bounds, then the series is probably not white noise.
+
+In this example, $T = 50$ and so the bounds are at $±2/\sqrt{50} = \pm 0.28$. All of the autocorrelation coefficients lie within these limits, confirming that the data are white noise.    
+
+Why white noise matters? Researchers generally assume that white noise is not predictable, and contains no information related to the respose of interest. It follows that we would expect that residuals computed according to a specific model to be white noise. This means the valuable part of model extract information from the data to such an extent that we do not care what's left.   
+
+If residuals $\epsilon_1, \epsilon_2, \dots, \epsilon_t$ violates any of the rules of white noise, then there is still valuable information buried under the resiuals, which we will imporve our models to capture. We have not a 'best' model at hand until residuals become unpredictable, in other words, white noise.  
 
 ### Example: Forecasting the Google daily closing stock price  
 
@@ -379,39 +438,51 @@ The following graph shows the Google daily closing stock price for trading days 
 
 ```r
 google_2015 %>% autoplot(Close) +
-  xlab("Day") + ylab("Closing Price (US$)") +
-  ggtitle("Google Stock in 2015")
+  labs(x = "Day",
+       y = "Closing Price (US$)",
+       title = "Google Stock in 2015")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-20-1.png" width="90%" style="display: block; margin: auto;" />
 
+
+Remeber what an ideal set of residuals shoule be like: they should have mean 0 and constant variance, and behave uncorrelated. In most cases we also want residuals to be normally distributed:
 
 
 ```r
-aug <- google_2015 %>% model(NAIVE(Close)) %>% augment()
-aug %>% autoplot(.resid) + xlab("Day") + ylab("") +
-  ggtitle("Residuals from naïve method")
+aug <- google_2015 %>% 
+  model(NAIVE(Close)) %>% 
+  augment()
+
+# mean, variance
+aug %>% 
+  autoplot(.resid) + 
+  labs(title = "Residuals from naïve method",
+       x = "Day",
+       y = "")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" />
 
 ```r
 
+# distribution
 aug %>% 
   ggplot() + 
   geom_histogram(aes(.resid))
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-20-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-21-2.png" width="90%" style="display: block; margin: auto;" />
 
 ```r
 
+# correlation
 aug %>% 
   ACF(.resid) %>%
   autoplot()
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-20-3.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-21-3.png" width="90%" style="display: block; margin: auto;" />
 
 Shorthand function `gg_tsresiduals()`:  
 
@@ -422,7 +493,7 @@ google_2015 %>%
   gg_tsresiduals()
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" />
 
 A qq plot to detect distribution:  
 
@@ -434,13 +505,21 @@ aug %>%
   stat_qq_line()
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
-
-### Portmanteau tests for autocorrelation
+<img src="ch5_files/figure-html/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" />
 
 
+Some useful functions for general diagonisis from the [performance](https://easystats.github.io/performance/) are mentioned in Section \@ref(the-performance-package)
 
-In order to overcome this problem, we test whether the first h autocorrelations are significantly different from what would be expected from a white noise process. A test for a group of autocorrelations is called a **portmanteau test**, from a French word describing a suitcase containing a number of items.  
+### Portmanteau tests for autocorrelation  
+
+In order to evaluate estimated time series models, it is important to know
+whether the residuals of the model really have the properties of a white noise, in particular, whether they are uncorrelated. Thus, the null hypothesis to be tested is
+
+$$
+H_0 : r_k = 0, k = 1, 2, ...
+$$
+
+In order to build formal statistical tests to overcome undue reliance on ACF plots, we test whether the first $h$ autocorrelations are significantly different from what would be expected from a white noise process. A test for a group of autocorrelations is called a **portmanteau test**, from a French word describing a suitcase containing a number of items.  
 
 One such test is the **Box-Pierce** test, based on the following statistic:  
 
@@ -449,7 +528,7 @@ Q = T \sum_{k = 1}^{h}{r^2_k}
 $$
 
 
-where $h$ is the maximum lag being considered and $T$ is the number of observations. If each $r_k$ is close to zero, then $Q$ will be small. If some $r_k$ values are large (positive or negative), then $Q$ will be large. We suggest using $h = 10$ for non-seasonal data and $h = 2m$ for seasonal data, where $m$ is the period of seasonality. However, the test is not good when $h$ is large, so if these values are larger than $T/5$, then use $h=T/5$.  
+where $h$ is the maximum lag being considered and $T$ is the number of observations. If each $r_k$ is close to zero, then $Q$ will be small. If some $r_k$ values are large (positive or negative), then $Q$ will be large. It is suggested that use $h = 10$ for non-seasonal data and $h = 2m$ for seasonal data, where $m$ is the period of seasonality. However, the test is not good when $h$ is large, so if these values are larger than $T/5$, then use $h=T/5$.  
 
 A related (and more accurate) test is the **Ljung-Box test**, based on 
 
@@ -457,11 +536,11 @@ $$
 Q^* = T(T + 2)\sum_{k = 1}^{h}{(T-K)^{-1}}r_k^2
 $$
 
- If the autocorrelations did come from a white noise series, then both $Q$ and $Q^*$ follows a  distribution of $\chi^2_{h - K}$ where $K$ is the number of parameters in the model. For naive model where there is no parameter to estimate, we simply set $K = 0$.  
+If the autocorrelations did come from a white noise series, then both $Q$ and $Q^*$ follows a  distribution of $\chi^2_{h - K}$ where $K$ is the number of parameters in the model. For model where there is no parameter to estimate (such as naive model), we simply set $K = 0$. For a regular time series rather than residuals that come from a particular model, we also set $K = 0$. Note that in `ljung_box()`, argument `dof` specifies `K`, rather than `h - K`  
 
 
 ```r
-# lag = h and fitdf = K
+# lag = h and dof = K
 aug %>% features(.resid, box_pierce, lag = 10, dof = 0)
 #> # A tibble: 1 x 4
 #>   Symbol .model       bp_stat bp_pvalue
@@ -477,6 +556,7 @@ aug %>% features(.resid, ljung_box, lag = 10, dof = 0)
 
 For both $Q$ and $Q^∗$, the results are not significant. Thus, we can conclude that the residuals are not distinguishable from a white noise series.  
 
+To see details of these tests, see Section \@ref(tests-for-autocorrelation-and-normality)
 
 ## Prediction intervals {#predict-interval}
 
@@ -525,7 +605,7 @@ To produce a prediction interval, it is necessary to have an estimate of $\sigma
 
 For the **four benchmark methods**, it is possible to mathematically derive the forecast standard deviation under the assumption of uncorrelated residuals. If $\sigma_h$ denotes the standard deviation of the h-step forecast distribution, and $\hat{\sigma}$ is the residual standard deviation, then we can use the following expressions.  
 
-<img src="images/benchmark.png" width="80%" style="display: block; margin: auto;" />
+<img src="images/benchmark.png" width="90%" style="display: block; margin: auto;" />
 
 Note that when $h = 1$ and T is large, these all give the same approximate value $\hat{\sigma}$.
 
@@ -575,12 +655,12 @@ sim
 #> # Key:       Symbol, .model, .rep [5]
 #>   Symbol .model        .rep   day  .sim
 #>   <chr>  <chr>        <int> <dbl> <dbl>
-#> 1 GOOG   NAIVE(Close)     1   505  765.
-#> 2 GOOG   NAIVE(Close)     1   506  766.
-#> 3 GOOG   NAIVE(Close)     1   507  768.
-#> 4 GOOG   NAIVE(Close)     1   508  757.
-#> 5 GOOG   NAIVE(Close)     1   509  761.
-#> 6 GOOG   NAIVE(Close)     1   510  742.
+#> 1 GOOG   NAIVE(Close)     1   505  724.
+#> 2 GOOG   NAIVE(Close)     1   506  722.
+#> 3 GOOG   NAIVE(Close)     1   507  700.
+#> 4 GOOG   NAIVE(Close)     1   508  696.
+#> 5 GOOG   NAIVE(Close)     1   509  696.
+#> 6 GOOG   NAIVE(Close)     1   510  698.
 #> # ... with 144 more rows
 ```
 Here we have generated five possible sample paths for the next 30 trading days. The `.rep` variable provides a new key for the tsibble. The plot below shows the five sample paths along with the historical data.  
@@ -594,7 +674,7 @@ ggplot(google_2015) +
   guides(col = FALSE)
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-28-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 This is all built into the `forecast()` function so we do not need to call generate() directly:  
@@ -627,7 +707,7 @@ google_bootstrap_fc %>%
   ggtitle("Bootstrapped prediction interval")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-30-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ## Evaluating model accuracy  
@@ -725,7 +805,7 @@ beer_fc %>%
   guides(colour=guide_legend(title = "Models"))
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-31-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -736,8 +816,8 @@ accuracy(beer_fc, recent_production)
 #>   <chr>          <chr> <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl>   <dbl>
 #> 1 Drift          Test  -54.0  64.9  58.9 -13.6  14.6  4.12  -0.0741
 #> 2 Mean           Test  -13.8  38.4  34.8  -3.97  8.28 2.44  -0.0691
-#> 3 Naïve          Test  -51.4  62.7  57.4 -13.0  14.2  4.01  -0.0691
-#> 4 Seasonal naïve Test    5.2  14.3  13.4   1.15  3.17 0.937  0.132
+#> 3 Na<U+00EF>ve          Test  -51.4  62.7  57.4 -13.0  14.2  4.01  -0.0691
+#> 4 Seasonal na<U+00EF>ve Test    5.2  14.3  13.4   1.15  3.17 0.937  0.132
 ```
 
 It is obvious from the graph that the seasonal naïve method is best for these data, although it can still be improved, as we will discover later. Sometimes, different accuracy measures will lead to different results as to which forecast method is best. However, in this case, all of the results point to the seasonal naïve method as the best of these three methods for this data set.
@@ -765,7 +845,7 @@ google_fc %>%
   guides(colour=guide_legend(title="Forecast"))
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-33-1.png" width="90%" style="display: block; margin: auto;" />
 Check model accuracy
 
 
@@ -776,7 +856,7 @@ accuracy(google_fc, google_stock)
 #>   <chr>  <chr>  <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
 #> 1 Drift  GOOG   Test  -49.8  53.1  49.8 -6.99  6.99  7.84 0.604
 #> 2 Mean   GOOG   Test  117.  118.  117.  16.2  16.2  18.4  0.496
-#> 3 Naïve  GOOG   Test  -40.4  43.4  40.4 -5.67  5.67  6.36 0.496
+#> 3 Na<U+00EF>ve  GOOG   Test  -40.4  43.4  40.4 -5.67  5.67  6.36 0.496
 ```
 
 Here, the best method is the naïve method (regardless of which accuracy measure is used).
@@ -785,13 +865,13 @@ Here, the best method is the naïve method (regardless of which accuracy measure
 
 > A more sophisticated version of training/test sets is time series cross-validation. In this procedure, there are a series of test sets, each consisting of a single observation. The corresponding training set consists only of observations that occurred prior to the observation that forms the test set. Thus, no future observations can be used in constructing the forecast. Since it is not possible to obtain a reliable forecast based on a small training set, the earliest observations are not considered as test sets.
 
-<img src="images/cv.png" width="80%" style="display: block; margin: auto;" />
+<img src="images/cv.png" width="90%" style="display: block; margin: auto;" />
 
 The forecast accuracy is computed by averaging over the test sets. 
 
 With time series forecasting, one-step forecasts may not be as relevant as multi-step forecasts. In this case, the cross-validation procedure based on a rolling forecasting origin can be modified to allow multi-step errors to be used. Suppose that we are interested in models that produce good 4-step-ahead forecasts. Then the corresponding diagram is shown below.  
 
-<img src="images/cv_multi.png" width="80%" style="display: block; margin: auto;" />
+<img src="images/cv_multi.png" width="90%" style="display: block; margin: auto;" />
 
  `stretch_tsibble()` generates multiple folds as we specified: (may subject to change, I havn't found a corresponding function in the **slider** package, perhaps `vfold_cv` from **rsample** in the future?)
 
@@ -801,7 +881,7 @@ With time series forecasting, one-step forecasts may not be as relevant as multi
 google_2015 %>%
   slice(1:7) %>% 
   stretch_tsibble(.init = 3, .step = 1) %>%  # initial window size = 3, incremental step = 1
-  as_data_frame()
+  as_tibble()
 #> # A tibble: 25 x 10
 #>   Symbol Date        Open  High   Low Close Adj_Close  Volume   day   .id
 #>   <chr>  <date>     <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <int> <int>
@@ -888,7 +968,7 @@ fc %>%
   geom_point()
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-41-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Forecasting using transformations  
 
@@ -964,7 +1044,7 @@ beer_production %>%
   ggtitle("No transformation")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-42-1.png" width="50%" /><img src="ch5_files/figure-html/unnamed-chunk-42-2.png" width="50%" />
+<img src="ch5_files/figure-html/unnamed-chunk-43-1.png" width="50%" /><img src="ch5_files/figure-html/unnamed-chunk-43-2.png" width="50%" />
 
 
 
@@ -1014,7 +1094,7 @@ eggs %>% autoplot(value) +
   autolayer(eggs_fc, colour = "red", level = NULL)
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-44-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 The blue line in shows the forecast medians while the red line shows the forecast means. Notice how the skewed forecast distribution pulls up the point forecast when we use the bias adjustment.  
@@ -1057,7 +1137,7 @@ retail_employment_dcmp %>%
   ggtitle("Naive forecasts of seasonally adjusted data")
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-45-1.png" width="90%" style="display: block; margin: auto;" />
 
 This shows naïve forecasts of the seasonally adjusted electrical equipment orders data. These are then “reseasonalised” by adding in the seasonal naïve forecasts of the seasonal component. 
 
@@ -1074,7 +1154,7 @@ us_retail_employment %>%
   autoplot(us_retail_employment)
 ```
 
-<img src="ch5_files/figure-html/unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch5_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" />
 
 The prediction intervals shown in this graph are constructed in the same way as the point forecasts. That is, the upper and lower limits of the prediction intervals on the seasonally adjusted data are “reseasonalised” by adding in the forecasts of the seasonal component.
 

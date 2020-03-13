@@ -1,8 +1,7 @@
-
 --- 
 title: 'Notes for "Forecasting: Principles and Practice, 3rd edition"'
 author: "Qiushi Yan"
-date: "2020-03-01"
+date: "2020-03-13"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [references.bib, packages.bib]
@@ -19,9 +18,17 @@ This project contains my learning notes and code for [*Forecasting: Principles a
 
 Another reference is [*Applied Time Series Analysis for Fisheries and Environmental Sciences*](https://nwfsc-timeseries.github.io/atsa-labs/)  
 
-Other references include a video tutorial on time series concepts presented in this [youtube watchlist](https://www.youtube.com/playlist?list=PLvcbYUQ5t0UHOLnBzl46_Q6QKtFgfMGc3) by [ritvikmath](https://www.youtube.com/channel/UCUcpVoi5KkJmnE3bvEhHR0Q); a [online course](https://online.stat.psu.edu/stat510) offered by the Department of Statistics at PennState. 
+Other references include 
 
-Tidyverse is automatically loaded before each chapter.
+- Kirchgässner, G., Wolters, J., & Hassler, U. (2012). *Introduction to modern time series analysis*. Springer Science & Business Media.
+
+- a video tutorial on time series concepts presented in this [youtube watchlist](https://www.youtube.com/playlist?list=PLvcbYUQ5t0UHOLnBzl46_Q6QKtFgfMGc3) by [ritvikmath](https://www.youtube.com/channel/UCUcpVoi5KkJmnE3bvEhHR0Q)  
+
+- also a video tutorial on [econometrics](https://www.youtube.com/playlist?list=PLwJRxp3blEvb7P-7po9AxuBwquPv75LjU) presented by [Ben Lambert](https://www.youtube.com/channel/UC3tFZR3eL1bDY8CqZDOQh-w)
+
+- an [online course](https://online.stat.psu.edu/stat510) offered by the Department of Statistics at PennState   
+
+`tidyverse` is assumed to be loaded before each chapter.
 
 
 ```r

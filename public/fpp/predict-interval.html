@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.5 Prediction intervals | Notes for “Forecasting: Principles and Practice, 3rd edition”</title>
   <meta name="description" content="“Reproducing”Forecasting: Principles and Practice, 3rd edition"" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.5 Prediction intervals | Notes for “Forecasting: Principles and Practice, 3rd edition”" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-01" />
+<meta name="date" content="2020-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.1" data-path="lag-plots.html"><a href="lag-plots.html#autocorrelation"><i class="fa fa-check"></i><b>2.7.1</b> Autocorrelation</a></li>
 <li class="chapter" data-level="2.7.2" data-path="lag-plots.html"><a href="lag-plots.html#trend-and-seasonality-in-acf-plots"><i class="fa fa-check"></i><b>2.7.2</b> Trend and seasonality in ACF plots</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="white-noise.html"><a href="white-noise.html"><i class="fa fa-check"></i><b>2.8</b> White noise</a></li>
+<li class="chapter" data-level="2.8" data-path="calendar-plots.html"><a href="calendar-plots.html"><i class="fa fa-check"></i><b>2.8</b> Calendar plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>3</b> Time series decomposition</a><ul>
 <li class="chapter" data-level="3.1" data-path="transformation-and-adjustments.html"><a href="transformation-and-adjustments.html"><i class="fa fa-check"></i><b>3.1</b> Transformation and adjustments</a><ul>
@@ -200,8 +200,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="fitted-values-and-residuals.html"><a href="fitted-values-and-residuals.html#residuals"><i class="fa fa-check"></i><b>5.3.1</b> Residuals</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html"><i class="fa fa-check"></i><b>5.4</b> Residual diagnostics</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.1</b> Example: Forecasting the Google daily closing stock price</a></li>
-<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.2</b> Portmanteau tests for autocorrelation</a></li>
+<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#white-noise"><i class="fa fa-check"></i><b>5.4.1</b> White noise</a></li>
+<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.2</b> Example: Forecasting the Google daily closing stock price</a></li>
+<li class="chapter" data-level="5.4.3" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.3</b> Portmanteau tests for autocorrelation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="predict-interval.html"><a href="predict-interval.html"><i class="fa fa-check"></i><b>5.5</b> Prediction intervals</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="predict-interval.html"><a href="predict-interval.html#one-step-prediction-intervals"><i class="fa fa-check"></i><b>5.5.1</b> One-step prediction intervals</a></li>
@@ -266,7 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-predictors"><i class="fa fa-check"></i><b>7.3.1</b> Residual plots against predictors</a></li>
 <li class="chapter" data-level="7.3.2" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-fitted-values"><i class="fa fa-check"></i><b>7.3.2</b> Residual plots against fitted values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#outliers-and-influential-observations"><i class="fa fa-check"></i><b>7.3.3</b> Outliers and influential observations</a></li>
-<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.4</b> Spurious regression</a></li>
+<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#the-performance-package"><i class="fa fa-check"></i><b>7.3.4</b> The <code>performance</code> package</a></li>
+<li class="chapter" data-level="7.3.5" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.5</b> Spurious regression</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Some useful predictors</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html#trend"><i class="fa fa-check"></i><b>7.4.1</b> Trend</a></li>
@@ -338,21 +340,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.2" data-path="forecasting-with-ets-models.html"><a href="forecasting-with-ets-models.html#prediction-intervals-1"><i class="fa fa-check"></i><b>8.6.2</b> Prediction intervals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>9</b> ARIMA models</a><ul>
-<li class="chapter" data-level="9.1" data-path="stationarity-and-differencing.html"><a href="stationarity-and-differencing.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity and differencing</a></li>
+<li class="chapter" data-level="9" data-path="univariate-stationary-processes.html"><a href="univariate-stationary-processes.html"><i class="fa fa-check"></i><b>9</b> Univariate stationary processes</a><ul>
+<li class="chapter" data-level="9.1" data-path="stationarity.html"><a href="stationarity.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="stationarity.html"><a href="stationarity.html#ch9-white-noise"><i class="fa fa-check"></i><b>9.1.1</b> White noise</a></li>
+<li class="chapter" data-level="9.1.2" data-path="stationarity.html"><a href="stationarity.html#tests-for-autocorrelation-and-normality"><i class="fa fa-check"></i><b>9.1.2</b> Tests for autocorrelation and normality</a></li>
+<li class="chapter" data-level="9.1.3" data-path="stationarity.html"><a href="stationarity.html#the-wold-decomposition"><i class="fa fa-check"></i><b>9.1.3</b> The Wold Decomposition</a></li>
+</ul></li>
 <li class="chapter" data-level="9.2" data-path="backshift-notation.html"><a href="backshift-notation.html"><i class="fa fa-check"></i><b>9.2</b> Backshift notation</a></li>
 <li class="chapter" data-level="9.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html"><i class="fa fa-check"></i><b>9.3</b> Autoregressive models</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order"><i class="fa fa-check"></i><b>9.3.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.2</b> Random walk</a></li>
+<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#stimulating-an-arp-process"><i class="fa fa-check"></i><b>9.3.1</b> Stimulating an AR(p) process</a></li>
+<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order-p"><i class="fa fa-check"></i><b>9.3.2</b> Decision of order p</a></li>
+<li class="chapter" data-level="9.3.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.3</b> Random walk</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="moving-average-models.html"><a href="moving-average-models.html"><i class="fa fa-check"></i><b>9.4</b> Moving average models</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-1"><i class="fa fa-check"></i><b>9.4.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.2</b> Koyck transformation and Invertibility</a></li>
+<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#simulating-an-maq-process"><i class="fa fa-check"></i><b>9.4.1</b> Simulating an MA(q) process</a></li>
+<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
+<li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
-<li class="chapter" data-level="9.6" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>9.6</b> Non-seasonal ARIMA models</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>10</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
+<li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="differencing.html"><a href="differencing.html#second-order-differencing"><i class="fa fa-check"></i><b>10.1.1</b> Second-order differencing</a></li>
+<li class="chapter" data-level="10.1.2" data-path="differencing.html"><a href="differencing.html#seasonal-differencing"><i class="fa fa-check"></i><b>10.1.2</b> Seasonal differencing</a></li>
+<li class="chapter" data-level="10.1.3" data-path="differencing.html"><a href="differencing.html#unit-root-tests"><i class="fa fa-check"></i><b>10.1.3</b> Unit root tests</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.2</b> Non-seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html#understanding-arima-models"><i class="fa fa-check"></i><b>10.2.1</b> Understanding ARIMA models</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html"><i class="fa fa-check"></i><b>10.3</b> Estimation and order selection</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#mle"><i class="fa fa-check"></i><b>10.3.1</b> MLE</a></li>
+<li class="chapter" data-level="10.3.2" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#information-criteria"><i class="fa fa-check"></i><b>10.3.2</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="the-arima-function.html"><a href="the-arima-function.html"><i class="fa fa-check"></i><b>10.4</b> The <code>ARIMA()</code> function</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="the-arima-function.html"><a href="the-arima-function.html#algorithm"><i class="fa fa-check"></i><b>10.4.1</b> Algorithm</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-arima-function.html"><a href="the-arima-function.html#modelling-procedure"><i class="fa fa-check"></i><b>10.4.2</b> Modelling procedure</a></li>
+<li class="chapter" data-level="10.4.3" data-path="the-arima-function.html"><a href="the-arima-function.html#example-seasonally-adjusted-electrical-equipment-orders"><i class="fa fa-check"></i><b>10.4.3</b> Example: Seasonally adjusted electrical equipment orders</a></li>
+<li class="chapter" data-level="10.4.4" data-path="the-arima-function.html"><a href="the-arima-function.html#plotting-the-characteristic-roots"><i class="fa fa-check"></i><b>10.4.4</b> Plotting the characteristic roots</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html"><i class="fa fa-check"></i><b>10.5</b> Forecasting with ARIMA models</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#point-forecasts"><i class="fa fa-check"></i><b>10.5.1</b> Point forecasts</a></li>
+<li class="chapter" data-level="10.5.2" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#prediction-intervals-2"><i class="fa fa-check"></i><b>10.5.2</b> Prediction intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.6</b> Seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#acf-and-pacf"><i class="fa fa-check"></i><b>10.6.1</b> ACF and PACF</a></li>
+<li class="chapter" data-level="10.6.2" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-european-quarterly-retail-trade"><i class="fa fa-check"></i><b>10.6.2</b> Example: European quarterly retail trade</a></li>
+<li class="chapter" data-level="10.6.3" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-corticosteroid-drug-sales-in-australia"><i class="fa fa-check"></i><b>10.6.3</b> Example: Corticosteroid drug sales in Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="ets-and-arima.html"><a href="ets-and-arima.html"><i class="fa fa-check"></i><b>10.7</b> ETS and ARIMA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-non-seasonal-data"><i class="fa fa-check"></i><b>10.7.1</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on non-seasonal data</a></li>
+<li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -404,24 +444,24 @@ y_{T+h | h} \pm c\hat{\sigma}_h
 <p>To produce a prediction interval, it is necessary to have an estimate of <span class="math inline">\(\sigma_h\)</span>
 . As already noted, for one-step forecasts (<span class="math inline">\(h = 1\)</span>), the residual standard deviation provides a good estimate of the forecast standard deviation <span class="math inline">\(\sigma_1\)</span>. For multi-step forecasts, a more complicated method of calculation is required. <strong>These calculations assume that the residuals are uncorrelated</strong>.</p>
 <p>For the <strong>four benchmark methods</strong>, it is possible to mathematically derive the forecast standard deviation under the assumption of uncorrelated residuals. If <span class="math inline">\(\sigma_h\)</span> denotes the standard deviation of the h-step forecast distribution, and <span class="math inline">\(\hat{\sigma}\)</span> is the residual standard deviation, then we can use the following expressions.</p>
-<p><img src="images/benchmark.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="images/benchmark.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>Note that when <span class="math inline">\(h = 1\)</span> and T is large, these all give the same approximate value <span class="math inline">\(\hat{\sigma}\)</span>.</p>
 <p>Prediction intervals can easily be computed for you when using the fable package. For example, here is the output when using the naïve method for the Google stock price.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">google_<span class="dv">2015</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb84-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">NAIVE</span>(Close)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb84-3" title="3"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb84-4" title="4"><span class="st">  </span><span class="kw">hilo</span>(<span class="dt">level =</span> <span class="dv">95</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb84-5" title="5"><span class="st">  </span><span class="kw">unnest</span>(<span class="st">`</span><span class="dt">95%</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb84-6" title="6"><span class="co">#&gt; # A tibble: 10 x 7</span></a>
-<a class="sourceLine" id="cb84-7" title="7"><span class="co">#&gt;   Symbol .model         day Close .lower .upper .level</span></a>
-<a class="sourceLine" id="cb84-8" title="8"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb84-9" title="9"><span class="co">#&gt; 1 GOOG   NAIVE(Close)   505  759.   737.   781.     95</span></a>
-<a class="sourceLine" id="cb84-10" title="10"><span class="co">#&gt; 2 GOOG   NAIVE(Close)   506  759.   728.   790.     95</span></a>
-<a class="sourceLine" id="cb84-11" title="11"><span class="co">#&gt; 3 GOOG   NAIVE(Close)   507  759.   721.   797.     95</span></a>
-<a class="sourceLine" id="cb84-12" title="12"><span class="co">#&gt; 4 GOOG   NAIVE(Close)   508  759.   715.   803.     95</span></a>
-<a class="sourceLine" id="cb84-13" title="13"><span class="co">#&gt; 5 GOOG   NAIVE(Close)   509  759.   710.   808.     95</span></a>
-<a class="sourceLine" id="cb84-14" title="14"><span class="co">#&gt; 6 GOOG   NAIVE(Close)   510  759.   705.   813.     95</span></a>
-<a class="sourceLine" id="cb84-15" title="15"><span class="co">#&gt; # ... with 4 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">google_<span class="dv">2015</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">NAIVE</span>(Close)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-3" title="3"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-4" title="4"><span class="st">  </span><span class="kw">hilo</span>(<span class="dt">level =</span> <span class="dv">95</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb91-5" title="5"><span class="st">  </span><span class="kw">unnest</span>(<span class="st">`</span><span class="dt">95%</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb91-6" title="6"><span class="co">#&gt; # A tibble: 10 x 7</span></a>
+<a class="sourceLine" id="cb91-7" title="7"><span class="co">#&gt;   Symbol .model         day Close .lower .upper .level</span></a>
+<a class="sourceLine" id="cb91-8" title="8"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb91-9" title="9"><span class="co">#&gt; 1 GOOG   NAIVE(Close)   505  759.   737.   781.     95</span></a>
+<a class="sourceLine" id="cb91-10" title="10"><span class="co">#&gt; 2 GOOG   NAIVE(Close)   506  759.   728.   790.     95</span></a>
+<a class="sourceLine" id="cb91-11" title="11"><span class="co">#&gt; 3 GOOG   NAIVE(Close)   507  759.   721.   797.     95</span></a>
+<a class="sourceLine" id="cb91-12" title="12"><span class="co">#&gt; 4 GOOG   NAIVE(Close)   508  759.   715.   803.     95</span></a>
+<a class="sourceLine" id="cb91-13" title="13"><span class="co">#&gt; 5 GOOG   NAIVE(Close)   509  759.   710.   808.     95</span></a>
+<a class="sourceLine" id="cb91-14" title="14"><span class="co">#&gt; 6 GOOG   NAIVE(Close)   510  759.   705.   813.     95</span></a>
+<a class="sourceLine" id="cb91-15" title="15"><span class="co">#&gt; # ... with 4 more rows</span></a></code></pre></div>
 <p>The <code>hilo()</code> function converts the forecast distributions into intervals. By default, 80% and 95% prediction intervals are returned, here I aks only for a 95% interval via the <code>level</code> argument.</p>
 </div>
 <div id="prediction-intervals-from-bootstrapped-residuals" class="section level3">
@@ -429,50 +469,50 @@ y_{T+h | h} \pm c\hat{\sigma}_h
 <p>Assuming future errors will be similar to past errors, we can replace <span class="math inline">\(e_{T+1}, e_{T+2}, \dots\)</span> by sampling from the collection of errors we have seen in the past (i.e., the residuals). Thus we could get “future” <span class="math inline">\(y_{T+1}, y_{T+2}, \dots\)</span> by <span class="math inline">\(\hat{y}_{T+1} + e_{T+1}, \hat{y}_{T+2} + e_{T+2}, \dots\)</span>.</p>
 <p>Since sampling could generate different sets of future residuals, we thus get different paths of <span class="math inline">\(y_{T+1}, y_{T+2}, \dots\)</span>. And we can then derive the <span class="math inline">\(1 - \alpha\)</span> prediction interval simply by calculating a correspoing percentile based on each <span class="math inline">\(\hat{y}_{T+1}, \hat{y}_{T+2}, \dots\)</span> and numerous simulated path.</p>
 <p><code>generate()</code> lets us see some possible futures:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">google_fit &lt;-<span class="st"> </span>google_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">NAIVE</span>(Close))</a>
-<a class="sourceLine" id="cb85-3" title="3"></a>
-<a class="sourceLine" id="cb85-4" title="4">sim &lt;-<span class="st"> </span>google_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-5" title="5"><span class="st">  </span><span class="kw">generate</span>(<span class="dt">h =</span> <span class="dv">30</span>, <span class="dt">times =</span> <span class="dv">5</span>, <span class="dt">bootstrap =</span> <span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb85-6" title="6"></a>
-<a class="sourceLine" id="cb85-7" title="7">sim</a>
-<a class="sourceLine" id="cb85-8" title="8"><span class="co">#&gt; # A tsibble: 150 x 5 [1]</span></a>
-<a class="sourceLine" id="cb85-9" title="9"><span class="co">#&gt; # Key:       Symbol, .model, .rep [5]</span></a>
-<a class="sourceLine" id="cb85-10" title="10"><span class="co">#&gt;   Symbol .model        .rep   day  .sim</span></a>
-<a class="sourceLine" id="cb85-11" title="11"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb85-12" title="12"><span class="co">#&gt; 1 GOOG   NAIVE(Close)     1   505  765.</span></a>
-<a class="sourceLine" id="cb85-13" title="13"><span class="co">#&gt; 2 GOOG   NAIVE(Close)     1   506  766.</span></a>
-<a class="sourceLine" id="cb85-14" title="14"><span class="co">#&gt; 3 GOOG   NAIVE(Close)     1   507  768.</span></a>
-<a class="sourceLine" id="cb85-15" title="15"><span class="co">#&gt; 4 GOOG   NAIVE(Close)     1   508  757.</span></a>
-<a class="sourceLine" id="cb85-16" title="16"><span class="co">#&gt; 5 GOOG   NAIVE(Close)     1   509  761.</span></a>
-<a class="sourceLine" id="cb85-17" title="17"><span class="co">#&gt; 6 GOOG   NAIVE(Close)     1   510  742.</span></a>
-<a class="sourceLine" id="cb85-18" title="18"><span class="co">#&gt; # ... with 144 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">google_fit &lt;-<span class="st"> </span>google_<span class="dv">2015</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb92-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">NAIVE</span>(Close))</a>
+<a class="sourceLine" id="cb92-3" title="3"></a>
+<a class="sourceLine" id="cb92-4" title="4">sim &lt;-<span class="st"> </span>google_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb92-5" title="5"><span class="st">  </span><span class="kw">generate</span>(<span class="dt">h =</span> <span class="dv">30</span>, <span class="dt">times =</span> <span class="dv">5</span>, <span class="dt">bootstrap =</span> <span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb92-6" title="6"></a>
+<a class="sourceLine" id="cb92-7" title="7">sim</a>
+<a class="sourceLine" id="cb92-8" title="8"><span class="co">#&gt; # A tsibble: 150 x 5 [1]</span></a>
+<a class="sourceLine" id="cb92-9" title="9"><span class="co">#&gt; # Key:       Symbol, .model, .rep [5]</span></a>
+<a class="sourceLine" id="cb92-10" title="10"><span class="co">#&gt;   Symbol .model        .rep   day  .sim</span></a>
+<a class="sourceLine" id="cb92-11" title="11"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb92-12" title="12"><span class="co">#&gt; 1 GOOG   NAIVE(Close)     1   505  724.</span></a>
+<a class="sourceLine" id="cb92-13" title="13"><span class="co">#&gt; 2 GOOG   NAIVE(Close)     1   506  722.</span></a>
+<a class="sourceLine" id="cb92-14" title="14"><span class="co">#&gt; 3 GOOG   NAIVE(Close)     1   507  700.</span></a>
+<a class="sourceLine" id="cb92-15" title="15"><span class="co">#&gt; 4 GOOG   NAIVE(Close)     1   508  696.</span></a>
+<a class="sourceLine" id="cb92-16" title="16"><span class="co">#&gt; 5 GOOG   NAIVE(Close)     1   509  696.</span></a>
+<a class="sourceLine" id="cb92-17" title="17"><span class="co">#&gt; 6 GOOG   NAIVE(Close)     1   510  698.</span></a>
+<a class="sourceLine" id="cb92-18" title="18"><span class="co">#&gt; # ... with 144 more rows</span></a></code></pre></div>
 <p>Here we have generated five possible sample paths for the next 30 trading days. The <code>.rep</code> variable provides a new key for the tsibble. The plot below shows the five sample paths along with the historical data.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">ggplot</span>(google_<span class="dv">2015</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-2" title="2"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(day, Close)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(day, .sim, <span class="dt">color =</span> <span class="kw">factor</span>(.rep)), <span class="dt">data =</span> sim) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-4" title="4"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Google closing stock price&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb86-5" title="5"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">col =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">ggplot</span>(google_<span class="dv">2015</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(day, Close)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(day, .sim, <span class="dt">color =</span> <span class="kw">factor</span>(.rep)), <span class="dt">data =</span> sim) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-4" title="4"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Google closing stock price&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb93-5" title="5"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">col =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-28-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>This is all built into the <code>forecast()</code> function so we do not need to call generate() directly:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">google_bootstrap_fc &lt;-<span class="st"> </span>google_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">30</span>, <span class="dt">bootstrap =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb87-2" title="2">google_bootstrap_fc</a>
-<a class="sourceLine" id="cb87-3" title="3"><span class="co">#&gt; # A fable: 30 x 5 [1]</span></a>
-<a class="sourceLine" id="cb87-4" title="4"><span class="co">#&gt; # Key:     Symbol, .model [1]</span></a>
-<a class="sourceLine" id="cb87-5" title="5"><span class="co">#&gt;   Symbol .model         day Close .distribution  </span></a>
-<a class="sourceLine" id="cb87-6" title="6"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dist&gt;         </span></a>
-<a class="sourceLine" id="cb87-7" title="7"><span class="co">#&gt; 1 GOOG   NAIVE(Close)   505  759. sim(=dbl[5000])</span></a>
-<a class="sourceLine" id="cb87-8" title="8"><span class="co">#&gt; 2 GOOG   NAIVE(Close)   506  759. sim(=dbl[5000])</span></a>
-<a class="sourceLine" id="cb87-9" title="9"><span class="co">#&gt; 3 GOOG   NAIVE(Close)   507  759. sim(=dbl[5000])</span></a>
-<a class="sourceLine" id="cb87-10" title="10"><span class="co">#&gt; 4 GOOG   NAIVE(Close)   508  759. sim(=dbl[5000])</span></a>
-<a class="sourceLine" id="cb87-11" title="11"><span class="co">#&gt; 5 GOOG   NAIVE(Close)   509  759. sim(=dbl[5000])</span></a>
-<a class="sourceLine" id="cb87-12" title="12"><span class="co">#&gt; 6 GOOG   NAIVE(Close)   510  759. sim(=dbl[5000])</span></a>
-<a class="sourceLine" id="cb87-13" title="13"><span class="co">#&gt; # ... with 24 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">google_bootstrap_fc &lt;-<span class="st"> </span>google_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">30</span>, <span class="dt">bootstrap =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb94-2" title="2">google_bootstrap_fc</a>
+<a class="sourceLine" id="cb94-3" title="3"><span class="co">#&gt; # A fable: 30 x 5 [1]</span></a>
+<a class="sourceLine" id="cb94-4" title="4"><span class="co">#&gt; # Key:     Symbol, .model [1]</span></a>
+<a class="sourceLine" id="cb94-5" title="5"><span class="co">#&gt;   Symbol .model         day Close .distribution  </span></a>
+<a class="sourceLine" id="cb94-6" title="6"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dist&gt;         </span></a>
+<a class="sourceLine" id="cb94-7" title="7"><span class="co">#&gt; 1 GOOG   NAIVE(Close)   505  759. sim(=dbl[5000])</span></a>
+<a class="sourceLine" id="cb94-8" title="8"><span class="co">#&gt; 2 GOOG   NAIVE(Close)   506  759. sim(=dbl[5000])</span></a>
+<a class="sourceLine" id="cb94-9" title="9"><span class="co">#&gt; 3 GOOG   NAIVE(Close)   507  759. sim(=dbl[5000])</span></a>
+<a class="sourceLine" id="cb94-10" title="10"><span class="co">#&gt; 4 GOOG   NAIVE(Close)   508  759. sim(=dbl[5000])</span></a>
+<a class="sourceLine" id="cb94-11" title="11"><span class="co">#&gt; 5 GOOG   NAIVE(Close)   509  759. sim(=dbl[5000])</span></a>
+<a class="sourceLine" id="cb94-12" title="12"><span class="co">#&gt; 6 GOOG   NAIVE(Close)   510  759. sim(=dbl[5000])</span></a>
+<a class="sourceLine" id="cb94-13" title="13"><span class="co">#&gt; # ... with 24 more rows</span></a></code></pre></div>
 <p>Notice that the forecast distribution is now represented as a simulation with <strong>5000 sample paths</strong>. Because there is no normality assumption, the prediction intervals are not symmetric.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">google_bootstrap_fc <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb88-2" title="2"><span class="st">  </span><span class="kw">autoplot</span>(google_<span class="dv">2015</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb88-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bootstrapped prediction interval&quot;</span>)</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">google_bootstrap_fc <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb95-2" title="2"><span class="st">  </span><span class="kw">autoplot</span>(google_<span class="dv">2015</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb95-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bootstrapped prediction interval&quot;</span>)</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-30-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
             </section>

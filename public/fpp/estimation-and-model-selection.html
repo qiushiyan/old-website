@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.5 Estimation and model selection | Notes for “Forecasting: Principles and Practice, 3rd edition”</title>
   <meta name="description" content="“Reproducing”Forecasting: Principles and Practice, 3rd edition"" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.5 Estimation and model selection | Notes for “Forecasting: Principles and Practice, 3rd edition”" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-01" />
+<meta name="date" content="2020-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.1" data-path="lag-plots.html"><a href="lag-plots.html#autocorrelation"><i class="fa fa-check"></i><b>2.7.1</b> Autocorrelation</a></li>
 <li class="chapter" data-level="2.7.2" data-path="lag-plots.html"><a href="lag-plots.html#trend-and-seasonality-in-acf-plots"><i class="fa fa-check"></i><b>2.7.2</b> Trend and seasonality in ACF plots</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="white-noise.html"><a href="white-noise.html"><i class="fa fa-check"></i><b>2.8</b> White noise</a></li>
+<li class="chapter" data-level="2.8" data-path="calendar-plots.html"><a href="calendar-plots.html"><i class="fa fa-check"></i><b>2.8</b> Calendar plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>3</b> Time series decomposition</a><ul>
 <li class="chapter" data-level="3.1" data-path="transformation-and-adjustments.html"><a href="transformation-and-adjustments.html"><i class="fa fa-check"></i><b>3.1</b> Transformation and adjustments</a><ul>
@@ -200,8 +200,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="fitted-values-and-residuals.html"><a href="fitted-values-and-residuals.html#residuals"><i class="fa fa-check"></i><b>5.3.1</b> Residuals</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html"><i class="fa fa-check"></i><b>5.4</b> Residual diagnostics</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.1</b> Example: Forecasting the Google daily closing stock price</a></li>
-<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.2</b> Portmanteau tests for autocorrelation</a></li>
+<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#white-noise"><i class="fa fa-check"></i><b>5.4.1</b> White noise</a></li>
+<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.2</b> Example: Forecasting the Google daily closing stock price</a></li>
+<li class="chapter" data-level="5.4.3" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.3</b> Portmanteau tests for autocorrelation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="predict-interval.html"><a href="predict-interval.html"><i class="fa fa-check"></i><b>5.5</b> Prediction intervals</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="predict-interval.html"><a href="predict-interval.html#one-step-prediction-intervals"><i class="fa fa-check"></i><b>5.5.1</b> One-step prediction intervals</a></li>
@@ -266,7 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-predictors"><i class="fa fa-check"></i><b>7.3.1</b> Residual plots against predictors</a></li>
 <li class="chapter" data-level="7.3.2" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-fitted-values"><i class="fa fa-check"></i><b>7.3.2</b> Residual plots against fitted values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#outliers-and-influential-observations"><i class="fa fa-check"></i><b>7.3.3</b> Outliers and influential observations</a></li>
-<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.4</b> Spurious regression</a></li>
+<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#the-performance-package"><i class="fa fa-check"></i><b>7.3.4</b> The <code>performance</code> package</a></li>
+<li class="chapter" data-level="7.3.5" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.5</b> Spurious regression</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Some useful predictors</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html#trend"><i class="fa fa-check"></i><b>7.4.1</b> Trend</a></li>
@@ -338,21 +340,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.2" data-path="forecasting-with-ets-models.html"><a href="forecasting-with-ets-models.html#prediction-intervals-1"><i class="fa fa-check"></i><b>8.6.2</b> Prediction intervals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>9</b> ARIMA models</a><ul>
-<li class="chapter" data-level="9.1" data-path="stationarity-and-differencing.html"><a href="stationarity-and-differencing.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity and differencing</a></li>
+<li class="chapter" data-level="9" data-path="univariate-stationary-processes.html"><a href="univariate-stationary-processes.html"><i class="fa fa-check"></i><b>9</b> Univariate stationary processes</a><ul>
+<li class="chapter" data-level="9.1" data-path="stationarity.html"><a href="stationarity.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="stationarity.html"><a href="stationarity.html#ch9-white-noise"><i class="fa fa-check"></i><b>9.1.1</b> White noise</a></li>
+<li class="chapter" data-level="9.1.2" data-path="stationarity.html"><a href="stationarity.html#tests-for-autocorrelation-and-normality"><i class="fa fa-check"></i><b>9.1.2</b> Tests for autocorrelation and normality</a></li>
+<li class="chapter" data-level="9.1.3" data-path="stationarity.html"><a href="stationarity.html#the-wold-decomposition"><i class="fa fa-check"></i><b>9.1.3</b> The Wold Decomposition</a></li>
+</ul></li>
 <li class="chapter" data-level="9.2" data-path="backshift-notation.html"><a href="backshift-notation.html"><i class="fa fa-check"></i><b>9.2</b> Backshift notation</a></li>
 <li class="chapter" data-level="9.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html"><i class="fa fa-check"></i><b>9.3</b> Autoregressive models</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order"><i class="fa fa-check"></i><b>9.3.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.2</b> Random walk</a></li>
+<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#stimulating-an-arp-process"><i class="fa fa-check"></i><b>9.3.1</b> Stimulating an AR(p) process</a></li>
+<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order-p"><i class="fa fa-check"></i><b>9.3.2</b> Decision of order p</a></li>
+<li class="chapter" data-level="9.3.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.3</b> Random walk</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="moving-average-models.html"><a href="moving-average-models.html"><i class="fa fa-check"></i><b>9.4</b> Moving average models</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-1"><i class="fa fa-check"></i><b>9.4.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.2</b> Koyck transformation and Invertibility</a></li>
+<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#simulating-an-maq-process"><i class="fa fa-check"></i><b>9.4.1</b> Simulating an MA(q) process</a></li>
+<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
+<li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
-<li class="chapter" data-level="9.6" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>9.6</b> Non-seasonal ARIMA models</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>10</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
+<li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="differencing.html"><a href="differencing.html#second-order-differencing"><i class="fa fa-check"></i><b>10.1.1</b> Second-order differencing</a></li>
+<li class="chapter" data-level="10.1.2" data-path="differencing.html"><a href="differencing.html#seasonal-differencing"><i class="fa fa-check"></i><b>10.1.2</b> Seasonal differencing</a></li>
+<li class="chapter" data-level="10.1.3" data-path="differencing.html"><a href="differencing.html#unit-root-tests"><i class="fa fa-check"></i><b>10.1.3</b> Unit root tests</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.2</b> Non-seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html#understanding-arima-models"><i class="fa fa-check"></i><b>10.2.1</b> Understanding ARIMA models</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html"><i class="fa fa-check"></i><b>10.3</b> Estimation and order selection</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#mle"><i class="fa fa-check"></i><b>10.3.1</b> MLE</a></li>
+<li class="chapter" data-level="10.3.2" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#information-criteria"><i class="fa fa-check"></i><b>10.3.2</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="the-arima-function.html"><a href="the-arima-function.html"><i class="fa fa-check"></i><b>10.4</b> The <code>ARIMA()</code> function</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="the-arima-function.html"><a href="the-arima-function.html#algorithm"><i class="fa fa-check"></i><b>10.4.1</b> Algorithm</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-arima-function.html"><a href="the-arima-function.html#modelling-procedure"><i class="fa fa-check"></i><b>10.4.2</b> Modelling procedure</a></li>
+<li class="chapter" data-level="10.4.3" data-path="the-arima-function.html"><a href="the-arima-function.html#example-seasonally-adjusted-electrical-equipment-orders"><i class="fa fa-check"></i><b>10.4.3</b> Example: Seasonally adjusted electrical equipment orders</a></li>
+<li class="chapter" data-level="10.4.4" data-path="the-arima-function.html"><a href="the-arima-function.html#plotting-the-characteristic-roots"><i class="fa fa-check"></i><b>10.4.4</b> Plotting the characteristic roots</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html"><i class="fa fa-check"></i><b>10.5</b> Forecasting with ARIMA models</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#point-forecasts"><i class="fa fa-check"></i><b>10.5.1</b> Point forecasts</a></li>
+<li class="chapter" data-level="10.5.2" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#prediction-intervals-2"><i class="fa fa-check"></i><b>10.5.2</b> Prediction intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.6</b> Seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#acf-and-pacf"><i class="fa fa-check"></i><b>10.6.1</b> ACF and PACF</a></li>
+<li class="chapter" data-level="10.6.2" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-european-quarterly-retail-trade"><i class="fa fa-check"></i><b>10.6.2</b> Example: European quarterly retail trade</a></li>
+<li class="chapter" data-level="10.6.3" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-corticosteroid-drug-sales-in-australia"><i class="fa fa-check"></i><b>10.6.3</b> Example: Corticosteroid drug sales in Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="ets-and-arima.html"><a href="ets-and-arima.html"><i class="fa fa-check"></i><b>10.7</b> ETS and ARIMA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-non-seasonal-data"><i class="fa fa-check"></i><b>10.7.1</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on non-seasonal data</a></li>
+<li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -412,28 +452,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-domestic-holiday-tourist-visitor-nights-in-australia" class="section level3">
 <h3><span class="header-section-number">8.5.3</span> Example: Domestic holiday tourist visitor nights in Australia</h3>
 <p>If not explicitly set <code>error()</code>, <code>trend()</code> or <code>season()</code>, <code>ETS()</code> use MLE to estimtate the corresponding parameters.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1">aus_holidays &lt;-<span class="st"> </span>tourism <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb152-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Purpose <span class="op">==</span><span class="st"> &quot;Holiday&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb152-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Trips =</span> <span class="kw">sum</span>(Trips))  </a>
-<a class="sourceLine" id="cb152-4" title="4"></a>
-<a class="sourceLine" id="cb152-5" title="5">holidays_fit &lt;-<span class="st"> </span>aus_holidays <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb152-6" title="6"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ETS</span>(Trips))</a>
-<a class="sourceLine" id="cb152-7" title="7"></a>
-<a class="sourceLine" id="cb152-8" title="8">holidays_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
-<a class="sourceLine" id="cb152-9" title="9"><span class="co">#&gt; Series: Trips </span></a>
-<a class="sourceLine" id="cb152-10" title="10"><span class="co">#&gt; Model: ETS(M,N,M) </span></a>
-<a class="sourceLine" id="cb152-11" title="11"><span class="co">#&gt;   Smoothing parameters:</span></a>
-<a class="sourceLine" id="cb152-12" title="12"><span class="co">#&gt;     alpha = 0.358 </span></a>
-<a class="sourceLine" id="cb152-13" title="13"><span class="co">#&gt;     gamma = 0.000969 </span></a>
-<a class="sourceLine" id="cb152-14" title="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb152-15" title="15"><span class="co">#&gt;   Initial states:</span></a>
-<a class="sourceLine" id="cb152-16" title="16"><span class="co">#&gt;     l    s1    s2    s3   s4</span></a>
-<a class="sourceLine" id="cb152-17" title="17"><span class="co">#&gt;  9667 0.943 0.927 0.968 1.16</span></a>
-<a class="sourceLine" id="cb152-18" title="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb152-19" title="19"><span class="co">#&gt;   sigma^2:  0.0022</span></a>
-<a class="sourceLine" id="cb152-20" title="20"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb152-21" title="21"><span class="co">#&gt;  AIC AICc  BIC </span></a>
-<a class="sourceLine" id="cb152-22" title="22"><span class="co">#&gt; 1331 1333 1348</span></a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1">aus_holidays &lt;-<span class="st"> </span>tourism <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb160-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Purpose <span class="op">==</span><span class="st"> &quot;Holiday&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb160-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Trips =</span> <span class="kw">sum</span>(Trips))  </a>
+<a class="sourceLine" id="cb160-4" title="4"></a>
+<a class="sourceLine" id="cb160-5" title="5">holidays_fit &lt;-<span class="st"> </span>aus_holidays <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb160-6" title="6"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ETS</span>(Trips))</a>
+<a class="sourceLine" id="cb160-7" title="7"></a>
+<a class="sourceLine" id="cb160-8" title="8">holidays_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
+<a class="sourceLine" id="cb160-9" title="9"><span class="co">#&gt; Series: Trips </span></a>
+<a class="sourceLine" id="cb160-10" title="10"><span class="co">#&gt; Model: ETS(M,N,M) </span></a>
+<a class="sourceLine" id="cb160-11" title="11"><span class="co">#&gt;   Smoothing parameters:</span></a>
+<a class="sourceLine" id="cb160-12" title="12"><span class="co">#&gt;     alpha = 0.358 </span></a>
+<a class="sourceLine" id="cb160-13" title="13"><span class="co">#&gt;     gamma = 0.000969 </span></a>
+<a class="sourceLine" id="cb160-14" title="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb160-15" title="15"><span class="co">#&gt;   Initial states:</span></a>
+<a class="sourceLine" id="cb160-16" title="16"><span class="co">#&gt;     l    s1    s2    s3   s4</span></a>
+<a class="sourceLine" id="cb160-17" title="17"><span class="co">#&gt;  9667 0.943 0.927 0.968 1.16</span></a>
+<a class="sourceLine" id="cb160-18" title="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb160-19" title="19"><span class="co">#&gt;   sigma^2:  0.0022</span></a>
+<a class="sourceLine" id="cb160-20" title="20"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb160-21" title="21"><span class="co">#&gt;  AIC AICc  BIC </span></a>
+<a class="sourceLine" id="cb160-22" title="22"><span class="co">#&gt; 1331 1333 1348</span></a></code></pre></div>
 <p>The model selected is ETS(M, N, M) (<code>Trips</code> are strictly positive):</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -442,19 +482,19 @@ y_t &amp;= \ell_{t-1}s_{t-m}(1 + \epsilon_t) \\
 s_t &amp;= s_{t-1}(1 + \gamma \epsilon_t)
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1">holidays_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb153-2" title="2"><span class="st">  </span><span class="kw">components</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb153-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
-<p><img src="ch8_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1">holidays_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb161-2" title="2"><span class="st">  </span><span class="kw">components</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb161-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<p><img src="ch8_files/figure-html/unnamed-chunk-24-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>Because this model has multiplicative errors, the residuals are not equivalent to the one-step training errors. The residuals are given by <span class="math inline">\(\hat{\epsilon}_t\)</span>, while the one-step training errors are defined as <span class="math inline">\(y_t − \hat{y}_{t|t−1}\)</span>.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="kw">residuals</span>(holidays_fit) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb154-2" title="2"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb154-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Innovation errors&quot;</span>)</a>
-<a class="sourceLine" id="cb154-4" title="4"></a>
-<a class="sourceLine" id="cb154-5" title="5"><span class="kw">residuals</span>(holidays_fit, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb154-6" title="6"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb154-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Response errors&quot;</span>)</a></code></pre></div>
-<p><img src="ch8_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" /><img src="ch8_files/figure-html/unnamed-chunk-27-2.png" width="50%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="kw">residuals</span>(holidays_fit) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb162-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Innovation errors&quot;</span>)</a>
+<a class="sourceLine" id="cb162-4" title="4"></a>
+<a class="sourceLine" id="cb162-5" title="5"><span class="kw">residuals</span>(holidays_fit, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">%&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb162-6" title="6"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb162-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Response errors&quot;</span>)</a></code></pre></div>
+<p><img src="ch8_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" /><img src="ch8_files/figure-html/unnamed-chunk-25-2.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
             </section>

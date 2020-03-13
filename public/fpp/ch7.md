@@ -1,6 +1,3 @@
-
-
-
 # Time series regression models  
 
 
@@ -45,7 +42,7 @@ us_change %>%
        color = "Series")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" />
 
 And then make a scatter plot:  
 
@@ -59,7 +56,7 @@ us_change %>%
     geom_smooth(method="lm", se=FALSE)
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;" />
 
 Fit a formal model:  
 
@@ -117,7 +114,7 @@ us_change %>%
 y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \epsilon_t
 \end{equation}
 
-We could simply use more predictors in `us_change` to create a multiple linear regression model. This time, the last 4 columns are included in the model. Take a look at the rest 3 time seires determined by `Production`, `Savings` and `Unemployment`  
+We could simply use more predictors in `us_change` to create a multiple linear regression model. This time, the last 4 columns are included in the model. Take a look at the rest 3 time series determined by `Production`, `Savings` and `Unemployment`  
 
 
 ```r
@@ -129,7 +126,7 @@ us_change %>%
   scale_color_discrete(guide = FALSE)
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 Below is a scatterplot matrix of five variables. The first column shows the relationships between the forecast variable (`consumption`) and each of the predictors. The scatterplots show positive relationships with income and industrial production, and negative relationships with savings and unemployment. 
@@ -140,7 +137,7 @@ GGally::ggpairs(us_change[, 2:6])
 ```
 
 <div class="figure" style="text-align: center">
-<img src="ch7_files/figure-html/pairs-1.png" alt="A scatterplot matrix of all 5 variables" width="80%" />
+<img src="ch7_files/figure-html/pairs-1.png" alt="A scatterplot matrix of all 5 variables" width="90%" />
 <p class="caption">(\#fig:pairs)A scatterplot matrix of all 5 variables</p>
 </div>
 
@@ -254,7 +251,7 @@ us_change_mfit %>%
        title = "Percent change in US consumption expenditure")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -268,7 +265,7 @@ us_change_mfit %>%
        x = "Data (actual values)")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Goodness of fit 
  
@@ -299,7 +296,7 @@ The standard error is related to the size of the average error that the model pr
 us_change_mfit %>% gg_tsresiduals()
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -349,7 +346,7 @@ p4 <- ggplot(df, aes(Unemployment, .resid)) +
 p1 + p2 + p3 + p4 + plot_layout(nrow = 2)
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ### Residual plots against fitted values  
@@ -368,7 +365,7 @@ augment(us_change_mfit) %>%
   labs(x = "Fitted", y = "Residuals")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ### Outliers and influential observations    
@@ -401,11 +398,26 @@ us_change_lm <- lm(Consumption ~ Income + Production + Savings + Unemployment,
 us_change_lm %>% car::influenceIndexPlot()
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" />
+
+
+### The `performance` package  
+
+The [performance](https://easystats.github.io/performance/) package is dedicated to  providing utilities for computing indices of model quality and goodness of fit. In the case of regression, `performance` provides many functions to check model assumptions, like `check_collinearity()`, `check_normality()` or `check_heteroscedasticity()`. To get a comprehensive check, use `check_model()`  
+
+
+```r
+library(performance)
+check_model(us_change_lm)
+```
+
+<img src="ch7_files/figure-html/unnamed-chunk-20-1.png" width="90%" style="display: block; margin: auto;" />
+
+
 
 ### Spurious regression  
 
-More often than not, time series data are “non-stationary”; that is, the values of the time series do not fluctuate around a constant mean or with a constant variance. We will deal with time series stationarity in more detail in Chapter \@ref(arima-models), but here we need to address the effect that non-stationary data can have on regression models.   
+More often than not, time series data are “non-stationary”; that is, the values of the time series do not fluctuate around a constant mean or with a constant variance. We will come to the formal definition of stationarity in more detail in Section \@ref(stationarity), but here we need to address the effect that non-stationary data can have on regression models.   
 
 For example, consider the two variables plotted in below. These appear to be related simply because they both trend upwards in the same manner. However, air passenger traffic in Australia has nothing to do with rice production in Guinea.  
 
@@ -426,7 +438,7 @@ p3 <- guinea_rice %>%
 (p1 / p2) | p3 
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 Regressing non-stationary time series can lead to spurious regressions. **High $R^2$ and high residual autocorrelation can be signs of spurious regression**. Notice these features in the output below. We discuss the issues surrounding non-stationary data and spurious regressions in more detail in Chapter \@ref(dynamic-regression-models).
@@ -460,7 +472,7 @@ spurious_fit %>% report()
 spurious_fit %>% gg_tsresiduals()
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ## Some useful predictors  
@@ -498,7 +510,7 @@ recent_production <- aus_production %>%
 recent_production %>% gg_tsdisplay(Beer)
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 We want to forecast the value of future beer production. We can model this data using a regression model with a linear trend and quarterly dummy variables, 
@@ -551,7 +563,7 @@ augment(beer_fit) %>%
        title = "Quarterly Beer Production")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-25-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -565,7 +577,7 @@ augment(beer_fit) %>%
          title = "Quarterly beer production")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-26-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Intervention variables  
 
@@ -636,12 +648,12 @@ and so on. If we have monthly seasonality, and we use the first 11 of these pred
 
 With Fourier terms, we often need fewer predictors than with dummy variables, especially when m is large. This makes them useful for weekly data, for example, where $m \approx 52$. For short seasonal periods (e.g., quarterly data), there is little advantage in using Fourier terms over seasonal dummy variables.  
 
-These Fourier terms are produced using the `fourier(k)` function. The `K` argument specifies the maximum order of Fourier terms (i.e., how many pairs of $\sin$ and $\cos$ terms to include). For example, the Australian beer data (quarterly, should include 3 terms so `K = 2`) can be modelled like this.     
+These Fourier terms are produced using the `fourier(K)` function. The `K` argument specifies the maximum order of Fourier terms (i.e., how many pairs of $\sin$ and $\cos$ terms to include). For example, the Australian beer data (quarterly, should include 3 terms so `K = 2`) can be modelled like this.     
 
 
 ```r
 fourier_beer <- recent_production %>%
-  model(TSLM(Beer ~ trend() + fourier(K=2)))
+  model(TSLM(Beer ~ trend() + fourier(K = 2)))
 
 fourier_beer %>% report()
 #> Series: Beer 
@@ -754,7 +766,7 @@ Consequently, **we recommend that one of the $\text{AIC}_c$, $\text{AIC}$, or $\
 
 In `us_change_mfit` 4 predictors are specified, so there are $2^4 = 16$ possible models   
 
-<img src="images/all_subsets.png" width="80%" style="display: block; margin: auto;" />
+<img src="images/all_subsets.png" width="90%" style="display: block; margin: auto;" />
 
 The best model contains all four predictors according to $\text{AIC}_c$. The results from a backward selection using AIC follow suit:   
 
@@ -818,7 +830,7 @@ beer_fit %>%
        title = "Forecasts of beer production using regression")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-31-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -909,7 +921,7 @@ us_change %>%
                   ylim = c(0, 1.2))
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-33-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ### Prediction intervals  
@@ -1085,7 +1097,7 @@ boston_lm %>%
   labs(title = "Residual across trend")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" /><img src="ch7_files/figure-html/unnamed-chunk-35-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-34-1.png" width="90%" style="display: block; margin: auto;" /><img src="ch7_files/figure-html/unnamed-chunk-34-2.png" width="90%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -1130,7 +1142,7 @@ boston_piece_fc %>%
        color = "Model")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-36-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Correlation, causation and forecasting  
 

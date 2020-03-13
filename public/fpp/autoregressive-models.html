@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.3 Autoregressive models | Notes for “Forecasting: Principles and Practice, 3rd edition”</title>
   <meta name="description" content="“Reproducing”Forecasting: Principles and Practice, 3rd edition"" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.3 Autoregressive models | Notes for “Forecasting: Principles and Practice, 3rd edition”" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-01" />
+<meta name="date" content="2020-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.1" data-path="lag-plots.html"><a href="lag-plots.html#autocorrelation"><i class="fa fa-check"></i><b>2.7.1</b> Autocorrelation</a></li>
 <li class="chapter" data-level="2.7.2" data-path="lag-plots.html"><a href="lag-plots.html#trend-and-seasonality-in-acf-plots"><i class="fa fa-check"></i><b>2.7.2</b> Trend and seasonality in ACF plots</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="white-noise.html"><a href="white-noise.html"><i class="fa fa-check"></i><b>2.8</b> White noise</a></li>
+<li class="chapter" data-level="2.8" data-path="calendar-plots.html"><a href="calendar-plots.html"><i class="fa fa-check"></i><b>2.8</b> Calendar plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>3</b> Time series decomposition</a><ul>
 <li class="chapter" data-level="3.1" data-path="transformation-and-adjustments.html"><a href="transformation-and-adjustments.html"><i class="fa fa-check"></i><b>3.1</b> Transformation and adjustments</a><ul>
@@ -200,8 +200,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="fitted-values-and-residuals.html"><a href="fitted-values-and-residuals.html#residuals"><i class="fa fa-check"></i><b>5.3.1</b> Residuals</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html"><i class="fa fa-check"></i><b>5.4</b> Residual diagnostics</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.1</b> Example: Forecasting the Google daily closing stock price</a></li>
-<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.2</b> Portmanteau tests for autocorrelation</a></li>
+<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#white-noise"><i class="fa fa-check"></i><b>5.4.1</b> White noise</a></li>
+<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.2</b> Example: Forecasting the Google daily closing stock price</a></li>
+<li class="chapter" data-level="5.4.3" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.3</b> Portmanteau tests for autocorrelation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="predict-interval.html"><a href="predict-interval.html"><i class="fa fa-check"></i><b>5.5</b> Prediction intervals</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="predict-interval.html"><a href="predict-interval.html#one-step-prediction-intervals"><i class="fa fa-check"></i><b>5.5.1</b> One-step prediction intervals</a></li>
@@ -266,7 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-predictors"><i class="fa fa-check"></i><b>7.3.1</b> Residual plots against predictors</a></li>
 <li class="chapter" data-level="7.3.2" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-fitted-values"><i class="fa fa-check"></i><b>7.3.2</b> Residual plots against fitted values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#outliers-and-influential-observations"><i class="fa fa-check"></i><b>7.3.3</b> Outliers and influential observations</a></li>
-<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.4</b> Spurious regression</a></li>
+<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#the-performance-package"><i class="fa fa-check"></i><b>7.3.4</b> The <code>performance</code> package</a></li>
+<li class="chapter" data-level="7.3.5" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.5</b> Spurious regression</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Some useful predictors</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html#trend"><i class="fa fa-check"></i><b>7.4.1</b> Trend</a></li>
@@ -338,21 +340,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.2" data-path="forecasting-with-ets-models.html"><a href="forecasting-with-ets-models.html#prediction-intervals-1"><i class="fa fa-check"></i><b>8.6.2</b> Prediction intervals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>9</b> ARIMA models</a><ul>
-<li class="chapter" data-level="9.1" data-path="stationarity-and-differencing.html"><a href="stationarity-and-differencing.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity and differencing</a></li>
+<li class="chapter" data-level="9" data-path="univariate-stationary-processes.html"><a href="univariate-stationary-processes.html"><i class="fa fa-check"></i><b>9</b> Univariate stationary processes</a><ul>
+<li class="chapter" data-level="9.1" data-path="stationarity.html"><a href="stationarity.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="stationarity.html"><a href="stationarity.html#ch9-white-noise"><i class="fa fa-check"></i><b>9.1.1</b> White noise</a></li>
+<li class="chapter" data-level="9.1.2" data-path="stationarity.html"><a href="stationarity.html#tests-for-autocorrelation-and-normality"><i class="fa fa-check"></i><b>9.1.2</b> Tests for autocorrelation and normality</a></li>
+<li class="chapter" data-level="9.1.3" data-path="stationarity.html"><a href="stationarity.html#the-wold-decomposition"><i class="fa fa-check"></i><b>9.1.3</b> The Wold Decomposition</a></li>
+</ul></li>
 <li class="chapter" data-level="9.2" data-path="backshift-notation.html"><a href="backshift-notation.html"><i class="fa fa-check"></i><b>9.2</b> Backshift notation</a></li>
 <li class="chapter" data-level="9.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html"><i class="fa fa-check"></i><b>9.3</b> Autoregressive models</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order"><i class="fa fa-check"></i><b>9.3.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.2</b> Random walk</a></li>
+<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#stimulating-an-arp-process"><i class="fa fa-check"></i><b>9.3.1</b> Stimulating an AR(p) process</a></li>
+<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order-p"><i class="fa fa-check"></i><b>9.3.2</b> Decision of order p</a></li>
+<li class="chapter" data-level="9.3.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.3</b> Random walk</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="moving-average-models.html"><a href="moving-average-models.html"><i class="fa fa-check"></i><b>9.4</b> Moving average models</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-1"><i class="fa fa-check"></i><b>9.4.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.2</b> Koyck transformation and Invertibility</a></li>
+<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#simulating-an-maq-process"><i class="fa fa-check"></i><b>9.4.1</b> Simulating an MA(q) process</a></li>
+<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
+<li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
-<li class="chapter" data-level="9.6" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>9.6</b> Non-seasonal ARIMA models</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>10</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
+<li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="differencing.html"><a href="differencing.html#second-order-differencing"><i class="fa fa-check"></i><b>10.1.1</b> Second-order differencing</a></li>
+<li class="chapter" data-level="10.1.2" data-path="differencing.html"><a href="differencing.html#seasonal-differencing"><i class="fa fa-check"></i><b>10.1.2</b> Seasonal differencing</a></li>
+<li class="chapter" data-level="10.1.3" data-path="differencing.html"><a href="differencing.html#unit-root-tests"><i class="fa fa-check"></i><b>10.1.3</b> Unit root tests</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.2</b> Non-seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html#understanding-arima-models"><i class="fa fa-check"></i><b>10.2.1</b> Understanding ARIMA models</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html"><i class="fa fa-check"></i><b>10.3</b> Estimation and order selection</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#mle"><i class="fa fa-check"></i><b>10.3.1</b> MLE</a></li>
+<li class="chapter" data-level="10.3.2" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#information-criteria"><i class="fa fa-check"></i><b>10.3.2</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="the-arima-function.html"><a href="the-arima-function.html"><i class="fa fa-check"></i><b>10.4</b> The <code>ARIMA()</code> function</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="the-arima-function.html"><a href="the-arima-function.html#algorithm"><i class="fa fa-check"></i><b>10.4.1</b> Algorithm</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-arima-function.html"><a href="the-arima-function.html#modelling-procedure"><i class="fa fa-check"></i><b>10.4.2</b> Modelling procedure</a></li>
+<li class="chapter" data-level="10.4.3" data-path="the-arima-function.html"><a href="the-arima-function.html#example-seasonally-adjusted-electrical-equipment-orders"><i class="fa fa-check"></i><b>10.4.3</b> Example: Seasonally adjusted electrical equipment orders</a></li>
+<li class="chapter" data-level="10.4.4" data-path="the-arima-function.html"><a href="the-arima-function.html#plotting-the-characteristic-roots"><i class="fa fa-check"></i><b>10.4.4</b> Plotting the characteristic roots</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html"><i class="fa fa-check"></i><b>10.5</b> Forecasting with ARIMA models</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#point-forecasts"><i class="fa fa-check"></i><b>10.5.1</b> Point forecasts</a></li>
+<li class="chapter" data-level="10.5.2" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#prediction-intervals-2"><i class="fa fa-check"></i><b>10.5.2</b> Prediction intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.6</b> Seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#acf-and-pacf"><i class="fa fa-check"></i><b>10.6.1</b> ACF and PACF</a></li>
+<li class="chapter" data-level="10.6.2" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-european-quarterly-retail-trade"><i class="fa fa-check"></i><b>10.6.2</b> Example: European quarterly retail trade</a></li>
+<li class="chapter" data-level="10.6.3" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-corticosteroid-drug-sales-in-australia"><i class="fa fa-check"></i><b>10.6.3</b> Example: Corticosteroid drug sales in Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="ets-and-arima.html"><a href="ets-and-arima.html"><i class="fa fa-check"></i><b>10.7</b> ETS and ARIMA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-non-seasonal-data"><i class="fa fa-check"></i><b>10.7.1</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on non-seasonal data</a></li>
+<li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -389,18 +429,17 @@ y_t - \phi_1y_{t-1} - \phi_2y_{t-2} - \cdots - \phi_py_{t-p} &amp;= \epsilon_t +
 \phi_p(B)y_t &amp;= \epsilon_t + c
 \end{aligned}
 \]</span></p>
-<p>AR models generally require the time series to be stationary.</p>
 
 <div class="todo">
 The relationship between AR models and stationarity,
 </div>
 
-<p>When autoregressive models are confined to stationary data, some constraints on the values of the parameters are required.</p>
+<p>Whether autoregressive process is stationary is dependent on the values of <span class="math inline">\(\phi_1, \phi_2, \dots\)</span>. To yield a stationary autoregressive process, some constraints on the values of the parameters are required.</p>
 <ul>
 <li><p>For an AR(1) model: <span class="math inline">\(-1 &lt; \phi_1 &lt; -1\)</span> (Consider the denominator of the sum of a inifite geometric series)</p></li>
-<li><p>For an AR(2) model: <span class="math inline">\(-1 &lt; \phi_2 &lt; 1\)</span>, <span class="math inline">\(\phi_1 + \phi_2 &lt; 1, \phi_2 - \phi_1 &lt; 1\)</span></p></li>
+<li><p>For an AR(2) model: <span class="math inline">\(-1 &lt; \phi_2 &lt; 1\)</span>, <span class="math inline">\(\phi_1 + \phi_2 &lt; 1, \phi_2 - \phi_1 &lt; 1\)</span>.</p></li>
 </ul>
-<p>Generally, if we treat <strong>B</strong> as number (or numbers), we can write out the the formula (<span class="math inline">\(\phi_p(B)\)</span> below) as</p>
+<p>Generally, for a AR(p) model, if we treat <strong>B</strong> as number (or numbers), we can write out the the formula (<span class="math inline">\(\phi_p(B)\)</span> below) as</p>
 <p><span class="math display">\[
 \begin{aligned}
 \phi_p(B)y_t &amp;= \epsilon_t + c\\
@@ -408,7 +447,7 @@ The relationship between AR models and stationarity,
 \phi_p(B) &amp;= 0
 \end{aligned}
 \]</span>
-To be stationary, all roots (<span class="math inline">\(B_1\)</span>, <span class="math inline">\(B_2\)</span>, …, <span class="math inline">\(B_p\)</span>) of the characteristic equation <span class="math inline">\(\Phi(B) = 1 - \phi_1B - \phi_2B^2 - \cdots - \phi_pB^p\)</span> must <strong>exceed</strong> 1 in absolute value (actually all of them should lie ouside of the unit circle). We can thus derive conditions on the valuse of <span class="math inline">\(\phi_1, \cdots, \phi_p\)</span>, but it’s quite complicated, and R takes care of these restrictions when estimating a model.</p>
+To be stationary, all complex roots (<span class="math inline">\(B_1\)</span>, <span class="math inline">\(B_2\)</span>, …, <span class="math inline">\(B_p\)</span>) of the characteristic equation <span class="math inline">\(\Phi(B) = 1 - \phi_1B - \phi_2B^2 - \cdots - \phi_pB^p\)</span> must <strong>exceed</strong> 1 in absolute value (actually all of them should lie ouside of the unit circle). We can thus derive conditions on the valuse of <span class="math inline">\(\phi_1, \cdots, \phi_p\)</span>, but it’s quite complicated, and R takes care of these restrictions when estimating a model.</p>
 <p>For example, consider this AR(1) model :</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -421,73 +460,125 @@ B &amp;= 2
 \end{aligned}
 \]</span>
 This model is indeed stationary because <span class="math inline">\(|B| &gt; 1\)</span>. From this we can also derive <span class="math inline">\(|\phi_1| &lt; 1\)</span> for AR(1) model.</p>
-<div id="decision-of-order" class="section level3">
-<h3><span class="header-section-number">9.3.1</span> Decision of order</h3>
-<p>How do we decide the order $p $of a AR model? A rule of thumb is to look at <strong>partial autocorrelation coefficients</strong>, PACF. PACF measures the direct effect of a lagged value on its previous value. Suppose we want to measure the effect of <span class="math inline">\(y_{t-2}\)</span> on <span class="math inline">\(y_{t}\)</span>, while <span class="math inline">\(r_2\)</span> could be high, it could also carry the effect of <span class="math inline">\(y_{t-2} \rightarrow y_{t-1} \rightarrow y_t\)</span>, especially when <span class="math inline">\(r_1\)</span> is also high. This is when partial autocorrelation come to resuce, consider a AR(2) model (if we ignore any observation earlier than <span class="math inline">\(y_{t-2}\)</span>, assuming that they are too distant to exert an effect)</p>
+<div id="stimulating-an-arp-process" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Stimulating an AR(p) process</h3>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">set.seed</span>(<span class="dv">2020</span>)</a>
+<a class="sourceLine" id="cb169-2" title="2"><span class="co"># specification for AR(1) model with small coef</span></a>
+<a class="sourceLine" id="cb169-3" title="3">AR_small_spec &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">ar =</span> <span class="fl">0.1</span>, <span class="dt">sd =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb169-4" title="4"><span class="co"># specification for AR(1) model with large coef</span></a>
+<a class="sourceLine" id="cb169-5" title="5">AR_large_spec &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">ar =</span> <span class="fl">0.9</span>, <span class="dt">sd =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb169-6" title="6"><span class="co">## simulate AR(1)</span></a>
+<a class="sourceLine" id="cb169-7" title="7">AR1_small &lt;-<span class="st"> </span><span class="kw">arima.sim</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">model =</span> AR_small_spec) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tsibble</span>()</a>
+<a class="sourceLine" id="cb169-8" title="8">AR1_large &lt;-<span class="st"> </span><span class="kw">arima.sim</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">model =</span> AR_large_spec) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tsibble</span>()</a>
+<a class="sourceLine" id="cb169-9" title="9"></a>
+<a class="sourceLine" id="cb169-10" title="10"><span class="kw">wrap_plots</span>(</a>
+<a class="sourceLine" id="cb169-11" title="11">  <span class="kw">autoplot</span>(AR1_small) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.1&quot;</span>))),</a>
+<a class="sourceLine" id="cb169-12" title="12">  <span class="kw">autoplot</span>(AR1_large) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.9&quot;</span>))),</a>
+<a class="sourceLine" id="cb169-13" title="13">  <span class="kw">ACF</span>(AR1_small) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.1&quot;</span>))),</a>
+<a class="sourceLine" id="cb169-14" title="14">  <span class="kw">ACF</span>(AR1_large) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.9&quot;</span>)))</a>
+<a class="sourceLine" id="cb169-15" title="15">)</a></code></pre></div>
+<p><img src="stationary_files/figure-html/unnamed-chunk-5-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>It looks like the time series with the smaller AR coefficient is more “choppy” and seems to stay closer to 0 whereas the time series with the larger AR coefficient appears to wander around more. Remember that as the coefficient in an AR(1) model goes to 0, the model approaches a WN sequence, which is stationary in both the mean and variance. As the coefficient goes to 1, however, the model approaches a random walk (<a href="autoregressive-models.html#random-walk">9.3.3</a>), which is not stationary in either the mean or covariance.</p>
+<p>Next, let’s generate two AR(1) models that have the same magnitude coeficient, but opposite signs, and compare their behavior.</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">set.seed</span>(<span class="dv">2020</span>)</a>
+<a class="sourceLine" id="cb170-2" title="2"><span class="co"># specification for AR(1) model with positive coef</span></a>
+<a class="sourceLine" id="cb170-3" title="3">AR_pos_spec &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">ar =</span> <span class="fl">0.5</span>, <span class="dt">sd =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb170-4" title="4"><span class="co"># specification for AR(1) model with negative coef</span></a>
+<a class="sourceLine" id="cb170-5" title="5">AR_neg_spec &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">ar =</span> <span class="fl">-0.5</span>, <span class="dt">sd =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb170-6" title="6"><span class="co"># simulate AR(1)</span></a>
+<a class="sourceLine" id="cb170-7" title="7">AR1_pos &lt;-<span class="st"> </span><span class="kw">arima.sim</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">model =</span> AR_pos_spec) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tsibble</span>()</a>
+<a class="sourceLine" id="cb170-8" title="8">AR1_neg &lt;-<span class="st"> </span><span class="kw">arima.sim</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">model =</span> AR_neg_spec) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tsibble</span>()</a>
+<a class="sourceLine" id="cb170-9" title="9"></a>
+<a class="sourceLine" id="cb170-10" title="10"><span class="kw">wrap_plots</span>(</a>
+<a class="sourceLine" id="cb170-11" title="11">  <span class="kw">autoplot</span>(AR1_pos) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.5&quot;</span>))),</a>
+<a class="sourceLine" id="cb170-12" title="12">  <span class="kw">autoplot</span>(AR1_neg) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = -0.5&quot;</span>))),</a>
+<a class="sourceLine" id="cb170-13" title="13">  <span class="kw">ACF</span>(AR1_pos) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.5&quot;</span>))),</a>
+<a class="sourceLine" id="cb170-14" title="14">  <span class="kw">ACF</span>(AR1_neg) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = -0.5&quot;</span>)))</a>
+<a class="sourceLine" id="cb170-15" title="15">)</a></code></pre></div>
+<p><img src="stationary_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Now it appears like both time series vary around the mean by about the same amount, but the model with the negative coefficient produces a much more “sawtooth” time series. It turns out that any AR(1) model with <span class="math inline">\(−1 &lt; \phi_1 &lt; 0\)</span> will exhibit the 2-point oscillation we see here.</p>
+<p>We can simulate higher order AR(p) models in the same manner, but care must be exercised when choosing a set of coefficients that result in a stationary model or else <code>arima.sim()</code> will fail and report an error. For example, an AR(2) model with both coefficients equal to 0.5 is not stationary, and therefore this function call will not work:</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">arima.sim</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">model =</span> <span class="kw">list</span>(<span class="kw">order</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">ar =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)))</a>
+<a class="sourceLine" id="cb171-2" title="2"><span class="co">#&gt; Error in arima.sim(n = 100, model = list(order(2, 0, 0), ar = c(0.5, 0.5))): &#39;ar&#39; part of model is not stationary</span></a></code></pre></div>
+</div>
+<div id="decision-of-order-p" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> Decision of order p</h3>
+<p>How do we decide the order $p $of a AR model? A rule of thumb is to look at <strong>partial autocorrelation coefficients</strong>, PACF. PACF measures the direct effect of a lagged value on its previous value. Suppose we want to measure the effect of <span class="math inline">\(y_{t-2}\)</span> on <span class="math inline">\(y_{t}\)</span>, while <span class="math inline">\(r_2\)</span> could be high, it could also carry the effect of <span class="math inline">\(y_{t-2} \rightarrow y_{t-1} \rightarrow y_t\)</span>, especially when <span class="math inline">\(r_1\)</span> is also high. This is when partial autocorrelation come to resuce, consider a AR(2) process (which means past values earlier than <span class="math inline">\(y_{t-2}\)</span> cannot have an effect on <span class="math inline">\(y_t\)</span>)</p>
 <p><span class="math display">\[
 y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \epsilon_t
 \]</span></p>
-<p>Then a partial autocorrelation coefficient between <span class="math inline">\(y_t\)</span> and <span class="math inline">\(y_{t-2}\)</span> is defined as the square root of partial determinant coefficient</p>
-<p><span class="math display">\[
-\sqrt{\frac{SSE_{y_{t-2}} - SSE_{y_{t-2}, y_{t-1}}}{SSE_{y_{t-2}}}}
-\]</span>
-Where <span class="math inline">\(SSE_{y_{t-2}, y_{t-1}}\)</span> and <span class="math inline">\(SSE_{y_{t-2}}\)</span> are sum of squared errors when <span class="math inline">\(y_t\)</span> is regressed on <span class="math inline">\(y_{t-2}, y_{t-1}\)</span> and only <span class="math inline">\(y_{t-1}\)</span> respectively.</p>
-<p>A useful tool is partial correlation coefficient:</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1">fpp3<span class="op">::</span>aus_airpassengers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-2" title="2"><span class="st">  </span><span class="kw">PACF</span>(<span class="dt">lag_max =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
-<p><img src="ch9_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The partial correlation coefficient for <span class="math inline">\(y_{t-k}\)</span> is simply defined as <span class="math inline">\(\phi_k\)</span> in the model, i.e., <span class="math inline">\(\phi_1\)</span> for <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(\phi_2\)</span> for <span class="math inline">\(y_{t-2}\)</span>. Partial correlation coefficient for <span class="math inline">\(k &gt; 2\)</span> is think of as zero. In practice, there are more efficient algorithms for computing <span class="math inline">\(\phi_k\)</span> than fitting all of these autoregressions, but they give the same results.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">fpp3<span class="op">::</span>aus_airpassengers <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb172-2" title="2"><span class="st">  </span><span class="kw">PACF</span>(<span class="dt">lag_max =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb172-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<p><img src="stationary_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>This tells us only PAC at <span class="math inline">\(\text{lag} = 1\)</span> is significantly different than 0. As such only among <span class="math inline">\(y_{t-1}, y_{t-2}, \dots, y_{t-10}\)</span>, only <span class="math inline">\(y_{t-1}\)</span> has a significant <strong>direct</strong> effect on the response, so a AR(1) model may be appropriate. We can compare this to the ACF plot</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">fpp3<span class="op">::</span>aus_airpassengers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-2" title="2"><span class="st">  </span><span class="kw">ACF</span>(<span class="dt">lag_max =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
-<p><img src="ch9_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">fpp3<span class="op">::</span>aus_airpassengers <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb173-2" title="2"><span class="st">  </span><span class="kw">ACF</span>(<span class="dt">lag_max =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb173-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<p><img src="stationary_files/figure-html/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>Another characteristic of AR(p) is that ACF plots tails slowly.</p>
-<p><img src="images/AR_1.png" width="80%" style="display: block; margin: auto;" /><img src="images/AR_2.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="co"># model with larger phi has longer tail </span></a>
+<a class="sourceLine" id="cb174-2" title="2"><span class="kw">wrap_plots</span>(</a>
+<a class="sourceLine" id="cb174-3" title="3">  <span class="kw">ACF</span>(AR1_small) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.1&quot;</span>))),</a>
+<a class="sourceLine" id="cb174-4" title="4">  <span class="kw">ACF</span>(AR1_large) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(phi, <span class="st">&quot; = 0.9&quot;</span>))),</a>
+<a class="sourceLine" id="cb174-5" title="5">  <span class="dt">nrow =</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb174-6" title="6">)</a></code></pre></div>
+<p><img src="stationary_files/figure-html/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Further illustration: the ACF for an AR(p) process tails off toward zero very slowly, but the PACF goes to zero for lags &gt; <span class="math inline">\(p\)</span>.</p>
+<p><img src="images/AR_decision.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="random-walk" class="section level3">
-<h3><span class="header-section-number">9.3.2</span> Random walk</h3>
+<h3><span class="header-section-number">9.3.3</span> Random walk</h3>
 <p>Random walk is a special case of autoregressive process, namely AR(1). A time series is a random walk if</p>
 <p><span class="math display">\[
-y_t = y_{t-1} + \epsilon_t \\
-\epsilon_t \;\text{is white noise}
-\]</span></p>
-<p>We often set a initial, fixed state <span class="math inline">\(y_0 = 0\)</span> at the beginning of white noise. And the following apply to random walks (with a fixed <span class="math inline">\(y_1\)</span>)</p>
+y_t = 
+\begin{cases}
+\epsilon_1 &amp;t = 1 \\
+y_{t - 1} + \epsilon_t&amp; t = 2, 3, \dots 
+\end{cases}
+\]</span>
+where <span class="math inline">\(\epsilon_t\)</span> comes from a white noise process. It can also be expressed in the following form:</p>
 <p><span class="math display">\[
-\text{mean}:  \text{E}(\epsilon_t) = 0 \\
+y_t = \sum_{i=1}^{t}{\epsilon_t}
+\]</span></p>
+<p>According to this, we also have (covariance can be viewed as autocorrelation in this sense)</p>
+<p><span class="math display">\[
+\text{mean}:  \text{E}(y_t) = 0 \\
+\text{variance}: \text{Var}(y_t) = t\sigma^2 \\
 \text{ACF}: r_k(t) = \frac{t\sigma^2}{\sqrt{t\sigma^2(t+k)\sigma^2}}
 \]</span></p>
-<p>Note that a random walk process has its ACF both related to <span class="math inline">\(k\)</span> and <span class="math inline">\(t\)</span>, meaning that it is not a white noise.</p>
-<p>Random walk can be extende by adding a <strong>drift</strong> <span class="math inline">\(\mu\)</span>, which would be the new expectation of the process. Random walk with a drift (also called a <em>biased random walk</em>) is the process behind a drift model</p>
+<p>Note that a random walk process has changable variance and a ACF not only related to the distance, meaning that it is <strong>not statinary</strong>(since <span class="math inline">\(\phi_1 = 1 \not&lt;|1|\)</span>). In other words, it does not satisfy variance stationarity and covariance stationarity. This non-stationary process is often suitable fro describing economic phenomena.</p>
+<p>Random walk can be extended by adding a <strong>drift</strong> <span class="math inline">\(\mu\)</span>, which would be the new expectation of the process. Random walk with a drift (also called a <em>biased random walk</em>) is the process behind a drift model</p>
 <p><span class="math display">\[
 \begin{split}
 y_t &amp;= \mu + y_{t-1} + \epsilon_t \\ 
     &amp;= \mu + \mu + y_{t-2} + \epsilon_t + \epsilon_{t-1}\\ 
     \vdots \\
-    &amp;= \mu t + y_0 + \sum_{i=1}^{t}\epsilon_i 
+    &amp;=  t\mu + \sum_{i=1}^{t}\epsilon_i 
 \end{split}
 \]</span></p>
-<p>With little effort, we can show that for a drift process <span class="math inline">\(\text{E}(y_t) = \mu\)</span>, <span class="math inline">\(\text{Var}(y_t) = t\sigma^2\)</span>, and ACF stays still. A random walk with drift can be considered as a curve fluctuating around line <span class="math inline">\(y = \mu t\)</span> with increasing volatility as <span class="math inline">\(t\)</span> increases.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="co"># stimulate a random walk with drift</span></a>
-<a class="sourceLine" id="cb163-2" title="2">RW &lt;-<span class="st"> </span><span class="cf">function</span>(N, x0, mu, variance) {</a>
-<a class="sourceLine" id="cb163-3" title="3">  z&lt;-<span class="kw">cumsum</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> N, </a>
-<a class="sourceLine" id="cb163-4" title="4">                  <span class="dt">mean =</span> <span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb163-5" title="5">                  <span class="dt">sd=</span><span class="kw">sqrt</span>(variance)))</a>
-<a class="sourceLine" id="cb163-6" title="6">  t &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>N</a>
-<a class="sourceLine" id="cb163-7" title="7">  x &lt;-<span class="st"> </span>x0 <span class="op">+</span><span class="st"> </span>t<span class="op">*</span>mu<span class="op">+</span>z</a>
-<a class="sourceLine" id="cb163-8" title="8">  </a>
-<a class="sourceLine" id="cb163-9" title="9">  x</a>
-<a class="sourceLine" id="cb163-10" title="10">  }</a>
-<a class="sourceLine" id="cb163-11" title="11"><span class="co"># mu is the drift</span></a>
-<a class="sourceLine" id="cb163-12" title="12"></a>
-<a class="sourceLine" id="cb163-13" title="13">rw &lt;-<span class="st"> </span><span class="kw">RW</span>(<span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb163-14" title="14"><span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb163-15" title="15"><span class="st">  </span><span class="kw">as_tsibble</span>(<span class="dt">index =</span> name)</a>
-<a class="sourceLine" id="cb163-16" title="16"></a>
-<a class="sourceLine" id="cb163-17" title="17">rw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
-<p><img src="ch9_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">rw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ACF</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
-<p><img src="ch9_files/figure-html/unnamed-chunk-8-2.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>With little effort, we can show that for a drift process <span class="math inline">\(\text{E}(y_t) = \mu\)</span>, <span class="math inline">\(\text{Var}(y_t) = t\sigma^2\)</span>, and ACF stays the same, so that a biased random walk is still non-stationary. A random walk with drift can be considered as a curve fluctuating around line <span class="math inline">\(y = \mu t\)</span> with increasing volatility as <span class="math inline">\(t\)</span> increases.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="co"># stimulate a random walk with drift</span></a>
+<a class="sourceLine" id="cb175-2" title="2">RW &lt;-<span class="st"> </span><span class="cf">function</span>(N, x0, mu, variance) {</a>
+<a class="sourceLine" id="cb175-3" title="3">  z&lt;-<span class="kw">cumsum</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> N, </a>
+<a class="sourceLine" id="cb175-4" title="4">                  <span class="dt">mean =</span> <span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb175-5" title="5">                  <span class="dt">sd=</span><span class="kw">sqrt</span>(variance)))</a>
+<a class="sourceLine" id="cb175-6" title="6">  t &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>N</a>
+<a class="sourceLine" id="cb175-7" title="7">  x &lt;-<span class="st"> </span>x0 <span class="op">+</span><span class="st"> </span>t<span class="op">*</span>mu<span class="op">+</span>z</a>
+<a class="sourceLine" id="cb175-8" title="8">  </a>
+<a class="sourceLine" id="cb175-9" title="9">  x</a>
+<a class="sourceLine" id="cb175-10" title="10">  }</a>
+<a class="sourceLine" id="cb175-11" title="11"><span class="co"># mu is the drift</span></a>
+<a class="sourceLine" id="cb175-12" title="12"><span class="kw">set.seed</span>(<span class="dv">2020</span>)</a>
+<a class="sourceLine" id="cb175-13" title="13">rw &lt;-<span class="st"> </span><span class="kw">RW</span>(<span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb175-14" title="14"><span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb175-15" title="15"><span class="st">  </span><span class="kw">as_tsibble</span>(<span class="dt">index =</span> name)</a>
+<a class="sourceLine" id="cb175-16" title="16"></a>
+<a class="sourceLine" id="cb175-17" title="17">rw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="stationary_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">rw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ACF</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<p><img src="stationary_files/figure-html/unnamed-chunk-12-2.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
             </section>
@@ -527,7 +618,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/enixam/fpp/edit/master/ch9.Rmd",
+"link": "https://github.com/enixam/fpp/edit/master/stationary.Rmd",
 "text": "Edit"
 },
 "history": {

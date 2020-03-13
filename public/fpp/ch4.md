@@ -1,5 +1,4 @@
 
-
 # Time series features  
 
 
@@ -135,16 +134,16 @@ $$
 y_t = T_t + S_t + R_t
 $$
 
-For strongly trended data, the seasonally adjusted data should have much more variation than the remainder component. Therefore $Var(R_t)/Var(T_t + R_t)$ should be relatively small. But for data with little or no trend, the two variances should be approximately the same. So we define the strength of trend as: 
+For strongly trended data, the seasonally adjusted data should have stronger variation than that of the remainder component . Therefore $\text{Var}(R_t) / \text{Var}(T_t + R_t)$ should be relatively small. But for data with little or no trend, the two variances should be approximately the same. So we define the strength of trend as: 
 
 $$
-F_T = \max(0\,, 1- \frac{Var(R_t)}{Var(T_t + R_t)})
+F_T = \max(0\,, 1- \frac{\text{Var}(R_t)}{\text{Var}(T_t + R_t)})
 $$
 
 The strength of seasonality is defined similarly, but with respect to the detrended data rather than the seasonally adjusted data:
 
 $$
-F_S = \max(0\,, 1- \frac{Var(R_t)}{Var(S_t + R_t)})
+F_S = \max(0\,, 1- \frac{\text{Var}(R_t)}{\text{Var}(S_t + R_t)})
 $$
 
 These measures can be useful, for example, when you have a large collection of time series, and you need to find the series with the most trend or the most seasonality.
@@ -179,7 +178,7 @@ tourism %>%
   geom_point(aes(trend_strength, seasonal_strength_year, color = Purpose))
 ```
 
-<img src="ch4_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch4_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
 
 The most seasonal series can also be easily identified and plotted.  
 
@@ -195,7 +194,7 @@ tourism %>%
   facet_grid(vars(State, Region, Purpose))
 ```
 
-<img src="ch4_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch4_files/figure-html/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Other features  
 
@@ -251,7 +250,7 @@ tourism_tsl %>%
   GGally::ggpairs(aes(color = Purpose))
 ```
 
-<img src="ch4_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="ch4_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 

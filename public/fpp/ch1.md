@@ -1,5 +1,4 @@
 
-
 # Getting started  
 
 What can be forecast?  

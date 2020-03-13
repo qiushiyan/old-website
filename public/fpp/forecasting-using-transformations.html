@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.8 Forecasting using transformations | Notes for “Forecasting: Principles and Practice, 3rd edition”</title>
   <meta name="description" content="“Reproducing”Forecasting: Principles and Practice, 3rd edition"" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.8 Forecasting using transformations | Notes for “Forecasting: Principles and Practice, 3rd edition”" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-01" />
+<meta name="date" content="2020-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.1" data-path="lag-plots.html"><a href="lag-plots.html#autocorrelation"><i class="fa fa-check"></i><b>2.7.1</b> Autocorrelation</a></li>
 <li class="chapter" data-level="2.7.2" data-path="lag-plots.html"><a href="lag-plots.html#trend-and-seasonality-in-acf-plots"><i class="fa fa-check"></i><b>2.7.2</b> Trend and seasonality in ACF plots</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="white-noise.html"><a href="white-noise.html"><i class="fa fa-check"></i><b>2.8</b> White noise</a></li>
+<li class="chapter" data-level="2.8" data-path="calendar-plots.html"><a href="calendar-plots.html"><i class="fa fa-check"></i><b>2.8</b> Calendar plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>3</b> Time series decomposition</a><ul>
 <li class="chapter" data-level="3.1" data-path="transformation-and-adjustments.html"><a href="transformation-and-adjustments.html"><i class="fa fa-check"></i><b>3.1</b> Transformation and adjustments</a><ul>
@@ -200,8 +200,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="fitted-values-and-residuals.html"><a href="fitted-values-and-residuals.html#residuals"><i class="fa fa-check"></i><b>5.3.1</b> Residuals</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html"><i class="fa fa-check"></i><b>5.4</b> Residual diagnostics</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.1</b> Example: Forecasting the Google daily closing stock price</a></li>
-<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.2</b> Portmanteau tests for autocorrelation</a></li>
+<li class="chapter" data-level="5.4.1" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#white-noise"><i class="fa fa-check"></i><b>5.4.1</b> White noise</a></li>
+<li class="chapter" data-level="5.4.2" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#example-forecasting-the-google-daily-closing-stock-price"><i class="fa fa-check"></i><b>5.4.2</b> Example: Forecasting the Google daily closing stock price</a></li>
+<li class="chapter" data-level="5.4.3" data-path="residual-diagnostics.html"><a href="residual-diagnostics.html#portmanteau-tests-for-autocorrelation"><i class="fa fa-check"></i><b>5.4.3</b> Portmanteau tests for autocorrelation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="predict-interval.html"><a href="predict-interval.html"><i class="fa fa-check"></i><b>5.5</b> Prediction intervals</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="predict-interval.html"><a href="predict-interval.html#one-step-prediction-intervals"><i class="fa fa-check"></i><b>5.5.1</b> One-step prediction intervals</a></li>
@@ -266,7 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.1" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-predictors"><i class="fa fa-check"></i><b>7.3.1</b> Residual plots against predictors</a></li>
 <li class="chapter" data-level="7.3.2" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#residual-plots-against-fitted-values"><i class="fa fa-check"></i><b>7.3.2</b> Residual plots against fitted values</a></li>
 <li class="chapter" data-level="7.3.3" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#outliers-and-influential-observations"><i class="fa fa-check"></i><b>7.3.3</b> Outliers and influential observations</a></li>
-<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.4</b> Spurious regression</a></li>
+<li class="chapter" data-level="7.3.4" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#the-performance-package"><i class="fa fa-check"></i><b>7.3.4</b> The <code>performance</code> package</a></li>
+<li class="chapter" data-level="7.3.5" data-path="evaluating-a-regression-model.html"><a href="evaluating-a-regression-model.html#spurious-regression"><i class="fa fa-check"></i><b>7.3.5</b> Spurious regression</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Some useful predictors</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="some-useful-predictors.html"><a href="some-useful-predictors.html#trend"><i class="fa fa-check"></i><b>7.4.1</b> Trend</a></li>
@@ -338,21 +340,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.2" data-path="forecasting-with-ets-models.html"><a href="forecasting-with-ets-models.html#prediction-intervals-1"><i class="fa fa-check"></i><b>8.6.2</b> Prediction intervals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>9</b> ARIMA models</a><ul>
-<li class="chapter" data-level="9.1" data-path="stationarity-and-differencing.html"><a href="stationarity-and-differencing.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity and differencing</a></li>
+<li class="chapter" data-level="9" data-path="univariate-stationary-processes.html"><a href="univariate-stationary-processes.html"><i class="fa fa-check"></i><b>9</b> Univariate stationary processes</a><ul>
+<li class="chapter" data-level="9.1" data-path="stationarity.html"><a href="stationarity.html"><i class="fa fa-check"></i><b>9.1</b> Stationarity</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="stationarity.html"><a href="stationarity.html#ch9-white-noise"><i class="fa fa-check"></i><b>9.1.1</b> White noise</a></li>
+<li class="chapter" data-level="9.1.2" data-path="stationarity.html"><a href="stationarity.html#tests-for-autocorrelation-and-normality"><i class="fa fa-check"></i><b>9.1.2</b> Tests for autocorrelation and normality</a></li>
+<li class="chapter" data-level="9.1.3" data-path="stationarity.html"><a href="stationarity.html#the-wold-decomposition"><i class="fa fa-check"></i><b>9.1.3</b> The Wold Decomposition</a></li>
+</ul></li>
 <li class="chapter" data-level="9.2" data-path="backshift-notation.html"><a href="backshift-notation.html"><i class="fa fa-check"></i><b>9.2</b> Backshift notation</a></li>
 <li class="chapter" data-level="9.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html"><i class="fa fa-check"></i><b>9.3</b> Autoregressive models</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order"><i class="fa fa-check"></i><b>9.3.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.2</b> Random walk</a></li>
+<li class="chapter" data-level="9.3.1" data-path="autoregressive-models.html"><a href="autoregressive-models.html#stimulating-an-arp-process"><i class="fa fa-check"></i><b>9.3.1</b> Stimulating an AR(p) process</a></li>
+<li class="chapter" data-level="9.3.2" data-path="autoregressive-models.html"><a href="autoregressive-models.html#decision-of-order-p"><i class="fa fa-check"></i><b>9.3.2</b> Decision of order p</a></li>
+<li class="chapter" data-level="9.3.3" data-path="autoregressive-models.html"><a href="autoregressive-models.html#random-walk"><i class="fa fa-check"></i><b>9.3.3</b> Random walk</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="moving-average-models.html"><a href="moving-average-models.html"><i class="fa fa-check"></i><b>9.4</b> Moving average models</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-1"><i class="fa fa-check"></i><b>9.4.1</b> Decision of order</a></li>
-<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.2</b> Koyck transformation and Invertibility</a></li>
+<li class="chapter" data-level="9.4.1" data-path="moving-average-models.html"><a href="moving-average-models.html#simulating-an-maq-process"><i class="fa fa-check"></i><b>9.4.1</b> Simulating an MA(q) process</a></li>
+<li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
+<li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
-<li class="chapter" data-level="9.6" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>9.6</b> Non-seasonal ARIMA models</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>10</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
+<li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="differencing.html"><a href="differencing.html#second-order-differencing"><i class="fa fa-check"></i><b>10.1.1</b> Second-order differencing</a></li>
+<li class="chapter" data-level="10.1.2" data-path="differencing.html"><a href="differencing.html#seasonal-differencing"><i class="fa fa-check"></i><b>10.1.2</b> Seasonal differencing</a></li>
+<li class="chapter" data-level="10.1.3" data-path="differencing.html"><a href="differencing.html#unit-root-tests"><i class="fa fa-check"></i><b>10.1.3</b> Unit root tests</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.2</b> Non-seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="non-seasonal-arima-models.html"><a href="non-seasonal-arima-models.html#understanding-arima-models"><i class="fa fa-check"></i><b>10.2.1</b> Understanding ARIMA models</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html"><i class="fa fa-check"></i><b>10.3</b> Estimation and order selection</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#mle"><i class="fa fa-check"></i><b>10.3.1</b> MLE</a></li>
+<li class="chapter" data-level="10.3.2" data-path="estimation-and-order-selection.html"><a href="estimation-and-order-selection.html#information-criteria"><i class="fa fa-check"></i><b>10.3.2</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="the-arima-function.html"><a href="the-arima-function.html"><i class="fa fa-check"></i><b>10.4</b> The <code>ARIMA()</code> function</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="the-arima-function.html"><a href="the-arima-function.html#algorithm"><i class="fa fa-check"></i><b>10.4.1</b> Algorithm</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-arima-function.html"><a href="the-arima-function.html#modelling-procedure"><i class="fa fa-check"></i><b>10.4.2</b> Modelling procedure</a></li>
+<li class="chapter" data-level="10.4.3" data-path="the-arima-function.html"><a href="the-arima-function.html#example-seasonally-adjusted-electrical-equipment-orders"><i class="fa fa-check"></i><b>10.4.3</b> Example: Seasonally adjusted electrical equipment orders</a></li>
+<li class="chapter" data-level="10.4.4" data-path="the-arima-function.html"><a href="the-arima-function.html#plotting-the-characteristic-roots"><i class="fa fa-check"></i><b>10.4.4</b> Plotting the characteristic roots</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html"><i class="fa fa-check"></i><b>10.5</b> Forecasting with ARIMA models</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#point-forecasts"><i class="fa fa-check"></i><b>10.5.1</b> Point forecasts</a></li>
+<li class="chapter" data-level="10.5.2" data-path="forecasting-with-arima-models.html"><a href="forecasting-with-arima-models.html#prediction-intervals-2"><i class="fa fa-check"></i><b>10.5.2</b> Prediction intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html"><i class="fa fa-check"></i><b>10.6</b> Seasonal ARIMA models</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#acf-and-pacf"><i class="fa fa-check"></i><b>10.6.1</b> ACF and PACF</a></li>
+<li class="chapter" data-level="10.6.2" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-european-quarterly-retail-trade"><i class="fa fa-check"></i><b>10.6.2</b> Example: European quarterly retail trade</a></li>
+<li class="chapter" data-level="10.6.3" data-path="seasonal-arima-models.html"><a href="seasonal-arima-models.html#example-corticosteroid-drug-sales-in-australia"><i class="fa fa-check"></i><b>10.6.3</b> Example: Corticosteroid drug sales in Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="ets-and-arima.html"><a href="ets-and-arima.html"><i class="fa fa-check"></i><b>10.7</b> ETS and ARIMA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-non-seasonal-data"><i class="fa fa-check"></i><b>10.7.1</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on non-seasonal data</a></li>
+<li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -403,32 +443,32 @@ w_t = f(y_t) = \log{\frac{y_t -a}{b - y_t}}
 y_t = \frac{a + be^{w_t}}{1 + e^{w_t}} = \frac{(b - a)e^{w_t}}{1 + e^{w_t}} + a
 \]</span></p>
 <p>To use this transformation when modelling, we can create a new transformation with the <code>new_transformation()</code> function, which is essentially a <strong>function factory</strong>. This allows us to define two functions that accept the same parameters, where the observations are provided as the first argument. The first the argument of <code>new_transformation()</code>, <code>transformation</code> shoule be a function taht is used to transform the data, the second <code>inverse</code> is used to back-transform forecasts:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">scaled_logit &lt;-<span class="st"> </span><span class="kw">new_transformation</span>(</a>
-<a class="sourceLine" id="cb98-2" title="2">  <span class="dt">transformation =</span> <span class="cf">function</span>(x, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb98-3" title="3">    <span class="kw">log</span>(x <span class="op">-</span><span class="st"> </span>lower) <span class="op">/</span><span class="st"> </span>(upper <span class="op">-</span><span class="st"> </span>x)</a>
-<a class="sourceLine" id="cb98-4" title="4">  },</a>
-<a class="sourceLine" id="cb98-5" title="5">  <span class="dt">inverse =</span> <span class="cf">function</span>(x, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb98-6" title="6">    (upper <span class="op">-</span><span class="st"> </span>lower) <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(x) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(x)) <span class="op">+</span><span class="st"> </span>lower</a>
-<a class="sourceLine" id="cb98-7" title="7">  }</a>
-<a class="sourceLine" id="cb98-8" title="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">scaled_logit &lt;-<span class="st"> </span><span class="kw">new_transformation</span>(</a>
+<a class="sourceLine" id="cb105-2" title="2">  <span class="dt">transformation =</span> <span class="cf">function</span>(x, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb105-3" title="3">    <span class="kw">log</span>(x <span class="op">-</span><span class="st"> </span>lower) <span class="op">/</span><span class="st"> </span>(upper <span class="op">-</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb105-4" title="4">  },</a>
+<a class="sourceLine" id="cb105-5" title="5">  <span class="dt">inverse =</span> <span class="cf">function</span>(x, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb105-6" title="6">    (upper <span class="op">-</span><span class="st"> </span>lower) <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(x) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(x)) <span class="op">+</span><span class="st"> </span>lower</a>
+<a class="sourceLine" id="cb105-7" title="7">  }</a>
+<a class="sourceLine" id="cb105-8" title="8">)</a></code></pre></div>
 <p>Take the beer data for example, suppose we want to constrain the forecast production of beer into a <span class="math inline">\((300, 400)\)</span> interval:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1">beer_production &lt;-<span class="st"> </span>aus_production <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-2" title="2"><span class="st">  </span><span class="kw">filter_index</span>(<span class="st">&quot;1992 Q1&quot;</span> <span class="op">~</span><span class="st"> &quot;2006 Q4&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-3" title="3"><span class="st">  </span><span class="kw">select</span>(Quarter, Beer)</a>
-<a class="sourceLine" id="cb99-4" title="4"></a>
-<a class="sourceLine" id="cb99-5" title="5"></a>
-<a class="sourceLine" id="cb99-6" title="6">beer_production <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-7" title="7"><span class="st">  </span><span class="kw">model</span>(<span class="kw">SNAIVE</span>(<span class="kw">scaled_logit</span>(Beer, <span class="dv">300</span>, <span class="dv">400</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-8" title="8"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-9" title="9"><span class="st">  </span><span class="kw">autoplot</span>(beer_production, <span class="dt">level =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-10" title="10"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scaled logit transformation&quot;</span>)</a>
-<a class="sourceLine" id="cb99-11" title="11"></a>
-<a class="sourceLine" id="cb99-12" title="12">beer_production <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-13" title="13"><span class="st">  </span><span class="kw">model</span>(<span class="kw">SNAIVE</span>(Beer)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-14" title="14"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-15" title="15"><span class="st">  </span><span class="kw">autoplot</span>(beer_production, <span class="dt">level =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-16" title="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;No transformation&quot;</span>)</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-42-1.png" width="50%" /><img src="ch5_files/figure-html/unnamed-chunk-42-2.png" width="50%" /></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">beer_production &lt;-<span class="st"> </span>aus_production <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-2" title="2"><span class="st">  </span><span class="kw">filter_index</span>(<span class="st">&quot;1992 Q1&quot;</span> <span class="op">~</span><span class="st"> &quot;2006 Q4&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-3" title="3"><span class="st">  </span><span class="kw">select</span>(Quarter, Beer)</a>
+<a class="sourceLine" id="cb106-4" title="4"></a>
+<a class="sourceLine" id="cb106-5" title="5"></a>
+<a class="sourceLine" id="cb106-6" title="6">beer_production <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-7" title="7"><span class="st">  </span><span class="kw">model</span>(<span class="kw">SNAIVE</span>(<span class="kw">scaled_logit</span>(Beer, <span class="dv">300</span>, <span class="dv">400</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-8" title="8"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-9" title="9"><span class="st">  </span><span class="kw">autoplot</span>(beer_production, <span class="dt">level =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-10" title="10"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Scaled logit transformation&quot;</span>)</a>
+<a class="sourceLine" id="cb106-11" title="11"></a>
+<a class="sourceLine" id="cb106-12" title="12">beer_production <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-13" title="13"><span class="st">  </span><span class="kw">model</span>(<span class="kw">SNAIVE</span>(Beer)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-14" title="14"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-15" title="15"><span class="st">  </span><span class="kw">autoplot</span>(beer_production, <span class="dt">level =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-16" title="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;No transformation&quot;</span>)</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-43-1.png" width="50%" /><img src="ch5_files/figure-html/unnamed-chunk-43-2.png" width="50%" /></p>
 </div>
 <div id="bias-adjustments" class="section level3">
 <h3><span class="header-section-number">5.8.3</span> Bias adjustments</h3>
@@ -443,31 +483,31 @@ y_t =           \tag{5.1}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(\sigma_h^2\)</span> is the h-step forecast variance on the transformed scale. The larger the forecast variance, the bigger the difference between the mean and the median. Estimation of <span class="math inline">\(\sigma_h^2\)</span> is mentioned in <a href="predict-interval.html#predict-interval">5.5</a></p>
 <p>The difference between the simple back-transformed forecast given by Equation <a href="transformation-and-adjustments.html#eq:box-cox">(3.1)</a> and the mean by equation <a href="forecasting-using-transformations.html#eq:bias-adjusted">(5.1)</a> is called the <strong>bias</strong>. When we use the mean, rather than the median, we say the point forecasts have been <strong>bias-adjusted</strong>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">eggs &lt;-<span class="st"> </span>fma<span class="op">::</span>eggs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tsibble</span>()</a>
-<a class="sourceLine" id="cb100-2" title="2">eggs</a>
-<a class="sourceLine" id="cb100-3" title="3"><span class="co">#&gt; # A tsibble: 94 x 2 [1Y]</span></a>
-<a class="sourceLine" id="cb100-4" title="4"><span class="co">#&gt;   index value</span></a>
-<a class="sourceLine" id="cb100-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb100-6" title="6"><span class="co">#&gt; 1  1900  277.</span></a>
-<a class="sourceLine" id="cb100-7" title="7"><span class="co">#&gt; 2  1901  315.</span></a>
-<a class="sourceLine" id="cb100-8" title="8"><span class="co">#&gt; 3  1902  315.</span></a>
-<a class="sourceLine" id="cb100-9" title="9"><span class="co">#&gt; 4  1903  321.</span></a>
-<a class="sourceLine" id="cb100-10" title="10"><span class="co">#&gt; 5  1904  315.</span></a>
-<a class="sourceLine" id="cb100-11" title="11"><span class="co">#&gt; 6  1905  318.</span></a>
-<a class="sourceLine" id="cb100-12" title="12"><span class="co">#&gt; # ... with 88 more rows</span></a>
-<a class="sourceLine" id="cb100-13" title="13"></a>
-<a class="sourceLine" id="cb100-14" title="14">eggs_fit &lt;-<span class="st"> </span>eggs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">model</span>(<span class="kw">RW</span>(<span class="kw">log</span>(value) <span class="op">~</span><span class="st"> </span><span class="kw">drift</span>()))</a>
-<a class="sourceLine" id="cb100-15" title="15"></a>
-<a class="sourceLine" id="cb100-16" title="16">eggs_fc &lt;-<span class="st"> </span>eggs_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb100-17" title="17"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">50</span>) </a>
-<a class="sourceLine" id="cb100-18" title="18"></a>
-<a class="sourceLine" id="cb100-19" title="19">eggs_fc_biased &lt;-<span class="st"> </span>eggs_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb100-20" title="20"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">50</span>, <span class="dt">bias_adjust =</span> <span class="ot">FALSE</span>) </a>
-<a class="sourceLine" id="cb100-21" title="21"></a>
-<a class="sourceLine" id="cb100-22" title="22">eggs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>(value) <span class="op">+</span></a>
-<a class="sourceLine" id="cb100-23" title="23"><span class="st">  </span><span class="kw">autolayer</span>(eggs_fc_biased, <span class="dt">level =</span> <span class="dv">80</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb100-24" title="24"><span class="st">  </span><span class="kw">autolayer</span>(eggs_fc, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">level =</span> <span class="ot">NULL</span>)</a></code></pre></div>
-<p><img src="ch5_files/figure-html/unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1">eggs &lt;-<span class="st"> </span>fma<span class="op">::</span>eggs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tsibble</span>()</a>
+<a class="sourceLine" id="cb107-2" title="2">eggs</a>
+<a class="sourceLine" id="cb107-3" title="3"><span class="co">#&gt; # A tsibble: 94 x 2 [1Y]</span></a>
+<a class="sourceLine" id="cb107-4" title="4"><span class="co">#&gt;   index value</span></a>
+<a class="sourceLine" id="cb107-5" title="5"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb107-6" title="6"><span class="co">#&gt; 1  1900  277.</span></a>
+<a class="sourceLine" id="cb107-7" title="7"><span class="co">#&gt; 2  1901  315.</span></a>
+<a class="sourceLine" id="cb107-8" title="8"><span class="co">#&gt; 3  1902  315.</span></a>
+<a class="sourceLine" id="cb107-9" title="9"><span class="co">#&gt; 4  1903  321.</span></a>
+<a class="sourceLine" id="cb107-10" title="10"><span class="co">#&gt; 5  1904  315.</span></a>
+<a class="sourceLine" id="cb107-11" title="11"><span class="co">#&gt; 6  1905  318.</span></a>
+<a class="sourceLine" id="cb107-12" title="12"><span class="co">#&gt; # ... with 88 more rows</span></a>
+<a class="sourceLine" id="cb107-13" title="13"></a>
+<a class="sourceLine" id="cb107-14" title="14">eggs_fit &lt;-<span class="st"> </span>eggs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">model</span>(<span class="kw">RW</span>(<span class="kw">log</span>(value) <span class="op">~</span><span class="st"> </span><span class="kw">drift</span>()))</a>
+<a class="sourceLine" id="cb107-15" title="15"></a>
+<a class="sourceLine" id="cb107-16" title="16">eggs_fc &lt;-<span class="st"> </span>eggs_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb107-17" title="17"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">50</span>) </a>
+<a class="sourceLine" id="cb107-18" title="18"></a>
+<a class="sourceLine" id="cb107-19" title="19">eggs_fc_biased &lt;-<span class="st"> </span>eggs_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb107-20" title="20"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">50</span>, <span class="dt">bias_adjust =</span> <span class="ot">FALSE</span>) </a>
+<a class="sourceLine" id="cb107-21" title="21"></a>
+<a class="sourceLine" id="cb107-22" title="22">eggs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>(value) <span class="op">+</span></a>
+<a class="sourceLine" id="cb107-23" title="23"><span class="st">  </span><span class="kw">autolayer</span>(eggs_fc_biased, <span class="dt">level =</span> <span class="dv">80</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb107-24" title="24"><span class="st">  </span><span class="kw">autolayer</span>(eggs_fc, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">level =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<p><img src="ch5_files/figure-html/unnamed-chunk-44-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>The blue line in shows the forecast medians while the red line shows the forecast means. Notice how the skewed forecast distribution pulls up the point forecast when we use the bias adjustment.</p>
 <p><strong>Bias adjustments will be applied by default in the <code>fable</code> package</strong>. To produce point forecasts that are not bias adjusted (giving forecast medians rather than means), use the argument <code>bias_adjust = FALSE</code> in <code>forecast()</code>.</p>
 </div>

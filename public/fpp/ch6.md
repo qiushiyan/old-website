@@ -1,6 +1,5 @@
 
 
-
 # Judgmental forecasts  
 
 There are three general settings in which judgmental forecasting is used:  
@@ -182,8 +181,8 @@ The forecasting methodology applied is an iterative process. First, model-based 
 
 
 <div class="figure" style="text-align: center">
-<img src="images/tfc.png" alt="Long run annual forecasts for domestic visitor nights for Australia, comparing regression models, ETS(Exponetial Smoothing) and judgmental adjustsments by TFC." width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-2)Long run annual forecasts for domestic visitor nights for Australia, comparing regression models, ETS(Exponetial Smoothing) and judgmental adjustsments by TFC.</p>
+<img src="images/tfc.png" alt="Long run annual forecasts for domestic visitor nights for Australia, comparing regression models, ETS(Exponetial Smoothing) and judgmental adjustsments by TFC." width="90%" />
+<p class="caption">(\#fig:unnamed-chunk-1)Long run annual forecasts for domestic visitor nights for Australia, comparing regression models, ETS(Exponetial Smoothing) and judgmental adjustsments by TFC.</p>
 </div>
 
 What can we learn from this example? Although the TFC clearly states in its methodology that it produces ‘forecasts’ rather than ‘targets’, could this be a case where these have been confused? Are the forecasters and users sufficiently well-segregated in this process? Could the iterative process itself be improved? Could the adjustment process in the meetings be improved? Could it be that the group meetings have promoted optimism ? 

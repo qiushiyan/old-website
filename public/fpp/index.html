@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -417,19 +436,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Notes for “Forecasting: Principles and Practice, 3rd edition”</h1>
 <p class="author"><em>Qiushi Yan</em></p>
-<p class="date"><em>2020-03-13</em></p>
+<p class="date"><em>2020-03-17</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
-<p>This project contains my learning notes and code for <a href="https://otexts.com/fpp3/"><em>Forecasting: Principles and Practice, 3rd edition</em></a>, which heavliy draws on packages <strong>tsibble</strong><span class="citation">(Wang et al. <a href="references.html#ref-R-tsibble" role="doc-biblioref">2019</a>)</span>, <strong>feasts</strong><span class="citation">(O’Hara-Wild, Hyndman, and Wang <a href="references.html#ref-R-feasts" role="doc-biblioref">2019</a>)</span>, <strong>fable</strong><span class="citation">(O’Hara-Wild, Hyndman, and Wang <a href="references.html#ref-R-fable" role="doc-biblioref">2020</a>)</span> and <strong>tidyverse</strong><span class="citation">(Wickham <a href="references.html#ref-R-tidyverse" role="doc-biblioref">2019</a>)</span> .</p>
-<p>Another reference is <a href="https://nwfsc-timeseries.github.io/atsa-labs/"><em>Applied Time Series Analysis for Fisheries and Environmental Sciences</em></a></p>
-<p>Other references include</p>
+<p>This project contains my learning notes and code for <a href="https://otexts.com/fpp3/"><em>Forecasting: Principles and Practice, 3rd edition</em></a>. My solutions to its exercises can be found at <a href="https://qiushi.rbind.io/fpp-exercises" class="uri">https://qiushi.rbind.io/fpp-exercises</a></p>
+<p>Other references include:</p>
 <ul>
+<li><p><a href="https://nwfsc-timeseries.github.io/atsa-labs/"><em>Applied Time Series Analysis for Fisheries and Environmental Sciences</em></a></p></li>
 <li><p>Kirchgässner, G., Wolters, J., &amp; Hassler, U. (2012). <em>Introduction to modern time series analysis</em>. Springer Science &amp; Business Media.</p></li>
 <li><p>a video tutorial on time series concepts presented in this <a href="https://www.youtube.com/playlist?list=PLvcbYUQ5t0UHOLnBzl46_Q6QKtFgfMGc3">youtube watchlist</a> by <a href="https://www.youtube.com/channel/UCUcpVoi5KkJmnE3bvEhHR0Q">ritvikmath</a></p></li>
 <li><p>also a video tutorial on <a href="https://www.youtube.com/playlist?list=PLwJRxp3blEvb7P-7po9AxuBwquPv75LjU">econometrics</a> presented by <a href="https://www.youtube.com/channel/UC3tFZR3eL1bDY8CqZDOQh-w">Ben Lambert</a></p></li>
 <li><p>an <a href="https://online.stat.psu.edu/stat510">online course</a> offered by the Department of Statistics at PennState</p></li>
 </ul>
+<p>My contributions include</p>
+<ul>
+<li><p>More supplementary mathematical proofs: they are not hard assuming introductory level statistics knowledge, but skimmed in the book</p></li>
+<li><p>An additional chapter separating basic concepts of univariate processes from ARIMA models, so that Chapter <a href="arima-models.html#arima-models">10</a> will not be too verbose</p></li>
+<li><p>Up-to-date <code>tidyverse</code> code: for example <code>gather()</code> use cases are changed into <code>pivot_longer()</code></p></li>
+</ul>
+<p>I will continue to add new topics as I learn new things related to time series modelling.</p>
 <p><code>tidyverse</code> is assumed to be loaded before each chapter.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 

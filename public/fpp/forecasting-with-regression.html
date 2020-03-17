@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -418,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.6</span> Forecasting with regression</h2>
 <p>Recall the regression model Equation <a href="the-linear-model.html#eq:multiple-linear-reg">(7.1)</a></p>
 <p><span class="math display">\[\begin{equation}
-y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \epsilon_t
+y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \varepsilon_t
 \end{equation}\]</span></p>
 <p>While we can easily get fitted values <span class="math inline">\({\hat{y}_1, \hat{y}_2, \dots, \hat{y}_T}\)</span>, what we are interested in here, however, is forecasting future values of <span class="math inline">\(y\)</span>.</p>
 <div id="ex-ante-versus-ex-post-forecasts" class="section level3">
@@ -431,91 +450,91 @@ y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \epsilon
 <div id="example-australian-quarterly-beer-production-1" class="section level3">
 <h3><span class="header-section-number">7.6.2</span> Example: Australian quarterly beer production</h3>
 <p>Normally, we cannot use actual future values of the predictor variables when producing ex-ante forecasts because their values will not be known in advance. However, the special predictors introduced in Section <a href="some-useful-predictors.html#some-useful-predictors">7.4</a> are all known in advance (a trend variable and 3 seasonal dummy variable), as they are based on calendar variables (e.g., seasonal dummy variables or public holiday indicators) or deterministic functions of time (e.g. time trend). In such cases, there is no difference between ex-ante and ex-post forecasts.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1"><span class="co"># `beer_fit` uses only trend variabe and seasonal dummy variables. In such cases, there is no difference between ex-ante and ex-post forecasts. </span></a>
-<a class="sourceLine" id="cb137-2" title="2">beer_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb137-3" title="3"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;3 years&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb137-4" title="4"><span class="st">  </span><span class="kw">autoplot</span>(recent_production, <span class="dt">level =</span> <span class="dv">90</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb137-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;megalitres&quot;</span>,</a>
-<a class="sourceLine" id="cb137-6" title="6">       <span class="dt">title =</span> <span class="st">&quot;Forecasts of beer production using regression&quot;</span>)</a></code></pre></div>
-<p><img src="ch7_files/figure-html/unnamed-chunk-31-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="co"># `beer_fit` uses only trend variabe and seasonal dummy variables. In such cases, there is no difference between ex-ante and ex-post forecasts. </span></a>
+<a class="sourceLine" id="cb138-2" title="2">beer_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-3" title="3"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;3 years&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-4" title="4"><span class="st">  </span><span class="kw">autoplot</span>(recent_production, <span class="dt">level =</span> <span class="dv">90</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb138-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;megalitres&quot;</span>,</a>
+<a class="sourceLine" id="cb138-6" title="6">       <span class="dt">title =</span> <span class="st">&quot;Forecasts of beer production using regression&quot;</span>)</a></code></pre></div>
+<p><img src="ch7_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="scenario-based-forecasting" class="section level3">
 <h3><span class="header-section-number">7.6.3</span> Scenario based forecasting</h3>
 <p>In this setting, the forecaster assumes possible scenarios for the predictor variables that are of interest. For example, a US policy maker may be interested in comparing the predicted change in consumption when there is a constant growth of <span class="math inline">\(1\%\)</span> and <span class="math inline">\(0.5\%\)</span> respectively for income and savings with no change in production and the employment rate, versus a respective decline of <span class="math inline">\(1\%\)</span> and <span class="math inline">\(0.5\%\)</span>, for each of the four quarters following the end of the sample.</p>
 <p>We should note that prediction intervals for scenario based forecasts <strong>do not include the uncertainty associated with the future values of the predictor variables</strong>. They assume that the values of the predictors are known in advance, (i.e, ex-post forecasts).</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="co"># new_data(data, n) appends n following observations of each series to a tsibble </span></a>
-<a class="sourceLine" id="cb138-2" title="2"><span class="kw">new_data</span>(us_change, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb138-3" title="3"><span class="co">#&gt; # A tsibble: 4 x 1 [1Q]</span></a>
-<a class="sourceLine" id="cb138-4" title="4"><span class="co">#&gt;   Quarter</span></a>
-<a class="sourceLine" id="cb138-5" title="5"><span class="co">#&gt;     &lt;qtr&gt;</span></a>
-<a class="sourceLine" id="cb138-6" title="6"><span class="co">#&gt; 1 2019 Q3</span></a>
-<a class="sourceLine" id="cb138-7" title="7"><span class="co">#&gt; 2 2019 Q4</span></a>
-<a class="sourceLine" id="cb138-8" title="8"><span class="co">#&gt; 3 2020 Q1</span></a>
-<a class="sourceLine" id="cb138-9" title="9"><span class="co">#&gt; 4 2020 Q2</span></a>
-<a class="sourceLine" id="cb138-10" title="10"></a>
-<a class="sourceLine" id="cb138-11" title="11"><span class="co"># define a function producing values based on increase / decrease rate </span></a>
-<a class="sourceLine" id="cb138-12" title="12">new_obs &lt;-<span class="st"> </span><span class="cf">function</span>(value, length, rate) {</a>
-<a class="sourceLine" id="cb138-13" title="13">  vec &lt;-<span class="st"> </span><span class="kw">rep</span>(value, length)</a>
-<a class="sourceLine" id="cb138-14" title="14">  <span class="kw">imap_dbl</span>(vec, <span class="op">~</span><span class="st"> </span>.x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>rate) <span class="op">^</span><span class="st"> </span>.y)</a>
-<a class="sourceLine" id="cb138-15" title="15">}</a>
-<a class="sourceLine" id="cb138-16" title="16"></a>
-<a class="sourceLine" id="cb138-17" title="17">up_future &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-18" title="18"><span class="st">  </span><span class="kw">slice</span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-19" title="19"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-20" title="20"><span class="st">  </span><span class="kw">select</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-21" title="21"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-22" title="22"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>name) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-23" title="23"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">length =</span> <span class="dv">4</span>, <span class="dt">rate =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.005</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-24" title="24"><span class="st">  </span><span class="kw">pmap</span>(new_obs) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-25" title="25"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Production&quot;</span>, <span class="st">&quot;Savings&quot;</span>, <span class="st">&quot;Unemployment&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-26" title="26"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-27" title="27"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">new_data</span>(us_change, <span class="dv">4</span>), .)</a>
-<a class="sourceLine" id="cb138-28" title="28">   </a>
-<a class="sourceLine" id="cb138-29" title="29">up_future</a>
-<a class="sourceLine" id="cb138-30" title="30"><span class="co">#&gt; # A tsibble: 4 x 5 [1Q]</span></a>
-<a class="sourceLine" id="cb138-31" title="31"><span class="co">#&gt;   Quarter Income Production Savings Unemployment</span></a>
-<a class="sourceLine" id="cb138-32" title="32"><span class="co">#&gt;     &lt;qtr&gt;  &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb138-33" title="33"><span class="co">#&gt; 1 2019 Q3  0.599     -0.540   -4.29       -0.100</span></a>
-<a class="sourceLine" id="cb138-34" title="34"><span class="co">#&gt; 2 2019 Q4  0.605     -0.540   -4.31       -0.100</span></a>
-<a class="sourceLine" id="cb138-35" title="35"><span class="co">#&gt; 3 2020 Q1  0.611     -0.540   -4.33       -0.100</span></a>
-<a class="sourceLine" id="cb138-36" title="36"><span class="co">#&gt; 4 2020 Q2  0.617     -0.540   -4.35       -0.100</span></a>
-<a class="sourceLine" id="cb138-37" title="37"></a>
-<a class="sourceLine" id="cb138-38" title="38">down_future &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-39" title="39"><span class="st">  </span><span class="kw">slice</span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-40" title="40"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-41" title="41"><span class="st">  </span><span class="kw">select</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-42" title="42"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-43" title="43"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>name) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-44" title="44"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">length =</span> <span class="dv">4</span>, <span class="dt">rate =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">-0.005</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-45" title="45"><span class="st">  </span><span class="kw">pmap</span>(new_obs) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-46" title="46"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Production&quot;</span>, <span class="st">&quot;Savings&quot;</span>, <span class="st">&quot;Unemployment&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-47" title="47"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb138-48" title="48"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">new_data</span>(us_change, <span class="dv">4</span>), .)  </a>
-<a class="sourceLine" id="cb138-49" title="49"></a>
-<a class="sourceLine" id="cb138-50" title="50">down_future</a>
-<a class="sourceLine" id="cb138-51" title="51"><span class="co">#&gt; # A tsibble: 4 x 5 [1Q]</span></a>
-<a class="sourceLine" id="cb138-52" title="52"><span class="co">#&gt;   Quarter Income Production Savings Unemployment</span></a>
-<a class="sourceLine" id="cb138-53" title="53"><span class="co">#&gt;     &lt;qtr&gt;  &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb138-54" title="54"><span class="co">#&gt; 1 2019 Q3  0.587     -0.540   -4.24       -0.100</span></a>
-<a class="sourceLine" id="cb138-55" title="55"><span class="co">#&gt; 2 2019 Q4  0.582     -0.540   -4.22       -0.100</span></a>
-<a class="sourceLine" id="cb138-56" title="56"><span class="co">#&gt; 3 2020 Q1  0.576     -0.540   -4.20       -0.100</span></a>
-<a class="sourceLine" id="cb138-57" title="57"><span class="co">#&gt; 4 2020 Q2  0.570     -0.540   -4.18       -0.100</span></a></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="co"># new_data(data, n) appends n following observations of each series to a tsibble </span></a>
+<a class="sourceLine" id="cb139-2" title="2"><span class="kw">new_data</span>(us_change, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb139-3" title="3"><span class="co">#&gt; # A tsibble: 4 x 1 [1Q]</span></a>
+<a class="sourceLine" id="cb139-4" title="4"><span class="co">#&gt;   Quarter</span></a>
+<a class="sourceLine" id="cb139-5" title="5"><span class="co">#&gt;     &lt;qtr&gt;</span></a>
+<a class="sourceLine" id="cb139-6" title="6"><span class="co">#&gt; 1 2019 Q3</span></a>
+<a class="sourceLine" id="cb139-7" title="7"><span class="co">#&gt; 2 2019 Q4</span></a>
+<a class="sourceLine" id="cb139-8" title="8"><span class="co">#&gt; 3 2020 Q1</span></a>
+<a class="sourceLine" id="cb139-9" title="9"><span class="co">#&gt; 4 2020 Q2</span></a>
+<a class="sourceLine" id="cb139-10" title="10"></a>
+<a class="sourceLine" id="cb139-11" title="11"><span class="co"># define a function producing values based on increase / decrease rate </span></a>
+<a class="sourceLine" id="cb139-12" title="12">new_obs &lt;-<span class="st"> </span><span class="cf">function</span>(value, length, rate) {</a>
+<a class="sourceLine" id="cb139-13" title="13">  vec &lt;-<span class="st"> </span><span class="kw">rep</span>(value, length)</a>
+<a class="sourceLine" id="cb139-14" title="14">  <span class="kw">imap_dbl</span>(vec, <span class="op">~</span><span class="st"> </span>.x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>rate) <span class="op">^</span><span class="st"> </span>.y)</a>
+<a class="sourceLine" id="cb139-15" title="15">}</a>
+<a class="sourceLine" id="cb139-16" title="16"></a>
+<a class="sourceLine" id="cb139-17" title="17">up_future &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-18" title="18"><span class="st">  </span><span class="kw">slice</span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-19" title="19"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-20" title="20"><span class="st">  </span><span class="kw">select</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-21" title="21"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-22" title="22"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>name) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-23" title="23"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">length =</span> <span class="dv">4</span>, <span class="dt">rate =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.005</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-24" title="24"><span class="st">  </span><span class="kw">pmap</span>(new_obs) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-25" title="25"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Production&quot;</span>, <span class="st">&quot;Savings&quot;</span>, <span class="st">&quot;Unemployment&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-26" title="26"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-27" title="27"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">new_data</span>(us_change, <span class="dv">4</span>), .)</a>
+<a class="sourceLine" id="cb139-28" title="28">   </a>
+<a class="sourceLine" id="cb139-29" title="29">up_future</a>
+<a class="sourceLine" id="cb139-30" title="30"><span class="co">#&gt; # A tsibble: 4 x 5 [1Q]</span></a>
+<a class="sourceLine" id="cb139-31" title="31"><span class="co">#&gt;   Quarter Income Production Savings Unemployment</span></a>
+<a class="sourceLine" id="cb139-32" title="32"><span class="co">#&gt;     &lt;qtr&gt;  &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb139-33" title="33"><span class="co">#&gt; 1 2019 Q3  0.599     -0.540   -4.29       -0.100</span></a>
+<a class="sourceLine" id="cb139-34" title="34"><span class="co">#&gt; 2 2019 Q4  0.605     -0.540   -4.31       -0.100</span></a>
+<a class="sourceLine" id="cb139-35" title="35"><span class="co">#&gt; 3 2020 Q1  0.611     -0.540   -4.33       -0.100</span></a>
+<a class="sourceLine" id="cb139-36" title="36"><span class="co">#&gt; 4 2020 Q2  0.617     -0.540   -4.35       -0.100</span></a>
+<a class="sourceLine" id="cb139-37" title="37"></a>
+<a class="sourceLine" id="cb139-38" title="38">down_future &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-39" title="39"><span class="st">  </span><span class="kw">slice</span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-40" title="40"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-41" title="41"><span class="st">  </span><span class="kw">select</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-42" title="42"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-43" title="43"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>name) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-44" title="44"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">length =</span> <span class="dv">4</span>, <span class="dt">rate =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">-0.005</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-45" title="45"><span class="st">  </span><span class="kw">pmap</span>(new_obs) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-46" title="46"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Production&quot;</span>, <span class="st">&quot;Savings&quot;</span>, <span class="st">&quot;Unemployment&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-47" title="47"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-48" title="48"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">new_data</span>(us_change, <span class="dv">4</span>), .)  </a>
+<a class="sourceLine" id="cb139-49" title="49"></a>
+<a class="sourceLine" id="cb139-50" title="50">down_future</a>
+<a class="sourceLine" id="cb139-51" title="51"><span class="co">#&gt; # A tsibble: 4 x 5 [1Q]</span></a>
+<a class="sourceLine" id="cb139-52" title="52"><span class="co">#&gt;   Quarter Income Production Savings Unemployment</span></a>
+<a class="sourceLine" id="cb139-53" title="53"><span class="co">#&gt;     &lt;qtr&gt;  &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb139-54" title="54"><span class="co">#&gt; 1 2019 Q3  0.587     -0.540   -4.24       -0.100</span></a>
+<a class="sourceLine" id="cb139-55" title="55"><span class="co">#&gt; 2 2019 Q4  0.582     -0.540   -4.22       -0.100</span></a>
+<a class="sourceLine" id="cb139-56" title="56"><span class="co">#&gt; 3 2020 Q1  0.576     -0.540   -4.20       -0.100</span></a>
+<a class="sourceLine" id="cb139-57" title="57"><span class="co">#&gt; 4 2020 Q2  0.570     -0.540   -4.18       -0.100</span></a></code></pre></div>
 <p>Then we could produce forecast for each of the two scenarios :</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1">up_future_fc &lt;-<span class="st"> </span><span class="kw">forecast</span>(us_change_mfit, <span class="dt">new_data =</span> up_future) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb139-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Scenario =</span> <span class="st">&quot;Increase&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-3" title="3"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
-<a class="sourceLine" id="cb139-4" title="4"></a>
-<a class="sourceLine" id="cb139-5" title="5">down_future_fc &lt;-<span class="st"> </span><span class="kw">forecast</span>(us_change_mfit, <span class="dt">new_data =</span> down_future) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb139-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Scenario =</span> <span class="st">&quot;Decrease&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-7" title="7"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
-<a class="sourceLine" id="cb139-8" title="8"></a>
-<a class="sourceLine" id="cb139-9" title="9">us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Quarter, Consumption)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-11" title="11"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-12" title="12"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Scenario), <span class="dt">data =</span> <span class="kw">rbind</span>(up_future_fc, down_future_fc)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb139-13" title="13"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">ymd</span>(<span class="st">&quot;2015-01-01&quot;</span>, <span class="ot">NA</span>)),</a>
-<a class="sourceLine" id="cb139-14" title="14">                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.2</span>))</a></code></pre></div>
-<p><img src="ch7_files/figure-html/unnamed-chunk-33-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1">up_future_fc &lt;-<span class="st"> </span><span class="kw">forecast</span>(us_change_mfit, <span class="dt">new_data =</span> up_future) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb140-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Scenario =</span> <span class="st">&quot;Increase&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-3" title="3"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
+<a class="sourceLine" id="cb140-4" title="4"></a>
+<a class="sourceLine" id="cb140-5" title="5">down_future_fc &lt;-<span class="st"> </span><span class="kw">forecast</span>(us_change_mfit, <span class="dt">new_data =</span> down_future) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb140-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Scenario =</span> <span class="st">&quot;Decrease&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-7" title="7"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
+<a class="sourceLine" id="cb140-8" title="8"></a>
+<a class="sourceLine" id="cb140-9" title="9">us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Quarter, Consumption)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-11" title="11"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-12" title="12"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Scenario), <span class="dt">data =</span> <span class="kw">rbind</span>(up_future_fc, down_future_fc)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-13" title="13"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">ymd</span>(<span class="st">&quot;2015-01-01&quot;</span>, <span class="ot">NA</span>)),</a>
+<a class="sourceLine" id="cb140-14" title="14">                  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.2</span>))</a></code></pre></div>
+<p><img src="ch7_files/figure-html/unnamed-chunk-34-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="prediction-intervals" class="section level3">
 <h3><span class="header-section-number">7.6.4</span> Prediction intervals</h3>

@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -420,22 +439,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A seasonal ARIMA model includes additional seasonal terms, written as follows</p>
 <p><img src="images/seasonal_arima.png" width="90%" style="display: block; margin: auto;" />
 where <span class="math inline">\(m\)</span> is number of observations per year.</p>
-<p>The seasonal part of the model consists of terms that are similar to the non-seasonal components of the model, but involve backshifts of the seasonal period. For example, an <span class="math inline">\(\text{ARIMA}(1, 1, 1)(1, 1, 1)_4\)</span> model (without a constant) is for quarterly data (m=4), and can be written as (Not that a seasonal difference is <strong>not</strong> a m order difference)</p>
+<p>The seasonal part of the model consists of terms that are similar to the non-seasonal components of the model, but involve backshifts of the seasonal period. For example, an <span class="math inline">\(\text{ARIMA}(1, 1, 1)(1, 1, 1)_4\)</span> model (without a constant) is for quarterly data (m = 4), and can be written as (Not that a seasonal difference is <strong>not</strong> a m order difference)</p>
 <p><span class="math display">\[
-(1 - \Phi_1B^4)(1 - \phi_1B)(1 - B^4)(1 - B)y_t = \epsilon_t(1 - \theta_1B)(1 - \Theta_1B^4)
+(1 - \Phi_1B^4)(1 - \phi_1B)(1 - B^4)(1 - B)y_t = \varepsilon_t(1 - \theta_1B)(1 - \Theta_1B^4)
 \]</span></p>
-<p>Here is an example to see what these pieces work together. Consider the following model <span class="math inline">\(\text{ARIMA}(1, 0, 0)(0, 1, 1)_4\)</span></p>
+<p>It can be easily shown that a SARIMA model can be converted to an ARMA model. For autoregression terms</p>
 <p><span class="math display">\[
-\begin{aligned}
-(1 - \phi_1B)(1 - B^4)y_t &amp;= (1 - \Theta_1B^4)\epsilon_t \\
-(1 - B^4 - \phi_1B - \phi_1B^5)y_t &amp;= \epsilon_t - \Theta_1\epsilon_{t-4} \\
-y_t - y_{t-4} - \phi_1y_{t-1} - \phi_1y_{t - 5} &amp;= \epsilon_t - \Theta_1\epsilon_{t-4} \\
-\end{aligned} 
-\]</span></p>
-<p>Let <span class="math inline">\(Z_t = y_t - y_{t - 4}\)</span>, then</p>
+ar = (1 - \phi_1B - \cdots - \phi_pB^p)(1 - B)^d \\
+sar = (1 - \Phi_1 B^m - \cdots - B^{Pm})(1 - B^m)^D 
+\]</span>
+Then, the AR polynomial of the inverted ARMA model can be written as</p>
 <p><span class="math display">\[
-Z_{t} - \phi_1Z_{t-1} = \epsilon_t - \Theta_1\epsilon_{t-4}
+AR = ar \times sar
 \]</span></p>
+<p>For moving average terms, we have</p>
+<p><span class="math display">\[
+ma = (1 + \theta_1B + \cdots + \theta_qB^q) \\
+sma = (1 + \Theta_1B^m + \cdots + \Theta_1B^{Pm})(1 - B^m)^D 
+\]</span></p>
+<p>Then, the MA polynomial of the inverted ARMA model can be written as</p>
+<p><span class="math display">\[
+MA = ma \times sma
+\]</span></p>
+<p>In this way, we can get the ARMA(u, v) model inverted from the SARIMA model. It can be written as</p>
+<p><span class="math display">\[
+(1 - \phi_1&#39;B - \cdots - \phi_u&#39;B^u)y_t = (1 - \theta_1&#39;B - \cdots - \theta_v&#39;B^v)\varepsilon_t
+\]</span></p>
+<p>From Section <a href="arma-models.html#three-representations-of-an-arma-model">9.5.1</a>, we also know that an ARMA model can be converted to AR or MA models under certain circumstances, so that SARIMA models can be further transformed in a similar way.</p>
 <div id="acf-and-pacf" class="section level3">
 <h3><span class="header-section-number">10.6.1</span> ACF and PACF</h3>
 <p>The seasonal part of an AR or MA model will be seen in the seasonal lags of the PACF and ACF. For example, an <span class="math inline">\(\text{ARIMA}(0, 0, 0)(0, 0, 1)_{12}\)</span> model will show:</p>
@@ -452,144 +482,144 @@ Z_{t} - \phi_1Z_{t-1} = \epsilon_t - \Theta_1\epsilon_{t-4}
 <div id="example-european-quarterly-retail-trade" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Example: European quarterly retail trade</h3>
 <p><code>eu_retail</code>: quarterly European retail trade data from 1996 to 2011</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">eu_retail &lt;-<span class="st"> </span><span class="kw">as_tsibble</span>(fpp2<span class="op">::</span>euretail)</a>
-<a class="sourceLine" id="cb201-2" title="2">eu_retail <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>(value)</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">eu_retail &lt;-<span class="st"> </span><span class="kw">as_tsibble</span>(fpp2<span class="op">::</span>euretail)</a>
+<a class="sourceLine" id="cb200-2" title="2">eu_retail <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>(value)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-25-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>The data is non-stationary, with a degree of seasonality</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">eu_retail <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">features</span>(value, feat_stl)</a>
-<a class="sourceLine" id="cb202-2" title="2"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
-<a class="sourceLine" id="cb202-3" title="3"><span class="co">#&gt;   trend_strength seasonal_streng~ seasonal_peak_y~ seasonal_trough~ spikiness</span></a>
-<a class="sourceLine" id="cb202-4" title="4"><span class="co">#&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb202-5" title="5"><span class="co">#&gt; 1          0.998            0.703                0                1   3.77e-7</span></a>
-<a class="sourceLine" id="cb202-6" title="6"><span class="co">#&gt; # ... with 4 more variables: linearity &lt;dbl&gt;, curvature &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb202-7" title="7"><span class="co">#&gt; #   stl_e_acf1 &lt;dbl&gt;, stl_e_acf10 &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">eu_retail <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">features</span>(value, feat_stl)</a>
+<a class="sourceLine" id="cb201-2" title="2"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
+<a class="sourceLine" id="cb201-3" title="3"><span class="co">#&gt;   trend_strength seasonal_streng~ seasonal_peak_y~ seasonal_trough~ spikiness</span></a>
+<a class="sourceLine" id="cb201-4" title="4"><span class="co">#&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb201-5" title="5"><span class="co">#&gt; 1          0.998            0.703                0                1   3.77e-7</span></a>
+<a class="sourceLine" id="cb201-6" title="6"><span class="co">#&gt; # ... with 4 more variables: linearity &lt;dbl&gt;, curvature &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb201-7" title="7"><span class="co">#&gt; #   stl_e_acf1 &lt;dbl&gt;, stl_e_acf10 &lt;dbl&gt;</span></a></code></pre></div>
 <p>We will first take a seasonal difference. These still appear to be some sort of nonstationarity, so we take an additional first difference</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb203-2" title="2"><span class="st">  </span><span class="kw">gg_tsdisplay</span>(<span class="kw">difference</span>(value, <span class="dv">4</span>), <span class="dt">plot_type=</span><span class="st">&#39;partial&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb202-2" title="2"><span class="st">  </span><span class="kw">gg_tsdisplay</span>(<span class="kw">difference</span>(value, <span class="dv">4</span>), <span class="dt">plot_type=</span><span class="st">&#39;partial&#39;</span>)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-27-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb204-2" title="2"><span class="st">  </span><span class="kw">gg_tsdisplay</span>(value <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">difference</span>(<span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">difference</span>(),</a>
-<a class="sourceLine" id="cb204-3" title="3">  <span class="dt">plot_type=</span><span class="st">&#39;partial&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb203-2" title="2"><span class="st">  </span><span class="kw">gg_tsdisplay</span>(value <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">difference</span>(<span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">difference</span>(),</a>
+<a class="sourceLine" id="cb203-3" title="3">  <span class="dt">plot_type=</span><span class="st">&#39;partial&#39;</span>)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-28-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>Our aim now is to find an appropriate ARIMA model based on the ACF and PACF plots. The significant spike at lag 1 in the ACF suggests a non-seasonal MA(1) component, and the significant spike at lag 4 in the ACF suggests a seasonal MA(1) component. Consequently, we begin with an <span class="math inline">\(\text{ARIMA}(0, 1, 1)(0, 1, 1)_4\)</span> model, indicating a first and seasonal difference, and non-seasonal and seasonal MA(1) components. By analogous logic applied to the PACF, we could also have started with an <span class="math inline">\(\text{ARIMA}(1,1,0)(1,1,0)_4\)</span> model. (Not that only either <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> is zero can ACF and PACF plots be used to decide orders. <a href="arma-models.html#arma-models">9.5</a>)</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">eu_retail_fit &lt;-<span class="st"> </span>eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb205-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(value <span class="op">~</span><span class="st"> </span><span class="kw">pdq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)))</a>
-<a class="sourceLine" id="cb205-3" title="3"></a>
-<a class="sourceLine" id="cb205-4" title="4">eu_retail_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
-<a class="sourceLine" id="cb205-5" title="5"><span class="co">#&gt; Series: value </span></a>
-<a class="sourceLine" id="cb205-6" title="6"><span class="co">#&gt; Model: ARIMA(0,1,1)(0,1,1)[4] </span></a>
-<a class="sourceLine" id="cb205-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb205-8" title="8"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb205-9" title="9"><span class="co">#&gt;         ma1    sma1</span></a>
-<a class="sourceLine" id="cb205-10" title="10"><span class="co">#&gt;       0.290  -0.691</span></a>
-<a class="sourceLine" id="cb205-11" title="11"><span class="co">#&gt; s.e.  0.112   0.119</span></a>
-<a class="sourceLine" id="cb205-12" title="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb205-13" title="13"><span class="co">#&gt; sigma^2 estimated as 0.188:  log likelihood=-34.6</span></a>
-<a class="sourceLine" id="cb205-14" title="14"><span class="co">#&gt; AIC=75.3   AICc=75.7   BIC=81.5</span></a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">eu_retail_fit &lt;-<span class="st"> </span>eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb204-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(value <span class="op">~</span><span class="st"> </span><span class="kw">pdq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)))</a>
+<a class="sourceLine" id="cb204-3" title="3"></a>
+<a class="sourceLine" id="cb204-4" title="4">eu_retail_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
+<a class="sourceLine" id="cb204-5" title="5"><span class="co">#&gt; Series: value </span></a>
+<a class="sourceLine" id="cb204-6" title="6"><span class="co">#&gt; Model: ARIMA(0,1,1)(0,1,1)[4] </span></a>
+<a class="sourceLine" id="cb204-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb204-8" title="8"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb204-9" title="9"><span class="co">#&gt;         ma1    sma1</span></a>
+<a class="sourceLine" id="cb204-10" title="10"><span class="co">#&gt;       0.290  -0.691</span></a>
+<a class="sourceLine" id="cb204-11" title="11"><span class="co">#&gt; s.e.  0.112   0.119</span></a>
+<a class="sourceLine" id="cb204-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb204-13" title="13"><span class="co">#&gt; sigma^2 estimated as 0.188:  log likelihood=-34.6</span></a>
+<a class="sourceLine" id="cb204-14" title="14"><span class="co">#&gt; AIC=75.3   AICc=75.7   BIC=81.5</span></a></code></pre></div>
 <p>Check residuals</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">eu_retail_aug &lt;-<span class="st"> </span>eu_retail_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>()</a>
-<a class="sourceLine" id="cb206-2" title="2"></a>
-<a class="sourceLine" id="cb206-3" title="3">eu_retail_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb206-4" title="4"><span class="st">  </span><span class="kw">ACF</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb206-5" title="5"><span class="st">  </span><span class="kw">autoplot</span>()</a>
-<a class="sourceLine" id="cb206-6" title="6"></a>
-<a class="sourceLine" id="cb206-7" title="7">eu_retail_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb206-8" title="8"><span class="st">  </span><span class="kw">PACF</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb206-9" title="9"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">eu_retail_aug &lt;-<span class="st"> </span>eu_retail_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>()</a>
+<a class="sourceLine" id="cb205-2" title="2"></a>
+<a class="sourceLine" id="cb205-3" title="3">eu_retail_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-4" title="4"><span class="st">  </span><span class="kw">ACF</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-5" title="5"><span class="st">  </span><span class="kw">autoplot</span>()</a>
+<a class="sourceLine" id="cb205-6" title="6"></a>
+<a class="sourceLine" id="cb205-7" title="7">eu_retail_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-8" title="8"><span class="st">  </span><span class="kw">PACF</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-9" title="9"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-30-1.png" width="50%" /><img src="ch9_files/figure-html/unnamed-chunk-30-2.png" width="50%" /></p>
 <p>Both the ACF and PACF show significant spikes at lag 2, and almost significant spikes at lag 3, indicating that some additional non-seasonal terms need to be included in the model. What if we just let <code>ARIMA()</code> pick a model for us?</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">eu_retail_fit2 &lt;-<span class="st"> </span>eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb207-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(value))</a>
-<a class="sourceLine" id="cb207-3" title="3"></a>
-<a class="sourceLine" id="cb207-4" title="4">eu_retail_fit2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
-<a class="sourceLine" id="cb207-5" title="5"><span class="co">#&gt; Series: value </span></a>
-<a class="sourceLine" id="cb207-6" title="6"><span class="co">#&gt; Model: ARIMA(0,1,3)(0,1,1)[4] </span></a>
-<a class="sourceLine" id="cb207-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb207-8" title="8"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb207-9" title="9"><span class="co">#&gt;         ma1    ma2    ma3    sma1</span></a>
-<a class="sourceLine" id="cb207-10" title="10"><span class="co">#&gt;       0.263  0.369  0.420  -0.664</span></a>
-<a class="sourceLine" id="cb207-11" title="11"><span class="co">#&gt; s.e.  0.124  0.126  0.129   0.154</span></a>
-<a class="sourceLine" id="cb207-12" title="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb207-13" title="13"><span class="co">#&gt; sigma^2 estimated as 0.156:  log likelihood=-28.6</span></a>
-<a class="sourceLine" id="cb207-14" title="14"><span class="co">#&gt; AIC=67.3   AICc=68.4   BIC=77.7</span></a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">eu_retail_fit2 &lt;-<span class="st"> </span>eu_retail <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb206-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(value))</a>
+<a class="sourceLine" id="cb206-3" title="3"></a>
+<a class="sourceLine" id="cb206-4" title="4">eu_retail_fit2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
+<a class="sourceLine" id="cb206-5" title="5"><span class="co">#&gt; Series: value </span></a>
+<a class="sourceLine" id="cb206-6" title="6"><span class="co">#&gt; Model: ARIMA(0,1,3)(0,1,1)[4] </span></a>
+<a class="sourceLine" id="cb206-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb206-8" title="8"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb206-9" title="9"><span class="co">#&gt;         ma1    ma2    ma3    sma1</span></a>
+<a class="sourceLine" id="cb206-10" title="10"><span class="co">#&gt;       0.263  0.369  0.420  -0.664</span></a>
+<a class="sourceLine" id="cb206-11" title="11"><span class="co">#&gt; s.e.  0.124  0.126  0.129   0.154</span></a>
+<a class="sourceLine" id="cb206-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb206-13" title="13"><span class="co">#&gt; sigma^2 estimated as 0.156:  log likelihood=-28.6</span></a>
+<a class="sourceLine" id="cb206-14" title="14"><span class="co">#&gt; AIC=67.3   AICc=68.4   BIC=77.7</span></a></code></pre></div>
 <p>The automatic picked model is <span class="math inline">\(\text{ARIMA}(0, 1, 3)(0, 1, 1)_4\)</span>, and has lower <span class="math inline">\(\text{AIC}_c\)</span>, 68.39 compared to 75.72. This in some sense explains why previous residuals show some non-seaonal correlation pattern and how it is fixed.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1">eu_retail_fit2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb208-2" title="2"><span class="st">  </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">eu_retail_fit2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb207-2" title="2"><span class="st">  </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1"></a>
-<a class="sourceLine" id="cb209-2" title="2">eu_retail_fit2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb209-3" title="3"><span class="st">  </span><span class="kw">augment</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb209-4" title="4"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">8</span>, <span class="dt">dof =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb209-5" title="5"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb209-6" title="6"><span class="co">#&gt;   .model       lb_stat lb_pvalue</span></a>
-<a class="sourceLine" id="cb209-7" title="7"><span class="co">#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb209-8" title="8"><span class="co">#&gt; 1 ARIMA(value)   0.511     0.916</span></a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1"></a>
+<a class="sourceLine" id="cb208-2" title="2">eu_retail_fit2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb208-3" title="3"><span class="st">  </span><span class="kw">augment</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb208-4" title="4"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">8</span>, <span class="dt">dof =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb208-5" title="5"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb208-6" title="6"><span class="co">#&gt;   .model       lb_stat lb_pvalue</span></a>
+<a class="sourceLine" id="cb208-7" title="7"><span class="co">#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb208-8" title="8"><span class="co">#&gt; 1 ARIMA(value)   0.511     0.916</span></a></code></pre></div>
 <p>Forecasts from the model for the next three years are shown below</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">eu_retail_fit2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb210-2" title="2"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb210-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>(eu_retail)</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">eu_retail_fit2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb209-2" title="2"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb209-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>(eu_retail)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-33-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>The forecasts follow the recent trend in the data, because of the double differencing. The large and rapidly increasing prediction intervals show that the retail trade index could start increasing or decreasing at any time — while the point forecasts trend downwards, the prediction intervals allow for the data to trend upwards during the forecast period.</p>
 </div>
 <div id="example-corticosteroid-drug-sales-in-australia" class="section level3">
 <h3><span class="header-section-number">10.6.3</span> Example: Corticosteroid drug sales in Australia</h3>
 <p>We will try to forecast monthly corticosteroid drug sales in Australia. There is a small increase in the variance with the level, so we take logarithms to stabilise the variance.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">h02 &lt;-<span class="st"> </span>tsibbledata<span class="op">::</span>PBS <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb211-2" title="2"><span class="st">  </span><span class="kw">filter</span>(ATC2 <span class="op">==</span><span class="st"> &quot;H02&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb211-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">cost =</span> <span class="kw">sum</span>(Cost) <span class="op">/</span><span class="st"> </span><span class="fl">1e6</span>)  </a>
-<a class="sourceLine" id="cb211-4" title="4"></a>
-<a class="sourceLine" id="cb211-5" title="5">h02 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb211-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cost_log =</span> <span class="kw">log</span>(cost)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb211-7" title="7"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">c</span>(cost, cost_log), <span class="dt">names_to =</span> <span class="st">&quot;measure&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb211-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb211-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(Month, value)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb211-10" title="10"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>measure, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">h02 &lt;-<span class="st"> </span>tsibbledata<span class="op">::</span>PBS <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb210-2" title="2"><span class="st">  </span><span class="kw">filter</span>(ATC2 <span class="op">==</span><span class="st"> &quot;H02&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb210-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">cost =</span> <span class="kw">sum</span>(Cost) <span class="op">/</span><span class="st"> </span><span class="fl">1e6</span>)  </a>
+<a class="sourceLine" id="cb210-4" title="4"></a>
+<a class="sourceLine" id="cb210-5" title="5">h02 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb210-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cost_log =</span> <span class="kw">log</span>(cost)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb210-7" title="7"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">c</span>(cost, cost_log), <span class="dt">names_to =</span> <span class="st">&quot;measure&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb210-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb210-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(Month, value)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb210-10" title="10"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>measure, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-34-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>The data are strongly seasonal and obviously non-stationary, so seasonal differencing will be used. It is unclear that whether another difference should be used at this point, though we decide not to. The last few observations appear to be different (more variable) from the earlier data. This may be due to the fact that data are sometimes revised when earlier sales are reported late.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">h02 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb212-2" title="2"><span class="st">  </span><span class="kw">gg_tsdisplay</span>(<span class="kw">difference</span>(<span class="kw">log</span>(cost), <span class="dv">12</span>), </a>
-<a class="sourceLine" id="cb212-3" title="3">               <span class="dt">plot_type=</span><span class="st">&#39;partial&#39;</span>, </a>
-<a class="sourceLine" id="cb212-4" title="4">               <span class="dt">lag_max =</span> <span class="dv">24</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">h02 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb211-2" title="2"><span class="st">  </span><span class="kw">gg_tsdisplay</span>(<span class="kw">difference</span>(<span class="kw">log</span>(cost), <span class="dv">12</span>), </a>
+<a class="sourceLine" id="cb211-3" title="3">               <span class="dt">plot_type=</span><span class="st">&#39;partial&#39;</span>, </a>
+<a class="sourceLine" id="cb211-4" title="4">               <span class="dt">lag_max =</span> <span class="dv">24</span>) </a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
 In the plots of the seasonally differenced data, there are spikes in the PACF at lags 12 and 24, but nothing at seasonal lags in the ACF. This may be suggestive of a seasonal AR(2) term. In the non-seasonal lags, there are three significant spikes in the PACF, suggesting a possible AR(3) term. The pattern in the ACF is not indicative of any simple model.</p>
 <p>Consequently, this initial analysis suggests that a possible model for these data is an <span class="math inline">\(\text{ARIMA}(3, 0, 0)(2, 1, 0)_12\)</span>. The <span class="math inline">\(\text{AIC}_c\)</span> of such model and some variations are shown:</p>
 <p><img src="images/seasonal_arima_2.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>Of these models, the best is the <span class="math inline">\(ARIMA(3, 0, 1)(0, 1, 2)_12\)</span> model</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">h02_fit &lt;-<span class="st"> </span>h02 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(<span class="kw">log</span>(cost) <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="kw">pdq</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))) <span class="co"># without constant</span></a>
-<a class="sourceLine" id="cb213-3" title="3"></a>
-<a class="sourceLine" id="cb213-4" title="4">h02_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
-<a class="sourceLine" id="cb213-5" title="5"><span class="co">#&gt; Series: cost </span></a>
-<a class="sourceLine" id="cb213-6" title="6"><span class="co">#&gt; Model: ARIMA(3,0,1)(0,1,2)[12] </span></a>
-<a class="sourceLine" id="cb213-7" title="7"><span class="co">#&gt; Transformation: log(.x) </span></a>
-<a class="sourceLine" id="cb213-8" title="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb213-9" title="9"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb213-10" title="10"><span class="co">#&gt;          ar1     ar2     ar3    ma1     sma1     sma2</span></a>
-<a class="sourceLine" id="cb213-11" title="11"><span class="co">#&gt;       -0.160  0.5481  0.5678  0.383  -0.5222  -0.1768</span></a>
-<a class="sourceLine" id="cb213-12" title="12"><span class="co">#&gt; s.e.   0.164  0.0878  0.0942  0.190   0.0861   0.0872</span></a>
-<a class="sourceLine" id="cb213-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb213-14" title="14"><span class="co">#&gt; sigma^2 estimated as 0.004278:  log likelihood=250</span></a>
-<a class="sourceLine" id="cb213-15" title="15"><span class="co">#&gt; AIC=-486   AICc=-485   BIC=-463</span></a></code></pre></div>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1">h02_aug &lt;-<span class="st"> </span>h02_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>()</a>
-<a class="sourceLine" id="cb214-2" title="2"></a>
-<a class="sourceLine" id="cb214-3" title="3">h02_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb214-4" title="4"><span class="st">  </span><span class="kw">ACF</span>(.resid, <span class="dt">lag_max =</span> <span class="dv">36</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb214-5" title="5"><span class="st">  </span><span class="kw">autoplot</span>()</a>
-<a class="sourceLine" id="cb214-6" title="6"></a>
-<a class="sourceLine" id="cb214-7" title="7">h02_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb214-8" title="8"><span class="st">  </span><span class="kw">PACF</span>(.resid, <span class="dt">lag_max =</span> <span class="dv">36</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb214-9" title="9"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">h02_fit &lt;-<span class="st"> </span>h02 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb212-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(<span class="kw">log</span>(cost) <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="kw">pdq</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))) <span class="co"># without constant</span></a>
+<a class="sourceLine" id="cb212-3" title="3"></a>
+<a class="sourceLine" id="cb212-4" title="4">h02_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
+<a class="sourceLine" id="cb212-5" title="5"><span class="co">#&gt; Series: cost </span></a>
+<a class="sourceLine" id="cb212-6" title="6"><span class="co">#&gt; Model: ARIMA(3,0,1)(0,1,2)[12] </span></a>
+<a class="sourceLine" id="cb212-7" title="7"><span class="co">#&gt; Transformation: log(.x) </span></a>
+<a class="sourceLine" id="cb212-8" title="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb212-9" title="9"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb212-10" title="10"><span class="co">#&gt;          ar1     ar2     ar3    ma1     sma1     sma2</span></a>
+<a class="sourceLine" id="cb212-11" title="11"><span class="co">#&gt;       -0.160  0.5481  0.5678  0.383  -0.5222  -0.1768</span></a>
+<a class="sourceLine" id="cb212-12" title="12"><span class="co">#&gt; s.e.   0.164  0.0878  0.0942  0.190   0.0861   0.0872</span></a>
+<a class="sourceLine" id="cb212-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb212-14" title="14"><span class="co">#&gt; sigma^2 estimated as 0.004278:  log likelihood=250</span></a>
+<a class="sourceLine" id="cb212-15" title="15"><span class="co">#&gt; AIC=-486   AICc=-485   BIC=-463</span></a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">h02_aug &lt;-<span class="st"> </span>h02_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">augment</span>()</a>
+<a class="sourceLine" id="cb213-2" title="2"></a>
+<a class="sourceLine" id="cb213-3" title="3">h02_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb213-4" title="4"><span class="st">  </span><span class="kw">ACF</span>(.resid, <span class="dt">lag_max =</span> <span class="dv">36</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb213-5" title="5"><span class="st">  </span><span class="kw">autoplot</span>()</a>
+<a class="sourceLine" id="cb213-6" title="6"></a>
+<a class="sourceLine" id="cb213-7" title="7">h02_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb213-8" title="8"><span class="st">  </span><span class="kw">PACF</span>(.resid, <span class="dt">lag_max =</span> <span class="dv">36</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb213-9" title="9"><span class="st">  </span><span class="kw">autoplot</span>()</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-38-1.png" width="50%" /><img src="ch9_files/figure-html/unnamed-chunk-38-2.png" width="50%" /></p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">h02_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb215-2" title="2"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">24</span>, <span class="dt">dof =</span> <span class="dv">7</span>) <span class="co"># h = 2m for seasonal data </span></a>
-<a class="sourceLine" id="cb215-3" title="3"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb215-4" title="4"><span class="co">#&gt;   .model                                             lb_stat lb_pvalue</span></a>
-<a class="sourceLine" id="cb215-5" title="5"><span class="co">#&gt;   &lt;chr&gt;                                                &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb215-6" title="6"><span class="co">#&gt; 1 ARIMA(log(cost) ~ 0 + pdq(3, 0, 1) + PDQ(0, 1, 2))    23.7     0.129</span></a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1">h02_aug <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb214-2" title="2"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">24</span>, <span class="dt">dof =</span> <span class="dv">7</span>) <span class="co"># h = 2m for seasonal data </span></a>
+<a class="sourceLine" id="cb214-3" title="3"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb214-4" title="4"><span class="co">#&gt;   .model                                             lb_stat lb_pvalue</span></a>
+<a class="sourceLine" id="cb214-5" title="5"><span class="co">#&gt;   &lt;chr&gt;                                                &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb214-6" title="6"><span class="co">#&gt; 1 ARIMA(log(cost) ~ 0 + pdq(3, 0, 1) + PDQ(0, 1, 2))    23.7     0.129</span></a></code></pre></div>
 <p>Produce forecasts</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">h02_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb216-2" title="2"><span class="st">  </span><span class="kw">forecast</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb216-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>(h02)</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">h02_fit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-2" title="2"><span class="st">  </span><span class="kw">forecast</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-3" title="3"><span class="st">  </span><span class="kw">autoplot</span>(h02)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-40-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 </div>

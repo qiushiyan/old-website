@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -479,15 +498,14 @@ The first possibility to check this is to apply the 95 percent confidence limits
 Q = T \sum_{k = 1}^{h}{r^2_k}
 \]</span></p>
 <p>Under the null hypothesis it is asymptotically <span class="math inline">\(\chi^2\)</span> distributed with <span class="math inline">\(h - K\)</span> degrees of freedom, <span class="math inline">\(K\)</span> being the number of estimated parameters. It is suggested that use <span class="math inline">\(h = 10\)</span> for non-seasonal data and <span class="math inline">\(h = 2m\)</span> for seasonal data, where <span class="math inline">\(m\)</span> is the period of seasonality.</p>
-<p>As – strictly applied – the distribution of this test statistic holds only asymptotically (under large sample), GRETA M. LJUNG and GEORGE E.P. BOX (1978) proposed the following modification for small samples</p>
+<p>As – strictly applied – the distribution of this test statistic holds only asymptotically (under large sample), GRETA M. LJUNG and GEORGE E.P. BOX (1978) proposed the following modification for small samples, known as the <strong>ljung-box test</strong></p>
 <p><span class="math display">\[
 Q^* = T(T + 2)\sum_{k = 1}^{h}{(T-K)^{-1}}r_k^2
 \]</span>
-<span class="math inline">\(Q^*\)</span> is also asymptotically <span class="math inline">\(\chi^2\)</span> distributed with <span class="math inline">\(m - k\)</span> degrees of freedom</p>
-<p>An alternative to these testing procedures is the Lagrange-Multiplier Test (LM Test) developed by TREVOR S. BREUSCH (1978) and LESLIE G. GODFREY (1978). Like for the <span class="math inline">\(Q\)</span> (<span class="math inline">\(Q^*\)</span>) test the null hypothesis is which is tested against the alternative that the residuals follow an auto-
-regressive or a moving average process of order h. The test can be performed with an auxiliary regression. The estimated residuals are regressed on the explanatory variables of the main model and on the lagged residuals, up to order h. The test statistic which is <span class="math inline">\(\chi^2\)</span> distributed with h degrees of freedom is given by <span class="math inline">\(TR^2\)</span> the auxiliary regression, with T being the number of observations. Alternatively, an F test can be used for testing the combined significance of the lagged residuals in the auxiliary regression.</p>
-<p>Compared to the Durbin-Watson test which is used in traditional econometrics for testing autocorrelation of the residuals of an estimated model, the <span class="math inline">\(Q\)</span>, <span class="math inline">\(Q^*\)</span> as well as the LM test have two major advantages: firstly, they can check for autocorrelation of any order, and not only one order at a time. Secondly, the results are also correct if there are lagged endogenous variables in the regression equation, whereas in such cases the results of the Durbin-
-Watson test are biased in favour of the null hypothesis.</p>
+<span class="math inline">\(Q^*\)</span> is also asymptotically <span class="math inline">\(\chi^2\)</span> distributed with <span class="math inline">\(m - k\)</span> degrees of freedom,</p>
+<p>An alternative to these testing procedures is the <strong>Breusch-Godfrey test</strong> (BG test), also known asa the <strong>Lagrange-Multiplier Test</strong> (LM Test) developed by TREVOR S. BREUSCH (1978) and LESLIE G. GODFREY (1978). Like for the <span class="math inline">\(Q\)</span> (<span class="math inline">\(Q^*\)</span>) test the null hypothesis is which is tested against the alternative that the residuals follow an autoregressive or a moving average process of order h. The test can be performed with an auxiliary regression. The estimated residuals are regressed on the explanatory variables of the main model and on the lagged residuals, up to order h. The test statistic which is <span class="math inline">\(\chi^2\)</span> distributed with h degrees of freedom is given by <span class="math inline">\(TR^2\)</span> the auxiliary regression, with T being the number of observations. Alternatively, an <span class="math inline">\(F\)</span> test can be used for testing the combined significance of the lagged residuals in the auxiliary regression.</p>
+<p>The Breusch-Godfrey test is similar to the Ljung-Box test, but it is specifically designed for use with regression models.</p>
+<p>Compared to the Durbin-Watson test which is used in traditional econometrics for testing autocorrelation of the residuals of an estimated model, the <span class="math inline">\(Q\)</span>, <span class="math inline">\(Q^*\)</span> as well as the BG test have two major advantages: firstly, they can check for autocorrelation of any order, and not only one order at a time. Secondly, the results are also correct if there are lagged endogenous variables in the regression equation, whereas in such cases the results of the Durbin-Watson test are biased in favour of the null hypothesis.</p>
 <p>As mentioned in Section <a href="residual-diagnostics.html#white-noise">5.4.1</a>, we often assume normally distributed white noise. But the fact that the residuals are not autocorrelated does not imply that they are stochastic independence if the variauted, as the usual testing procedures are based on this aspecially the third (skewness) and fourth moments (kurtosis) are important (0 and 3 respectively based on normality hypothesis).</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -523,16 +541,17 @@ hypothesis that the variable is normally distributed is rejected whenever the va
 <a class="sourceLine" id="cb168-20" title="20"><span class="co">#&gt;   .model                      lb_stat lb_pvalue</span></a>
 <a class="sourceLine" id="cb168-21" title="21"><span class="co">#&gt;   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb168-22" title="22"><span class="co">#&gt; 1 ARIMA(value ~ PDQ(1, 0, 0))    5.01     0.890</span></a>
-<a class="sourceLine" id="cb168-23" title="23"><span class="co"># durbin watson test </span></a>
-<a class="sourceLine" id="cb168-24" title="24">AR1_aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span>car<span class="op">::</span><span class="kw">durbinWatsonTest</span>(<span class="dt">max.lag =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb168-25" title="25"><span class="co">#&gt;  [1] 1.89 1.99 1.95 1.77 2.04 1.86 1.83 1.45 1.11 1.59</span></a>
-<a class="sourceLine" id="cb168-26" title="26"><span class="co"># jb test (normality)</span></a>
-<a class="sourceLine" id="cb168-27" title="27">AR1_aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span>normtest<span class="op">::</span><span class="kw">jb.norm.test</span>()</a>
-<a class="sourceLine" id="cb168-28" title="28"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb168-29" title="29"><span class="co">#&gt;  Jarque-Bera test for normality</span></a>
-<a class="sourceLine" id="cb168-30" title="30"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb168-31" title="31"><span class="co">#&gt; data:  .</span></a>
-<a class="sourceLine" id="cb168-32" title="32"><span class="co">#&gt; JB = 7, p-value = 0.03</span></a></code></pre></div>
+<a class="sourceLine" id="cb168-23" title="23"><span class="co"># Breusch Godfrey test: lmtest::bgtest()</span></a>
+<a class="sourceLine" id="cb168-24" title="24"><span class="co"># durbin watson test </span></a>
+<a class="sourceLine" id="cb168-25" title="25">AR1_aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span>car<span class="op">::</span><span class="kw">durbinWatsonTest</span>(<span class="dt">max.lag =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb168-26" title="26"><span class="co">#&gt;  [1] 1.89 1.99 1.95 1.77 2.04 1.86 1.83 1.45 1.11 1.59</span></a>
+<a class="sourceLine" id="cb168-27" title="27"><span class="co"># jb test (normality)</span></a>
+<a class="sourceLine" id="cb168-28" title="28">AR1_aug <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(.resid) <span class="op">%&gt;%</span><span class="st"> </span>normtest<span class="op">::</span><span class="kw">jb.norm.test</span>()</a>
+<a class="sourceLine" id="cb168-29" title="29"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb168-30" title="30"><span class="co">#&gt;  Jarque-Bera test for normality</span></a>
+<a class="sourceLine" id="cb168-31" title="31"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb168-32" title="32"><span class="co">#&gt; data:  .</span></a>
+<a class="sourceLine" id="cb168-33" title="33"><span class="co">#&gt; JB = 7, p-value = 0.03</span></a></code></pre></div>
 </div>
 <div id="the-wold-decomposition" class="section level3">
 <h3><span class="header-section-number">9.1.3</span> The Wold Decomposition</h3>
@@ -542,25 +561,25 @@ the basis of a linear function of lagged <span class="math inline">\(y\)</span>(
 <p><em>Purely non-deterministic</em> means that all additive deterministic components of a time series have to be subtracted in advance. By using its own lagged values, any deterministic component can be perfectly predicted in advance. This holds, for example, for a constant mean, as well as for periodic, polynomial, or exponential series in t. Thus, one can write (see proof in Seciton <a href="moving-average-models.html#koyck-transformation-and-invertibility">9.4.3</a>):</p>
 <p><span class="math display" id="eq:wold-decomposition">\[\begin{equation}
 \tag{9.1}
-y_t - \mu_t = \sum_{i-0}^{\infty}\psi_i\epsilon_i
+y_t - \mu_t = \sum_{i-0}^{\infty}\psi_i\varepsilon_i
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(\epsilon_t\)</span> is white noise and <span class="math inline">\(\psi_i\)</span> satisfy <span class="math inline">\(\sum_{i-0}^{\infty}\psi_i^2 &lt; \infty\)</span>. The quadratic convergence of the series of the <span class="math inline">\(\psi_i\)</span> guarantees the existence
-of second moments of the process <span class="math inline">\(y_t\)</span>. There is no need of any distributional assumption for this decomposition to hold. Especially, there is no need of the <span class="math inline">\(\epsilon_t\)</span> to be independent, it is sufficient that they are (linearly) uncorrelated.</p>
+<p>where <span class="math inline">\(\varepsilon_t\)</span> is white noise and <span class="math inline">\(\psi_i\)</span> satisfy <span class="math inline">\(\sum_{i-0}^{\infty}\psi_i^2 &lt; \infty\)</span>. The quadratic convergence of the series of the <span class="math inline">\(\psi_i\)</span> guarantees the existence
+of second moments of the process <span class="math inline">\(y_t\)</span>. There is no need of any distributional assumption for this decomposition to hold. Especially, there is no need of the <span class="math inline">\(\varepsilon_t\)</span> to be independent, it is sufficient that they are (linearly) uncorrelated.</p>
 <p>From Wold Decomposition we can derive <span class="math inline">\(y_t\)</span> has properties as follows:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{E}(y_t) &amp;= \mu_t \\
-\text{Var}(y_t) = \text{E}[(y_t - \mu_t)^2] &amp;= E[(\epsilon_t + \psi_1\epsilon_{t-1} + ...)^2] = \sigma^2\sum_{i=0}^{\infty}\psi_i^2 \\ 
+\text{Var}(y_t) = \text{E}[(y_t - \mu_t)^2] &amp;= E[(\varepsilon_t + \psi_1\varepsilon_{t-1} + ...)^2] = \sigma^2\sum_{i=0}^{\infty}\psi_i^2 \\ 
 \end{aligned}
 \]</span>
 And as for variance:
 <span class="math display">\[
 \begin{split}
 \text{Cov}(y_t, y_{t+k}) &amp;= \text{E}[(y_t - \mu_t)(y_{t+k} - \mu_{t+k})] \\ 
-&amp;= \text{E}[(\epsilon_t + \psi_1\epsilon_{t-1} + \cdots + \psi_k\epsilon_{t-k} + \psi_{k+1}\epsilon_{t-k-1}) * (\epsilon_{t+k} + \psi_1\epsilon_{t+k-1} + \cdots + \psi_{k}\epsilon_t) + \psi_{k+1}\epsilon_{t-1})] \\
+&amp;= \text{E}[(\varepsilon_t + \psi_1\varepsilon_{t-1} + \cdots + \psi_k\varepsilon_{t-k} + \psi_{k+1}\varepsilon_{t-k-1}) * (\varepsilon_{t+k} + \psi_1\varepsilon_{t+k-1} + \cdots + \psi_{k}\varepsilon_t) + \psi_{k+1}\varepsilon_{t-1})] \\
 \end{split}
 \]</span>
-We know that for <span class="math inline">\(i \not= j, \text{E}(\epsilon_i\epsilon_j) = \text{Cov}(\epsilon_i, \epsilon_j) = 0\)</span> and <span class="math inline">\(\text{E}(\epsilon_i^2) = \text{Var}(\epsilon_i^2) = \sigma^2\)</span>, so the result can be simplfied as :</p>
+We know that for <span class="math inline">\(i \not= j, \text{E}(\varepsilon_i\varepsilon_j) = \text{Cov}(\varepsilon_i, \varepsilon_j) = 0\)</span> and <span class="math inline">\(\text{E}(\varepsilon_i^2) = \text{Var}(\varepsilon_i^2) = \sigma^2\)</span>, so the result can be simplfied as :</p>
 <p><span class="math display">\[
 \begin{split}
 \text{Cov}(y_t, y_{t+k}) &amp;= \sigma^2(1 ·\psi_k + \psi_1\psi_{k+1} + \psi_{2}\psi_{k+2} + \cdots) \\

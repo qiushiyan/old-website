@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -418,9 +437,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.4</span> Moving average models</h2>
 <p>Rather than using past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p><span class="math display">\[
-y_t = c + \theta_1\epsilon_{t-1} + \theta_2\epsilon_{t-2} + \dots + \theta_q\epsilon_{t-q} + \epsilon_{t}
+y_t = c + \theta_1\varepsilon_{t-1} + \theta_2\varepsilon_{t-2} + \dots + \theta_q\varepsilon_{t-q} + \varepsilon_{t}
 \]</span></p>
-<p>where <span class="math inline">\(\epsilon_t\)</span> is white noise. We refer to this as a MA(q) model, a moving average model of order <span class="math inline">\(q\)</span>. Of course, we do not observe the values of <span class="math inline">\(\epsilon_t\)</span>, so it is not really a regression in the usual sense.</p>
+<p>where <span class="math inline">\(\varepsilon_t\)</span> is white noise. We refer to this as a MA(q) model, a moving average model of order <span class="math inline">\(q\)</span>. Of course, we do not observe the values of <span class="math inline">\(\varepsilon_t\)</span>, so it is not really a regression in the usual sense.</p>
 <p>Notice that each value of <span class="math inline">\(y_t\)</span> can be thought of as a weighted moving average of the past few forecast errors. However, moving average models should not be confused with the moving average smoothing we discussed in Section <a href="moving-averages.html#moving-averages">3.2</a>. A moving average model is used for forecasting future values, while moving average smoothing is used for estimating the trend-cycle of past values.</p>
 <p>It is easy to show <strong>MA(q) process is always stationary</strong>. A MA(1) process has the following properties</p>
 <p><span class="math display">\[
@@ -439,14 +458,14 @@ y_t = c + \theta_1\epsilon_{t-1} + \theta_2\epsilon_{t-2} + \dots + \theta_q\eps
 \begin{split}
 \frac{\gamma(1)}{\gamma(0)} &amp;= \frac{\text{Covariance for lag} 1}{\text{variance for lag}1} \\
            &amp;= \frac{E[(y_t - E(y_t))(y_{t-1} - E(y_{t-1}))]}{(1 + \theta_1^2)\sigma^2} \\ 
-           &amp;= \frac{E[(\epsilon_{t} + \theta_1\epsilon_{t-1})(\epsilon_{t-1} + \theta_1\epsilon_{t-2})]}{(1 + \theta_1^2)\sigma^2} \\
-           &amp;= \frac{E(\epsilon_t \epsilon_{t-1} + \theta_1\epsilon_t\epsilon_{t-2} + \theta_1 \epsilon_{t-1}^2 + \theta_1^2\epsilon_{t-1}\epsilon_{t-2})}{(1 + \theta_1^2)\sigma^2} \\
-           &amp;= \frac{\theta_1E(\epsilon_{t-1}^2)}{(1 + \theta_1^2)\sigma^2} \\
+           &amp;= \frac{E[(\varepsilon_{t} + \theta_1\varepsilon_{t-1})(\varepsilon_{t-1} + \theta_1\varepsilon_{t-2})]}{(1 + \theta_1^2)\sigma^2} \\
+           &amp;= \frac{E(\varepsilon_t \varepsilon_{t-1} + \theta_1\varepsilon_t\varepsilon_{t-2} + \theta_1 \varepsilon_{t-1}^2 + \theta_1^2\varepsilon_{t-1}\varepsilon_{t-2})}{(1 + \theta_1^2)\sigma^2} \\
+           &amp;= \frac{\theta_1E(\varepsilon_{t-1}^2)}{(1 + \theta_1^2)\sigma^2} \\
            &amp;= \frac{\theta_1\sigma^2}{(1 + \theta_1^2)\sigma^2} \\
            &amp;= \frac{\theta_1}{1 + \theta_1^2}
 \end{split}
 \]</span>
-For <span class="math inline">\(\text{lag} &gt; 1\)</span>, there will be no square term like <span class="math inline">\(\epsilon_{t-k}^2\)</span>, but only cross terms like <span class="math inline">\(\epsilon_t\epsilon_{t-k}\)</span>，whose expectation would be zero by defination, so that ACF will be zero, which leads to covariance stationarity.</p>
+For <span class="math inline">\(\text{lag} &gt; 1\)</span>, there will be no square term like <span class="math inline">\(\varepsilon_{t-k}^2\)</span>, but only cross terms like <span class="math inline">\(\varepsilon_t\varepsilon_{t-k}\)</span>，whose expectation would be zero by defination, so that ACF will be zero, which leads to covariance stationarity.</p>
 <div id="simulating-an-maq-process" class="section level3">
 <h3><span class="header-section-number">9.4.1</span> Simulating an MA(q) process</h3>
 <p>We can simulate MA(q) processes just as we did for AR(p) processes using <code>arima.sim()</code>. Here are 3 different ones with contrasting <span class="math inline">\(\theta\)</span>:</p>
@@ -474,22 +493,22 @@ For <span class="math inline">\(\text{lag} &gt; 1\)</span>, there will be no squ
 <p>The derivation of the ACF function has shed light on how we would decide the order <span class="math inline">\(q\)</span>. For a MA(2) process, ACF would be 0 for <span class="math inline">\(k = 3, 4, \dots\)</span>. In general, for a MA(q) process, ACF will be nonzero for <span class="math inline">\(k = 1, 2, \dots,q\)</span> and zero after <span class="math inline">\(q\)</span>.</p>
 <p>Let’s prove this, a MA(q) model can be written as:
 <span class="math display">\[
-y_{t-k} = c + \theta_1\epsilon_{t-k -1} + \theta_2\epsilon_{t- k - 2} + \dots + \theta_q\epsilon_{t-k -q} + \epsilon_{t-q}
+y_{t-k} = c + \theta_1\varepsilon_{t-k -1} + \theta_2\varepsilon_{t- k - 2} + \dots + \theta_q\varepsilon_{t-k -q} + \varepsilon_{t-q}
 \]</span>
 To see at which point ACF will be zero, consider the covariance (if covariance between <span class="math inline">\(y_t\)</span> and <span class="math inline">\(y_{t-k}\)</span> is zero, then <span class="math inline">\(r_k\)</span> is zero)
 <span class="math display">\[
 \text{Cov}(y_t, y_{t-k}) = \text{E}(y_ty_{t-k}) - \text{E}(y_t)\text{E}(y_{t-k})
 \]</span></p>
 <p>We know that <span class="math inline">\(\text{E}(y_t)\text{E}(y_{t-k}) = c^2\)</span>. So the problem is, what is included in <span class="math inline">\(E(y_ty_{t-k})\)</span>, and when will it be <span class="math inline">\(c^2\)</span>, so that the covariance would be zero?</p>
-<p>Follow MA(q), <span class="math inline">\(y_t\)</span> includes <span class="math inline">\((c, \epsilon_t, \epsilon_{t-1}, \epsilon_{t-2}, \dots, \epsilon_{t-q})\)</span>, and <span class="math inline">\(y_{t-k}\)</span> includes <span class="math inline">\((c, \epsilon_{t-k}, \epsilon_{t-k -1}, \epsilon_{t-k -2}, \dots, \epsilon_{t - k -q})\)</span>. When they are multiplied together, there will be</p>
+<p>Follow MA(q), <span class="math inline">\(y_t\)</span> includes <span class="math inline">\((c, \varepsilon_t, \varepsilon_{t-1}, \varepsilon_{t-2}, \dots, \varepsilon_{t-q})\)</span>, and <span class="math inline">\(y_{t-k}\)</span> includes <span class="math inline">\((c, \varepsilon_{t-k}, \varepsilon_{t-k -1}, \varepsilon_{t-k -2}, \dots, \varepsilon_{t - k -q})\)</span>. When they are multiplied together, there will be</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{constant} &amp;: c^2 \rightarrow E(c^2) = c^2 \\
-\text{cross terms} &amp;: \epsilon_i\epsilon_j, i \not= j \rightarrow E(\epsilon_i\epsilon_j) = 0 \\
-\text{square terms} &amp;: \epsilon_i^2 \rightarrow E(\epsilon_i^2) = \text{Var}(\epsilon_i) + \text{E}(\epsilon_i)^2 = \sigma^2 &gt; 0
+\text{cross terms} &amp;: \varepsilon_i\varepsilon_j, i \not= j \rightarrow E(\varepsilon_i\varepsilon_j) = 0 \\
+\text{square terms} &amp;: \varepsilon_i^2 \rightarrow E(\varepsilon_i^2) = \text{Var}(\varepsilon_i) + \text{E}(\varepsilon_i)^2 = \sigma^2 &gt; 0
 \end{aligned}
 \]</span>
-Now everything is clear, ACF will be zero, if and only if there is no <strong>square term</strong>. That is to say, there is no same error term when we decompose <span class="math inline">\(y_t\)</span> and <span class="math inline">\(y_{t-k}\)</span>. This means the earliest error in <span class="math inline">\((\epsilon_t, \epsilon_{t-1}, \epsilon_{t-2}, \dots, \epsilon_{t-q})\)</span> is still earlier than the latest error term in of <span class="math inline">\((\epsilon_{t-k}, \epsilon_{t-k -1}, \epsilon_{t-k -2}, \dots, \epsilon_{t - k -q})\)</span></p>
+Now everything is clear, ACF will be zero, if and only if there is no <strong>square term</strong>. That is to say, there is no same error term when we decompose <span class="math inline">\(y_t\)</span> and <span class="math inline">\(y_{t-k}\)</span>. This means the earliest error in <span class="math inline">\((\varepsilon_t, \varepsilon_{t-1}, \varepsilon_{t-2}, \dots, \varepsilon_{t-q})\)</span> is still earlier than the latest error term in of <span class="math inline">\((\varepsilon_{t-k}, \varepsilon_{t-k -1}, \varepsilon_{t-k -2}, \dots, \varepsilon_{t - k -q})\)</span></p>
 <p><span class="math display">\[
 \begin{aligned}
 t - q &amp;&gt; t - k \\
@@ -506,8 +525,8 @@ k &amp;&gt; q
 <p><em>Koyck transformation</em> is one that converts a AR(p) model to MA(<span class="math inline">\(\infty\)</span>) model . Take an AR(1) model for example, which can be written as</p>
 <p><span class="math display">\[
 \begin{aligned}
-(1 - \phi_1B)y_t &amp;= \epsilon_t + c \\
-y_t &amp;= \frac{\epsilon_t + c}{1 - \phi_1B} 
+(1 - \phi_1B)y_t &amp;= \varepsilon_t + c \\
+y_t &amp;= \frac{\varepsilon_t + c}{1 - \phi_1B} 
 \end{aligned}
 \]</span></p>
 <p>Recall that the infinite sum of a geometric series is</p>
@@ -520,8 +539,8 @@ s &amp;= a + ar + ar^2 + \cdots \\
 <p>It follows that we can rewritten our formula as (backshift operator on a constant is still that constant, so <span class="math inline">\(|\phi_1| &lt; 1\)</span> ):</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_t &amp;= (\epsilon_t + c) + (\epsilon_t + c)\phi_1B + (\epsilon_t + c)(\phi_1B)^2 + \cdots \\
-    &amp;= \epsilon_t + (c + \phi_1c + \phi_1^2c + \dots) + (\phi_1\epsilon_{t-1} + \phi_1^2\epsilon_{t-2} + \cdots) 
+y_t &amp;= (\varepsilon_t + c) + (\varepsilon_t + c)\phi_1B + (\varepsilon_t + c)(\phi_1B)^2 + \cdots \\
+    &amp;= \varepsilon_t + (c + \phi_1c + \phi_1^2c + \dots) + (\phi_1\varepsilon_{t-1} + \phi_1^2\varepsilon_{t-2} + \cdots) 
 \end{aligned}
 \]</span></p>
 <p>For a AR(1) model, we have <span class="math inline">\(|\phi_1| &lt; 1\)</span>. so that <span class="math inline">\((c + \phi_1c + \phi_1^2c + c\dots)\)</span> will converge to a constant. And what we derived is exactly a MA(<span class="math inline">\(\infty\)</span>) model.</p>
@@ -529,14 +548,14 @@ y_t &amp;= (\epsilon_t + c) + (\epsilon_t + c)\phi_1B + (\epsilon_t + c)(\phi_1B
 <p><em>Invertibility</em> is like the opposite of Koyck transformation. It describes the fact that it is possible to write any stationary MA(<span class="math inline">\(\infty\)</span>) model as a AR(p) model. Again, we demonstrate this with an MA(1) model (here I put a negative sign on <span class="math inline">\(\theta_1\)</span> just for convenience):</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_t &amp;= c -  \theta_1\epsilon_{t-1} + \epsilon_t \\
-y_t &amp;= (1 - \theta_1B)\epsilon_t + c\\
-\epsilon_t &amp;= \frac{y_t - c}{1 - \theta_1B}
+y_t &amp;= c -  \theta_1\varepsilon_{t-1} + \varepsilon_t \\
+y_t &amp;= (1 - \theta_1B)\varepsilon_t + c\\
+\varepsilon_t &amp;= \frac{y_t - c}{1 - \theta_1B}
 \end{aligned}
 \]</span>
 The rest is the same, <span class="math inline">\(\frac{y_t - c}{1 - \theta_1B}\)</span> can be considered as the infinite sum of a geometric series, when <span class="math inline">\(|\theta_1| &lt; 1\)</span>. And the final equation is</p>
 <p><span class="math display">\[
-y_t = (c + \theta_1c + \theta_1^2c + \cdots) + (\theta_1y_{t-1} + \theta_1^2y_{t-2} + \cdots) + \epsilon_t
+y_t = (c + \theta_1c + \theta_1^2c + \cdots) + (\theta_1y_{t-1} + \theta_1^2y_{t-2} + \cdots) + \varepsilon_t
 \]</span>
 With <span class="math inline">\(|\theta_1| &lt; 1\)</span>, <span class="math inline">\((c + \theta_1c + \theta_1^2c + \cdots)\)</span> will converge to a constant and the equation qualifies for a AR(<span class="math inline">\(\infty\)</span>) model. Thus, when <span class="math inline">\(|\theta_1| &lt; 1\)</span> the MA model is <strong>invertible</strong>. (From another perspective, if <span class="math inline">\(|\theta_1| &gt; 1\)</span> <span class="math inline">\(\phi_1, ... ,\phi_p\)</span> in MA(<span class="math inline">\(\infty\)</span>) model will not met stationary conditions).</p>
 <p>Although we no longer need to place constraints on MA models like we did on AR models since it is always stationary, we do hope that MA models are invertible, because only when an MA(q) process is invertible can it be <strong>uniquely identified</strong>. Consider, for example, the following case in which we know that for a MA(1) model <span class="math inline">\(\gamma(1) = r_1\)</span>, and the way we would compute <span class="math inline">\(\theta_1\)</span>:</p>

@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -423,113 +442,113 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-comparing-arima-and-ets-on-non-seasonal-data" class="section level3">
 <h3><span class="header-section-number">10.7.1</span> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on non-seasonal data</h3>
 <p>We can use time series cross-validation to compare an ARIMA model and an ETS model. Let’s consider the Australian population from the <code>global_economy</code> dataset</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">aus_economy &lt;-<span class="st"> </span>global_economy <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb217-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Code <span class="op">==</span><span class="st"> &quot;AUS&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb217-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Population =</span> Population<span class="op">/</span><span class="fl">1e6</span>)</a>
-<a class="sourceLine" id="cb217-4" title="4"></a>
-<a class="sourceLine" id="cb217-5" title="5">aus_economy <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb217-6" title="6"><span class="st">  </span><span class="kw">slice</span>(<span class="op">-</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb217-7" title="7"><span class="st">  </span><span class="kw">stretch_tsibble</span>(<span class="dt">.init =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb217-8" title="8"><span class="st">  </span><span class="kw">model</span>(</a>
-<a class="sourceLine" id="cb217-9" title="9">    <span class="kw">ETS</span>(Population),</a>
-<a class="sourceLine" id="cb217-10" title="10">    <span class="kw">ARIMA</span>(Population)</a>
-<a class="sourceLine" id="cb217-11" title="11">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb217-12" title="12"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb217-13" title="13"><span class="st">  </span><span class="kw">accuracy</span>(aus_economy)</a>
-<a class="sourceLine" id="cb217-14" title="14"><span class="co">#&gt; # A tibble: 2 x 10</span></a>
-<a class="sourceLine" id="cb217-15" title="15"><span class="co">#&gt;   .model            Country   .type     ME   RMSE    MAE   MPE  MAPE  MASE  ACF1</span></a>
-<a class="sourceLine" id="cb217-16" title="16"><span class="co">#&gt;   &lt;chr&gt;             &lt;fct&gt;     &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb217-17" title="17"><span class="co">#&gt; 1 ARIMA(Population) Australia Test  0.0420 0.194  0.0789 0.277 0.509 0.317 0.188</span></a>
-<a class="sourceLine" id="cb217-18" title="18"><span class="co">#&gt; 2 ETS(Population)   Australia Test  0.0202 0.0774 0.0543 0.112 0.327 0.218 0.506</span></a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">aus_economy &lt;-<span class="st"> </span>global_economy <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb216-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Code <span class="op">==</span><span class="st"> &quot;AUS&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb216-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Population =</span> Population<span class="op">/</span><span class="fl">1e6</span>)</a>
+<a class="sourceLine" id="cb216-4" title="4"></a>
+<a class="sourceLine" id="cb216-5" title="5">aus_economy <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb216-6" title="6"><span class="st">  </span><span class="kw">slice</span>(<span class="op">-</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb216-7" title="7"><span class="st">  </span><span class="kw">stretch_tsibble</span>(<span class="dt">.init =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb216-8" title="8"><span class="st">  </span><span class="kw">model</span>(</a>
+<a class="sourceLine" id="cb216-9" title="9">    <span class="kw">ETS</span>(Population),</a>
+<a class="sourceLine" id="cb216-10" title="10">    <span class="kw">ARIMA</span>(Population)</a>
+<a class="sourceLine" id="cb216-11" title="11">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb216-12" title="12"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb216-13" title="13"><span class="st">  </span><span class="kw">accuracy</span>(aus_economy)</a>
+<a class="sourceLine" id="cb216-14" title="14"><span class="co">#&gt; # A tibble: 2 x 10</span></a>
+<a class="sourceLine" id="cb216-15" title="15"><span class="co">#&gt;   .model            Country   .type     ME   RMSE    MAE   MPE  MAPE  MASE  ACF1</span></a>
+<a class="sourceLine" id="cb216-16" title="16"><span class="co">#&gt;   &lt;chr&gt;             &lt;fct&gt;     &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb216-17" title="17"><span class="co">#&gt; 1 ARIMA(Population) Australia Test  0.0420 0.194  0.0789 0.277 0.509 0.317 0.188</span></a>
+<a class="sourceLine" id="cb216-18" title="18"><span class="co">#&gt; 2 ETS(Population)   Australia Test  0.0202 0.0774 0.0543 0.112 0.327 0.218 0.506</span></a></code></pre></div>
 <p>In this case the ETS model has higher accuracy on the cross-validated performance measures. Below we generate and plot forecasts for the next 5 years generated from an ETS model.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1">aus_economy <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb218-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ETS</span>(Population)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb218-3" title="3"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;5 years&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb218-4" title="4"><span class="st">  </span><span class="kw">autoplot</span>(aus_economy)</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">aus_economy <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb217-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ETS</span>(Population)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb217-3" title="3"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;5 years&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb217-4" title="4"><span class="st">  </span><span class="kw">autoplot</span>(aus_economy)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-43-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="example-comparing-arima-and-ets-on-seasonal-data" class="section level3">
 <h3><span class="header-section-number">10.7.2</span> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</h3>
 <p>In this case we want to compare seasonal ARIMA and ETS models applied to the quarterly cement production data (from aus_production). This time we separate the original data into testing set and training set. We create a training set from the beginning of 1988 to the end of 2007 and select an ARIMA and an ETS model using the <code>ARIMA()</code> and <code>ETS()</code> functions.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="co"># Consider the cement data beginning in 1988</span></a>
-<a class="sourceLine" id="cb219-2" title="2">cement &lt;-<span class="st"> </span>aus_production <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-3" title="3"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">year</span>(Quarter) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1988</span>)</a>
-<a class="sourceLine" id="cb219-4" title="4"></a>
-<a class="sourceLine" id="cb219-5" title="5"><span class="co"># Use 20 years of the data as the training set</span></a>
-<a class="sourceLine" id="cb219-6" title="6">train &lt;-<span class="st"> </span>cement <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-7" title="7"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">year</span>(Quarter) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2007</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">cement_fit_arima &lt;-<span class="st"> </span>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(Cement))</a>
-<a class="sourceLine" id="cb220-2" title="2"></a>
-<a class="sourceLine" id="cb220-3" title="3"><span class="kw">report</span>(cement_fit_arima)</a>
-<a class="sourceLine" id="cb220-4" title="4"><span class="co">#&gt; Series: Cement </span></a>
-<a class="sourceLine" id="cb220-5" title="5"><span class="co">#&gt; Model: ARIMA(1,0,1)(2,1,1)[4] w/ drift </span></a>
-<a class="sourceLine" id="cb220-6" title="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb220-7" title="7"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb220-8" title="8"><span class="co">#&gt;          ar1     ma1   sar1    sar2    sma1  constant</span></a>
-<a class="sourceLine" id="cb220-9" title="9"><span class="co">#&gt;       0.8886  -0.237  0.081  -0.234  -0.898      5.39</span></a>
-<a class="sourceLine" id="cb220-10" title="10"><span class="co">#&gt; s.e.  0.0842   0.133  0.157   0.139   0.178      1.48</span></a>
-<a class="sourceLine" id="cb220-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb220-12" title="12"><span class="co">#&gt; sigma^2 estimated as 11456:  log likelihood=-464</span></a>
-<a class="sourceLine" id="cb220-13" title="13"><span class="co">#&gt; AIC=941   AICc=943   BIC=957</span></a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="co"># Consider the cement data beginning in 1988</span></a>
+<a class="sourceLine" id="cb218-2" title="2">cement &lt;-<span class="st"> </span>aus_production <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb218-3" title="3"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">year</span>(Quarter) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1988</span>)</a>
+<a class="sourceLine" id="cb218-4" title="4"></a>
+<a class="sourceLine" id="cb218-5" title="5"><span class="co"># Use 20 years of the data as the training set</span></a>
+<a class="sourceLine" id="cb218-6" title="6">train &lt;-<span class="st"> </span>cement <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb218-7" title="7"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">year</span>(Quarter) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2007</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">cement_fit_arima &lt;-<span class="st"> </span>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(Cement))</a>
+<a class="sourceLine" id="cb219-2" title="2"></a>
+<a class="sourceLine" id="cb219-3" title="3"><span class="kw">report</span>(cement_fit_arima)</a>
+<a class="sourceLine" id="cb219-4" title="4"><span class="co">#&gt; Series: Cement </span></a>
+<a class="sourceLine" id="cb219-5" title="5"><span class="co">#&gt; Model: ARIMA(1,0,1)(2,1,1)[4] w/ drift </span></a>
+<a class="sourceLine" id="cb219-6" title="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb219-7" title="7"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb219-8" title="8"><span class="co">#&gt;          ar1     ma1   sar1    sar2    sma1  constant</span></a>
+<a class="sourceLine" id="cb219-9" title="9"><span class="co">#&gt;       0.8886  -0.237  0.081  -0.234  -0.898      5.39</span></a>
+<a class="sourceLine" id="cb219-10" title="10"><span class="co">#&gt; s.e.  0.0842   0.133  0.157   0.139   0.178      1.48</span></a>
+<a class="sourceLine" id="cb219-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb219-12" title="12"><span class="co">#&gt; sigma^2 estimated as 11456:  log likelihood=-464</span></a>
+<a class="sourceLine" id="cb219-13" title="13"><span class="co">#&gt; AIC=941   AICc=943   BIC=957</span></a></code></pre></div>
 <p>Residuals from the ARIMA model appear to be white noise.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">cement_fit_arima <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">cement_fit_arima <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1"></a>
-<a class="sourceLine" id="cb222-2" title="2"><span class="kw">augment</span>(cement_fit_arima) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb222-3" title="3"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">8</span>, <span class="dt">dof =</span> <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb222-4" title="4"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb222-5" title="5"><span class="co">#&gt;   .model        lb_stat lb_pvalue</span></a>
-<a class="sourceLine" id="cb222-6" title="6"><span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb222-7" title="7"><span class="co">#&gt; 1 ARIMA(Cement)   0.783     0.376</span></a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1"></a>
+<a class="sourceLine" id="cb221-2" title="2"><span class="kw">augment</span>(cement_fit_arima) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb221-3" title="3"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">8</span>, <span class="dt">dof =</span> <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb221-4" title="4"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb221-5" title="5"><span class="co">#&gt;   .model        lb_stat lb_pvalue</span></a>
+<a class="sourceLine" id="cb221-6" title="6"><span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb221-7" title="7"><span class="co">#&gt; 1 ARIMA(Cement)   0.783     0.376</span></a></code></pre></div>
 <p>The output below also shows the ETS model selected and estimated by <code>ETS()</code>. This model also does well in capturing all the dynamics in the data</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1">cement_fit_ets &lt;-<span class="st"> </span>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">model</span>(<span class="kw">ETS</span>(Cement))</a>
-<a class="sourceLine" id="cb223-2" title="2"><span class="kw">report</span>(cement_fit_ets)</a>
-<a class="sourceLine" id="cb223-3" title="3"><span class="co">#&gt; Series: Cement </span></a>
-<a class="sourceLine" id="cb223-4" title="4"><span class="co">#&gt; Model: ETS(M,N,M) </span></a>
-<a class="sourceLine" id="cb223-5" title="5"><span class="co">#&gt;   Smoothing parameters:</span></a>
-<a class="sourceLine" id="cb223-6" title="6"><span class="co">#&gt;     alpha = 0.753 </span></a>
-<a class="sourceLine" id="cb223-7" title="7"><span class="co">#&gt;     gamma = 0.0001 </span></a>
-<a class="sourceLine" id="cb223-8" title="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb223-9" title="9"><span class="co">#&gt;   Initial states:</span></a>
-<a class="sourceLine" id="cb223-10" title="10"><span class="co">#&gt;     l   s1   s2   s3    s4</span></a>
-<a class="sourceLine" id="cb223-11" title="11"><span class="co">#&gt;  1695 1.03 1.05 1.01 0.912</span></a>
-<a class="sourceLine" id="cb223-12" title="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb223-13" title="13"><span class="co">#&gt;   sigma^2:  0.0034</span></a>
-<a class="sourceLine" id="cb223-14" title="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb223-15" title="15"><span class="co">#&gt;  AIC AICc  BIC </span></a>
-<a class="sourceLine" id="cb223-16" title="16"><span class="co">#&gt; 1104 1106 1121</span></a>
-<a class="sourceLine" id="cb223-17" title="17"></a>
-<a class="sourceLine" id="cb223-18" title="18">cement_fit_ets <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">cement_fit_ets &lt;-<span class="st"> </span>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">model</span>(<span class="kw">ETS</span>(Cement))</a>
+<a class="sourceLine" id="cb222-2" title="2"><span class="kw">report</span>(cement_fit_ets)</a>
+<a class="sourceLine" id="cb222-3" title="3"><span class="co">#&gt; Series: Cement </span></a>
+<a class="sourceLine" id="cb222-4" title="4"><span class="co">#&gt; Model: ETS(M,N,M) </span></a>
+<a class="sourceLine" id="cb222-5" title="5"><span class="co">#&gt;   Smoothing parameters:</span></a>
+<a class="sourceLine" id="cb222-6" title="6"><span class="co">#&gt;     alpha = 0.753 </span></a>
+<a class="sourceLine" id="cb222-7" title="7"><span class="co">#&gt;     gamma = 0.0001 </span></a>
+<a class="sourceLine" id="cb222-8" title="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb222-9" title="9"><span class="co">#&gt;   Initial states:</span></a>
+<a class="sourceLine" id="cb222-10" title="10"><span class="co">#&gt;     l   s1   s2   s3    s4</span></a>
+<a class="sourceLine" id="cb222-11" title="11"><span class="co">#&gt;  1695 1.03 1.05 1.01 0.912</span></a>
+<a class="sourceLine" id="cb222-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb222-13" title="13"><span class="co">#&gt;   sigma^2:  0.0034</span></a>
+<a class="sourceLine" id="cb222-14" title="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb222-15" title="15"><span class="co">#&gt;  AIC AICc  BIC </span></a>
+<a class="sourceLine" id="cb222-16" title="16"><span class="co">#&gt; 1104 1106 1121</span></a>
+<a class="sourceLine" id="cb222-17" title="17"></a>
+<a class="sourceLine" id="cb222-18" title="18">cement_fit_ets <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_tsresiduals</span>()</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-47-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1"></a>
-<a class="sourceLine" id="cb224-2" title="2"><span class="kw">augment</span>(cement_fit_ets) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb224-3" title="3"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">8</span>, <span class="dt">dof =</span> <span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb224-4" title="4"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb224-5" title="5"><span class="co">#&gt;   .model      lb_stat lb_pvalue</span></a>
-<a class="sourceLine" id="cb224-6" title="6"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb224-7" title="7"><span class="co">#&gt; 1 ETS(Cement)    5.49    0.0642</span></a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"></a>
+<a class="sourceLine" id="cb223-2" title="2"><span class="kw">augment</span>(cement_fit_ets) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb223-3" title="3"><span class="st">  </span><span class="kw">features</span>(.resid, ljung_box, <span class="dt">lag =</span> <span class="dv">8</span>, <span class="dt">dof =</span> <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb223-4" title="4"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb223-5" title="5"><span class="co">#&gt;   .model      lb_stat lb_pvalue</span></a>
+<a class="sourceLine" id="cb223-6" title="6"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb223-7" title="7"><span class="co">#&gt; 1 ETS(Cement)    5.49    0.0642</span></a></code></pre></div>
 <p>The output below evaluates the forecasting performance of the two competing models over the test set. In this case the ARIMA model seems to be the slightly more accurate model based on the test set RMSE, MAPE and MASE.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1"><span class="kw">bind_rows</span>(</a>
-<a class="sourceLine" id="cb225-2" title="2">  cement_fit_arima <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(),</a>
-<a class="sourceLine" id="cb225-3" title="3">  cement_fit_ets <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(),</a>
-<a class="sourceLine" id="cb225-4" title="4">  cement_fit_arima <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;2 years 6 months&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb225-5" title="5"><span class="st">    </span><span class="kw">accuracy</span>(cement),</a>
-<a class="sourceLine" id="cb225-6" title="6">  cement_fit_ets <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;2 years 6 months&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb225-7" title="7"><span class="st">    </span><span class="kw">accuracy</span>(cement)</a>
-<a class="sourceLine" id="cb225-8" title="8">)</a>
-<a class="sourceLine" id="cb225-9" title="9"><span class="co">#&gt; # A tibble: 4 x 9</span></a>
-<a class="sourceLine" id="cb225-10" title="10"><span class="co">#&gt;   .model        .type         ME  RMSE   MAE    MPE  MAPE  MASE    ACF1</span></a>
-<a class="sourceLine" id="cb225-11" title="11"><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb225-12" title="12"><span class="co">#&gt; 1 ARIMA(Cement) Training   -6.21  100.  79.9 -0.670  4.37 0.546 -0.0113</span></a>
-<a class="sourceLine" id="cb225-13" title="13"><span class="co">#&gt; 2 ETS(Cement)   Training   12.8   103.  80.0  0.427  4.41 0.547 -0.0528</span></a>
-<a class="sourceLine" id="cb225-14" title="14"><span class="co">#&gt; 3 ARIMA(Cement) Test     -161.    216. 186.  -7.71   8.68 1.27   0.387 </span></a>
-<a class="sourceLine" id="cb225-15" title="15"><span class="co">#&gt; 4 ETS(Cement)   Test     -171.    222. 191.  -8.07   8.85 1.30   0.579</span></a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1"><span class="kw">bind_rows</span>(</a>
+<a class="sourceLine" id="cb224-2" title="2">  cement_fit_arima <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(),</a>
+<a class="sourceLine" id="cb224-3" title="3">  cement_fit_ets <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">accuracy</span>(),</a>
+<a class="sourceLine" id="cb224-4" title="4">  cement_fit_arima <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;2 years 6 months&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb224-5" title="5"><span class="st">    </span><span class="kw">accuracy</span>(cement),</a>
+<a class="sourceLine" id="cb224-6" title="6">  cement_fit_ets <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;2 years 6 months&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb224-7" title="7"><span class="st">    </span><span class="kw">accuracy</span>(cement)</a>
+<a class="sourceLine" id="cb224-8" title="8">)</a>
+<a class="sourceLine" id="cb224-9" title="9"><span class="co">#&gt; # A tibble: 4 x 9</span></a>
+<a class="sourceLine" id="cb224-10" title="10"><span class="co">#&gt;   .model        .type         ME  RMSE   MAE    MPE  MAPE  MASE    ACF1</span></a>
+<a class="sourceLine" id="cb224-11" title="11"><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb224-12" title="12"><span class="co">#&gt; 1 ARIMA(Cement) Training   -6.21  100.  79.9 -0.670  4.37 0.546 -0.0113</span></a>
+<a class="sourceLine" id="cb224-13" title="13"><span class="co">#&gt; 2 ETS(Cement)   Training   12.8   103.  80.0  0.427  4.41 0.547 -0.0528</span></a>
+<a class="sourceLine" id="cb224-14" title="14"><span class="co">#&gt; 3 ARIMA(Cement) Test     -161.    216. 186.  -7.71   8.68 1.27   0.387 </span></a>
+<a class="sourceLine" id="cb224-15" title="15"><span class="co">#&gt; 4 ETS(Cement)   Test     -171.    222. 191.  -8.07   8.85 1.30   0.579</span></a></code></pre></div>
 <p>Notice that the ETS model fits the training data slightly better than the ARIMA model, but that the ARIMA model provides more accurate forecasts on the test set. A good fit to training data is never an indication that the model will forecast well. Below we generate and plot forecasts from an ETS model for the next 3 years.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1"><span class="co"># Generate forecasts from an ETS model</span></a>
-<a class="sourceLine" id="cb226-2" title="2">cement <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-3" title="3"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ETS</span>(Cement)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-4" title="4"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;3 years&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb226-5" title="5"><span class="st">  </span><span class="kw">autoplot</span>(cement)</a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1"><span class="co"># Generate forecasts from an ETS model</span></a>
+<a class="sourceLine" id="cb225-2" title="2">cement <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb225-3" title="3"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ETS</span>(Cement)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb225-4" title="4"><span class="st">  </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="st">&quot;3 years&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb225-5" title="5"><span class="st">  </span><span class="kw">autoplot</span>(cement)</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-49-1.png" width="90%" style="display: block; margin: auto;" /></p>
 
 </div>

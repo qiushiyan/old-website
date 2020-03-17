@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -421,7 +440,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">7.4.1</span> Trend</h3>
 <p>It is common for time series data to be trending. A linear trend can be modelled by simply using <span class="math inline">\(x_{1t} = t\)</span> as a predictor</p>
 <p><span class="math display">\[
-y_t = \beta_0 + \beta_1 t + \epsilon
+y_t = \beta_0 + \beta_1 t + \varepsilon
 \]</span></p>
 <p>where <span class="math inline">\(t = 1, 2, \dots, T\)</span></p>
 <p>A trend variable can be specified in the <code>TSLM()</code> function using the <code>trend()</code> special. In Section <a href="nonlinear-regression.html#nonlinear-regression">7.8</a> we discuss how we can also model a nonlinear trends.</p>
@@ -434,59 +453,59 @@ The <code>TSLM()</code> function will automatically handle this situation if you
 <div id="example-australian-quarterly-beer-production" class="section level3">
 <h3><span class="header-section-number">7.4.3</span> Example: Australian quarterly beer production</h3>
 <p>Recall the Australian quarterly beer production data</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">recent_production &lt;-<span class="st"> </span>aus_production <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb130-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">year</span>(Quarter) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1992</span>)  </a>
-<a class="sourceLine" id="cb130-3" title="3"></a>
-<a class="sourceLine" id="cb130-4" title="4"></a>
-<a class="sourceLine" id="cb130-5" title="5">recent_production <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_tsdisplay</span>(Beer)</a></code></pre></div>
-<p><img src="ch7_files/figure-html/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">recent_production &lt;-<span class="st"> </span>aus_production <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb131-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">year</span>(Quarter) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1992</span>)  </a>
+<a class="sourceLine" id="cb131-3" title="3"></a>
+<a class="sourceLine" id="cb131-4" title="4"></a>
+<a class="sourceLine" id="cb131-5" title="5">recent_production <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gg_tsdisplay</span>(Beer)</a></code></pre></div>
+<p><img src="ch7_files/figure-html/unnamed-chunk-24-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>We want to forecast the value of future beer production. We can model this data using a regression model with a linear trend and quarterly dummy variables,</p>
 <p><span class="math display">\[
 y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 d_{2t} + \beta_3 d_{3t}+ \beta_4 d_{4t}
 \]</span>
 where <span class="math inline">\(d_{2t}\)</span>, <span class="math inline">\(d_{3t}\)</span> and <span class="math inline">\(d_{4t}\)</span> are dummy variables representing 3 of all 4 seasons except the first.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">beer_fit &lt;-<span class="st"> </span>recent_production <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb131-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">TSLM</span>(Beer <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>() <span class="op">+</span><span class="st"> </span><span class="kw">season</span>()))</a>
-<a class="sourceLine" id="cb131-3" title="3"></a>
-<a class="sourceLine" id="cb131-4" title="4">beer_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
-<a class="sourceLine" id="cb131-5" title="5"><span class="co">#&gt; Series: Beer </span></a>
-<a class="sourceLine" id="cb131-6" title="6"><span class="co">#&gt; Model: TSLM </span></a>
-<a class="sourceLine" id="cb131-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb131-8" title="8"><span class="co">#&gt; Residuals:</span></a>
-<a class="sourceLine" id="cb131-9" title="9"><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></a>
-<a class="sourceLine" id="cb131-10" title="10"><span class="co">#&gt;  -42.9   -7.6   -0.5    8.0   21.8 </span></a>
-<a class="sourceLine" id="cb131-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb131-12" title="12"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb131-13" title="13"><span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb131-14" title="14"><span class="co">#&gt; (Intercept)   441.8004     3.7335  118.33  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb131-15" title="15"><span class="co">#&gt; trend()        -0.3403     0.0666   -5.11  2.7e-06 ***</span></a>
-<a class="sourceLine" id="cb131-16" title="16"><span class="co">#&gt; season()year2 -34.6597     3.9683   -8.73  9.1e-13 ***</span></a>
-<a class="sourceLine" id="cb131-17" title="17"><span class="co">#&gt; season()year3 -17.8216     4.0225   -4.43  3.4e-05 ***</span></a>
-<a class="sourceLine" id="cb131-18" title="18"><span class="co">#&gt; season()year4  72.7964     4.0230   18.09  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb131-19" title="19"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb131-20" title="20"><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb131-21" title="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb131-22" title="22"><span class="co">#&gt; Residual standard error: 12.2 on 69 degrees of freedom</span></a>
-<a class="sourceLine" id="cb131-23" title="23"><span class="co">#&gt; Multiple R-squared: 0.924,   Adjusted R-squared: 0.92</span></a>
-<a class="sourceLine" id="cb131-24" title="24"><span class="co">#&gt; F-statistic:  211 on 4 and 69 DF, p-value: &lt;2e-16</span></a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">beer_fit &lt;-<span class="st"> </span>recent_production <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb132-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">TSLM</span>(Beer <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>() <span class="op">+</span><span class="st"> </span><span class="kw">season</span>()))</a>
+<a class="sourceLine" id="cb132-3" title="3"></a>
+<a class="sourceLine" id="cb132-4" title="4">beer_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
+<a class="sourceLine" id="cb132-5" title="5"><span class="co">#&gt; Series: Beer </span></a>
+<a class="sourceLine" id="cb132-6" title="6"><span class="co">#&gt; Model: TSLM </span></a>
+<a class="sourceLine" id="cb132-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb132-8" title="8"><span class="co">#&gt; Residuals:</span></a>
+<a class="sourceLine" id="cb132-9" title="9"><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></a>
+<a class="sourceLine" id="cb132-10" title="10"><span class="co">#&gt;  -42.9   -7.6   -0.5    8.0   21.8 </span></a>
+<a class="sourceLine" id="cb132-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb132-12" title="12"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb132-13" title="13"><span class="co">#&gt;               Estimate Std. Error t value             Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb132-14" title="14"><span class="co">#&gt; (Intercept)   441.8004     3.7335  118.33 &lt; 0.0000000000000002 ***</span></a>
+<a class="sourceLine" id="cb132-15" title="15"><span class="co">#&gt; trend()        -0.3403     0.0666   -5.11     0.00000272965382 ***</span></a>
+<a class="sourceLine" id="cb132-16" title="16"><span class="co">#&gt; season()year2 -34.6597     3.9683   -8.73     0.00000000000091 ***</span></a>
+<a class="sourceLine" id="cb132-17" title="17"><span class="co">#&gt; season()year3 -17.8216     4.0225   -4.43     0.00003449674545 ***</span></a>
+<a class="sourceLine" id="cb132-18" title="18"><span class="co">#&gt; season()year4  72.7964     4.0230   18.09 &lt; 0.0000000000000002 ***</span></a>
+<a class="sourceLine" id="cb132-19" title="19"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb132-20" title="20"><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb132-21" title="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb132-22" title="22"><span class="co">#&gt; Residual standard error: 12.2 on 69 degrees of freedom</span></a>
+<a class="sourceLine" id="cb132-23" title="23"><span class="co">#&gt; Multiple R-squared: 0.924,   Adjusted R-squared: 0.92</span></a>
+<a class="sourceLine" id="cb132-24" title="24"><span class="co">#&gt; F-statistic:  211 on 4 and 69 DF, p-value: &lt;0.0000000000000002</span></a></code></pre></div>
 <p>Note that <code>trend()</code> and <code>season()</code> are not standard functions; they are “special” functions that work within the <code>TSLM()</code> model formulae.</p>
 <p>There is an average downward trend of -0.34 megalitres per quarter. On average, the second quarter has production of 34.7 megalitres lower than the first quarter, the third quarter has production of 17.8 megalitres lower than the first quarter, and the fourth quarter has production of 72.8 megalitres higher than the first quarter.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1"><span class="kw">augment</span>(beer_fit) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb132-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Quarter)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb132-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Beer, <span class="dt">colour =</span> <span class="st">&quot;Data&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb132-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> .fitted, <span class="dt">colour =</span> <span class="st">&quot;Fitted&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb132-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Megalitres&quot;</span>,</a>
-<a class="sourceLine" id="cb132-6" title="6">       <span class="dt">title =</span> <span class="st">&quot;Quarterly Beer Production&quot;</span>)</a></code></pre></div>
-<p><img src="ch7_files/figure-html/unnamed-chunk-25-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="kw">augment</span>(beer_fit) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb133-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Beer, <span class="dt">y =</span> .fitted,</a>
-<a class="sourceLine" id="cb133-3" title="3">             <span class="dt">colour =</span> <span class="kw">factor</span>(<span class="kw">quarter</span>(Quarter)))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb133-4" title="4"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb133-5" title="5"><span class="st">    </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>, <span class="dt">name=</span><span class="st">&quot;Quarter&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb133-6" title="6"><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb133-7" title="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Fitted&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Actual values&quot;</span>,</a>
-<a class="sourceLine" id="cb133-8" title="8">         <span class="dt">title =</span> <span class="st">&quot;Quarterly beer production&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb133-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Quarter)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Beer, <span class="dt">colour =</span> <span class="st">&quot;Data&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> .fitted, <span class="dt">colour =</span> <span class="st">&quot;Fitted&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Megalitres&quot;</span>,</a>
+<a class="sourceLine" id="cb133-6" title="6">       <span class="dt">title =</span> <span class="st">&quot;Quarterly Beer Production&quot;</span>)</a></code></pre></div>
 <p><img src="ch7_files/figure-html/unnamed-chunk-26-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="kw">augment</span>(beer_fit) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb134-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Beer, <span class="dt">y =</span> .fitted,</a>
+<a class="sourceLine" id="cb134-3" title="3">             <span class="dt">colour =</span> <span class="kw">factor</span>(<span class="kw">quarter</span>(Quarter)))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-4" title="4"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-5" title="5"><span class="st">    </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>, <span class="dt">name=</span><span class="st">&quot;Quarter&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-6" title="6"><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb134-7" title="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Fitted&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Actual values&quot;</span>,</a>
+<a class="sourceLine" id="cb134-8" title="8">         <span class="dt">title =</span> <span class="st">&quot;Quarterly beer production&quot;</span>)</a></code></pre></div>
+<p><img src="ch7_files/figure-html/unnamed-chunk-27-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="intervention-variables" class="section level3">
 <h3><span class="header-section-number">7.4.4</span> Intervention variables</h3>
@@ -543,30 +562,30 @@ x_{6t} &amp;= \sin{\frac{6 \pi t}{m}} \\
 <p>and so on. If we have monthly seasonality, and we use the first 11 of these predictor variables, then we will get exactly the same forecasts as using 11 dummy variables.</p>
 <p>With Fourier terms, we often need fewer predictors than with dummy variables, especially when m is large. This makes them useful for weekly data, for example, where <span class="math inline">\(m \approx 52\)</span>. For short seasonal periods (e.g., quarterly data), there is little advantage in using Fourier terms over seasonal dummy variables.</p>
 <p>These Fourier terms are produced using the <code>fourier(K)</code> function. The <code>K</code> argument specifies the maximum order of Fourier terms (i.e., how many pairs of <span class="math inline">\(\sin\)</span> and <span class="math inline">\(\cos\)</span> terms to include). For example, the Australian beer data (quarterly, should include 3 terms so <code>K = 2</code>) can be modelled like this.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1">fourier_beer &lt;-<span class="st"> </span>recent_production <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb134-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">TSLM</span>(Beer <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>() <span class="op">+</span><span class="st"> </span><span class="kw">fourier</span>(<span class="dt">K =</span> <span class="dv">2</span>)))</a>
-<a class="sourceLine" id="cb134-3" title="3"></a>
-<a class="sourceLine" id="cb134-4" title="4">fourier_beer <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
-<a class="sourceLine" id="cb134-5" title="5"><span class="co">#&gt; Series: Beer </span></a>
-<a class="sourceLine" id="cb134-6" title="6"><span class="co">#&gt; Model: TSLM </span></a>
-<a class="sourceLine" id="cb134-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb134-8" title="8"><span class="co">#&gt; Residuals:</span></a>
-<a class="sourceLine" id="cb134-9" title="9"><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></a>
-<a class="sourceLine" id="cb134-10" title="10"><span class="co">#&gt;  -42.9   -7.6   -0.5    8.0   21.8 </span></a>
-<a class="sourceLine" id="cb134-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb134-12" title="12"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb134-13" title="13"><span class="co">#&gt;                    Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb134-14" title="14"><span class="co">#&gt; (Intercept)        446.8792     2.8732  155.53  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb134-15" title="15"><span class="co">#&gt; trend()             -0.3403     0.0666   -5.11  2.7e-06 ***</span></a>
-<a class="sourceLine" id="cb134-16" title="16"><span class="co">#&gt; fourier(K = 2)C1_4   8.9108     2.0112    4.43  3.4e-05 ***</span></a>
-<a class="sourceLine" id="cb134-17" title="17"><span class="co">#&gt; fourier(K = 2)S1_4 -53.7281     2.0112  -26.71  &lt; 2e-16 ***</span></a>
-<a class="sourceLine" id="cb134-18" title="18"><span class="co">#&gt; fourier(K = 2)C2_4 -13.9896     1.4226   -9.83  9.3e-15 ***</span></a>
-<a class="sourceLine" id="cb134-19" title="19"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb134-20" title="20"><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
-<a class="sourceLine" id="cb134-21" title="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb134-22" title="22"><span class="co">#&gt; Residual standard error: 12.2 on 69 degrees of freedom</span></a>
-<a class="sourceLine" id="cb134-23" title="23"><span class="co">#&gt; Multiple R-squared: 0.924,   Adjusted R-squared: 0.92</span></a>
-<a class="sourceLine" id="cb134-24" title="24"><span class="co">#&gt; F-statistic:  211 on 4 and 69 DF, p-value: &lt;2e-16</span></a></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">fourier_beer &lt;-<span class="st"> </span>recent_production <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb135-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">TSLM</span>(Beer <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>() <span class="op">+</span><span class="st"> </span><span class="kw">fourier</span>(<span class="dt">K =</span> <span class="dv">2</span>)))</a>
+<a class="sourceLine" id="cb135-3" title="3"></a>
+<a class="sourceLine" id="cb135-4" title="4">fourier_beer <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
+<a class="sourceLine" id="cb135-5" title="5"><span class="co">#&gt; Series: Beer </span></a>
+<a class="sourceLine" id="cb135-6" title="6"><span class="co">#&gt; Model: TSLM </span></a>
+<a class="sourceLine" id="cb135-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb135-8" title="8"><span class="co">#&gt; Residuals:</span></a>
+<a class="sourceLine" id="cb135-9" title="9"><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></a>
+<a class="sourceLine" id="cb135-10" title="10"><span class="co">#&gt;  -42.9   -7.6   -0.5    8.0   21.8 </span></a>
+<a class="sourceLine" id="cb135-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb135-12" title="12"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb135-13" title="13"><span class="co">#&gt;                    Estimate Std. Error t value             Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb135-14" title="14"><span class="co">#&gt; (Intercept)        446.8792     2.8732  155.53 &lt; 0.0000000000000002 ***</span></a>
+<a class="sourceLine" id="cb135-15" title="15"><span class="co">#&gt; trend()             -0.3403     0.0666   -5.11   0.0000027296538238 ***</span></a>
+<a class="sourceLine" id="cb135-16" title="16"><span class="co">#&gt; fourier(K = 2)C1_4   8.9108     2.0112    4.43   0.0000344967454483 ***</span></a>
+<a class="sourceLine" id="cb135-17" title="17"><span class="co">#&gt; fourier(K = 2)S1_4 -53.7281     2.0112  -26.71 &lt; 0.0000000000000002 ***</span></a>
+<a class="sourceLine" id="cb135-18" title="18"><span class="co">#&gt; fourier(K = 2)C2_4 -13.9896     1.4226   -9.83   0.0000000000000093 ***</span></a>
+<a class="sourceLine" id="cb135-19" title="19"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb135-20" title="20"><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb135-21" title="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb135-22" title="22"><span class="co">#&gt; Residual standard error: 12.2 on 69 degrees of freedom</span></a>
+<a class="sourceLine" id="cb135-23" title="23"><span class="co">#&gt; Multiple R-squared: 0.924,   Adjusted R-squared: 0.92</span></a>
+<a class="sourceLine" id="cb135-24" title="24"><span class="co">#&gt; F-statistic:  211 on 4 and 69 DF, p-value: &lt;0.0000000000000002</span></a></code></pre></div>
 <p>The maximum allowed is <span class="math inline">\(K = m / 2\)</span> where <span class="math inline">\(m\)</span> is the seasonal period. Because we have used the maximum here, the results are identical to those obtained when using seasonal dummy variables.</p>
 <p>If only the first two Fourier terms are used (<span class="math inline">\(x_{1t}\)</span> and <span class="math inline">\(x_{2t}\)</span>), the seasonal pattern will follow a simple sine wave. A regression model containing Fourier terms is often called a <strong>harmonic regression</strong> because the successive Fourier terms represent harmonics of the first two Fourier terms.</p>
 </div>

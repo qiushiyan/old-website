@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -429,50 +448,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>the PACF is exponentially decaying or sinusoidal;</p></li>
 <li><p>there is a significant spike at lag q in the ACF, but none beyond lag q.</p></li>
 </ul>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">us_change &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">pin</span>(<span class="st">&quot;https://otexts.com/fpp3/extrafiles/us_change.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb187-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">time =</span> <span class="kw">yearquarter</span>(Time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb187-3" title="3"><span class="st">  </span><span class="kw">as_tsibble</span>(<span class="dt">index =</span> time)  </a>
-<a class="sourceLine" id="cb187-4" title="4"></a>
-<a class="sourceLine" id="cb187-5" title="5">us_change <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ACF</span>(Consumption) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a>
-<a class="sourceLine" id="cb187-6" title="6">us_change <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">PACF</span>(Consumption) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1">us_change &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">pin</span>(<span class="st">&quot;https://otexts.com/fpp3/extrafiles/us_change.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb186-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">time =</span> <span class="kw">yearquarter</span>(Time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb186-3" title="3"><span class="st">  </span><span class="kw">as_tsibble</span>(<span class="dt">index =</span> time)  </a>
+<a class="sourceLine" id="cb186-4" title="4"></a>
+<a class="sourceLine" id="cb186-5" title="5">us_change <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ACF</span>(Consumption) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a>
+<a class="sourceLine" id="cb186-6" title="6">us_change <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">PACF</span>(Consumption) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">autoplot</span>()</a></code></pre></div>
 <p><img src="ch9_files/figure-html/unnamed-chunk-12-1.png" width="50%" /><img src="ch9_files/figure-html/unnamed-chunk-12-2.png" width="50%" /></p>
 <p>The pattern in the first three spikes is what we would expect from an ARIMA(3, 0, 0), as the PACF tends to decrease. So in this case, the ACF and PACF lead us to think an ARIMA(3, 0, 0) model might be appropriate.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1">us_change_fit2 &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb188-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(Consumption <span class="op">~</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">pdq</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>)))</a>
-<a class="sourceLine" id="cb188-3" title="3"></a>
-<a class="sourceLine" id="cb188-4" title="4">us_change_fit2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
-<a class="sourceLine" id="cb188-5" title="5"><span class="co">#&gt; Series: Consumption </span></a>
-<a class="sourceLine" id="cb188-6" title="6"><span class="co">#&gt; Model: ARIMA(3,0,0) w/ mean </span></a>
-<a class="sourceLine" id="cb188-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb188-8" title="8"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb188-9" title="9"><span class="co">#&gt;          ar1     ar2     ar3  constant</span></a>
-<a class="sourceLine" id="cb188-10" title="10"><span class="co">#&gt;       0.2274  0.1604  0.2027    0.3050</span></a>
-<a class="sourceLine" id="cb188-11" title="11"><span class="co">#&gt; s.e.  0.0713  0.0723  0.0712    0.0421</span></a>
-<a class="sourceLine" id="cb188-12" title="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb188-13" title="13"><span class="co">#&gt; sigma^2 estimated as 0.3494:  log likelihood=-165</span></a>
-<a class="sourceLine" id="cb188-14" title="14"><span class="co">#&gt; AIC=340   AICc=341   BIC=356</span></a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">us_change_fit2 &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb187-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(Consumption <span class="op">~</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">pdq</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>)))</a>
+<a class="sourceLine" id="cb187-3" title="3"></a>
+<a class="sourceLine" id="cb187-4" title="4">us_change_fit2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report</span>()</a>
+<a class="sourceLine" id="cb187-5" title="5"><span class="co">#&gt; Series: Consumption </span></a>
+<a class="sourceLine" id="cb187-6" title="6"><span class="co">#&gt; Model: ARIMA(3,0,0) w/ mean </span></a>
+<a class="sourceLine" id="cb187-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb187-8" title="8"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb187-9" title="9"><span class="co">#&gt;          ar1     ar2     ar3  constant</span></a>
+<a class="sourceLine" id="cb187-10" title="10"><span class="co">#&gt;       0.2274  0.1604  0.2027    0.3050</span></a>
+<a class="sourceLine" id="cb187-11" title="11"><span class="co">#&gt; s.e.  0.0713  0.0723  0.0712    0.0421</span></a>
+<a class="sourceLine" id="cb187-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb187-13" title="13"><span class="co">#&gt; sigma^2 estimated as 0.3494:  log likelihood=-165</span></a>
+<a class="sourceLine" id="cb187-14" title="14"><span class="co">#&gt; AIC=340   AICc=341   BIC=356</span></a></code></pre></div>
 <p>This model is actually slightly better than the model identified by <code>ARIMA()</code> (with an AICc value of 340.67 compared to 342.08). The <code>ARIMA()</code> function did not find this model because it does not consider all possible models in its search. Use <code>stepwise = FALSE</code> and <code>approximation = FALSE</code> to expand search region</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">us_change_fit3 &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb189-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(Consumption <span class="op">~</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb189-3" title="3">              <span class="dt">stepwise =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb189-4" title="4">              <span class="dt">approximation =</span> <span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb189-5" title="5"></a>
-<a class="sourceLine" id="cb189-6" title="6"><span class="kw">report</span>(us_change_fit3)</a>
-<a class="sourceLine" id="cb189-7" title="7"><span class="co">#&gt; Series: Consumption </span></a>
-<a class="sourceLine" id="cb189-8" title="8"><span class="co">#&gt; Model: ARIMA(3,0,0) w/ mean </span></a>
-<a class="sourceLine" id="cb189-9" title="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb189-10" title="10"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb189-11" title="11"><span class="co">#&gt;          ar1     ar2     ar3  constant</span></a>
-<a class="sourceLine" id="cb189-12" title="12"><span class="co">#&gt;       0.2274  0.1604  0.2027    0.3050</span></a>
-<a class="sourceLine" id="cb189-13" title="13"><span class="co">#&gt; s.e.  0.0713  0.0723  0.0712    0.0421</span></a>
-<a class="sourceLine" id="cb189-14" title="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb189-15" title="15"><span class="co">#&gt; sigma^2 estimated as 0.3494:  log likelihood=-165</span></a>
-<a class="sourceLine" id="cb189-16" title="16"><span class="co">#&gt; AIC=340   AICc=341   BIC=356</span></a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1">us_change_fit3 &lt;-<span class="st"> </span>us_change <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb188-2" title="2"><span class="st">  </span><span class="kw">model</span>(<span class="kw">ARIMA</span>(Consumption <span class="op">~</span><span class="st"> </span><span class="kw">PDQ</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb188-3" title="3">              <span class="dt">stepwise =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb188-4" title="4">              <span class="dt">approximation =</span> <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb188-5" title="5"></a>
+<a class="sourceLine" id="cb188-6" title="6"><span class="kw">report</span>(us_change_fit3)</a>
+<a class="sourceLine" id="cb188-7" title="7"><span class="co">#&gt; Series: Consumption </span></a>
+<a class="sourceLine" id="cb188-8" title="8"><span class="co">#&gt; Model: ARIMA(3,0,0) w/ mean </span></a>
+<a class="sourceLine" id="cb188-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb188-10" title="10"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb188-11" title="11"><span class="co">#&gt;          ar1     ar2     ar3  constant</span></a>
+<a class="sourceLine" id="cb188-12" title="12"><span class="co">#&gt;       0.2274  0.1604  0.2027    0.3050</span></a>
+<a class="sourceLine" id="cb188-13" title="13"><span class="co">#&gt; s.e.  0.0713  0.0723  0.0712    0.0421</span></a>
+<a class="sourceLine" id="cb188-14" title="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb188-15" title="15"><span class="co">#&gt; sigma^2 estimated as 0.3494:  log likelihood=-165</span></a>
+<a class="sourceLine" id="cb188-16" title="16"><span class="co">#&gt; AIC=340   AICc=341   BIC=356</span></a></code></pre></div>
 <div id="mle" class="section level3">
 <h3><span class="header-section-number">10.3.1</span> MLE</h3>
 <p>Once the model order has been identified (i.e., the values of p, d and q), we need to estimate the parameters <span class="math inline">\(c, \phi_1, \dots, \phi_p, \theta_1, \dots, \theta_q\)</span>. When R estimates the ARIMA model, it uses MLE. For ARIMA models, MLE is similar to the least squares estimates that would be obtained by minimising</p>
 <p><span class="math display">\[
-\sum_{t=1}^{T}{\epsilon_t^2}
+\sum_{t=1}^{T}{\varepsilon_t^2}
 \]</span></p>
 </div>
 <div id="information-criteria" class="section level3">

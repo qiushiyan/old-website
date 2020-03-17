@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -420,14 +439,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The simplest way of modelling a nonlinear relationship is to transform the forecast variable y and/or the predictor variable x before estimating a regression model. While this provides a non-linear functional form, the model is still linear in the parameters. The most commonly used transformation is the (natural) logarithm (see Section <a href="transformation-and-adjustments.html#transformation-and-adjustments">3.1</a>).</p>
 <p>A <strong>log-log</strong> functional form is specified as
 <span class="math display">\[
-\log{y} = \beta_0 + \beta_1 \log{x} + \epsilon
+\log{y} = \beta_0 + \beta_1 \log{x} + \varepsilon
 \]</span></p>
 <p>Other useful forms can also be specified. The <strong>log-linear</strong> form is specified by only transforming the forecast variable and the <strong>linear-log</strong> form is obtained by transforming the predictor.</p>
 <p>Recall that in order to perform a logarithmic transformation to a variable, all of its observed values must be greater than zero. In the case that variable <span class="math inline">\(x\)</span> contains zeros, we use the transformation <span class="math inline">\(\log{(x+1)}\)</span>; i.e., we add one to the value of the variable and then take logarithms. This has a similar effect to taking logarithms but avoids the problem of zeros. It also has the neat side-effect of zeros on the original scale remaining zeros on the transformed scale.</p>
 <p>Also, box-cox transformation as a family of both power transformation and log transformation is given by Equation <a href="transformation-and-adjustments.html#eq:box-cox">(3.1)</a></p>
 <p>There are cases for which simply transforming the data will not be adequate and a more general specification may be required. Then the model we use is</p>
 <p><span class="math display">\[
-y = f(x) + \epsilon
+y = f(x) + \varepsilon
 \]</span></p>
 <p>where <span class="math inline">\(f(x)\)</span> could be of any form. In the specification of nonlinear regression that follows, we allow f to be a more flexible nonlinear function of <span class="math inline">\(x\)</span>, compared to simply a logarithmic or other transformation.</p>
 <p>One of the simplest specifications is to make <span class="math inline">\(f\)</span> <strong>piecewise linear</strong>. That is, we introduce points where the slope of <span class="math inline">\(f\)</span> can change. These points are called <strong>knots</strong>. This can be achieved by letting <span class="math inline">\(x_{1t} = x\)</span> and introducing variable <span class="math inline">\(x_{2t}\)</span> such that</p>
@@ -467,57 +486,57 @@ in the model.</p>
 <div id="example-boston-marathon-winning-times" class="section level3">
 <h3><span class="header-section-number">7.8.2</span> Example: Boston marathon winning times</h3>
 <p>We will fit some trend models to the Boston marathon winning times for men since the event started in 1897.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1">boston_men &lt;-<span class="st"> </span>fpp3<span class="op">::</span>boston_marathon <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Event <span class="op">==</span><span class="st"> &quot;Men&#39;s open division&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Minutes =</span> <span class="kw">as.numeric</span>(Time) <span class="op">/</span><span class="st"> </span><span class="dv">60</span>)</a>
-<a class="sourceLine" id="cb140-4" title="4"></a>
-<a class="sourceLine" id="cb140-5" title="5">boston_lm &lt;-<span class="st"> </span>boston_men <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-6" title="6"><span class="st">  </span><span class="kw">model</span>(<span class="kw">TSLM</span>(Minutes <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>())) </a>
-<a class="sourceLine" id="cb140-7" title="7"></a>
-<a class="sourceLine" id="cb140-8" title="8">boston_men <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, Minutes)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-11" title="11"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-12" title="12"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">c</span>(<span class="dv">1940</span>, <span class="dv">1980</span>), <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-13" title="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Fitting a linear line&quot;</span>)</a>
-<a class="sourceLine" id="cb140-14" title="14">  </a>
-<a class="sourceLine" id="cb140-15" title="15">boston_lm <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-16" title="16"><span class="st">  </span><span class="kw">augment</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-17" title="17"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, .resid)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-18" title="18"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-19" title="19"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb140-20" title="20"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residual across trend&quot;</span>)</a></code></pre></div>
-<p><img src="ch7_files/figure-html/unnamed-chunk-34-1.png" width="90%" style="display: block; margin: auto;" /><img src="ch7_files/figure-html/unnamed-chunk-34-2.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">boston_lm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glance</span>()</a>
-<a class="sourceLine" id="cb141-2" title="2"><span class="co">#&gt; # A tibble: 1 x 16</span></a>
-<a class="sourceLine" id="cb141-3" title="3"><span class="co">#&gt;   Event .model r_squared adj_r_squared sigma2 statistic  p_value    df log_lik</span></a>
-<a class="sourceLine" id="cb141-4" title="4"><span class="co">#&gt;   &lt;fct&gt; &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb141-5" title="5"><span class="co">#&gt; 1 Men&#39;~ TSLM(~     0.728         0.726   38.2      324. 4.82e-36     2   -398.</span></a>
-<a class="sourceLine" id="cb141-6" title="6"><span class="co">#&gt; # ... with 7 more variables: AIC &lt;dbl&gt;, AICc &lt;dbl&gt;, BIC &lt;dbl&gt;, CV &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb141-7" title="7"><span class="co">#&gt; #   deviance &lt;dbl&gt;, df.residual &lt;int&gt;, rank &lt;int&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">boston_men &lt;-<span class="st"> </span>fpp3<span class="op">::</span>boston_marathon <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Event <span class="op">==</span><span class="st"> &quot;Men&#39;s open division&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Minutes =</span> <span class="kw">as.numeric</span>(Time) <span class="op">/</span><span class="st"> </span><span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb141-4" title="4"></a>
+<a class="sourceLine" id="cb141-5" title="5">boston_lm &lt;-<span class="st"> </span>boston_men <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-6" title="6"><span class="st">  </span><span class="kw">model</span>(<span class="kw">TSLM</span>(Minutes <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>())) </a>
+<a class="sourceLine" id="cb141-7" title="7"></a>
+<a class="sourceLine" id="cb141-8" title="8">boston_men <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, Minutes)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-11" title="11"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-12" title="12"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">c</span>(<span class="dv">1940</span>, <span class="dv">1980</span>), <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-13" title="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Fitting a linear line&quot;</span>)</a>
+<a class="sourceLine" id="cb141-14" title="14">  </a>
+<a class="sourceLine" id="cb141-15" title="15">boston_lm <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-16" title="16"><span class="st">  </span><span class="kw">augment</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-17" title="17"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, .resid)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-18" title="18"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-19" title="19"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb141-20" title="20"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residual across trend&quot;</span>)</a></code></pre></div>
+<p><img src="ch7_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" /><img src="ch7_files/figure-html/unnamed-chunk-35-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">boston_lm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glance</span>()</a>
+<a class="sourceLine" id="cb142-2" title="2"><span class="co">#&gt; # A tibble: 1 x 16</span></a>
+<a class="sourceLine" id="cb142-3" title="3"><span class="co">#&gt;   Event .model r_squared adj_r_squared sigma2 statistic  p_value    df log_lik</span></a>
+<a class="sourceLine" id="cb142-4" title="4"><span class="co">#&gt;   &lt;fct&gt; &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb142-5" title="5"><span class="co">#&gt; 1 Men&#39;~ TSLM(~     0.728         0.726   38.2      324. 4.82e-36     2   -398.</span></a>
+<a class="sourceLine" id="cb142-6" title="6"><span class="co">#&gt; # ... with 7 more variables: AIC &lt;dbl&gt;, AICc &lt;dbl&gt;, BIC &lt;dbl&gt;, CV &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb142-7" title="7"><span class="co">#&gt; #   deviance &lt;dbl&gt;, df.residual &lt;int&gt;, rank &lt;int&gt;</span></a></code></pre></div>
 <p>There seems to be a (quadratic) pattern in our residual plot, and our simple linear model isn’t fitting very well.</p>
 <p>Alternatively, fitting an exponential trend (equivalent to a log-linear regression) to the data can be achieved by transforming the <span class="math inline">\(y\)</span> variable so that the model to be fitted is,</p>
 <p><span class="math display">\[
-\log{y}_t = \beta_0 + \beta_1t + \epsilon_t
+\log{y}_t = \beta_0 + \beta_1t + \varepsilon_t
 \]</span></p>
 <p>The plot of winning times reveals three different periods. There is a lot of volatility in the winning times up to about 1940, with the winning times decreasing overall but with significant increases during the 1920s. After 1940 there is a near-linear decrease in times, followed by a flattening out after the 1980s, with the suggestion of an upturn towards the end of the sample. To account for these changes, <strong>we specify the years 1940 and 1980 as knots</strong>. We should warn here that subjective identification of knots can lead to over-fitting, which can be detrimental to the forecast performance of a model, and should be performed with caution.</p>
 <p>A piecewise regression (bends at certain time <span class="math inline">\(t\)</span>) is specified using the <code>knots</code> argument in <code>trend()</code>:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">boston_piece_fit &lt;-<span class="st"> </span>boston_men <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb142-2" title="2"><span class="st">  </span><span class="kw">model</span>(</a>
-<a class="sourceLine" id="cb142-3" title="3">    <span class="dt">linear =</span> <span class="kw">TSLM</span>(Minutes <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>()),</a>
-<a class="sourceLine" id="cb142-4" title="4">    <span class="dt">exponential =</span> <span class="kw">TSLM</span>(<span class="kw">log</span>(Minutes) <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>()),</a>
-<a class="sourceLine" id="cb142-5" title="5">    <span class="dt">piecewise =</span> <span class="kw">TSLM</span>(Minutes <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>(<span class="dt">knots =</span> <span class="kw">c</span>(<span class="dv">1940</span>, <span class="dv">1980</span>)))</a>
-<a class="sourceLine" id="cb142-6" title="6">  )</a>
-<a class="sourceLine" id="cb142-7" title="7"></a>
-<a class="sourceLine" id="cb142-8" title="8">boston_piece_fc &lt;-<span class="st"> </span>boston_piece_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">10</span>) </a>
-<a class="sourceLine" id="cb142-9" title="9"></a>
-<a class="sourceLine" id="cb142-10" title="10">boston_piece_fc <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb142-11" title="11"><span class="st">  </span><span class="kw">autoplot</span>(boston_men, <span class="dt">level =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb142-12" title="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Boston Marathon&quot;</span>, </a>
-<a class="sourceLine" id="cb142-13" title="13">       <span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, </a>
-<a class="sourceLine" id="cb142-14" title="14">       <span class="dt">y =</span> <span class="st">&quot;Winning times in minutes&quot;</span>,</a>
-<a class="sourceLine" id="cb142-15" title="15">       <span class="dt">color =</span> <span class="st">&quot;Model&quot;</span>)</a></code></pre></div>
-<p><img src="ch7_files/figure-html/unnamed-chunk-36-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1">boston_piece_fit &lt;-<span class="st"> </span>boston_men <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-2" title="2"><span class="st">  </span><span class="kw">model</span>(</a>
+<a class="sourceLine" id="cb143-3" title="3">    <span class="dt">linear =</span> <span class="kw">TSLM</span>(Minutes <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>()),</a>
+<a class="sourceLine" id="cb143-4" title="4">    <span class="dt">exponential =</span> <span class="kw">TSLM</span>(<span class="kw">log</span>(Minutes) <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>()),</a>
+<a class="sourceLine" id="cb143-5" title="5">    <span class="dt">piecewise =</span> <span class="kw">TSLM</span>(Minutes <span class="op">~</span><span class="st"> </span><span class="kw">trend</span>(<span class="dt">knots =</span> <span class="kw">c</span>(<span class="dv">1940</span>, <span class="dv">1980</span>)))</a>
+<a class="sourceLine" id="cb143-6" title="6">  )</a>
+<a class="sourceLine" id="cb143-7" title="7"></a>
+<a class="sourceLine" id="cb143-8" title="8">boston_piece_fc &lt;-<span class="st"> </span>boston_piece_fit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">forecast</span>(<span class="dt">h =</span> <span class="dv">10</span>) </a>
+<a class="sourceLine" id="cb143-9" title="9"></a>
+<a class="sourceLine" id="cb143-10" title="10">boston_piece_fc <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb143-11" title="11"><span class="st">  </span><span class="kw">autoplot</span>(boston_men, <span class="dt">level =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-12" title="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Boston Marathon&quot;</span>, </a>
+<a class="sourceLine" id="cb143-13" title="13">       <span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, </a>
+<a class="sourceLine" id="cb143-14" title="14">       <span class="dt">y =</span> <span class="st">&quot;Winning times in minutes&quot;</span>,</a>
+<a class="sourceLine" id="cb143-15" title="15">       <span class="dt">color =</span> <span class="st">&quot;Model&quot;</span>)</a></code></pre></div>
+<p><img src="ch7_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
             </section>

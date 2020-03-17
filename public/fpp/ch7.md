@@ -1,6 +1,8 @@
 # Time series regression models  
 
 
+
+
 ```r
 library(tsibble)
 library(tsibbledata)
@@ -26,7 +28,7 @@ using total advertising spend $x$ as a predictor. Or we might forecast daily ele
 In the simplest case, the regression model allows for a linear relationship between the forecast variable $y$ and a single predictor variable $x$:
 
 $$
-y_t = \beta_0 + \beta_1x_t + \epsilon_t
+y_t = \beta_0 + \beta_1x_t + \varvarepsilon_t
 $$
 
 Use the US consumption data, `us_change`, to fit a simple linear model where `Consumption` is predicted against `Income`. First, plot these two time series
@@ -111,7 +113,7 @@ us_change %>%
 
 \begin{equation}
 (\#eq:multiple-linear-reg)
-y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \epsilon_t
+y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \varepsilon_t
 \end{equation}
 
 We could simply use more predictors in `us_change` to create a multiple linear regression model. This time, the last 4 columns are included in the model. Take a look at the rest 3 time series determined by `Production`, `Savings` and `Unemployment`  
@@ -196,18 +198,18 @@ When we use a linear regression model, we are implicitly making some assumptions
 
 
 
-- Residuals $\epsilon_t$ are **independent** (not autocorrelated in a time series linear model specifically) and have constant variance $\sigma^2$ and mean $0$ . Otherwise the forecasts will be inefficient, as there is more information in the data that can be exploited. This can be expressed as 
+- Residuals $\varepsilon_t$ are **independent** (not autocorrelated in a time series linear model specifically) and have constant variance $\sigma^2$ and mean $0$ . Otherwise the forecasts will be inefficient, as there is more information in the data that can be exploited. This can be expressed as 
 
 \begin{equation}  
 (\#eq:GM)
 \begin{aligned}
-\text{Cov}(\epsilon_i, \epsilon_j) &= 
+\text{Cov}(\varepsilon_i, \varepsilon_j) &= 
 \begin{cases}
 0 & i \not=j \\
 \sigma^2 & i = j
 \end{cases} 
 \;\;\;i,j = 1, 2,\dots,T \\ 
-E(\epsilon_t) &= 0  
+E(\varepsilon_t) &= 0  
 \;\;\;t = 1,2,\dots,T
 \end{aligned}
 \end{equation}
@@ -219,7 +221,7 @@ Equation \@ref(eq:GM) is also called a G-M (Gauss-Markov) condition.
 - Residuals follow a approximate **normal** distribution, meaning: 
 
 $$
-\epsilon_t \sim N(0, \sigma^2) \;\;\; t = 1,2, \dots,T
+\varepsilon_t \sim N(0, \sigma^2) \;\;\; t = 1,2, \dots,T
 $$
 
 
@@ -232,7 +234,7 @@ Another important assumption in the linear regression model is that **each predi
 The least squares principle provides a way of choosing the coefficients effectively by minimising the sum of the squared errors. That is, we choose the values of $\beta_0$,$\beta_1$,…,$\beta_k$ that minimise :  
 
 $$
-\sum_{t=1}^{T}{\epsilon_t^2} = \sum_{t=1}^{T}{(y_t -\beta_0 - \beta_1x_{t1} + \beta_2x_{t2} - \cdots- \beta_kx_{tk})^2}
+\sum_{t=1}^{T}{\varepsilon_t^2} = \sum_{t=1}^{T}{(y_t -\beta_0 - \beta_1x_{t1} + \beta_2x_{t2} - \cdots- \beta_kx_{tk})^2}
 $$
 
 
@@ -372,6 +374,8 @@ augment(us_change_mfit) %>%
 
 Observations that take extreme values compared to the majority of the data are called outliers. Observations that have a large influence on the estimated coefficients of a regression model are called influential observations. Usually, influential observations are also outliers that are extreme in the $x$ direction.  
 
+**It is useful to distinguish outliers from anomalies**. An outlier is mathematically stated as any observation point in given data-set that is more than 1.5 interquartile ranges (IQRs) below the first quartile or above the third quartile. Anomaly is items, events or observations which do not conform to an expected pattern (staistical distributions), simply anything "outside normal". It can be noise, deviations and exceptions defined in application of particular system. The [anomalize](https://github.com/business-science/anomalize) package provides tools in anomaly detection and visualization.
+
 For a formal detection of observation influence, the **leverage** of the t-th observation ${x_{1t}, x_{2t}, \dots, {x_{kt}}$ is defined as the t-th diagonal element of the hat matrix $H = X(X^TX)^{-1}X^T$, i.e. $h_{tt}$.  
 
 And the **Cook distance** of the i-th observation is defined as :  
@@ -383,15 +387,13 @@ $$
 where $k$ is the number of predictors and $r_t$ the i-th internally studentized residuals $r_t = \frac{e_t}{\hat{\sigma}\sqrt{1-h_{tt}}}$  
 
 
-So I followed instructions from another book: *An R Companion to Applied Regression, 3rd* [@fox2018r]. Unfortunately the code is basically base-R style, so I have to refit the model with `lm()` again.  
+Finding influential observations in practice is not covered in the book. So I followed instructions from another book: *An R Companion to Applied Regression, 3rd* [@fox2018r]. 
 
 
 ```r
 us_change_lm <- lm(Consumption ~ Income + Production + Savings + Unemployment, 
                     data = us_change)
 ```
-
-
 
 
 ```r
@@ -417,7 +419,7 @@ check_model(us_change_lm)
 
 ### Spurious regression  
 
-More often than not, time series data are “non-stationary”; that is, the values of the time series do not fluctuate around a constant mean or with a constant variance. We will come to the formal definition of stationarity in more detail in Section \@ref(stationarity), but here we need to address the effect that non-stationary data can have on regression models.   
+Time series data are often “non-stationary”. That is, the values of the time series do not fluctuate around a constant mean or with a constant variance. We will come to the formal definition of stationarity in more detail in Section \@ref(stationarity), but here we need to address the effect that non-stationary data can have on regression models.   
 
 For example, consider the two variables plotted in below. These appear to be related simply because they both trend upwards in the same manner. However, air passenger traffic in Australia has nothing to do with rice production in Guinea.  
 
@@ -441,7 +443,7 @@ p3 <- guinea_rice %>%
 <img src="ch7_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" />
 
 
-Regressing non-stationary time series can lead to spurious regressions. **High $R^2$ and high residual autocorrelation can be signs of spurious regression**. Notice these features in the output below. We discuss the issues surrounding non-stationary data and spurious regressions in more detail in Chapter \@ref(dynamic-regression-models).
+Regressing non-stationary time series can lead to spurious regressions. **High $R^2$ and high residual autocorrelation can be signs of spurious regression**. Notice these features in the output below. We discuss the issues surrounding non-stationary data and spurious regressions in more details in Chapter \@ref(dynamic-regression-models).
 
 Cases of spurious regression might appear to give reasonable short-term forecasts, but they will generally not continue to work into the future.   
 
@@ -449,30 +451,28 @@ Cases of spurious regression might appear to give reasonable short-term forecast
 ```r
 spurious_fit <- guinea_rice %>% 
   left_join(air_passengers) %>% 
-  model(TSLM(Passengers ~ Production)) 
+  lm(Passengers ~ Production, data = .) 
 
-spurious_fit %>% report()
-#> Series: Passengers 
-#> Model: TSLM 
-#> 
-#> Residuals:
-#>    Min     1Q Median     3Q    Max 
-#>  -5.94  -1.89  -0.33   1.86  10.42 
-#> 
-#> Coefficients:
-#>             Estimate Std. Error t value   Pr(>|t|)    
-#> (Intercept)    -7.49       1.20   -6.23 0.00000023 ***
-#> Production     40.29       1.34   30.13    < 2e-16 ***
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#> 
-#> Residual standard error: 3.24 on 40 degrees of freedom
-#> Multiple R-squared: 0.958,	Adjusted R-squared: 0.957
-#> F-statistic:  908 on 1 and 40 DF, p-value: <2e-16
-spurious_fit %>% gg_tsresiduals()
+# high r^2 and sigma
+glance(spurious_fit)
+#> # A tibble: 1 x 11
+#>   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+#>       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>  <dbl> <dbl> <dbl>
+#> 1     0.958         0.957  3.24      908. 4.08e-29     2  -108.  222.  227.
+#> # ... with 2 more variables: deviance <dbl>, df.residual <int>
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" />
+Section \@ref(tests-for-autocorrelation-and-normality) introduces the BG test, which is designed to detect autocorrelation among residuals of a regression model, small p-value suggests that residuals are highly correlated  
+
+
+```r
+spurious_fit %>% lmtest::bgtest()
+#> 
+#> 	Breusch-Godfrey test for serial correlation of order up to 1
+#> 
+#> data:  .
+#> LM test = 23, df = 1, p-value = 0.000001
+```
 
 
 ## Some useful predictors  
@@ -484,7 +484,7 @@ There are several useful predictors that occur frequently when using regression 
 It is common for time series data to be trending. A linear trend can be modelled by simply using $x_{1t} = t$ as a predictor 
 
 $$
-y_t = \beta_0 + \beta_1 t + \epsilon
+y_t = \beta_0 + \beta_1 t + \varepsilon
 $$
 
 where $t = 1, 2, \dots, T$  
@@ -510,7 +510,7 @@ recent_production <- aus_production %>%
 recent_production %>% gg_tsdisplay(Beer)
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-24-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 We want to forecast the value of future beer production. We can model this data using a regression model with a linear trend and quarterly dummy variables, 
@@ -534,18 +534,18 @@ beer_fit %>% report()
 #>  -42.9   -7.6   -0.5    8.0   21.8 
 #> 
 #> Coefficients:
-#>               Estimate Std. Error t value Pr(>|t|)    
-#> (Intercept)   441.8004     3.7335  118.33  < 2e-16 ***
-#> trend()        -0.3403     0.0666   -5.11  2.7e-06 ***
-#> season()year2 -34.6597     3.9683   -8.73  9.1e-13 ***
-#> season()year3 -17.8216     4.0225   -4.43  3.4e-05 ***
-#> season()year4  72.7964     4.0230   18.09  < 2e-16 ***
+#>               Estimate Std. Error t value             Pr(>|t|)    
+#> (Intercept)   441.8004     3.7335  118.33 < 0.0000000000000002 ***
+#> trend()        -0.3403     0.0666   -5.11     0.00000272965382 ***
+#> season()year2 -34.6597     3.9683   -8.73     0.00000000000091 ***
+#> season()year3 -17.8216     4.0225   -4.43     0.00003449674545 ***
+#> season()year4  72.7964     4.0230   18.09 < 0.0000000000000002 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> Residual standard error: 12.2 on 69 degrees of freedom
 #> Multiple R-squared: 0.924,	Adjusted R-squared: 0.92
-#> F-statistic:  211 on 4 and 69 DF, p-value: <2e-16
+#> F-statistic:  211 on 4 and 69 DF, p-value: <0.0000000000000002
 ```
 
 
@@ -563,7 +563,7 @@ augment(beer_fit) %>%
        title = "Quarterly Beer Production")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-25-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-26-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -577,7 +577,7 @@ augment(beer_fit) %>%
          title = "Quarterly beer production")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-26-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-27-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Intervention variables  
 
@@ -664,18 +664,18 @@ fourier_beer %>% report()
 #>  -42.9   -7.6   -0.5    8.0   21.8 
 #> 
 #> Coefficients:
-#>                    Estimate Std. Error t value Pr(>|t|)    
-#> (Intercept)        446.8792     2.8732  155.53  < 2e-16 ***
-#> trend()             -0.3403     0.0666   -5.11  2.7e-06 ***
-#> fourier(K = 2)C1_4   8.9108     2.0112    4.43  3.4e-05 ***
-#> fourier(K = 2)S1_4 -53.7281     2.0112  -26.71  < 2e-16 ***
-#> fourier(K = 2)C2_4 -13.9896     1.4226   -9.83  9.3e-15 ***
+#>                    Estimate Std. Error t value             Pr(>|t|)    
+#> (Intercept)        446.8792     2.8732  155.53 < 0.0000000000000002 ***
+#> trend()             -0.3403     0.0666   -5.11   0.0000027296538238 ***
+#> fourier(K = 2)C1_4   8.9108     2.0112    4.43   0.0000344967454483 ***
+#> fourier(K = 2)S1_4 -53.7281     2.0112  -26.71 < 0.0000000000000002 ***
+#> fourier(K = 2)C2_4 -13.9896     1.4226   -9.83   0.0000000000000093 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> Residual standard error: 12.2 on 69 degrees of freedom
 #> Multiple R-squared: 0.924,	Adjusted R-squared: 0.92
-#> F-statistic:  211 on 4 and 69 DF, p-value: <2e-16
+#> F-statistic:  211 on 4 and 69 DF, p-value: <0.0000000000000002
 ```
 
 The maximum allowed is $K = m / 2$ where $m$ is the seasonal period. Because we have used the maximum here, the results are identical to those obtained when using seasonal dummy variables.
@@ -714,7 +714,7 @@ $$
 
 All things being equal, adjusted $R^2$ is generally smaller than $R^2$, unless you are dealing with a null model so that $k = 0$, since it aims to penalize models with too many predictors.  
 
-Using this measure, the best model will be the one with the largest value of ¯R2. Maximising ¯R2 is equivalent to minimising the standard error $\hat{\sigma}$ of $\hat{\epsilon}$ given in Equation \@ref(eq:standard-error).  
+Using this measure, the best model will be the one with the largest value of ¯R2. Maximising ¯R2 is equivalent to minimising the standard error $\hat{\sigma}$ of $\hat{\varepsilon}$ given in Equation \@ref(eq:standard-error).  
 Maximising $\bar{R}^2$ (For the rest of regression measurements, we almost always want to minimize) works quite well as a method of selecting predictors, although it does tend to err on the side of selecting too many predictors.
 
 ### Cross validation  
@@ -800,7 +800,7 @@ The best model contains all four predictors. However, a closer look at the resul
 Recall the regression model Equation \@ref(eq:multiple-linear-reg) 
 
 \begin{equation}
-y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \epsilon_t
+y_t = \beta_0 + \beta_1x_{1t} + \beta_2x_{2t} + \dots + \beta_kx_{kt} + \varepsilon_t
 \end{equation} 
 
 While we can easily get fitted values ${\hat{y}_1, \hat{y}_2, \dots, \hat{y}_T}$, what we are interested in here, however, is forecasting future values of $y$.
@@ -830,7 +830,7 @@ beer_fit %>%
        title = "Forecasts of beer production using regression")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-31-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
@@ -921,7 +921,7 @@ us_change %>%
                   ylim = c(0, 1.2))
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-33-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-34-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 ### Prediction intervals  
@@ -963,10 +963,10 @@ Including lagged values of the predictors does not only make the model operation
 A linear regression model can be expressed in matrix forms as such:  
 
 $$
-\boldsymbol{y} = \boldsymbol{X} \boldsymbol{\beta} + \boldsymbol{\epsilon}
+\boldsymbol{y} = \boldsymbol{X} \boldsymbol{\beta} + \boldsymbol{\varepsilon}
 $$
 
-where $\boldsymbol{y} = [y_1, y_2, \dots, y_T]$, $\boldsymbol{X}$ being the design matrix and $\boldsymbol{\epsilon} = [\epsilon_1, \epsilon_2, \dots, \epsilon_T]$ thus have mean $\boldsymbol{0}$ and variance-covariance matrix $\sigma^2\boldsymbol{I}$  
+where $\boldsymbol{y} = [y_1, y_2, \dots, y_T]$, $\boldsymbol{X}$ being the design matrix and $\boldsymbol{\varepsilon} = [\varepsilon_1, \varepsilon_2, \dots, \varepsilon_T]$ thus have mean $\boldsymbol{0}$ and variance-covariance matrix $\sigma^2\boldsymbol{I}$  
 
 Least square estimation uses a projection matrix $H = \boldsymbol{X(X^TX)^{-1}X^T}$ (also called "hat matrix") so that $\boldsymbol{Hy = \hat{y} = X\hat{\beta}}$. We can derive that 
 
@@ -998,7 +998,7 @@ $$
 \hat{y} + Z_\alpha \hat{\sigma} \sqrt{[1 + \boldsymbol{x^*}(\boldsymbol{X^T X})^{-1}\boldsymbol{(x^*)^T}]}
 $$
 
-This takes into account the uncertainty due to the error term $\boldsymbol{\epsilon}$ and the uncertainty in the coefficient estimates. However, it ignores any errors in $\boldsymbol{x^*}$. Thus, if the future values of the predictors are uncertain, then the prediction interval calculated using this expression will be too narrow.  
+This takes into account the uncertainty due to the error term $\boldsymbol{\varepsilon}$ and the uncertainty in the coefficient estimates. However, it ignores any errors in $\boldsymbol{x^*}$. Thus, if the future values of the predictors are uncertain, then the prediction interval calculated using this expression will be too narrow.  
 
 ## Nonlinear regression  
 
@@ -1008,7 +1008,7 @@ The simplest way of modelling a nonlinear relationship is to transform the forec
 
 A **log-log** functional form is specified as 
 $$
-\log{y} = \beta_0 + \beta_1 \log{x} + \epsilon
+\log{y} = \beta_0 + \beta_1 \log{x} + \varepsilon
 $$
 
 Other useful forms can also be specified. The **log-linear** form is specified by only transforming the forecast variable and the **linear-log** form is obtained by transforming the predictor.
@@ -1020,7 +1020,7 @@ Also, box-cox transformation as a family of both power transformation and log tr
 There are cases for which simply transforming the data will not be adequate and a more general specification may be required. Then the model we use is  
 
 $$
-y = f(x) + \epsilon
+y = f(x) + \varepsilon
 $$
 
 where $f(x)$ could be of any form. In the specification of nonlinear regression that follows, we allow f to be a more flexible nonlinear function of $x$, compared to simply a logarithmic or other transformation.  
@@ -1097,7 +1097,7 @@ boston_lm %>%
   labs(title = "Residual across trend")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-34-1.png" width="90%" style="display: block; margin: auto;" /><img src="ch7_files/figure-html/unnamed-chunk-34-2.png" width="90%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" /><img src="ch7_files/figure-html/unnamed-chunk-35-2.png" width="90%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -1116,7 +1116,7 @@ There seems to be a (quadratic) pattern in our residual plot, and our simple lin
 Alternatively, fitting an exponential trend (equivalent to a log-linear regression) to the data can be achieved by transforming the $y$ variable so that the model to be fitted is,   
 
 $$
-\log{y}_t = \beta_0 + \beta_1t + \epsilon_t
+\log{y}_t = \beta_0 + \beta_1t + \varepsilon_t
 $$
 
 The plot of winning times reveals three different periods. There is a lot of volatility in the winning times up to about 1940, with the winning times decreasing overall but with significant increases during the 1920s. After 1940 there is a near-linear decrease in times, followed by a flattening out after the 1980s, with the suggestion of an upturn towards the end of the sample. To account for these changes, **we specify the years 1940 and 1980 as knots**. We should warn here that subjective identification of knots can lead to over-fitting, which can be detrimental to the forecast performance of a model, and should be performed with caution.  
@@ -1142,7 +1142,7 @@ boston_piece_fc %>%
        color = "Model")
 ```
 
-<img src="ch7_files/figure-html/unnamed-chunk-36-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="ch7_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Correlation, causation and forecasting  
 

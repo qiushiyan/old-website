@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -439,29 +458,29 @@ y_t = \ell_{t - 1} + e_t  \tag{8.2}
 \ell_t = \ell_{t-1} + \alpha e_t \tag{8.3}
 \end{equation}\]</span></p>
 <p>We refer to Equation <a href="innovations-state-space-models-for-exponential-smoothing.html#eq:measurement">(8.2)</a> as the <strong>measurement</strong> (or observation) equation and Equation <a href="innovations-state-space-models-for-exponential-smoothing.html#eq:state">(8.3)</a> as the <strong>stat</strong>e (or transition) equation. These two equations, together with the statistical distribution of the errors, form a fully specified statistical model. Specifically, these constitute an innovations state space model underlying simple exponential smoothing.</p>
-<p>The term “<strong>innovations</strong>” comes from the fact that all equations use the same random error process, <span class="math inline">\(\epsilon_t\)</span>. For the same reason, this formulation is also referred to as a “single source of error” model. There are alternative multiple source of error formulations that is not presented here.</p>
-<p>The state equation shows the evolution of the state through time. The influence of the smoothing parameter <span class="math inline">\(\alpha\)</span> is the same as for the methods discussed earlier. For example, <span class="math inline">\(\alpha\)</span> governs the amount of change in successive levels: high values of α allow rapid changes in the level; low values of α lead to smooth changes. If <span class="math inline">\(\alpha = 0\)</span>, the level of the series does not change over time; if <span class="math inline">\(\alpha = 1\)</span>, the model reduces to a random walk model, <span class="math inline">\(y_t = \ell_{t-1} + \epsilon_t = y_{t−1} + \epsilon_t\)</span>. (See Section <a href="stationarity.html#stationarity">9.1</a> for a discussion of this model.)</p>
+<p>The term “<strong>innovations</strong>” comes from the fact that all equations use the same random error process, <span class="math inline">\(\varepsilon_t\)</span>. For the same reason, this formulation is also referred to as a “single source of error” model. There are alternative multiple source of error formulations that is not presented here.</p>
+<p>The state equation shows the evolution of the state through time. The influence of the smoothing parameter <span class="math inline">\(\alpha\)</span> is the same as for the methods discussed earlier. For example, <span class="math inline">\(\alpha\)</span> governs the amount of change in successive levels: high values of α allow rapid changes in the level; low values of α lead to smooth changes. If <span class="math inline">\(\alpha = 0\)</span>, the level of the series does not change over time; if <span class="math inline">\(\alpha = 1\)</span>, the model reduces to a random walk model, <span class="math inline">\(y_t = \ell_{t-1} + \varvarepsilon_t = y_{t−1} + \varepsilon_t\)</span>. (See Section <a href="stationarity.html#stationarity">9.1</a> for a discussion of this model.)</p>
 </div>
 <div id="etsmnn-simple-exponential-smoothing-with-multiplicative-errors" class="section level3">
 <h3><span class="header-section-number">8.4.2</span> ETS(M,N,N): simple exponential smoothing with multiplicative errors</h3>
 <p>A multiplicative error is defined as:</p>
 <p><span class="math display">\[
-\epsilon_t = \frac{y_{t} - \hat{y}_{t|t-1}}{\hat{y}_{t|t-1}}
+\varepsilon_t = \frac{y_{t} - \hat{y}_{t|t-1}}{\hat{y}_{t|t-1}}
 \]</span>
-where <span class="math inline">\(\epsilon_t \sim N(0, \sigma^2)\)</span>.</p>
-<p>From the above equaiton we know <span class="math inline">\(y_t = \ell_{t-1}(1 + \epsilon_t)\)</span>, so that</p>
+where <span class="math inline">\(\varepsilon_t \sim N(0, \sigma^2)\)</span>.</p>
+<p>From the above equaiton we know <span class="math inline">\(y_t = \ell_{t-1}(1 + \varepsilon_t)\)</span>, so that</p>
 <p><span class="math display">\[
 \begin{split}
 \ell_t &amp;= \alpha y_t + (1 - \alpha) \ell_{t-1}  \\
-       &amp;=  \alpha(1 + \epsilon_t)\ell_{t-1} + (1-\alpha)\ell_{t-1} \\
-       &amp;=\ell_{t-1} (1 + \alpha\epsilon_t)
+       &amp;=  \alpha(1 + \varepsilon_t)\ell_{t-1} + (1-\alpha)\ell_{t-1} \\
+       &amp;=\ell_{t-1} (1 + \alpha\varepsilon_t)
 \end{split}
 \]</span></p>
 <p>Then we can write the multiplicative form of the state space model as</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_t &amp;= \ell_{t-1} (1 + \epsilon_t)\\
-l_t &amp;= \ell_{t-1}(1 + \alpha\epsilon_t) 
+y_t &amp;= \ell_{t-1} (1 + \varepsilon_t)\\
+l_t &amp;= \ell_{t-1}(1 + \alpha\varepsilon_t) 
 \end{aligned}
 \]</span></p>
 </div>
@@ -489,12 +508,12 @@ b_t &amp;= \beta^*(b_{t-1} + \alpha e_t) + (1 - \beta^*)b_{t-1} \\
     &amp;= b_{t-1} + \alpha \beta^*e_t
 \end{split}
 \]</span></p>
-<p>Finally, assuiming NID errors <span class="math inline">\(\epsilon_t = e_t \sim (0, \sigma^2)\)</span> and let <span class="math inline">\(\beta = \alpha\beta^*\)</span>, we get</p>
+<p>Finally, assuiming NID errors <span class="math inline">\(\varepsilon_t = e_t \sim (0, \sigma^2)\)</span> and let <span class="math inline">\(\beta = \alpha\beta^*\)</span>, we get</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_{t} &amp;= \ell_{t- 1} + b_{t-1} + \epsilon_t \\
-\ell_t &amp;= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
-b_t  &amp;= b_{t-1} + \beta \epsilon_t
+y_{t} &amp;= \ell_{t- 1} + b_{t-1} + \varepsilon_t \\
+\ell_t &amp;= \ell_{t-1} + b_{t-1} + \alpha \varepsilon_t \\
+b_t  &amp;= b_{t-1} + \beta \varepsilon_t
 \end{aligned}
 \]</span></p>
 </div>
@@ -502,14 +521,14 @@ b_t  &amp;= b_{t-1} + \beta \epsilon_t
 <h3><span class="header-section-number">8.4.4</span> ETS(M,A,N): Holt’s linear method with multiplicative errors</h3>
 <p>Specifying one-step-ahead training errors as relative errors such that</p>
 <p><span class="math display">\[
-\epsilon_t = \frac{y_t - (\ell_{t-1} + b_{t-1})}{(\ell_{t-1} + b_{t-1})}
+\varepsilon_t = \frac{y_t - (\ell_{t-1} + b_{t-1})}{(\ell_{t-1} + b_{t-1})}
 \]</span></p>
-<p>and that <span class="math inline">\(y_t = (1 + \epsilon_t)(\ell_{t-1} + b_{t-1})\)</span>, so</p>
+<p>and that <span class="math inline">\(y_t = (1 + \varepsilon_t)(\ell_{t-1} + b_{t-1})\)</span>, so</p>
 <p><span class="math display">\[
 \begin{split}
-\ell_t &amp;= \alpha(1 + \epsilon_t)(\ell_{t-1} + b_{t-1}) + (1 - \alpha)(\ell_{t-1} + b_{t-1}) \\
-    &amp;= (1 + \alpha \epsilon_t) \ell_{t-1} + (1 + \alpha \epsilon_t)b_{t-1} \\
-    &amp;= (\ell_{t-1} + b_{t-1})(1 + \alpha \epsilon_t)
+\ell_t &amp;= \alpha(1 + \varepsilon_t)(\ell_{t-1} + b_{t-1}) + (1 - \alpha)(\ell_{t-1} + b_{t-1}) \\
+    &amp;= (1 + \alpha \varepsilon_t) \ell_{t-1} + (1 + \alpha \varepsilon_t)b_{t-1} \\
+    &amp;= (\ell_{t-1} + b_{t-1})(1 + \alpha \varepsilon_t)
 \end{split}
 \]</span></p>
 <p>and</p>
@@ -517,17 +536,17 @@ b_t  &amp;= b_{t-1} + \beta \epsilon_t
 \begin{split}
 b_t &amp;= \beta^*(\ell_t - \ell_{t-1}) + (1 - \beta^*)b_{t-1} \\
     &amp;= \beta^* \ell_t + b_{t-1} - \beta^* (\ell_{t-1} + b_{t-1}) \\
-    &amp;= \beta^* (\ell_{t-1} + b_{t-1})(1 + \alpha \epsilon_t) + b_{t-1} - \beta^* (\ell_{t-1} + b_{t-1}) \\
-    &amp;= \alpha\beta^*(\ell_{t-1} + b_{t-1})\epsilon_t + b_{t-1} \\
-    &amp;= b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\epsilon_t
+    &amp;= \beta^* (\ell_{t-1} + b_{t-1})(1 + \alpha \varepsilon_t) + b_{t-1} - \beta^* (\ell_{t-1} + b_{t-1}) \\
+    &amp;= \alpha\beta^*(\ell_{t-1} + b_{t-1})\varepsilon_t + b_{t-1} \\
+    &amp;= b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\varepsilon_t
 \end{split}
 \]</span></p>
 <p>And our final state space model is:</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_t &amp;= (\ell_{t-1} + b_{t-1})(1 + \epsilon_t) \\
-\ell_t &amp;= (\ell_{t-1} + b_{t-1})(1 + \alpha \epsilon_t)\\
-b_t  &amp;=  b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\epsilon_t
+y_t &amp;= (\ell_{t-1} + b_{t-1})(1 + \varepsilon_t) \\
+\ell_t &amp;= (\ell_{t-1} + b_{t-1})(1 + \alpha \varepsilon_t)\\
+b_t  &amp;=  b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\varepsilon_t
 \end{aligned}
 \]</span></p>
 </div>

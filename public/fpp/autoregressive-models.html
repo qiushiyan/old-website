@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -418,15 +437,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.3</span> Autoregressive models</h2>
 <p>In an autoregression model, we forecast the variable of interest using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus, an autoregressive model of order <span class="math inline">\(p\)</span> can be written as</p>
 <p><span class="math display">\[
-y_t =  c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t
+y_t =  c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \varepsilon_t
 \]</span></p>
-<p>where <span class="math inline">\(\epsilon_t\)</span> is white noise. We refer to this model as <strong>AR(p) model</strong>, a autoregressive model with order <span class="math inline">\(p\)</span></p>
+<p>where <span class="math inline">\(\varepsilon_t\)</span> is white noise. We refer to this model as <strong>AR(p) model</strong>, a autoregressive model with order <span class="math inline">\(p\)</span></p>
 <p>We can write out an AR(p) model using the backshift operator:</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_t - \phi_1y_{t-1} - \phi_2y_{t-2} - \cdots - \phi_py_{t-p} &amp;= \epsilon_t + c\\ 
-(1 - \phi_1B - \phi_2B^2 - \cdots - \phi_pB^p)y_t &amp;= \epsilon_t + c\\
-\phi_p(B)y_t &amp;= \epsilon_t + c
+y_t - \phi_1y_{t-1} - \phi_2y_{t-2} - \cdots - \phi_py_{t-p} &amp;= \varepsilon_t + c\\ 
+(1 - \phi_1B - \phi_2B^2 - \cdots - \phi_pB^p)y_t &amp;= \varepsilon_t + c\\
+\phi_p(B)y_t &amp;= \varepsilon_t + c
 \end{aligned}
 \]</span></p>
 
@@ -442,7 +461,7 @@ The relationship between AR models and stationarity,
 <p>Generally, for a AR(p) model, if we treat <strong>B</strong> as number (or numbers), we can write out the the formula (<span class="math inline">\(\phi_p(B)\)</span> below) as</p>
 <p><span class="math display">\[
 \begin{aligned}
-\phi_p(B)y_t &amp;= \epsilon_t + c\\
+\phi_p(B)y_t &amp;= \varepsilon_t + c\\
 &amp;\Downarrow \\
 \phi_p(B) &amp;= 0
 \end{aligned}
@@ -451,9 +470,9 @@ To be stationary, all complex roots (<span class="math inline">\(B_1\)</span>, <
 <p>For example, consider this AR(1) model :</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_t &amp;= 0.5y_{t-1} + \epsilon_t \\
-y_t - 0.5y_{t-1} &amp;= \epsilon_t \\
-(1 - 0.5B)y_t &amp;= \epsilon_t \\
+y_t &amp;= 0.5y_{t-1} + \varepsilon_t \\
+y_t - 0.5y_{t-1} &amp;= \varepsilon_t \\
+(1 - 0.5B)y_t &amp;= \varepsilon_t \\
 &amp;\Downarrow \\
 1 - 0.5B &amp;= 0 \\
 B &amp;= 2
@@ -505,7 +524,7 @@ This model is indeed stationary because <span class="math inline">\(|B| &gt; 1\)
 <h3><span class="header-section-number">9.3.2</span> Decision of order p</h3>
 <p>How do we decide the order $p $of a AR model? A rule of thumb is to look at <strong>partial autocorrelation coefficients</strong>, PACF. PACF measures the direct effect of a lagged value on its previous value. Suppose we want to measure the effect of <span class="math inline">\(y_{t-2}\)</span> on <span class="math inline">\(y_{t}\)</span>, while <span class="math inline">\(r_2\)</span> could be high, it could also carry the effect of <span class="math inline">\(y_{t-2} \rightarrow y_{t-1} \rightarrow y_t\)</span>, especially when <span class="math inline">\(r_1\)</span> is also high. This is when partial autocorrelation come to resuce, consider a AR(2) process (which means past values earlier than <span class="math inline">\(y_{t-2}\)</span> cannot have an effect on <span class="math inline">\(y_t\)</span>)</p>
 <p><span class="math display">\[
-y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \epsilon_t
+y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \varepsilon_t
 \]</span></p>
 <p>The partial correlation coefficient for <span class="math inline">\(y_{t-k}\)</span> is simply defined as <span class="math inline">\(\phi_k\)</span> in the model, i.e., <span class="math inline">\(\phi_1\)</span> for <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(\phi_2\)</span> for <span class="math inline">\(y_{t-2}\)</span>. Partial correlation coefficient for <span class="math inline">\(k &gt; 2\)</span> is think of as zero. In practice, there are more efficient algorithms for computing <span class="math inline">\(\phi_k\)</span> than fitting all of these autoregressions, but they give the same results.</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">fpp3<span class="op">::</span>aus_airpassengers <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -534,13 +553,13 @@ y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \epsilon_t
 <p><span class="math display">\[
 y_t = 
 \begin{cases}
-\epsilon_1 &amp;t = 1 \\
-y_{t - 1} + \epsilon_t&amp; t = 2, 3, \dots 
+\varepsilon_1 &amp;t = 1 \\
+y_{t - 1} + \varepsilon_t&amp; t = 2, 3, \dots 
 \end{cases}
 \]</span>
-where <span class="math inline">\(\epsilon_t\)</span> comes from a white noise process. It can also be expressed in the following form:</p>
+where <span class="math inline">\(\varepsilon_t\)</span> comes from a white noise process. It can also be expressed in the following form:</p>
 <p><span class="math display">\[
-y_t = \sum_{i=1}^{t}{\epsilon_t}
+y_t = \sum_{i=1}^{t}{\varepsilon_t}
 \]</span></p>
 <p>According to this, we also have (covariance can be viewed as autocorrelation in this sense)</p>
 <p><span class="math display">\[
@@ -552,10 +571,10 @@ y_t = \sum_{i=1}^{t}{\epsilon_t}
 <p>Random walk can be extended by adding a <strong>drift</strong> <span class="math inline">\(\mu\)</span>, which would be the new expectation of the process. Random walk with a drift (also called a <em>biased random walk</em>) is the process behind a drift model</p>
 <p><span class="math display">\[
 \begin{split}
-y_t &amp;= \mu + y_{t-1} + \epsilon_t \\ 
-    &amp;= \mu + \mu + y_{t-2} + \epsilon_t + \epsilon_{t-1}\\ 
+y_t &amp;= \mu + y_{t-1} + \varepsilon_t \\ 
+    &amp;= \mu + \mu + y_{t-2} + \varepsilon_t + \varepsilon_{t-1}\\ 
     \vdots \\
-    &amp;=  t\mu + \sum_{i=1}^{t}\epsilon_i 
+    &amp;=  t\mu + \sum_{i=1}^{t}\varepsilon_i 
 \end{split}
 \]</span></p>
 <p>With little effort, we can show that for a drift process <span class="math inline">\(\text{E}(y_t) = \mu\)</span>, <span class="math inline">\(\text{Var}(y_t) = t\sigma^2\)</span>, and ACF stays the same, so that a biased random walk is still non-stationary. A random walk with drift can be considered as a curve fluctuating around line <span class="math inline">\(y = \mu t\)</span> with increasing volatility as <span class="math inline">\(t\)</span> increases.</p>

@@ -3,9 +3,6 @@
 # Exponential smoothing 
 
 
-```r
-knitr::opts_chunk$set(cache = TRUE)
-```
 
 
 Exponential smoothing was proposed in the late 1950s ([@brown1959statistical; @holt1957forecasting; @winters1960forecasting]), and has motivated some of the most successful forecasting methods. Forecasts produced using exponential smoothing methods are weighted averages of past observations, with the weights decaying exponentially as the observations get older. In other words, the more recent the observation the higher the associated weight. This framework generates reliable forecasts quickly and for a wide range of time series, which is a great advantage and of major importance to applications in industry.
@@ -586,26 +583,26 @@ y_t = \ell_{t - 1} + e_t  (\#eq:measurement)
 
 We refer to Equation \@ref(eq:measurement) as the **measurement** (or observation) equation and Equation \@ref(eq:state) as the **stat**e (or transition) equation. These two equations, together with the statistical distribution of the errors, form a fully specified statistical model. Specifically, these constitute an innovations state space model underlying simple exponential smoothing.  
 
-The term “**innovations**” comes from the fact that all equations use the same random error process, $\epsilon_t$. For the same reason, this formulation is also referred to as a “single source of error” model. There are alternative multiple source of error formulations that is not presented here.  
+The term “**innovations**” comes from the fact that all equations use the same random error process, $\varepsilon_t$. For the same reason, this formulation is also referred to as a “single source of error” model. There are alternative multiple source of error formulations that is not presented here.  
 
-The state equation shows the evolution of the state through time. The influence of the smoothing parameter $\alpha$ is the same as for the methods discussed earlier. For example, $\alpha$ governs the amount of change in successive levels: high values of α allow rapid changes in the level; low values of α lead to smooth changes. If $\alpha = 0$, the level of the series does not change over time; if $\alpha = 1$, the model reduces to a random walk model, $y_t = \ell_{t-1} + \epsilon_t = y_{t−1} + \epsilon_t$. (See Section \@ref(stationarity) for a discussion of this model.)
+The state equation shows the evolution of the state through time. The influence of the smoothing parameter $\alpha$ is the same as for the methods discussed earlier. For example, $\alpha$ governs the amount of change in successive levels: high values of α allow rapid changes in the level; low values of α lead to smooth changes. If $\alpha = 0$, the level of the series does not change over time; if $\alpha = 1$, the model reduces to a random walk model, $y_t = \ell_{t-1} + \varvarepsilon_t = y_{t−1} + \varepsilon_t$. (See Section \@ref(stationarity) for a discussion of this model.)
 
 ### ETS(M,N,N): simple exponential smoothing with multiplicative errors  
 
 A multiplicative error is defined as: 
 
 $$
-\epsilon_t = \frac{y_{t} - \hat{y}_{t|t-1}}{\hat{y}_{t|t-1}}
+\varepsilon_t = \frac{y_{t} - \hat{y}_{t|t-1}}{\hat{y}_{t|t-1}}
 $$
-where $\epsilon_t \sim N(0, \sigma^2)$.
+where $\varepsilon_t \sim N(0, \sigma^2)$.
 
-From the above equaiton we know $y_t = \ell_{t-1}(1 + \epsilon_t)$, so that
+From the above equaiton we know $y_t = \ell_{t-1}(1 + \varepsilon_t)$, so that
 
 $$
 \begin{split}
 \ell_t &= \alpha y_t + (1 - \alpha) \ell_{t-1}  \\
-       &=  \alpha(1 + \epsilon_t)\ell_{t-1} + (1-\alpha)\ell_{t-1} \\
-       &=\ell_{t-1} (1 + \alpha\epsilon_t)
+       &=  \alpha(1 + \varepsilon_t)\ell_{t-1} + (1-\alpha)\ell_{t-1} \\
+       &=\ell_{t-1} (1 + \alpha\varepsilon_t)
 \end{split}
 $$
 
@@ -614,8 +611,8 @@ Then we can write the multiplicative form of the state space model as
 
 $$
 \begin{aligned}
-y_t &= \ell_{t-1} (1 + \epsilon_t)\\
-l_t &= \ell_{t-1}(1 + \alpha\epsilon_t) 
+y_t &= \ell_{t-1} (1 + \varepsilon_t)\\
+l_t &= \ell_{t-1}(1 + \alpha\varepsilon_t) 
 \end{aligned}
 $$
 
@@ -649,13 +646,13 @@ b_t &= \beta^*(b_{t-1} + \alpha e_t) + (1 - \beta^*)b_{t-1} \\
 \end{split}
 $$
 
-Finally, assuiming NID errors $\epsilon_t = e_t \sim (0, \sigma^2)$ and let $\beta = \alpha\beta^*$, we get
+Finally, assuiming NID errors $\varepsilon_t = e_t \sim (0, \sigma^2)$ and let $\beta = \alpha\beta^*$, we get
 
 $$
 \begin{aligned}
-y_{t} &= \ell_{t- 1} + b_{t-1} + \epsilon_t \\
-\ell_t &= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
-b_t  &= b_{t-1} + \beta \epsilon_t
+y_{t} &= \ell_{t- 1} + b_{t-1} + \varepsilon_t \\
+\ell_t &= \ell_{t-1} + b_{t-1} + \alpha \varepsilon_t \\
+b_t  &= b_{t-1} + \beta \varepsilon_t
 \end{aligned}
 $$
 
@@ -664,16 +661,16 @@ $$
 Specifying one-step-ahead training errors as relative errors such that   
 
 $$
-\epsilon_t = \frac{y_t - (\ell_{t-1} + b_{t-1})}{(\ell_{t-1} + b_{t-1})}
+\varepsilon_t = \frac{y_t - (\ell_{t-1} + b_{t-1})}{(\ell_{t-1} + b_{t-1})}
 $$
 
-and that $y_t = (1 + \epsilon_t)(\ell_{t-1} + b_{t-1})$, so
+and that $y_t = (1 + \varepsilon_t)(\ell_{t-1} + b_{t-1})$, so
 
 $$
 \begin{split}
-\ell_t &= \alpha(1 + \epsilon_t)(\ell_{t-1} + b_{t-1}) + (1 - \alpha)(\ell_{t-1} + b_{t-1}) \\
-    &= (1 + \alpha \epsilon_t) \ell_{t-1} + (1 + \alpha \epsilon_t)b_{t-1} \\
-    &= (\ell_{t-1} + b_{t-1})(1 + \alpha \epsilon_t)
+\ell_t &= \alpha(1 + \varepsilon_t)(\ell_{t-1} + b_{t-1}) + (1 - \alpha)(\ell_{t-1} + b_{t-1}) \\
+    &= (1 + \alpha \varepsilon_t) \ell_{t-1} + (1 + \alpha \varepsilon_t)b_{t-1} \\
+    &= (\ell_{t-1} + b_{t-1})(1 + \alpha \varepsilon_t)
 \end{split}
 $$
 
@@ -683,9 +680,9 @@ $$
 \begin{split}
 b_t &= \beta^*(\ell_t - \ell_{t-1}) + (1 - \beta^*)b_{t-1} \\
     &= \beta^* \ell_t + b_{t-1} - \beta^* (\ell_{t-1} + b_{t-1}) \\
-    &= \beta^* (\ell_{t-1} + b_{t-1})(1 + \alpha \epsilon_t) + b_{t-1} - \beta^* (\ell_{t-1} + b_{t-1}) \\
-    &= \alpha\beta^*(\ell_{t-1} + b_{t-1})\epsilon_t + b_{t-1} \\
-    &= b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\epsilon_t
+    &= \beta^* (\ell_{t-1} + b_{t-1})(1 + \alpha \varepsilon_t) + b_{t-1} - \beta^* (\ell_{t-1} + b_{t-1}) \\
+    &= \alpha\beta^*(\ell_{t-1} + b_{t-1})\varepsilon_t + b_{t-1} \\
+    &= b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\varepsilon_t
 \end{split}
 $$
 
@@ -693,9 +690,9 @@ And our final state space model is:
 
 $$
 \begin{aligned}
-y_t &= (\ell_{t-1} + b_{t-1})(1 + \epsilon_t) \\
-\ell_t &= (\ell_{t-1} + b_{t-1})(1 + \alpha \epsilon_t)\\
-b_t  &=  b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\epsilon_t
+y_t &= (\ell_{t-1} + b_{t-1})(1 + \varepsilon_t) \\
+\ell_t &= (\ell_{t-1} + b_{t-1})(1 + \alpha \varepsilon_t)\\
+b_t  &=  b_{t-1}  + \beta(\ell_{t-1} + b_{t-1})\varepsilon_t
 \end{aligned}
 $$
 
@@ -793,9 +790,9 @@ The model selected is ETS(M, N, M) (`Trips` are strictly positive):
 
 $$
 \begin{aligned}
-y_t &= \ell_{t-1}s_{t-m}(1 + \epsilon_t) \\
-\ell_t &= \ell_{t-1}(1 + \alpha \epsilon_ t) \\
-s_t &= s_{t-1}(1 + \gamma \epsilon_t)
+y_t &= \ell_{t-1}s_{t-m}(1 + \varepsilon_t) \\
+\ell_t &= \ell_{t-1}(1 + \alpha \varepsilon_ t) \\
+s_t &= s_{t-1}(1 + \gamma \varepsilon_t)
 \end{aligned}
 $$
 
@@ -810,7 +807,7 @@ holidays_fit %>%
 <img src="ch8_files/figure-html/unnamed-chunk-24-1.png" width="90%" style="display: block; margin: auto;" />
 
 
-Because this model has multiplicative errors, the residuals are not equivalent to the one-step training errors. The residuals are given by $\hat{\epsilon}_t$, while the one-step training errors are defined as $y_t − \hat{y}_{t|t−1}$.
+Because this model has multiplicative errors, the residuals are not equivalent to the one-step training errors. The residuals are given by $\hat{\varepsilon}_t$, while the one-step training errors are defined as $y_t − \hat{y}_{t|t−1}$.
 
 
 ```r
@@ -828,16 +825,16 @@ residuals(holidays_fit, type = "response") %>%
 
 ## Forecasting with ETS models 
 
-For model ETS(M, A, N), we have $y_{T+1} = (l_t + b_t)(1 + \epsilon_t)$. Therefore $\hat{y}_{T+1} = l_t + b_t$. Similarly (check Section \@ref(ets-man) for formula of $\ell_{T+1}$ and $b_{T+1}$)
+For model ETS(M, A, N), we have $y_{T+1} = (l_t + b_t)(1 + \varepsilon_t)$. Therefore $\hat{y}_{T+1} = l_t + b_t$. Similarly (check Section \@ref(ets-man) for formula of $\ell_{T+1}$ and $b_{T+1}$)
 
 $$
 \begin{split}
-y_{T+2} &= (\ell_{T + 1} + b_{T + 1})(1 + \epsilon_{T+1}) \\
-              &= [(\ell_{T} + b_T)(1 + \alpha \epsilon_t) + b_T  + \beta(\ell_T + b_T)\epsilon_t] (1 + \epsilon_{T+1})
+y_{T+2} &= (\ell_{T + 1} + b_{T + 1})(1 + \varepsilon_{T+1}) \\
+              &= [(\ell_{T} + b_T)(1 + \alpha \varepsilon_t) + b_T  + \beta(\ell_T + b_T)\varepsilon_t] (1 + \varepsilon_{T+1})
 \end{split}
 $$
 
-By setting $\epsilon_{T+1} = 0$, we get $y_{T+2} =\ell_T + 2b_T$, which is the same to Holt’s linear methodin Section \@ref(holts-linear-trend-method), where innovation state space model is not formally introduced. Thus, the point forecasts obtained from the method and from the two models that underlie the method are identical (assuming that the same parameter values are used).   
+By setting $\varepsilon_{T+1} = 0$, we get $y_{T+2} =\ell_T + 2b_T$, which is the same to Holt’s linear methodin Section \@ref(holts-linear-trend-method), where innovation state space model is not formally introduced. Thus, the point forecasts obtained from the method and from the two models that underlie the method are identical (assuming that the same parameter values are used).   
 
 
 ETS point forecasts are equal to the **medians** of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.  
@@ -918,7 +915,7 @@ gas_fit_damped %>% report()
 
 ### Prediction intervals  
 
-Since $y_{T + h| T} = \hat{y}_{T+h|h} + \epsilon_{T+h}$, and h-step residuals are assumed to be normally distributed and have standard deviation $\hat{\sigma}_h$, mean 0, we have 
+Since $y_{T + h| T} = \hat{y}_{T+h|h} + \varepsilon_{T+h}$, and h-step residuals are assumed to be normally distributed and have standard deviation $\hat{\sigma}_h$, mean 0, we have 
 
 $$
 y_{T + h| T} \sim N(\hat{y}_{T+h|h},\hat{\sigma}_h^2)

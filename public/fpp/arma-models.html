@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="moving-average-models.html"><a href="moving-average-models.html#decision-of-order-q"><i class="fa fa-check"></i><b>9.4.2</b> Decision of order q</a></li>
 <li class="chapter" data-level="9.4.3" data-path="moving-average-models.html"><a href="moving-average-models.html#koyck-transformation-and-invertibility"><i class="fa fa-check"></i><b>9.4.3</b> Koyck transformation and Invertibility</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a></li>
+<li class="chapter" data-level="9.5" data-path="arma-models.html"><a href="arma-models.html"><i class="fa fa-check"></i><b>9.5</b> ARMA models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="arma-models.html"><a href="arma-models.html#three-representations-of-an-arma-model"><i class="fa fa-check"></i><b>9.5.1</b> Three representations of an ARMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arima-models.html"><a href="arima-models.html"><i class="fa fa-check"></i><b>10</b> ARIMA models</a><ul>
 <li class="chapter" data-level="10.1" data-path="differencing.html"><a href="differencing.html"><i class="fa fa-check"></i><b>10.1</b> Differencing</a><ul>
@@ -392,7 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.2" data-path="ets-and-arima.html"><a href="ets-and-arima.html#example-comparing-arima-and-ets-on-seasonal-data"><i class="fa fa-check"></i><b>10.7.2</b> Example: Comparing <code>ARIMA()</code> and <code>ETS()</code> on seasonal data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a></li>
+<li class="chapter" data-level="11" data-path="dynamic-regression-models.html"><a href="dynamic-regression-models.html"><i class="fa fa-check"></i><b>11</b> Dynamic regression models</a><ul>
+<li class="chapter" data-level="11.1" data-path="estimation-1.html"><a href="estimation-1.html"><i class="fa fa-check"></i><b>11.1</b> Estimation</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html"><i class="fa fa-check"></i><b>11.2</b> Regression with ARIMA errors</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="regression-with-arima-errors.html"><a href="regression-with-arima-errors.html#example-us-personal-consumption-and-income"><i class="fa fa-check"></i><b>11.2.1</b> Example: US Personal Consumption and Income</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>11.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="forecasting.html"><a href="forecasting.html#example-forecasting-electricity-demand"><i class="fa fa-check"></i><b>11.3.1</b> Example: Forecasting electricity demand</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html"><i class="fa fa-check"></i><b>11.4</b> Deterministic and stochastic trends</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deterministic-and-stochastic-trends.html"><a href="deterministic-and-stochastic-trends.html#example-international-visitors-to-australia"><i class="fa fa-check"></i><b>11.4.1</b> Example: International visitors to Australia</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html"><i class="fa fa-check"></i><b>11.5</b> Dynamic harmonic regression</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="dynamic-harmonic-regression.html"><a href="dynamic-harmonic-regression.html#example-australian-eating-out-expenditure"><i class="fa fa-check"></i><b>11.5.1</b> Example: Australian eating out expenditure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="lagged-predictors.html"><a href="lagged-predictors.html"><i class="fa fa-check"></i><b>11.6</b> Lagged predictors</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="lagged-predictors.html"><a href="lagged-predictors.html#example-tv-advertising-and-insurance-quotations"><i class="fa fa-check"></i><b>11.6.1</b> Example: TV advertising and insurance quotations</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">written with bookdown</a></li>
@@ -420,17 +439,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 number of lags. Again, we start with the simplest case, the ARMA(1, 1) process.</p>
 <p>An ARMA(1, 1) process can be written as follows (Note the negative sign before <span class="math inline">\(\theta_1\)</span>)</p>
 <p><span class="math display">\[
-y_t = c + \phi_1y_{t-1} - \theta_1\epsilon_{t-1}  + \epsilon_t
+y_t = c + \phi_1y_{t-1} - \theta_1\varepsilon_{t-1}  + \varepsilon_t
 \]</span>
 using the backshift notation</p>
 <p><span class="math display">\[
-(1 - \phi_1B)y_t = c + (1 - \theta_1B)\epsilon_t
+(1 - \phi_1B)y_t = c + (1 - \theta_1B)\varepsilon_t
 \]</span>
-where <span class="math inline">\(\epsilon_t\)</span> comes from pure random process. To get the Wold representation of an
+where <span class="math inline">\(\varepsilon_t\)</span> comes from pure random process. To get the Wold representation of an
 ARMA(1, 1) process, we solve the equation below for <span class="math inline">\(y_t\)</span></p>
 <p><span class="math display" id="eq:arma11">\[\begin{equation}
 \tag{9.2}
-y_t = \frac{c}{1 - \phi_1B} + \frac{1 - \theta_1B}{1 - \phi_1B}\epsilon_t
+y_t = \frac{c}{1 - \phi_1B} + \frac{1 - \theta_1B}{1 - \phi_1B}\varepsilon_t
 \end{equation}\]</span></p>
 <p>It is obvious that <span class="math inline">\(\phi_1 \not= \theta_1\)</span> must hold, because otherwise <span class="math inline">\(y_t\)</span> would be a pure
 random process fluctuating around the mean <span class="math inline">\(\mu = c/(1 – \phi_1B)\)</span>.</p>
@@ -456,22 +475,22 @@ B^i&amp;: \psi_i - \phi_1\psi_{i-1} = 0 \Rightarrow \psi_i = \phi_1^{i-1}(\phi_1
 <p>Note that the Wold Decomposition also requires <span class="math inline">\(\sum_{i-0}^{\infty}\psi_i^2 &lt; \infty\)</span> (this is in the mean function), and this can be only satisfied when <span class="math inline">\(|\phi_1| &lt; 1\)</span>. This corresponds to the stability condition of the AR term.</p>
 <p><strong>Thus, the ARMA(1, 1) process is stationary if, with stochastic initial conditions, it has a stable AR(1) term.</strong> The Wold representation is</p>
 <p><span class="math display">\[
-y_t = \frac{c}{1 - \phi_1} + \epsilon_t + (\phi_1 - \theta_1)\epsilon_{t-1} + \phi_1(\phi_1 - \theta_1)\epsilon_{t-2} + \phi_1^2(\phi_1 - \theta_1)\epsilon_{t-3}
+y_t = \frac{c}{1 - \phi_1} + \varepsilon_t + (\phi_1 - \theta_1)\varepsilon_{t-1} + \phi_1(\phi_1 - \theta_1)\varepsilon_{t-2} + \phi_1^2(\phi_1 - \theta_1)\varepsilon_{t-3}
 \]</span></p>
 <p>Thus, the ARMA(1, 1) process can be written as an MA(<span class="math inline">\(\infty\)</span>) process.</p>
 <p>To invert the MA(1) part, <span class="math inline">\(|\theta_1| &lt; 1\)</span> must hold. From Equation <a href="arma-models.html#eq:arma11">(9.2)</a> we know:</p>
 <p><span class="math display">\[
-\epsilon_t = \frac{-c}{1 - \theta_1} + \frac{1 - \phi_1B}{1 - \theta_1B}y_t
+\varepsilon_t = \frac{-c}{1 - \theta_1} + \frac{1 - \phi_1B}{1 - \theta_1B}y_t
 \]</span></p>
 <p>If <span class="math inline">\(1/(1 – \theta_1B)\)</span> is developed into a geometric series we get</p>
 <p><span class="math display">\[
 \begin{aligned}
-\epsilon_t &amp;= \frac{-c}{1 + \theta_1} + (1 - \phi_1B)(1 + \theta_1B + \theta_1^2B^2 + \cdots)y_t \\
+\varepsilon_t &amp;= \frac{-c}{1 + \theta_1} + (1 - \phi_1B)(1 + \theta_1B + \theta_1^2B^2 + \cdots)y_t \\
 &amp;= \frac{-c}{1 + \theta_1} + y_t + (\theta_1 - \phi_1)y_{t-1} + \theta_1(\theta_1 - \phi_1)y_{t-2} + \theta_1^2(\theta_1 - \phi_1)y_{t-3} + \cdots
 \end{aligned}
 \]</span>
 This proves to be an AR(<span class="math inline">\(\infty\)</span>) representation. It shows that the combination of an AR(1) and an MA(1) term leads to a process with both MA(<span class="math inline">\(\infty\)</span>) and AR(<span class="math inline">\(\infty\)</span>) representation if the AR term is stable and the MA term invertible.</p>
-<p>More generally, <strong>ARMA(p, q) is staionary and invertible if the AR term is stationary and the MA term invertible</strong> (all complex roots of <span class="math inline">\(\Phi(B)\)</span> and that of <span class="math inline">\(\Theta(B)\)</span> exceeds 1 in absolute value). It can either be represented as an AR(<span class="math inline">\(\infty\)</span>) or as an MA(<span class="math inline">\(\infty\)</span>) process. Thus, neither its autocorrelation nor its partial autocorrelation function breaks off. In short, it is possible to generate stationary stochastic processes with infinite AR and MA orders by using only a finite number of parameters.</p>
+<p>More generally, <strong>ARMA(p, q) is staionary and invertible if the AR term is stationary and the MA term invertible</strong> (all complex roots of <span class="math inline">\(\Phi(B)\)</span> and that of <span class="math inline">\(\Theta(B)\)</span> exceeds 1 in absolute value, Section @ref(plotting-the-characteristic-roots introduces <code>gg_arma()</code> to visualized characteristic roots)). It can either be represented as an AR(<span class="math inline">\(\infty\)</span>) or as an MA(<span class="math inline">\(\infty\)</span>) process. Thus, neither its autocorrelation nor its partial autocorrelation function breaks off. In short, it is possible to generate stationary stochastic processes with infinite AR and MA orders by using only a finite number of parameters.</p>
 <p>It can be proved that an stationary ARMA(1, 1) has the following properties:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -495,7 +514,46 @@ condition <span class="math inline">\(r_1\)</span> is negative.</p></li>
 condition <span class="math inline">\(r_1\)</span> is positive.</p></li>
 </ul>
 <p><img src="images/arma11.png" width="90%" style="display: block; margin: auto;" /></p>
+<div id="three-representations-of-an-arma-model" class="section level3">
+<h3><span class="header-section-number">9.5.1</span> Three representations of an ARMA model</h3>
+<p>This is a supplementary section elaborating on the details among the relationship between ARMA, AR, and MA models.</p>
+<p>For a stationary ARMA(p, q) model:</p>
+<p><span class="math display">\[
+(1 - \phi_1 B - \cdots - \phi_p B^p)y_t = c + (1 + \theta_1 B + \cdots +\theta_q B^q)\varepsilon_t
+\]</span></p>
+<p>For the AR and MA representations, we use long division of two polynomials. Given two polynomials
+<span class="math inline">\(\Phi(B) = 1 - \sum_{i=1}^{p}\phi_iB^i\)</span> and <span class="math inline">\(\Theta(B) = 1 - \sum_{i=1}^{q}\theta_iB^i\)</span> we can obtain, by long division, that the following results take form of</p>
+<p><span class="math display">\[
+\frac{\Theta(B)}{\Phi(B)} = 1 + \psi_1 B + \psi_2 B^2 + \cdots  \equiv \Psi(B) \tag{1}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\frac{\Phi(B)}{\Theta(B)}= 1 - \pi_1 B - \pi_2 B ^2 - \cdots \equiv \Pi(B) \tag{2}
+\]</span></p>
+<div id="ar-representation" class="section level4">
+<h4><span class="header-section-number">9.5.1.1</span> AR representation</h4>
+<p>From Eq (2), the ARMA(p, q) model can be written as</p>
+<p><span class="math display">\[
+\frac{\Phi(B)}{\Theta(B)}y_t = c + \varepsilon_t
+\]</span>
+So</p>
+<p><span class="math display">\[
+y_t = c + \pi_1y_{t-1} + \pi_2y_{t-2} + \pi_3y_{t-3} + \cdots + \varepsilon_t 
+\]</span></p>
+</div>
+<div id="ma-representation" class="section level4">
+<h4><span class="header-section-number">9.5.1.2</span> MA representation</h4>
+<p>From Eq(1), the ARMA(p, q) model can be written as</p>
+<p><span class="math display">\[
+y_t = \frac{c}{\Phi(B)} + \frac{\Theta(B)}{\Phi(B)}\varepsilon_t
+\]</span>
+So</p>
+<p><span class="math display">\[
+y_t = \frac{c}{\Phi(B)} + \psi_1\varepsilon_{t-1} + \psi_2\varepsilon_{t-2} + \cdots  + \varepsilon_{t}
+\]</span></p>
 
+</div>
+</div>
 </div>
 <!-- </div> -->
             </section>

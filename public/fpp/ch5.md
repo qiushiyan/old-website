@@ -375,10 +375,10 @@ A time series is (discrete) white noise if its values are (see mathematical defi
 
 Using time series terms, a white noise should have mean 0, no autocorrelation and no seasonality.  
 
-We often assume a more stringent form of white noise, that is **Gaussian white noise**:  
+We often assume a more stringent form of white noise, that is **Gaussian white noise**, see Section \@ref(tests-for-autocorrelation-and-normality) for JB normality test:  
 
 $$
-\epsilon_t \stackrel{iid}{\sim} N(0, \sigma^2)
+\varepsilon_t \stackrel{iid}{\sim} N(0, \sigma^2)
 $$
 
 
@@ -407,12 +407,12 @@ Let's check the autocorrelation of a white noise:
 
 
 ```r
-p1 <- y %>% gg_lag(geom = "point") + ggtitle("Lag plot forGaussian white noise")
-p2 <- y %>% ACF() %>% autoplot() + ggtitle("ACF plot for Gaussian white noise")
-p3 <- z %>% gg_lag(geom = "point") + ggtitle("Lag plot for Other white noise")
-p4 <- z %>% ACF() %>% autoplot() + ggtitle("ACF plot Other white noise")
-
-p1 + p2 + p3 + p4 
+wrap_plots(
+  y %>% gg_lag(geom = "point") + ggtitle("Lag plot forGaussian white noise"),
+  y %>% ACF() %>% autoplot() + ggtitle("ACF plot for Gaussian white noise"),
+  z %>% gg_lag(geom = "point") + ggtitle("Lag plot for Other white noise"),
+  z %>% ACF() %>% autoplot() + ggtitle("ACF plot Other white noise")
+)
 ```
 
 <img src="ch5_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" />
@@ -423,7 +423,7 @@ In this example, $T = 50$ and so the bounds are at $±2/\sqrt{50} = \pm 0.28$. A
 
 Why white noise matters? Researchers generally assume that white noise is not predictable, and contains no information related to the respose of interest. It follows that we would expect that residuals computed according to a specific model to be white noise. This means the valuable part of model extract information from the data to such an extent that we do not care what's left.   
 
-If residuals $\epsilon_1, \epsilon_2, \dots, \epsilon_t$ violates any of the rules of white noise, then there is still valuable information buried under the resiuals, which we will imporve our models to capture. We have not a 'best' model at hand until residuals become unpredictable, in other words, white noise.  
+If residuals $\varepsilon_1, \varepsilon_2, \dots, \varepsilon_t$ violates any of the rules of white noise, then there is still valuable information buried under the resiuals, which we will imporve our models to capture. We have not a 'best' model at hand until residuals become unpredictable, in other words, white noise.  
 
 ### Example: Forecasting the Google daily closing stock price  
 

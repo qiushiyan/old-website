@@ -39,7 +39,7 @@
   
   
   
-  <meta name="theme-color" content="rgb(251, 191, 183)">
+  <meta name="theme-color" content="#3f51b5">
   
 
   
@@ -75,7 +75,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather%7CRoboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=B612+Mono:400,700%7COrbitron:400,700&display=swap">
   
 
   
@@ -292,74 +292,9 @@
         
         
         
-          
-          
-          
-            
-          
-          
-        
 
         <li class="nav-item">
-          <a class="nav-link " href="/#posts"><span>Posts</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>Projects</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#tags"><span>Topics</span></a>
+          <a class="nav-link  active" href="/post"><span>Posts</span></a>
         </li>
 
         
@@ -733,7 +668,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
     <div class="media-body">
       <h5 class="card-title"><a href="/">Qiushi Yan</a></h5>
       <h6 class="card-subtitle">Junior student, Data Journalism</h6>
-      <p class="card-text">Everything about</p>
+      <p class="card-text">Yet another rstats guy</p>
       <ul class="network-icon" aria-hidden="true">
   
     
@@ -874,23 +809,23 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
         
       
 
@@ -902,7 +837,9 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
 
     
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+
+    
+    
     
 
     
@@ -912,13 +849,13 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
 
     
     
-    
-    
-    
-    
     <script>
-      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
-      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
       const content_type = {
         'post': "Posts",
         'project': "Projects",
@@ -957,11 +894,6 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
 
     
     
-    <script id="dsq-count-scr" src="https://qiushiyan.disqus.com/count.js" async></script>
-    
-
-    
-    
     
     
     
@@ -988,17 +920,21 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
   <div class="container">
     <footer class="site-footer">
   
+  <p class="powered-by">
+    <a href="/license/">Privacy Policy <br> Privacy Policy </a><br>
+  </p>
+  
 
   <p class="powered-by">
     Qiushi Yan © 2020 &middot; 
 
-    Powered by the
+    Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and the 
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
     <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
 
     
     <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
+      <a href="#" id="back_to_top">
         <span class="button_icon">
           <i class="fas fa-chevron-up fa-2x"></i>
         </span>
@@ -1007,7 +943,6 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
     
   </p>
 </footer>
-
   </div>
   
 

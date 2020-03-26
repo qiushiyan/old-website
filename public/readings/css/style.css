@@ -1,4 +1,42 @@
-p.caption {
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400i,700,700i|Merriweather:400,400i,700,700i|Roboto+Mono:400,400i,500,500i');
+
+h1, h2, h3, h4, h5, h6, .book-summary {
+  font-family: 'Merriweather Sans', sans-serif;
+  letter-spacing: -0.02em !important;
+}
+
+h1.title {
+  font-size: 2.5em !important;
+}
+
+.book.font-family-0 {
+  font-family: 'Merriweather', serif !important;
+}
+
+.book.font-family-1 {
+  font-family: 'Merriweather Sans', sans-serif !important;
+}
+
+#header .title {
+  margin-bottom: 0em;
+}
+
+#header h4.author {
+  margin: 0;
+  font-size: 1.7em;
+}
+
+#header h4.date {
+  margin: 0;
+  color: #666;
+}
+
+#header h4.author em, #header h4.date em {
+  font-style: normal;
+}
+
+
+.caption {
   color: #777;
   margin-top: 10px;
 }
@@ -12,14 +50,9 @@ pre {
 pre code {
   white-space: inherit;
 }
+
 p.flushright {
   text-align: right;
-}
-blockquote > p:last-child {
-  text-align: right;
-}
-blockquote > p:first-child {
-  text-align: inherit;
 }
 
 /* Sidebar formating --------------------------------------------*/
@@ -115,14 +148,26 @@ div.rmdtip::before {
   text-align: right;
 }
 
-blockquote > p:last-child {
+
+blockquote {
+  width: 80%;
+  margin: 2em auto !important;
+}
+
+blockquote p {
+  color: #ce253e;
   text-align: right;
 }
-blockquote > p:first-child {
-  text-align: inherit;
+
+blockquote > p:last-child {
+  font-size: 14px !important;
+  margin-top: -1em !important;
 }
 
-
+blockquote > p:first-child {
+  text-align: inherit;
+  font-style: italic;
+}
 
 
 .header-section-number {
@@ -138,15 +183,3 @@ blockquote > p:first-child {
 }
 
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
-}
-.title {
-  font-weight: 700;
-}
-.smallcaps {
-  font-variant: small-caps;
-}
-.book .book-body .page-wrapper .page-inner section.normal strong {
-  font-weight: 600;
-}

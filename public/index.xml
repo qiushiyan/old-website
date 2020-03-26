@@ -40,7 +40,7 @@
 &lt;p&gt;Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a &lt;code&gt;SpatialPolygonsDataFrame&lt;/code&gt; object&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(sf)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nc &amp;lt;- st_read(system.file(&amp;quot;shape/nc.shp&amp;quot;, package=&amp;quot;sf&amp;quot;))
-#&amp;gt; Reading layer `nc&amp;#39; from data source `C:\Users\56570\Documents\R\win-library\3.6\sf\shape\nc.shp&amp;#39; using driver `ESRI Shapefile&amp;#39;
+#&amp;gt; Reading layer `nc&amp;#39; from data source `C:\Users\Lenovo\Documents\R\win-library\3.6\sf\shape\nc.shp&amp;#39; using driver `ESRI Shapefile&amp;#39;
 #&amp;gt; Simple feature collection with 100 features and 14 fields
 #&amp;gt; geometry type:  MULTIPOLYGON
 #&amp;gt; dimension:      XY
@@ -399,15 +399,15 @@ london_stage&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 52,617 x 13
 ##    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
 ##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt; 
-##  1 0       16591029  city        1659-~ 1      &amp;quot;&amp;quot;    The &amp;lt;i&amp;gt;~ 63        *p165~
-##  2 1       16591100  mt          1659-~ 1      &amp;quot;&amp;quot;    On 23 N~ 206       *p165~
-##  3 2       16591218  none        1659-~ 1      &amp;quot;&amp;quot;    Represe~ 1         *p165~
-##  4 3       16600200  mt          1659-~ 1      &amp;quot;&amp;quot;    6 Feb. ~ 206       *p166~
-##  5 4       16600204  cockpit     1659-~ 1      &amp;quot;&amp;quot;    $Thomas~ 73        *p166~
-##  6 5       16600328  dh          1659-~ 1      &amp;quot;&amp;quot;    At &amp;lt;i&amp;gt;D~ 90        *p166~
+##  1 0       16591029  city        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;The &amp;lt;i~ 63        *p165~
+##  2 1       16591100  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;On 23 ~ 206       *p165~
+##  3 2       16591218  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Repres~ 1         *p165~
+##  4 3       16600200  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;6 Feb.~ 206       *p166~
+##  5 4       16600204  cockpit     1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;$Thoma~ 73        *p166~
+##  6 5       16600328  dh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;At &amp;lt;i&amp;gt;~ 90        *p166~
 ##  7 6       16600406  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
-##  8 7       16600412  vh          1659-~ 1      &amp;quot;&amp;quot;    Edition~ 319       *p166~
-##  9 8       16600413  fh          1659-~ 1      &amp;quot;&amp;quot;    &amp;lt;i&amp;gt;The ~ 116       *p166~
+##  8 7       16600412  vh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Editio~ 319       *p166~
+##  9 8       16600413  fh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;lt;i&amp;gt;The~ 116       *p166~
 ## 10 9       16600416  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
 ## # ... with 52,607 more rows, and 4 more variables: Phase1 &amp;lt;chr&amp;gt;,
 ## #   CommentCClean &amp;lt;chr&amp;gt;, BookPDF &amp;lt;chr&amp;gt;, Performances &amp;lt;list&amp;gt;&lt;/code&gt;&lt;/pre&gt;
@@ -2563,14 +2563,6 @@ Prediction: To be able to predict what the responses are going to be to future i
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Advanced ggplot2</title>
-      <link>/project/advanced-r-graphics/</link>
-      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/project/advanced-r-graphics/</guid>
-      <description></description>
     </item>
     
     <item>

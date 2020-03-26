@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Random Thoughts on Qiushi Yan</title>
+    <title>Random Thoughts | Qiushi Yan</title>
     <link>/categories/random-thoughts/</link>
-    <description>Recent content in Random Thoughts on Qiushi Yan</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Qiushi Yan &amp;copy; {year}</copyright>
-    <lastBuildDate>Thu, 21 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/categories/random-thoughts/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="/categories/random-thoughts/index.xml" rel="self" type="application/rss+xml" />
+    <description>Random Thoughts</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Thu, 21 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Random Thoughts</title>
+      <link>/categories/random-thoughts/</link>
+    </image>
     
     <item>
       <title>Of Certificate</title>
       <link>/post/of-certificate/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>/post/of-certificate/</guid>
       <description>&lt;p&gt;With the ever-growing expansion of higher education, today’s world has seen college graduates growing in larger numbers, leading to fierce competition in the talent market, where a subtle craze for various of certificates is on the rise and here to stay. Students took several weeks or months cramming for an examination to get one certificate for qualification, and they aimed at another certificate afterwards, irrespective of what previous cramming has brought him or future learning routes on the subject concerned. What’s more, various training institutions sprouting up these days are also in a ferment. They go out their way to inculcate in the minds of patrons the importance of those certificates. Implanted the beliefs, many are under the illusion that certificates are panacea and selling points for their resume, that it would open up hidden opportunities. These convictions, however inappropriate, add to the mania.&lt;/p&gt;
 &lt;p&gt;Does a cupboard bedecked with certificates necessarily means competence? The answer is a qualified yes. The ultimate value of any accomplishment, including gaining certificates, depends on the what kind of capability to which it attests and what it will bring to us aside from physical evidence of any sort. Work that are too ambiguous to demonstrate certain abilities are rarely helpful, thus is not worth questing. And Work that revolves around rote learning without inspiring, is another slippery slope.&lt;/p&gt;

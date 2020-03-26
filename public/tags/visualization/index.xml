@@ -32,7 +32,7 @@
 &lt;p&gt;Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a &lt;code&gt;SpatialPolygonsDataFrame&lt;/code&gt; object&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(sf)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nc &amp;lt;- st_read(system.file(&amp;quot;shape/nc.shp&amp;quot;, package=&amp;quot;sf&amp;quot;))
-#&amp;gt; Reading layer `nc&amp;#39; from data source `C:\Users\56570\Documents\R\win-library\3.6\sf\shape\nc.shp&amp;#39; using driver `ESRI Shapefile&amp;#39;
+#&amp;gt; Reading layer `nc&amp;#39; from data source `C:\Users\Lenovo\Documents\R\win-library\3.6\sf\shape\nc.shp&amp;#39; using driver `ESRI Shapefile&amp;#39;
 #&amp;gt; Simple feature collection with 100 features and 14 fields
 #&amp;gt; geometry type:  MULTIPOLYGON
 #&amp;gt; dimension:      XY
@@ -140,14 +140,6 @@ Helpers. R package version 0.4.1. &lt;a href=&#34;https://CRAN.R-project.org/pac
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Advanced ggplot2</title>
-      <link>/project/advanced-r-graphics/</link>
-      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/project/advanced-r-graphics/</guid>
-      <description></description>
     </item>
     
     <item>

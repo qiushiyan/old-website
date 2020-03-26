@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Reading Notes on Qiushi Yan</title>
+    <title>Reading Notes | Qiushi Yan</title>
     <link>/categories/reading-notes/</link>
-    <description>Recent content in Reading Notes on Qiushi Yan</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Qiushi Yan &amp;copy; {year}</copyright>
-    <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/categories/reading-notes/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="/categories/reading-notes/index.xml" rel="self" type="application/rss+xml" />
+    <description>Reading Notes</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Reading Notes</title>
+      <link>/categories/reading-notes/</link>
+    </image>
     
     <item>
       <title>Better science in less time</title>
       <link>/post/better-sicence-in-less-time/better-science-in-less-time/</link>
       <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>/post/better-sicence-in-less-time/better-science-in-less-time/</guid>
       <description>
 
@@ -100,7 +99,6 @@ pace, with which comes wasted time struggling to create their own conventions fo
       <title>50 Years of Data Science</title>
       <link>/post/50-years-of-data-science/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>/post/50-years-of-data-science/</guid>
       <description>
 
@@ -256,7 +254,6 @@ Prediction: To be able to predict what the responses are going to be to future i
       <title>Enterprise Data Analysis and Visualization: An Interview Study</title>
       <link>/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</guid>
       <description>
 

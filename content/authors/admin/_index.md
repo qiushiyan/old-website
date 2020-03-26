@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: Everything about #rstats
+bio: Yet another rstats guy
 education:
   courses:
   - course: BA in Data Journalism

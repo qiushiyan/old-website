@@ -38,6 +38,8 @@ pace, with which comes wasted time struggling to create their own conventions fo
 ![](/img/ohi_transition.png)
 
 
+
+
 This figure shows an interesting transition of the OHI project from traditional methods to modern data science tools, and most importantly, with greater reproducibility and collaboration effectiveness. As they described:  
 
 > The original assessment in 2012 focused solely on scientific methods (for example, obtaining and analysing data, developing models, calculating, and presenting results; dark shading). In 2013, by necessity we gave more focus to data science (for example, data organization and wrangling, coding, versioning, and documentation; light shading), using open data science tools. We established R as the main language for all data preparation and modelling (using RStudio), which drastically decreased the time involved to complete the assessment. In 2014, we adopted Git and GitHub for version control, project management, and collaboration. This further decreased the time required to repeat the assessment. We also created the OHI Toolbox, which includes our R package ohicore for core analytical operations used in all OHI assessments. In subsequent years we have continued (and plan to continue) this trajectory towards better science in less time by improving code with principles of tidy data ; standardizing file and data structure; and focusing more on communication, in part by creating websites with the same open data science tools and workflow.

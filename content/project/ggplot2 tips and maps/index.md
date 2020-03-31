@@ -4,6 +4,6 @@ external_link: /ggplot2-maps
 summary: A distill blog focusing on ggplot2 tips and creating maps in R
 tags:
 - R 
-- visualization
+- Visualization
 title: ggplot2 tips and beautiful maps in R
 ---

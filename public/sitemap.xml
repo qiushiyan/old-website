@@ -148,11 +148,6 @@
   </url>
   
   <url>
-    <loc>/tags/other/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/project/r4ds/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
   </url>
@@ -163,7 +158,22 @@
   </url>
   
   <url>
+    <loc>/tags/readings/</loc>
+    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/project/readings/</loc>
+    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/text-mining/</loc>
+    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/tidy-text-mining/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
   </url>
   

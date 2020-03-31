@@ -109,10 +109,18 @@
     </item>
     
     <item>
-      <title>Other</title>
-      <link>/tags/other/</link>
+      <title>Readings</title>
+      <link>/tags/readings/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/other/</guid>
+      <guid>/tags/readings/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Text Mining</title>
+      <link>/tags/text-mining/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/text-mining/</guid>
       <description></description>
     </item>
     

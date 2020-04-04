@@ -1,5 +1,4 @@
 
-
 # (PART) Miscellaneous tools {-}
 
 # Advanced relational data  
@@ -138,7 +137,7 @@ words
 #> 4 hmph          1
 #> 5 mmhmm         2
 #> 6 mmhm          2
-#> # ... with 2.013e+04 more rows
+#> # ... with 20,131 more rows
 ```
 
 
@@ -191,7 +190,7 @@ Look at the data:
 #> 4 79827 14257         2008-09-17T03~ 79709         1 FALSE            "<p>I'm n~
 #> 5 79893 14928         2008-09-17T04~ 79709         6 FALSE            "<p>Remem~
 #> 6 83162 15842         2008-09-17T13~ 77434        70 FALSE            "<p>If yo~
-#> # ... with 6.367e+05 more rows
+#> # ... with 636,656 more rows
 
 (questions <- questions %>% 
   janitor::clean_names() %>% 
@@ -205,7 +204,7 @@ Look at the data:
 #> 4 359438 2173          2008-12-11T14:~ 4     Optimization pa~ "<p>Does anyone k~
 #> 5 439526 37751         2009-01-13T15:~ 23    Thinking in Vec~ "<p>I know that R~
 #> 6 445059 37751         2009-01-14T23:~ 12    Vectorize my th~ "<p>So earlier I ~
-#> # ... with 8.572e+05 more rows
+#> # ... with 857,154 more rows
 ```
 
 
@@ -227,7 +226,7 @@ first_answer_after_first_question
 #> 4 "'-'"       "']'"         '                '              "'\"~ "f2=f1.lower~
 #> 5 "'B'"       "'C"          '                'D')            <NA> "from &lt;- ~
 #> 6 "'"         "'DE"         '                'CA            "', ~ "print(Websi~
-#> # ... with 4.299e+05 more rows, and 6 more variables: id_answer <chr>,
+#> # ... with 429,894 more rows, and 6 more variables: id_answer <chr>,
 #> #   creation_date_answer <chr>, parent_id <chr>, score_answer <dbl>,
 #> #   is_accepted_answer <lgl>, body_answer <chr>
 ```

@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-31" />
+<meta name="date" content="2020-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,9 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.4.0/str_view.js"></script>
 
 
 <style type="text/css">
@@ -191,6 +194,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="reviews-on-regular-expressions.html"><a href="reviews-on-regular-expressions.html"><i class="fa fa-check"></i><b>A</b> Reviews on regular expressions</a><ul>
+<li class="chapter" data-level="A.1" data-path="posix-character-classes.html"><a href="posix-character-classes.html"><i class="fa fa-check"></i><b>A.1</b> POSIX Character Classes</a></li>
+<li class="chapter" data-level="A.2" data-path="greedy-and-lazy-quantifiers.html"><a href="greedy-and-lazy-quantifiers.html"><i class="fa fa-check"></i><b>A.2</b> Greedy and lazy quantifiers</a></li>
+<li class="chapter" data-level="A.3" data-path="looking-ahead-and-back.html"><a href="looking-ahead-and-back.html"><i class="fa fa-check"></i><b>A.3</b> Looking ahead and back</a></li>
+<li class="chapter" data-level="A.4" data-path="backreferences.html"><a href="backreferences.html"><i class="fa fa-check"></i><b>A.4</b> Backreferences</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="text-processing-examples-in-r.html"><a href="text-processing-examples-in-r.html"><i class="fa fa-check"></i><b>B</b> Text processing examples in R</a><ul>
+<li class="chapter" data-level="B.1" data-path="replacing-and-removing.html"><a href="replacing-and-removing.html"><i class="fa fa-check"></i><b>B.1</b> Replacing and removing</a></li>
+<li class="chapter" data-level="B.2" data-path="combining-and-splitting.html"><a href="combining-and-splitting.html"><i class="fa fa-check"></i><b>B.2</b> Combining and splitting</a></li>
+<li class="chapter" data-level="B.3" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html"><i class="fa fa-check"></i><b>B.3</b> Extracting text from pdf and other files</a><ul>
+<li class="chapter" data-level="B.3.1" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html#office-documents"><i class="fa fa-check"></i><b>B.3.1</b> Office documents</a></li>
+<li class="chapter" data-level="B.3.2" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html#images"><i class="fa fa-check"></i><b>B.3.2</b> Images</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Written with bookdown</a></li>
 
@@ -226,95 +244,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>cast()</code> turns a tidy data frame into a matrix.There are three variations of this verb corresponding to different classes of matricies : <code>cast_sparse()</code> (converting to a sparse matrix from the <code>Matrix</code> package), <code>cast_dtm()</code> (converting to a <code>DocumentTermMatrix</code> object from <code>tm</code>), and <code>cast_dfm()</code> (converting to a <code>dfm</code> object from quanteda)</p></li>
 </ul>
 <p><code>DocumentTermMatrix</code> class is built into the <code>tm</code> package. Notice that this DTM is 99% sparse (99% of document-word pairs are zero).</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">library</span>(tm)</a>
-<a class="sourceLine" id="cb90-2" title="2"><span class="kw">library</span>(topicmodels)</a>
-<a class="sourceLine" id="cb90-3" title="3"><span class="kw">data</span>(<span class="st">&quot;AssociatedPress&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;topicmodels&quot;</span>)</a>
-<a class="sourceLine" id="cb90-4" title="4"></a>
-<a class="sourceLine" id="cb90-5" title="5">AssociatedPress</a>
-<a class="sourceLine" id="cb90-6" title="6"><span class="co">#&gt; &lt;&lt;DocumentTermMatrix (documents: 2246, terms: 10473)&gt;&gt;</span></a>
-<a class="sourceLine" id="cb90-7" title="7"><span class="co">#&gt; Non-/sparse entries: 302031/23220327</span></a>
-<a class="sourceLine" id="cb90-8" title="8"><span class="co">#&gt; Sparsity           : 99%</span></a>
-<a class="sourceLine" id="cb90-9" title="9"><span class="co">#&gt; Maximal term length: 18</span></a>
-<a class="sourceLine" id="cb90-10" title="10"><span class="co">#&gt; Weighting          : term frequency (tf)</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">library</span>(tm)</a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="kw">library</span>(topicmodels)</a>
+<a class="sourceLine" id="cb89-3" title="3"><span class="kw">data</span>(<span class="st">&quot;AssociatedPress&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;topicmodels&quot;</span>)</a>
+<a class="sourceLine" id="cb89-4" title="4"></a>
+<a class="sourceLine" id="cb89-5" title="5">AssociatedPress</a>
+<a class="sourceLine" id="cb89-6" title="6"><span class="co">#&gt; &lt;&lt;DocumentTermMatrix (documents: 2246, terms: 10473)&gt;&gt;</span></a>
+<a class="sourceLine" id="cb89-7" title="7"><span class="co">#&gt; Non-/sparse entries: 302031/23220327</span></a>
+<a class="sourceLine" id="cb89-8" title="8"><span class="co">#&gt; Sparsity           : 99%</span></a>
+<a class="sourceLine" id="cb89-9" title="9"><span class="co">#&gt; Maximal term length: 18</span></a>
+<a class="sourceLine" id="cb89-10" title="10"><span class="co">#&gt; Weighting          : term frequency (tf)</span></a></code></pre></div>
 <p><code>Terms()</code> is a accessor function to extract the full distinct word vector</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">Terms</span>(AssociatedPress) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a>
-<a class="sourceLine" id="cb91-2" title="2"><span class="co">#&gt; [1] &quot;aaron&quot;      &quot;abandon&quot;    &quot;abandoned&quot;  &quot;abandoning&quot; &quot;abbott&quot;    </span></a>
-<a class="sourceLine" id="cb91-3" title="3"><span class="co">#&gt; [6] &quot;abboud&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">Terms</span>(AssociatedPress) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a>
+<a class="sourceLine" id="cb90-2" title="2"><span class="co">#&gt; [1] &quot;aaron&quot;      &quot;abandon&quot;    &quot;abandoned&quot;  &quot;abandoning&quot; &quot;abbott&quot;    </span></a>
+<a class="sourceLine" id="cb90-3" title="3"><span class="co">#&gt; [6] &quot;abboud&quot;</span></a></code></pre></div>
 <p><code>tidy</code> it to get a tidy data frame</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="co"># convert to tidy data frames with counts</span></a>
-<a class="sourceLine" id="cb92-2" title="2">ap_tidy &lt;-<span class="st"> </span><span class="kw">tidy</span>(AssociatedPress)</a>
-<a class="sourceLine" id="cb92-3" title="3">ap_tidy</a>
-<a class="sourceLine" id="cb92-4" title="4"><span class="co">#&gt; # A tibble: 302,031 x 3</span></a>
-<a class="sourceLine" id="cb92-5" title="5"><span class="co">#&gt;   document term      count</span></a>
-<a class="sourceLine" id="cb92-6" title="6"><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb92-7" title="7"><span class="co">#&gt; 1        1 adding        1</span></a>
-<a class="sourceLine" id="cb92-8" title="8"><span class="co">#&gt; 2        1 adult         2</span></a>
-<a class="sourceLine" id="cb92-9" title="9"><span class="co">#&gt; 3        1 ago           1</span></a>
-<a class="sourceLine" id="cb92-10" title="10"><span class="co">#&gt; 4        1 alcohol       1</span></a>
-<a class="sourceLine" id="cb92-11" title="11"><span class="co">#&gt; 5        1 allegedly     1</span></a>
-<a class="sourceLine" id="cb92-12" title="12"><span class="co">#&gt; 6        1 allen         1</span></a>
-<a class="sourceLine" id="cb92-13" title="13"><span class="co">#&gt; # ... with 3.02e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="co"># convert to tidy data frames with counts</span></a>
+<a class="sourceLine" id="cb91-2" title="2">ap_tidy &lt;-<span class="st"> </span><span class="kw">tidy</span>(AssociatedPress)</a>
+<a class="sourceLine" id="cb91-3" title="3">ap_tidy</a>
+<a class="sourceLine" id="cb91-4" title="4"><span class="co">#&gt; # A tibble: 302,031 x 3</span></a>
+<a class="sourceLine" id="cb91-5" title="5"><span class="co">#&gt;   document term      count</span></a>
+<a class="sourceLine" id="cb91-6" title="6"><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb91-7" title="7"><span class="co">#&gt; 1        1 adding        1</span></a>
+<a class="sourceLine" id="cb91-8" title="8"><span class="co">#&gt; 2        1 adult         2</span></a>
+<a class="sourceLine" id="cb91-9" title="9"><span class="co">#&gt; 3        1 ago           1</span></a>
+<a class="sourceLine" id="cb91-10" title="10"><span class="co">#&gt; 4        1 alcohol       1</span></a>
+<a class="sourceLine" id="cb91-11" title="11"><span class="co">#&gt; 5        1 allegedly     1</span></a>
+<a class="sourceLine" id="cb91-12" title="12"><span class="co">#&gt; 6        1 allen         1</span></a>
+<a class="sourceLine" id="cb91-13" title="13"><span class="co">#&gt; # ... with 3.02e+05 more rows</span></a></code></pre></div>
 <p><code>quanteda</code> uses <code>dfm</code> (document-feauture matrix) as a common data structure for text data. For example, the <code>quanteda</code> package comes with a corpus of presidential inauguration speeches, which can be converted to a dfm using the appropriate function.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">data</span>(<span class="st">&quot;data_corpus_inaugural&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;quanteda&quot;</span>)</a>
-<a class="sourceLine" id="cb93-2" title="2">quanteda<span class="op">::</span><span class="kw">dfm</span>(data_corpus_inaugural)</a>
-<a class="sourceLine" id="cb93-3" title="3"><span class="co">#&gt; Document-feature matrix of: 58 documents, 9,360 features (91.8% sparse) and 4 docvars.</span></a>
-<a class="sourceLine" id="cb93-4" title="4"><span class="co">#&gt;                  features</span></a>
-<a class="sourceLine" id="cb93-5" title="5"><span class="co">#&gt; docs              fellow-citizens  of the senate and house representatives :</span></a>
-<a class="sourceLine" id="cb93-6" title="6"><span class="co">#&gt;   1789-Washington               1  71 116      1  48     2               2 1</span></a>
-<a class="sourceLine" id="cb93-7" title="7"><span class="co">#&gt;   1793-Washington               0  11  13      0   2     0               0 1</span></a>
-<a class="sourceLine" id="cb93-8" title="8"><span class="co">#&gt;   1797-Adams                    3 140 163      1 130     0               2 0</span></a>
-<a class="sourceLine" id="cb93-9" title="9"><span class="co">#&gt;   1801-Jefferson                2 104 130      0  81     0               0 1</span></a>
-<a class="sourceLine" id="cb93-10" title="10"><span class="co">#&gt;   1805-Jefferson                0 101 143      0  93     0               0 0</span></a>
-<a class="sourceLine" id="cb93-11" title="11"><span class="co">#&gt;   1809-Madison                  1  69 104      0  43     0               0 0</span></a>
-<a class="sourceLine" id="cb93-12" title="12"><span class="co">#&gt;                  features</span></a>
-<a class="sourceLine" id="cb93-13" title="13"><span class="co">#&gt; docs              among vicissitudes</span></a>
-<a class="sourceLine" id="cb93-14" title="14"><span class="co">#&gt;   1789-Washington     1            1</span></a>
-<a class="sourceLine" id="cb93-15" title="15"><span class="co">#&gt;   1793-Washington     0            0</span></a>
-<a class="sourceLine" id="cb93-16" title="16"><span class="co">#&gt;   1797-Adams          4            0</span></a>
-<a class="sourceLine" id="cb93-17" title="17"><span class="co">#&gt;   1801-Jefferson      1            0</span></a>
-<a class="sourceLine" id="cb93-18" title="18"><span class="co">#&gt;   1805-Jefferson      7            0</span></a>
-<a class="sourceLine" id="cb93-19" title="19"><span class="co">#&gt;   1809-Madison        0            0</span></a>
-<a class="sourceLine" id="cb93-20" title="20"><span class="co">#&gt; [ reached max_ndoc ... 52 more documents, reached max_nfeat ... 9,350 more features ]</span></a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">data</span>(<span class="st">&quot;data_corpus_inaugural&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;quanteda&quot;</span>)</a>
+<a class="sourceLine" id="cb92-2" title="2">quanteda<span class="op">::</span><span class="kw">dfm</span>(data_corpus_inaugural)</a>
+<a class="sourceLine" id="cb92-3" title="3"><span class="co">#&gt; Document-feature matrix of: 58 documents, 9,360 features (91.8% sparse) and 4 docvars.</span></a>
+<a class="sourceLine" id="cb92-4" title="4"><span class="co">#&gt;                  features</span></a>
+<a class="sourceLine" id="cb92-5" title="5"><span class="co">#&gt; docs              fellow-citizens  of the senate and house representatives :</span></a>
+<a class="sourceLine" id="cb92-6" title="6"><span class="co">#&gt;   1789-Washington               1  71 116      1  48     2               2 1</span></a>
+<a class="sourceLine" id="cb92-7" title="7"><span class="co">#&gt;   1793-Washington               0  11  13      0   2     0               0 1</span></a>
+<a class="sourceLine" id="cb92-8" title="8"><span class="co">#&gt;   1797-Adams                    3 140 163      1 130     0               2 0</span></a>
+<a class="sourceLine" id="cb92-9" title="9"><span class="co">#&gt;   1801-Jefferson                2 104 130      0  81     0               0 1</span></a>
+<a class="sourceLine" id="cb92-10" title="10"><span class="co">#&gt;   1805-Jefferson                0 101 143      0  93     0               0 0</span></a>
+<a class="sourceLine" id="cb92-11" title="11"><span class="co">#&gt;   1809-Madison                  1  69 104      0  43     0               0 0</span></a>
+<a class="sourceLine" id="cb92-12" title="12"><span class="co">#&gt;                  features</span></a>
+<a class="sourceLine" id="cb92-13" title="13"><span class="co">#&gt; docs              among vicissitudes</span></a>
+<a class="sourceLine" id="cb92-14" title="14"><span class="co">#&gt;   1789-Washington     1            1</span></a>
+<a class="sourceLine" id="cb92-15" title="15"><span class="co">#&gt;   1793-Washington     0            0</span></a>
+<a class="sourceLine" id="cb92-16" title="16"><span class="co">#&gt;   1797-Adams          4            0</span></a>
+<a class="sourceLine" id="cb92-17" title="17"><span class="co">#&gt;   1801-Jefferson      1            0</span></a>
+<a class="sourceLine" id="cb92-18" title="18"><span class="co">#&gt;   1805-Jefferson      7            0</span></a>
+<a class="sourceLine" id="cb92-19" title="19"><span class="co">#&gt;   1809-Madison        0            0</span></a>
+<a class="sourceLine" id="cb92-20" title="20"><span class="co">#&gt; [ reached max_ndoc ... 52 more documents, reached max_nfeat ... 9,350 more features ]</span></a></code></pre></div>
 <p>We, of course, want to <code>tidy</code> it</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">inaugural &lt;-<span class="st"> </span>quanteda<span class="op">::</span><span class="kw">dfm</span>(data_corpus_inaugural) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb94-2" title="2"><span class="st">  </span><span class="kw">tidy</span>()</a>
-<a class="sourceLine" id="cb94-3" title="3"></a>
-<a class="sourceLine" id="cb94-4" title="4">inaugural</a>
-<a class="sourceLine" id="cb94-5" title="5"><span class="co">#&gt; # A tibble: 44,710 x 3</span></a>
-<a class="sourceLine" id="cb94-6" title="6"><span class="co">#&gt;   document        term            count</span></a>
-<a class="sourceLine" id="cb94-7" title="7"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;           &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb94-8" title="8"><span class="co">#&gt; 1 1789-Washington fellow-citizens     1</span></a>
-<a class="sourceLine" id="cb94-9" title="9"><span class="co">#&gt; 2 1797-Adams      fellow-citizens     3</span></a>
-<a class="sourceLine" id="cb94-10" title="10"><span class="co">#&gt; 3 1801-Jefferson  fellow-citizens     2</span></a>
-<a class="sourceLine" id="cb94-11" title="11"><span class="co">#&gt; 4 1809-Madison    fellow-citizens     1</span></a>
-<a class="sourceLine" id="cb94-12" title="12"><span class="co">#&gt; 5 1813-Madison    fellow-citizens     1</span></a>
-<a class="sourceLine" id="cb94-13" title="13"><span class="co">#&gt; 6 1817-Monroe     fellow-citizens     5</span></a>
-<a class="sourceLine" id="cb94-14" title="14"><span class="co">#&gt; # ... with 4.47e+04 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1">inaugural &lt;-<span class="st"> </span>quanteda<span class="op">::</span><span class="kw">dfm</span>(data_corpus_inaugural) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="st">  </span><span class="kw">tidy</span>()</a>
+<a class="sourceLine" id="cb93-3" title="3"></a>
+<a class="sourceLine" id="cb93-4" title="4">inaugural</a>
+<a class="sourceLine" id="cb93-5" title="5"><span class="co">#&gt; # A tibble: 44,710 x 3</span></a>
+<a class="sourceLine" id="cb93-6" title="6"><span class="co">#&gt;   document        term            count</span></a>
+<a class="sourceLine" id="cb93-7" title="7"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb93-8" title="8"><span class="co">#&gt; 1 1789-Washington fellow-citizens     1</span></a>
+<a class="sourceLine" id="cb93-9" title="9"><span class="co">#&gt; 2 1797-Adams      fellow-citizens     3</span></a>
+<a class="sourceLine" id="cb93-10" title="10"><span class="co">#&gt; 3 1801-Jefferson  fellow-citizens     2</span></a>
+<a class="sourceLine" id="cb93-11" title="11"><span class="co">#&gt; 4 1809-Madison    fellow-citizens     1</span></a>
+<a class="sourceLine" id="cb93-12" title="12"><span class="co">#&gt; 5 1813-Madison    fellow-citizens     1</span></a>
+<a class="sourceLine" id="cb93-13" title="13"><span class="co">#&gt; 6 1817-Monroe     fellow-citizens     5</span></a>
+<a class="sourceLine" id="cb93-14" title="14"><span class="co">#&gt; # ... with 4.47e+04 more rows</span></a></code></pre></div>
 <p>Suppose we would like to see how the usage of some user specified words change over time. We start by <code>complete()</code> the data frame, and then total words per speech:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">year_term_counts &lt;-<span class="st"> </span>inaugural <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb95-2" title="2"><span class="st">  </span><span class="kw">extract</span>(document, <span class="dt">into =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">regex =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">d{4})&quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb95-3" title="3"><span class="st">  </span><span class="kw">complete</span>(year, term, <span class="dt">fill =</span> <span class="kw">list</span>(<span class="dt">count =</span> <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb95-4" title="4"><span class="st">  </span><span class="kw">add_count</span>(year, <span class="dt">wt =</span> count, <span class="dt">name =</span> <span class="st">&quot;year_total&quot;</span>)</a>
-<a class="sourceLine" id="cb95-5" title="5"></a>
-<a class="sourceLine" id="cb95-6" title="6">year_term_counts</a>
-<a class="sourceLine" id="cb95-7" title="7"><span class="co">#&gt; # A tibble: 542,880 x 4</span></a>
-<a class="sourceLine" id="cb95-8" title="8"><span class="co">#&gt;    year term  count year_total</span></a>
-<a class="sourceLine" id="cb95-9" title="9"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb95-10" title="10"><span class="co">#&gt; 1  1789 &quot;&#39;&quot;       0       1537</span></a>
-<a class="sourceLine" id="cb95-11" title="11"><span class="co">#&gt; 2  1789 &quot;-&quot;       1       1537</span></a>
-<a class="sourceLine" id="cb95-12" title="12"><span class="co">#&gt; 3  1789 &quot;!&quot;       0       1537</span></a>
-<a class="sourceLine" id="cb95-13" title="13"><span class="co">#&gt; 4  1789 &quot;\&quot;&quot;      2       1537</span></a>
-<a class="sourceLine" id="cb95-14" title="14"><span class="co">#&gt; 5  1789 &quot;$&quot;       0       1537</span></a>
-<a class="sourceLine" id="cb95-15" title="15"><span class="co">#&gt; 6  1789 &quot;(&quot;       1       1537</span></a>
-<a class="sourceLine" id="cb95-16" title="16"><span class="co">#&gt; # ... with 5.429e+05 more rows</span></a></code></pre></div>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">year_term_counts <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-2" title="2"><span class="st">  </span><span class="kw">filter</span>(term <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;god&quot;</span>, <span class="st">&quot;america&quot;</span>, <span class="st">&quot;foreign&quot;</span>, <span class="st">&quot;union&quot;</span>, <span class="st">&quot;constitution&quot;</span>, <span class="st">&quot;freedom&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, count <span class="op">/</span><span class="st"> </span>year_total)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb96-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb96-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb96-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>term, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb96-7" title="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent_format</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb96-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;% frequency of word in inaugural address&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">year_term_counts &lt;-<span class="st"> </span>inaugural <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb94-2" title="2"><span class="st">  </span><span class="kw">extract</span>(document, <span class="dt">into =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">regex =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">d{4})&quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb94-3" title="3"><span class="st">  </span><span class="kw">complete</span>(year, term, <span class="dt">fill =</span> <span class="kw">list</span>(<span class="dt">count =</span> <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb94-4" title="4"><span class="st">  </span><span class="kw">add_count</span>(year, <span class="dt">wt =</span> count, <span class="dt">name =</span> <span class="st">&quot;year_total&quot;</span>)</a>
+<a class="sourceLine" id="cb94-5" title="5"></a>
+<a class="sourceLine" id="cb94-6" title="6">year_term_counts</a>
+<a class="sourceLine" id="cb94-7" title="7"><span class="co">#&gt; # A tibble: 542,880 x 4</span></a>
+<a class="sourceLine" id="cb94-8" title="8"><span class="co">#&gt;    year term  count year_total</span></a>
+<a class="sourceLine" id="cb94-9" title="9"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb94-10" title="10"><span class="co">#&gt; 1  1789 &quot;&#39;&quot;       0       1537</span></a>
+<a class="sourceLine" id="cb94-11" title="11"><span class="co">#&gt; 2  1789 &quot;-&quot;       1       1537</span></a>
+<a class="sourceLine" id="cb94-12" title="12"><span class="co">#&gt; 3  1789 &quot;!&quot;       0       1537</span></a>
+<a class="sourceLine" id="cb94-13" title="13"><span class="co">#&gt; 4  1789 &quot;\&quot;&quot;      2       1537</span></a>
+<a class="sourceLine" id="cb94-14" title="14"><span class="co">#&gt; 5  1789 &quot;$&quot;       0       1537</span></a>
+<a class="sourceLine" id="cb94-15" title="15"><span class="co">#&gt; 6  1789 &quot;(&quot;       1       1537</span></a>
+<a class="sourceLine" id="cb94-16" title="16"><span class="co">#&gt; # ... with 5.429e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">year_term_counts <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb95-2" title="2"><span class="st">  </span><span class="kw">filter</span>(term <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;god&quot;</span>, <span class="st">&quot;america&quot;</span>, <span class="st">&quot;foreign&quot;</span>, <span class="st">&quot;union&quot;</span>, <span class="st">&quot;constitution&quot;</span>, <span class="st">&quot;freedom&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb95-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, count <span class="op">/</span><span class="st"> </span>year_total)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb95-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb95-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb95-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>term, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb95-7" title="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent_format</span>()) <span class="op">+</span></a>
+<a class="sourceLine" id="cb95-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;% frequency of word in inaugural address&quot;</span>)</a></code></pre></div>
 <p><img src="non-tidy_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
             </section>

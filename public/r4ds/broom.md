@@ -1,6 +1,5 @@
 
 
-
 # broom: Tidy representation of models
 
 
@@ -29,7 +28,7 @@ gapminder %>%
                     y = continent))
 ```
 
-<img src="broom_files/figure-html/unnamed-chunk-3-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="broom_files/figure-html/unnamed-chunk-2-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 ## Examples 
@@ -87,7 +86,7 @@ iris_pca %>%
 #> [[1]]
 ```
 
-<img src="broom_files/figure-html/unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="broom_files/figure-html/unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -106,5 +105,5 @@ lm(Petal.Width ~ Petal.Length, data = iris) %>%
   autoplot(label.size = 3)
 ```
 
-<img src="broom_files/figure-html/unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="broom_files/figure-html/unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
 

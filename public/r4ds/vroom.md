@@ -1,10 +1,9 @@
 
 
+# (PART) Importing {-}  
 
-# (PART) Importing and APIs  {-}  
 
-
-# vroom  
+# vroom: Fast reading of delimited files
 
 **vroom**[@R-vroom]
 

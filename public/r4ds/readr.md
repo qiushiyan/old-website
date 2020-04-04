@@ -1,7 +1,6 @@
 
 
 
-
 # readr: Data import   
 
 
@@ -244,12 +243,12 @@ write_csv(x = gapminder, path = "data\\gapminder.csv")
 
 ### Exercises 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-13"><strong>(\#exr:unnamed-chunk-13) </strong></span>如果一个文件中的域是由"|"分隔的，那么应该使用哪个函数读取这个文件？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-12"><strong>(\#exr:unnamed-chunk-12) </strong></span>如果一个文件中的域是由"|"分隔的，那么应该使用哪个函数读取这个文件？  </div>\EndKnitrBlock{exercise}
 
 
 应该使用`read_delim(path, delim = "|")`
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-14"><strong>(\#exr:unnamed-chunk-14) </strong></span>`read_fwf()` 中最重要的参数是什么？   </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-13"><strong>(\#exr:unnamed-chunk-13) </strong></span>`read_fwf()` 中最重要的参数是什么？   </div>\EndKnitrBlock{exercise}
 
 `read_fwf()`用于固定宽度文件(fixed width files)。在固定宽度文件中，每一列的的宽度是固定的（不足的用某种填充符号填充），如第一列总是10个字符长度，第二列 5 个字符长度，第三列8个字符长度，每列内采取统一的对齐方式。`readr`安装时附带了一个固定宽度文件的示例,我们用一个变量存储它的路径：
 
@@ -572,7 +571,7 @@ parse_date("Nov/12/1998","%b/%d/%Y")
 
 ### Exercises   
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-33"><strong>(\#exr:unnamed-chunk-33) </strong></span>如果在`locale()`函数中把`decimal_mark`和`grouping_mark`设为同一个字符，会发生什么情况？如果将`decimal_mark`设为逗号，`grouping_mark`的默认值会发生什么变化？如果将`grouping_mark`设置为句点，`decimal_mark`的默认值会发生什么变化？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-32"><strong>(\#exr:unnamed-chunk-32) </strong></span>如果在`locale()`函数中把`decimal_mark`和`grouping_mark`设为同一个字符，会发生什么情况？如果将`decimal_mark`设为逗号，`grouping_mark`的默认值会发生什么变化？如果将`grouping_mark`设置为句点，`decimal_mark`的默认值会发生什么变化？  </div>\EndKnitrBlock{exercise}
 
 
 不能将`decimal_mark` 和 `group_mark` 设为同一个字符：
@@ -621,7 +620,7 @@ locale(grouping_mark = ".")
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-37"><strong>(\#exr:unnamed-chunk-37) </strong></span>`locale()`函数中的`date_format()`和`time_format()`参数有什么用？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-36"><strong>(\#exr:unnamed-chunk-36) </strong></span>`locale()`函数中的`date_format()`和`time_format()`参数有什么用？  </div>\EndKnitrBlock{exercise}
 
 
 `date_format()` 和 `time_format()` 和 `format` 参数的功能一样，用以指定日期时间数据的格式，如果在 `locale()` 中设定了以上两个参数，就不需要再设定 `format`；反之亦然：  
@@ -809,8 +808,8 @@ df <- tibble(
 )
 
 df %>% glimpse()
-#> Observations: 10
-#> Variables: 3
+#> Rows: 10
+#> Columns: 3
 #> $ x <chr> "0.78455981053412", "0.525363321648911", "0.336503465892747", "0....
 #> $ y <chr> "2", "10", "1", "6", "8", "7", "4", "5", "3", "9"
 #> $ z <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
@@ -821,8 +820,8 @@ df %>% type_convert() %>% glimpse()
 #>   x = col_double(),
 #>   y = col_double()
 #> )
-#> Observations: 10
-#> Variables: 3
+#> Rows: 10
+#> Columns: 3
 #> $ x <dbl> 0.7846, 0.5254, 0.3365, 0.5136, 0.5227, 0.5568, 0.7613, 0.5780, 0...
 #> $ y <dbl> 2, 10, 1, 6, 8, 7, 4, 5, 3, 9
 #> $ z <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
@@ -1250,7 +1249,7 @@ data_head <- read_excel("data/3headers_demo.xlsx",
 #> * `` -> ...3
 #> * `` -> ...4
 #> * `` -> ...5
-#> * ... and 3 more problems
+#> * ...
 
 data_head %>% slider::slide(~ as.vector(fill(.x, .direction = "down")))
 #> [[1]]

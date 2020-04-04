@@ -52,10 +52,10 @@
 <polyline points='180.13,237.99 180.13,235.25 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)' />
 <polyline points='292.06,237.99 292.06,235.25 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)' />
 <polyline points='403.98,237.99 403.98,235.25 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='44.11' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='48.19px' lengthAdjust='spacingAndGlyphs'>1月 01 06:00</text></g>
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='156.04' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='48.19px' lengthAdjust='spacingAndGlyphs'>1月 01 12:00</text></g>
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='267.96' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='48.19px' lengthAdjust='spacingAndGlyphs'>1月 01 18:00</text></g>
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='379.88' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='48.19px' lengthAdjust='spacingAndGlyphs'>1月 02 00:00</text></g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='42.77' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='50.89px' lengthAdjust='spacingAndGlyphs'>Jan 01 06:00</text></g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='154.69' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='50.89px' lengthAdjust='spacingAndGlyphs'>Jan 01 12:00</text></g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='266.61' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='50.89px' lengthAdjust='spacingAndGlyphs'>Jan 01 18:00</text></g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='378.54' y='246.48' style='font-size: 8.80px; fill: #4D4D4D; font-family: Arial;' textLength='50.89px' lengthAdjust='spacingAndGlyphs'>Jan 02 00:00</text></g>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text x='207.25' y='259.08' style='font-size: 11.00px; font-family: Arial;' textLength='45.25px' lengthAdjust='spacingAndGlyphs'>dep_time</text></g>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MjY2Ljk4fDAuMDA=)'><text transform='translate(13.35,133.82) rotate(-90)' style='font-size: 11.00px; font-family: Arial;' textLength='26.91px' lengthAdjust='spacingAndGlyphs'>count</text></g>
 </svg>

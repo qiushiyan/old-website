@@ -1,6 +1,5 @@
 
 
-
 # purrr: Functional programming  
 
 purrr tutorial : https://jennybc.github.io/purrr-tutorial/  

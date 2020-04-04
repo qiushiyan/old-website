@@ -1,7 +1,7 @@
 --- 
 title: 'Text Mining with R --- Notes'
 author: "Qiushi Yan"
-date: "2020-03-31"
+date: "2020-04-05"
 site: bookdown::bookdown_site
 documentclass: book
 github-repo: enixam/tidy-text-mining

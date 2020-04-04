@@ -1,4 +1,3 @@
-
 # tibble: Modern data frames
 
 
@@ -93,8 +92,8 @@ Yet we cannoto create new variables:
 
 ```r
 add_row(df, z = 0)
-#> Error: New rows in `add_row()` must use columns that already exist:
-#> * Can't find column `z` in `.data`.
+#> Error: New rows can't add columns.
+#> x Can't find column `z` in `.data`.
 ```
 
 
@@ -452,9 +451,10 @@ tibble(x = 1:4, y = 1)
 #> 3     3     1
 #> 4     4     1
 tibble(x = 1:4, y = 1:2)
-#> Error: Tibble columns must have consistent lengths, only values of length one are recycled:
-#> * Length 2: Column `y`
-#> * Length 4: Column `x`
+#> Error: Tibble columns must have compatible sizes.
+#> * Size 4: Existing data.
+#> * Size 2: Column `y`.
+#> i Only values of size one are recycled.
 
 data.frame(x = 1:4, y = 1:2)
 #>   x y
@@ -538,12 +538,12 @@ tibble(
 #> # A tibble: 1,000 x 5
 #>   a                   b              c     d e    
 #>   <dttm>              <date>     <int> <dbl> <chr>
-#> 1 2020-02-19 12:43:11 2020-02-20     1 0.392 i    
-#> 2 2020-02-19 05:46:45 2020-02-22     2 0.409 p    
-#> 3 2020-02-19 00:43:19 2020-03-04     3 0.944 t    
-#> 4 2020-02-19 05:27:48 2020-03-13     4 0.614 z    
-#> 5 2020-02-19 05:42:27 2020-03-05     5 0.672 f    
-#> 6 2020-02-19 06:37:16 2020-02-28     6 0.113 q    
+#> 1 2020-04-05 12:55:40 2020-04-06     1 0.392 i    
+#> 2 2020-04-05 05:59:14 2020-04-08     2 0.409 p    
+#> 3 2020-04-05 00:55:48 2020-04-19     3 0.944 t    
+#> 4 2020-04-05 05:40:17 2020-04-28     4 0.614 z    
+#> 5 2020-04-05 05:54:56 2020-04-20     5 0.672 f    
+#> 6 2020-04-05 06:49:45 2020-04-14     6 0.113 q    
 #> # ... with 994 more rows
 ```
 
@@ -593,7 +593,7 @@ nycflights13::flights %>%
 #>  8 2013-01-01 06:00:00
 #>  9 2013-01-01 06:00:00
 #> 10 2013-01-01 06:00:00
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,766 more rows
 ```
 
 ### Subsetting  
@@ -1082,7 +1082,7 @@ issues$VarClassDiffs %>% unnest(CLASS.BASE) %>% unnest(CLASS.COMP)
 
 ## Exercises  {#tibble-exercise}
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-42"><strong>(\#exr:unnamed-chunk-42) </strong></span>如何识别一个数据框是否为 `tibble`？</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-41"><strong>(\#exr:unnamed-chunk-41) </strong></span>如何识别一个数据框是否为 `tibble`？</div>\EndKnitrBlock{exercise}
 
 
 可以直接根据打印时的显示来判断。  
@@ -1099,7 +1099,7 @@ class(nycflights13::flights)
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-44"><strong>(\#exr:unnamed-chunk-44) </strong></span>在以下的数据框中练习如何引用不符合语法规则的变量名  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-43"><strong>(\#exr:unnamed-chunk-43) </strong></span>在以下的数据框中练习如何引用不符合语法规则的变量名  </div>\EndKnitrBlock{exercise}
 
 
 
@@ -1119,7 +1119,7 @@ ggplot(annoying,mapping = aes(x = `1`, y = `2`)) +
   geom_smooth(method = "lm",se = F)
 ```
 
-<img src="tibble_files/figure-html/unnamed-chunk-45-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="tibble_files/figure-html/unnamed-chunk-44-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 ## 创建一个名称为3的新列，其值为列2除以列1

@@ -1,5 +1,4 @@
 
-
 # Categorical data (facotr)
 
 ## Frequency and contingency table

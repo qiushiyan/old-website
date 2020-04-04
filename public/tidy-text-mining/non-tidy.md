@@ -3,9 +3,6 @@
 
 
 
-```r
-knitr::opts_chunk$set(cache = TRUE)
-```
 
 
 Non-tidy data structures, in particular matrcies, is essential in topic modeling where other packages for NLP in R play a major role. 

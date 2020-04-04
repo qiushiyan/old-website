@@ -1,7 +1,6 @@
 
 
 
-
 # lubridate: Dates and times
 
 
@@ -29,9 +28,9 @@ There are generally 3 types of date / time data :
 
 ```r
 today()
-#> [1] "2020-03-04"
+#> [1] "2020-04-04"
 now()
-#> [1] "2020-03-04 00:46:10 CST"
+#> [1] "2020-04-04 15:55:51 CST"
 ```
 
 除此之外，以下 3 种方法也可以创建日期或时间：  
@@ -119,7 +118,7 @@ flights %>%
 #> 4  2013     1     1     5     45 2013-01-01 05:45:00
 #> 5  2013     1     1     6      0 2013-01-01 06:00:00
 #> 6  2013     1     1     5     58 2013-01-01 05:58:00
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 `sec` in `make_datetime()` is unassigned so it defualts to base level 0. This is also how `make_date()` workds 
@@ -149,7 +148,7 @@ flights %>% select(dep_time,
 #> 4      544     1004            545           1022
 #> 5      554      812            600            837
 #> 6      554      740            558            728
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 为了创建出表示实际出发和到达时间的日期时间型数据，我们首先编写一个函数以使`make_datetime`函数适应`dep_time`和`arr_time`这种比较奇怪的表示方式，思想是使用模运算将小时成分与分钟成分分离。一旦创建了日期时间变量，我们就在本章剩余部分使用这些变量进行讨论：  
@@ -179,7 +178,7 @@ make_datetime_100 <- function(year, month, day, time) {
 #> 4 JFK    BQN          -1       -18 2013-01-01 05:44:00 2013-01-01 05:45:00
 #> 5 LGA    ATL          -6       -25 2013-01-01 05:54:00 2013-01-01 06:00:00
 #> 6 EWR    ORD          -4        12 2013-01-01 05:54:00 2013-01-01 05:58:00
-#> # ... with 3.281e+05 more rows, and 3 more variables: arr_time <dttm>,
+#> # ... with 328,057 more rows, and 3 more variables: arr_time <dttm>,
 #> #   sched_arr_time <dttm>, air_time <dbl>
 ```
 
@@ -193,7 +192,7 @@ flights_dt %>%
   geom_freqpoly(aes(x = dep_time),binwidth = 86400)  ## 86000秒= 1天
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-16-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-15-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -204,7 +203,7 @@ flights_dt %>%
   geom_freqpoly(binwidth = 600)   ## 600秒 = 10分钟
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-16-2.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-15-2.svg" width="80%" style="display: block; margin: auto;" />
 
 ### From other times  
 
@@ -213,10 +212,10 @@ You may want to switch between a date-time and a date. That’s the job of `as_d
 
 ```r
 today() %>% as_datetime()
-#> [1] "2020-03-04 UTC"
+#> [1] "2020-04-04 UTC"
 
 now() %>% as_date()
-#> [1] "2020-03-04"
+#> [1] "2020-04-04"
 ```
 
 Sometimes you’ll get date/times as numeric offsets from the “Unix Epoch”, 1970-01-01. If the offset is in seconds, use `as_datetime()`; if it’s in days, use `as_date()`.  
@@ -233,7 +232,7 @@ as_date(1)
 ### Exercises  
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-19"><strong>(\#exr:unnamed-chunk-19) </strong></span>What happens if you parse a string that contains invalid dates?</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-18"><strong>(\#exr:unnamed-chunk-18) </strong></span>What happens if you parse a string that contains invalid dates?</div>\EndKnitrBlock{exercise}
 
 If returns `NA` and throws a warning:
 
@@ -245,7 +244,7 @@ ymd(c("2010-10-10", "bananas"))
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-21"><strong>(\#exr:unnamed-chunk-21) </strong></span>Use the appropriate lubridate function to parse each of the following dates:</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-20"><strong>(\#exr:unnamed-chunk-20) </strong></span>Use the appropriate lubridate function to parse each of the following dates:</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -305,11 +304,11 @@ For `month()` and `wday()` you can set `label = TRUE` to return the abbreviated 
 
 ```r
 month(datetime, label = T)
-#> [1] 7月
-#> 12 Levels: 1月 < 2月 < 3月 < 4月 < 5月 < 6月 < 7月 < 8月 < 9月 < ... < 12月
+#> [1] Jul
+#> 12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < ... < Dec
 wday(datetime, label = T, abbr = F)
-#> [1] 星期五
-#> Levels: 星期日 < 星期一 < 星期二 < 星期三 < 星期四 < 星期五 < 星期六
+#> [1] Friday
+#> 7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
 ```
 
 通过 `wday()`函数，我们可以知道在工作日出发的航班要多于周末出发的航班：  
@@ -321,7 +320,7 @@ flights_dt %>%
   geom_bar()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-25-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-24-1.svg" width="80%" style="display: block; margin: auto;" />
 
 再看一个使用 `minute()` 函数获取分钟成分的例子。比如我们想知道出发时间的分钟数与平均到达延误时间的关系：  
 
@@ -334,7 +333,7 @@ flights_dt %>%
   geom_line()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-26-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-25-1.svg" width="80%" style="display: block; margin: auto;" />
 
 我们可以发现一个有趣的趋势，似乎在 20 ~ 30 分钟和第 50 ~ 60 分钟出发的航班的到达延误时间远远低于其他时间出发的航班。  
 
@@ -350,7 +349,7 @@ flights_dt %>%
   geom_bar()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-27-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-26-1.svg" width="80%" style="display: block; margin: auto;" />
 
 Note that unlike accessor functions, rounding functions still return a complte time unit, not individual components. 
 
@@ -447,14 +446,14 @@ flights_dt %>%
   labs(title = "All flight dep time in a day")
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-33-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-32-1.svg" width="80%" style="display: block; margin: auto;" />
 
 如果不用 `update()` ，我们可能需要先用`hour()、minute()、second()`获取三种成分，然后再用`make_datetime()`对这三种成分进行合并。  
 
 
 ### Exercises   
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-34"><strong>(\#exr:unnamed-chunk-34) </strong></span>以月份作为分组变量，在一年的范围内，航班时间在一天中的分布是如何变化的？ </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-33"><strong>(\#exr:unnamed-chunk-33) </strong></span>以月份作为分组变量，在一年的范围内，航班时间在一天中的分布是如何变化的？ </div>\EndKnitrBlock{exercise}
 
 
 
@@ -469,9 +468,9 @@ flights_dt %>%
   facet_wrap(vars(month), nrow = 4)
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-35-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-34-1.svg" width="80%" style="display: block; margin: auto;" />
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-36"><strong>(\#exr:unnamed-chunk-36) </strong></span>如果想要再将延误的几率降至最低，那么应该在星期几搭乘航班？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-35"><strong>(\#exr:unnamed-chunk-35) </strong></span>如果想要再将延误的几率降至最低，那么应该在星期几搭乘航班？  </div>\EndKnitrBlock{exercise}
 
 
 
@@ -484,10 +483,10 @@ flights_dt %>%
   geom_line(aes(group = 1))
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-37-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-36-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-38"><strong>(\#exr:unnamed-chunk-38) </strong></span>航班预计起飞的小时对应的平均延误时间在一天的范围内是如何变化的？ </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-37"><strong>(\#exr:unnamed-chunk-37) </strong></span>航班预计起飞的小时对应的平均延误时间在一天的范围内是如何变化的？ </div>\EndKnitrBlock{exercise}
 
 
 
@@ -501,7 +500,7 @@ flights_dt %>%
   geom_smooth()
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-39-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-38-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ## Time span {#time-span}
 
@@ -519,7 +518,7 @@ flights_dt %>%
 ```r
 my_age <- today() - ymd(19981112) 
 my_age
-#> Time difference of 7783 days
+#> Time difference of 7814 days
 ```
 
 `difftime` 对象的单位可以是秒、分钟、小时、日或周。这种模棱两可的对象处理起来非常困难，，所以 lubridate提供了总是以秒为单位的另一种时间间隔：**时期**。
@@ -527,7 +526,7 @@ my_age
 
 ```r
 as.duration(my_age)
-#> [1] "672451200s (~21.31 years)"
+#> [1] "675129600s (~21.39 years)"
 ```
 
 可以用很多方便的函数来构造时期，它们有统一的格式`d + 时间单位（复数）`：  
@@ -566,10 +565,10 @@ dyears(1) + dweeks(12) + ddays(10)
 
 ```r
 (tomorrow <- today() + ddays(1))
-#> [1] "2020-03-05"
+#> [1] "2020-04-05"
 
 (last_year <- now() - dyears(1))
-#> [1] "2019-03-05 00:46:46 CST"
+#> [1] "2019-04-05 15:56:26 CST"
 ```
 
 然而，因为时期表示的是秒为单位的一个精确数值，有时我们会得到意想不到的结果：  
@@ -694,7 +693,7 @@ flights_dt %>%
 #> 4 2013-01-01 01:46:00 2013-01-01 21:02:00
 #> 5 2013-01-01 00:25:00 2013-01-01 21:08:00
 #> 6 2013-01-01 00:16:00 2013-01-01 21:20:00
-#> # ... with 1.063e+04 more rows
+#> # ... with 10,627 more rows
 ```
 
 这些都是过夜航班。我们使用了同一种日期来表示出发时间和到达时间，但这些航班是在第二天到达的。将每个过夜航班的到达时间加上一个`days(1)`，就可以解决这个问题了：  
@@ -734,7 +733,7 @@ interval(ymd(20090201), ymd(20090101))
 ```r
 next_year <- today() + years(1)
 today() %--% next_year 
-#> [1] 2020-03-04 UTC--2021-03-04 UTC
+#> [1] 2020-04-04 UTC--2021-04-04 UTC
 ```
 
 要想知道一个区间内有多少个阶段，需要使用整数除法。利用区间进行精确计算：
@@ -761,7 +760,7 @@ today() %--% next_year
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-59"><strong>(\#exr:unnamed-chunk-59) </strong></span>创建一个日期向量来给出 2015 年每个月的第一天 </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-58"><strong>(\#exr:unnamed-chunk-58) </strong></span>创建一个日期向量来给出 2015 年每个月的第一天 </div>\EndKnitrBlock{exercise}
 
 
 
@@ -779,7 +778,7 @@ floor_date(today(), "year") + months(0:11)
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-61"><strong>(\#exr:unnamed-chunk-61) </strong></span>编写一个函数，输入你的生日（日期型），返回你的年龄（以年为单位）：  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-60"><strong>(\#exr:unnamed-chunk-60) </strong></span>编写一个函数，输入你的生日（日期型），返回你的年龄（以年为单位）：  </div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -881,7 +880,7 @@ It is worth mentioning that `tsibble` also provides similar functions like `year
 
 ```r
 as_date_yq(Sys.time())
-#> [1] "2020-Q1"
+#> [1] "2020-Q2"
 as_date_yq(20141)
 #> [1] "2014-Q1"
 as_date_ym(201412) 
@@ -927,11 +926,11 @@ Accessor functions in `dint` are compatible with `Date`, `POSIXct` classes, so a
 ```r
 # dint accessor functions on other classes
 get_quarter(Sys.Date())
-#> [1] 1
+#> [1] 2
 get_month(ymd(20200303))
 #> [1] 3
 get_isoweek(Sys.time())
-#> [1] 10
+#> [1] 14
 
 # lubridate accessor functions on date_xx classes 
 year(q)
@@ -1006,18 +1005,18 @@ There are some shorthands functions for formatting
 
 ```r
 format_yq(Sys.Date())
-#> [1] "2020-Q1"
+#> [1] "2020-Q2"
 format_yq_short(Sys.Date())
-#> [1] "2020.1"
+#> [1] "2020.2"
 format_yq_shorter(Sys.Date())
-#> [1] "20.1"
+#> [1] "20.2"
 
 format_ym(Sys.Date())
-#> [1] "2020-M03"
+#> [1] "2020-M04"
 format_ym_short(Sys.Date())
-#> [1] "2020.03"
+#> [1] "2020.04"
 format_ym_shorter(Sys.Date())
-#> [1] "20.03"
+#> [1] "20.04"
 ```
 
 
@@ -1049,7 +1048,7 @@ ggplot(q) +
 p1 + p2
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-76-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="lubridate_files/figure-html/unnamed-chunk-75-1.svg" width="80%" style="display: block; margin: auto;" />
 
 Use `format_**` in `Date` axes   
 
@@ -1073,5 +1072,5 @@ p + scale_x_date(labels = format_ym_short) + ggtitle("date_ym_short")
 p + scale_x_date(labels = format_yw_shorter) + ggtitle("date_yw_shorter")
 ```
 
-<img src="lubridate_files/figure-html/unnamed-chunk-77-1.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-77-2.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-77-3.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-77-4.svg" width="50%" />
+<img src="lubridate_files/figure-html/unnamed-chunk-76-1.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-76-2.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-76-3.svg" width="50%" /><img src="lubridate_files/figure-html/unnamed-chunk-76-4.svg" width="50%" />
 

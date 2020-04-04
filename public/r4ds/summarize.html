@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.4 summarize() | R for data science: tidyverse and beyond</title>
   <meta name="description" content="1.4 summarize() | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.4 summarize() | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-03-04" />
+<meta name="date" content="2020-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -314,83 +314,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="broomextra.html"><a href="broomextra.html"><i class="fa fa-check"></i><b>9.3</b> broomExtra</a></li>
 <li class="chapter" data-level="9.4" data-path="ggfortify.html"><a href="ggfortify.html"><i class="fa fa-check"></i><b>9.4</b> ggfortify</a></li>
 </ul></li>
-<li class="part"><span><b>II Importing and APIs</b></span></li>
-<li class="chapter" data-level="10" data-path="vroom.html"><a href="vroom.html"><i class="fa fa-check"></i><b>10</b> vroom</a></li>
-<li class="chapter" data-level="11" data-path="data-apis.html"><a href="data-apis.html"><i class="fa fa-check"></i><b>11</b> Data APIs</a><ul>
-<li class="chapter" data-level="11.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>11.1</b> WDI</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>11.1.1</b> <code>WDIsearch()</code></a></li>
-<li class="chapter" data-level="11.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>11.1.2</b> <code>WDI</code></a></li>
+<li class="part"><span><b>II Importing</b></span></li>
+<li class="chapter" data-level="10" data-path="vroom-fast-reading-of-delimited-files.html"><a href="vroom-fast-reading-of-delimited-files.html"><i class="fa fa-check"></i><b>10</b> vroom: Fast reading of delimited files</a></li>
+<li class="chapter" data-level="11" data-path="reading-in-data-from-other-formats.html"><a href="reading-in-data-from-other-formats.html"><i class="fa fa-check"></i><b>11</b> Reading in data from other formats</a><ul>
+<li class="chapter" data-level="11.1" data-path="pdf.html"><a href="pdf.html"><i class="fa fa-check"></i><b>11.1</b> PDF</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="pdf.html"><a href="pdf.html#scraping-pdf-data"><i class="fa fa-check"></i><b>11.1.1</b> Scraping pdf data</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>11.2</b> ipumsr</a></li>
+<li class="chapter" data-level="11.2" data-path="office-documents.html"><a href="office-documents.html"><i class="fa fa-check"></i><b>11.2</b> Office documents</a></li>
+<li class="chapter" data-level="11.3" data-path="google-sheet.html"><a href="google-sheet.html"><i class="fa fa-check"></i><b>11.3</b> Google sheet</a></li>
+<li class="chapter" data-level="11.4" data-path="images.html"><a href="images.html"><i class="fa fa-check"></i><b>11.4</b> Images</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="useful-apis.html"><a href="useful-apis.html"><i class="fa fa-check"></i><b>12</b> Useful APIs</a><ul>
+<li class="chapter" data-level="12.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>12.1</b> WDI</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>12.1.1</b> <code>WDIsearch()</code></a></li>
+<li class="chapter" data-level="12.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>12.1.2</b> <code>WDI</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>12.2</b> ipumsr</a></li>
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
-<li class="chapter" data-level="12" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>12</b> Data Summary</a><ul>
-<li class="chapter" data-level="12.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>12.1</b> skimr</a></li>
-<li class="chapter" data-level="12.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>12.2</b> visdat</a></li>
-<li class="chapter" data-level="12.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>12.3</b> summarytools</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>12.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="12.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>12.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="13" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>13</b> Data summary</a><ul>
+<li class="chapter" data-level="13.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>13.1</b> skimr</a></li>
+<li class="chapter" data-level="13.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>13.2</b> visdat</a></li>
+<li class="chapter" data-level="13.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>13.3</b> summarytools</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>13.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="13.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>13.3.2</b> <code>descr()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>12.4</b> gt and gtsummary</a></li>
-<li class="chapter" data-level="12.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>12.5</b> naniar</a></li>
+<li class="chapter" data-level="13.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>13.4</b> gt and gtsummary</a></li>
+<li class="chapter" data-level="13.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>13.5</b> naniar</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>13</b> Janitor</a><ul>
-<li class="chapter" data-level="13.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>13.1</b> cleaning</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>13.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="14" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>14</b> Janitor</a><ul>
+<li class="chapter" data-level="14.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>14.1</b> cleaning</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>14.1.1</b> <code>clean_names</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>13.2</b> Exploring</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>13.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="13.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>13.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="13.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>13.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="13.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>13.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="13.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>13.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="13.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>13.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="13.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>13.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="14.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>14.2</b> Exploring</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>14.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="14.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>14.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="14.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>14.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="14.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>14.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="14.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>14.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="14.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>14.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="14.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>14.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>14</b> data.table</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
-<li class="chapter" data-level="14.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>14.2</b> dtplyr</a></li>
-<li class="chapter" data-level="14.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>14.3</b> maditr</a></li>
-<li class="chapter" data-level="14.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>14.4</b> tidyfast</a></li>
-<li class="chapter" data-level="14.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>14.5</b> disk.frame</a></li>
+<li class="chapter" data-level="15" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>15</b> data.table</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>15.2</b> dtplyr</a></li>
+<li class="chapter" data-level="15.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>15.3</b> maditr</a></li>
+<li class="chapter" data-level="15.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>15.4</b> tidyfast</a></li>
+<li class="chapter" data-level="15.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>15.5</b> disk.frame</a></li>
 </ul></li>
 <li class="part"><span><b>IV Miscellaneous tools</b></span></li>
-<li class="chapter" data-level="15" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>15</b> Advanced relational data</a><ul>
-<li class="chapter" data-level="15.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>15.1</b> fuzzyjoin</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>15.1.1</b> inexact matching</a></li>
-<li class="chapter" data-level="15.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>15.1.2</b> stringdist</a></li>
+<li class="chapter" data-level="16" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>16</b> Advanced relational data</a><ul>
+<li class="chapter" data-level="16.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>16.1</b> fuzzyjoin</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>16.1.1</b> inexact matching</a></li>
+<li class="chapter" data-level="16.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>16.1.2</b> stringdist</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>15.2</b> funneljoin</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>15.2.1</b> <code>after_join()</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>15.2.2</b> funnel in one table</a></li>
+<li class="chapter" data-level="16.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>16.2</b> funneljoin</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>16.2.1</b> <code>after_join()</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>16.2.2</b> funnel in one table</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>15.3</b> dm</a></li>
+<li class="chapter" data-level="16.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>16.3</b> dm</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>16</b> Categorical data (facotr)</a><ul>
-<li class="chapter" data-level="16.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>16.1</b> Frequency and contingency table</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>16.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
+<li class="chapter" data-level="17" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>17</b> Categorical data (facotr)</a><ul>
+<li class="chapter" data-level="17.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>17.1</b> Frequency and contingency table</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>17.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>16.2</b> Coding</a><ul>
-<li class="chapter" data-level="16.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>16.2.1</b> <code>rec()</code></a></li>
+<li class="chapter" data-level="17.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>17.2</b> Coding</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>17.2.1</b> <code>rec()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>16.3</b> Cutting</a><ul>
-<li class="chapter" data-level="16.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>16.3.1</b> <code>chop()</code></a></li>
+<li class="chapter" data-level="17.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>17.3</b> Cutting</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>17.3.1</b> <code>chop()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>17</b> Dealing with missing values</a><ul>
-<li class="chapter" data-level="17.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>17.1</b> Exploring</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>17.1.1</b> naniar</a></li>
-<li class="chapter" data-level="17.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>17.1.2</b> Replace a value with NA</a></li>
-<li class="chapter" data-level="17.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>17.1.3</b> janitor</a></li>
-<li class="chapter" data-level="17.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>17.1.4</b> sjmisc</a></li>
+<li class="chapter" data-level="18" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>18</b> Dealing with missing values</a><ul>
+<li class="chapter" data-level="18.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>18.1</b> Exploring</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>18.1.1</b> naniar</a></li>
+<li class="chapter" data-level="18.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>18.1.2</b> Replace a value with NA</a></li>
+<li class="chapter" data-level="18.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>18.1.3</b> janitor</a></li>
+<li class="chapter" data-level="18.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>18.1.4</b> sjmisc</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>17.2</b> Wrangling</a><ul>
-<li class="chapter" data-level="17.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>17.2.1</b> tidyr</a></li>
-<li class="chapter" data-level="17.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>17.2.2</b> janitor</a></li>
-<li class="chapter" data-level="17.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>17.2.3</b> visdat</a></li>
+<li class="chapter" data-level="18.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>18.2</b> Wrangling</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>18.2.1</b> tidyr</a></li>
+<li class="chapter" data-level="18.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>18.2.2</b> janitor</a></li>
+<li class="chapter" data-level="18.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>18.2.3</b> visdat</a></li>
 </ul></li>
-<li class="chapter" data-level="17.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>17.3</b> Imputation</a></li>
+<li class="chapter" data-level="18.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>18.3</b> Imputation</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -678,7 +686,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb94-4" title="4"></a>
 <a class="sourceLine" id="cb94-5" title="5"><span class="kw">ggplot</span>(delays) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb94-6" title="6"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(delay))</a></code></pre></div>
-<p><img src="dplyr-core_files/figure-html/unnamed-chunk-104-1.svg" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="dplyr-core_files/figure-html/unnamed-chunk-103-1.svg" width="80%" style="display: block; margin: auto;" /></p>
 <p>有些飞机的<strong>平均</strong>到达延误事件竟然接近 300 分钟，我们可以画一张航班数量和平均延误时间的散点图，一遍获得更深刻的理解:</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="co">## n = n()对group_by中的变量水平进行计数，生成一个计数变量命名为n</span></a>
 <a class="sourceLine" id="cb95-2" title="2">delays &lt;-<span class="st"> </span>not_cancelled <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -688,7 +696,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb95-6" title="6">    <span class="dt">n =</span> <span class="kw">n</span>())</a>
 <a class="sourceLine" id="cb95-7" title="7"></a>
 <a class="sourceLine" id="cb95-8" title="8"><span class="kw">ggplot</span>(delays) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> n,<span class="dt">y =</span> delay),<span class="dt">alpha =</span> <span class="fl">0.1</span>)</a></code></pre></div>
-<p><img src="dplyr-core_files/figure-html/unnamed-chunk-105-1.svg" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="dplyr-core_files/figure-html/unnamed-chunk-104-1.svg" width="80%" style="display: block; margin: auto;" /></p>
 <p>从散点图可以看出，如果航班对应的出航次数非常少时，平均延误时间的变动特别大，所有延误时间较长的航班的出航次数几乎都在 0 右边一点点。这张图的形状非常能说明问题:当绘制均值（或其他摘要统计量）和分组规模的关系时，总能看到样本量的增加，变动在不断减小。（样本统计量的方差随样本数变小）。</p>
 <p>这种数据模式还有另外一种常见的变体。我们来看一下棒球击球手的平均表现与击球次数之间的关系。我们用Lahman包中的数据埃及算棒球大联盟中的每个棒球队员的加大率（安打数 / 打数):</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">library</span>(Lahman)</a>
@@ -703,7 +711,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb96-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(ab, ba)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb96-11" title="11"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb96-12" title="12"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="dplyr-core_files/figure-html/unnamed-chunk-106-1.svg" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="dplyr-core_files/figure-html/unnamed-chunk-105-1.svg" width="80%" style="display: block; margin: auto;" /></p>
 <p>当绘制击球手的能力（用打击率 ba 衡量）与击球机会数量（用总打数ab衡量）之间的关系时，可以看到两个趋势：</p>
 <ul>
 <li>总大数越多，不同击球手的打击率之间变动越小<br />
@@ -722,7 +730,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb97-9" title="9"><span class="co">#&gt; 4 banisje01     1     1</span></a>
 <a class="sourceLine" id="cb97-10" title="10"><span class="co">#&gt; 5 bartocl01     1     1</span></a>
 <a class="sourceLine" id="cb97-11" title="11"><span class="co">#&gt; 6 bassdo01      1     1</span></a>
-<a class="sourceLine" id="cb97-12" title="12"><span class="co">#&gt; # ... with 1.942e+04 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb97-12" title="12"><span class="co">#&gt; # ... with 19,422 more rows</span></a></code></pre></div>
 </div>
 <div id="逻辑值的计数和比例sumx-10-和-meany-0" class="section level3">
 <h3><span class="header-section-number">1.4.3</span> 逻辑值的计数和比例:<code>sum(x &gt; 10) 和 mean(y == 0)</code></h3>

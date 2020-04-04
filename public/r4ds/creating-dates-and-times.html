@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.1 Creating dates and times | R for data science: tidyverse and beyond</title>
   <meta name="description" content="4.1 Creating dates and times | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.1 Creating dates and times | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-03-04" />
+<meta name="date" content="2020-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -314,83 +314,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="broomextra.html"><a href="broomextra.html"><i class="fa fa-check"></i><b>9.3</b> broomExtra</a></li>
 <li class="chapter" data-level="9.4" data-path="ggfortify.html"><a href="ggfortify.html"><i class="fa fa-check"></i><b>9.4</b> ggfortify</a></li>
 </ul></li>
-<li class="part"><span><b>II Importing and APIs</b></span></li>
-<li class="chapter" data-level="10" data-path="vroom.html"><a href="vroom.html"><i class="fa fa-check"></i><b>10</b> vroom</a></li>
-<li class="chapter" data-level="11" data-path="data-apis.html"><a href="data-apis.html"><i class="fa fa-check"></i><b>11</b> Data APIs</a><ul>
-<li class="chapter" data-level="11.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>11.1</b> WDI</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>11.1.1</b> <code>WDIsearch()</code></a></li>
-<li class="chapter" data-level="11.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>11.1.2</b> <code>WDI</code></a></li>
+<li class="part"><span><b>II Importing</b></span></li>
+<li class="chapter" data-level="10" data-path="vroom-fast-reading-of-delimited-files.html"><a href="vroom-fast-reading-of-delimited-files.html"><i class="fa fa-check"></i><b>10</b> vroom: Fast reading of delimited files</a></li>
+<li class="chapter" data-level="11" data-path="reading-in-data-from-other-formats.html"><a href="reading-in-data-from-other-formats.html"><i class="fa fa-check"></i><b>11</b> Reading in data from other formats</a><ul>
+<li class="chapter" data-level="11.1" data-path="pdf.html"><a href="pdf.html"><i class="fa fa-check"></i><b>11.1</b> PDF</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="pdf.html"><a href="pdf.html#scraping-pdf-data"><i class="fa fa-check"></i><b>11.1.1</b> Scraping pdf data</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>11.2</b> ipumsr</a></li>
+<li class="chapter" data-level="11.2" data-path="office-documents.html"><a href="office-documents.html"><i class="fa fa-check"></i><b>11.2</b> Office documents</a></li>
+<li class="chapter" data-level="11.3" data-path="google-sheet.html"><a href="google-sheet.html"><i class="fa fa-check"></i><b>11.3</b> Google sheet</a></li>
+<li class="chapter" data-level="11.4" data-path="images.html"><a href="images.html"><i class="fa fa-check"></i><b>11.4</b> Images</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="useful-apis.html"><a href="useful-apis.html"><i class="fa fa-check"></i><b>12</b> Useful APIs</a><ul>
+<li class="chapter" data-level="12.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>12.1</b> WDI</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>12.1.1</b> <code>WDIsearch()</code></a></li>
+<li class="chapter" data-level="12.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>12.1.2</b> <code>WDI</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>12.2</b> ipumsr</a></li>
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
-<li class="chapter" data-level="12" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>12</b> Data Summary</a><ul>
-<li class="chapter" data-level="12.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>12.1</b> skimr</a></li>
-<li class="chapter" data-level="12.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>12.2</b> visdat</a></li>
-<li class="chapter" data-level="12.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>12.3</b> summarytools</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>12.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="12.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>12.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="13" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>13</b> Data summary</a><ul>
+<li class="chapter" data-level="13.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>13.1</b> skimr</a></li>
+<li class="chapter" data-level="13.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>13.2</b> visdat</a></li>
+<li class="chapter" data-level="13.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>13.3</b> summarytools</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>13.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="13.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>13.3.2</b> <code>descr()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>12.4</b> gt and gtsummary</a></li>
-<li class="chapter" data-level="12.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>12.5</b> naniar</a></li>
+<li class="chapter" data-level="13.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>13.4</b> gt and gtsummary</a></li>
+<li class="chapter" data-level="13.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>13.5</b> naniar</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>13</b> Janitor</a><ul>
-<li class="chapter" data-level="13.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>13.1</b> cleaning</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>13.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="14" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>14</b> Janitor</a><ul>
+<li class="chapter" data-level="14.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>14.1</b> cleaning</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>14.1.1</b> <code>clean_names</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>13.2</b> Exploring</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>13.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="13.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>13.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="13.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>13.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="13.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>13.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="13.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>13.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="13.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>13.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="13.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>13.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="14.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>14.2</b> Exploring</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>14.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="14.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>14.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="14.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>14.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="14.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>14.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="14.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>14.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="14.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>14.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="14.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>14.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>14</b> data.table</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
-<li class="chapter" data-level="14.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>14.2</b> dtplyr</a></li>
-<li class="chapter" data-level="14.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>14.3</b> maditr</a></li>
-<li class="chapter" data-level="14.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>14.4</b> tidyfast</a></li>
-<li class="chapter" data-level="14.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>14.5</b> disk.frame</a></li>
+<li class="chapter" data-level="15" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>15</b> data.table</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>15.2</b> dtplyr</a></li>
+<li class="chapter" data-level="15.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>15.3</b> maditr</a></li>
+<li class="chapter" data-level="15.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>15.4</b> tidyfast</a></li>
+<li class="chapter" data-level="15.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>15.5</b> disk.frame</a></li>
 </ul></li>
 <li class="part"><span><b>IV Miscellaneous tools</b></span></li>
-<li class="chapter" data-level="15" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>15</b> Advanced relational data</a><ul>
-<li class="chapter" data-level="15.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>15.1</b> fuzzyjoin</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>15.1.1</b> inexact matching</a></li>
-<li class="chapter" data-level="15.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>15.1.2</b> stringdist</a></li>
+<li class="chapter" data-level="16" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>16</b> Advanced relational data</a><ul>
+<li class="chapter" data-level="16.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>16.1</b> fuzzyjoin</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>16.1.1</b> inexact matching</a></li>
+<li class="chapter" data-level="16.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>16.1.2</b> stringdist</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>15.2</b> funneljoin</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>15.2.1</b> <code>after_join()</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>15.2.2</b> funnel in one table</a></li>
+<li class="chapter" data-level="16.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>16.2</b> funneljoin</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>16.2.1</b> <code>after_join()</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>16.2.2</b> funnel in one table</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>15.3</b> dm</a></li>
+<li class="chapter" data-level="16.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>16.3</b> dm</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>16</b> Categorical data (facotr)</a><ul>
-<li class="chapter" data-level="16.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>16.1</b> Frequency and contingency table</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>16.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
+<li class="chapter" data-level="17" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>17</b> Categorical data (facotr)</a><ul>
+<li class="chapter" data-level="17.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>17.1</b> Frequency and contingency table</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>17.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>16.2</b> Coding</a><ul>
-<li class="chapter" data-level="16.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>16.2.1</b> <code>rec()</code></a></li>
+<li class="chapter" data-level="17.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>17.2</b> Coding</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>17.2.1</b> <code>rec()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>16.3</b> Cutting</a><ul>
-<li class="chapter" data-level="16.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>16.3.1</b> <code>chop()</code></a></li>
+<li class="chapter" data-level="17.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>17.3</b> Cutting</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>17.3.1</b> <code>chop()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>17</b> Dealing with missing values</a><ul>
-<li class="chapter" data-level="17.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>17.1</b> Exploring</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>17.1.1</b> naniar</a></li>
-<li class="chapter" data-level="17.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>17.1.2</b> Replace a value with NA</a></li>
-<li class="chapter" data-level="17.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>17.1.3</b> janitor</a></li>
-<li class="chapter" data-level="17.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>17.1.4</b> sjmisc</a></li>
+<li class="chapter" data-level="18" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>18</b> Dealing with missing values</a><ul>
+<li class="chapter" data-level="18.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>18.1</b> Exploring</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>18.1.1</b> naniar</a></li>
+<li class="chapter" data-level="18.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>18.1.2</b> Replace a value with NA</a></li>
+<li class="chapter" data-level="18.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>18.1.3</b> janitor</a></li>
+<li class="chapter" data-level="18.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>18.1.4</b> sjmisc</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>17.2</b> Wrangling</a><ul>
-<li class="chapter" data-level="17.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>17.2.1</b> tidyr</a></li>
-<li class="chapter" data-level="17.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>17.2.2</b> janitor</a></li>
-<li class="chapter" data-level="17.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>17.2.3</b> visdat</a></li>
+<li class="chapter" data-level="18.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>18.2</b> Wrangling</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>18.2.1</b> tidyr</a></li>
+<li class="chapter" data-level="18.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>18.2.2</b> janitor</a></li>
+<li class="chapter" data-level="18.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>18.2.3</b> visdat</a></li>
 </ul></li>
-<li class="chapter" data-level="17.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>17.3</b> Imputation</a></li>
+<li class="chapter" data-level="18.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>18.3</b> Imputation</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -426,9 +434,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>如果能够满足需要，就应该使用最简单的数据类型。这意味着只要能够使用日期型数据，那么就不应该使用日期时间型数据。</p>
 <p>要想得到当前日期或当前时期时间，可以使用 <code>today()</code> 或 <code>now()</code> ：</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1"><span class="kw">today</span>()</a>
-<a class="sourceLine" id="cb222-2" title="2"><span class="co">#&gt; [1] &quot;2020-03-04&quot;</span></a>
+<a class="sourceLine" id="cb222-2" title="2"><span class="co">#&gt; [1] &quot;2020-04-04&quot;</span></a>
 <a class="sourceLine" id="cb222-3" title="3"><span class="kw">now</span>()</a>
-<a class="sourceLine" id="cb222-4" title="4"><span class="co">#&gt; [1] &quot;2020-03-04 00:46:10 CST&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb222-4" title="4"><span class="co">#&gt; [1] &quot;2020-04-04 15:55:51 CST&quot;</span></a></code></pre></div>
 <p>除此之外，以下 3 种方法也可以创建日期或时间：</p>
 <ul>
 <li>通过字符串创建<br />
@@ -484,7 +492,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb229-14" title="14"><span class="co">#&gt; 4  2013     1     1     5     45 2013-01-01 05:45:00</span></a>
 <a class="sourceLine" id="cb229-15" title="15"><span class="co">#&gt; 5  2013     1     1     6      0 2013-01-01 06:00:00</span></a>
 <a class="sourceLine" id="cb229-16" title="16"><span class="co">#&gt; 6  2013     1     1     5     58 2013-01-01 05:58:00</span></a>
-<a class="sourceLine" id="cb229-17" title="17"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb229-17" title="17"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p><code>sec</code> in <code>make_datetime()</code> is unassigned so it defualts to base level 0. This is also how <code>make_date()</code> workds</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="kw">make_date</span>(<span class="dt">year =</span> <span class="dv">2020</span>, <span class="dt">day =</span> <span class="dv">20</span>)</a>
 <a class="sourceLine" id="cb230-2" title="2"><span class="co">#&gt; [1] &quot;2020-01-20&quot;</span></a>
@@ -504,7 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb231-11" title="11"><span class="co">#&gt; 4      544     1004            545           1022</span></a>
 <a class="sourceLine" id="cb231-12" title="12"><span class="co">#&gt; 5      554      812            600            837</span></a>
 <a class="sourceLine" id="cb231-13" title="13"><span class="co">#&gt; 6      554      740            558            728</span></a>
-<a class="sourceLine" id="cb231-14" title="14"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb231-14" title="14"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>为了创建出表示实际出发和到达时间的日期时间型数据，我们首先编写一个函数以使<code>make_datetime</code>函数适应<code>dep_time</code>和<code>arr_time</code>这种比较奇怪的表示方式，思想是使用模运算将小时成分与分钟成分分离。一旦创建了日期时间变量，我们就在本章剩余部分使用这些变量进行讨论：</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">make_datetime_<span class="dv">100</span> &lt;-<span class="st"> </span><span class="cf">function</span>(year, month, day, time) {</a>
 <a class="sourceLine" id="cb232-2" title="2">  hour =<span class="st"> </span>time <span class="op">%/%</span><span class="st"> </span><span class="dv">100</span></a>
@@ -530,30 +538,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb232-22" title="22"><span class="co">#&gt; 4 JFK    BQN          -1       -18 2013-01-01 05:44:00 2013-01-01 05:45:00</span></a>
 <a class="sourceLine" id="cb232-23" title="23"><span class="co">#&gt; 5 LGA    ATL          -6       -25 2013-01-01 05:54:00 2013-01-01 06:00:00</span></a>
 <a class="sourceLine" id="cb232-24" title="24"><span class="co">#&gt; 6 EWR    ORD          -4        12 2013-01-01 05:54:00 2013-01-01 05:58:00</span></a>
-<a class="sourceLine" id="cb232-25" title="25"><span class="co">#&gt; # ... with 3.281e+05 more rows, and 3 more variables: arr_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb232-25" title="25"><span class="co">#&gt; # ... with 328,057 more rows, and 3 more variables: arr_time &lt;dttm&gt;,</span></a>
 <a class="sourceLine" id="cb232-26" title="26"><span class="co">#&gt; #   sched_arr_time &lt;dttm&gt;, air_time &lt;dbl&gt;</span></a></code></pre></div>
 <p>我们还可以使用这些数据做出一年间出发时间或某一天内出发时间的可视化分布（精确到分钟）。注意在直方图的分箱宽度中，日期时间数据的单位是秒，而日期数据则是天</p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1"><span class="co">## 一年内起飞时间的分布</span></a>
 <a class="sourceLine" id="cb233-2" title="2">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb233-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb233-4" title="4"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dep_time),<span class="dt">binwidth =</span> <span class="dv">86400</span>)  <span class="co">## 86000秒= 1天</span></a></code></pre></div>
-<p><img src="lubridate_files/figure-html/unnamed-chunk-16-1.svg" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="lubridate_files/figure-html/unnamed-chunk-15-1.svg" width="80%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1"></a>
 <a class="sourceLine" id="cb234-2" title="2"><span class="co">## 1月1日起飞时间的分布</span></a>
 <a class="sourceLine" id="cb234-3" title="3">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb234-4" title="4"><span class="st">  </span><span class="kw">filter</span>(dep_time <span class="op">&lt;</span><span class="st"> </span><span class="kw">ymd</span>(<span class="dv">20130102</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb234-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dep_time))<span class="op">+</span></a>
 <a class="sourceLine" id="cb234-6" title="6"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">600</span>)   <span class="co">## 600秒 = 10分钟</span></a></code></pre></div>
-<p><img src="lubridate_files/figure-html/unnamed-chunk-16-2.svg" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="lubridate_files/figure-html/unnamed-chunk-15-2.svg" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="from-other-times" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> From other times</h3>
 <p>You may want to switch between a date-time and a date. That’s the job of <code>as_datetime()</code> and <code>as_date()</code>:</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1"><span class="kw">today</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_datetime</span>()</a>
-<a class="sourceLine" id="cb235-2" title="2"><span class="co">#&gt; [1] &quot;2020-03-04 UTC&quot;</span></a>
+<a class="sourceLine" id="cb235-2" title="2"><span class="co">#&gt; [1] &quot;2020-04-04 UTC&quot;</span></a>
 <a class="sourceLine" id="cb235-3" title="3"></a>
 <a class="sourceLine" id="cb235-4" title="4"><span class="kw">now</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_date</span>()</a>
-<a class="sourceLine" id="cb235-5" title="5"><span class="co">#&gt; [1] &quot;2020-03-04&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb235-5" title="5"><span class="co">#&gt; [1] &quot;2020-04-04&quot;</span></a></code></pre></div>
 <p>Sometimes you’ll get date/times as numeric offsets from the “Unix Epoch”, 1970-01-01. If the offset is in seconds, use <code>as_datetime()</code>; if it’s in days, use <code>as_date()</code>.</p>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1"><span class="co"># 1 day</span></a>
 <a class="sourceLine" id="cb236-2" title="2"><span class="kw">as_datetime</span>(<span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">25</span>)</a>
@@ -565,7 +573,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.1.4</span> Exercises</h3>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-19" class="exercise"><strong>Exercise 4.1  </strong></span>What happens if you parse a string that contains invalid dates?
+<span id="exr:unnamed-chunk-18" class="exercise"><strong>Exercise 4.1  </strong></span>What happens if you parse a string that contains invalid dates?
 </div>
 
 <p>If returns <code>NA</code> and throws a warning:</p>
@@ -574,7 +582,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb237-3" title="3"><span class="co">#&gt; [1] &quot;2010-10-10&quot; NA</span></a></code></pre></div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-21" class="exercise"><strong>Exercise 4.2  </strong></span>Use the appropriate lubridate function to parse each of the following dates:
+<span id="exr:unnamed-chunk-20" class="exercise"><strong>Exercise 4.2  </strong></span>Use the appropriate lubridate function to parse each of the following dates:
 </div>
 
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">d1 &lt;-<span class="st"> &quot;January 1,2010&quot;</span></a>

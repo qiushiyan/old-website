@@ -1,5 +1,4 @@
 
-
 # (PART) R for data science {-}
 
 # dplyr: Data transformation
@@ -23,7 +22,7 @@ flights
 #> 4  2013     1     1      544            545        -1     1004           1022
 #> 5  2013     1     1      554            600        -6      812            837
 #> 6  2013     1     1      554            558        -4      740            728
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -34,8 +33,8 @@ flights
 
 ```r
 glimpse(flights)
-#> Observations: 336,776
-#> Variables: 19
+#> Rows: 336,776
+#> Columns: 19
 #> $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013...
 #> $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
 #> $ day            <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
@@ -56,26 +55,26 @@ glimpse(flights)
 #> $ minute         <dbl> 15, 29, 40, 45, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59...
 #> $ time_hour      <dttm> 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-0...
 str(flights)
-#> Classes 'tbl_df', 'tbl' and 'data.frame':	336776 obs. of  19 variables:
-#>  $ year          : int  2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 ...
-#>  $ month         : int  1 1 1 1 1 1 1 1 1 1 ...
-#>  $ day           : int  1 1 1 1 1 1 1 1 1 1 ...
-#>  $ dep_time      : int  517 533 542 544 554 554 555 557 557 558 ...
-#>  $ sched_dep_time: int  515 529 540 545 600 558 600 600 600 600 ...
-#>  $ dep_delay     : num  2 4 2 -1 -6 -4 -5 -3 -3 -2 ...
-#>  $ arr_time      : int  830 850 923 1004 812 740 913 709 838 753 ...
-#>  $ sched_arr_time: int  819 830 850 1022 837 728 854 723 846 745 ...
-#>  $ arr_delay     : num  11 20 33 -18 -25 12 19 -14 -8 8 ...
-#>  $ carrier       : chr  "UA" "UA" "AA" "B6" ...
-#>  $ flight        : int  1545 1714 1141 725 461 1696 507 5708 79 301 ...
-#>  $ tailnum       : chr  "N14228" "N24211" "N619AA" "N804JB" ...
-#>  $ origin        : chr  "EWR" "LGA" "JFK" "JFK" ...
-#>  $ dest          : chr  "IAH" "IAH" "MIA" "BQN" ...
-#>  $ air_time      : num  227 227 160 183 116 150 158 53 140 138 ...
-#>  $ distance      : num  1400 1416 1089 1576 762 ...
-#>  $ hour          : num  5 5 5 5 6 5 6 6 6 6 ...
-#>  $ minute        : num  15 29 40 45 0 58 0 0 0 0 ...
-#>  $ time_hour     : POSIXct, format: "2013-01-01 05:00:00" "2013-01-01 05:00:00" ...
+#> tibble [336,776 x 19] (S3: tbl_df/tbl/data.frame)
+#>  $ year          : int [1:336776] 2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 ...
+#>  $ month         : int [1:336776] 1 1 1 1 1 1 1 1 1 1 ...
+#>  $ day           : int [1:336776] 1 1 1 1 1 1 1 1 1 1 ...
+#>  $ dep_time      : int [1:336776] 517 533 542 544 554 554 555 557 557 558 ...
+#>  $ sched_dep_time: int [1:336776] 515 529 540 545 600 558 600 600 600 600 ...
+#>  $ dep_delay     : num [1:336776] 2 4 2 -1 -6 -4 -5 -3 -3 -2 ...
+#>  $ arr_time      : int [1:336776] 830 850 923 1004 812 740 913 709 838 753 ...
+#>  $ sched_arr_time: int [1:336776] 819 830 850 1022 837 728 854 723 846 745 ...
+#>  $ arr_delay     : num [1:336776] 11 20 33 -18 -25 12 19 -14 -8 8 ...
+#>  $ carrier       : chr [1:336776] "UA" "UA" "AA" "B6" ...
+#>  $ flight        : int [1:336776] 1545 1714 1141 725 461 1696 507 5708 79 301 ...
+#>  $ tailnum       : chr [1:336776] "N14228" "N24211" "N619AA" "N804JB" ...
+#>  $ origin        : chr [1:336776] "EWR" "LGA" "JFK" "JFK" ...
+#>  $ dest          : chr [1:336776] "IAH" "IAH" "MIA" "BQN" ...
+#>  $ air_time      : num [1:336776] 227 227 160 183 116 150 158 53 140 138 ...
+#>  $ distance      : num [1:336776] 1400 1416 1089 1576 762 ...
+#>  $ hour          : num [1:336776] 5 5 5 5 6 5 6 6 6 6 ...
+#>  $ minute        : num [1:336776] 15 29 40 45 0 58 0 0 0 0 ...
+#>  $ time_hour     : POSIXct[1:336776], format: "2013-01-01 05:00:00" "2013-01-01 05:00:00" ...
 ```
 
 
@@ -174,7 +173,7 @@ flights %>% filter(month == 11 | month == 12)
 #> 4  2013    11     1      539            545        -6      856            827
 #> 5  2013    11     1      542            545        -3      831            855
 #> 6  2013    11     1      549            600       -11      912            923
-#> # ... with 5.54e+04 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 55,397 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -194,7 +193,7 @@ flights %>% filter(month %in% c(11, 12))  ## 找出所有月份值包含在该�
 #> 4  2013    11     1      539            545        -6      856            827
 #> 5  2013    11     1      542            545        -3      831            855
 #> 6  2013    11     1      549            600       -11      912            923
-#> # ... with 5.54e+04 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 55,397 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -218,7 +217,7 @@ flights %>% filter(between(month, 11, 12))
 #> 4  2013    11     1      539            545        -6      856            827
 #> 5  2013    11     1      542            545        -3      831            855
 #> 6  2013    11     1      549            600       -11      912            923
-#> # ... with 5.54e+04 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 55,397 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -282,7 +281,7 @@ For more topics on missing values, see section \@ref(tidyr-missing) and Chapter 
 
 ### Exercises
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-17"><strong>(\#exr:unnamed-chunk-17) </strong></span>找出满足以下条件的所有航班: </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-16"><strong>(\#exr:unnamed-chunk-16) </strong></span>找出满足以下条件的所有航班: </div>\EndKnitrBlock{exercise}
 
 > 到达时间延误两小时或更多的航班 
   
@@ -298,7 +297,7 @@ flights %>% filter(arr_delay >= 120)
 #> 4  2013     1     1     1114            900       134     1447           1222
 #> 5  2013     1     1     1505           1310       115     1638           1431
 #> 6  2013     1     1     1525           1340       105     1831           1626
-#> # ... with 1.019e+04 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 10,194 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -339,7 +338,7 @@ flights["carrier"]
 #> 4 B6     
 #> 5 DL     
 #> 6 UA     
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -373,7 +372,7 @@ flights %>% filter(carrier %in% c("DL", "UA", "AA"))
 #> 4  2013     1     1      554            600        -6      812            837
 #> 5  2013     1     1      554            558        -4      740            728
 #> 6  2013     1     1      558            600        -2      753            745
-#> # ... with 1.395e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 139,498 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -391,7 +390,7 @@ flights %>% filter(month %in% c(7, 8, 9))
 #> 4  2013     7     1       43           2130       193      322             14
 #> 5  2013     7     1       44           2150       174      300            100
 #> 6  2013     7     1       46           2051       235      304           2358
-#> # ... with 8.632e+04 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 86,320 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -411,7 +410,7 @@ flights %>% filter(between(month,7,9))
 #> 4  2013     7     1       43           2130       193      322             14
 #> 5  2013     7     1       44           2150       174      300            100
 #> 6  2013     7     1       46           2051       235      304           2358
-#> # ... with 8.632e+04 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 86,320 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -451,7 +450,7 @@ flights %>% filter(dep_delay - arr_delay > 30)
 #> 4  2013     1     1      857            851         6     1157           1222
 #> 5  2013     1     1      909            810        59     1331           1315
 #> 6  2013     1     1     1025            951        34     1258           1302
-#> # ... with 1.794e+04 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 17,944 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -484,7 +483,7 @@ flights %>%  filter(dep_time <= 600 | dep_time == 2400)
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-29"><strong>(\#exr:unnamed-chunk-29) </strong></span>dep_time`有缺失值的航班有多少？其他变量的缺失值情况如何？</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-28"><strong>(\#exr:unnamed-chunk-28) </strong></span>dep_time`有缺失值的航班有多少？其他变量的缺失值情况如何？</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -521,7 +520,7 @@ flights %>%
 #> #   hour <int>, minute <int>, time_hour <int>
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-32"><strong>(\#exr:unnamed-chunk-32) </strong></span>为什么`NA ^ 0`的值不是NA，而`NA * 0`的值是NA ？为什么NA | TRUE 的值不是NA？为什么FALSE & NA的值不是NA，能找出一般规律吗？  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-31"><strong>(\#exr:unnamed-chunk-31) </strong></span>为什么`NA ^ 0`的值不是NA，而`NA * 0`的值是NA ？为什么NA | TRUE 的值不是NA？为什么FALSE & NA的值不是NA，能找出一般规律吗？  </div>\EndKnitrBlock{exercise}
 
 
 **只要表达式的值被NA背后的未知量所决定，就返回NA**
@@ -673,7 +672,7 @@ flights %>% arrange(year, month, day)
 #> 4  2013     1     1      544            545        -1     1004           1022
 #> 5  2013     1     1      554            600        -6      812            837
 #> 6  2013     1     1      554            558        -4      740            728
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -691,7 +690,7 @@ flights %>% arrange(desc(arr_delay))  ## 按照到达延误时间从大到小排
 #> 4  2013     9    20     1139           1845      1014     1457           2210
 #> 5  2013     7    22      845           1600      1005     1044           1815
 #> 6  2013     4    10     1100           1900       960     1342           2211
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -724,7 +723,7 @@ flights %>% arrange((dep_delay ** 2))
 #> 4  2013     1     1      607            607         0      858            915
 #> 5  2013     1     1      615            615         0     1039           1100
 #> 6  2013     1     1      615            615         0      833            842
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -743,7 +742,7 @@ flights %>% arrange(desc(arr_delay + dep_delay))
 #> 4  2013     9    20     1139           1845      1014     1457           2210
 #> 5  2013     7    22      845           1600      1005     1044           1815
 #> 6  2013     4    10     1100           1900       960     1342           2211
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -756,7 +755,7 @@ flights %>% arrange(desc(arr_delay + dep_delay))
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-44"><strong>(\#exr:unnamed-chunk-44) </strong></span>如何使用 `arrange()` 将缺失值排在最前面？（提示：使用`is.na()`)  
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-43"><strong>(\#exr:unnamed-chunk-43) </strong></span>如何使用 `arrange()` 将缺失值排在最前面？（提示：使用`is.na()`)  
 例：把 flights 数据集中`dep_time`上的 NA 值排在最前面( to sort the data frame by departure time (dep_time) in ascending order but NA values first)  </div>\EndKnitrBlock{exercise}
 
 
@@ -775,13 +774,13 @@ flights %>%
 #> 4  2013     1     1       NA            600        NA       NA            901
 #> 5  2013     1     2       NA           1540        NA       NA           1747
 #> 6  2013     1     2       NA           1620        NA       NA           1746
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-46"><strong>(\#exr:unnamed-chunk-46) </strong></span>对 `flights` 排序以找出延误时间最长的航班。找出出发时间最早的航班。 </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-45"><strong>(\#exr:unnamed-chunk-45) </strong></span>对 `flights` 排序以找出延误时间最长的航班。找出出发时间最早的航班。 </div>\EndKnitrBlock{exercise}
 
 
 
@@ -797,7 +796,7 @@ flights %>% arrange(desc(dep_delay))
 #> 4  2013     9    20     1139           1845      1014     1457           2210
 #> 5  2013     7    22      845           1600      1005     1044           1815
 #> 6  2013     4    10     1100           1900       960     1342           2211
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -816,13 +815,13 @@ flights %>% arrange(dep_time)
 #> 4  2013    12    16        1           2359         2      447            437
 #> 5  2013    12    20        1           2359         2      430            440
 #> 6  2013    12    26        1           2359         2      437            440
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-49"><strong>(\#exr:unnamed-chunk-49) </strong></span>对 `flights` 排序以找出速度最快的航班     </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-48"><strong>(\#exr:unnamed-chunk-48) </strong></span>对 `flights` 排序以找出速度最快的航班     </div>\EndKnitrBlock{exercise}
 
 
 这个排序条件需要用到表达式，`速度 = distance / air_time`
@@ -839,7 +838,7 @@ flights %>% arrange(distance / air_time)
 #> 4  2013     1    30     1037            955        42     1221           1100
 #> 5  2013    11    27      556            600        -4      727            658
 #> 6  2013     5    21      558            600        -2      721            657
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -852,8 +851,8 @@ flights %>% arrange(distance / air_time)
 
 ```r
 glimpse(flights)
-#> Observations: 336,776
-#> Variables: 19
+#> Rows: 336,776
+#> Columns: 19
 #> $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013...
 #> $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
 #> $ day            <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
@@ -884,7 +883,7 @@ flights %>% select(year, month, day)
 #> 4  2013     1     1
 #> 5  2013     1     1
 #> 6  2013     1     1
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 顺便说一句，如果把变量名变成字符串或者它在所有变量中的顺序也可以正常工作,如 `flights %>% select("year", "month", "day")`和`flights %>% select(1, 2, 3)`和上面代码会返回一样结果，但是这两种方法都不值得推荐。
@@ -973,7 +972,7 @@ rename(flights, tail_num = tailnum)
 #> 4  2013     1     1      544            545        -1     1004           1022
 #> 5  2013     1     1      554            600        -6      812            837
 #> 6  2013     1     1      554            558        -4      740            728
-#> # ... with 3.368e+05 more rows, and 11 more variables: arr_delay <dbl>,
+#> # ... with 336,770 more rows, and 11 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tail_num <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -995,7 +994,7 @@ flights %>% select(year:day)
 #> 4  2013     1     1
 #> 5  2013     1     1
 #> 6  2013     1     1
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -1011,7 +1010,7 @@ flights %>% select(-(year:day))
 #> 4      544            545        -1     1004           1022       -18 B6     
 #> 5      554            600        -6      812            837       -25 DL     
 #> 6      554            558        -4      740            728        12 UA     
-#> # ... with 3.368e+05 more rows, and 9 more variables: flight <int>,
+#> # ... with 336,770 more rows, and 9 more variables: flight <int>,
 #> #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
 #> #   hour <dbl>, minute <dbl>, time_hour <dttm>
 ```
@@ -1030,7 +1029,7 @@ flights %>% select(starts_with("arr"))  ## 所有以arr开头的列
 #> 4     1004       -18
 #> 5      812       -25
 #> 6      740        12
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 * `ends_with("xyz")`: 匹配名字以“xyz”结尾的列  
@@ -1047,7 +1046,7 @@ flights %>% select(ends_with("delay"))
 #> 4        -1       -18
 #> 5        -6       -25
 #> 6        -4        12
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 * `contains("ijk")`，匹配名字包含"ijk"的列  
@@ -1064,7 +1063,7 @@ flights %>% select(contains("time"))
 #> 4      544            545     1004           1022      183 2013-01-01 05:00:00
 #> 5      554            600      812            837      116 2013-01-01 06:00:00
 #> 6      554            558      740            728      150 2013-01-01 05:00:00
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 * `matches("(.)\\1")`：选择名字符合正则表达式要求的列，后面将具体讲述正则表达式   
@@ -1090,7 +1089,7 @@ flights %>% select(one_of("arr_delay", "dep_delay", "xyz"))
 #> 4       -18        -1
 #> 5       -25        -6
 #> 6        12        -4
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -1110,7 +1109,7 @@ flights %>% select(time_hour,air_time, everything())
 #> 4 2013-01-01 05:00:00      183  2013     1     1      544            545
 #> 5 2013-01-01 06:00:00      116  2013     1     1      554            600
 #> 6 2013-01-01 05:00:00      150  2013     1     1      554            558
-#> # ... with 3.368e+05 more rows, and 12 more variables: dep_delay <dbl>,
+#> # ... with 336,770 more rows, and 12 more variables: dep_delay <dbl>,
 #> #   arr_time <int>, sched_arr_time <int>, arr_delay <dbl>, carrier <chr>,
 #> #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>, distance <dbl>,
 #> #   hour <dbl>, minute <dbl>
@@ -1129,7 +1128,7 @@ flights %>% select(last_col())
 #> 4 2013-01-01 05:00:00
 #> 5 2013-01-01 06:00:00
 #> 6 2013-01-01 05:00:00
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 利用这些帮助函数，我们可以为选择列设置任意数目的条件，`select()`中以逗号分隔的列表示**“或”** 关系，如：
@@ -1146,7 +1145,7 @@ flights %>% select(starts_with("arr"), ends_with("time"))
 #> 4     1004       -18      544            545           1022      183
 #> 5      812       -25      554            600            837      116
 #> 6      740        12      554            558            728      150
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -1165,7 +1164,7 @@ flights %>%
 #> 4        -1       -18
 #> 5        -6       -25
 #> 6        -4        12
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 如果要区分大小写，可以设置任意帮助函数的参数`ignore.case = FALSE`
@@ -1178,7 +1177,7 @@ flights %>%
 
 ### 练习
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-67"><strong>(\#exr:unnamed-chunk-67) </strong></span>从 `flights` 中选择 `dep_time`、`dep_delay`、`arr_time`、`arr_delay`，找出尽可能多的方法</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-66"><strong>(\#exr:unnamed-chunk-66) </strong></span>从 `flights` 中选择 `dep_time`、`dep_delay`、`arr_time`、`arr_delay`，找出尽可能多的方法</div>\EndKnitrBlock{exercise}
 
 
 先查看这些变量的位置：
@@ -1186,8 +1185,8 @@ flights %>%
 
 ```r
 glimpse(flights)
-#> Observations: 336,776
-#> Variables: 19
+#> Rows: 336,776
+#> Columns: 19
 #> $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013...
 #> $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
 #> $ day            <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
@@ -1222,7 +1221,7 @@ flights %>% select(dep_time, dep_delay, arr_time, arr_delay)
 #> 4      544        -1     1004       -18
 #> 5      554        -6      812       -25
 #> 6      554        -4      740        12
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -1240,7 +1239,7 @@ flights %>% select(one_of(vars))
 #> 4      544        -1     1004       -18
 #> 5      554        -6      812       -25
 #> 6      554        -4      740        12
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -1256,10 +1255,10 @@ flights %>% select(starts_with("arr_"), starts_with("dep_"))
 #> 4     1004       -18      544        -1
 #> 5      812       -25      554        -6
 #> 6      740        12      554        -4
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-72"><strong>(\#exr:unnamed-chunk-72) </strong></span>如果在`select()`中多次计入一个变量名，会发生什么情况？   </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-71"><strong>(\#exr:unnamed-chunk-71) </strong></span>如果在`select()`中多次计入一个变量名，会发生什么情况？   </div>\EndKnitrBlock{exercise}
 
 `select()`函数将会忽略重复出现的变量，只选出一列，同时也不会报错：
 
@@ -1275,7 +1274,7 @@ flights %>% select(year, month, day, year, month, day)
 #> 4  2013     1     1
 #> 5  2013     1     1
 #> 6  2013     1     1
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -1300,7 +1299,7 @@ flights %>% select(year, month, day, year, month, day)
 #> 4        -1       -18      183   -17  3.05
 #> 5        -6       -25      116   -19  1.93
 #> 6        -4        12      150    16  2.5 
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 一旦新列被创建，就可以立即使用。例如，可能想知道对gain做时间上的平均：  
@@ -1316,7 +1315,7 @@ flights_gain %>% mutate(gain_per_hour = gain / hours)
 #> 4        -1       -18      183   -17  3.05         -5.57
 #> 5        -6       -25      116   -19  1.93         -9.83
 #> 6        -4        12      150    16  2.5           6.4 
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 以上的数据转换也可以通过`mutate()`一次完成：  
@@ -1337,7 +1336,7 @@ flights %>%
 #> 4        -1       -18      183   -17  3.05         -5.57
 #> 5        -6       -25      116   -19  1.93         -9.83
 #> 6        -4        12      150    16  2.5           6.4 
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 
@@ -1362,7 +1361,7 @@ flights %>%
 #> 4   -17  3.05         -5.57
 #> 5   -19  1.93         -9.83
 #> 6    16  2.5           6.4 
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 ### 常用创建函数 
@@ -1391,7 +1390,7 @@ flights %>%
 #> 4     1     83
 #> 5     1     16
 #> 6     1     50
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 **对数函数 log()/log2()/log10()**  
@@ -1487,7 +1486,7 @@ ntile(x,n=3)
 
 ### Exercises  
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-86"><strong>(\#exr:unnamed-chunk-86) </strong></span>虽然现在的`dep_time`和`sched_dep_time`变量方便阅读，但不适合计算，因为它们实际上并不是连续型数值。将它们转换为一种更方便的表示形式，即从 0 点开始的分钟数</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-85"><strong>(\#exr:unnamed-chunk-85) </strong></span>虽然现在的`dep_time`和`sched_dep_time`变量方便阅读，但不适合计算，因为它们实际上并不是连续型数值。将它们转换为一种更方便的表示形式，即从 0 点开始的分钟数</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -1503,7 +1502,7 @@ flights %>%
 #> 4      544            545
 #> 5      554            600
 #> 6      554            558
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 xyz 表示 x 点 yz 分，则总分钟数为`x %/% 100 * 60 + x %% 100` ; 但有一个问题是，由于 0 点是用2400代表的，经过这样的转换它变为 1440，我们希望它变为 0，所以在外层再套一个` %% 1440`
@@ -1522,7 +1521,7 @@ flights %>% transmute(
 #> 4           344                 345
 #> 5           354                 360
 #> 6           354                 358
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 2. 比较`dep_time、sched_dep_time 和 dep_delay`，这三者应该是何种关系？
@@ -1566,7 +1565,7 @@ flights %>% mutate(delay_rank = min_rank(desc(dep_delay))) %>% arrange(delay_ran
 #> 4  2013     9    20      1014          4
 #> 5  2013     7    22      1005          5
 #> 6  2013     4    10       960          6
-#> # ... with 3.368e+05 more rows
+#> # ... with 336,770 more rows
 ```
 
 3. `1:3 + 1:10`会返回什么？为什么？  
@@ -1915,7 +1914,7 @@ ggplot(delays) +
   geom_histogram(aes(delay))
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-104-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-103-1.svg" width="80%" style="display: block; margin: auto;" />
 
 有些飞机的**平均**到达延误事件竟然接近 300 分钟，我们可以画一张航班数量和平均延误时间的散点图，一遍获得更深刻的理解:    
 
@@ -1931,7 +1930,7 @@ delays <- not_cancelled %>%
 ggplot(delays) + geom_point(aes(x = n,y = delay),alpha = 0.1)
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-105-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-104-1.svg" width="80%" style="display: block; margin: auto;" />
 
 从散点图可以看出，如果航班对应的出航次数非常少时，平均延误时间的变动特别大，所有延误时间较长的航班的出航次数几乎都在 0 右边一点点。这张图的形状非常能说明问题:当绘制均值（或其他摘要统计量）和分组规模的关系时，总能看到样本量的增加，变动在不断减小。（样本统计量的方差随样本数变小）。    
 
@@ -1952,7 +1951,7 @@ batters %>%
   geom_smooth(se = FALSE)
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-106-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-105-1.svg" width="80%" style="display: block; margin: auto;" />
   
 当绘制击球手的能力（用打击率 ba 衡量）与击球机会数量（用总打数ab衡量）之间的关系时，可以看到两个趋势：  
 
@@ -1973,7 +1972,7 @@ batters %>%
 #> 4 banisje01     1     1
 #> 5 bartocl01     1     1
 #> 6 bassdo01      1     1
-#> # ... with 1.942e+04 more rows
+#> # ... with 19,422 more rows
 ```
 
 
@@ -2427,7 +2426,7 @@ df %>%
 
 ## Exercises {#dplyr-exercise}
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-123"><strong>(\#exr:unnamed-chunk-123) </strong></span>找到每个日期分组中到达时间延迟最长的10条记录  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-122"><strong>(\#exr:unnamed-chunk-122) </strong></span>找到每个日期分组中到达时间延迟最长的10条记录  </div>\EndKnitrBlock{exercise}
 
 
 
@@ -2450,7 +2449,7 @@ not_cancelled %>%
 #> # ... with 3,603 more rows
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-125"><strong>(\#exr:unnamed-chunk-125) </strong></span>找出一年中到达航班多于 365 次的目的地：</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-124"><strong>(\#exr:unnamed-chunk-124) </strong></span>找出一年中到达航班多于 365 次的目的地：</div>\EndKnitrBlock{exercise}
 
 
 
@@ -2487,7 +2486,7 @@ not_cancelled %>%
 #> # ... with 69 more rows
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-127"><strong>(\#exr:unnamed-chunk-127) </strong></span>哪一架飞机(`tailnum`)具有最差的准点记录：  </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-126"><strong>(\#exr:unnamed-chunk-126) </strong></span>哪一架飞机(`tailnum`)具有最差的准点记录：  </div>\EndKnitrBlock{exercise}
 
 衡量一个飞机的准点情况有很多种可能的选择，这里只提供两个方向：   
 
@@ -2535,7 +2534,7 @@ flights %>%
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-130"><strong>(\#exr:unnamed-chunk-130) </strong></span>如果想要尽量避免航班延误，应该在一天中的哪个时间搭乘飞机？   
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-129"><strong>(\#exr:unnamed-chunk-129) </strong></span>如果想要尽量避免航班延误，应该在一天中的哪个时间搭乘飞机？   
 </div>\EndKnitrBlock{exercise}
 
 
@@ -2559,7 +2558,7 @@ flights %>%
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-132"><strong>(\#exr:unnamed-chunk-132) </strong></span>计算每个目的地的到达延误总时间的分钟数，以及每条记录到每个目的地的延误时间比例 </div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-131"><strong>(\#exr:unnamed-chunk-131) </strong></span>计算每个目的地的到达延误总时间的分钟数，以及每条记录到每个目的地的延误时间比例 </div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -2585,11 +2584,11 @@ flights %>%
 #> 4 ABQ   N589JB        137         0.0305
 #> 5 ABQ   N556JB        136         0.0303
 #> 6 ABQ   N598JB        126         0.0281
-#> # ... with 1.33e+05 more rows
+#> # ... with 132,998 more rows
 ```
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-134"><strong>(\#exr:unnamed-chunk-134) </strong></span>延误通常是由临时原因造成的：即使最初引起延误的问题已经解决，但因为要让前面的航班先起飞，所以后面的航班也会延误。使用`lag()` 探究一架航班延误与前一架航班延误之间的关系。</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-133"><strong>(\#exr:unnamed-chunk-133) </strong></span>延误通常是由临时原因造成的：即使最初引起延误的问题已经解决，但因为要让前面的航班先起飞，所以后面的航班也会延误。使用`lag()` 探究一架航班延误与前一架航班延误之间的关系。</div>\EndKnitrBlock{exercise}
 
 
 
@@ -2613,7 +2612,7 @@ flights %>%
 #> 4  2013     1     1      559            600        -1      854            902
 #> 5  2013     1     1      601            600         1      844            850
 #> 6  2013     1     1      606            610        -4      858            910
-#> # ... with 3.276e+05 more rows, and 12 more variables: arr_delay <dbl>,
+#> # ... with 327,643 more rows, and 12 more variables: arr_delay <dbl>,
 #> #   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
 #> #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>,
 #> #   dep_delay_lag <dbl>
@@ -2628,14 +2627,14 @@ lagged_delays %>%
   theme_classic()
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-135-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-134-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
     
 ## This plots the relationship between the mean delay of a flight for all values of the previous flight. For delays less than two hours, the relationship between the delay of the preceding flight and the current flight is nearly a line. After that the relationship becomes more variable, as long-delayed flights are interspersed with flights leaving on-time. After about 8-hours, a delayed flight is likely to be followed by a flight leaving on time.
 ```
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-136"><strong>(\#exr:unnamed-chunk-136) </strong></span>根据到达地点的数量，对航空公司进行排序 ; 找出至少有两个航空公司的目的地</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-135"><strong>(\#exr:unnamed-chunk-135) </strong></span>根据到达地点的数量，对航空公司进行排序 ; 找出至少有两个航空公司的目的地</div>\EndKnitrBlock{exercise}
 
 
 
@@ -2676,7 +2675,7 @@ flights %>%
 
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-138"><strong>(\#exr:unnamed-chunk-138) </strong></span>每天取消的航班数量和总航班数量存在什么关系？每天的平均到达延误时间和取消航班的比例有什么关系？</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-137"><strong>(\#exr:unnamed-chunk-137) </strong></span>每天取消的航班数量和总航班数量存在什么关系？每天的平均到达延误时间和取消航班的比例有什么关系？</div>\EndKnitrBlock{exercise}
 
    
 
@@ -2692,7 +2691,7 @@ flights %>%
   ggplot(aes(x = n_total,y = n_cancelled)) + geom_point()
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-139-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-138-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -2704,9 +2703,9 @@ flights %>%
   ggplot() + geom_point(aes(x = avg_arr_delay,y = cancelled_prop))
 ```
 
-<img src="dplyr-core_files/figure-html/unnamed-chunk-139-2.svg" width="80%" style="display: block; margin: auto;" />
+<img src="dplyr-core_files/figure-html/unnamed-chunk-138-2.svg" width="80%" style="display: block; margin: auto;" />
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-140"><strong>(\#exr:unnamed-chunk-140) </strong></span>
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-139"><strong>(\#exr:unnamed-chunk-139) </strong></span>
 哪个航空公司的延误情况最严重？你能否分清这是因为糟糕的机场设备，还是航空公司的问题？（考虑一下`flights %>% group_by(carrier,dest) %>% summarize(n())`  </div>\EndKnitrBlock{exercise}
  
 

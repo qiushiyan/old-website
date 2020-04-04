@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.3 select() | R for data science: tidyverse and beyond</title>
   <meta name="description" content="1.3 select() | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.3 select() | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-03-04" />
+<meta name="date" content="2020-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -314,83 +314,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="broomextra.html"><a href="broomextra.html"><i class="fa fa-check"></i><b>9.3</b> broomExtra</a></li>
 <li class="chapter" data-level="9.4" data-path="ggfortify.html"><a href="ggfortify.html"><i class="fa fa-check"></i><b>9.4</b> ggfortify</a></li>
 </ul></li>
-<li class="part"><span><b>II Importing and APIs</b></span></li>
-<li class="chapter" data-level="10" data-path="vroom.html"><a href="vroom.html"><i class="fa fa-check"></i><b>10</b> vroom</a></li>
-<li class="chapter" data-level="11" data-path="data-apis.html"><a href="data-apis.html"><i class="fa fa-check"></i><b>11</b> Data APIs</a><ul>
-<li class="chapter" data-level="11.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>11.1</b> WDI</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>11.1.1</b> <code>WDIsearch()</code></a></li>
-<li class="chapter" data-level="11.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>11.1.2</b> <code>WDI</code></a></li>
+<li class="part"><span><b>II Importing</b></span></li>
+<li class="chapter" data-level="10" data-path="vroom-fast-reading-of-delimited-files.html"><a href="vroom-fast-reading-of-delimited-files.html"><i class="fa fa-check"></i><b>10</b> vroom: Fast reading of delimited files</a></li>
+<li class="chapter" data-level="11" data-path="reading-in-data-from-other-formats.html"><a href="reading-in-data-from-other-formats.html"><i class="fa fa-check"></i><b>11</b> Reading in data from other formats</a><ul>
+<li class="chapter" data-level="11.1" data-path="pdf.html"><a href="pdf.html"><i class="fa fa-check"></i><b>11.1</b> PDF</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="pdf.html"><a href="pdf.html#scraping-pdf-data"><i class="fa fa-check"></i><b>11.1.1</b> Scraping pdf data</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>11.2</b> ipumsr</a></li>
+<li class="chapter" data-level="11.2" data-path="office-documents.html"><a href="office-documents.html"><i class="fa fa-check"></i><b>11.2</b> Office documents</a></li>
+<li class="chapter" data-level="11.3" data-path="google-sheet.html"><a href="google-sheet.html"><i class="fa fa-check"></i><b>11.3</b> Google sheet</a></li>
+<li class="chapter" data-level="11.4" data-path="images.html"><a href="images.html"><i class="fa fa-check"></i><b>11.4</b> Images</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="useful-apis.html"><a href="useful-apis.html"><i class="fa fa-check"></i><b>12</b> Useful APIs</a><ul>
+<li class="chapter" data-level="12.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>12.1</b> WDI</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>12.1.1</b> <code>WDIsearch()</code></a></li>
+<li class="chapter" data-level="12.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>12.1.2</b> <code>WDI</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>12.2</b> ipumsr</a></li>
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
-<li class="chapter" data-level="12" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>12</b> Data Summary</a><ul>
-<li class="chapter" data-level="12.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>12.1</b> skimr</a></li>
-<li class="chapter" data-level="12.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>12.2</b> visdat</a></li>
-<li class="chapter" data-level="12.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>12.3</b> summarytools</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>12.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="12.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>12.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="13" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>13</b> Data summary</a><ul>
+<li class="chapter" data-level="13.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>13.1</b> skimr</a></li>
+<li class="chapter" data-level="13.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>13.2</b> visdat</a></li>
+<li class="chapter" data-level="13.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>13.3</b> summarytools</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>13.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="13.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>13.3.2</b> <code>descr()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>12.4</b> gt and gtsummary</a></li>
-<li class="chapter" data-level="12.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>12.5</b> naniar</a></li>
+<li class="chapter" data-level="13.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>13.4</b> gt and gtsummary</a></li>
+<li class="chapter" data-level="13.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>13.5</b> naniar</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>13</b> Janitor</a><ul>
-<li class="chapter" data-level="13.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>13.1</b> cleaning</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>13.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="14" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>14</b> Janitor</a><ul>
+<li class="chapter" data-level="14.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>14.1</b> cleaning</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>14.1.1</b> <code>clean_names</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>13.2</b> Exploring</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>13.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="13.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>13.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="13.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>13.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="13.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>13.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="13.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>13.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="13.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>13.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="13.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>13.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="14.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>14.2</b> Exploring</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>14.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="14.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>14.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="14.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>14.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="14.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>14.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="14.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>14.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="14.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>14.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="14.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>14.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>14</b> data.table</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
-<li class="chapter" data-level="14.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>14.2</b> dtplyr</a></li>
-<li class="chapter" data-level="14.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>14.3</b> maditr</a></li>
-<li class="chapter" data-level="14.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>14.4</b> tidyfast</a></li>
-<li class="chapter" data-level="14.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>14.5</b> disk.frame</a></li>
+<li class="chapter" data-level="15" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>15</b> data.table</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>15.2</b> dtplyr</a></li>
+<li class="chapter" data-level="15.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>15.3</b> maditr</a></li>
+<li class="chapter" data-level="15.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>15.4</b> tidyfast</a></li>
+<li class="chapter" data-level="15.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>15.5</b> disk.frame</a></li>
 </ul></li>
 <li class="part"><span><b>IV Miscellaneous tools</b></span></li>
-<li class="chapter" data-level="15" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>15</b> Advanced relational data</a><ul>
-<li class="chapter" data-level="15.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>15.1</b> fuzzyjoin</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>15.1.1</b> inexact matching</a></li>
-<li class="chapter" data-level="15.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>15.1.2</b> stringdist</a></li>
+<li class="chapter" data-level="16" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>16</b> Advanced relational data</a><ul>
+<li class="chapter" data-level="16.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>16.1</b> fuzzyjoin</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>16.1.1</b> inexact matching</a></li>
+<li class="chapter" data-level="16.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>16.1.2</b> stringdist</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>15.2</b> funneljoin</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>15.2.1</b> <code>after_join()</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>15.2.2</b> funnel in one table</a></li>
+<li class="chapter" data-level="16.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>16.2</b> funneljoin</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>16.2.1</b> <code>after_join()</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>16.2.2</b> funnel in one table</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>15.3</b> dm</a></li>
+<li class="chapter" data-level="16.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>16.3</b> dm</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>16</b> Categorical data (facotr)</a><ul>
-<li class="chapter" data-level="16.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>16.1</b> Frequency and contingency table</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>16.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
+<li class="chapter" data-level="17" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>17</b> Categorical data (facotr)</a><ul>
+<li class="chapter" data-level="17.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>17.1</b> Frequency and contingency table</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>17.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>16.2</b> Coding</a><ul>
-<li class="chapter" data-level="16.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>16.2.1</b> <code>rec()</code></a></li>
+<li class="chapter" data-level="17.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>17.2</b> Coding</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>17.2.1</b> <code>rec()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>16.3</b> Cutting</a><ul>
-<li class="chapter" data-level="16.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>16.3.1</b> <code>chop()</code></a></li>
+<li class="chapter" data-level="17.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>17.3</b> Cutting</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>17.3.1</b> <code>chop()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>17</b> Dealing with missing values</a><ul>
-<li class="chapter" data-level="17.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>17.1</b> Exploring</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>17.1.1</b> naniar</a></li>
-<li class="chapter" data-level="17.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>17.1.2</b> Replace a value with NA</a></li>
-<li class="chapter" data-level="17.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>17.1.3</b> janitor</a></li>
-<li class="chapter" data-level="17.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>17.1.4</b> sjmisc</a></li>
+<li class="chapter" data-level="18" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>18</b> Dealing with missing values</a><ul>
+<li class="chapter" data-level="18.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>18.1</b> Exploring</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>18.1.1</b> naniar</a></li>
+<li class="chapter" data-level="18.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>18.1.2</b> Replace a value with NA</a></li>
+<li class="chapter" data-level="18.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>18.1.3</b> janitor</a></li>
+<li class="chapter" data-level="18.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>18.1.4</b> sjmisc</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>17.2</b> Wrangling</a><ul>
-<li class="chapter" data-level="17.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>17.2.1</b> tidyr</a></li>
-<li class="chapter" data-level="17.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>17.2.2</b> janitor</a></li>
-<li class="chapter" data-level="17.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>17.2.3</b> visdat</a></li>
+<li class="chapter" data-level="18.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>18.2</b> Wrangling</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>18.2.1</b> tidyr</a></li>
+<li class="chapter" data-level="18.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>18.2.2</b> janitor</a></li>
+<li class="chapter" data-level="18.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>18.2.3</b> visdat</a></li>
 </ul></li>
-<li class="chapter" data-level="17.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>17.3</b> Imputation</a></li>
+<li class="chapter" data-level="18.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>18.3</b> Imputation</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -417,8 +425,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.3</span> <code>select()</code></h2>
 <p>如今，数据集有几百个甚至几千个变量已经司空见惯。这种情况下，如何找出真正感兴趣的变量经常是一个挑战。通过基于变量名的操作，<code>select()</code>函数可以让我们快速生成一个有用的变量子集。</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">glimpse</span>(flights)</a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="co">#&gt; Observations: 336,776</span></a>
-<a class="sourceLine" id="cb43-3" title="3"><span class="co">#&gt; Variables: 19</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="co">#&gt; Rows: 336,776</span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="co">#&gt; Columns: 19</span></a>
 <a class="sourceLine" id="cb43-4" title="4"><span class="co">#&gt; $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013...</span></a>
 <a class="sourceLine" id="cb43-5" title="5"><span class="co">#&gt; $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...</span></a>
 <a class="sourceLine" id="cb43-6" title="6"><span class="co">#&gt; $ day            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...</span></a>
@@ -449,7 +457,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb43-31" title="31"><span class="co">#&gt; 4  2013     1     1</span></a>
 <a class="sourceLine" id="cb43-32" title="32"><span class="co">#&gt; 5  2013     1     1</span></a>
 <a class="sourceLine" id="cb43-33" title="33"><span class="co">#&gt; 6  2013     1     1</span></a>
-<a class="sourceLine" id="cb43-34" title="34"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb43-34" title="34"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>顺便说一句，如果把变量名变成字符串或者它在所有变量中的顺序也可以正常工作,如 <code>flights %&gt;% select("year", "month", "day")</code>和<code>flights %&gt;% select(1, 2, 3)</code>和上面代码会返回一样结果，但是这两种方法都不值得推荐。</p>
 <p>关于 Non-standard evalution <code>{{ var }}</code> <code>!!enquo(var)</code> 或者 <code>.data[[var]]</code> 将会使 <code>select()</code>按照我们希望的那样工作。</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">my_select &lt;-<span class="st"> </span><span class="cf">function</span>(df, var) {</a>
@@ -521,7 +529,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb46-9" title="9"><span class="co">#&gt; 4  2013     1     1      544            545        -1     1004           1022</span></a>
 <a class="sourceLine" id="cb46-10" title="10"><span class="co">#&gt; 5  2013     1     1      554            600        -6      812            837</span></a>
 <a class="sourceLine" id="cb46-11" title="11"><span class="co">#&gt; 6  2013     1     1      554            558        -4      740            728</span></a>
-<a class="sourceLine" id="cb46-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb46-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb46-13" title="13"><span class="co">#&gt; #   carrier &lt;chr&gt;, flight &lt;int&gt;, tail_num &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb46-14" title="14"><span class="co">#&gt; #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</span></a></code></pre></div>
 <p>其他常见的<code>select()</code>函数用法如下所示：</p>
@@ -536,7 +544,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb47-9" title="9"><span class="co">#&gt; 4  2013     1     1</span></a>
 <a class="sourceLine" id="cb47-10" title="10"><span class="co">#&gt; 5  2013     1     1</span></a>
 <a class="sourceLine" id="cb47-11" title="11"><span class="co">#&gt; 6  2013     1     1</span></a>
-<a class="sourceLine" id="cb47-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb47-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co">## 选择不在“year”和“day”之间的所有列，减号</span></a>
 <a class="sourceLine" id="cb48-2" title="2">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>(year<span class="op">:</span>day))</a>
 <a class="sourceLine" id="cb48-3" title="3"><span class="co">#&gt; # A tibble: 336,776 x 16</span></a>
@@ -548,7 +556,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb48-9" title="9"><span class="co">#&gt; 4      544            545        -1     1004           1022       -18 B6     </span></a>
 <a class="sourceLine" id="cb48-10" title="10"><span class="co">#&gt; 5      554            600        -6      812            837       -25 DL     </span></a>
 <a class="sourceLine" id="cb48-11" title="11"><span class="co">#&gt; 6      554            558        -4      740            728        12 UA     </span></a>
-<a class="sourceLine" id="cb48-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows, and 9 more variables: flight &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows, and 9 more variables: flight &lt;int&gt;,</span></a>
 <a class="sourceLine" id="cb48-13" title="13"><span class="co">#&gt; #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb48-14" title="14"><span class="co">#&gt; #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</span></a></code></pre></div>
 <p>还可以在<code>select()</code>函数中使用一些辅助函数：<br />
@@ -563,7 +571,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb49-8" title="8"><span class="co">#&gt; 4     1004       -18</span></a>
 <a class="sourceLine" id="cb49-9" title="9"><span class="co">#&gt; 5      812       -25</span></a>
 <a class="sourceLine" id="cb49-10" title="10"><span class="co">#&gt; 6      740        12</span></a>
-<a class="sourceLine" id="cb49-11" title="11"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb49-11" title="11"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <ul>
 <li><code>ends_with("xyz")</code>: 匹配名字以“xyz”结尾的列</li>
 </ul>
@@ -578,7 +586,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb50-9" title="9"><span class="co">#&gt; 4        -1       -18</span></a>
 <a class="sourceLine" id="cb50-10" title="10"><span class="co">#&gt; 5        -6       -25</span></a>
 <a class="sourceLine" id="cb50-11" title="11"><span class="co">#&gt; 6        -4        12</span></a>
-<a class="sourceLine" id="cb50-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb50-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <ul>
 <li><code>contains("ijk")</code>，匹配名字包含“ijk”的列</li>
 </ul>
@@ -593,7 +601,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb51-9" title="9"><span class="co">#&gt; 4      544            545     1004           1022      183 2013-01-01 05:00:00</span></a>
 <a class="sourceLine" id="cb51-10" title="10"><span class="co">#&gt; 5      554            600      812            837      116 2013-01-01 06:00:00</span></a>
 <a class="sourceLine" id="cb51-11" title="11"><span class="co">#&gt; 6      554            558      740            728      150 2013-01-01 05:00:00</span></a>
-<a class="sourceLine" id="cb51-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb51-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <ul>
 <li><code>matches("(.)\\1")</code>：选择名字符合正则表达式要求的列，后面将具体讲述正则表达式<br />
 </li>
@@ -615,7 +623,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb53-8" title="8"><span class="co">#&gt; 4       -18        -1</span></a>
 <a class="sourceLine" id="cb53-9" title="9"><span class="co">#&gt; 5       -25        -6</span></a>
 <a class="sourceLine" id="cb53-10" title="10"><span class="co">#&gt; 6        12        -4</span></a>
-<a class="sourceLine" id="cb53-11" title="11"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb53-11" title="11"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <ul>
 <li><code>everything()</code>：匹配所有(剩余)变量，当想要将几个变量移到数据集开头时，这种方法很有用</li>
 </ul>
@@ -630,7 +638,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb54-9" title="9"><span class="co">#&gt; 4 2013-01-01 05:00:00      183  2013     1     1      544            545</span></a>
 <a class="sourceLine" id="cb54-10" title="10"><span class="co">#&gt; 5 2013-01-01 06:00:00      116  2013     1     1      554            600</span></a>
 <a class="sourceLine" id="cb54-11" title="11"><span class="co">#&gt; 6 2013-01-01 05:00:00      150  2013     1     1      554            558</span></a>
-<a class="sourceLine" id="cb54-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows, and 12 more variables: dep_delay &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb54-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows, and 12 more variables: dep_delay &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb54-13" title="13"><span class="co">#&gt; #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb54-14" title="14"><span class="co">#&gt; #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, distance &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb54-15" title="15"><span class="co">#&gt; #   hour &lt;dbl&gt;, minute &lt;dbl&gt;</span></a></code></pre></div>
@@ -647,7 +655,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb55-8" title="8"><span class="co">#&gt; 4 2013-01-01 05:00:00</span></a>
 <a class="sourceLine" id="cb55-9" title="9"><span class="co">#&gt; 5 2013-01-01 06:00:00</span></a>
 <a class="sourceLine" id="cb55-10" title="10"><span class="co">#&gt; 6 2013-01-01 05:00:00</span></a>
-<a class="sourceLine" id="cb55-11" title="11"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb55-11" title="11"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>利用这些帮助函数，我们可以为选择列设置任意数目的条件，<code>select()</code>中以逗号分隔的列表示<strong>“或”</strong> 关系，如：</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co">## 找出以“arr”开头或者以“time”结尾的列</span></a>
 <a class="sourceLine" id="cb56-2" title="2">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;arr&quot;</span>), <span class="kw">ends_with</span>(<span class="st">&quot;time&quot;</span>))</a>
@@ -660,7 +668,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb56-9" title="9"><span class="co">#&gt; 4     1004       -18      544            545           1022      183</span></a>
 <a class="sourceLine" id="cb56-10" title="10"><span class="co">#&gt; 5      812       -25      554            600            837      116</span></a>
 <a class="sourceLine" id="cb56-11" title="11"><span class="co">#&gt; 6      740        12      554            558            728      150</span></a>
-<a class="sourceLine" id="cb56-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb56-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p><strong>注意</strong>:<br />
 所有帮助函数都忽略大小写:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -674,7 +682,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb57-9" title="9"><span class="co">#&gt; 4        -1       -18</span></a>
 <a class="sourceLine" id="cb57-10" title="10"><span class="co">#&gt; 5        -6       -25</span></a>
 <a class="sourceLine" id="cb57-11" title="11"><span class="co">#&gt; 6        -4        12</span></a>
-<a class="sourceLine" id="cb57-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb57-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>如果要区分大小写，可以设置任意帮助函数的参数<code>ignore.case = FALSE</code></p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb58-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">ends_with</span>(<span class="st">&quot;DELAY&quot;</span>, <span class="dt">ignore.case =</span> F))   <span class="co">## 将不会选择出任何列</span></a>
@@ -683,13 +691,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">1.3.1</span> 练习</h3>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-67" class="exercise"><strong>Exercise 1.7  </strong></span>从 <code>flights</code> 中选择 <code>dep_time</code>、<code>dep_delay</code>、<code>arr_time</code>、<code>arr_delay</code>，找出尽可能多的方法
+<span id="exr:unnamed-chunk-66" class="exercise"><strong>Exercise 1.7  </strong></span>从 <code>flights</code> 中选择 <code>dep_time</code>、<code>dep_delay</code>、<code>arr_time</code>、<code>arr_delay</code>，找出尽可能多的方法
 </div>
 
 <p>先查看这些变量的位置：</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">glimpse</span>(flights)</a>
-<a class="sourceLine" id="cb59-2" title="2"><span class="co">#&gt; Observations: 336,776</span></a>
-<a class="sourceLine" id="cb59-3" title="3"><span class="co">#&gt; Variables: 19</span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="co">#&gt; Rows: 336,776</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="co">#&gt; Columns: 19</span></a>
 <a class="sourceLine" id="cb59-4" title="4"><span class="co">#&gt; $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013...</span></a>
 <a class="sourceLine" id="cb59-5" title="5"><span class="co">#&gt; $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...</span></a>
 <a class="sourceLine" id="cb59-6" title="6"><span class="co">#&gt; $ day            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...</span></a>
@@ -720,7 +728,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb60-9" title="9"><span class="co">#&gt; 4      544        -1     1004       -18</span></a>
 <a class="sourceLine" id="cb60-10" title="10"><span class="co">#&gt; 5      554        -6      812       -25</span></a>
 <a class="sourceLine" id="cb60-11" title="11"><span class="co">#&gt; 6      554        -4      740        12</span></a>
-<a class="sourceLine" id="cb60-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb60-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># one_of()</span></a>
 <a class="sourceLine" id="cb61-2" title="2">vars =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dep_time&quot;</span>, <span class="st">&quot;dep_delay&quot;</span>, <span class="st">&quot;arr_time&quot;</span>, <span class="st">&quot;arr_delay&quot;</span>)</a>
 <a class="sourceLine" id="cb61-3" title="3">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">one_of</span>(vars))</a>
@@ -733,7 +741,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb61-10" title="10"><span class="co">#&gt; 4      544        -1     1004       -18</span></a>
 <a class="sourceLine" id="cb61-11" title="11"><span class="co">#&gt; 5      554        -6      812       -25</span></a>
 <a class="sourceLine" id="cb61-12" title="12"><span class="co">#&gt; 6      554        -4      740        12</span></a>
-<a class="sourceLine" id="cb61-13" title="13"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb61-13" title="13"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="co"># 多个条件</span></a>
 <a class="sourceLine" id="cb62-2" title="2">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;arr_&quot;</span>), <span class="kw">starts_with</span>(<span class="st">&quot;dep_&quot;</span>))</a>
 <a class="sourceLine" id="cb62-3" title="3"><span class="co">#&gt; # A tibble: 336,776 x 4</span></a>
@@ -745,10 +753,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb62-9" title="9"><span class="co">#&gt; 4     1004       -18      544        -1</span></a>
 <a class="sourceLine" id="cb62-10" title="10"><span class="co">#&gt; 5      812       -25      554        -6</span></a>
 <a class="sourceLine" id="cb62-11" title="11"><span class="co">#&gt; 6      740        12      554        -4</span></a>
-<a class="sourceLine" id="cb62-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb62-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-72" class="exercise"><strong>Exercise 1.8  </strong></span>如果在<code>select()</code>中多次计入一个变量名，会发生什么情况？
+<span id="exr:unnamed-chunk-71" class="exercise"><strong>Exercise 1.8  </strong></span>如果在<code>select()</code>中多次计入一个变量名，会发生什么情况？
 </div>
 
 <p><code>select()</code>函数将会忽略重复出现的变量，只选出一列，同时也不会报错：</p>
@@ -762,7 +770,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb63-8" title="8"><span class="co">#&gt; 4  2013     1     1</span></a>
 <a class="sourceLine" id="cb63-9" title="9"><span class="co">#&gt; 5  2013     1     1</span></a>
 <a class="sourceLine" id="cb63-10" title="10"><span class="co">#&gt; 6  2013     1     1</span></a>
-<a class="sourceLine" id="cb63-11" title="11"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb63-11" title="11"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>##<code>mutate()</code></p>
 <p>除了选择现有的列，经常还需要添加新列。新列是现有列的函数，这就 <code>mutate()</code> 函数的作用。<br />
 <code>mutate()</code> 总是将新列添加在最后,格式为 <code>新列名= 表达式</code>。为了便于观察它的效果，我们需要先创建一个更狭窄的数据集，以便能看到新变量。<br />
@@ -780,7 +788,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb64-11" title="11"><span class="co">#&gt; 4        -1       -18      183   -17  3.05</span></a>
 <a class="sourceLine" id="cb64-12" title="12"><span class="co">#&gt; 5        -6       -25      116   -19  1.93</span></a>
 <a class="sourceLine" id="cb64-13" title="13"><span class="co">#&gt; 6        -4        12      150    16  2.5 </span></a>
-<a class="sourceLine" id="cb64-14" title="14"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb64-14" title="14"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>一旦新列被创建，就可以立即使用。例如，可能想知道对gain做时间上的平均：</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">flights_gain <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">gain_per_hour =</span> gain <span class="op">/</span><span class="st"> </span>hours)</a>
 <a class="sourceLine" id="cb65-2" title="2"><span class="co">#&gt; # A tibble: 336,776 x 6</span></a>
@@ -792,7 +800,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb65-8" title="8"><span class="co">#&gt; 4        -1       -18      183   -17  3.05         -5.57</span></a>
 <a class="sourceLine" id="cb65-9" title="9"><span class="co">#&gt; 5        -6       -25      116   -19  1.93         -9.83</span></a>
 <a class="sourceLine" id="cb65-10" title="10"><span class="co">#&gt; 6        -4        12      150    16  2.5           6.4 </span></a>
-<a class="sourceLine" id="cb65-11" title="11"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb65-11" title="11"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>以上的数据转换也可以通过<code>mutate()</code>一次完成：</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb66-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>),air_time) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -809,7 +817,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb66-13" title="13"><span class="co">#&gt; 4        -1       -18      183   -17  3.05         -5.57</span></a>
 <a class="sourceLine" id="cb66-14" title="14"><span class="co">#&gt; 5        -6       -25      116   -19  1.93         -9.83</span></a>
 <a class="sourceLine" id="cb66-15" title="15"><span class="co">#&gt; 6        -4        12      150    16  2.5           6.4 </span></a>
-<a class="sourceLine" id="cb66-16" title="16"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb66-16" title="16"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>如果只想在保留新变量，可以使用<code>transmute()</code>：</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb67-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>),air_time) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -826,7 +834,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb67-13" title="13"><span class="co">#&gt; 4   -17  3.05         -5.57</span></a>
 <a class="sourceLine" id="cb67-14" title="14"><span class="co">#&gt; 5   -19  1.93         -9.83</span></a>
 <a class="sourceLine" id="cb67-15" title="15"><span class="co">#&gt; 6    16  2.5           6.4 </span></a>
-<a class="sourceLine" id="cb67-16" title="16"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb67-16" title="16"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 </div>
 <div id="常用创建函数" class="section level3">
 <h3><span class="header-section-number">1.3.2</span> 常用创建函数</h3>
@@ -850,7 +858,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb68-11" title="11"><span class="co">#&gt; 4     1     83</span></a>
 <a class="sourceLine" id="cb68-12" title="12"><span class="co">#&gt; 5     1     16</span></a>
 <a class="sourceLine" id="cb68-13" title="13"><span class="co">#&gt; 6     1     50</span></a>
-<a class="sourceLine" id="cb68-14" title="14"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb68-14" title="14"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p><strong>对数函数 log()/log2()/log10()</strong><br />
 在处理取值范围变化多个数量级的数据时，对数变换很有用。其他条件相同的情况下，更推荐使用<code>log2()</code>函数，因为它的解释很容易，对数变换后的变量每增加一个单位，意味着原始变量加倍 ； 减少一个单位，则原始数据变为原来的一半。</p>
 <p><strong>偏移函数</strong><br />
@@ -924,7 +932,7 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 <h3><span class="header-section-number">1.3.3</span> Exercises</h3>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-86" class="exercise"><strong>Exercise 1.9  </strong></span>虽然现在的<code>dep_time</code>和<code>sched_dep_time</code>变量方便阅读，但不适合计算，因为它们实际上并不是连续型数值。将它们转换为一种更方便的表示形式，即从 0 点开始的分钟数
+<span id="exr:unnamed-chunk-85" class="exercise"><strong>Exercise 1.9  </strong></span>虽然现在的<code>dep_time</code>和<code>sched_dep_time</code>变量方便阅读，但不适合计算，因为它们实际上并不是连续型数值。将它们转换为一种更方便的表示形式，即从 0 点开始的分钟数
 </div>
 
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="co"># 观察两个变量的存储方式</span></a>
@@ -939,7 +947,7 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 <a class="sourceLine" id="cb76-10" title="10"><span class="co">#&gt; 4      544            545</span></a>
 <a class="sourceLine" id="cb76-11" title="11"><span class="co">#&gt; 5      554            600</span></a>
 <a class="sourceLine" id="cb76-12" title="12"><span class="co">#&gt; 6      554            558</span></a>
-<a class="sourceLine" id="cb76-13" title="13"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb76-13" title="13"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <p>xyz 表示 x 点 yz 分，则总分钟数为<code>x %/% 100 * 60 + x %% 100</code> ; 但有一个问题是，由于 0 点是用2400代表的，经过这样的转换它变为 1440，我们希望它变为 0，所以在外层再套一个<code>%% 1440</code></p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transmute</span>(</a>
 <a class="sourceLine" id="cb77-2" title="2">  <span class="dt">dep_time_mins =</span> (dep_time <span class="op">%/%</span><span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span> <span class="op">+</span><span class="st"> </span>dep_time <span class="op">%%</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">1440</span>, </a>
@@ -953,7 +961,7 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 <a class="sourceLine" id="cb77-10" title="10"><span class="co">#&gt; 4           344                 345</span></a>
 <a class="sourceLine" id="cb77-11" title="11"><span class="co">#&gt; 5           354                 360</span></a>
 <a class="sourceLine" id="cb77-12" title="12"><span class="co">#&gt; 6           354                 358</span></a>
-<a class="sourceLine" id="cb77-13" title="13"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb77-13" title="13"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>比较<code>dep_time、sched_dep_time 和 dep_delay</code>，这三者应该是何种关系？</li>
 </ol>
@@ -991,7 +999,7 @@ R的基础包提供了计算累加和、累加积、累加最小值和累加最�
 <a class="sourceLine" id="cb79-9" title="9"><span class="co">#&gt; 4  2013     9    20      1014          4</span></a>
 <a class="sourceLine" id="cb79-10" title="10"><span class="co">#&gt; 5  2013     7    22      1005          5</span></a>
 <a class="sourceLine" id="cb79-11" title="11"><span class="co">#&gt; 6  2013     4    10       960          6</span></a>
-<a class="sourceLine" id="cb79-12" title="12"><span class="co">#&gt; # ... with 3.368e+05 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb79-12" title="12"><span class="co">#&gt; # ... with 336,770 more rows</span></a></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li><code>1:3 + 1:10</code>会返回什么？为什么？</li>
 </ol>

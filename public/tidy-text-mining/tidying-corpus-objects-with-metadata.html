@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-31" />
+<meta name="date" content="2020-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,9 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.4.0/str_view.js"></script>
 
 
 <style type="text/css">
@@ -191,6 +194,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="reviews-on-regular-expressions.html"><a href="reviews-on-regular-expressions.html"><i class="fa fa-check"></i><b>A</b> Reviews on regular expressions</a><ul>
+<li class="chapter" data-level="A.1" data-path="posix-character-classes.html"><a href="posix-character-classes.html"><i class="fa fa-check"></i><b>A.1</b> POSIX Character Classes</a></li>
+<li class="chapter" data-level="A.2" data-path="greedy-and-lazy-quantifiers.html"><a href="greedy-and-lazy-quantifiers.html"><i class="fa fa-check"></i><b>A.2</b> Greedy and lazy quantifiers</a></li>
+<li class="chapter" data-level="A.3" data-path="looking-ahead-and-back.html"><a href="looking-ahead-and-back.html"><i class="fa fa-check"></i><b>A.3</b> Looking ahead and back</a></li>
+<li class="chapter" data-level="A.4" data-path="backreferences.html"><a href="backreferences.html"><i class="fa fa-check"></i><b>A.4</b> Backreferences</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="text-processing-examples-in-r.html"><a href="text-processing-examples-in-r.html"><i class="fa fa-check"></i><b>B</b> Text processing examples in R</a><ul>
+<li class="chapter" data-level="B.1" data-path="replacing-and-removing.html"><a href="replacing-and-removing.html"><i class="fa fa-check"></i><b>B.1</b> Replacing and removing</a></li>
+<li class="chapter" data-level="B.2" data-path="combining-and-splitting.html"><a href="combining-and-splitting.html"><i class="fa fa-check"></i><b>B.2</b> Combining and splitting</a></li>
+<li class="chapter" data-level="B.3" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html"><i class="fa fa-check"></i><b>B.3</b> Extracting text from pdf and other files</a><ul>
+<li class="chapter" data-level="B.3.1" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html#office-documents"><i class="fa fa-check"></i><b>B.3.1</b> Office documents</a></li>
+<li class="chapter" data-level="B.3.2" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html#images"><i class="fa fa-check"></i><b>B.3.2</b> Images</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Written with bookdown</a></li>
 
@@ -215,49 +233,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.3</span> Tidying corpus objects with metadata</h2>
 <p>Notwithstanding discrepancies in their form, document term matrix and one-token-per-row data frame are exchangable for they both store the same information after tokenization. A corpus object, however, is a data structure for text data <strong>before</strong> tokenization. One common example is Corpus objects from the tm package. These store text alongside <strong>metadata</strong>, which may include an ID, date/time, title, or language for each document.</p>
 <p>The <code>tm</code> package comes with the <code>acq</code> corpus, containing 50 articles from the news service Reuters.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">data</span>(<span class="st">&quot;acq&quot;</span>)</a>
-<a class="sourceLine" id="cb100-2" title="2">acq</a>
-<a class="sourceLine" id="cb100-3" title="3"><span class="co">#&gt; &lt;&lt;VCorpus&gt;&gt;</span></a>
-<a class="sourceLine" id="cb100-4" title="4"><span class="co">#&gt; Metadata:  corpus specific: 0, document level (indexed): 0</span></a>
-<a class="sourceLine" id="cb100-5" title="5"><span class="co">#&gt; Content:  documents: 50</span></a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">data</span>(<span class="st">&quot;acq&quot;</span>)</a>
+<a class="sourceLine" id="cb99-2" title="2">acq</a>
+<a class="sourceLine" id="cb99-3" title="3"><span class="co">#&gt; &lt;&lt;VCorpus&gt;&gt;</span></a>
+<a class="sourceLine" id="cb99-4" title="4"><span class="co">#&gt; Metadata:  corpus specific: 0, document level (indexed): 0</span></a>
+<a class="sourceLine" id="cb99-5" title="5"><span class="co">#&gt; Content:  documents: 50</span></a></code></pre></div>
 <p>A corpus object is structured like a list, with each item containing both text and metadata, wh.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1">acq[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb101-2" title="2"><span class="co">#&gt; &lt;&lt;PlainTextDocument&gt;&gt;</span></a>
-<a class="sourceLine" id="cb101-3" title="3"><span class="co">#&gt; Metadata:  15</span></a>
-<a class="sourceLine" id="cb101-4" title="4"><span class="co">#&gt; Content:  chars: 1287</span></a>
-<a class="sourceLine" id="cb101-5" title="5">acq[[<span class="dv">1</span>]]<span class="op">$</span>content</a>
-<a class="sourceLine" id="cb101-6" title="6"><span class="co">#&gt; [1] &quot;Computer Terminal Systems Inc said\nit has completed the sale of 200,000 shares of its common\nstock, and warrants to acquire an additional one mln shares, to\n&lt;Sedio N.V.&gt; of Lugano, Switzerland for 50,000 dlrs.\n    The company said the warrants are exercisable for five\nyears at a purchase price of .125 dlrs per share.\n    Computer Terminal said Sedio also has the right to buy\nadditional shares and increase its total holdings up to 40 pct\nof the Computer Terminal&#39;s outstanding common stock under\ncertain circumstances involving change of control at the\ncompany.\n    The company said if the conditions occur the warrants would\nbe exercisable at a price equal to 75 pct of its common stock&#39;s\nmarket price at the time, not to exceed 1.50 dlrs per share.\n    Computer Terminal also said it sold the technolgy rights to\nits Dot Matrix impact technology, including any future\nimprovements, to &lt;Woodco Inc&gt; of Houston, Tex. for 200,000\ndlrs. But, it said it would continue to be the exclusive\nworldwide licensee of the technology for Woodco.\n    The company said the moves were part of its reorganization\nplan and would help pay current operation costs and ensure\nproduct delivery.\n    Computer Terminal makes computer generated labels, forms,\ntags and ticket printers and terminals.\n Reuter&quot;</span></a>
-<a class="sourceLine" id="cb101-7" title="7">acq[[<span class="dv">1</span>]]<span class="op">$</span>meta</a>
-<a class="sourceLine" id="cb101-8" title="8"><span class="co">#&gt;   author       : character(0)</span></a>
-<a class="sourceLine" id="cb101-9" title="9"><span class="co">#&gt;   datetimestamp: 1987-02-26 15:18:06</span></a>
-<a class="sourceLine" id="cb101-10" title="10"><span class="co">#&gt;   description  : </span></a>
-<a class="sourceLine" id="cb101-11" title="11"><span class="co">#&gt;   heading      : COMPUTER TERMINAL SYSTEMS &lt;CPML&gt; COMPLETES SALE</span></a>
-<a class="sourceLine" id="cb101-12" title="12"><span class="co">#&gt;   id           : 10</span></a>
-<a class="sourceLine" id="cb101-13" title="13"><span class="co">#&gt;   language     : en</span></a>
-<a class="sourceLine" id="cb101-14" title="14"><span class="co">#&gt;   origin       : Reuters-21578 XML</span></a>
-<a class="sourceLine" id="cb101-15" title="15"><span class="co">#&gt;   topics       : YES</span></a>
-<a class="sourceLine" id="cb101-16" title="16"><span class="co">#&gt;   lewissplit   : TRAIN</span></a>
-<a class="sourceLine" id="cb101-17" title="17"><span class="co">#&gt;   cgisplit     : TRAINING-SET</span></a>
-<a class="sourceLine" id="cb101-18" title="18"><span class="co">#&gt;   oldid        : 5553</span></a>
-<a class="sourceLine" id="cb101-19" title="19"><span class="co">#&gt;   places       : usa</span></a>
-<a class="sourceLine" id="cb101-20" title="20"><span class="co">#&gt;   people       : character(0)</span></a>
-<a class="sourceLine" id="cb101-21" title="21"><span class="co">#&gt;   orgs         : character(0)</span></a>
-<a class="sourceLine" id="cb101-22" title="22"><span class="co">#&gt;   exchanges    : character(0)</span></a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">acq[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb100-2" title="2"><span class="co">#&gt; &lt;&lt;PlainTextDocument&gt;&gt;</span></a>
+<a class="sourceLine" id="cb100-3" title="3"><span class="co">#&gt; Metadata:  15</span></a>
+<a class="sourceLine" id="cb100-4" title="4"><span class="co">#&gt; Content:  chars: 1287</span></a>
+<a class="sourceLine" id="cb100-5" title="5">acq[[<span class="dv">1</span>]]<span class="op">$</span>content</a>
+<a class="sourceLine" id="cb100-6" title="6"><span class="co">#&gt; [1] &quot;Computer Terminal Systems Inc said\nit has completed the sale of 200,000 shares of its common\nstock, and warrants to acquire an additional one mln shares, to\n&lt;Sedio N.V.&gt; of Lugano, Switzerland for 50,000 dlrs.\n    The company said the warrants are exercisable for five\nyears at a purchase price of .125 dlrs per share.\n    Computer Terminal said Sedio also has the right to buy\nadditional shares and increase its total holdings up to 40 pct\nof the Computer Terminal&#39;s outstanding common stock under\ncertain circumstances involving change of control at the\ncompany.\n    The company said if the conditions occur the warrants would\nbe exercisable at a price equal to 75 pct of its common stock&#39;s\nmarket price at the time, not to exceed 1.50 dlrs per share.\n    Computer Terminal also said it sold the technolgy rights to\nits Dot Matrix impact technology, including any future\nimprovements, to &lt;Woodco Inc&gt; of Houston, Tex. for 200,000\ndlrs. But, it said it would continue to be the exclusive\nworldwide licensee of the technology for Woodco.\n    The company said the moves were part of its reorganization\nplan and would help pay current operation costs and ensure\nproduct delivery.\n    Computer Terminal makes computer generated labels, forms,\ntags and ticket printers and terminals.\n Reuter&quot;</span></a>
+<a class="sourceLine" id="cb100-7" title="7">acq[[<span class="dv">1</span>]]<span class="op">$</span>meta</a>
+<a class="sourceLine" id="cb100-8" title="8"><span class="co">#&gt;   author       : character(0)</span></a>
+<a class="sourceLine" id="cb100-9" title="9"><span class="co">#&gt;   datetimestamp: 1987-02-26 15:18:06</span></a>
+<a class="sourceLine" id="cb100-10" title="10"><span class="co">#&gt;   description  : </span></a>
+<a class="sourceLine" id="cb100-11" title="11"><span class="co">#&gt;   heading      : COMPUTER TERMINAL SYSTEMS &lt;CPML&gt; COMPLETES SALE</span></a>
+<a class="sourceLine" id="cb100-12" title="12"><span class="co">#&gt;   id           : 10</span></a>
+<a class="sourceLine" id="cb100-13" title="13"><span class="co">#&gt;   language     : en</span></a>
+<a class="sourceLine" id="cb100-14" title="14"><span class="co">#&gt;   origin       : Reuters-21578 XML</span></a>
+<a class="sourceLine" id="cb100-15" title="15"><span class="co">#&gt;   topics       : YES</span></a>
+<a class="sourceLine" id="cb100-16" title="16"><span class="co">#&gt;   lewissplit   : TRAIN</span></a>
+<a class="sourceLine" id="cb100-17" title="17"><span class="co">#&gt;   cgisplit     : TRAINING-SET</span></a>
+<a class="sourceLine" id="cb100-18" title="18"><span class="co">#&gt;   oldid        : 5553</span></a>
+<a class="sourceLine" id="cb100-19" title="19"><span class="co">#&gt;   places       : usa</span></a>
+<a class="sourceLine" id="cb100-20" title="20"><span class="co">#&gt;   people       : character(0)</span></a>
+<a class="sourceLine" id="cb100-21" title="21"><span class="co">#&gt;   orgs         : character(0)</span></a>
+<a class="sourceLine" id="cb100-22" title="22"><span class="co">#&gt;   exchanges    : character(0)</span></a></code></pre></div>
 <p>We can thus use the <code>tidy()</code> method to construct a table with one row per document, including the metadata</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1">acq_tidy &lt;-<span class="st"> </span><span class="kw">tidy</span>(acq)</a>
-<a class="sourceLine" id="cb102-2" title="2">acq_tidy</a>
-<a class="sourceLine" id="cb102-3" title="3"><span class="co">#&gt; # A tibble: 50 x 16</span></a>
-<a class="sourceLine" id="cb102-4" title="4"><span class="co">#&gt;   author datetimestamp       description heading id    language origin topics</span></a>
-<a class="sourceLine" id="cb102-5" title="5"><span class="co">#&gt;   &lt;chr&gt;  &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb102-6" title="6"><span class="co">#&gt; 1 &lt;NA&gt;   1987-02-26 23:18:06 &quot;&quot;          COMPUT~ 10    en       Reute~ YES   </span></a>
-<a class="sourceLine" id="cb102-7" title="7"><span class="co">#&gt; 2 &lt;NA&gt;   1987-02-26 23:19:15 &quot;&quot;          OHIO M~ 12    en       Reute~ YES   </span></a>
-<a class="sourceLine" id="cb102-8" title="8"><span class="co">#&gt; 3 &lt;NA&gt;   1987-02-26 23:49:56 &quot;&quot;          MCLEAN~ 44    en       Reute~ YES   </span></a>
-<a class="sourceLine" id="cb102-9" title="9"><span class="co">#&gt; 4 By Ca~ 1987-02-26 23:51:17 &quot;&quot;          CHEMLA~ 45    en       Reute~ YES   </span></a>
-<a class="sourceLine" id="cb102-10" title="10"><span class="co">#&gt; 5 &lt;NA&gt;   1987-02-27 00:08:33 &quot;&quot;          &lt;COFAB~ 68    en       Reute~ YES   </span></a>
-<a class="sourceLine" id="cb102-11" title="11"><span class="co">#&gt; 6 &lt;NA&gt;   1987-02-27 00:32:37 &quot;&quot;          INVEST~ 96    en       Reute~ YES   </span></a>
-<a class="sourceLine" id="cb102-12" title="12"><span class="co">#&gt; # ... with 44 more rows, and 8 more variables: lewissplit &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb102-13" title="13"><span class="co">#&gt; #   cgisplit &lt;chr&gt;, oldid &lt;chr&gt;, places &lt;named list&gt;, people &lt;lgl&gt;, orgs &lt;lgl&gt;,</span></a>
-<a class="sourceLine" id="cb102-14" title="14"><span class="co">#&gt; #   exchanges &lt;lgl&gt;, text &lt;chr&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1">acq_tidy &lt;-<span class="st"> </span><span class="kw">tidy</span>(acq)</a>
+<a class="sourceLine" id="cb101-2" title="2">acq_tidy</a>
+<a class="sourceLine" id="cb101-3" title="3"><span class="co">#&gt; # A tibble: 50 x 16</span></a>
+<a class="sourceLine" id="cb101-4" title="4"><span class="co">#&gt;   author datetimestamp       description heading id    language origin topics</span></a>
+<a class="sourceLine" id="cb101-5" title="5"><span class="co">#&gt;   &lt;chr&gt;  &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb101-6" title="6"><span class="co">#&gt; 1 &lt;NA&gt;   1987-02-26 23:18:06 &quot;&quot;          COMPUT~ 10    en       Reute~ YES   </span></a>
+<a class="sourceLine" id="cb101-7" title="7"><span class="co">#&gt; 2 &lt;NA&gt;   1987-02-26 23:19:15 &quot;&quot;          OHIO M~ 12    en       Reute~ YES   </span></a>
+<a class="sourceLine" id="cb101-8" title="8"><span class="co">#&gt; 3 &lt;NA&gt;   1987-02-26 23:49:56 &quot;&quot;          MCLEAN~ 44    en       Reute~ YES   </span></a>
+<a class="sourceLine" id="cb101-9" title="9"><span class="co">#&gt; 4 By Ca~ 1987-02-26 23:51:17 &quot;&quot;          CHEMLA~ 45    en       Reute~ YES   </span></a>
+<a class="sourceLine" id="cb101-10" title="10"><span class="co">#&gt; 5 &lt;NA&gt;   1987-02-27 00:08:33 &quot;&quot;          &lt;COFAB~ 68    en       Reute~ YES   </span></a>
+<a class="sourceLine" id="cb101-11" title="11"><span class="co">#&gt; 6 &lt;NA&gt;   1987-02-27 00:32:37 &quot;&quot;          INVEST~ 96    en       Reute~ YES   </span></a>
+<a class="sourceLine" id="cb101-12" title="12"><span class="co">#&gt; # ... with 44 more rows, and 8 more variables: lewissplit &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb101-13" title="13"><span class="co">#&gt; #   cgisplit &lt;chr&gt;, oldid &lt;chr&gt;, places &lt;named list&gt;, people &lt;lgl&gt;, orgs &lt;lgl&gt;,</span></a>
+<a class="sourceLine" id="cb101-14" title="14"><span class="co">#&gt; #   exchanges &lt;lgl&gt;, text &lt;chr&gt;</span></a></code></pre></div>
 
 </div>
 <!-- </div> -->

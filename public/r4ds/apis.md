@@ -1,7 +1,6 @@
 
 
-
-# Data APIs
+# Useful APIs
 
 ## WDI
 
@@ -18,7 +17,7 @@ library(WDI)
 
 <div class="figure" style="text-align: center">
 <img src="images/19.png" alt="Indicators divided by sectors" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-4)Indicators divided by sectors</p>
+<p class="caption">(\#fig:unnamed-chunk-3)Indicators divided by sectors</p>
 </div>
 
 具体到某领域内，每个数据集都是各个国家在某个指标上的时间序列，时效性一般在两年之内。下面是气候变化分类中电力覆盖率指标(Access to electricity)的一个例子： 

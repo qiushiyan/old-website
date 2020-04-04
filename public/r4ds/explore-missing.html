@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>17.1 Exploring | R for data science: tidyverse and beyond</title>
-  <meta name="description" content="17.1 Exploring | R for data science: tidyverse and beyond" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <title>18.1 Exploring | R for data science: tidyverse and beyond</title>
+  <meta name="description" content="18.1 Exploring | R for data science: tidyverse and beyond" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="17.1 Exploring | R for data science: tidyverse and beyond" />
+  <meta property="og:title" content="18.1 Exploring | R for data science: tidyverse and beyond" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="enixam/rfordatascience" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="17.1 Exploring | R for data science: tidyverse and beyond" />
+  <meta name="twitter:title" content="18.1 Exploring | R for data science: tidyverse and beyond" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Maxine" />
 
 
-<meta name="date" content="2020-03-04" />
+<meta name="date" content="2020-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -314,83 +314,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="broomextra.html"><a href="broomextra.html"><i class="fa fa-check"></i><b>9.3</b> broomExtra</a></li>
 <li class="chapter" data-level="9.4" data-path="ggfortify.html"><a href="ggfortify.html"><i class="fa fa-check"></i><b>9.4</b> ggfortify</a></li>
 </ul></li>
-<li class="part"><span><b>II Importing and APIs</b></span></li>
-<li class="chapter" data-level="10" data-path="vroom.html"><a href="vroom.html"><i class="fa fa-check"></i><b>10</b> vroom</a></li>
-<li class="chapter" data-level="11" data-path="data-apis.html"><a href="data-apis.html"><i class="fa fa-check"></i><b>11</b> Data APIs</a><ul>
-<li class="chapter" data-level="11.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>11.1</b> WDI</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>11.1.1</b> <code>WDIsearch()</code></a></li>
-<li class="chapter" data-level="11.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>11.1.2</b> <code>WDI</code></a></li>
+<li class="part"><span><b>II Importing</b></span></li>
+<li class="chapter" data-level="10" data-path="vroom-fast-reading-of-delimited-files.html"><a href="vroom-fast-reading-of-delimited-files.html"><i class="fa fa-check"></i><b>10</b> vroom: Fast reading of delimited files</a></li>
+<li class="chapter" data-level="11" data-path="reading-in-data-from-other-formats.html"><a href="reading-in-data-from-other-formats.html"><i class="fa fa-check"></i><b>11</b> Reading in data from other formats</a><ul>
+<li class="chapter" data-level="11.1" data-path="pdf.html"><a href="pdf.html"><i class="fa fa-check"></i><b>11.1</b> PDF</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="pdf.html"><a href="pdf.html#scraping-pdf-data"><i class="fa fa-check"></i><b>11.1.1</b> Scraping pdf data</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>11.2</b> ipumsr</a></li>
+<li class="chapter" data-level="11.2" data-path="office-documents.html"><a href="office-documents.html"><i class="fa fa-check"></i><b>11.2</b> Office documents</a></li>
+<li class="chapter" data-level="11.3" data-path="google-sheet.html"><a href="google-sheet.html"><i class="fa fa-check"></i><b>11.3</b> Google sheet</a></li>
+<li class="chapter" data-level="11.4" data-path="images.html"><a href="images.html"><i class="fa fa-check"></i><b>11.4</b> Images</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="useful-apis.html"><a href="useful-apis.html"><i class="fa fa-check"></i><b>12</b> Useful APIs</a><ul>
+<li class="chapter" data-level="12.1" data-path="wdi.html"><a href="wdi.html"><i class="fa fa-check"></i><b>12.1</b> WDI</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="wdi.html"><a href="wdi.html#wdisearch"><i class="fa fa-check"></i><b>12.1.1</b> <code>WDIsearch()</code></a></li>
+<li class="chapter" data-level="12.1.2" data-path="wdi.html"><a href="wdi.html#wdi-1"><i class="fa fa-check"></i><b>12.1.2</b> <code>WDI</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ipumsr.html"><a href="ipumsr.html"><i class="fa fa-check"></i><b>12.2</b> ipumsr</a></li>
 </ul></li>
 <li class="part"><span><b>III Exploring and Wrangling</b></span></li>
-<li class="chapter" data-level="12" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>12</b> Data Summary</a><ul>
-<li class="chapter" data-level="12.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>12.1</b> skimr</a></li>
-<li class="chapter" data-level="12.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>12.2</b> visdat</a></li>
-<li class="chapter" data-level="12.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>12.3</b> summarytools</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>12.3.1</b> <code>freq</code></a></li>
-<li class="chapter" data-level="12.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>12.3.2</b> <code>descr()</code></a></li>
+<li class="chapter" data-level="13" data-path="data-summary.html"><a href="data-summary.html"><i class="fa fa-check"></i><b>13</b> Data summary</a><ul>
+<li class="chapter" data-level="13.1" data-path="skimr.html"><a href="skimr.html"><i class="fa fa-check"></i><b>13.1</b> skimr</a></li>
+<li class="chapter" data-level="13.2" data-path="visdat.html"><a href="visdat.html"><i class="fa fa-check"></i><b>13.2</b> visdat</a></li>
+<li class="chapter" data-level="13.3" data-path="summarytools.html"><a href="summarytools.html"><i class="fa fa-check"></i><b>13.3</b> summarytools</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="summarytools.html"><a href="summarytools.html#freq"><i class="fa fa-check"></i><b>13.3.1</b> <code>freq</code></a></li>
+<li class="chapter" data-level="13.3.2" data-path="summarytools.html"><a href="summarytools.html#descr"><i class="fa fa-check"></i><b>13.3.2</b> <code>descr()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>12.4</b> gt and gtsummary</a></li>
-<li class="chapter" data-level="12.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>12.5</b> naniar</a></li>
+<li class="chapter" data-level="13.4" data-path="gt-and-gtsummary.html"><a href="gt-and-gtsummary.html"><i class="fa fa-check"></i><b>13.4</b> gt and gtsummary</a></li>
+<li class="chapter" data-level="13.5" data-path="naniar.html"><a href="naniar.html"><i class="fa fa-check"></i><b>13.5</b> naniar</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>13</b> Janitor</a><ul>
-<li class="chapter" data-level="13.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>13.1</b> cleaning</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>13.1.1</b> <code>clean_names</code></a></li>
+<li class="chapter" data-level="14" data-path="janitor.html"><a href="janitor.html"><i class="fa fa-check"></i><b>14</b> Janitor</a><ul>
+<li class="chapter" data-level="14.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html"><i class="fa fa-check"></i><b>14.1</b> cleaning</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="janitor-cleaning.html"><a href="janitor-cleaning.html#clean_names"><i class="fa fa-check"></i><b>14.1.1</b> <code>clean_names</code></a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>13.2</b> Exploring</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>13.2.1</b> <code>tabyl</code></a></li>
-<li class="chapter" data-level="13.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>13.2.2</b> <code>get_dupes</code></a></li>
-<li class="chapter" data-level="13.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>13.2.3</b> <code>remove_</code></a></li>
-<li class="chapter" data-level="13.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>13.2.4</b> <code>round_half_up</code></a></li>
-<li class="chapter" data-level="13.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>13.2.5</b> <code>excel_numeric_to_date</code></a></li>
-<li class="chapter" data-level="13.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>13.2.6</b> <code>top_levels</code></a></li>
-<li class="chapter" data-level="13.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>13.2.7</b> <code>row_to_names</code></a></li>
+<li class="chapter" data-level="14.2" data-path="janitor-explore.html"><a href="janitor-explore.html"><i class="fa fa-check"></i><b>14.2</b> Exploring</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="janitor-explore.html"><a href="janitor-explore.html#tabyl"><i class="fa fa-check"></i><b>14.2.1</b> <code>tabyl</code></a></li>
+<li class="chapter" data-level="14.2.2" data-path="janitor-explore.html"><a href="janitor-explore.html#get_dupes"><i class="fa fa-check"></i><b>14.2.2</b> <code>get_dupes</code></a></li>
+<li class="chapter" data-level="14.2.3" data-path="janitor-explore.html"><a href="janitor-explore.html#remove_"><i class="fa fa-check"></i><b>14.2.3</b> <code>remove_</code></a></li>
+<li class="chapter" data-level="14.2.4" data-path="janitor-explore.html"><a href="janitor-explore.html#round_half_up"><i class="fa fa-check"></i><b>14.2.4</b> <code>round_half_up</code></a></li>
+<li class="chapter" data-level="14.2.5" data-path="janitor-explore.html"><a href="janitor-explore.html#excel_numeric_to_date"><i class="fa fa-check"></i><b>14.2.5</b> <code>excel_numeric_to_date</code></a></li>
+<li class="chapter" data-level="14.2.6" data-path="janitor-explore.html"><a href="janitor-explore.html#top_levels"><i class="fa fa-check"></i><b>14.2.6</b> <code>top_levels</code></a></li>
+<li class="chapter" data-level="14.2.7" data-path="janitor-explore.html"><a href="janitor-explore.html#row_to_names"><i class="fa fa-check"></i><b>14.2.7</b> <code>row_to_names</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>14</b> data.table</a><ul>
-<li class="chapter" data-level="14.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
-<li class="chapter" data-level="14.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>14.2</b> dtplyr</a></li>
-<li class="chapter" data-level="14.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>14.3</b> maditr</a></li>
-<li class="chapter" data-level="14.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>14.4</b> tidyfast</a></li>
-<li class="chapter" data-level="14.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>14.5</b> disk.frame</a></li>
+<li class="chapter" data-level="15" data-path="data-table.html"><a href="data-table.html"><i class="fa fa-check"></i><b>15</b> data.table</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-table-intro.html"><a href="data-table-intro.html"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="dtplyr.html"><a href="dtplyr.html"><i class="fa fa-check"></i><b>15.2</b> dtplyr</a></li>
+<li class="chapter" data-level="15.3" data-path="maditr.html"><a href="maditr.html"><i class="fa fa-check"></i><b>15.3</b> maditr</a></li>
+<li class="chapter" data-level="15.4" data-path="tidyfast.html"><a href="tidyfast.html"><i class="fa fa-check"></i><b>15.4</b> tidyfast</a></li>
+<li class="chapter" data-level="15.5" data-path="disk-frame.html"><a href="disk-frame.html"><i class="fa fa-check"></i><b>15.5</b> disk.frame</a></li>
 </ul></li>
 <li class="part"><span><b>IV Miscellaneous tools</b></span></li>
-<li class="chapter" data-level="15" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>15</b> Advanced relational data</a><ul>
-<li class="chapter" data-level="15.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>15.1</b> fuzzyjoin</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>15.1.1</b> inexact matching</a></li>
-<li class="chapter" data-level="15.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>15.1.2</b> stringdist</a></li>
+<li class="chapter" data-level="16" data-path="advanced-relational-data.html"><a href="advanced-relational-data.html"><i class="fa fa-check"></i><b>16</b> Advanced relational data</a><ul>
+<li class="chapter" data-level="16.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html"><i class="fa fa-check"></i><b>16.1</b> fuzzyjoin</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#inexact-matching"><i class="fa fa-check"></i><b>16.1.1</b> inexact matching</a></li>
+<li class="chapter" data-level="16.1.2" data-path="fuzzyjoin.html"><a href="fuzzyjoin.html#stringdist"><i class="fa fa-check"></i><b>16.1.2</b> stringdist</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>15.2</b> funneljoin</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>15.2.1</b> <code>after_join()</code></a></li>
-<li class="chapter" data-level="15.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>15.2.2</b> funnel in one table</a></li>
+<li class="chapter" data-level="16.2" data-path="funneljoin.html"><a href="funneljoin.html"><i class="fa fa-check"></i><b>16.2</b> funneljoin</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="funneljoin.html"><a href="funneljoin.html#after_join"><i class="fa fa-check"></i><b>16.2.1</b> <code>after_join()</code></a></li>
+<li class="chapter" data-level="16.2.2" data-path="funneljoin.html"><a href="funneljoin.html#funnel-in-one-table"><i class="fa fa-check"></i><b>16.2.2</b> funnel in one table</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>15.3</b> dm</a></li>
+<li class="chapter" data-level="16.3" data-path="dm.html"><a href="dm.html"><i class="fa fa-check"></i><b>16.3</b> dm</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>16</b> Categorical data (facotr)</a><ul>
-<li class="chapter" data-level="16.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>16.1</b> Frequency and contingency table</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>16.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
+<li class="chapter" data-level="17" data-path="categorical-data-facotr.html"><a href="categorical-data-facotr.html"><i class="fa fa-check"></i><b>17</b> Categorical data (facotr)</a><ul>
+<li class="chapter" data-level="17.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html"><i class="fa fa-check"></i><b>17.1</b> Frequency and contingency table</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="frequency-and-contingency-table.html"><a href="frequency-and-contingency-table.html#frq-and-flat_table"><i class="fa fa-check"></i><b>17.1.1</b> <code>frq()</code> and <code>flat_table()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>16.2</b> Coding</a><ul>
-<li class="chapter" data-level="16.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>16.2.1</b> <code>rec()</code></a></li>
+<li class="chapter" data-level="17.2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>17.2</b> Coding</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="coding.html"><a href="coding.html#rec"><i class="fa fa-check"></i><b>17.2.1</b> <code>rec()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>16.3</b> Cutting</a><ul>
-<li class="chapter" data-level="16.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>16.3.1</b> <code>chop()</code></a></li>
+<li class="chapter" data-level="17.3" data-path="cutting.html"><a href="cutting.html"><i class="fa fa-check"></i><b>17.3</b> Cutting</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="cutting.html"><a href="cutting.html#chop"><i class="fa fa-check"></i><b>17.3.1</b> <code>chop()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>17</b> Dealing with missing values</a><ul>
-<li class="chapter" data-level="17.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>17.1</b> Exploring</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>17.1.1</b> naniar</a></li>
-<li class="chapter" data-level="17.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>17.1.2</b> Replace a value with NA</a></li>
-<li class="chapter" data-level="17.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>17.1.3</b> janitor</a></li>
-<li class="chapter" data-level="17.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>17.1.4</b> sjmisc</a></li>
+<li class="chapter" data-level="18" data-path="dealing-with-missing-values.html"><a href="dealing-with-missing-values.html"><i class="fa fa-check"></i><b>18</b> Dealing with missing values</a><ul>
+<li class="chapter" data-level="18.1" data-path="explore-missing.html"><a href="explore-missing.html"><i class="fa fa-check"></i><b>18.1</b> Exploring</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="explore-missing.html"><a href="explore-missing.html#naniar-1"><i class="fa fa-check"></i><b>18.1.1</b> naniar</a></li>
+<li class="chapter" data-level="18.1.2" data-path="explore-missing.html"><a href="explore-missing.html#replace-a-value-with-na"><i class="fa fa-check"></i><b>18.1.2</b> Replace a value with NA</a></li>
+<li class="chapter" data-level="18.1.3" data-path="explore-missing.html"><a href="explore-missing.html#janitor-1"><i class="fa fa-check"></i><b>18.1.3</b> janitor</a></li>
+<li class="chapter" data-level="18.1.4" data-path="explore-missing.html"><a href="explore-missing.html#sjmisc"><i class="fa fa-check"></i><b>18.1.4</b> sjmisc</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>17.2</b> Wrangling</a><ul>
-<li class="chapter" data-level="17.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>17.2.1</b> tidyr</a></li>
-<li class="chapter" data-level="17.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>17.2.2</b> janitor</a></li>
-<li class="chapter" data-level="17.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>17.2.3</b> visdat</a></li>
+<li class="chapter" data-level="18.2" data-path="wrangling.html"><a href="wrangling.html"><i class="fa fa-check"></i><b>18.2</b> Wrangling</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="wrangling.html"><a href="wrangling.html#tidyr"><i class="fa fa-check"></i><b>18.2.1</b> tidyr</a></li>
+<li class="chapter" data-level="18.2.2" data-path="wrangling.html"><a href="wrangling.html#janitor-2"><i class="fa fa-check"></i><b>18.2.2</b> janitor</a></li>
+<li class="chapter" data-level="18.2.3" data-path="wrangling.html"><a href="wrangling.html#visdat-1"><i class="fa fa-check"></i><b>18.2.3</b> visdat</a></li>
 </ul></li>
-<li class="chapter" data-level="17.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>17.3</b> Imputation</a></li>
+<li class="chapter" data-level="18.3" data-path="imputation.html"><a href="imputation.html"><i class="fa fa-check"></i><b>18.3</b> Imputation</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -414,133 +422,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="explore-missing" class="section level2">
-<h2><span class="header-section-number">17.1</span> Exploring</h2>
+<h2><span class="header-section-number">18.1</span> Exploring</h2>
 <div id="naniar-1" class="section level3">
-<h3><span class="header-section-number">17.1.1</span> naniar</h3>
+<h3><span class="header-section-number">18.1.1</span> naniar</h3>
 <p><a href="http://naniar.njtierney.com/" class="uri">http://naniar.njtierney.com/</a></p>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1"><span class="kw">library</span>(naniar)</a></code></pre></div>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb598-1" title="1"><span class="kw">library</span>(naniar)</a></code></pre></div>
 <div id="shadown-matrices" class="section level4">
-<h4><span class="header-section-number">17.1.1.1</span> Shadown matrices</h4>
+<h4><span class="header-section-number">18.1.1.1</span> Shadown matrices</h4>
 </div>
 <div id="summaries" class="section level4">
-<h4><span class="header-section-number">17.1.1.2</span> Summaries</h4>
+<h4><span class="header-section-number">18.1.1.2</span> Summaries</h4>
 </div>
 <div id="visualizations" class="section level4">
-<h4><span class="header-section-number">17.1.1.3</span> Visualizations</h4>
+<h4><span class="header-section-number">18.1.1.3</span> Visualizations</h4>
 <p><a href="http://naniar.njtierney.com/articles/naniar-visualisation.html" class="uri">http://naniar.njtierney.com/articles/naniar-visualisation.html</a></p>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" title="1"><span class="kw">ggplot</span>(airquality) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb589-2" title="2"><span class="st">  </span><span class="kw">geom_miss_point</span>(<span class="kw">aes</span>(Ozone, Solar.R))</a></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" title="1"><span class="kw">ggplot</span>(airquality) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb599-2" title="2"><span class="st">  </span><span class="kw">geom_miss_point</span>(<span class="kw">aes</span>(Ozone, Solar.R))</a></code></pre></div>
+<p><img src="missing-values_files/figure-html/unnamed-chunk-3-1.svg" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb600-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> airquality,</a>
+<a class="sourceLine" id="cb600-2" title="2">       <span class="kw">aes</span>(<span class="dt">x =</span> Ozone,</a>
+<a class="sourceLine" id="cb600-3" title="3">           <span class="dt">y =</span> Solar.R)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb600-4" title="4"><span class="st">  </span><span class="kw">geom_miss_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb600-5" title="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Month, <span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb600-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</a></code></pre></div>
 <p><img src="missing-values_files/figure-html/unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb590-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> airquality,</a>
-<a class="sourceLine" id="cb590-2" title="2">       <span class="kw">aes</span>(<span class="dt">x =</span> Ozone,</a>
-<a class="sourceLine" id="cb590-3" title="3">           <span class="dt">y =</span> Solar.R)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb590-4" title="4"><span class="st">  </span><span class="kw">geom_miss_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb590-5" title="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Month, <span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb590-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb601-1" title="1"><span class="kw">gg_miss_upset</span>(airquality)</a></code></pre></div>
 <p><img src="missing-values_files/figure-html/unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb591-1" title="1"><span class="kw">gg_miss_upset</span>(airquality)</a></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" title="1"><span class="kw">gg_miss_upset</span>(riskfactors)</a></code></pre></div>
 <p><img src="missing-values_files/figure-html/unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb592-1" title="1"><span class="kw">gg_miss_upset</span>(riskfactors)</a></code></pre></div>
-<p><img src="missing-values_files/figure-html/unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="replace-a-value-with-na" class="section level3">
-<h3><span class="header-section-number">17.1.2</span> Replace a value with NA</h3>
+<h3><span class="header-section-number">18.1.2</span> Replace a value with NA</h3>
 <p>It’s worth to mention one <code>dplyr</code> functions that does the same thing:<br />
 <code>dplyr::na_if()</code></p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" title="1">y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;def&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;ghi&quot;</span>)</a>
-<a class="sourceLine" id="cb593-2" title="2"><span class="kw">na_if</span>(y, <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb593-3" title="3"><span class="co">#&gt; [1] &quot;abc&quot; &quot;def&quot; NA    &quot;ghi&quot;</span></a></code></pre></div>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" title="1"><span class="co"># na_if is particularly useful inside mutate,</span></a>
-<a class="sourceLine" id="cb594-2" title="2"><span class="co"># and is meant for use with vectors rather than entire data frames</span></a>
-<a class="sourceLine" id="cb594-3" title="3">starwars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb594-4" title="4"><span class="st">  </span><span class="kw">select</span>(name, eye_color) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb594-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">na_if</span>(eye_color, <span class="st">&quot;unknown&quot;</span>))</a>
-<a class="sourceLine" id="cb594-6" title="6"><span class="co">#&gt; # A tibble: 87 x 2</span></a>
-<a class="sourceLine" id="cb594-7" title="7"><span class="co">#&gt;   name           eye_color</span></a>
-<a class="sourceLine" id="cb594-8" title="8"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;    </span></a>
-<a class="sourceLine" id="cb594-9" title="9"><span class="co">#&gt; 1 Luke Skywalker blue     </span></a>
-<a class="sourceLine" id="cb594-10" title="10"><span class="co">#&gt; 2 C-3PO          yellow   </span></a>
-<a class="sourceLine" id="cb594-11" title="11"><span class="co">#&gt; 3 R2-D2          red      </span></a>
-<a class="sourceLine" id="cb594-12" title="12"><span class="co">#&gt; 4 Darth Vader    yellow   </span></a>
-<a class="sourceLine" id="cb594-13" title="13"><span class="co">#&gt; 5 Leia Organa    brown    </span></a>
-<a class="sourceLine" id="cb594-14" title="14"><span class="co">#&gt; 6 Owen Lars      blue     </span></a>
-<a class="sourceLine" id="cb594-15" title="15"><span class="co">#&gt; # ... with 81 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" title="1">y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;def&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;ghi&quot;</span>)</a>
+<a class="sourceLine" id="cb603-2" title="2"><span class="kw">na_if</span>(y, <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb603-3" title="3"><span class="co">#&gt; [1] &quot;abc&quot; &quot;def&quot; NA    &quot;ghi&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb604-1" title="1"><span class="co"># na_if is particularly useful inside mutate,</span></a>
+<a class="sourceLine" id="cb604-2" title="2"><span class="co"># and is meant for use with vectors rather than entire data frames</span></a>
+<a class="sourceLine" id="cb604-3" title="3">starwars <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb604-4" title="4"><span class="st">  </span><span class="kw">select</span>(name, eye_color) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb604-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">na_if</span>(eye_color, <span class="st">&quot;unknown&quot;</span>))</a>
+<a class="sourceLine" id="cb604-6" title="6"><span class="co">#&gt; # A tibble: 87 x 2</span></a>
+<a class="sourceLine" id="cb604-7" title="7"><span class="co">#&gt;   name           eye_color</span></a>
+<a class="sourceLine" id="cb604-8" title="8"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;    </span></a>
+<a class="sourceLine" id="cb604-9" title="9"><span class="co">#&gt; 1 Luke Skywalker blue     </span></a>
+<a class="sourceLine" id="cb604-10" title="10"><span class="co">#&gt; 2 C-3PO          yellow   </span></a>
+<a class="sourceLine" id="cb604-11" title="11"><span class="co">#&gt; 3 R2-D2          red      </span></a>
+<a class="sourceLine" id="cb604-12" title="12"><span class="co">#&gt; 4 Darth Vader    yellow   </span></a>
+<a class="sourceLine" id="cb604-13" title="13"><span class="co">#&gt; 5 Leia Organa    brown    </span></a>
+<a class="sourceLine" id="cb604-14" title="14"><span class="co">#&gt; 6 Owen Lars      blue     </span></a>
+<a class="sourceLine" id="cb604-15" title="15"><span class="co">#&gt; # ... with 81 more rows</span></a></code></pre></div>
 <p>article: <a href="http://naniar.njtierney.com/articles/replace-with-na.html" class="uri">http://naniar.njtierney.com/articles/replace-with-na.html</a></p>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb595-1" title="1">df &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tribble</span>(</a>
-<a class="sourceLine" id="cb595-2" title="2">  <span class="op">~</span>name,           <span class="op">~</span>x,  <span class="op">~</span>y,              <span class="op">~</span>z,  </a>
-<a class="sourceLine" id="cb595-3" title="3">  <span class="st">&quot;N/A&quot;</span>,           <span class="dv">1</span>,   <span class="st">&quot;N/A&quot;</span>,           <span class="dv">-100</span>, </a>
-<a class="sourceLine" id="cb595-4" title="4">  <span class="st">&quot;N A&quot;</span>,           <span class="dv">3</span>,   <span class="st">&quot;NOt available&quot;</span>, <span class="dv">-99</span>,</a>
-<a class="sourceLine" id="cb595-5" title="5">  <span class="st">&quot;N / A&quot;</span>,         <span class="ot">NA</span>,  <span class="dv">29</span>,              <span class="dv">-98</span>,</a>
-<a class="sourceLine" id="cb595-6" title="6">  <span class="st">&quot;Not Available&quot;</span>, <span class="dv">-99</span>, <span class="dv">25</span>,              <span class="dv">-101</span>,</a>
-<a class="sourceLine" id="cb595-7" title="7">  <span class="st">&quot;John Smith&quot;</span>,    <span class="dv">-98</span>, <span class="dv">28</span>,              <span class="dv">-1</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb596-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na</span>(<span class="dt">replace =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">-99</span>))</a>
-<a class="sourceLine" id="cb596-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb596-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
-<a class="sourceLine" id="cb596-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb596-5" title="5"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
-<a class="sourceLine" id="cb596-6" title="6"><span class="co">#&gt; 2 N A               3 NOt available   -99</span></a>
-<a class="sourceLine" id="cb596-7" title="7"><span class="co">#&gt; 3 N / A            NA 29              -98</span></a>
-<a class="sourceLine" id="cb596-8" title="8"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
-<a class="sourceLine" id="cb596-9" title="9"><span class="co">#&gt; 5 John Smith      -98 28               -1</span></a></code></pre></div>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb597-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na</span>(<span class="dt">replace =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">-98</span>)))</a>
-<a class="sourceLine" id="cb597-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb597-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
-<a class="sourceLine" id="cb597-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb597-5" title="5"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
-<a class="sourceLine" id="cb597-6" title="6"><span class="co">#&gt; 2 N A               3 NOt available   -99</span></a>
-<a class="sourceLine" id="cb597-7" title="7"><span class="co">#&gt; 3 N / A            NA 29              -98</span></a>
-<a class="sourceLine" id="cb597-8" title="8"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
-<a class="sourceLine" id="cb597-9" title="9"><span class="co">#&gt; 5 John Smith       NA 28               -1</span></a></code></pre></div>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb598-1" title="1">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb598-2" title="2"><span class="st">  </span><span class="kw">replace_with_na</span>(<span class="dt">replace =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">99</span>,<span class="op">-</span><span class="dv">98</span>),</a>
-<a class="sourceLine" id="cb598-3" title="3">                             <span class="dt">z =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">-98</span>)))</a>
-<a class="sourceLine" id="cb598-4" title="4"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb598-5" title="5"><span class="co">#&gt;   name              x y                 z</span></a>
-<a class="sourceLine" id="cb598-6" title="6"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb598-7" title="7"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
-<a class="sourceLine" id="cb598-8" title="8"><span class="co">#&gt; 2 N A               3 NOt available    NA</span></a>
-<a class="sourceLine" id="cb598-9" title="9"><span class="co">#&gt; 3 N / A            NA 29               NA</span></a>
-<a class="sourceLine" id="cb598-10" title="10"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
-<a class="sourceLine" id="cb598-11" title="11"><span class="co">#&gt; 5 John Smith       NA 28               -1</span></a></code></pre></div>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na_all</span>(<span class="dt">condition =</span> <span class="op">~</span>.x <span class="op">==</span><span class="st"> </span><span class="dv">-99</span>)</a>
-<a class="sourceLine" id="cb599-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb599-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
-<a class="sourceLine" id="cb599-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb599-5" title="5"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
-<a class="sourceLine" id="cb599-6" title="6"><span class="co">#&gt; 2 N A               3 NOt available    NA</span></a>
-<a class="sourceLine" id="cb599-7" title="7"><span class="co">#&gt; 3 N / A            NA 29              -98</span></a>
-<a class="sourceLine" id="cb599-8" title="8"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
-<a class="sourceLine" id="cb599-9" title="9"><span class="co">#&gt; 5 John Smith      -98 28               -1</span></a></code></pre></div>
-<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb600-1" title="1">common_na_numbers</a>
-<a class="sourceLine" id="cb600-2" title="2"><span class="co">#&gt; [1]    -9   -99  -999 -9999  9999    66    77    88</span></a></code></pre></div>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb601-1" title="1">common_na_strings</a>
-<a class="sourceLine" id="cb601-2" title="2"><span class="co">#&gt;  [1] &quot;NA&quot;     &quot;N A&quot;    &quot;N/A&quot;    &quot;NA &quot;    &quot; NA&quot;    &quot;N /A&quot;   &quot;N / A&quot;  &quot; N / A&quot;</span></a>
-<a class="sourceLine" id="cb601-3" title="3"><span class="co">#&gt;  [9] &quot;N / A &quot; &quot;na&quot;     &quot;n a&quot;    &quot;n/a&quot;    &quot;na &quot;    &quot; na&quot;    &quot;n /a&quot;   &quot;n / a&quot; </span></a>
-<a class="sourceLine" id="cb601-4" title="4"><span class="co">#&gt; [17] &quot; a / a&quot; &quot;n / a &quot; &quot;NULL&quot;   &quot;null&quot;   &quot;&quot;       &quot;\\?&quot;    &quot;\\*&quot;    &quot;\\.&quot;</span></a></code></pre></div>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na_all</span>(<span class="op">~</span>.x <span class="op">%in%</span><span class="st"> </span>common_na_strings)</a>
-<a class="sourceLine" id="cb602-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb602-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
-<a class="sourceLine" id="cb602-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb602-5" title="5"><span class="co">#&gt; 1 &lt;NA&gt;              1 &lt;NA&gt;           -100</span></a>
-<a class="sourceLine" id="cb602-6" title="6"><span class="co">#&gt; 2 &lt;NA&gt;              3 NOt available   -99</span></a>
-<a class="sourceLine" id="cb602-7" title="7"><span class="co">#&gt; 3 &lt;NA&gt;             NA 29              -98</span></a>
-<a class="sourceLine" id="cb602-8" title="8"><span class="co">#&gt; 4 Not Available   -99 25             -101</span></a>
-<a class="sourceLine" id="cb602-9" title="9"><span class="co">#&gt; 5 John Smith      -98 28               -1</span></a></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb605-1" title="1">df &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb605-2" title="2">  <span class="op">~</span>name,           <span class="op">~</span>x,  <span class="op">~</span>y,              <span class="op">~</span>z,  </a>
+<a class="sourceLine" id="cb605-3" title="3">  <span class="st">&quot;N/A&quot;</span>,           <span class="dv">1</span>,   <span class="st">&quot;N/A&quot;</span>,           <span class="dv">-100</span>, </a>
+<a class="sourceLine" id="cb605-4" title="4">  <span class="st">&quot;N A&quot;</span>,           <span class="dv">3</span>,   <span class="st">&quot;NOt available&quot;</span>, <span class="dv">-99</span>,</a>
+<a class="sourceLine" id="cb605-5" title="5">  <span class="st">&quot;N / A&quot;</span>,         <span class="ot">NA</span>,  <span class="st">&quot;29&quot;</span>,              <span class="dv">-98</span>,</a>
+<a class="sourceLine" id="cb605-6" title="6">  <span class="st">&quot;Not Available&quot;</span>, <span class="dv">-99</span>, <span class="st">&quot;25&quot;</span>,              <span class="dv">-101</span>,</a>
+<a class="sourceLine" id="cb605-7" title="7">  <span class="st">&quot;John Smith&quot;</span>,    <span class="dv">-98</span>, <span class="st">&quot;28&quot;</span>,              <span class="dv">-1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb606-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na</span>(<span class="dt">replace =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">-99</span>))</a>
+<a class="sourceLine" id="cb606-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
+<a class="sourceLine" id="cb606-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
+<a class="sourceLine" id="cb606-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb606-5" title="5"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
+<a class="sourceLine" id="cb606-6" title="6"><span class="co">#&gt; 2 N A               3 NOt available   -99</span></a>
+<a class="sourceLine" id="cb606-7" title="7"><span class="co">#&gt; 3 N / A            NA 29              -98</span></a>
+<a class="sourceLine" id="cb606-8" title="8"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
+<a class="sourceLine" id="cb606-9" title="9"><span class="co">#&gt; 5 John Smith      -98 28               -1</span></a></code></pre></div>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb607-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na</span>(<span class="dt">replace =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">-98</span>)))</a>
+<a class="sourceLine" id="cb607-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
+<a class="sourceLine" id="cb607-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
+<a class="sourceLine" id="cb607-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb607-5" title="5"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
+<a class="sourceLine" id="cb607-6" title="6"><span class="co">#&gt; 2 N A               3 NOt available   -99</span></a>
+<a class="sourceLine" id="cb607-7" title="7"><span class="co">#&gt; 3 N / A            NA 29              -98</span></a>
+<a class="sourceLine" id="cb607-8" title="8"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
+<a class="sourceLine" id="cb607-9" title="9"><span class="co">#&gt; 5 John Smith       NA 28               -1</span></a></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb608-1" title="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb608-2" title="2"><span class="st">  </span><span class="kw">replace_with_na</span>(<span class="dt">replace =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">99</span>,<span class="op">-</span><span class="dv">98</span>),</a>
+<a class="sourceLine" id="cb608-3" title="3">                             <span class="dt">z =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">-98</span>)))</a>
+<a class="sourceLine" id="cb608-4" title="4"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
+<a class="sourceLine" id="cb608-5" title="5"><span class="co">#&gt;   name              x y                 z</span></a>
+<a class="sourceLine" id="cb608-6" title="6"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb608-7" title="7"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
+<a class="sourceLine" id="cb608-8" title="8"><span class="co">#&gt; 2 N A               3 NOt available    NA</span></a>
+<a class="sourceLine" id="cb608-9" title="9"><span class="co">#&gt; 3 N / A            NA 29               NA</span></a>
+<a class="sourceLine" id="cb608-10" title="10"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
+<a class="sourceLine" id="cb608-11" title="11"><span class="co">#&gt; 5 John Smith       NA 28               -1</span></a></code></pre></div>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb609-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na_all</span>(<span class="dt">condition =</span> <span class="op">~</span>.x <span class="op">==</span><span class="st"> </span><span class="dv">-99</span>)</a>
+<a class="sourceLine" id="cb609-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
+<a class="sourceLine" id="cb609-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
+<a class="sourceLine" id="cb609-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb609-5" title="5"><span class="co">#&gt; 1 N/A               1 N/A            -100</span></a>
+<a class="sourceLine" id="cb609-6" title="6"><span class="co">#&gt; 2 N A               3 NOt available    NA</span></a>
+<a class="sourceLine" id="cb609-7" title="7"><span class="co">#&gt; 3 N / A            NA 29              -98</span></a>
+<a class="sourceLine" id="cb609-8" title="8"><span class="co">#&gt; 4 Not Available    NA 25             -101</span></a>
+<a class="sourceLine" id="cb609-9" title="9"><span class="co">#&gt; 5 John Smith      -98 28               -1</span></a></code></pre></div>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb610-1" title="1">common_na_numbers</a>
+<a class="sourceLine" id="cb610-2" title="2"><span class="co">#&gt; [1]    -9   -99  -999 -9999  9999    66    77    88</span></a></code></pre></div>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb611-1" title="1">common_na_strings</a>
+<a class="sourceLine" id="cb611-2" title="2"><span class="co">#&gt;  [1] &quot;NA&quot;     &quot;N A&quot;    &quot;N/A&quot;    &quot;NA &quot;    &quot; NA&quot;    &quot;N /A&quot;   &quot;N / A&quot;  &quot; N / A&quot;</span></a>
+<a class="sourceLine" id="cb611-3" title="3"><span class="co">#&gt;  [9] &quot;N / A &quot; &quot;na&quot;     &quot;n a&quot;    &quot;n/a&quot;    &quot;na &quot;    &quot; na&quot;    &quot;n /a&quot;   &quot;n / a&quot; </span></a>
+<a class="sourceLine" id="cb611-4" title="4"><span class="co">#&gt; [17] &quot; a / a&quot; &quot;n / a &quot; &quot;NULL&quot;   &quot;null&quot;   &quot;&quot;       &quot;\\?&quot;    &quot;\\*&quot;    &quot;\\.&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb612-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na_all</span>(<span class="op">~</span>.x <span class="op">%in%</span><span class="st"> </span>common_na_strings)</a>
+<a class="sourceLine" id="cb612-2" title="2"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
+<a class="sourceLine" id="cb612-3" title="3"><span class="co">#&gt;   name              x y                 z</span></a>
+<a class="sourceLine" id="cb612-4" title="4"><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb612-5" title="5"><span class="co">#&gt; 1 &lt;NA&gt;              1 &lt;NA&gt;           -100</span></a>
+<a class="sourceLine" id="cb612-6" title="6"><span class="co">#&gt; 2 &lt;NA&gt;              3 NOt available   -99</span></a>
+<a class="sourceLine" id="cb612-7" title="7"><span class="co">#&gt; 3 &lt;NA&gt;             NA 29              -98</span></a>
+<a class="sourceLine" id="cb612-8" title="8"><span class="co">#&gt; 4 Not Available   -99 25             -101</span></a>
+<a class="sourceLine" id="cb612-9" title="9"><span class="co">#&gt; 5 John Smith      -98 28               -1</span></a></code></pre></div>
 </div>
 <div id="janitor-1" class="section level3">
-<h3><span class="header-section-number">17.1.3</span> janitor</h3>
-<p><strong>Janitor</strong> 中的 <code>tabyl</code></p>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" title="1">janitor<span class="op">::</span><span class="kw">tabyl</span>(df, y)</a>
-<a class="sourceLine" id="cb603-2" title="2"><span class="co">#&gt;              y n percent</span></a>
-<a class="sourceLine" id="cb603-3" title="3"><span class="co">#&gt;             25 1     0.2</span></a>
-<a class="sourceLine" id="cb603-4" title="4"><span class="co">#&gt;             28 1     0.2</span></a>
-<a class="sourceLine" id="cb603-5" title="5"><span class="co">#&gt;             29 1     0.2</span></a>
-<a class="sourceLine" id="cb603-6" title="6"><span class="co">#&gt;            N/A 1     0.2</span></a>
-<a class="sourceLine" id="cb603-7" title="7"><span class="co">#&gt;  NOt available 1     0.2</span></a></code></pre></div>
+<h3><span class="header-section-number">18.1.3</span> janitor</h3>
+<p><code>janitor::tabyl()</code> generates a frequency table and exposing missing values at the same time</p>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb613-1" title="1">janitor<span class="op">::</span><span class="kw">tabyl</span>(df, y)</a>
+<a class="sourceLine" id="cb613-2" title="2"><span class="co">#&gt;              y n percent</span></a>
+<a class="sourceLine" id="cb613-3" title="3"><span class="co">#&gt;             25 1     0.2</span></a>
+<a class="sourceLine" id="cb613-4" title="4"><span class="co">#&gt;             28 1     0.2</span></a>
+<a class="sourceLine" id="cb613-5" title="5"><span class="co">#&gt;             29 1     0.2</span></a>
+<a class="sourceLine" id="cb613-6" title="6"><span class="co">#&gt;            N/A 1     0.2</span></a>
+<a class="sourceLine" id="cb613-7" title="7"><span class="co">#&gt;  NOt available 1     0.2</span></a></code></pre></div>
 </div>
 <div id="sjmisc" class="section level3">
-<h3><span class="header-section-number">17.1.4</span> sjmisc</h3>
+<h3><span class="header-section-number">18.1.4</span> sjmisc</h3>
 <p>when missing variable is factor <code>sjmisc::frq</code></p>
 </div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Qiushi Yan" />
 
 
-<meta name="date" content="2020-03-31" />
+<meta name="date" content="2020-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,9 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.4.0/str_view.js"></script>
 
 
 <style type="text/css">
@@ -191,6 +194,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="reviews-on-regular-expressions.html"><a href="reviews-on-regular-expressions.html"><i class="fa fa-check"></i><b>A</b> Reviews on regular expressions</a><ul>
+<li class="chapter" data-level="A.1" data-path="posix-character-classes.html"><a href="posix-character-classes.html"><i class="fa fa-check"></i><b>A.1</b> POSIX Character Classes</a></li>
+<li class="chapter" data-level="A.2" data-path="greedy-and-lazy-quantifiers.html"><a href="greedy-and-lazy-quantifiers.html"><i class="fa fa-check"></i><b>A.2</b> Greedy and lazy quantifiers</a></li>
+<li class="chapter" data-level="A.3" data-path="looking-ahead-and-back.html"><a href="looking-ahead-and-back.html"><i class="fa fa-check"></i><b>A.3</b> Looking ahead and back</a></li>
+<li class="chapter" data-level="A.4" data-path="backreferences.html"><a href="backreferences.html"><i class="fa fa-check"></i><b>A.4</b> Backreferences</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="text-processing-examples-in-r.html"><a href="text-processing-examples-in-r.html"><i class="fa fa-check"></i><b>B</b> Text processing examples in R</a><ul>
+<li class="chapter" data-level="B.1" data-path="replacing-and-removing.html"><a href="replacing-and-removing.html"><i class="fa fa-check"></i><b>B.1</b> Replacing and removing</a></li>
+<li class="chapter" data-level="B.2" data-path="combining-and-splitting.html"><a href="combining-and-splitting.html"><i class="fa fa-check"></i><b>B.2</b> Combining and splitting</a></li>
+<li class="chapter" data-level="B.3" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html"><i class="fa fa-check"></i><b>B.3</b> Extracting text from pdf and other files</a><ul>
+<li class="chapter" data-level="B.3.1" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html#office-documents"><i class="fa fa-check"></i><b>B.3.1</b> Office documents</a></li>
+<li class="chapter" data-level="B.3.2" data-path="extracting-text-from-pdf-and-other-files.html"><a href="extracting-text-from-pdf-and-other-files.html#images"><i class="fa fa-check"></i><b>B.3.2</b> Images</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Written with bookdown</a></li>
 
@@ -214,208 +232,207 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-the-great-library-heist" class="section level2">
 <h2><span class="header-section-number">6.2</span> Example: the great library heist</h2>
 <p>To evaluate our topic model, we first divided 4 books into chapters. If a topic model with <span class="math inline">\(K = 4\)</span> performs well, then there should be a corresponding segmentation among those chpaters coming from those 4 different books.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1">titles &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Twenty Thousand Leagues under the Sea&quot;</span>, <span class="st">&quot;The War of the Worlds&quot;</span>,</a>
-<a class="sourceLine" id="cb110-2" title="2">            <span class="st">&quot;Pride and Prejudice&quot;</span>, <span class="st">&quot;Great Expectations&quot;</span>)  </a>
-<a class="sourceLine" id="cb110-3" title="3"></a>
-<a class="sourceLine" id="cb110-4" title="4"><span class="kw">library</span>(gutenbergr)</a>
-<a class="sourceLine" id="cb110-5" title="5"></a>
-<a class="sourceLine" id="cb110-6" title="6">books &lt;-<span class="st"> </span><span class="kw">gutenberg_works</span>(title <span class="op">%in%</span><span class="st"> </span>titles) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb110-7" title="7"><span class="st">  </span><span class="kw">gutenberg_download</span>(<span class="dt">meta_fields =</span> <span class="st">&quot;title&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="co"># add a chapter column</span></a>
-<a class="sourceLine" id="cb111-2" title="2">by_chapter &lt;-<span class="st"> </span>books <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(title) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">chapter =</span> <span class="kw">cumsum</span>(<span class="kw">str_detect</span>(text, <span class="kw">regex</span>(<span class="st">&quot;^chapter &quot;</span>, <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>)))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-6" title="6"><span class="st">  </span><span class="kw">filter</span>(chapter <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-7" title="7"><span class="st">  </span><span class="kw">unite</span>(document, title, chapter)</a>
-<a class="sourceLine" id="cb111-8" title="8"></a>
-<a class="sourceLine" id="cb111-9" title="9"></a>
-<a class="sourceLine" id="cb111-10" title="10"><span class="co"># find document-word counts</span></a>
-<a class="sourceLine" id="cb111-11" title="11">word_counts &lt;-<span class="st"> </span>by_chapter <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-12" title="12"><span class="st">  </span><span class="kw">unnest_tokens</span>(word, text) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb111-13" title="13"><span class="st">  </span><span class="kw">anti_join</span>(stop_words) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-14" title="14"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">chapter =</span> document) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb111-15" title="15"><span class="st">  </span><span class="kw">count</span>(chapter, word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-16" title="16"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb111-17" title="17"></a>
-<a class="sourceLine" id="cb111-18" title="18">word_counts</a>
-<a class="sourceLine" id="cb111-19" title="19"><span class="co">#&gt; # A tibble: 104,722 x 3</span></a>
-<a class="sourceLine" id="cb111-20" title="20"><span class="co">#&gt;   chapter               word        n</span></a>
-<a class="sourceLine" id="cb111-21" title="21"><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;   &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb111-22" title="22"><span class="co">#&gt; 1 Great Expectations_57 joe        88</span></a>
-<a class="sourceLine" id="cb111-23" title="23"><span class="co">#&gt; 2 Great Expectations_7  joe        70</span></a>
-<a class="sourceLine" id="cb111-24" title="24"><span class="co">#&gt; 3 Great Expectations_17 biddy      63</span></a>
-<a class="sourceLine" id="cb111-25" title="25"><span class="co">#&gt; 4 Great Expectations_27 joe        58</span></a>
-<a class="sourceLine" id="cb111-26" title="26"><span class="co">#&gt; 5 Great Expectations_38 estella    58</span></a>
-<a class="sourceLine" id="cb111-27" title="27"><span class="co">#&gt; 6 Great Expectations_2  joe        56</span></a>
-<a class="sourceLine" id="cb111-28" title="28"><span class="co">#&gt; # ... with 1.047e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">titles &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Twenty Thousand Leagues under the Sea&quot;</span>, <span class="st">&quot;The War of the Worlds&quot;</span>,</a>
+<a class="sourceLine" id="cb109-2" title="2">            <span class="st">&quot;Pride and Prejudice&quot;</span>, <span class="st">&quot;Great Expectations&quot;</span>)  </a>
+<a class="sourceLine" id="cb109-3" title="3"></a>
+<a class="sourceLine" id="cb109-4" title="4"><span class="kw">library</span>(gutenbergr)</a>
+<a class="sourceLine" id="cb109-5" title="5"></a>
+<a class="sourceLine" id="cb109-6" title="6">books &lt;-<span class="st"> </span><span class="kw">gutenberg_works</span>(title <span class="op">%in%</span><span class="st"> </span>titles) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb109-7" title="7"><span class="st">  </span><span class="kw">gutenberg_download</span>(<span class="dt">meta_fields =</span> <span class="st">&quot;title&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="co"># add a chapter column</span></a>
+<a class="sourceLine" id="cb110-2" title="2">by_chapter &lt;-<span class="st"> </span>books <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(title) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">chapter =</span> <span class="kw">cumsum</span>(<span class="kw">str_detect</span>(text, <span class="kw">regex</span>(<span class="st">&quot;^chapter &quot;</span>, <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>)))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-6" title="6"><span class="st">  </span><span class="kw">filter</span>(chapter <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-7" title="7"><span class="st">  </span><span class="kw">unite</span>(document, title, chapter)</a>
+<a class="sourceLine" id="cb110-8" title="8"></a>
+<a class="sourceLine" id="cb110-9" title="9"></a>
+<a class="sourceLine" id="cb110-10" title="10"><span class="co"># find document-word counts</span></a>
+<a class="sourceLine" id="cb110-11" title="11">word_counts &lt;-<span class="st"> </span>by_chapter <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-12" title="12"><span class="st">  </span><span class="kw">unnest_tokens</span>(word, text) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb110-13" title="13"><span class="st">  </span><span class="kw">anti_join</span>(stop_words) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-14" title="14"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">chapter =</span> document) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb110-15" title="15"><span class="st">  </span><span class="kw">count</span>(chapter, word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-16" title="16"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb110-17" title="17"></a>
+<a class="sourceLine" id="cb110-18" title="18">word_counts</a>
+<a class="sourceLine" id="cb110-19" title="19"><span class="co">#&gt; # A tibble: 104,722 x 3</span></a>
+<a class="sourceLine" id="cb110-20" title="20"><span class="co">#&gt;   chapter               word        n</span></a>
+<a class="sourceLine" id="cb110-21" title="21"><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;   &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb110-22" title="22"><span class="co">#&gt; 1 Great Expectations_57 joe        88</span></a>
+<a class="sourceLine" id="cb110-23" title="23"><span class="co">#&gt; 2 Great Expectations_7  joe        70</span></a>
+<a class="sourceLine" id="cb110-24" title="24"><span class="co">#&gt; 3 Great Expectations_17 biddy      63</span></a>
+<a class="sourceLine" id="cb110-25" title="25"><span class="co">#&gt; 4 Great Expectations_27 joe        58</span></a>
+<a class="sourceLine" id="cb110-26" title="26"><span class="co">#&gt; 5 Great Expectations_38 estella    58</span></a>
+<a class="sourceLine" id="cb110-27" title="27"><span class="co">#&gt; 6 Great Expectations_2  joe        56</span></a>
+<a class="sourceLine" id="cb110-28" title="28"><span class="co">#&gt; # ... with 104,716 more rows</span></a></code></pre></div>
 <div id="lda-on-chapters" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> LDA on chapters</h3>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1">chapters_dtm &lt;-<span class="st"> </span>word_counts <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb112-2" title="2"><span class="st">  </span><span class="kw">cast_dtm</span>(<span class="dt">document =</span> chapter, <span class="dt">term =</span> word, <span class="dt">value =</span> n)</a>
-<a class="sourceLine" id="cb112-3" title="3"></a>
-<a class="sourceLine" id="cb112-4" title="4">chapters_lda &lt;-<span class="st"> </span>chapters_dtm <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb112-5" title="5"><span class="st">  </span><span class="kw">LDA</span>(<span class="dt">k  =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1">chapters_dtm &lt;-<span class="st"> </span>word_counts <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb111-2" title="2"><span class="st">  </span><span class="kw">cast_dtm</span>(<span class="dt">document =</span> chapter, <span class="dt">term =</span> word, <span class="dt">value =</span> n)</a>
+<a class="sourceLine" id="cb111-3" title="3"></a>
+<a class="sourceLine" id="cb111-4" title="4">chapters_lda &lt;-<span class="st"> </span>chapters_dtm <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb111-5" title="5"><span class="st">  </span><span class="kw">LDA</span>(<span class="dt">k  =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p>Much as we did on the Associated Press data, we can examine per-topic-per-word probabilities.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1">chapter_topics &lt;-<span class="st"> </span><span class="kw">tidy</span>(chapters_lda, <span class="dt">matrix =</span> <span class="st">&quot;beta&quot;</span>)</a>
-<a class="sourceLine" id="cb113-2" title="2">chapter_topics</a>
-<a class="sourceLine" id="cb113-3" title="3"><span class="co">#&gt; # A tibble: 72,860 x 3</span></a>
-<a class="sourceLine" id="cb113-4" title="4"><span class="co">#&gt;   topic term      beta</span></a>
-<a class="sourceLine" id="cb113-5" title="5"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb113-6" title="6"><span class="co">#&gt; 1     1 joe   3.90e-13</span></a>
-<a class="sourceLine" id="cb113-7" title="7"><span class="co">#&gt; 2     2 joe   4.52e-47</span></a>
-<a class="sourceLine" id="cb113-8" title="8"><span class="co">#&gt; 3     3 joe   1.56e- 2</span></a>
-<a class="sourceLine" id="cb113-9" title="9"><span class="co">#&gt; 4     4 joe   3.73e-71</span></a>
-<a class="sourceLine" id="cb113-10" title="10"><span class="co">#&gt; 5     1 biddy 4.18e-23</span></a>
-<a class="sourceLine" id="cb113-11" title="11"><span class="co">#&gt; 6     2 biddy 6.46e-48</span></a>
-<a class="sourceLine" id="cb113-12" title="12"><span class="co">#&gt; # ... with 7.285e+04 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1">chapter_topics &lt;-<span class="st"> </span><span class="kw">tidy</span>(chapters_lda, <span class="dt">matrix =</span> <span class="st">&quot;beta&quot;</span>)</a>
+<a class="sourceLine" id="cb112-2" title="2">chapter_topics</a>
+<a class="sourceLine" id="cb112-3" title="3"><span class="co">#&gt; # A tibble: 72,860 x 3</span></a>
+<a class="sourceLine" id="cb112-4" title="4"><span class="co">#&gt;   topic term       beta</span></a>
+<a class="sourceLine" id="cb112-5" title="5"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb112-6" title="6"><span class="co">#&gt; 1     1 joe   1.45e- 52</span></a>
+<a class="sourceLine" id="cb112-7" title="7"><span class="co">#&gt; 2     2 joe   1.44e-  2</span></a>
+<a class="sourceLine" id="cb112-8" title="8"><span class="co">#&gt; 3     3 joe   4.69e-118</span></a>
+<a class="sourceLine" id="cb112-9" title="9"><span class="co">#&gt; 4     4 joe   3.61e- 19</span></a>
+<a class="sourceLine" id="cb112-10" title="10"><span class="co">#&gt; 5     1 biddy 5.21e-181</span></a>
+<a class="sourceLine" id="cb112-11" title="11"><span class="co">#&gt; 6     2 biddy 4.75e-  3</span></a>
+<a class="sourceLine" id="cb112-12" title="12"><span class="co">#&gt; # ... with 72,854 more rows</span></a></code></pre></div>
 <p>We can find top 5 terms within each topic.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1">chapter_topics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(topic) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-3" title="3"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-4" title="4"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">topic =</span> <span class="kw">str_c</span>(<span class="st">&quot;topic&quot;</span>, topic)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb114-6" title="6"><span class="st">  </span><span class="kw">facet_bar</span>(<span class="dt">y =</span> term, <span class="dt">x =</span> beta, <span class="dt">by =</span> topic)</a></code></pre></div>
-<p><img src="topic_modeling_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1">chapter_topics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(topic) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-3" title="3"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-4" title="4"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">topic =</span> <span class="kw">str_c</span>(<span class="st">&quot;topic&quot;</span>, topic)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-6" title="6"><span class="st">  </span><span class="kw">facet_bar</span>(<span class="dt">y =</span> term, <span class="dt">x =</span> beta, <span class="dt">by =</span> topic)</a></code></pre></div>
+<p><img src="topic-modeling_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>I am not an expert on the other 3 books aside from Pride &amp; Prejudice, but according to <a href="https://www.tidytextmining.com/topicmodeling#lda-on-chapters">Julia</a>, each topic did correspond to one book by and large!</p>
 </div>
 <div id="per-document-classification" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> Per-document classification</h3>
 <p>We may want to how which topics are associated with each document, in particular, the majority of chapters in the same book should belong to the same topic (if we assign a chapter<span class="math inline">\(_m\)</span> to a topic<span class="math inline">\(_k\)</span> when the <span class="math inline">\(k\)</span>th postion in <span class="math inline">\(\hat{\theta}_m\)</span> is significantly higher).</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1">chapters_gamma &lt;-<span class="st"> </span><span class="kw">tidy</span>(chapters_lda, <span class="dt">matrix =</span> <span class="st">&quot;gamma&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb115-2" title="2"><span class="st">  </span><span class="kw">separate</span>(document, <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;chapter&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb115-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">topic =</span> <span class="kw">factor</span>(topic) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fct_inseq</span>())</a>
-<a class="sourceLine" id="cb115-4" title="4"></a>
-<a class="sourceLine" id="cb115-5" title="5">chapters_gamma</a>
-<a class="sourceLine" id="cb115-6" title="6"><span class="co">#&gt; # A tibble: 772 x 4</span></a>
-<a class="sourceLine" id="cb115-7" title="7"><span class="co">#&gt;   title              chapter topic     gamma</span></a>
-<a class="sourceLine" id="cb115-8" title="8"><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;fct&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb115-9" title="9"><span class="co">#&gt; 1 Great Expectations      57 1     0.0000128</span></a>
-<a class="sourceLine" id="cb115-10" title="10"><span class="co">#&gt; 2 Great Expectations       7 1     0.0000140</span></a>
-<a class="sourceLine" id="cb115-11" title="11"><span class="co">#&gt; 3 Great Expectations      17 1     0.0000201</span></a>
-<a class="sourceLine" id="cb115-12" title="12"><span class="co">#&gt; 4 Great Expectations      27 1     0.0000182</span></a>
-<a class="sourceLine" id="cb115-13" title="13"><span class="co">#&gt; 5 Great Expectations      38 1     0.306    </span></a>
-<a class="sourceLine" id="cb115-14" title="14"><span class="co">#&gt; 6 Great Expectations       2 1     0.0000164</span></a>
-<a class="sourceLine" id="cb115-15" title="15"><span class="co">#&gt; # ... with 766 more rows</span></a></code></pre></div>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1"><span class="kw">ggplot</span>(chapters_gamma) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb116-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(topic, gamma)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb116-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>title)</a></code></pre></div>
-<p><img src="topic_modeling_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1">chapters_gamma &lt;-<span class="st"> </span><span class="kw">tidy</span>(chapters_lda, <span class="dt">matrix =</span> <span class="st">&quot;gamma&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb114-2" title="2"><span class="st">  </span><span class="kw">separate</span>(document, <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;chapter&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb114-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">topic =</span> <span class="kw">factor</span>(topic) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fct_inseq</span>())</a>
+<a class="sourceLine" id="cb114-4" title="4"></a>
+<a class="sourceLine" id="cb114-5" title="5">chapters_gamma</a>
+<a class="sourceLine" id="cb114-6" title="6"><span class="co">#&gt; # A tibble: 772 x 4</span></a>
+<a class="sourceLine" id="cb114-7" title="7"><span class="co">#&gt;   title              chapter topic     gamma</span></a>
+<a class="sourceLine" id="cb114-8" title="8"><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;fct&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb114-9" title="9"><span class="co">#&gt; 1 Great Expectations      57 1     0.0000150</span></a>
+<a class="sourceLine" id="cb114-10" title="10"><span class="co">#&gt; 2 Great Expectations       7 1     0.0000163</span></a>
+<a class="sourceLine" id="cb114-11" title="11"><span class="co">#&gt; 3 Great Expectations      17 1     0.0000234</span></a>
+<a class="sourceLine" id="cb114-12" title="12"><span class="co">#&gt; 4 Great Expectations      27 1     0.0000213</span></a>
+<a class="sourceLine" id="cb114-13" title="13"><span class="co">#&gt; 5 Great Expectations      38 1     0.0000142</span></a>
+<a class="sourceLine" id="cb114-14" title="14"><span class="co">#&gt; 6 Great Expectations       2 1     0.0000191</span></a>
+<a class="sourceLine" id="cb114-15" title="15"><span class="co">#&gt; # ... with 766 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="kw">ggplot</span>(chapters_gamma) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb115-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(topic, gamma)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb115-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>title)</a></code></pre></div>
+<p><img src="topic-modeling_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Ideally we would expect that in every book panel, there is one boxplot highly centered at 1 with the other 3 boxes at 0, since chapters in the same book are categorized in the same topic.</p>
 <p>It does look like some chapters from Great Expectations (which should be topic 4) were somewhat associated with other topics. Are there any cases where the topic most associated with a chapter belonged to another book?</p>
 <p>First we’d find the topic that was most associated with each chapter using <code>top_n()</code>, which is effectively the “classification” of that chapter.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1">chapter_classifications &lt;-<span class="st"> </span>chapters_gamma <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb117-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(title, chapter) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb117-3" title="3"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>, gamma) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb117-4" title="4"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb117-5" title="5"></a>
-<a class="sourceLine" id="cb117-6" title="6">chapter_classifications</a>
-<a class="sourceLine" id="cb117-7" title="7"><span class="co">#&gt; # A tibble: 193 x 4</span></a>
-<a class="sourceLine" id="cb117-8" title="8"><span class="co">#&gt;   title                 chapter topic gamma</span></a>
-<a class="sourceLine" id="cb117-9" title="9"><span class="co">#&gt;   &lt;chr&gt;                   &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb117-10" title="10"><span class="co">#&gt; 1 Great Expectations         23 1     0.456</span></a>
-<a class="sourceLine" id="cb117-11" title="11"><span class="co">#&gt; 2 The War of the Worlds      16 1     1.00 </span></a>
-<a class="sourceLine" id="cb117-12" title="12"><span class="co">#&gt; 3 Great Expectations         42 1     0.566</span></a>
-<a class="sourceLine" id="cb117-13" title="13"><span class="co">#&gt; 4 Great Expectations         46 1     0.702</span></a>
-<a class="sourceLine" id="cb117-14" title="14"><span class="co">#&gt; 5 The War of the Worlds      25 1     1.00 </span></a>
-<a class="sourceLine" id="cb117-15" title="15"><span class="co">#&gt; 6 The War of the Worlds      14 1     1.00 </span></a>
-<a class="sourceLine" id="cb117-16" title="16"><span class="co">#&gt; # ... with 187 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1">chapter_classifications &lt;-<span class="st"> </span>chapters_gamma <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb116-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(title, chapter) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb116-3" title="3"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>, gamma) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb116-4" title="4"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb116-5" title="5"></a>
+<a class="sourceLine" id="cb116-6" title="6">chapter_classifications</a>
+<a class="sourceLine" id="cb116-7" title="7"><span class="co">#&gt; # A tibble: 193 x 4</span></a>
+<a class="sourceLine" id="cb116-8" title="8"><span class="co">#&gt;   title               chapter topic gamma</span></a>
+<a class="sourceLine" id="cb116-9" title="9"><span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb116-10" title="10"><span class="co">#&gt; 1 Pride and Prejudice      43 1     1.00 </span></a>
+<a class="sourceLine" id="cb116-11" title="11"><span class="co">#&gt; 2 Pride and Prejudice      18 1     1.00 </span></a>
+<a class="sourceLine" id="cb116-12" title="12"><span class="co">#&gt; 3 Pride and Prejudice      45 1     1.00 </span></a>
+<a class="sourceLine" id="cb116-13" title="13"><span class="co">#&gt; 4 Pride and Prejudice      16 1     1.00 </span></a>
+<a class="sourceLine" id="cb116-14" title="14"><span class="co">#&gt; 5 Pride and Prejudice      29 1     0.988</span></a>
+<a class="sourceLine" id="cb116-15" title="15"><span class="co">#&gt; 6 Pride and Prejudice      10 1     1.00 </span></a>
+<a class="sourceLine" id="cb116-16" title="16"><span class="co">#&gt; # ... with 187 more rows</span></a></code></pre></div>
 <p>We can then compare each to the “consensus” topic for each book (the most common topic among its chapters), and see which were most often misidentified.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1"><span class="co"># identify which topic is most related to which book</span></a>
-<a class="sourceLine" id="cb118-2" title="2">book_topics &lt;-<span class="st"> </span>chapter_classifications <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb118-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, topic) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb118-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(title) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb118-5" title="5"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>, n) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb118-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb118-7" title="7"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">consensus =</span> title, topic)</a>
-<a class="sourceLine" id="cb118-8" title="8"></a>
-<a class="sourceLine" id="cb118-9" title="9"><span class="co"># which chapter in misidentified</span></a>
-<a class="sourceLine" id="cb118-10" title="10">chapter_classifications <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb118-11" title="11"><span class="st">  </span><span class="kw">inner_join</span>(book_topics) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb118-12" title="12"><span class="st">  </span><span class="kw">filter</span>(consensus <span class="op">!=</span><span class="st"> </span>title)</a>
-<a class="sourceLine" id="cb118-13" title="13"><span class="co">#&gt; # A tibble: 6 x 5</span></a>
-<a class="sourceLine" id="cb118-14" title="14"><span class="co">#&gt;   title              chapter topic gamma consensus            </span></a>
-<a class="sourceLine" id="cb118-15" title="15"><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt;                </span></a>
-<a class="sourceLine" id="cb118-16" title="16"><span class="co">#&gt; 1 Great Expectations      23 1     0.456 The War of the Worlds</span></a>
-<a class="sourceLine" id="cb118-17" title="17"><span class="co">#&gt; 2 Great Expectations      42 1     0.566 The War of the Worlds</span></a>
-<a class="sourceLine" id="cb118-18" title="18"><span class="co">#&gt; 3 Great Expectations      46 1     0.702 The War of the Worlds</span></a>
-<a class="sourceLine" id="cb118-19" title="19"><span class="co">#&gt; 4 Great Expectations      54 1     0.938 The War of the Worlds</span></a>
-<a class="sourceLine" id="cb118-20" title="20"><span class="co">#&gt; 5 Great Expectations      50 1     0.540 The War of the Worlds</span></a>
-<a class="sourceLine" id="cb118-21" title="21"><span class="co">#&gt; 6 Great Expectations      21 1     0.529 The War of the Worlds</span></a></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1"><span class="co"># identify which topic is most related to which book</span></a>
+<a class="sourceLine" id="cb117-2" title="2">book_topics &lt;-<span class="st"> </span>chapter_classifications <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb117-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, topic) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb117-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(title) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb117-5" title="5"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>, n) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb117-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb117-7" title="7"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">consensus =</span> title, topic)</a>
+<a class="sourceLine" id="cb117-8" title="8"></a>
+<a class="sourceLine" id="cb117-9" title="9"><span class="co"># which chapter in misidentified</span></a>
+<a class="sourceLine" id="cb117-10" title="10">chapter_classifications <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb117-11" title="11"><span class="st">  </span><span class="kw">inner_join</span>(book_topics) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb117-12" title="12"><span class="st">  </span><span class="kw">filter</span>(consensus <span class="op">!=</span><span class="st"> </span>title)</a>
+<a class="sourceLine" id="cb117-13" title="13"><span class="co">#&gt; # A tibble: 5 x 5</span></a>
+<a class="sourceLine" id="cb117-14" title="14"><span class="co">#&gt;   title              chapter topic gamma consensus            </span></a>
+<a class="sourceLine" id="cb117-15" title="15"><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt;                </span></a>
+<a class="sourceLine" id="cb117-16" title="16"><span class="co">#&gt; 1 Great Expectations      20 4     0.521 The War of the Worlds</span></a>
+<a class="sourceLine" id="cb117-17" title="17"><span class="co">#&gt; 2 Great Expectations      37 4     0.451 The War of the Worlds</span></a>
+<a class="sourceLine" id="cb117-18" title="18"><span class="co">#&gt; 3 Great Expectations      54 4     0.742 The War of the Worlds</span></a>
+<a class="sourceLine" id="cb117-19" title="19"><span class="co">#&gt; 4 Great Expectations      45 4     0.556 The War of the Worlds</span></a>
+<a class="sourceLine" id="cb117-20" title="20"><span class="co">#&gt; 5 Great Expectations      21 4     0.527 The War of the Worlds</span></a></code></pre></div>
 <p>We see that one chapter in “Great Expectation” is misidentified as a member of topic 3, which is essentially “The War of the Worlds”</p>
 </div>
 <div id="by-word-assignments-augment" class="section level3">
 <h3><span class="header-section-number">6.2.3</span> By word assignments: <code>augment()</code></h3>
 <p>One step of the LDA algorithm is assigning each word in each document to a topic <span class="math inline">\(z_{m, n}\)</span>. The more words in a document are assigned to that topic, generally, the more weight <span class="math inline">\(\theta_m\)</span> will go on that document-topic classification.</p>
 <p>We may want to take the original document-word pairs and find which words in each document were assigned to which topic. This is the job of the <code>augment()</code> function, which is to add information to each observation in the original data.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1">assignments &lt;-<span class="st"> </span><span class="kw">augment</span>(chapters_lda, <span class="dt">data =</span> chapters_dtm) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb119-2" title="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">chapter =</span> document)</a>
-<a class="sourceLine" id="cb119-3" title="3">assignments</a>
-<a class="sourceLine" id="cb119-4" title="4"><span class="co">#&gt; # A tibble: 104,722 x 4</span></a>
-<a class="sourceLine" id="cb119-5" title="5"><span class="co">#&gt;   chapter               term  count .topic</span></a>
-<a class="sourceLine" id="cb119-6" title="6"><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb119-7" title="7"><span class="co">#&gt; 1 Great Expectations_57 joe      88      3</span></a>
-<a class="sourceLine" id="cb119-8" title="8"><span class="co">#&gt; 2 Great Expectations_7  joe      70      3</span></a>
-<a class="sourceLine" id="cb119-9" title="9"><span class="co">#&gt; 3 Great Expectations_17 joe       5      3</span></a>
-<a class="sourceLine" id="cb119-10" title="10"><span class="co">#&gt; 4 Great Expectations_27 joe      58      3</span></a>
-<a class="sourceLine" id="cb119-11" title="11"><span class="co">#&gt; 5 Great Expectations_2  joe      56      3</span></a>
-<a class="sourceLine" id="cb119-12" title="12"><span class="co">#&gt; 6 Great Expectations_23 joe       1      3</span></a>
-<a class="sourceLine" id="cb119-13" title="13"><span class="co">#&gt; # ... with 1.047e+05 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1">assignments &lt;-<span class="st"> </span><span class="kw">augment</span>(chapters_lda, <span class="dt">data =</span> chapters_dtm) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb118-2" title="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">chapter =</span> document)</a>
+<a class="sourceLine" id="cb118-3" title="3">assignments</a>
+<a class="sourceLine" id="cb118-4" title="4"><span class="co">#&gt; # A tibble: 104,722 x 4</span></a>
+<a class="sourceLine" id="cb118-5" title="5"><span class="co">#&gt;   chapter               term  count .topic</span></a>
+<a class="sourceLine" id="cb118-6" title="6"><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb118-7" title="7"><span class="co">#&gt; 1 Great Expectations_57 joe      88      2</span></a>
+<a class="sourceLine" id="cb118-8" title="8"><span class="co">#&gt; 2 Great Expectations_7  joe      70      2</span></a>
+<a class="sourceLine" id="cb118-9" title="9"><span class="co">#&gt; 3 Great Expectations_17 joe       5      2</span></a>
+<a class="sourceLine" id="cb118-10" title="10"><span class="co">#&gt; 4 Great Expectations_27 joe      58      2</span></a>
+<a class="sourceLine" id="cb118-11" title="11"><span class="co">#&gt; 5 Great Expectations_2  joe      56      2</span></a>
+<a class="sourceLine" id="cb118-12" title="12"><span class="co">#&gt; 6 Great Expectations_23 joe       1      2</span></a>
+<a class="sourceLine" id="cb118-13" title="13"><span class="co">#&gt; # ... with 104,716 more rows</span></a></code></pre></div>
 <p>To get a sense of how our model works, we can draw a bar plot of assigned topics in each book</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1">assignments <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb120-2" title="2"><span class="st">  </span><span class="kw">separate</span>(chapter, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;chapter&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb120-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, .topic, <span class="dt">wt =</span> count) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb120-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(.topic, n)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb120-5" title="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb120-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>title)</a></code></pre></div>
-<p><img src="topic_modeling_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1">assignments <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-2" title="2"><span class="st">  </span><span class="kw">separate</span>(chapter, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;chapter&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb119-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, .topic, <span class="dt">wt =</span> count) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb119-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(.topic, n)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-5" title="5"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>title)</a></code></pre></div>
+<p><img src="topic-modeling_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>We can combine this assignments table with the <code>consensus</code> book titles to find which words were incorrectly classified by a coofusion matrix.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1">assignments &lt;-<span class="st"> </span>assignments <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb121-2" title="2"><span class="st">  </span><span class="kw">separate</span>(chapter, <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;chapter&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb121-3" title="3"><span class="st">  </span><span class="kw">inner_join</span>(book_topics, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;.topic&quot;</span> =<span class="st"> &quot;topic&quot;</span>))</a>
-<a class="sourceLine" id="cb121-4" title="4"></a>
-<a class="sourceLine" id="cb121-5" title="5">assignments</a>
-<a class="sourceLine" id="cb121-6" title="6"><span class="co">#&gt; # A tibble: 104,722 x 6</span></a>
-<a class="sourceLine" id="cb121-7" title="7"><span class="co">#&gt;   title              chapter term  count .topic consensus         </span></a>
-<a class="sourceLine" id="cb121-8" title="8"><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             </span></a>
-<a class="sourceLine" id="cb121-9" title="9"><span class="co">#&gt; 1 Great Expectations      57 joe      88      3 Great Expectations</span></a>
-<a class="sourceLine" id="cb121-10" title="10"><span class="co">#&gt; 2 Great Expectations       7 joe      70      3 Great Expectations</span></a>
-<a class="sourceLine" id="cb121-11" title="11"><span class="co">#&gt; 3 Great Expectations      17 joe       5      3 Great Expectations</span></a>
-<a class="sourceLine" id="cb121-12" title="12"><span class="co">#&gt; 4 Great Expectations      27 joe      58      3 Great Expectations</span></a>
-<a class="sourceLine" id="cb121-13" title="13"><span class="co">#&gt; 5 Great Expectations       2 joe      56      3 Great Expectations</span></a>
-<a class="sourceLine" id="cb121-14" title="14"><span class="co">#&gt; 6 Great Expectations      23 joe       1      3 Great Expectations</span></a>
-<a class="sourceLine" id="cb121-15" title="15"><span class="co">#&gt; # ... with 1.047e+05 more rows</span></a></code></pre></div>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1"><span class="co"># confusion matrix  </span></a>
-<a class="sourceLine" id="cb122-2" title="2">assignments <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, consensus, <span class="dt">wt =</span> count) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(title) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">percent =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(consensus, title, <span class="dt">fill =</span> percent)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-8" title="8"><span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-9" title="9"><span class="st">  </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">high =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">label =</span> scales<span class="op">::</span><span class="kw">percent_format</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb122-10" title="10"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">guide =</span> <span class="kw">guide_axis</span>(<span class="dt">n.dodge =</span> <span class="dv">2</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-11" title="11"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb122-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb122-13" title="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Book words were assigned to&quot;</span>,</a>
-<a class="sourceLine" id="cb122-14" title="14">       <span class="dt">y =</span> <span class="st">&quot;Book words came from&quot;</span>,</a>
-<a class="sourceLine" id="cb122-15" title="15">       <span class="dt">fill =</span> <span class="st">&quot;% of assignments&quot;</span>)</a></code></pre></div>
-<p><img src="topic_modeling_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1">assignments &lt;-<span class="st"> </span>assignments <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb120-2" title="2"><span class="st">  </span><span class="kw">separate</span>(chapter, <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;chapter&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb120-3" title="3"><span class="st">  </span><span class="kw">inner_join</span>(book_topics, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;.topic&quot;</span> =<span class="st"> &quot;topic&quot;</span>))</a>
+<a class="sourceLine" id="cb120-4" title="4"></a>
+<a class="sourceLine" id="cb120-5" title="5">assignments</a>
+<a class="sourceLine" id="cb120-6" title="6"><span class="co">#&gt; # A tibble: 104,722 x 6</span></a>
+<a class="sourceLine" id="cb120-7" title="7"><span class="co">#&gt;   title              chapter term  count .topic consensus         </span></a>
+<a class="sourceLine" id="cb120-8" title="8"><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             </span></a>
+<a class="sourceLine" id="cb120-9" title="9"><span class="co">#&gt; 1 Great Expectations      57 joe      88      2 Great Expectations</span></a>
+<a class="sourceLine" id="cb120-10" title="10"><span class="co">#&gt; 2 Great Expectations       7 joe      70      2 Great Expectations</span></a>
+<a class="sourceLine" id="cb120-11" title="11"><span class="co">#&gt; 3 Great Expectations      17 joe       5      2 Great Expectations</span></a>
+<a class="sourceLine" id="cb120-12" title="12"><span class="co">#&gt; 4 Great Expectations      27 joe      58      2 Great Expectations</span></a>
+<a class="sourceLine" id="cb120-13" title="13"><span class="co">#&gt; 5 Great Expectations       2 joe      56      2 Great Expectations</span></a>
+<a class="sourceLine" id="cb120-14" title="14"><span class="co">#&gt; 6 Great Expectations      23 joe       1      2 Great Expectations</span></a>
+<a class="sourceLine" id="cb120-15" title="15"><span class="co">#&gt; # ... with 104,716 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1"><span class="co"># confusion matrix  </span></a>
+<a class="sourceLine" id="cb121-2" title="2">assignments <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, consensus, <span class="dt">wt =</span> count) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(title) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">percent =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(consensus, title, <span class="dt">fill =</span> percent)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-8" title="8"><span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-9" title="9"><span class="st">  </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">high =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">label =</span> scales<span class="op">::</span><span class="kw">percent_format</span>()) <span class="op">+</span></a>
+<a class="sourceLine" id="cb121-10" title="10"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">guide =</span> <span class="kw">guide_axis</span>(<span class="dt">n.dodge =</span> <span class="dv">2</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-11" title="11"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb121-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-13" title="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Book words were assigned to&quot;</span>,</a>
+<a class="sourceLine" id="cb121-14" title="14">       <span class="dt">y =</span> <span class="st">&quot;Book words came from&quot;</span>,</a>
+<a class="sourceLine" id="cb121-15" title="15">       <span class="dt">fill =</span> <span class="st">&quot;% of assignments&quot;</span>)</a></code></pre></div>
+<p><img src="topic-modeling_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>What were the most commonly mistaken words?</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1">assignments <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb123-2" title="2"><span class="st">  </span><span class="kw">filter</span>(title <span class="op">!=</span><span class="st"> </span>consensus) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb123-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, consensus, term, <span class="dt">.wt =</span> count) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb123-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))</a>
-<a class="sourceLine" id="cb123-5" title="5"><span class="co">#&gt; # A tibble: 6,477 x 5</span></a>
-<a class="sourceLine" id="cb123-6" title="6"><span class="co">#&gt;   title              consensus             term      .wt     n</span></a>
-<a class="sourceLine" id="cb123-7" title="7"><span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;                 &lt;chr&gt;   &lt;dbl&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb123-8" title="8"><span class="co">#&gt; 1 Great Expectations The War of the Worlds ground      1    13</span></a>
-<a class="sourceLine" id="cb123-9" title="9"><span class="co">#&gt; 2 Great Expectations The War of the Worlds dust        1    11</span></a>
-<a class="sourceLine" id="cb123-10" title="10"><span class="co">#&gt; 3 Great Expectations The War of the Worlds people      1    11</span></a>
-<a class="sourceLine" id="cb123-11" title="11"><span class="co">#&gt; 4 Great Expectations The War of the Worlds silence     1    11</span></a>
-<a class="sourceLine" id="cb123-12" title="12"><span class="co">#&gt; 5 Great Expectations The War of the Worlds o&#39;clock     1    10</span></a>
-<a class="sourceLine" id="cb123-13" title="13"><span class="co">#&gt; 6 Great Expectations The War of the Worlds silent      1    10</span></a>
-<a class="sourceLine" id="cb123-14" title="14"><span class="co">#&gt; # ... with 6,471 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1">assignments <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb122-2" title="2"><span class="st">  </span><span class="kw">filter</span>(title <span class="op">!=</span><span class="st"> </span>consensus) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb122-3" title="3"><span class="st">  </span><span class="kw">count</span>(title, consensus, term, <span class="dt">.wt =</span> count) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb122-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))</a>
+<a class="sourceLine" id="cb122-5" title="5"><span class="co">#&gt; # A tibble: 3,523 x 5</span></a>
+<a class="sourceLine" id="cb122-6" title="6"><span class="co">#&gt;   title              consensus             term        .wt     n</span></a>
+<a class="sourceLine" id="cb122-7" title="7"><span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;                 &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb122-8" title="8"><span class="co">#&gt; 1 Great Expectations The War of the Worlds britain       1    11</span></a>
+<a class="sourceLine" id="cb122-9" title="9"><span class="co">#&gt; 2 Great Expectations The War of the Worlds yards         1     8</span></a>
+<a class="sourceLine" id="cb122-10" title="10"><span class="co">#&gt; 3 Great Expectations The War of the Worlds deep          1     7</span></a>
+<a class="sourceLine" id="cb122-11" title="11"><span class="co">#&gt; 4 Great Expectations The War of the Worlds direction     1     7</span></a>
+<a class="sourceLine" id="cb122-12" title="12"><span class="co">#&gt; 5 Great Expectations The War of the Worlds feet          1     7</span></a>
+<a class="sourceLine" id="cb122-13" title="13"><span class="co">#&gt; 6 Great Expectations The War of the Worlds london        1     7</span></a>
+<a class="sourceLine" id="cb122-14" title="14"><span class="co">#&gt; # ... with 3,517 more rows</span></a></code></pre></div>
 <p>We can see that a number of words were often assigned to the Pride and Prejudice or War of the Worlds cluster even when they appeared in Great Expectations. For some of these words, such as “love” and “lady”, that’s because they’re more common in Pride and Prejudice (we could confirm that by examining the counts).</p>
 <p>It is possible that a word is assigned to a book, even though it never appears in that book.</p>
 
@@ -459,7 +476,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/enixam/tidy-text-mining/edit/master/book/topic_modeling.Rmd",
+"link": "https://github.com/enixam/tidy-text-mining/edit/master/book/topic-modeling.Rmd",
 "text": "Edit"
 },
 "history": {

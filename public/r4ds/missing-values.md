@@ -1,6 +1,5 @@
 
 
-
 # Dealing with missing values  
 
 
@@ -35,7 +34,7 @@ ggplot(airquality) +
   geom_miss_point(aes(Ozone, Solar.R))
 ```
 
-<img src="missing-values_files/figure-html/unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="missing-values_files/figure-html/unnamed-chunk-3-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -47,7 +46,7 @@ ggplot(data = airquality,
   theme(legend.position = "bottom")
 ```
 
-<img src="missing-values_files/figure-html/unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="missing-values_files/figure-html/unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -56,14 +55,14 @@ ggplot(data = airquality,
 gg_miss_upset(airquality)
 ```
 
-<img src="missing-values_files/figure-html/unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="missing-values_files/figure-html/unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 ```r
 gg_miss_upset(riskfactors)
 ```
 
-<img src="missing-values_files/figure-html/unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="missing-values_files/figure-html/unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 ### Replace a value with NA  
@@ -107,9 +106,9 @@ df <- tibble::tribble(
   ~name,           ~x,  ~y,              ~z,  
   "N/A",           1,   "N/A",           -100, 
   "N A",           3,   "NOt available", -99,
-  "N / A",         NA,  29,              -98,
-  "Not Available", -99, 25,              -101,
-  "John Smith",    -98, 28,              -1)
+  "N / A",         NA,  "29",              -98,
+  "Not Available", -99, "25",              -101,
+  "John Smith",    -98, "28",              -1)
 ```
 
 
@@ -201,7 +200,7 @@ df %>% replace_with_na_all(~.x %in% common_na_strings)
 
 ### janitor
 
-**Janitor** 中的 `tabyl`
+`janitor::tabyl()` generates a frequency table and exposing missing values at the same time
 
 
 ```r
@@ -424,6 +423,7 @@ df <- tibble(
   qtr    = c(   1,    2,    3,    4,    1,    2,    3),
   return = rnorm(7)
 )
+
 df %>% expand(year, qtr)
 #> # A tibble: 8 x 2
 #>    year   qtr
@@ -435,6 +435,7 @@ df %>% expand(year, qtr)
 #> 5  2012     1
 #> 6  2012     2
 #> # ... with 2 more rows
+
 df %>% expand(year = 2010:2012, qtr)
 #> # A tibble: 12 x 2
 #>    year   qtr
@@ -446,6 +447,7 @@ df %>% expand(year = 2010:2012, qtr)
 #> 5  2011     1
 #> 6  2011     2
 #> # ... with 6 more rows
+
 df %>% expand(year = full_seq(year, 1), qtr)
 #> # A tibble: 12 x 2
 #>    year   qtr
@@ -456,17 +458,6 @@ df %>% expand(year = full_seq(year, 1), qtr)
 #> 4  2010     4
 #> 5  2011     1
 #> 6  2011     2
-#> # ... with 6 more rows
-df %>% complete(year = full_seq(year, 1), qtr)
-#> # A tibble: 12 x 3
-#>    year   qtr   return
-#>   <dbl> <dbl>    <dbl>
-#> 1  2010     1 -0.00859
-#> 2  2010     2 -0.530  
-#> 3  2010     3 -0.562  
-#> 4  2010     4  0.509  
-#> 5  2011     1 NA      
-#> 6  2011     2 NA      
 #> # ... with 6 more rows
 ```
 
@@ -541,16 +532,16 @@ experiment %>% right_join(all)
 
 ```r
 experiment %>% 
-  complete(nesting(name, trt), rep)
+  complete(rep, nesting(name, trt))
 #> # A tibble: 9 x 5
-#>   name   trt     rep measurement_1 measurement_2
-#>   <chr>  <chr> <dbl>         <dbl>         <dbl>
-#> 1 Alex   a         1         0.614         0.379
-#> 2 Alex   a         2         0.915         0.811
-#> 3 Alex   a         3         0.838         0.475
-#> 4 Robert b         1         0.855         0.838
-#> 5 Robert b         2         0.501         0.739
-#> 6 Robert b         3        NA            NA    
+#>     rep name   trt   measurement_1 measurement_2
+#>   <dbl> <chr>  <chr>         <dbl>         <dbl>
+#> 1     1 Alex   a             0.614         0.379
+#> 2     1 Robert b             0.855         0.838
+#> 3     1 Sam    a             0.158         0.278
+#> 4     2 Alex   a             0.915         0.811
+#> 5     2 Robert b             0.501         0.739
+#> 6     2 Sam    a            NA            NA    
 #> # ... with 3 more rows
 ```
 
@@ -560,7 +551,7 @@ experiment %>%
 
 #### `expand_grid`: create a tibble from all combinations of inputs
 
-`expand_grid()` is analogus to `expand()`. Instead of taking in a data frame, `expand_grid()` use multiple name-value pairs to generate all combinations :  
+`expand_grid()` is analogus to a (atomic) vector version if `expand()`. Instead of taking in a data frame, `expand_grid()` use multiple name-value pairs to generate all combinations :  
 
 
 ```r
@@ -654,12 +645,12 @@ library(visdat)
 vis_miss(df)
 ```
 
-<img src="missing-values_files/figure-html/unnamed-chunk-31-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="missing-values_files/figure-html/unnamed-chunk-30-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 
 
-more advanced:  mice 或 Amelia
+Advanced:  `mice`, `Amelia`
 
 
 ## Imputation  
@@ -686,3 +677,15 @@ df %>% mutate_all( ~ ifelse(is.na(.x), median(.x, na.rm = T), .))
 #> 5   9       5     9
 #> 6   3.5     5    10
 ```
+
+`rlang::%|%`
+
+
+`simputation`
+
+
+```r
+# install.packages("simputation", dependencies = TRUE)
+```
+
+https://edwinth.github.io/padr/

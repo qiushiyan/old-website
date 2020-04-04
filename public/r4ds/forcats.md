@@ -1,5 +1,4 @@
 
-
 # forcats: factor
 
 
@@ -126,7 +125,7 @@ ggplot(starwars) +
   geom_bar(aes(fct_infreq(hair_color)))
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-14-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="forcats_files/figure-html/unnamed-chunk-13-1.svg" width="80%" style="display: block; margin: auto;" />
 
 `fct_inorder()`: sort a factor by the order in which they first appear. This can be useful when dealing with time series data.  
 
@@ -173,7 +172,7 @@ med_height %>%
   geom_col()
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-17-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="forcats_files/figure-html/unnamed-chunk-16-1.svg" width="80%" style="display: block; margin: auto;" />
 
 Sometimes a factor is mapped to a non-position aesthetic, `fct_reorder2(.f, .x, .y, .fun = last2)` is designed for this kind of 2d displays of a factor.  `last2()` and `first2()`  are helpers for `fct_reorder2()`; `last2()` finds the last value of `.y` when sorted by `.x`; `first2()` finds the first value.
 
@@ -190,7 +189,7 @@ ggplot(chks, aes(Time, weight, color = Chick)) +
   geom_line()
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-18-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="forcats_files/figure-html/unnamed-chunk-17-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -203,7 +202,7 @@ ggplot(chks, aes(Time, weight, color = fct_reorder2(Chick, Time, weight))) +
   labs(colour = "Chick")
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-18-2.svg" width="80%" style="display: block; margin: auto;" />
+<img src="forcats_files/figure-html/unnamed-chunk-17-2.svg" width="80%" style="display: block; margin: auto;" />
 
 
 ### Sorting manually 
@@ -223,7 +222,7 @@ gss_cat
 #> 4  2000 Never mar~    39 White Not appli~ Ind,near r~ Orthodox~ Not app~       4
 #> 5  2000 Divorced      25 White Not appli~ Not str de~ None      Not app~       1
 #> 6  2000 Married       25 White $20000 - ~ Strong dem~ Protesta~ Souther~      NA
-#> # ... with 2.148e+04 more rows
+#> # ... with 21,477 more rows
 levels(gss_cat$rincome)
 #>  [1] "No answer"      "Don't know"     "Refused"        "$25000 or more"
 #>  [5] "$20000 - 24999" "$15000 - 19999" "$10000 - 14999" "$8000 to 9999" 
@@ -692,7 +691,7 @@ gss_cat %>%
 
 ### Exercises 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-39"><strong>(\#exr:unnamed-chunk-39) </strong></span>美国民主党，共和党和中间派的人数是如何随时间变化的？</div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:unnamed-chunk-38"><strong>(\#exr:unnamed-chunk-38) </strong></span>美国民主党，共和党和中间派的人数是如何随时间变化的？</div>\EndKnitrBlock{exercise}
 
 
 ```r
@@ -712,7 +711,7 @@ gss_cat_collapse %>%
   geom_point(size = 2, shape= 1)
 ```
 
-<img src="forcats_files/figure-html/unnamed-chunk-40-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="forcats_files/figure-html/unnamed-chunk-39-1.svg" width="80%" style="display: block; margin: auto;" />
 
 
 

@@ -10,7 +10,7 @@ education:
 email: "565702994@qq.com"
 interests:
 - R, Statistics, Visualization
-- Behavioural Science and Game Theory
+- Game Theory
 - Ancient Chinese Literature
 name: Qiushi Yan
 organizations:
@@ -30,7 +30,7 @@ user_groups:
 - Visitors
 ---
 
-I'm currently a junior majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in #rstats, especially when harnessing the magic of [tidyverse](https://www.tidyverse.org)! 
+I'm currently a junior majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in `#rstats`.
 
-I take equal delight in the study of ancient chinese literature, behavioural sicence, nueroscience and economics. My favourite author is Bertrand Russell.:black_nib: 
+I take equal delight in ancient Chinese literature, game theory, network analysis and sports statistics. My favourite author is Bertrand Russell.:black_nib: 
 

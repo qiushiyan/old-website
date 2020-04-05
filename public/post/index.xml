@@ -5,7 +5,7 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 05 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
@@ -13,10 +13,45 @@
     </image>
     
     <item>
+      <title>Exploring the London Stage Database</title>
+      <link>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</link>
+      <pubDate>Sun, 05 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# setup
+library(tidyverse)
+library(jsonlite)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# get the data
+london_stage &amp;lt;- fromJSON(&amp;quot;D:/RProjects/data/LondonStageFull.json&amp;quot;) %&amp;gt;% 
+  as_tibble()
+
+london_stage
+#&amp;gt; # A tibble: 52,617 x 13
+#&amp;gt;    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt; 
+#&amp;gt;  1 0       16591029  city        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;The &amp;lt;i~ 63        *p165~
+#&amp;gt;  2 1       16591100  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;On 23 ~ 206       *p165~
+#&amp;gt;  3 2       16591218  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Repres~ 1         *p165~
+#&amp;gt;  4 3       16600200  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;6 Feb.~ 206       *p166~
+#&amp;gt;  5 4       16600204  cockpit     1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;$Thoma~ 73        *p166~
+#&amp;gt;  6 5       16600328  dh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;At &amp;lt;i&amp;gt;~ 90        *p166~
+#&amp;gt;  7 6       16600406  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
+#&amp;gt;  8 7       16600412  vh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Editio~ 319       *p166~
+#&amp;gt;  9 8       16600413  fh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;lt;i&amp;gt;The~ 116       *p166~
+#&amp;gt; 10 9       16600416  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
+#&amp;gt; # ... with 52,607 more rows, and 4 more variables: Phase1 &amp;lt;chr&amp;gt;,
+#&amp;gt; #   CommentCClean &amp;lt;chr&amp;gt;, BookPDF &amp;lt;chr&amp;gt;, Performances &amp;lt;list&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;json&lt;/code&gt; file can be downloaded at &lt;a href=&#34;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&#34; class=&#34;uri&#34;&gt;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Interactive view of nested objects in R: {listviewer}</title>
-      <link>/post/interactive-view-of-nested-objects-in-r-list-viewer/</link>
+      <link>/post/interactive-view-of-nested-objects-list-viewer/</link>
       <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/interactive-view-of-nested-objects-in-r-list-viewer/</guid>
+      <guid>/post/interactive-view-of-nested-objects-list-viewer/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
 &lt;script src=&#34;/rmarkdown-libs/reactjson-binding/reactjson.js&#34;&gt;&lt;/script&gt;
@@ -49,7 +84,7 @@ spdf &amp;lt;- as(nc, &amp;quot;Spatial&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 #&amp;gt;   .. ..- attr(*, &amp;quot;dimnames&amp;quot;)=List of 2
 #&amp;gt;   ..@ proj4string:Formal class &amp;#39;CRS&amp;#39; [package &amp;quot;sp&amp;quot;] with 1 slot&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;A problem is that, with static output this is by far where we could go , we cannot tell &lt;code&gt;str()&lt;/code&gt; to go deeper into one component while others stay in their level , or get a more visually appearing display of the object’s structure. We are either overwhelmed or constrained.&lt;/p&gt;
-&lt;p&gt;This is when a taste of interactivity might help. The &lt;strong&gt;listviewr&lt;/strong&gt; package&lt;span class=&#34;citation&#34;&gt;(de Jong, Gainer, and Russell &lt;a href=&#34;#ref-R-listviewer&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains R htmlwidgets designed to view and maybe modify nested and complicated objects in an interactive manner. In fact, underlying this interactivity is that listviewer provides an interface to 2 interactive JSON editors: &lt;a href=&#34;https://github.com/mac-s-g/react-json-view&#34;&gt;react-json-view&lt;/a&gt; and &lt;a href=&#34;https://github.com/josdejong/jsoneditor&#34;&gt;jsoneditor&lt;/a&gt;. They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R’s list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in &lt;strong&gt;listviewer&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This is when a taste of interactivity might help. The &lt;strong&gt;listviewr&lt;/strong&gt; package&lt;span class=&#34;citation&#34;&gt;[@R-listviewer]&lt;/span&gt; contains R htmlwidgets designed to view and maybe modify nested and complicated objects in an interactive manner. In fact, underlying this interactivity is that listviewer provides an interface to 2 interactive JSON editors: &lt;a href=&#34;https://github.com/mac-s-g/react-json-view&#34;&gt;react-json-view&lt;/a&gt; and &lt;a href=&#34;https://github.com/josdejong/jsoneditor&#34;&gt;jsoneditor&lt;/a&gt;. They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R’s list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in &lt;strong&gt;listviewer&lt;/strong&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(listviewer)
 library(magrittr) # for pipeline &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
@@ -92,7 +127,7 @@ integer for the count at which arrays will be displayed in groups. Groups are di
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reactjson(mtcars, collapsed = 1, groupArraysAfterLength = 20)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;htmlwidget-3&#34; style=&#34;width:672px;height:480px;&#34; class=&#34;reactjson html-widget&#34;&gt;&lt;/div&gt;
 &lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-3&#34;&gt;{&#34;x&#34;:{&#34;data&#34;:{&#34;mpg&#34;:[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],&#34;cyl&#34;:[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],&#34;disp&#34;:[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],&#34;hp&#34;:[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],&#34;drat&#34;:[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],&#34;wt&#34;:[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],&#34;qsec&#34;:[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],&#34;vs&#34;:[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],&#34;am&#34;:[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],&#34;gear&#34;:[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],&#34;carb&#34;:[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]},&#34;name&#34;:&#34;root&#34;,&#34;theme&#34;:&#34;rjv-default&#34;,&#34;iconStyle&#34;:&#34;circle&#34;,&#34;indentWidth&#34;:4,&#34;collapsed&#34;:1,&#34;collapseStringsAfterLength&#34;:false,&#34;groupArraysAfterLength&#34;:20,&#34;enableClipboard&#34;:true,&#34;displayObjectSize&#34;:true,&#34;displayDataTypes&#34;:true,&#34;onEdit&#34;:true,&#34;onAdd&#34;:true,&#34;onDelete&#34;:true,&#34;onSelect&#34;:true,&#34;sortKeys&#34;:false},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
-&lt;p&gt;Or on JSON-fomat strings. Here we use the &lt;code&gt;companies&lt;/code&gt; data from the &lt;strong&gt;tidyjson&lt;/strong&gt; package&lt;span class=&#34;citation&#34;&gt;(Stanley and Arendt &lt;a href=&#34;#ref-R-tidyjson&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;, which is just a character vector:&lt;/p&gt;
+&lt;p&gt;Or on JSON-fomat strings. Here we use the &lt;code&gt;companies&lt;/code&gt; data from the &lt;strong&gt;tidyjson&lt;/strong&gt; package&lt;span class=&#34;citation&#34;&gt;[@R-tidyjson]&lt;/span&gt;, which is just a character vector:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyjson)
 companies %&amp;gt;% 
   head(1)
@@ -123,14 +158,6 @@ companies %&amp;gt;%
 Data. The R Journal 10 (1), 439-446, &lt;a href=&#34;https://doi.org/10.32614/RJ-2018-009&#34; class=&#34;uri&#34;&gt;https://doi.org/10.32614/RJ-2018-009&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Facebook Inc, Michel Weststrate, Kent Russell and Alan Dipert (2019). reactR: React
 Helpers. R package version 0.4.1. &lt;a href=&#34;https://CRAN.R-project.org/package=reactR&#34; class=&#34;uri&#34;&gt;https://CRAN.R-project.org/package=reactR&lt;/a&gt;&lt;/p&gt;
-&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
-&lt;div id=&#34;ref-R-listviewer&#34;&gt;
-&lt;p&gt;de Jong, Jos, Mac Gainer, and Kent Russell. 2019. &lt;em&gt;Listviewer: ’Htmlwidget’ for Interactive Views of R Lists&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=listviewer&#34;&gt;https://CRAN.R-project.org/package=listviewer&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-R-tidyjson&#34;&gt;
-&lt;p&gt;Stanley, Jeremy, and Cole Arendt. 2019. &lt;em&gt;Tidyjson: Tidy Complex Json&lt;/em&gt;. &lt;a href=&#34;https://github.com/colearendt/tidyjson&#34;&gt;https://github.com/colearendt/tidyjson&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
@@ -150,13 +177,18 @@ Helpers. R package version 0.4.1. &lt;a href=&#34;https://CRAN.R-project.org/pac
 
 
 &lt;p&gt;This blog post is inspired by Julia Silge’s &lt;a href=&#34;https://juliasilge.com/blog/reorder-within/&#34;&gt;Reordering and facetting for ggplot2&lt;/a&gt;. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.&lt;/p&gt;
-&lt;div id=&#34;most-common-words-in-jane-austens-books&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Most common words in Jane Austen’s books&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#common-words-in-jane-austen&amp;#39;s-books-&#34;&gt;Common words in Jane Austen’s books&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#helper-functions-for-reordering-&#34;&gt;Helper functions for reordering&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references-&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;common-words-in-jane-austens-books&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Common words in Jane Austen’s books&lt;/h1&gt;
 &lt;p&gt;Here is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# load package
-library(tidyverse)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
 library(tidytext)
-library(janeaustenr)&lt;/code&gt;&lt;/pre&gt;
+library(janeaustenr)
+theme_set(theme_light())&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;austen_books()
 #&amp;gt; # A tibble: 73,422 x 2
 #&amp;gt;    text                    book               
@@ -172,8 +204,8 @@ library(janeaustenr)&lt;/code&gt;&lt;/pre&gt;
 #&amp;gt;  9 &amp;quot;&amp;quot;                      Sense &amp;amp; Sensibility
 #&amp;gt; 10 &amp;quot;CHAPTER 1&amp;quot;             Sense &amp;amp; Sensibility
 #&amp;gt; # ... with 73,412 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that the raw data generated by calling &lt;code&gt;austen_books()&lt;/code&gt;, provided in the &lt;strong&gt;janeaustenr&lt;/strong&gt; package &lt;span class=&#34;citation&#34;&gt;(Silge &lt;a href=&#34;#ref-R-janeaustenr&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt;, is not in its most sensible format for analysis. Since each row is made up of multiple combined words.&lt;/p&gt;
-&lt;p&gt;Here we use &lt;code&gt;unnest_tokens&lt;/code&gt; from the &lt;strong&gt;tidytext&lt;/strong&gt; package &lt;span class=&#34;citation&#34;&gt;(Robinson and Silge &lt;a href=&#34;#ref-R-tidytext&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; to break the text into individual tokens and transform it into a tidy structure:&lt;/p&gt;
+&lt;p&gt;Note that the raw data generated by calling &lt;code&gt;austen_books()&lt;/code&gt;, provided in the &lt;code&gt;janeaustenr&lt;/code&gt; package &lt;span class=&#34;citation&#34;&gt;(Silge &lt;a href=&#34;#ref-R-janeaustenr&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt;, is not in its most sensible format for analysis. Since each row is made up of multiple combined words.&lt;/p&gt;
+&lt;p&gt;Here we use &lt;code&gt;unnest_tokens&lt;/code&gt; from the `tidytext package &lt;span class=&#34;citation&#34;&gt;(Robinson and Silge &lt;a href=&#34;#ref-R-tidytext&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; to break the text into individual tokens and transform it into a tidy structure:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# calculate 10 most common words in each book
 common_words &amp;lt;- austen_books() %&amp;gt;%
   unnest_tokens(word, text) %&amp;gt;% 
@@ -199,58 +231,60 @@ common_words &amp;lt;- austen_books() %&amp;gt;%
 #&amp;gt; 10 Sense &amp;amp; Sensibility willoughby   181
 #&amp;gt; # ... with 50 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For details many and other useful text mining techniques in R, I recommend reading &lt;a href=&#34;Text%20Mining%20with%20R:%20A%20tidy%20approach&#34;&gt;Text mining with R: A tidy approach&lt;/a&gt; by Julia Silge and David Robinson&lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-silge2017text&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot common words
 common_words %&amp;gt;% 
-  ggplot(aes(word, n, fill = book)) +
+  ggplot(aes(y = word, 
+             x = n, 
+             fill = book)) +
   geom_col() + 
-  coord_flip() + 
   facet_wrap(~ book, ncol = 2, scales = &amp;quot;free_y&amp;quot;) + 
-  theme_classic() + 
-  theme(legend.position = &amp;quot;none&amp;quot;, 
-        axis.text.y = element_text(size = 12),
+  theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &amp;quot;PurpOr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;In its default setting, &lt;strong&gt;ggplot2&lt;/strong&gt; puts the names in alphabetical order, because they are of type character. One common solution is to use &lt;code&gt;fct_reorder()&lt;/code&gt; or its equivalent &lt;code&gt;reorder()&lt;/code&gt; in baes R`:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;
+(&lt;strong&gt;Reminder&lt;/strong&gt;: don’t forget &lt;code&gt;scales = &#34;free_y&#34;&lt;/code&gt; or &lt;code&gt;scales = &#34;free&#34;&lt;/code&gt; in this case.)&lt;/p&gt;
+&lt;p&gt;In its default setting, ggplot2 puts the names in alphabetical order, because they are of type character. One common solution is to use &lt;code&gt;fct_reorder()&lt;/code&gt; or its equivalent &lt;code&gt;reorder()&lt;/code&gt; in baes R`:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;common_words %&amp;gt;% 
-  ggplot(aes(fct_reorder(word, n), n, fill = book)) +
-  geom_col() + 
-  coord_flip() + 
+  ggplot(aes(y = fct_reorder(word, n), 
+             x = n, 
+             fill = book)) +
+  geom_col(show.legend = FALSE) +
   facet_wrap(~ book, ncol = 2, scales = &amp;quot;free_y&amp;quot;) + 
-  theme_classic() + 
-  theme(legend.position = &amp;quot;none&amp;quot;, 
-        axis.text.y = element_text(size = 12),
+  theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &amp;quot;PurpOr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, &lt;code&gt;fct_reorder()&lt;/code&gt; or &lt;code&gt;reorder&lt;/code&gt; only reorder all of these together, meaning that &lt;code&gt;word&lt;/code&gt; are reordered in an overall level so that it cannot guarantee order in any specific subset of data.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, &lt;code&gt;fct_reorder&lt;/code&gt; or &lt;code&gt;reorder&lt;/code&gt; only reorder all of these together, meaning that &lt;code&gt;word&lt;/code&gt; are reordered in an overall level so that it cannot guarantee order in any specific subset of data.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;reorder_within-and-scale_x_reordered&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;&lt;code&gt;reorder_within()&lt;/code&gt; and &lt;code&gt;scale_x_reordered()&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;The &lt;strong&gt;tidytext&lt;/strong&gt; package provides 2 new functions to reorder a variable on a facet level.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;reorder_within()&lt;/code&gt; takes three arguments:
-- &lt;strong&gt;x&lt;/strong&gt;: the item we want to reorder
-- &lt;strong&gt;by&lt;/strong&gt;: what we want to reorder by
-- &lt;strong&gt;within&lt;/strong&gt;: the groups or categories we want to reorder within&lt;/p&gt;
-&lt;p&gt;After that, we use &lt;code&gt;scale_x_reordered()&lt;/code&gt;(or &lt;code&gt;scale_y_reordered()&lt;/code&gt;) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., &lt;strong&gt;name&lt;/strong&gt;, &lt;strong&gt;labels&lt;/strong&gt;, &lt;strong&gt;expand&lt;/strong&gt;).&lt;/p&gt;
-&lt;p&gt;Here is a final plot:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# reorder word by n, grouped by book
+&lt;div id=&#34;helper-functions-for-reordering&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Helper functions for reordering&lt;/h1&gt;
+&lt;p&gt;tidytext provides 2 helper functions to reorder a variable on a facet level.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;reorder_within()&lt;/code&gt; takes three arguments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;x&lt;/code&gt;: the item we want to reorder&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;by&lt;/code&gt;: what we want to reorder by&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;within&lt;/code&gt;: the groups or categories we want to reorder within&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After that, we use &lt;code&gt;scale_x_reordered()&lt;/code&gt;(or &lt;code&gt;scale_y_reordered()&lt;/code&gt;) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;labels&lt;/code&gt;, &lt;code&gt;expand&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Here is the final plot:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# reorder word by n, within each book
 common_words %&amp;gt;% 
-  ggplot(aes(reorder_within(word, n, book), n, fill = book)) +
-  geom_col() + 
-  coord_flip() + 
+  ggplot(aes(y = reorder_within(word, n, book), 
+             x = n, 
+             fill = book)) +
+  geom_col(show.legend = FALSE) + 
   scale_x_reordered() + 
   facet_wrap(~ book, ncol = 2, scales = &amp;quot;free_y&amp;quot;) + 
-  theme_classic() + 
-  theme(legend.position = &amp;quot;none&amp;quot;, 
-        axis.text.y = element_text(size = 12),
+  theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &amp;quot;PurpOr&amp;quot;) +
   labs(title = &amp;quot;What are the most common words in Jane Austen&amp;#39;s books?&amp;quot;,
        x = NULL,
        y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Without using &lt;code&gt;scale_x_reordered&lt;/code&gt; to overide ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, which make its label way too long. Here is an simple example using the &lt;a href=&#34;https://github.com/hadley/babynames&#34;&gt;babynames&lt;/a&gt; data:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Without &lt;code&gt;scale_x_reordered&lt;/code&gt; which overides ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, making lables way too long and uninformative. Here is an simple example to demonstrate this problem using the &lt;a href=&#34;https://github.com/hadley/babynames&#34;&gt;babynames&lt;/a&gt; data:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(babynames)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;top_names &amp;lt;- babynames %&amp;gt;% 
   filter(year &amp;gt;= 1950,
@@ -262,16 +296,16 @@ common_words %&amp;gt;%
   top_n(10)
 
 top_names %&amp;gt;% 
-  ggplot(aes(reorder_within(name, n, decade), n, fill = factor(decade))) + 
-  geom_col() + 
-  coord_flip() + 
-  facet_wrap(~ decade, scales = &amp;quot;free_y&amp;quot;) + 
-  theme(legend.position = &amp;quot;none&amp;quot;) + 
+  ggplot(aes(y = reorder_within(name, n, decade), 
+             x = n, 
+             fill = factor(decade))) + 
+  geom_col(show.legend = FALSE) + 
+  facet_wrap(~ decade, scales = &amp;quot;free_y&amp;quot;) +
   labs(x = NULL, y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
 &lt;p&gt;Nowosad, J. (2018). ‘CARTOColors’ Palettes. R package version 1.0.0. &lt;a href=&#34;https://nowosad.github.io/rcartocolor&#34; class=&#34;uri&#34;&gt;https://nowosad.github.io/rcartocolor&lt;/a&gt;&lt;/p&gt;
 &lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
 &lt;div id=&#34;ref-R-tidytext&#34;&gt;
@@ -298,15 +332,25 @@ top_names %&amp;gt;%
 
 &lt;p&gt;The &lt;a href=&#34;http://www.oceanhealthindex.org&#34;&gt;Ocean Health Index project&lt;/a&gt;(OHI) provides a means to advance comprehensive ocean policy and compare future progress, with an aim of informing decisions about how to use or protect marine ecosystems, and promoting ongoing assessment of ocean health.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;“Our path to better science in less time using open data science tools”&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Lowndes et al. &lt;a href=&#34;#ref-lowndes2017our&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; describes how several free software tools have fundamentally upgraded OHI team’s approach to collaborative research, and assist better science in less time.&lt;/p&gt;
-&lt;div id=&#34;reproducibility-challenges-in-environmental-science&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Reproducibility challenges in environmental science&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#reproducibility-challenges-in-environmental-science&#34;&gt;Reproducibility challenges in environmental science&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#the-happy-transition-&#34;&gt;The happy transition&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#reproducibility-&#34;&gt;Reproducibility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#collaboration-&#34;&gt;Collaboration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#communication&#34;&gt;Communication&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;reproducibility-challenges-in-environmental-science&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Reproducibility challenges in environmental science&lt;/h1&gt;
 &lt;p&gt;Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because “they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines”.&lt;/p&gt;
 &lt;p&gt;For another, environmental scientists, perhaps more than ever, are eager to build trust in public. So that in recognition of their work, some people would be roused to action. However, proposed environmental solutions can be opaque, controversial and prohibitively costly either in financial or resource terms, increasing the need for scientists to work transparently, reproducibly and collaboratively with data.&lt;/p&gt;
 &lt;p&gt;Without appropriate training, scientists tend to develop their own bespoke workarounds to keep
 pace, with which comes wasted time struggling to create their own conventions for managing, wrangling and versioning data. The OHI project experienced this sort of struggle first, and by borrowing philosophies, tools, and workflows primarily created for software development, they have dramatically improved work reproducibily, transparency and effectiveness in less time.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;the-happy-transition&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;The happy transition&lt;/h2&gt;
+&lt;div id=&#34;the-happy-transition&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The happy transition&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;/img/ohi_transition.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This figure shows an interesting transition of the OHI project from traditional methods to modern data science tools, and most importantly, with greater reproducibility and collaboration effectiveness. As they described:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -315,8 +359,8 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;p&gt;In OHI’s 2012 annual report, global assessments of 220 coastal nations and territories are presented. Data from nearly one hundred sources were &lt;strong&gt;prepared manually&lt;/strong&gt; — that is, without coding, typically in Microsoft Excel—which included organizing, transforming, rescaling, gap filling and formatting data. Records of data processing, if any, are scattered. Members communicated and shared files frequently, with long, often forwarded and vaguely titled email chains.&lt;/p&gt;
 &lt;p&gt;Not surprisingly, team members struggled to efficienty repeat our own work during the second assessment in 2013. And a 130-pages documentation just seems not sufficient.&lt;/p&gt;
 &lt;p&gt;However, in 2013 OHI team started to tackle with reproducibility, collaboration and communication, “with R and Rstudio for coding and visualization, Git for version control, GitHub for collaboration, and a combination of GitHub and Rstudio for organization, documentation, project management, online publishing, distribution and communication”.&lt;/p&gt;
-&lt;div id=&#34;reproducibility&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Reproducibility&lt;/h3&gt;
+&lt;div id=&#34;reproducibility&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Reproducibility&lt;/h2&gt;
 &lt;p&gt;Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data&lt;span class=&#34;citation&#34;&gt;(Wickham and others &lt;a href=&#34;#ref-wickham2014tidy&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt;, and grammar of data manipulation provided by dplyr&lt;span class=&#34;citation&#34;&gt;(Wickham et al. &lt;a href=&#34;#ref-R-dplyr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown&lt;span class=&#34;citation&#34;&gt;(Allaire et al. &lt;a href=&#34;#ref-R-rmarkdown&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;, instead of plain text files.&lt;/p&gt;
 &lt;p&gt;Modeling practices are also unified and standardized in R, and the OHI framwork are incorporated in an R package &lt;strong&gt;ohicore&lt;/strong&gt;, which can be downloaded in R via &lt;code&gt;devtools::install_github(&#39;ohi-science/ohicore&#39;)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/img/ohi.png&#34; /&gt;&lt;/p&gt;
@@ -329,13 +373,13 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;/p&gt;
 &lt;p&gt;For version control, Git has consigned to history local folder with weird naming conventions. Rstudio plays a key role here by offering an simple interface with Git.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;collaboration&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Collaboration&lt;/h3&gt;
+&lt;div id=&#34;collaboration&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Collaboration&lt;/h2&gt;
 &lt;p&gt;The OHI team transitioned from a team of distinct roles (scientists and programmer) to become a team with overlapping skill sets(data scientists). This transition has enable easier collaboration(i.e., to vet code as a team).&lt;/p&gt;
 &lt;p&gt;GitHub is now central to OHI’s collaboration workflow, an interesting report is that the team uses the &lt;em&gt;“Issues”&lt;/em&gt; feature to record discussions, decisions, collect feedbacks. Compared to email, team members can communicate directly by linking to specific lins of code in any branch of a repo. Conversations are open to all, and &lt;code&gt;@&lt;/code&gt; can be readily used when assigning tasks.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;communication&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Communication&lt;/h3&gt;
+&lt;div id=&#34;communication&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Communication&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Open data science tools have made us reimagine what communication can mean for science and management. They enable us to not only share our code online, but to create reports, ebooks, interactive web applications, and entire websites, which we can share for free to communicate our work.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -351,8 +395,8 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;p&gt;I really enjoy reading the last section, in which the author explained why open, transparent and reproducible science should be promoted and how to kickstart the rewarding learning path. The original line can be found at &lt;a href=&#34;https://www.nature.com/articles/s41559-017-0160#Sec7&#34; class=&#34;uri&#34;&gt;https://www.nature.com/articles/s41559-017-0160#Sec7&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
-&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
 &lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
 &lt;div id=&#34;ref-R-rmarkdown&#34;&gt;
 &lt;p&gt;Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. &lt;em&gt;Rmarkdown: Dynamic Documents for R&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=rmarkdown&#34;&gt;https://CRAN.R-project.org/package=rmarkdown&lt;/a&gt;.&lt;/p&gt;
@@ -372,50 +416,15 @@ pace, with which comes wasted time struggling to create their own conventions fo
     </item>
     
     <item>
-      <title>Exploring the London Stage Database</title>
-      <link>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</link>
-      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</guid>
-      <description>
-
-
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# setup
-library(tidyverse)
-library(jsonlite)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# get the data
-london_stage &amp;lt;- fromJSON(&amp;quot;D:/RProjects/data/LondonStageFull.json&amp;quot;) %&amp;gt;% 
-  as_tibble()
-
-london_stage&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 52,617 x 13
-##    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
-##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt; 
-##  1 0       16591029  city        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;The &amp;lt;i~ 63        *p165~
-##  2 1       16591100  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;On 23 ~ 206       *p165~
-##  3 2       16591218  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Repres~ 1         *p165~
-##  4 3       16600200  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;6 Feb.~ 206       *p166~
-##  5 4       16600204  cockpit     1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;$Thoma~ 73        *p166~
-##  6 5       16600328  dh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;At &amp;lt;i&amp;gt;~ 90        *p166~
-##  7 6       16600406  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
-##  8 7       16600412  vh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Editio~ 319       *p166~
-##  9 8       16600413  fh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;lt;i&amp;gt;The~ 116       *p166~
-## 10 9       16600416  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
-## # ... with 52,607 more rows, and 4 more variables: Phase1 &amp;lt;chr&amp;gt;,
-## #   CommentCClean &amp;lt;chr&amp;gt;, BookPDF &amp;lt;chr&amp;gt;, Performances &amp;lt;list&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;json&lt;/code&gt; file can be downloaded at &lt;a href=&#34;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&#34; class=&#34;uri&#34;&gt;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Skimming through {skimr}</title>
-      <link>/post/introduction-to-skimr/</link>
+      <link>/post/intro-skimr/introduction-to-skimr/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/introduction-to-skimr/</guid>
+      <guid>/post/intro-skimr/introduction-to-skimr/</guid>
       <description>
 
 
-&lt;div id=&#34;table-of-contents&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id=&#34;table-of-contents&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Table of Contents&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#intro&#34;&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#manipulation&#34;&gt;Manipulating the results&lt;/a&gt;&lt;/li&gt;
@@ -424,8 +433,8 @@ london_stage&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&#34;#ref&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div id=&#34;intro&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/h2&gt;
+&lt;div id=&#34;intro&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/h1&gt;
 &lt;p&gt;The &lt;strong&gt;skimr&lt;/strong&gt;&lt;span class=&#34;citation&#34;&gt;(Waring et al. &lt;a href=&#34;#ref-R-skimr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; package is developed by the &lt;a href=&#34;https://github.com/ropensci&#34;&gt;rOpenSci&lt;/a&gt; cummunity, with its core function &lt;code&gt;skim()&lt;/code&gt; as an enhanced version of &lt;code&gt;summary()&lt;/code&gt;, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its &lt;a href=&#34;https://docs.ropensci.org/skimr/index.html&#34;&gt;vignette&lt;/a&gt;.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;What &lt;code&gt;skim()&lt;/code&gt; returns can be divided into 2 parts:&lt;/p&gt;
 &lt;ul&gt;
@@ -1334,7 +1343,6 @@ skim(iris) %&amp;gt;%
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;`&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# extract the mean and median with a prefix
 skim(iris) %&amp;gt;% 
   filter(skim_type == &amp;quot;numeric&amp;quot;) %&amp;gt;%
@@ -1473,8 +1481,8 @@ skim(iris) %&amp;gt;%
   is_skim_df()
 #&amp;gt; [1] FALSE&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;manipulation&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Manipulating the results&lt;/h2&gt;
+&lt;div id=&#34;manipulation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Manipulating the results&lt;/h1&gt;
 &lt;p&gt;As noted above, &lt;code&gt;skim()&lt;/code&gt; returns a wide data frame, an &lt;code&gt;skim_df&lt;/code&gt; object. This is usually the most sensible format for the majority of operations when investigating data, and &lt;strong&gt;skimr&lt;/strong&gt; also provides functions aimed at facilitating the exploratory process .&lt;/p&gt;
 &lt;p&gt;First, &lt;code&gt;partition()&lt;/code&gt; returns a named list of the wide data frames &lt;strong&gt;for each data type&lt;/strong&gt;. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type. These data frames are, therefore, not &lt;code&gt;skim_df&lt;/code&gt; objects. And we can easily subset that list to get desirable component:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;iris %&amp;gt;%
@@ -1723,8 +1731,8 @@ iris_numeric %&amp;gt;%
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-&lt;div id=&#34;customization&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Customizing &lt;code&gt;skim()&lt;/code&gt;&lt;/h2&gt;
+&lt;div id=&#34;customization&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Customizing &lt;code&gt;skim()&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;We can create out own skimming function with the &lt;code&gt;skim_with()&lt;/code&gt; function factory. To add a statistic for a data type, create an &lt;code&gt;sfl()&lt;/code&gt; (a skimr function list) for each class that you want to change:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# also look at skewness and kurtosis for numerical variables
 library(e1071)
@@ -1838,8 +1846,8 @@ my_skim &amp;lt;- skim_with(numeric = sfl(&amp;quot;3rd_central_moment&amp;quot;
 &lt;/ul&gt;
 &lt;p&gt;It you want to customize &lt;code&gt;skim()&lt;/code&gt; to support more data classes, &lt;a href=&#34;https://docs.ropensci.org/skimr/articles/Supporting_additional_objects.html#conclusion&#34;&gt;here&lt;/a&gt; is an simple example, adding support for &lt;code&gt;sf&lt;/code&gt; oject.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;other&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Skimming non-data frames&lt;/h2&gt;
+&lt;div id=&#34;other&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Skimming non-data frames&lt;/h1&gt;
 &lt;p&gt;In &lt;strong&gt;skimr&lt;/strong&gt; &lt;a href=&#34;https://github.com/ropensci/skimr/releases&#34;&gt;v2&lt;/a&gt;, &lt;code&gt;skim()&lt;/code&gt; will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in as.data.frame().&lt;/p&gt;
 &lt;p&gt;Skimming charactor vector:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
@@ -2381,8 +2389,8 @@ m
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-&lt;div id=&#34;ref&#34; class=&#34;section level2 unnumbered&#34;&gt;
-&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;ref&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
 &lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
 &lt;div id=&#34;ref-R-skimr&#34;&gt;
 &lt;p&gt;Waring, Elin, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, and Shannon Ellis. 2019. &lt;em&gt;Skimr: Compact and Flexible Summaries of Data&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=skimr&#34;&gt;https://CRAN.R-project.org/package=skimr&lt;/a&gt;.&lt;/p&gt;
@@ -2403,13 +2411,22 @@ m
     
     <item>
       <title>50 Years of Data Science</title>
-      <link>/post/50-years-of-data-science/</link>
+      <link>/post/50-years/50-years-of-data-science/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/50-years-of-data-science/</guid>
+      <guid>/post/50-years/50-years-of-data-science/</guid>
       <description>
 
 
 &lt;p&gt;More than 50 years ago, John Tukey in his renowned “The Future of Dat Analysis” envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / analysis” trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#data-science-vs.-statistics&#34;&gt;Data Science vs. Statistics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#review-on-the-concept&#34;&gt;Review on the concept&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#the-six-divisions&#34;&gt;The Six Divisions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#science-about-data-science-&#34;&gt;Science About Data Science&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#next-50-years-&#34;&gt;Next 50 years&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion-&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div id=&#34;data-science-vs.-statistics&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data Science vs. Statistics&lt;/h1&gt;
 &lt;p&gt;The author first starts to distinguish data science from traditional statistics. Yet 3 commonly used indicators are discredited:&lt;/p&gt;

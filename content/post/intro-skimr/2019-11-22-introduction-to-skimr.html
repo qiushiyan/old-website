@@ -3,29 +3,25 @@ title: Skimming through {skimr}
 author: Qiushi Yan
 date: '2019-11-22'
 slug: introduction-to-skimr
-categories:
-  - R
-tags:
-  - skimr
-subtitle: ''
-summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics about variables'
-description: "introduction to skimr"
-bibliography: bib/introduction-to-skimr.bib
-biblio-style: "apalike"
+
+summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics of data frames'
+
+bibliography: ../bib/introduction-to-skimr.bib
 link-citations: true
-lastmod: '2019-11-22T23:27:44+08:00'
-featured: no
+lastmod: '2020-04-05T23:27:44+08:00'
+
 image:
-  caption: ''
+  placement: 2
+  caption: 'Photo by [Josh Sorenson](https://www.pexels.com/@joshsorenson)'
   focal_point: ''
   preview_only: no
-projects: []
+
 ---
 
 
 
-<div id="table-of-contents" class="section level2">
-<h2>Table of Contents</h2>
+<div id="table-of-contents" class="section level1">
+<h1>Table of Contents</h1>
 <ul>
 <li><a href="#intro"><code>skim()</code> basics</a></li>
 <li><a href="#manipulation">Manipulating the results</a></li>
@@ -34,8 +30,8 @@ projects: []
 <li><a href="#ref">References</a></li>
 </ul>
 </div>
-<div id="intro" class="section level2">
-<h2><code>skim()</code> basics</h2>
+<div id="intro" class="section level1">
+<h1><code>skim()</code> basics</h1>
 <p>The <strong>skimr</strong><span class="citation">(Waring et al. <a href="#ref-R-skimr" role="doc-biblioref">2019</a>)</span> package is developed by the <a href="https://github.com/ropensci">rOpenSci</a> cummunity, with its core function <code>skim()</code> as an enhanced version of <code>summary()</code>, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its <a href="https://docs.ropensci.org/skimr/index.html">vignette</a>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>What <code>skim()</code> returns can be divided into 2 parts:</p>
 <ul>
@@ -944,7 +940,6 @@ skim(iris) %&gt;%
 </tr>
 </tbody>
 </table>
-<p>`</p>
 <pre class="r"><code># extract the mean and median with a prefix
 skim(iris) %&gt;% 
   filter(skim_type == &quot;numeric&quot;) %&gt;%
@@ -1083,8 +1078,8 @@ skim(iris) %&gt;%
   is_skim_df()
 #&gt; [1] FALSE</code></pre>
 </div>
-<div id="manipulation" class="section level2">
-<h2>Manipulating the results</h2>
+<div id="manipulation" class="section level1">
+<h1>Manipulating the results</h1>
 <p>As noted above, <code>skim()</code> returns a wide data frame, an <code>skim_df</code> object. This is usually the most sensible format for the majority of operations when investigating data, and <strong>skimr</strong> also provides functions aimed at facilitating the exploratory process .</p>
 <p>First, <code>partition()</code> returns a named list of the wide data frames <strong>for each data type</strong>. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type. These data frames are, therefore, not <code>skim_df</code> objects. And we can easily subset that list to get desirable component:</p>
 <pre class="r"><code>iris %&gt;%
@@ -1333,8 +1328,8 @@ iris_numeric %&gt;%
 </tbody>
 </table>
 </div>
-<div id="customization" class="section level2">
-<h2>Customizing <code>skim()</code></h2>
+<div id="customization" class="section level1">
+<h1>Customizing <code>skim()</code></h1>
 <p>We can create out own skimming function with the <code>skim_with()</code> function factory. To add a statistic for a data type, create an <code>sfl()</code> (a skimr function list) for each class that you want to change:</p>
 <pre class="r"><code># also look at skewness and kurtosis for numerical variables
 library(e1071)
@@ -1448,8 +1443,8 @@ my_skim &lt;- skim_with(numeric = sfl(&quot;3rd_central_moment&quot; = skewness,
 </ul>
 <p>It you want to customize <code>skim()</code> to support more data classes, <a href="https://docs.ropensci.org/skimr/articles/Supporting_additional_objects.html#conclusion">here</a> is an simple example, adding support for <code>sf</code> oject.</p>
 </div>
-<div id="other" class="section level2">
-<h2>Skimming non-data frames</h2>
+<div id="other" class="section level1">
+<h1>Skimming non-data frames</h1>
 <p>In <strong>skimr</strong> <a href="https://github.com/ropensci/skimr/releases">v2</a>, <code>skim()</code> will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in as.data.frame().</p>
 <p>Skimming charactor vector:</p>
 <pre class="r"><code>
@@ -1991,8 +1986,8 @@ m
 </tbody>
 </table>
 </div>
-<div id="ref" class="section level2 unnumbered">
-<h2>References</h2>
+<div id="ref" class="section level1 unnumbered">
+<h1>References</h1>
 <div id="refs" class="references">
 <div id="ref-R-skimr">
 <p>Waring, Elin, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, and Shannon Ellis. 2019. <em>Skimr: Compact and Flexible Summaries of Data</em>. <a href="https://CRAN.R-project.org/package=skimr">https://CRAN.R-project.org/package=skimr</a>.</p>

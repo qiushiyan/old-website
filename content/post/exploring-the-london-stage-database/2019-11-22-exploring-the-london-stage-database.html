@@ -1,21 +1,20 @@
 ---
 title: Exploring the London Stage Database
 author: Qiushi Yan
-date: '2019-11-22'
+date: '2020-04-05'
 slug: exploring-the-london-stage-database
-categories:
-  - R
-tags: []
-subtitle: ''
-summary: 'Data wranling, cleaning practice using the English Stage Database'
-authors: []
-lastmod: '2019-11-22T14:09:39+08:00'
-featured: no
+
+summary: 'A little playing with London Stage Database'
+lastmod: '2020-04-05T14:09:39+08:00'
+
+
 image:
-  caption: ''
+  placement: 2
+  caption: 'Photo by [Sid Ali](https://www.pexels.com/@sidali)'
   focal_point: ''
   preview_only: no
-projects: []
+
+draft: true
 ---
 
 
@@ -27,20 +26,20 @@ library(jsonlite)</code></pre>
 london_stage &lt;- fromJSON(&quot;D:/RProjects/data/LondonStageFull.json&quot;) %&gt;% 
   as_tibble()
 
-london_stage</code></pre>
-<pre><code>## # A tibble: 52,617 x 13
-##    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
-##    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt; 
-##  1 0       16591029  city        1659-~ 1      &quot;&quot;    &quot;The &lt;i~ 63        *p165~
-##  2 1       16591100  mt          1659-~ 1      &quot;&quot;    &quot;On 23 ~ 206       *p165~
-##  3 2       16591218  none        1659-~ 1      &quot;&quot;    &quot;Repres~ 1         *p165~
-##  4 3       16600200  mt          1659-~ 1      &quot;&quot;    &quot;6 Feb.~ 206       *p166~
-##  5 4       16600204  cockpit     1659-~ 1      &quot;&quot;    &quot;$Thoma~ 73        *p166~
-##  6 5       16600328  dh          1659-~ 1      &quot;&quot;    &quot;At &lt;i&gt;~ 90        *p166~
-##  7 6       16600406  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
-##  8 7       16600412  vh          1659-~ 1      &quot;&quot;    &quot;Editio~ 319       *p166~
-##  9 8       16600413  fh          1659-~ 1      &quot;&quot;    &quot;&lt;i&gt;The~ 116       *p166~
-## 10 9       16600416  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
-## # ... with 52,607 more rows, and 4 more variables: Phase1 &lt;chr&gt;,
-## #   CommentCClean &lt;chr&gt;, BookPDF &lt;chr&gt;, Performances &lt;list&gt;</code></pre>
+london_stage
+#&gt; # A tibble: 52,617 x 13
+#&gt;    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
+#&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt; 
+#&gt;  1 0       16591029  city        1659-~ 1      &quot;&quot;    &quot;The &lt;i~ 63        *p165~
+#&gt;  2 1       16591100  mt          1659-~ 1      &quot;&quot;    &quot;On 23 ~ 206       *p165~
+#&gt;  3 2       16591218  none        1659-~ 1      &quot;&quot;    &quot;Repres~ 1         *p165~
+#&gt;  4 3       16600200  mt          1659-~ 1      &quot;&quot;    &quot;6 Feb.~ 206       *p166~
+#&gt;  5 4       16600204  cockpit     1659-~ 1      &quot;&quot;    &quot;$Thoma~ 73        *p166~
+#&gt;  6 5       16600328  dh          1659-~ 1      &quot;&quot;    &quot;At &lt;i&gt;~ 90        *p166~
+#&gt;  7 6       16600406  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
+#&gt;  8 7       16600412  vh          1659-~ 1      &quot;&quot;    &quot;Editio~ 319       *p166~
+#&gt;  9 8       16600413  fh          1659-~ 1      &quot;&quot;    &quot;&lt;i&gt;The~ 116       *p166~
+#&gt; 10 9       16600416  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
+#&gt; # ... with 52,607 more rows, and 4 more variables: Phase1 &lt;chr&gt;,
+#&gt; #   CommentCClean &lt;chr&gt;, BookPDF &lt;chr&gt;, Performances &lt;list&gt;</code></pre>
 <p>The <code>json</code> file can be downloaded at <a href="https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip" class="uri">https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip</a>.</p>

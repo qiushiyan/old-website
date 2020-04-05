@@ -3,30 +3,28 @@ title: Skimming through {skimr}
 author: Qiushi Yan
 date: '2019-11-22'
 slug: introduction-to-skimr
-categories:
-  - R
-tags:
-  - skimr
-subtitle: ''
-summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics about variables'
-description: "introduction to skimr"
-bibliography: bib/introduction-to-skimr.bib
-biblio-style: "apalike"
+
+summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics of data frames'
+
+bibliography: ../bib/introduction-to-skimr.bib
 link-citations: true
-lastmod: '2019-11-22T23:27:44+08:00'
-featured: no
+lastmod: '2020-04-05T23:27:44+08:00'
+
 image:
-  caption: ''
+  placement: 2
+  caption: 'Photo by [Josh Sorenson](https://www.pexels.com/@joshsorenson)'
   focal_point: ''
   preview_only: no
-projects: []
+
 ---
 
-## Table of Contents   
+# Table of Contents   
 
-```{r, include=F}
-knitr::opts_chunk$set(message = F, collapse = TRUE, comment = "#>")
-source("render_toc.R")
+```{r, include = FALSE}
+knitr::opts_chunk$set(message = F, warning = FALSE,
+                      collapse = TRUE, 
+                      comment = "#>")
+source("../render_toc.R")
 ```
 
 
@@ -34,7 +32,7 @@ source("render_toc.R")
 render_toc("2019-11-22-introduction-to-skimr.Rmd")
 ```
 
-## `skim()` basics  {#intro}
+# `skim()` basics  {#intro}
 
 
 The **skimr**[@R-skimr] package is developed by the [rOpenSci](https://github.com/ropensci) cummunity, with its core function `skim()` as an enhanced version of `summary()`, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its [vignette](https://docs.ropensci.org/skimr/index.html). ^[In the sense that `skim()` provides useful, tidy summary statistics and displays it in a pretty form for exploratory analysis based on data frames. `skim()` cannot supplant `summary()` in terms of model interpretation, viewing geospatial objects, etc.] 
@@ -127,7 +125,7 @@ skim(iris) %>%
   select(skim_variable, skim_type, n_missing, complete_rate)
 ```
 
-`
+
 ```{r}
 # extract the mean and median with a prefix
 skim(iris) %>% 
@@ -159,7 +157,7 @@ skim(iris) %>%
 ```
 
 
-## Manipulating the results  {#manipulation}
+# Manipulating the results  {#manipulation}
 
 As noted above, `skim()` returns a wide data frame, an `skim_df` object. This is usually the most sensible format for the majority of operations when investigating data, and **skimr** also provides functions aimed at facilitating the exploratory process .  
 
@@ -210,7 +208,7 @@ iris %>%
   focus(n_missing, numeric.mean)
 ```
 
-## Customizing `skim()`  {#customization}
+# Customizing `skim()`  {#customization}
 
 We can create out own skimming function with the `skim_with()` function factory. To add a statistic for a data type, create an `sfl()` (a skimr function list) for each class that you want to change:  
 
@@ -245,7 +243,7 @@ It you want to customize `skim()` to support more data classes, [here](https://d
 
 
 
-## Skimming non-data frames  {#other}
+# Skimming non-data frames  {#other}
 
 In **skimr** [v2](https://github.com/ropensci/skimr/releases), `skim()` will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in as.data.frame().  
 
@@ -295,4 +293,4 @@ Transpose the matrix:
 skim(t(m))
 ```
 
-## References {#ref}
+# References {#ref}

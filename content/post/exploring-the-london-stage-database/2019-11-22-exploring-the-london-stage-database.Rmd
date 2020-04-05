@@ -1,30 +1,35 @@
 ---
 title: Exploring the London Stage Database
 author: Qiushi Yan
-date: '2019-11-22'
+date: '`r Sys.Date()`'
 slug: exploring-the-london-stage-database
-categories:
-  - R
-tags: []
-subtitle: ''
-summary: 'Data wranling, cleaning practice using the English Stage Database'
-authors: []
-lastmod: '2019-11-22T14:09:39+08:00'
-featured: no
+
+summary: 'A little playing with London Stage Database'
+lastmod: '2020-04-05T14:09:39+08:00'
+
+
 image:
-  caption: ''
+  placement: 2
+  caption: 'Photo by [Sid Ali](https://www.pexels.com/@sidali)'
   focal_point: ''
   preview_only: no
-projects: []
+
+draft: true
 ---
 
-```{r,message=F}
+```{r, echo = F}
+knitr::opts_chunk$set(message = F,fig.height = 10, 
+                      fig.asp = 1, cache = TRUE,
+                      comment = "#>", collapse = TRUE)
+```
+
+```{r}
 # setup
 library(tidyverse)
 library(jsonlite)
 ```
 
-```{r,cache=T}
+```{r, cache = T}
 # get the data
 london_stage <- fromJSON("D:/RProjects/data/LondonStageFull.json") %>% 
   as_tibble()

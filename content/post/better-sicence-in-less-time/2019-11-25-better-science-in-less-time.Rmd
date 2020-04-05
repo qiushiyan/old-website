@@ -3,8 +3,7 @@ title: Better science in less time
 author: Qiushi Yan
 date: '2019-11-25'
 slug: better-science-in-less-time
-categories:
-  - Reading Notes
+
 
 image:
   placement: 2
@@ -12,19 +11,23 @@ image:
   preview_only: true
   
 summary: 'Reading notes on "Our path to better science in less time using open data science tools" by the Ocean Health Index project'
-authors: []
 lastmod: '2019-11-25T08:23:18+08:00'
 bibliography: ../bib/better-science-in-less-time.bib
-biblio-style: apalike
 link-citations: yes
 ---
 
 
 The [Ocean Health Index project](http://www.oceanhealthindex.org)(OHI) provides a means to advance comprehensive ocean policy and compare future progress, with an aim of informing decisions about how to use or protect marine ecosystems, and promoting ongoing assessment of ocean health.  
 
-**"Our path to better science in less time using open data science tools"** [@lowndes2017our] describes how several free software tools have fundamentally upgraded OHI team's approach to collaborative research, and assist better science in less time.  
+**"Our path to better science in less time using open data science tools"** [@lowndes2017our] describes how several free software tools have fundamentally upgraded OHI team's approach to collaborative research, and assist better science in less time.   
 
-## Reproducibility challenges in environmental science
+```{r, echo = FALSE}
+source("../render_toc.R")
+render_toc("2019-11-25-better-science-in-less-time.Rmd")
+```
+
+
+# Reproducibility challenges in environmental science
 
 Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because "they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines".  
 
@@ -35,7 +38,7 @@ pace, with which comes wasted time struggling to create their own conventions fo
 
 
 
-## The happy transition  
+# The happy transition  
 
 ![](/img/ohi_transition.png)
 
@@ -52,7 +55,7 @@ Not surprisingly, team members struggled to efficienty repeat our own work durin
 
 However, in 2013 OHI team started to tackle with reproducibility, collaboration and communication, "with R and Rstudio for coding and visualization, Git for version control, GitHub for collaboration, and a combination of GitHub and Rstudio for organization, documentation, project management, online publishing, distribution and communication".  
 
-### Reproducibility  
+## Reproducibility  
 
 Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data[@wickham2014tidy], and grammar of data manipulation provided by dplyr[@R-dplyr] have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown[@R-rmarkdown], instead of plain text files.  
 
@@ -70,7 +73,7 @@ Scientific advancement comes from building off the past work of others. Only in 
 For version control, Git has consigned to history local folder with weird naming conventions. Rstudio plays a key role here by offering an simple interface with Git.   
 
 
-### Collaboration  
+## Collaboration  
 
 The OHI team transitioned from a team of distinct roles (scientists and programmer) to become a team with overlapping skill sets(data scientists). This transition has enable easier collaboration(i.e., to vet code as a team).  
 
@@ -78,7 +81,7 @@ GitHub is now central to OHI's collaboration workflow, an interesting report is 
 
 
 
-### Communication
+## Communication
 
 > Open data science tools have made us reimagine what communication can mean for science and management. They enable us to not only share our code online, but to create reports, ebooks, interactive web applications, and entire websites, which we can share for free to communicate our work.
 
@@ -96,4 +99,4 @@ Two critical barrier to embracing open science using efficient tools are brieved
 
 I really enjoy reading the last section, in which the author explained why open, transparent and reproducible science should be promoted and how to kickstart the rewarding learning path. The original line can be found at https://www.nature.com/articles/s41559-017-0160#Sec7.  
 
-## References
+# References

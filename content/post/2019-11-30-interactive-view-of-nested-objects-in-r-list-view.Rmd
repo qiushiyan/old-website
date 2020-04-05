@@ -2,38 +2,24 @@
 title: 'Interactive view of nested objects in R: {listviewer}'
 author: Qiushi Yan
 date: '2019-11-30'
-slug: interactive-view-of-nested-objects-in-r-list-viewer
-categories:
-  - R
-tags:
-  - JSON
-  - htmlwidgets
-  - visualization
-subtitle: ''
-summary: 'listviewer is a package of R htmlwidgets to interactively view and maybe modify lists'
-authors: []
+slug: interactive-view-of-nested-objects-list-viewer
+
+summary: '{listviewer} is a package of R htmlwidgets to interactively view and maybe modify lists'
+
 lastmod: '2019-11-30T14:04:22+08:00'
-featured: no
-bibliography: bib/listviewer.bib
-biblio-style: apalike
 link-citations: yes
-image:
-  caption: ''
-  focal_point: ''
-  preview_only: no
-projects: []
 ---
 
 
 Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a `SpatialPolygonsDataFrame` object  
 
-```{r,include=F}
-knitr::opts_chunk$set(message = F,warning = F,
+```{r, include = FALSE}
+knitr::opts_chunk$set(message = F, warning = F,
                       comment = "#>", collapse = TRUE)
 ```
 
 
-```{r,message=F,results="hide"}
+```{r, message = F}
 library(sf)
 ```
 

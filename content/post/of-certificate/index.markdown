@@ -3,11 +3,6 @@ title: Of Certificate
 author: Qiushi Yan
 date: '2019-11-21'
 slug: of-certificate
-categories:
-  - Random Thoughts
-tags:
-  - education
-subtitle: ''
 summary: "Do certificates necessarily enhance one's capabilities?"
 image:
   placement: 3

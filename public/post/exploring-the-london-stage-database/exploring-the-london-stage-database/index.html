@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Data wranling, cleaning practice using the English Stage Database">
+  <meta name="description" content="A little playing with London Stage Database">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/exploring-the-london-stage-database/exploring-the-london-stage-database/">
@@ -116,13 +116,13 @@
   <meta property="og:site_name" content="Qiushi Yan">
   <meta property="og:url" content="/post/exploring-the-london-stage-database/exploring-the-london-stage-database/">
   <meta property="og:title" content="Exploring the London Stage Database | Qiushi Yan">
-  <meta property="og:description" content="Data wranling, cleaning practice using the English Stage Database"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="A little playing with London Stage Database"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2019-11-22T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2020-04-05T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-11-22T14:09:39&#43;08:00">
+    <meta property="article:modified_time" content="2020-04-05T14:09:39&#43;08:00">
   
 
   
@@ -152,8 +152,8 @@
   },
   "headline": "Exploring the London Stage Database",
   
-  "datePublished": "2019-11-22T00:00:00Z",
-  "dateModified": "2019-11-22T14:09:39+08:00",
+  "datePublished": "2020-04-05T00:00:00Z",
+  "dateModified": "2020-04-05T14:09:39+08:00",
   
   "author": {
     "@type": "Person",
@@ -168,7 +168,7 @@
       "url": "/img/icon-512.png"
     }
   },
-  "description": "Data wranling, cleaning practice using the English Stage Database"
+  "description": "A little playing with London Stage Database"
 }
 </script>
 
@@ -405,7 +405,7 @@
           Last updated on
       
     
-    Nov 22, 2019
+    Apr 5, 2020
   </span>
   
 
@@ -426,10 +426,6 @@
   
 
   
-  
-  <span class="middot-divider"></span>
-  <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a></span>
   
 
 </div>
@@ -467,22 +463,22 @@ library(jsonlite)</code></pre>
 london_stage &lt;- fromJSON(&quot;D:/RProjects/data/LondonStageFull.json&quot;) %&gt;% 
   as_tibble()
 
-london_stage</code></pre>
-<pre><code>## # A tibble: 52,617 x 13
-##    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
-##    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt; 
-##  1 0       16591029  city        1659-~ 1      &quot;&quot;    &quot;The &lt;i~ 63        *p165~
-##  2 1       16591100  mt          1659-~ 1      &quot;&quot;    &quot;On 23 ~ 206       *p165~
-##  3 2       16591218  none        1659-~ 1      &quot;&quot;    &quot;Repres~ 1         *p165~
-##  4 3       16600200  mt          1659-~ 1      &quot;&quot;    &quot;6 Feb.~ 206       *p166~
-##  5 4       16600204  cockpit     1659-~ 1      &quot;&quot;    &quot;$Thoma~ 73        *p166~
-##  6 5       16600328  dh          1659-~ 1      &quot;&quot;    &quot;At &lt;i&gt;~ 90        *p166~
-##  7 6       16600406  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
-##  8 7       16600412  vh          1659-~ 1      &quot;&quot;    &quot;Editio~ 319       *p166~
-##  9 8       16600413  fh          1659-~ 1      &quot;&quot;    &quot;&lt;i&gt;The~ 116       *p166~
-## 10 9       16600416  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
-## # ... with 52,607 more rows, and 4 more variables: Phase1 &lt;chr&gt;,
-## #   CommentCClean &lt;chr&gt;, BookPDF &lt;chr&gt;, Performances &lt;list&gt;</code></pre>
+london_stage
+#&gt; # A tibble: 52,617 x 13
+#&gt;    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
+#&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt; 
+#&gt;  1 0       16591029  city        1659-~ 1      &quot;&quot;    &quot;The &lt;i~ 63        *p165~
+#&gt;  2 1       16591100  mt          1659-~ 1      &quot;&quot;    &quot;On 23 ~ 206       *p165~
+#&gt;  3 2       16591218  none        1659-~ 1      &quot;&quot;    &quot;Repres~ 1         *p165~
+#&gt;  4 3       16600200  mt          1659-~ 1      &quot;&quot;    &quot;6 Feb.~ 206       *p166~
+#&gt;  5 4       16600204  cockpit     1659-~ 1      &quot;&quot;    &quot;$Thoma~ 73        *p166~
+#&gt;  6 5       16600328  dh          1659-~ 1      &quot;&quot;    &quot;At &lt;i&gt;~ 90        *p166~
+#&gt;  7 6       16600406  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
+#&gt;  8 7       16600412  vh          1659-~ 1      &quot;&quot;    &quot;Editio~ 319       *p166~
+#&gt;  9 8       16600413  fh          1659-~ 1      &quot;&quot;    &quot;&lt;i&gt;The~ 116       *p166~
+#&gt; 10 9       16600416  none        1659-~ 1      &quot;&quot;    &quot;&quot;       1         *p166~
+#&gt; # ... with 52,607 more rows, and 4 more variables: Phase1 &lt;chr&gt;,
+#&gt; #   CommentCClean &lt;chr&gt;, BookPDF &lt;chr&gt;, Performances &lt;list&gt;</code></pre>
 <p>The <code>json</code> file can be downloaded at <a href="https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip" class="uri">https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip</a>.</p>
 
     </div>
@@ -695,15 +691,8 @@ london_stage</code></pre>
   
   
   <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/post/better-sicence-in-less-time/better-science-in-less-time/" rel="next">Better science in less time</a>
-  </div>
-  
-  
-  
-  <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/post/introduction-to-skimr/" rel="prev">Skimming through {skimr}</a>
+    <a href="/post/interactive-view-of-nested-objects-list-viewer/" rel="prev">Interactive view of nested objects in R: {listviewer}</a>
   </div>
   
 </div>

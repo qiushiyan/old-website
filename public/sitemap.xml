@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</loc>
+    <lastmod>2020-04-05T14:09:39+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-04-05T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-04-05T23:27:44+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/forecasting/</loc>
     <lastmod>2020-03-04T00:00:00+00:00</lastmod>
   </url>
@@ -10,11 +25,6 @@
   <url>
     <loc>/project/</loc>
     <lastmod>2020-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-04-05T21:38:24+08:00</lastmod>
   </url>
   
   <url>
@@ -38,37 +48,7 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-04-05T21:38:24+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/htmlwidgets/</loc>
-    <lastmod>2019-11-30T14:04:22+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/interactive-view-of-nested-objects-in-r-list-viewer/</loc>
-    <lastmod>2019-11-30T14:04:22+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/json/</loc>
-    <lastmod>2019-11-30T14:04:22+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-04-05T21:38:24+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2020-04-05T21:38:24+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/visualization/</loc>
+    <loc>/post/interactive-view-of-nested-objects-list-viewer/</loc>
     <lastmod>2019-11-30T14:04:22+08:00</lastmod>
   </url>
   
@@ -83,38 +63,23 @@
   </url>
   
   <url>
-    <loc>/categories/reading-notes/</loc>
-    <lastmod>2019-11-25T08:23:18+08:00</lastmod>
+    <loc>/post/intro-skimr/introduction-to-skimr/</loc>
+    <lastmod>2020-04-05T23:27:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</loc>
-    <lastmod>2019-11-22T14:09:39+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/introduction-to-skimr/</loc>
-    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/skimr/</loc>
-    <lastmod>2019-11-22T23:27:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/50-years-of-data-science/</loc>
+    <loc>/post/50-years/50-years-of-data-science/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-11-21T18:42:03+08:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/data-science/</loc>
     <lastmod>2019-11-21T18:42:03+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/education/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -138,8 +103,8 @@
   </url>
   
   <url>
-    <loc>/categories/random-thoughts/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
+    <loc>/categories/reading-notes/</loc>
+    <lastmod>2019-11-21T18:42:03+08:00</lastmod>
   </url>
   
   <url>
@@ -159,6 +124,11 @@
   
   <url>
     <loc>/project/tidy-text-mining/</loc>
+    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/visualization/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
   </url>
   

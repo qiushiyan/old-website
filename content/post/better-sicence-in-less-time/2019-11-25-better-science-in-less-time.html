@@ -3,8 +3,7 @@ title: Better science in less time
 author: Qiushi Yan
 date: '2019-11-25'
 slug: better-science-in-less-time
-categories:
-  - Reading Notes
+
 
 image:
   placement: 2
@@ -12,10 +11,8 @@ image:
   preview_only: true
   
 summary: 'Reading notes on "Our path to better science in less time using open data science tools" by the Ocean Health Index project'
-authors: []
 lastmod: '2019-11-25T08:23:18+08:00'
 bibliography: ../bib/better-science-in-less-time.bib
-biblio-style: apalike
 link-citations: yes
 ---
 
@@ -23,15 +20,25 @@ link-citations: yes
 
 <p>The <a href="http://www.oceanhealthindex.org">Ocean Health Index project</a>(OHI) provides a means to advance comprehensive ocean policy and compare future progress, with an aim of informing decisions about how to use or protect marine ecosystems, and promoting ongoing assessment of ocean health.</p>
 <p><strong>“Our path to better science in less time using open data science tools”</strong> <span class="citation">(Lowndes et al. <a href="#ref-lowndes2017our" role="doc-biblioref">2017</a>)</span> describes how several free software tools have fundamentally upgraded OHI team’s approach to collaborative research, and assist better science in less time.</p>
-<div id="reproducibility-challenges-in-environmental-science" class="section level2">
-<h2>Reproducibility challenges in environmental science</h2>
+<ul>
+<li><a href="#reproducibility-challenges-in-environmental-science">Reproducibility challenges in environmental science</a></li>
+<li><a href="#the-happy-transition-">The happy transition</a>
+<ul>
+<li><a href="#reproducibility-">Reproducibility</a></li>
+<li><a href="#collaboration-">Collaboration</a></li>
+<li><a href="#communication">Communication</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+<div id="reproducibility-challenges-in-environmental-science" class="section level1">
+<h1>Reproducibility challenges in environmental science</h1>
 <p>Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because “they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines”.</p>
 <p>For another, environmental scientists, perhaps more than ever, are eager to build trust in public. So that in recognition of their work, some people would be roused to action. However, proposed environmental solutions can be opaque, controversial and prohibitively costly either in financial or resource terms, increasing the need for scientists to work transparently, reproducibly and collaboratively with data.</p>
 <p>Without appropriate training, scientists tend to develop their own bespoke workarounds to keep
 pace, with which comes wasted time struggling to create their own conventions for managing, wrangling and versioning data. The OHI project experienced this sort of struggle first, and by borrowing philosophies, tools, and workflows primarily created for software development, they have dramatically improved work reproducibily, transparency and effectiveness in less time.</p>
 </div>
-<div id="the-happy-transition" class="section level2">
-<h2>The happy transition</h2>
+<div id="the-happy-transition" class="section level1">
+<h1>The happy transition</h1>
 <p><img src="/img/ohi_transition.png" /></p>
 <p>This figure shows an interesting transition of the OHI project from traditional methods to modern data science tools, and most importantly, with greater reproducibility and collaboration effectiveness. As they described:</p>
 <blockquote>
@@ -40,8 +47,8 @@ pace, with which comes wasted time struggling to create their own conventions fo
 <p>In OHI’s 2012 annual report, global assessments of 220 coastal nations and territories are presented. Data from nearly one hundred sources were <strong>prepared manually</strong> — that is, without coding, typically in Microsoft Excel—which included organizing, transforming, rescaling, gap filling and formatting data. Records of data processing, if any, are scattered. Members communicated and shared files frequently, with long, often forwarded and vaguely titled email chains.</p>
 <p>Not surprisingly, team members struggled to efficienty repeat our own work during the second assessment in 2013. And a 130-pages documentation just seems not sufficient.</p>
 <p>However, in 2013 OHI team started to tackle with reproducibility, collaboration and communication, “with R and Rstudio for coding and visualization, Git for version control, GitHub for collaboration, and a combination of GitHub and Rstudio for organization, documentation, project management, online publishing, distribution and communication”.</p>
-<div id="reproducibility" class="section level3">
-<h3>Reproducibility</h3>
+<div id="reproducibility" class="section level2">
+<h2>Reproducibility</h2>
 <p>Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data<span class="citation">(Wickham and others <a href="#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span>, and grammar of data manipulation provided by dplyr<span class="citation">(Wickham et al. <a href="#ref-R-dplyr" role="doc-biblioref">2019</a>)</span> have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown<span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown" role="doc-biblioref">2019</a>)</span>, instead of plain text files.</p>
 <p>Modeling practices are also unified and standardized in R, and the OHI framwork are incorporated in an R package <strong>ohicore</strong>, which can be downloaded in R via <code>devtools::install_github('ohi-science/ohicore')</code></p>
 <p><img src="/img/ohi.png" /></p>
@@ -51,13 +58,13 @@ Scientific advancement comes from building off the past work of others. Only in 
 {{% /alert %}}</p>
 <p>For version control, Git has consigned to history local folder with weird naming conventions. Rstudio plays a key role here by offering an simple interface with Git.</p>
 </div>
-<div id="collaboration" class="section level3">
-<h3>Collaboration</h3>
+<div id="collaboration" class="section level2">
+<h2>Collaboration</h2>
 <p>The OHI team transitioned from a team of distinct roles (scientists and programmer) to become a team with overlapping skill sets(data scientists). This transition has enable easier collaboration(i.e., to vet code as a team).</p>
 <p>GitHub is now central to OHI’s collaboration workflow, an interesting report is that the team uses the <em>“Issues”</em> feature to record discussions, decisions, collect feedbacks. Compared to email, team members can communicate directly by linking to specific lins of code in any branch of a repo. Conversations are open to all, and <code>@</code> can be readily used when assigning tasks.</p>
 </div>
-<div id="communication" class="section level3">
-<h3>Communication</h3>
+<div id="communication" class="section level2">
+<h2>Communication</h2>
 <blockquote>
 <p>Open data science tools have made us reimagine what communication can mean for science and management. They enable us to not only share our code online, but to create reports, ebooks, interactive web applications, and entire websites, which we can share for free to communicate our work.</p>
 </blockquote>
@@ -73,8 +80,8 @@ Scientific advancement comes from building off the past work of others. Only in 
 <p>I really enjoy reading the last section, in which the author explained why open, transparent and reproducible science should be promoted and how to kickstart the rewarding learning path. The original line can be found at <a href="https://www.nature.com/articles/s41559-017-0160#Sec7" class="uri">https://www.nature.com/articles/s41559-017-0160#Sec7</a>.</p>
 </div>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2>References</h2>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
 <div id="refs" class="references">
 <div id="ref-R-rmarkdown">
 <p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.</p>

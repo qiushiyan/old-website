@@ -7,7 +7,7 @@
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Wed, 04 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.jpg</url>
+      <url>/img/icon-192.png</url>
       <title>R</title>
       <link>/tags/r/</link>
     </image>
@@ -18,89 +18,6 @@
       <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/project/fpp/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Better science in less time</title>
-      <link>/post/better-sicence-in-less-time/better-science-in-less-time/</link>
-      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/better-sicence-in-less-time/better-science-in-less-time/</guid>
-      <description>
-
-
-&lt;p&gt;The &lt;a href=&#34;http://www.oceanhealthindex.org&#34;&gt;Ocean Health Index project&lt;/a&gt;(OHI) provides a means to advance comprehensive ocean policy and compare future progress, with an aim of informing decisions about how to use or protect marine ecosystems, and promoting ongoing assessment of ocean health.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;“Our path to better science in less time using open data science tools”&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Lowndes et al. &lt;a href=&#34;#ref-lowndes2017our&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; describes how several free software tools have fundamentally upgraded OHI team’s approach to collaborative research, and assist better science in less time.&lt;/p&gt;
-&lt;div id=&#34;reproducibility-challenges-in-environmental-science&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Reproducibility challenges in environmental science&lt;/h2&gt;
-&lt;p&gt;Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because “they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines”.&lt;/p&gt;
-&lt;p&gt;For another, environmental scientists, perhaps more than ever, are eager to build trust in public. So that in recognition of their work, some people would be roused to action. However, proposed environmental solutions can be opaque, controversial and prohibitively costly either in financial or resource terms, increasing the need for scientists to work transparently, reproducibly and collaboratively with data.&lt;/p&gt;
-&lt;p&gt;Without appropriate training, scientists tend to develop their own bespoke workarounds to keep
-pace, with which comes wasted time struggling to create their own conventions for managing, wrangling and versioning data. The OHI project experienced this sort of struggle first, and by borrowing philosophies, tools, and workflows primarily created for software development, they have dramatically improved work reproducibily, transparency and effectiveness in less time.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;the-happy-transition&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;The happy transition&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ohi_transition.png&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;This figure shows an interesting transition of the OHI project from traditional methods to modern data science tools, and most importantly, with greater reproducibility and collaboration effectiveness. As they described:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The original assessment in 2012 focused solely on scientific methods (for example, obtaining and analysing data, developing models, calculating, and presenting results; dark shading). In 2013, by necessity we gave more focus to data science (for example, data organization and wrangling, coding, versioning, and documentation; light shading), using open data science tools. We established R as the main language for all data preparation and modelling (using RStudio), which drastically decreased the time involved to complete the assessment. In 2014, we adopted Git and GitHub for version control, project management, and collaboration. This further decreased the time required to repeat the assessment. We also created the OHI Toolbox, which includes our R package ohicore for core analytical operations used in all OHI assessments. In subsequent years we have continued (and plan to continue) this trajectory towards better science in less time by improving code with principles of tidy data ; standardizing file and data structure; and focusing more on communication, in part by creating websites with the same open data science tools and workflow.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In OHI’s 2012 annual report, global assessments of 220 coastal nations and territories are presented. Data from nearly one hundred sources were &lt;strong&gt;prepared manually&lt;/strong&gt; — that is, without coding, typically in Microsoft Excel—which included organizing, transforming, rescaling, gap filling and formatting data. Records of data processing, if any, are scattered. Members communicated and shared files frequently, with long, often forwarded and vaguely titled email chains.&lt;/p&gt;
-&lt;p&gt;Not surprisingly, team members struggled to efficienty repeat our own work during the second assessment in 2013. And a 130-pages documentation just seems not sufficient.&lt;/p&gt;
-&lt;p&gt;However, in 2013 OHI team started to tackle with reproducibility, collaboration and communication, “with R and Rstudio for coding and visualization, Git for version control, GitHub for collaboration, and a combination of GitHub and Rstudio for organization, documentation, project management, online publishing, distribution and communication”.&lt;/p&gt;
-&lt;div id=&#34;reproducibility&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Reproducibility&lt;/h3&gt;
-&lt;p&gt;Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data&lt;span class=&#34;citation&#34;&gt;(Wickham and others &lt;a href=&#34;#ref-wickham2014tidy&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt;, and grammar of data manipulation provided by dplyr&lt;span class=&#34;citation&#34;&gt;(Wickham et al. &lt;a href=&#34;#ref-R-dplyr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown&lt;span class=&#34;citation&#34;&gt;(Allaire et al. &lt;a href=&#34;#ref-R-rmarkdown&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;, instead of plain text files.&lt;/p&gt;
-&lt;p&gt;Modeling practices are also unified and standardized in R, and the OHI framwork are incorporated in an R package &lt;strong&gt;ohicore&lt;/strong&gt;, which can be downloaded in R via &lt;code&gt;devtools::install_github(&#39;ohi-science/ohicore&#39;)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ohi.png&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Of all things that &lt;strong&gt;ohicore&lt;/strong&gt; package has to offer, most seminal is that it has made self-made OHI assessment possible without recreating the wheel. There are currently two dozen OHI assessments underway, most of which are led by independent groups.&lt;/p&gt;
-&lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Scientific advancement comes from building off the past work of others. Only in an growing, accomodating community could modern science thrive.&lt;!-- raw HTML omitted --&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;/p&gt;
-&lt;p&gt;For version control, Git has consigned to history local folder with weird naming conventions. Rstudio plays a key role here by offering an simple interface with Git.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;collaboration&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Collaboration&lt;/h3&gt;
-&lt;p&gt;The OHI team transitioned from a team of distinct roles (scientists and programmer) to become a team with overlapping skill sets(data scientists). This transition has enable easier collaboration(i.e., to vet code as a team).&lt;/p&gt;
-&lt;p&gt;GitHub is now central to OHI’s collaboration workflow, an interesting report is that the team uses the &lt;em&gt;“Issues”&lt;/em&gt; feature to record discussions, decisions, collect feedbacks. Compared to email, team members can communicate directly by linking to specific lins of code in any branch of a repo. Conversations are open to all, and &lt;code&gt;@&lt;/code&gt; can be readily used when assigning tasks.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;communication&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Communication&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Open data science tools have made us reimagine what communication can mean for science and management. They enable us to not only share our code online, but to create reports, ebooks, interactive web applications, and entire websites, which we can share for free to communicate our work.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Code from the OHI project can be browsed at &lt;a href=&#34;https://github.com/ohi-science&#34; class=&#34;uri&#34;&gt;https://github.com/ohi-science&lt;/a&gt; and official website at &lt;a href=&#34;https://ohi-science.org/&#34; class=&#34;uri&#34;&gt;https://ohi-science.org/&lt;/a&gt;. A training book (also authored by OHI tema) about open data science with R can be found at &lt;a href=&#34;http://ohi-science.org/data-science-training/&#34; class=&#34;uri&#34;&gt;http://ohi-science.org/data-science-training/&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Communication outside the project (result publishing) are also part of the Rstudio-github workflow, saving scientists from copying and pasting code, figures and text. Thus, the website provides scientific methods, publications, data, and code, as well as instruction, news, and blog posts.&lt;/p&gt;
-&lt;p&gt;Ecologists and environmental scientists arguably have a heightened responsibility for transparency and openness, as data products provide important snapshots of systems that may be forever altered due to climate change and other human pressures 16,18 . There is particular urgency for efficiency and transparency, as well as opportunity to democratize science in fields that operate at the interface of science and policy.&lt;/p&gt;
-&lt;p&gt;Two critical barrier to embracing open science using efficient tools are brieved in the last section of this paper:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;knowing which tools exist that can be directly useful to one’s research&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;having the confidence to develop the skills to use them&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I really enjoy reading the last section, in which the author explained why open, transparent and reproducible science should be promoted and how to kickstart the rewarding learning path. The original line can be found at &lt;a href=&#34;https://www.nature.com/articles/s41559-017-0160#Sec7&#34; class=&#34;uri&#34;&gt;https://www.nature.com/articles/s41559-017-0160#Sec7&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
-&lt;h2&gt;References&lt;/h2&gt;
-&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
-&lt;div id=&#34;ref-R-rmarkdown&#34;&gt;
-&lt;p&gt;Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. &lt;em&gt;Rmarkdown: Dynamic Documents for R&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=rmarkdown&#34;&gt;https://CRAN.R-project.org/package=rmarkdown&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-lowndes2017our&#34;&gt;
-&lt;p&gt;Lowndes, Julia S Stewart, Benjamin D Best, Courtney Scarborough, Jamie C Afflerbach, Melanie R Frazier, Casey C O’Hara, Ning Jiang, and Benjamin S Halpern. 2017. “Our Path to Better Science in Less Time Using Open Data Science Tools.” &lt;em&gt;Nature Ecology &amp;amp; Evolution&lt;/em&gt; 1 (6): 0160.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-R-dplyr&#34;&gt;
-&lt;p&gt;Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. &lt;em&gt;Dplyr: A Grammar of Data Manipulation&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=dplyr&#34;&gt;https://CRAN.R-project.org/package=dplyr&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-wickham2014tidy&#34;&gt;
-&lt;p&gt;Wickham, Hadley, and others. 2014. “Tidy Data.” &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 59 (10): 1–23.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
     </item>
     
     <item>

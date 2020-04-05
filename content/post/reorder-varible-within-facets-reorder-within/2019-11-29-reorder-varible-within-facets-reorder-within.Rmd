@@ -5,21 +5,17 @@ date: '2019-11-29'
 slug: reorder-varible-within-facets-reorder-within
 categories:
   - R
-tags:
-  - ggplot2
-subtitle: ''
-summary: ''
-authors: []
-lastmod: '2019-11-29T21:38:24+08:00'
-featured: no
-bibliography: bib/reorder-within.bib
+
+image:
+  placement: 2
+  focal_point: ""
+  preview_only: true
+
+summary: '{ggetxt} provides graphing helpers to reorder an x or y axis within facets.'
+lastmod: '2020-04-05T21:38:24+08:00'
+bibliography: ../bib/reorder-within.bib
 biblio-style: apalike
 link-citations: yes
-image:
-  caption: ''
-  focal_point: ''
-  preview_only: no
-projects: []
 ---
 
 This blog post is inspired by Julia Silge's [

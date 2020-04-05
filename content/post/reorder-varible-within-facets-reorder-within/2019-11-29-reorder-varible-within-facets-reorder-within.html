@@ -5,21 +5,17 @@ date: '2019-11-29'
 slug: reorder-varible-within-facets-reorder-within
 categories:
   - R
-tags:
-  - ggplot2
-subtitle: ''
-summary: ''
-authors: []
-lastmod: '2019-11-29T21:38:24+08:00'
-featured: no
-bibliography: bib/reorder-within.bib
+
+image:
+  placement: 2
+  focal_point: ""
+  preview_only: true
+
+summary: '{ggetxt} provides graphing helpers to reorder an x or y axis within facets.'
+lastmod: '2020-04-05T21:38:24+08:00'
+bibliography: ../bib/reorder-within.bib
 biblio-style: apalike
 link-citations: yes
-image:
-  caption: ''
-  focal_point: ''
-  preview_only: no
-projects: []
 ---
 
 
@@ -85,7 +81,7 @@ common_words %&gt;%
         axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>In its default setting, <strong>ggplot2</strong> puts the names in alphabetical order, because they are of type character. One common solution is to use <code>fct_reorder()</code> or its equivalent <code>reorder()</code> in baes R`:</p>
 <pre class="r"><code>common_words %&gt;% 
   ggplot(aes(fct_reorder(word, n), n, fill = book)) +
@@ -97,7 +93,7 @@ common_words %&gt;%
         axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, <code>fct_reorder()</code> or <code>reorder</code> only reorder all of these together, meaning that <code>word</code> are reordered in an overall level so that it cannot guarantee order in any specific subset of data.</p>
 </div>
 <div id="reorder_within-and-scale_x_reordered" class="section level2">
@@ -124,7 +120,7 @@ common_words %&gt;%
   labs(title = &quot;What are the most common words in Jane Austen&#39;s books?&quot;,
        x = NULL,
        y = NULL)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Without using <code>scale_x_reordered</code> to overide ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, which make its label way too long. Here is an simple example using the <a href="https://github.com/hadley/babynames">babynames</a> data:</p>
 <pre class="r"><code>library(babynames)</code></pre>
 <pre class="r"><code>top_names &lt;- babynames %&gt;% 
@@ -143,7 +139,7 @@ top_names %&gt;%
   facet_wrap(~ decade, scales = &quot;free_y&quot;) + 
   theme(legend.position = &quot;none&quot;) + 
   labs(x = NULL, y = NULL)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>

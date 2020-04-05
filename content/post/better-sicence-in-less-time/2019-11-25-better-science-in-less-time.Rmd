@@ -5,10 +5,12 @@ date: '2019-11-25'
 slug: better-science-in-less-time
 categories:
   - Reading Notes
-tags:
-  - R
-  - GitHub
-  - Git
+
+image:
+  placement: 2
+  focal_point: ""
+  preview_only: true
+  
 summary: 'Reading notes on "Our path to better science in less time using open data science tools" by the Ocean Health Index project'
 authors: []
 lastmod: '2019-11-25T08:23:18+08:00'

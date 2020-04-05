@@ -48,7 +48,7 @@ description = "A personal blog of Qiushi Yan about life and #rstats"
 
 # Display a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
-logo = "logo.jpg"
+logo = ""
 
 ############################
 ## Site Features
@@ -78,7 +78,7 @@ privacy_pack = false
 
 # Enable visitors to edit pages?
 #   `repo` defines the repository URL. `editable` defines which page types can be edited.
-edit_page = {repo_url = "https://github.com/enixam/qiushi.rbind.com", repo_branch = "master", editable = {docs = true, page = false, post = false}}
+edit_page = {repo_url = "https://github.com/enixam/qiushi.rbind.io", repo_branch = "master", editable = {docs = true, page = false, post = false}}
 
 ############################
 ## Contact details

@@ -5,15 +5,17 @@ name = "qiushi"
 light = true
 
 # Primary
-primary = "#A8D0E6"
+primary = "#328cc1"
+primary_light = "#328cc1"
+primary_dark = "#DA2536"
 
 # Menu
-menu_primary = "#fbf9f4"
-menu_text = "#333"
-menu_text_active = "#d03b39"
-menu_title = "#333"
+menu_primary = "#494949"
+menu_text = "#fff"
+menu_text_active = "#fbf9f4"
+menu_title = "#fff"
 
 # Backgrounds
-background = "#DEF2F1"
-home_section_odd = "#DEF2F1"
-home_section_even = "#DEF2F1"
+background = "#fff"
+home_section_odd = "#fff"
+home_section_even = "#f7f7f7"

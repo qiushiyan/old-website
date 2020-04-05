@@ -66,3 +66,5 @@ subtitle = ""
  # CSS class.
  css_class = ""
 +++
+
+I maily post about R-related things and minimal data analysis projects, see all posts [here](/post)

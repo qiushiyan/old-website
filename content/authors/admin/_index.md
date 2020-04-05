@@ -6,7 +6,7 @@ education:
   courses:
   - course: BA in Data Journalism
     institution: Communication University of China
-    year: 2021(expected)
+    year: 2021 (expected)
 email: "565702994@qq.com"
 interests:
 - R, Statistics, Visualization
@@ -32,5 +32,5 @@ user_groups:
 
 I'm currently a junior majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in #rstats, especially when harnessing the magic of [tidyverse](https://www.tidyverse.org)! 
 
-I take equal delight in the study of ancient chinese literature, behavioural sicence, nueroscience and economics. My favourite author is Bertrand Russell :black_nib: . 
+I take equal delight in the study of ancient chinese literature, behavioural sicence, nueroscience and economics. My favourite author is Bertrand Russell.:black_nib: 
 

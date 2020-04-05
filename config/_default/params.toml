@@ -22,7 +22,7 @@ font = "qiushi"
 
 # Choose a font size.
 # Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
-font_size = "M"
+font_size = "L"
 
 ############################
 ## Basic Info
@@ -48,7 +48,7 @@ description = "A personal blog of Qiushi Yan about life and #rstats"
 
 # Display a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
-logo = ""
+logo = "logo.jpg"
 
 ############################
 ## Site Features

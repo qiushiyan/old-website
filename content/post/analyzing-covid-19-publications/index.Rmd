@@ -128,7 +128,7 @@ tidy(topic_model) %>%
   facet_wrap(~ topic, scales = "free_y", nrow = 3) + 
   labs(y = NULL,
        x = "Docuemtn-term probabilities",
-       title = "A 6-topic LDA model on abstract") + 
+       title = "A 6-topic LDA model") + 
   theme(plot.title.position = "plot",
         axis.ticks.y = element_blank())
 ```

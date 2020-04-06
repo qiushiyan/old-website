@@ -196,7 +196,7 @@ tidy(topic_model) %&amp;gt;%
   facet_wrap(~ topic, scales = &amp;quot;free_y&amp;quot;, nrow = 3) + 
   labs(y = NULL,
        x = &amp;quot;Docuemtn-term probabilities&amp;quot;,
-       title = &amp;quot;A 6-topic LDA model on abstract&amp;quot;) + 
+       title = &amp;quot;A 6-topic LDA model&amp;quot;) + 
   theme(plot.title.position = &amp;quot;plot&amp;quot;,
         axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
@@ -257,7 +257,7 @@ word_cors %&amp;gt;%
     </item>
     
     <item>
-      <title>Interactive view of nested objects in R: {listviewer}</title>
+      <title>Interactive view of nested objects in R</title>
       <link>/post/listviewer/view-of-nested-objects-listviewer/</link>
       <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/post/listviewer/view-of-nested-objects-listviewer/</guid>

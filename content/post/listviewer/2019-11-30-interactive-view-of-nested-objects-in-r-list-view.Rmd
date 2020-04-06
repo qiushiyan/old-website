@@ -1,5 +1,5 @@
 ---
-title: 'Interactive view of nested objects in R: {listviewer}'
+title: 'Interactive view of nested objects in R'
 author: Qiushi Yan
 date: '2019-11-30'
 slug: view-of-nested-objects-listviewer

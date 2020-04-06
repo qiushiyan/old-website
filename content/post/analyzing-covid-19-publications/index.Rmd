@@ -1,18 +1,169 @@
 ---
-title: Analyzing Covid 19 Publications
+title: Analyzing COVID-19 Publications
 author: Qiushi Yan
 date: '2020-04-06'
 slug: [analyzing-covid19-publications]
-summary: 'I performed a simple text analysis on the abstract of covid19 publications.'
+summary: 'A simple text analysis on the abstract of up-to-date COVID-19 publications.'
 lastmod: '2020-04-06T12:54:24+08:00'
 featured: no
 bibliography: ../bib/covid19.bib
 link-citations: yes
 image:
-  placement: 1
   caption: 'Image by [cottonbro](https://www.pexels.com/@cottonbro)'
   focal_point: ''
   preview_only: no
 
-draft: true
 ---
+
+
+In this post, I will be performing a simple text analysis on the abstract of publications on the coronavirus disease (COVID-19), courtesy of [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/global-research-on-novel-coronavirus-2019-ncov). We begin by steps of data preprocessing.  
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE,
+                      comment = "#>", collapse = TRUE,
+                      cache = TRUE)
+```
+
+
+# Data preprocessing
+
+```{r}
+library(tidyverse)
+library(showtext)
+font_add_google("Fira Sans")
+showtext_auto()
+theme_set(theme_light(base_family = "Fira Sans",
+                      base_size = 18))
+
+
+raw <- read_csv("covid-research.csv") %>% 
+  janitor::clean_names() 
+
+glimpse(raw)
+```
+
+For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on `abstract`. I was a little disappointied to find out that `published_month` are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English, I find this function `stringi::stri_enc_isascii` in an attempt to filter out non-English text, although this will not rid the text of German, French, Italian and other similar languages. I deleted some of them manually in the next step by expanding stop words. But this still left much room for improvement. Anyway, let's move on for now.
+```{r}
+df <- raw %>%
+  filter(!is.na(abstract),
+         stringi::stri_enc_isascii(abstract)) %>% 
+  select(title, abstract)
+```
+
+As illuatrated in [Text Mining with R](https://www.tidytextmining.com), text analysis commonly requires preprocessing steps like tokenizing, eliminating stop words and word stemming. A little problem is that `unnest_tokens()` recognize "covid" and "19" as two separated words, so I just add "19" to my custom stop words list. As a result, we have to bear in mind that most "covid" seen below is actually "covid19".  
+
+```{r}
+library(tidytext)
+library(SnowballC)
+
+words <- df %>% 
+  unnest_tokens(word, abstract) %>% 
+  mutate(word = wordStem(word)) %>% 
+  anti_join(stop_words %>% 
+              add_row(word = c("19", "2", "1", "manag", "dai", "studi", "epidem", "includ", "coronaviru", "diseas", "emetin", "dai", "acut", "dub", "hospit", "hfnc", "caus", "develop", "thi"), 
+                      lexicon = "custom")) 
+
+words
+```
+
+
+# Common words and keywords extraction  
+
+An immediate question is, what are the most common words among all these publications?  
+
+```{r, fig.height = 18, fig.width = 12}
+words %>% 
+  count(word, sort = TRUE) %>%
+  top_n(50) %>%
+  ggplot(aes(y = fct_reorder(word, n),
+             x = n)) + 
+  geom_col() + 
+  scale_x_continuous(expand = c(0.01, 0)) + 
+  labs(y = NULL,
+       x = "word counts",
+       title = "Top 50 common words in COVID-19 publications") 
+```
+
+I'm also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by @monroe_colaresi_quinn, which a standardized metric from a complete statistical model. It is also implemented in the R package [`tidylo`](https://github.com/juliasilge/tidylo)[@tidylo]. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:  
+
+```{r}
+library(tidylo)
+words %>%
+  count(title, word) %>% 
+  bind_log_odds(set = title, feature = word, n = n) %>%
+  top_n(20)
+```
+
+# Fit a LDA model  
+
+Let's then fit a 5-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using `cast_dtm`. There are various implementations of this kind of model, here I use `topicmodels::LDA()`.    
+
+```{r}
+dtm <- cast_dtm(words %>% count(title, word),
+                term = word,
+                document = title,
+                value = n)
+
+library(topicmodels)
+topic_model <- LDA(dtm, k = 6, method = "Gibbs")
+```
+
+
+Topic-term distributions are accessed by `tidy()`, this gives a glance of the underlying meanin of these topics:
+```{r, fig.height = 12, fig.width = 12}
+# topic-term distribution
+tidy(topic_model) %>% 
+  group_by(topic) %>% 
+  top_n(10) %>% 
+  ungroup() %>%
+  mutate(topic = factor(topic) %>% str_c("topic", .)) %>% 
+  ggplot(aes(y = reorder_within(term, beta, topic),
+         x = beta,
+         fill = topic)) + 
+  geom_col(show.legend = FALSE) + 
+  scale_y_reordered() + 
+  facet_wrap(~ topic, scales = "free_y", nrow = 3) + 
+  labs(y = NULL,
+       x = "Docuemtn-term probabilities",
+       title = "A 6-topic LDA model on abstract")
+```
+
+
+
+# A network of paired words  
+
+Another question of interest is the relationship between words: what group of words tend to appear together? I look at the [phi coefficient](https://en.wikipedia.org/wiki/Phi_coefficient), which is essentailly $\chi^2$ statistc in a contingency table applied to categorical variables.  
+
+As each abstract is a natual unit of measure, a pair of words that both appear in the same abstract are seen as "appearing together". We could compute $\phi$ based on pairwise counts:
+
+```{r}
+library(widyr)
+
+word_cors <- words %>% 
+  add_count(word) %>% 
+  filter(n > 20) %>%
+  select(-n) %>%
+  pairwise_cor(item = word, feature = title, sort = TRUE)
+
+word_cors
+```
+
+A network visualization of word correlation is a good idea:  
+
+```{r, fig.width = 12, fig.height = 12}
+library(ggraph)
+library(tidygraph)
+
+word_cors %>% 
+  filter(correlation > 0.4) %>% 
+  as_tbl_graph() %>% 
+  ggraph(layout = "fr") + 
+  geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
+  geom_node_point(color = "lightblue", size = 5.5) + 
+  geom_node_text(aes(label = name), repel = TRUE)
+```
+
+As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle... Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.  
+
+# References

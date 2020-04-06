@@ -4,11 +4,6 @@ author: Qiushi Yan
 date: '2019-11-25'
 slug: better-science-in-less-time
 
-
-image:
-  placement: 2
-  focal_point: ""
-  preview_only: true
   
 summary: 'Reading notes on "Our path to better science in less time using open data science tools" by the Ocean Health Index project'
 lastmod: '2019-11-25T08:23:18+08:00'
@@ -21,10 +16,6 @@ The [Ocean Health Index project](http://www.oceanhealthindex.org)(OHI) provides 
 
 **"Our path to better science in less time using open data science tools"** [@lowndes2017our] describes how several free software tools have fundamentally upgraded OHI team's approach to collaborative research, and assist better science in less time.   
 
-```{r, echo = FALSE}
-source("../render_toc.R")
-render_toc("2019-11-25-better-science-in-less-time.Rmd")
-```
 
 
 # Reproducibility challenges in environmental science

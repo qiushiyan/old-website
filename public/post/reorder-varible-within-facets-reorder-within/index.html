@@ -28,8 +28,7 @@
   
     
   
-  <meta name="description" content="This blog post is inspired by Julia Silge’s Reordering and facetting for ggplot2. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.
-Most common words in Jane Austen’s booksHere is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets.">
+  <meta name="description" content="{ggetxt} provides convenient yet less-recognized graphing helpers to reorder an x or y axis within facets.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/reorder-varible-within-facets-reorder-within/">
@@ -76,7 +75,7 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface%7CCutive+Mono%7CJosefin+Slab:300,400,600,700%7COpen+Sans:400,600,700,800%7CRaleway:300,400,500,600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CRoboto+Mono&display=swap">
   
 
   
@@ -106,25 +105,23 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary">
+  <meta property="twitter:card" content="summary_large_image">
   
   <meta property="twitter:site" content="@qiushizzzz">
   <meta property="twitter:creator" content="@qiushizzzz">
   
   <meta property="og:site_name" content="Qiushi Yan">
   <meta property="og:url" content="/post/reorder-varible-within-facets-reorder-within/">
-  <meta property="og:title" content="Reorder within facets: reorder_within | Qiushi Yan">
-  <meta property="og:description" content="This blog post is inspired by Julia Silge’s Reordering and facetting for ggplot2. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.
-Most common words in Jane Austen’s booksHere is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets."><meta property="og:image" content="/img/logo.jpg">
-  <meta property="twitter:image" content="/img/logo.jpg"><meta property="og:locale" content="en-us">
+  <meta property="og:title" content="Reordering within facets | Qiushi Yan">
+  <meta property="og:description" content="{ggetxt} provides convenient yet less-recognized graphing helpers to reorder an x or y axis within facets."><meta property="og:image" content="/post/reorder-varible-within-facets-reorder-within/featured.jpg">
+  <meta property="twitter:image" content="/post/reorder-varible-within-facets-reorder-within/featured.jpg"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2019-11-29T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-11-29T21:38:24&#43;08:00">
+    <meta property="article:modified_time" content="2020-04-05T21:38:24&#43;08:00">
   
 
   
@@ -152,10 +149,14 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
     "@type": "WebPage",
     "@id": "/post/reorder-varible-within-facets-reorder-within/"
   },
-  "headline": "Reorder within facets: reorder_within",
+  "headline": "Reordering within facets",
+  
+  "image": [
+    "/post/reorder-varible-within-facets-reorder-within/featured.jpg"
+  ],
   
   "datePublished": "2019-11-29T00:00:00Z",
-  "dateModified": "2019-11-29T21:38:24+08:00",
+  "dateModified": "2020-04-05T21:38:24+08:00",
   
   "author": {
     "@type": "Person",
@@ -167,10 +168,10 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
     "name": "Qiushi Yan",
     "logo": {
       "@type": "ImageObject",
-      "url": "/img/logo.jpg"
+      "url": "/img/icon-512.png"
     }
   },
-  "description": "This blog post is inspired by Julia Silge’s Reordering and facetting for ggplot2. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.\nMost common words in Jane Austen’s books\rHere is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets."
+  "description": "{ggetxt} provides convenient yet less-recognized graphing helpers to reorder an x or y axis within facets."
 }
 </script>
 
@@ -188,7 +189,7 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
 
 
 
-  <title>Reorder within facets: reorder_within | Qiushi Yan</title>
+  <title>Reordering within facets | Qiushi Yan</title>
 
 </head>
 
@@ -233,7 +234,7 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
     
     
     
-      <a class="navbar-brand" href="/"><img src="/img/logo.jpg" alt="Qiushi Yan"></a>
+      <a class="navbar-brand" href="/">Qiushi Yan</a>
     
 
     
@@ -386,7 +387,7 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
   
   
 <div class="article-container pt-3">
-  <h1>Reorder within facets: reorder_within</h1>
+  <h1>Reordering within facets</h1>
 
   
 
@@ -407,7 +408,7 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
           Last updated on
       
     
-    Nov 29, 2019
+    Apr 5, 2020
   </span>
   
 
@@ -428,10 +429,6 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
   
 
   
-  
-  <span class="middot-divider"></span>
-  <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a></span>
   
 
 </div>
@@ -461,15 +458,23 @@ Most common words in Jane Austen’s booksHere is a simple task: we want to fin
     <div class="article-style">
       
 
+<div id="TOC">
+<ul>
+<li><a href="#common-words-in-jane-austens-books">Common words in Jane Austen’s books</a></li>
+<li><a href="#helper-functions-for-reordering">Helper functions for reordering</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
 
 <p>This blog post is inspired by Julia Silge’s <a href="https://juliasilge.com/blog/reorder-within/">Reordering and facetting for ggplot2</a>. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.</p>
-<div id="most-common-words-in-jane-austens-books" class="section level2">
-<h2>Most common words in Jane Austen’s books</h2>
+<div id="common-words-in-jane-austens-books" class="section level1">
+<h1>Common words in Jane Austen’s books</h1>
 <p>Here is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets.</p>
-<pre class="r"><code># load package
-library(tidyverse)
+<pre class="r"><code>library(tidyverse)
 library(tidytext)
-library(janeaustenr)</code></pre>
+library(janeaustenr)
+
+theme_set(theme_light())</code></pre>
 <pre class="r"><code>austen_books()
 #&gt; # A tibble: 73,422 x 2
 #&gt;    text                    book               
@@ -485,8 +490,8 @@ library(janeaustenr)</code></pre>
 #&gt;  9 &quot;&quot;                      Sense &amp; Sensibility
 #&gt; 10 &quot;CHAPTER 1&quot;             Sense &amp; Sensibility
 #&gt; # ... with 73,412 more rows</code></pre>
-<p>Note that the raw data generated by calling <code>austen_books()</code>, provided in the <strong>janeaustenr</strong> package <span class="citation">(Silge <a href="#ref-R-janeaustenr" role="doc-biblioref">2017</a>)</span>, is not in its most sensible format for analysis. Since each row is made up of multiple combined words.</p>
-<p>Here we use <code>unnest_tokens</code> from the <strong>tidytext</strong> package <span class="citation">(Robinson and Silge <a href="#ref-R-tidytext" role="doc-biblioref">2019</a>)</span> to break the text into individual tokens and transform it into a tidy structure:</p>
+<p>Note that the raw data generated by calling <code>austen_books()</code>, provided in the <code>janeaustenr</code> package <span class="citation">(Silge <a href="#ref-R-janeaustenr" role="doc-biblioref">2017</a>)</span>, is not in its most sensible format for analysis. Since each row is made up of multiple combined words.</p>
+<p>Here we use <code>unnest_tokens</code> from the `tidytext package <span class="citation">(Robinson and Silge <a href="#ref-R-tidytext" role="doc-biblioref">2019</a>)</span> to break the text into individual tokens and transform it into a tidy structure:</p>
 <pre class="r"><code># calculate 10 most common words in each book
 common_words &lt;- austen_books() %&gt;%
   unnest_tokens(word, text) %&gt;% 
@@ -512,58 +517,60 @@ common_words &lt;- austen_books() %&gt;%
 #&gt; 10 Sense &amp; Sensibility willoughby   181
 #&gt; # ... with 50 more rows</code></pre>
 <p>For details many and other useful text mining techniques in R, I recommend reading <a href="Text%20Mining%20with%20R:%20A%20tidy%20approach">Text mining with R: A tidy approach</a> by Julia Silge and David Robinson<span class="citation">(<a href="#ref-silge2017text" role="doc-biblioref">2017</a>)</span>.</p>
-<pre class="r"><code># plot
+<pre class="r"><code># plot common words
 common_words %&gt;% 
-  ggplot(aes(word, n, fill = book)) +
+  ggplot(aes(y = word, 
+             x = n, 
+             fill = book)) +
   geom_col() + 
-  coord_flip() + 
   facet_wrap(~ book, ncol = 2, scales = &quot;free_y&quot;) + 
-  theme_classic() + 
-  theme(legend.position = &quot;none&quot;, 
-        axis.text.y = element_text(size = 12),
+  theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>In its default setting, <strong>ggplot2</strong> puts the names in alphabetical order, because they are of type character. One common solution is to use <code>fct_reorder()</code> or its equivalent <code>reorder()</code> in baes R`:</p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-6-1.png" width="768" />
+(<strong>Reminder</strong>: don’t forget <code>scales = "free_y"</code> or <code>scales = "free"</code> in this case.)</p>
+<p>In its default setting, ggplot2 puts the names in alphabetical order, because they are of type character. One common solution is to use <code>fct_reorder()</code> or its equivalent <code>reorder()</code> in baes R`:</p>
 <pre class="r"><code>common_words %&gt;% 
-  ggplot(aes(fct_reorder(word, n), n, fill = book)) +
-  geom_col() + 
-  coord_flip() + 
+  ggplot(aes(y = fct_reorder(word, n), 
+             x = n, 
+             fill = book)) +
+  geom_col(show.legend = FALSE) +
   facet_wrap(~ book, ncol = 2, scales = &quot;free_y&quot;) + 
-  theme_classic() + 
-  theme(legend.position = &quot;none&quot;, 
-        axis.text.y = element_text(size = 12),
+  theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, <code>fct_reorder()</code> or <code>reorder</code> only reorder all of these together, meaning that <code>word</code> are reordered in an overall level so that it cannot guarantee order in any specific subset of data.</p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
+<p>Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, <code>fct_reorder</code> or <code>reorder</code> only reorder all of these together, meaning that <code>word</code> are reordered in an overall level so that it cannot guarantee order in any specific subset of data.</p>
 </div>
-<div id="reorder_within-and-scale_x_reordered" class="section level2">
-<h2><code>reorder_within()</code> and <code>scale_x_reordered()</code></h2>
-<p>The <strong>tidytext</strong> package provides 2 new functions to reorder a variable on a facet level.</p>
-<p><code>reorder_within()</code> takes three arguments:
-- <strong>x</strong>: the item we want to reorder
-- <strong>by</strong>: what we want to reorder by
-- <strong>within</strong>: the groups or categories we want to reorder within</p>
-<p>After that, we use <code>scale_x_reordered()</code>(or <code>scale_y_reordered()</code>) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., <strong>name</strong>, <strong>labels</strong>, <strong>expand</strong>).</p>
-<p>Here is a final plot:</p>
-<pre class="r"><code># reorder word by n, grouped by book
+<div id="helper-functions-for-reordering" class="section level1">
+<h1>Helper functions for reordering</h1>
+<p>tidytext provides 2 helper functions to reorder a variable on a facet level.</p>
+<p><code>reorder_within()</code> takes three arguments:</p>
+<ul>
+<li><code>x</code>: the item we want to reorder<br />
+</li>
+<li><code>by</code>: what we want to reorder by<br />
+</li>
+<li><code>within</code>: the groups or categories we want to reorder within</li>
+</ul>
+<p>After that, we use <code>scale_x_reordered()</code>(or <code>scale_y_reordered()</code>) to finish the plot, these 2 scales can take any argument in common scale functions(e.g., <code>name</code>, <code>labels</code>, <code>expand</code>).</p>
+<p>Here is the final plot:</p>
+<pre class="r"><code># reorder word by n, within each book
 common_words %&gt;% 
-  ggplot(aes(reorder_within(word, n, book), n, fill = book)) +
-  geom_col() + 
-  coord_flip() + 
-  scale_x_reordered() + 
+  ggplot(aes(y = reorder_within(word, n, book), 
+             x = n, 
+             fill = book)) +
+  geom_col(show.legend = FALSE) + 
+  scale_y_reordered() + 
   facet_wrap(~ book, ncol = 2, scales = &quot;free_y&quot;) + 
-  theme_classic() + 
-  theme(legend.position = &quot;none&quot;, 
-        axis.text.y = element_text(size = 12),
+  theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &quot;PurpOr&quot;) +
   labs(title = &quot;What are the most common words in Jane Austen&#39;s books?&quot;,
        x = NULL,
        y = NULL)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Without using <code>scale_x_reordered</code> to overide ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, which make its label way too long. Here is an simple example using the <a href="https://github.com/hadley/babynames">babynames</a> data:</p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
+<p>Without <code>scale_y_reordered</code> which overides ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, making lables way too long and uninformative. Here is an simple example to demonstrate this problem using the <a href="https://github.com/hadley/babynames">babynames</a> data:</p>
 <pre class="r"><code>library(babynames)</code></pre>
 <pre class="r"><code>top_names &lt;- babynames %&gt;% 
   filter(year &gt;= 1950,
@@ -575,16 +582,16 @@ common_words %&gt;%
   top_n(10)
 
 top_names %&gt;% 
-  ggplot(aes(reorder_within(name, n, decade), n, fill = factor(decade))) + 
-  geom_col() + 
-  coord_flip() + 
-  facet_wrap(~ decade, scales = &quot;free_y&quot;) + 
-  theme(legend.position = &quot;none&quot;) + 
+  ggplot(aes(y = reorder_within(name, n, decade), 
+             x = n, 
+             fill = factor(decade))) + 
+  geom_col(show.legend = FALSE) + 
+  facet_wrap(~ decade, scales = &quot;free_y&quot;) +
   labs(x = NULL, y = NULL)</code></pre>
-<p><img src="/post/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
 </div>
-<div id="references" class="section level2">
-<h2>References</h2>
+<div id="references" class="section level1">
+<h1>References</h1>
 <p>Nowosad, J. (2018). ‘CARTOColors’ Palettes. R package version 1.0.0. <a href="https://nowosad.github.io/rcartocolor" class="uri">https://nowosad.github.io/rcartocolor</a></p>
 <div id="refs" class="references">
 <div id="ref-R-tidytext">
@@ -607,12 +614,6 @@ top_names %&gt;%
 
 
 
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tags/ggplot2/">ggplot2</a>
-  
-</div>
-
 
 
 <div class="share-box" aria-hidden="true">
@@ -626,7 +627,7 @@ top_names %&gt;%
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/reorder-varible-within-facets-reorder-within/&amp;text=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/reorder-varible-within-facets-reorder-within/&amp;text=Reordering%20within%20facets" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -639,7 +640,7 @@ top_names %&gt;%
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/reorder-varible-within-facets-reorder-within/&amp;t=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/reorder-varible-within-facets-reorder-within/&amp;t=Reordering%20within%20facets" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -652,7 +653,7 @@ top_names %&gt;%
       
       
       <li>
-        <a href="mailto:?subject=Reorder%20within%20facets:%20reorder_within&amp;body=/post/reorder-varible-within-facets-reorder-within/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Reordering%20within%20facets&amp;body=/post/reorder-varible-within-facets-reorder-within/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -665,7 +666,7 @@ top_names %&gt;%
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/reorder-varible-within-facets-reorder-within/&amp;title=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/reorder-varible-within-facets-reorder-within/&amp;title=Reordering%20within%20facets" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -678,7 +679,7 @@ top_names %&gt;%
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Reorder%20within%20facets:%20reorder_within%20/post/reorder-varible-within-facets-reorder-within/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Reordering%20within%20facets%20/post/reorder-varible-within-facets-reorder-within/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -691,7 +692,7 @@ top_names %&gt;%
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/reorder-varible-within-facets-reorder-within/&amp;title=Reorder%20within%20facets:%20reorder_within" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/reorder-varible-within-facets-reorder-within/&amp;title=Reordering%20within%20facets" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -816,7 +817,7 @@ top_names %&gt;%
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/post/interactive-view-of-nested-objects-in-r-list-viewer/" rel="next">Interactive view of nested objects in R: {listviewer}</a>
+    <a href="/post/interactive-view-of-nested-objects-list-viewer/" rel="next">Interactive view of nested objects in R: {listviewer}</a>
   </div>
   
   

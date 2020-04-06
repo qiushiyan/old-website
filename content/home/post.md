@@ -8,14 +8,14 @@ active = true  # Activate this widget? true/false
 weight = 40  # Order that this section will appear.
 
 title = "Posts"
-subtitle = ""
+subtitle = "I maily post about R-related things and minimal data analysis projects."
 
 [content]
   # Page type to display. E.g. post, talk, or publication.
   page_type = "post"
   
   # Choose how much pages you would like to display (0 = all pages)
-  count = 0
+  count = 4
   
   # Choose how many pages you would like to offset by
   offset = 0
@@ -67,4 +67,4 @@ subtitle = ""
  css_class = ""
 +++
 
-I maily post about R-related things and minimal data analysis projects, see all posts [here](/post)
+

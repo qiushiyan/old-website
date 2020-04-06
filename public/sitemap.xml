@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/post/exploring-the-london-stage-database/</loc>
+    <lastmod>2020-04-05T14:09:39+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
     <lastmod>2020-04-06T12:54:24+08:00</lastmod>
   </url>
@@ -15,11 +20,6 @@
   <url>
     <loc>/</loc>
     <lastmod>2020-04-06T12:54:24+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</loc>
-    <lastmod>2020-04-05T14:09:39+08:00</lastmod>
   </url>
   
   <url>
@@ -58,7 +58,7 @@
   </url>
   
   <url>
-    <loc>/post/reorder-varible-within-facets-reorder-within/reorder-varible-within-facets-reorder-within/</loc>
+    <loc>/post/reorder-varible-within-facets-reorder-within/</loc>
     <lastmod>2020-04-05T21:38:24+08:00</lastmod>
   </url>
   
@@ -68,12 +68,12 @@
   </url>
   
   <url>
-    <loc>/post/intro-skimr/introduction-to-skimr/</loc>
+    <loc>/post/introduction-to-skimr/</loc>
     <lastmod>2020-04-05T23:27:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/50-years/50-years-of-data-science/</loc>
+    <loc>/post/50-years-of-data-science/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
   </url>
   

@@ -13,22 +13,219 @@
     </image>
     
     <item>
-      <title>Analyzing Covid 19 Publications</title>
+      <title>Analyzing COVID-19 Publications</title>
       <link>/post/analyzing-covid-19-publications/</link>
       <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/post/analyzing-covid-19-publications/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#data-preprocessing&#34;&gt;Data preprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#common-words-and-keywords-extraction&#34;&gt;Common words and keywords extraction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#fit-a-lda-model&#34;&gt;Fit a LDA model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#a-network-of-paired-words&#34;&gt;A network of paired words&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this post, I will be performing a simple text analysis on the abstract of publications on the coronavirus disease (COVID-19), courtesy of &lt;a href=&#34;https://www.who.int/emergencies/diseases/novel-coronavirus-2019/global-research-on-novel-coronavirus-2019-ncov&#34;&gt;WHO&lt;/a&gt;. We begin by steps of data preprocessing.&lt;/p&gt;
+&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Data preprocessing&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(showtext)
+font_add_google(&amp;quot;Fira Sans&amp;quot;)
+showtext_auto()
+theme_set(theme_light(base_family = &amp;quot;Fira Sans&amp;quot;,
+                      base_size = 18))
 
 
+raw &amp;lt;- read_csv(&amp;quot;covid-research.csv&amp;quot;) %&amp;gt;% 
+  janitor::clean_names() 
+
+glimpse(raw)
+#&amp;gt; Rows: 4,190
+#&amp;gt; Columns: 16
+#&amp;gt; $ title            &amp;lt;chr&amp;gt; &amp;quot;SARS-CoV-2 is not detectable in the vaginal fluid...
+#&amp;gt; $ authors          &amp;lt;chr&amp;gt; &amp;quot;Qiu, Lin; Liu, Xia; Xiao, Meng; Xie, Jing; Cao, W...
+#&amp;gt; $ abstract         &amp;lt;chr&amp;gt; &amp;quot;Background Severe acute respiratory syndrome coro...
+#&amp;gt; $ published_year   &amp;lt;dbl&amp;gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 20...
+#&amp;gt; $ published_month  &amp;lt;lgl&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
+#&amp;gt; $ journal          &amp;lt;chr&amp;gt; &amp;quot;Clinical Infectious Diseases&amp;quot;, &amp;quot;International Jou...
+#&amp;gt; $ volume           &amp;lt;chr&amp;gt; NA, &amp;quot;17&amp;quot;, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+#&amp;gt; $ issue            &amp;lt;chr&amp;gt; NA, &amp;quot;7&amp;quot;, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+#&amp;gt; $ pages            &amp;lt;chr&amp;gt; NA, &amp;quot;2430-2430&amp;quot;, &amp;quot;112275-112275&amp;quot;, NA, &amp;quot;1-4&amp;quot;, NA, N...
+#&amp;gt; $ accession_number &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, &amp;quot;32229574&amp;quot;, NA, NA, &amp;quot;3...
+#&amp;gt; $ doi              &amp;lt;chr&amp;gt; &amp;quot;10.1093/cid/ciaa375&amp;quot;, &amp;quot;10.3390/IJERPH17072430&amp;quot;, &amp;quot;...
+#&amp;gt; $ ref              &amp;lt;dbl&amp;gt; 26513, 26499, 26744, 26447, 27114, 26388, 26696, 2...
+#&amp;gt; $ covidence_number &amp;lt;chr&amp;gt; &amp;quot;#27487&amp;quot;, &amp;quot;#27413&amp;quot;, &amp;quot;#27869&amp;quot;, &amp;quot;#27815&amp;quot;, &amp;quot;#27905&amp;quot;, ...
+#&amp;gt; $ study            &amp;lt;chr&amp;gt; &amp;quot;Qiu 2020&amp;quot;, &amp;quot;Pulido 2020&amp;quot;, &amp;quot;Pillaiyar 2020&amp;quot;, &amp;quot;Piau...
+#&amp;gt; $ notes            &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
+#&amp;gt; $ tags             &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on &lt;code&gt;abstract&lt;/code&gt;. I was a little disappointied to find out that &lt;code&gt;published_month&lt;/code&gt; are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English, I find this function &lt;code&gt;stringi::stri_enc_isascii&lt;/code&gt; in an attempt to filter out non-English text, although this will not rid the text of German, French, Italian and other similar languages. I deleted some of them manually in the next step by expanding stop words. But this still left much room for improvement. Anyway, let’s move on for now.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- raw %&amp;gt;%
+  filter(!is.na(abstract),
+         stringi::stri_enc_isascii(abstract)) %&amp;gt;% 
+  select(title, abstract)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As illuatrated in &lt;a href=&#34;https://www.tidytextmining.com&#34;&gt;Text Mining with R&lt;/a&gt;, text analysis commonly requires preprocessing steps like tokenizing, eliminating stop words and word stemming. A little problem is that &lt;code&gt;unnest_tokens()&lt;/code&gt; recognize “covid” and “19” as two separated words, so I just add “19” to my custom stop words list. As a result, we have to bear in mind that most “covid” seen below is actually “covid19”.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidytext)
+library(SnowballC)
+
+words &amp;lt;- df %&amp;gt;% 
+  unnest_tokens(word, abstract) %&amp;gt;% 
+  mutate(word = wordStem(word)) %&amp;gt;% 
+  anti_join(stop_words %&amp;gt;% 
+              add_row(word = c(&amp;quot;19&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;manag&amp;quot;, &amp;quot;dai&amp;quot;, &amp;quot;studi&amp;quot;, &amp;quot;epidem&amp;quot;, &amp;quot;includ&amp;quot;, &amp;quot;coronaviru&amp;quot;, &amp;quot;diseas&amp;quot;, &amp;quot;emetin&amp;quot;, &amp;quot;dai&amp;quot;, &amp;quot;acut&amp;quot;, &amp;quot;dub&amp;quot;, &amp;quot;hospit&amp;quot;, &amp;quot;hfnc&amp;quot;, &amp;quot;caus&amp;quot;, &amp;quot;develop&amp;quot;, &amp;quot;thi&amp;quot;), 
+                      lexicon = &amp;quot;custom&amp;quot;)) 
+
+words
+#&amp;gt; # A tibble: 159,434 x 2
+#&amp;gt;    title                                                              word      
+#&amp;gt;    &amp;lt;chr&amp;gt;                                                              &amp;lt;chr&amp;gt;     
+#&amp;gt;  1 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ background
+#&amp;gt;  2 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sever     
+#&amp;gt;  3 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
+#&amp;gt;  4 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ syndrom   
+#&amp;gt;  5 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sar       
+#&amp;gt;  6 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ cov       
+#&amp;gt;  7 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ mainli    
+#&amp;gt;  8 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ spread    
+#&amp;gt;  9 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
+#&amp;gt; 10 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ droplet   
+#&amp;gt; # ... with 159,424 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;common-words-and-keywords-extraction&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Common words and keywords extraction&lt;/h1&gt;
+&lt;p&gt;An immediate question is, what are the most common words among all these publications?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;words %&amp;gt;% 
+  count(word, sort = TRUE) %&amp;gt;%
+  top_n(50) %&amp;gt;%
+  ggplot(aes(y = fct_reorder(word, n),
+             x = n)) + 
+  geom_col() + 
+  scale_x_continuous(expand = c(0.01, 0)) + 
+  labs(y = NULL,
+       x = &amp;quot;word counts&amp;quot;,
+       title = &amp;quot;Top 50 common words in COVID-19 publications&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by &lt;span class=&#34;citation&#34;&gt;Monroe, Colaresi, and Quinn (&lt;a href=&#34;#ref-monroe_colaresi_quinn&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt;, which a standardized metric from a complete statistical model. It is also implemented in the R package &lt;a href=&#34;https://github.com/juliasilge/tidylo&#34;&gt;&lt;code&gt;tidylo&lt;/code&gt;&lt;/a&gt;&lt;span class=&#34;citation&#34;&gt;(Schnoebelen and Silge &lt;a href=&#34;#ref-tidylo&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
+words %&amp;gt;%
+  count(title, word) %&amp;gt;% 
+  bind_log_odds(set = title, feature = word, n = n) %&amp;gt;%
+  top_n(20)
+#&amp;gt; # A tibble: 20 x 4
+#&amp;gt;    title                                             word             n log_odds
+#&amp;gt;    &amp;lt;chr&amp;gt;                                             &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt;    &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 A comparative study on the clinical features of ~ ncovid          20     5.06
+#&amp;gt;  2 A high ATP concentration enhances the cooperativ~ duplex          16     4.52
+#&amp;gt;  3 A serological survey of canine respiratory coron~ dog             11     3.53
+#&amp;gt;  4 A survey on awareness of digestive system injury~ 216             16     4.42
+#&amp;gt;  5 A survey on awareness of digestive system injury~ gastroenter~    14     4.23
+#&amp;gt;  6 Analysis of clinical features of 153 patients wi~ cd              12     3.80
+#&amp;gt;  7 Analysis of clinical features of 153 patients wi~ gt              60     4.92
+#&amp;gt;  8 Analysis of clinical features of 153 patients wi~ ital            26     3.59
+#&amp;gt;  9 Analysis of clinical features of 153 patients wi~ lt              74     5.03
+#&amp;gt; 10 Characterization and evolution of the coronaviru~ hljby           12     3.92
+#&amp;gt; 11 Characterization and evolution of the coronaviru~ pedv            21     3.92
+#&amp;gt; 12 Clinical characteristics of 113 deceased patient~ deceas          16     4.42
+#&amp;gt; 13 Construction of 5G intelligent medical service s~ 5g              14     4.23
+#&amp;gt; 14 Frequency and Distribution of Chest Radiographic~ cxr             12     3.92
+#&amp;gt; 15 Genetic, antigenic and pathogenic characterizati~ phcov           10     3.58
+#&amp;gt; 16 Medicinal chemistry strategies toward host targe~ hta             10     3.57
+#&amp;gt; 17 Pregnant women with new coronavirus infection: a~ placenta        14     3.76
+#&amp;gt; 18 Retrospective study of low-to-moderate dose gluc~ iqr             20     4.24
+#&amp;gt; 19 The clinical study on the relationship between s~ lym             14     3.54
+#&amp;gt; 20 Thoughts and suggestions on modern construction ~ modern          20     4.44&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fit-a-lda-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Fit a LDA model&lt;/h1&gt;
+&lt;p&gt;Let’s then fit a 5-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using &lt;code&gt;cast_dtm&lt;/code&gt;. There are various implementations of this kind of model, here I use &lt;code&gt;topicmodels::LDA()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dtm &amp;lt;- cast_dtm(words %&amp;gt;% count(title, word),
+                term = word,
+                document = title,
+                value = n)
+
+library(topicmodels)
+topic_model &amp;lt;- LDA(dtm, k = 6, method = &amp;quot;Gibbs&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Topic-term distributions are accessed by &lt;code&gt;tidy()&lt;/code&gt;, this gives a glance of the underlying meanin of these topics:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# topic-term distribution
+tidy(topic_model) %&amp;gt;% 
+  group_by(topic) %&amp;gt;% 
+  top_n(10) %&amp;gt;% 
+  ungroup() %&amp;gt;%
+  mutate(topic = factor(topic) %&amp;gt;% str_c(&amp;quot;topic&amp;quot;, .)) %&amp;gt;% 
+  ggplot(aes(y = reorder_within(term, beta, topic),
+         x = beta,
+         fill = topic)) + 
+  geom_col(show.legend = FALSE) + 
+  scale_y_reordered() + 
+  facet_wrap(~ topic, scales = &amp;quot;free_y&amp;quot;, nrow = 3) + 
+  labs(y = NULL,
+       x = &amp;quot;Docuemtn-term probabilities&amp;quot;,
+       title = &amp;quot;A 6-topic LDA model on abstract&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;a-network-of-paired-words&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;A network of paired words&lt;/h1&gt;
+&lt;p&gt;Another question of interest is the relationship between words: what group of words tend to appear together? I look at the &lt;a href=&#34;https://en.wikipedia.org/wiki/Phi_coefficient&#34;&gt;phi coefficient&lt;/a&gt;, which is essentailly &lt;span class=&#34;math inline&#34;&gt;\(\chi^2\)&lt;/span&gt; statistc in a contingency table applied to categorical variables.&lt;/p&gt;
+&lt;p&gt;As each abstract is a natual unit of measure, a pair of words that both appear in the same abstract are seen as “appearing together”. We could compute &lt;span class=&#34;math inline&#34;&gt;\(\phi\)&lt;/span&gt; based on pairwise counts:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(widyr)
+
+word_cors &amp;lt;- words %&amp;gt;% 
+  add_count(word) %&amp;gt;% 
+  filter(n &amp;gt; 20) %&amp;gt;%
+  select(-n) %&amp;gt;%
+  pairwise_cor(item = word, feature = title, sort = TRUE)
+
+word_cors
+#&amp;gt; # A tibble: 1,386,506 x 3
+#&amp;gt;    item1     item2     correlation
+#&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 65288     65289           0.960
+#&amp;gt;  2 65289     65288           0.960
+#&amp;gt;  3 lopinavir ritonavir       0.955
+#&amp;gt;  4 ritonavir lopinavir       0.955
+#&amp;gt;  5 reserv    copyright       0.947
+#&amp;gt;  6 copyright reserv          0.947
+#&amp;gt;  7 glass     ground          0.946
+#&amp;gt;  8 ground    glass           0.946
+#&amp;gt;  9 effus     pleural         0.940
+#&amp;gt; 10 pleural   effus           0.940
+#&amp;gt; # ... with 1,386,496 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A network visualization of word correlation is a good idea:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggraph)
+library(tidygraph)
+
+word_cors %&amp;gt;% 
+  filter(correlation &amp;gt; 0.4) %&amp;gt;% 
+  as_tbl_graph() %&amp;gt;% 
+  ggraph(layout = &amp;quot;fr&amp;quot;) + 
+  geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
+  geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 5.5) + 
+  geom_node_text(aes(label = name), repel = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-monroe_colaresi_quinn&#34;&gt;
+&lt;p&gt;Monroe, Burt L., Michael P. Colaresi, and Kevin M. Quinn. 2008. “Fightin’ Words: Lexical Feature Selection and Evaluation for Identifying the Content of Political Conflict.” &lt;em&gt;Political Analysis&lt;/em&gt; 16 (4): 372–403. &lt;a href=&#34;https://doi.org/10.1093/pan/mpn018&#34;&gt;https://doi.org/10.1093/pan/mpn018&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-tidylo&#34;&gt;
+&lt;p&gt;Schnoebelen, Tyler, and Julia Silge. 2020. &lt;em&gt;Tidylo: Tidy Log Odds Ratio Weighted by Uninformative Prior&lt;/em&gt;. &lt;a href=&#34;http://github.com/juliasilge/tidylo&#34;&gt;http://github.com/juliasilge/tidylo&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Exploring the London Stage Database</title>
-      <link>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</link>
-      <pubDate>Sun, 05 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/post/exploring-the-london-stage-database/exploring-the-london-stage-database/</guid>
+      <link>/post/exploring-the-london-stage-database/</link>
+      <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/exploring-the-london-stage-database/</guid>
       <description>
 
 
@@ -181,25 +378,28 @@ Helpers. R package version 0.4.1. &lt;a href=&#34;https://CRAN.R-project.org/pac
     </item>
     
     <item>
-      <title>Reorder within facets: reorder_within</title>
-      <link>/post/reorder-varible-within-facets-reorder-within/reorder-varible-within-facets-reorder-within/</link>
+      <title>Reordering within facets</title>
+      <link>/post/reorder-varible-within-facets-reorder-within/</link>
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/reorder-varible-within-facets-reorder-within/reorder-varible-within-facets-reorder-within/</guid>
+      <guid>/post/reorder-varible-within-facets-reorder-within/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#common-words-in-jane-austens-books&#34;&gt;Common words in Jane Austen’s books&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#helper-functions-for-reordering&#34;&gt;Helper functions for reordering&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;p&gt;This blog post is inspired by Julia Silge’s &lt;a href=&#34;https://juliasilge.com/blog/reorder-within/&#34;&gt;Reordering and facetting for ggplot2&lt;/a&gt;. By reproducing the original post using another different dataset, I hope this could still shed some light on a handful of ggplot2 tips.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#common-words-in-jane-austen&amp;#39;s-books-&#34;&gt;Common words in Jane Austen’s books&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#helper-functions-for-reordering-&#34;&gt;Helper functions for reordering&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#references-&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;div id=&#34;common-words-in-jane-austens-books&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Common words in Jane Austen’s books&lt;/h1&gt;
 &lt;p&gt;Here is a simple task: we want to find the top-10 most common words in several Jane Austen’s books, draw a bar graph, and then put them into different facets.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
 library(tidytext)
 library(janeaustenr)
+
 theme_set(theme_light())&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;austen_books()
 #&amp;gt; # A tibble: 73,422 x 2
@@ -253,7 +453,7 @@ common_words %&amp;gt;%
   theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &amp;quot;PurpOr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;768&#34; /&gt;
 (&lt;strong&gt;Reminder&lt;/strong&gt;: don’t forget &lt;code&gt;scales = &#34;free_y&#34;&lt;/code&gt; or &lt;code&gt;scales = &#34;free&#34;&lt;/code&gt; in this case.)&lt;/p&gt;
 &lt;p&gt;In its default setting, ggplot2 puts the names in alphabetical order, because they are of type character. One common solution is to use &lt;code&gt;fct_reorder()&lt;/code&gt; or its equivalent &lt;code&gt;reorder()&lt;/code&gt; in baes R`:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;common_words %&amp;gt;% 
@@ -265,7 +465,7 @@ common_words %&amp;gt;%
   theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = &amp;quot;PurpOr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, &lt;code&gt;fct_reorder&lt;/code&gt; or &lt;code&gt;reorder&lt;/code&gt; only reorder all of these together, meaning that &lt;code&gt;word&lt;/code&gt; are reordered in an overall level so that it cannot guarantee order in any specific subset of data.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;helper-functions-for-reordering&#34; class=&#34;section level1&#34;&gt;
@@ -287,7 +487,7 @@ common_words %&amp;gt;%
              x = n, 
              fill = book)) +
   geom_col(show.legend = FALSE) + 
-  scale_x_reordered() + 
+  scale_y_reordered() + 
   facet_wrap(~ book, ncol = 2, scales = &amp;quot;free_y&amp;quot;) + 
   theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
@@ -295,8 +495,8 @@ common_words %&amp;gt;%
   labs(title = &amp;quot;What are the most common words in Jane Austen&amp;#39;s books?&amp;quot;,
        x = NULL,
        y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Without &lt;code&gt;scale_x_reordered&lt;/code&gt; which overides ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, making lables way too long and uninformative. Here is an simple example to demonstrate this problem using the &lt;a href=&#34;https://github.com/hadley/babynames&#34;&gt;babynames&lt;/a&gt; data:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Without &lt;code&gt;scale_y_reordered&lt;/code&gt; which overides ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, making lables way too long and uninformative. Here is an simple example to demonstrate this problem using the &lt;a href=&#34;https://github.com/hadley/babynames&#34;&gt;babynames&lt;/a&gt; data:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(babynames)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;top_names &amp;lt;- babynames %&amp;gt;% 
   filter(year &amp;gt;= 1950,
@@ -314,7 +514,7 @@ top_names %&amp;gt;%
   geom_col(show.legend = FALSE) + 
   facet_wrap(~ decade, scales = &amp;quot;free_y&amp;quot;) +
   labs(x = NULL, y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/2019-11-29-reorder-varible-within-facets-reorder-within_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets-reorder-within/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;
@@ -341,19 +541,20 @@ top_names %&amp;gt;%
       <guid>/post/better-sicence-in-less-time/better-science-in-less-time/</guid>
       <description>
 
-
-&lt;p&gt;The &lt;a href=&#34;http://www.oceanhealthindex.org&#34;&gt;Ocean Health Index project&lt;/a&gt;(OHI) provides a means to advance comprehensive ocean policy and compare future progress, with an aim of informing decisions about how to use or protect marine ecosystems, and promoting ongoing assessment of ocean health.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;“Our path to better science in less time using open data science tools”&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Lowndes et al. &lt;a href=&#34;#ref-lowndes2017our&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; describes how several free software tools have fundamentally upgraded OHI team’s approach to collaborative research, and assist better science in less time.&lt;/p&gt;
+&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#reproducibility-challenges-in-environmental-science&#34;&gt;Reproducibility challenges in environmental science&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#the-happy-transition-&#34;&gt;The happy transition&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#reproducibility-&#34;&gt;Reproducibility&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#collaboration-&#34;&gt;Collaboration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#the-happy-transition&#34;&gt;The happy transition&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#reproducibility&#34;&gt;Reproducibility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#collaboration&#34;&gt;Collaboration&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#communication&#34;&gt;Communication&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&#34;http://www.oceanhealthindex.org&#34;&gt;Ocean Health Index project&lt;/a&gt;(OHI) provides a means to advance comprehensive ocean policy and compare future progress, with an aim of informing decisions about how to use or protect marine ecosystems, and promoting ongoing assessment of ocean health.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“Our path to better science in less time using open data science tools”&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Lowndes et al. &lt;a href=&#34;#ref-lowndes2017our&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; describes how several free software tools have fundamentally upgraded OHI team’s approach to collaborative research, and assist better science in less time.&lt;/p&gt;
 &lt;div id=&#34;reproducibility-challenges-in-environmental-science&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Reproducibility challenges in environmental science&lt;/h1&gt;
 &lt;p&gt;Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because “they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines”.&lt;/p&gt;
@@ -429,14 +630,12 @@ pace, with which comes wasted time struggling to create their own conventions fo
     
     <item>
       <title>Skimming through {skimr}</title>
-      <link>/post/intro-skimr/introduction-to-skimr/</link>
+      <link>/post/introduction-to-skimr/</link>
       <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/intro-skimr/introduction-to-skimr/</guid>
+      <guid>/post/introduction-to-skimr/</guid>
       <description>
 
-
-&lt;div id=&#34;table-of-contents&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Table of Contents&lt;/h1&gt;
+&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#intro&#34;&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#manipulation&#34;&gt;Manipulating the results&lt;/a&gt;&lt;/li&gt;
@@ -445,6 +644,7 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;li&gt;&lt;a href=&#34;#ref&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
+
 &lt;div id=&#34;intro&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;code&gt;skim()&lt;/code&gt; basics&lt;/h1&gt;
 &lt;p&gt;The &lt;strong&gt;skimr&lt;/strong&gt;&lt;span class=&#34;citation&#34;&gt;(Waring et al. &lt;a href=&#34;#ref-R-skimr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; package is developed by the &lt;a href=&#34;https://github.com/ropensci&#34;&gt;rOpenSci&lt;/a&gt; cummunity, with its core function &lt;code&gt;skim()&lt;/code&gt; as an enhanced version of &lt;code&gt;summary()&lt;/code&gt;, and has just experienced a major update to V2. For a more comprehensive guide towards its features, please visit its &lt;a href=&#34;https://docs.ropensci.org/skimr/index.html&#34;&gt;vignette&lt;/a&gt;.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
@@ -458,7 +658,7 @@ pace, with which comes wasted time struggling to create their own conventions fo
 library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-4&#34;&gt;Table 1: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-3&#34;&gt;Table 1: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -596,7 +796,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The second argument &lt;code&gt;...&lt;/code&gt; in &lt;code&gt;skim()&lt;/code&gt; could specify any number of variables to be included, similar to &lt;code&gt;dplyr::select()&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris, Sepal.Width, Species)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-5&#34;&gt;Table 2: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-4&#34;&gt;Table 2: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -695,7 +895,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;or with common &lt;code&gt;select()&lt;/code&gt; helpers:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris, contains(&amp;quot;Length&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-6&#34;&gt;Table 3: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-5&#34;&gt;Table 3: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -781,7 +981,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   summary()&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-7&#34;&gt;Table 4: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-6&#34;&gt;Table 4: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -826,7 +1026,7 @@ library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
   group_by(Species) %&amp;gt;%
   skim()&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-8&#34;&gt;Table 5: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-7&#34;&gt;Table 5: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1081,7 +1281,7 @@ is_skim_df(skim(iris))
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   filter(skim_type == &amp;quot;numeric&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-11&#34;&gt;Table 6: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-10&#34;&gt;Table 6: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1192,7 +1392,7 @@ is_skim_df(skim(iris))
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(iris) %&amp;gt;% 
   filter(skim_variable == &amp;quot;Sepal.Length&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-12&#34;&gt;Table 7: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-11&#34;&gt;Table 7: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1266,7 +1466,7 @@ is_skim_df(skim(iris))
 skim(iris) %&amp;gt;% 
   select(skim_variable, skim_type, n_missing, complete_rate)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-13&#34;&gt;Table 8: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-12&#34;&gt;Table 8: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1379,7 +1579,7 @@ skim(iris) %&amp;gt;%
   select_if(is.numeric) %&amp;gt;% 
   skim()&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-15&#34;&gt;Table 9: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-14&#34;&gt;Table 9: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1655,7 +1855,7 @@ iris_numeric %&amp;gt;%
   skim() %&amp;gt;%
   focus(n_missing, numeric.mean)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-21&#34;&gt;Table 10: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-20&#34;&gt;Table 10: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1865,7 +2065,7 @@ my_skim &amp;lt;- skim_with(numeric = sfl(&amp;quot;3rd_central_moment&amp;quot;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
 skim(letters)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-24&#34;&gt;Table 11: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-23&#34;&gt;Table 11: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1927,7 +2127,7 @@ skim(letters)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is same to:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(as.data.frame(letters))&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-25&#34;&gt;Table 12: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-24&#34;&gt;Table 12: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -1990,7 +2190,7 @@ skim(letters)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;my_list &amp;lt;- list(a = 1:10, b = letters[1:10], c = factor(1:10))
 skim(my_list)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-26&#34;&gt;Table 13: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-25&#34;&gt;Table 13: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -2111,7 +2311,7 @@ skim(my_list)&lt;/code&gt;&lt;/pre&gt;
 # note the last inline line graph, pretty cute
 skim(lynx)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-27&#34;&gt;Table 14: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-26&#34;&gt;Table 14: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -2194,7 +2394,7 @@ m
 #&amp;gt; [4,]    4    8   12&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(m)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-29&#34;&gt;Table 15: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-28&#34;&gt;Table 15: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -2292,7 +2492,7 @@ m
 &lt;p&gt;Transpose the matrix:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;skim(t(m))&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-30&#34;&gt;Table 16: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-29&#34;&gt;Table 16: &lt;/span&gt;Data summary&lt;/caption&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
@@ -2423,22 +2623,24 @@ m
     
     <item>
       <title>50 Years of Data Science</title>
-      <link>/post/50-years/50-years-of-data-science/</link>
+      <link>/post/50-years-of-data-science/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/50-years/50-years-of-data-science/</guid>
+      <guid>/post/50-years-of-data-science/</guid>
       <description>
 
-
-&lt;p&gt;More than 50 years ago, John Tukey in his renowned “The Future of Dat Analysis” envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / analysis” trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
+&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#data-science-vs.-statistics&#34;&gt;Data Science vs. Statistics&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#review-on-the-concept&#34;&gt;Review on the concept&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#the-six-divisions&#34;&gt;The Six Divisions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#science-about-data-science-&#34;&gt;Science About Data Science&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#next-50-years-&#34;&gt;Next 50 years&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#conclusion-&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#science-about-data-science&#34;&gt;Science About Data Science&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#next-50-years&#34;&gt;Next 50 years&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;More than 50 years ago, John Tukey in his renowned “The Future of Dat Analysis” envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / analysis” trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
 &lt;div id=&#34;data-science-vs.-statistics&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data Science vs. Statistics&lt;/h1&gt;
 &lt;p&gt;The author first starts to distinguish data science from traditional statistics. Yet 3 commonly used indicators are discredited:&lt;/p&gt;

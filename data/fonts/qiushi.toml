@@ -11,5 +11,5 @@ nav_font = "Josefin Slab"
 mono_font = "Roboto Mono"
 
 # Font size
-font_size = "18.5"
+font_size_medium = "18.5"
 font_size_small = "16.5"

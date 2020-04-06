@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Analysis | Qiushi Yan</title>
+    <link>/categories/data-analysis/</link>
+      <atom:link href="/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <description>Data Analysis</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Data Analysis</title>
+      <link>/categories/data-analysis/</link>
+    </image>
+    
+    <item>
+      <title>Exploring the London Stage Database</title>
+      <link>/post/exploring-the-london-stage-database/</link>
+      <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/exploring-the-london-stage-database/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# setup
+library(tidyverse)
+library(jsonlite)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# get the data
+london_stage &amp;lt;- fromJSON(&amp;quot;D:/RProjects/data/LondonStageFull.json&amp;quot;) %&amp;gt;% 
+  as_tibble()
+
+london_stage
+#&amp;gt; # A tibble: 52,617 x 13
+#&amp;gt;    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt; 
+#&amp;gt;  1 0       16591029  city        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;The &amp;lt;i~ 63        *p165~
+#&amp;gt;  2 1       16591100  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;On 23 ~ 206       *p165~
+#&amp;gt;  3 2       16591218  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Repres~ 1         *p165~
+#&amp;gt;  4 3       16600200  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;6 Feb.~ 206       *p166~
+#&amp;gt;  5 4       16600204  cockpit     1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;$Thoma~ 73        *p166~
+#&amp;gt;  6 5       16600328  dh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;At &amp;lt;i&amp;gt;~ 90        *p166~
+#&amp;gt;  7 6       16600406  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
+#&amp;gt;  8 7       16600412  vh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Editio~ 319       *p166~
+#&amp;gt;  9 8       16600413  fh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;lt;i&amp;gt;The~ 116       *p166~
+#&amp;gt; 10 9       16600416  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
+#&amp;gt; # ... with 52,607 more rows, and 4 more variables: Phase1 &amp;lt;chr&amp;gt;,
+#&amp;gt; #   CommentCClean &amp;lt;chr&amp;gt;, BookPDF &amp;lt;chr&amp;gt;, Performances &amp;lt;list&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;json&lt;/code&gt; file can be downloaded at &lt;a href=&#34;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&#34; class=&#34;uri&#34;&gt;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing COVID-19 Publications</title>
+      <link>/post/analyzing-covid-19-publications/</link>
+      <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/analyzing-covid-19-publications/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#data-preprocessing&#34;&gt;Data preprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#common-words-and-keywords-extraction&#34;&gt;Common words and keywords extraction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#fit-a-lda-model&#34;&gt;Fit a LDA model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#a-network-of-paired-words&#34;&gt;A network of paired words&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this post, I will be performing a simple text analysis on the abstract of publications on the coronavirus disease (COVID-19), courtesy of &lt;a href=&#34;https://www.who.int/emergencies/diseases/novel-coronavirus-2019/global-research-on-novel-coronavirus-2019-ncov&#34;&gt;WHO&lt;/a&gt;. We begin by steps of data preprocessing.&lt;/p&gt;
+&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Data preprocessing&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+theme_set(theme_light(base_size = 18))
+
+
+raw &amp;lt;- read_csv(&amp;quot;covid-research.csv&amp;quot;) %&amp;gt;% 
+  janitor::clean_names() 
+
+glimpse(raw)
+#&amp;gt; Rows: 4,190
+#&amp;gt; Columns: 16
+#&amp;gt; $ title            &amp;lt;chr&amp;gt; &amp;quot;SARS-CoV-2 is not detectable in the vaginal fluid...
+#&amp;gt; $ authors          &amp;lt;chr&amp;gt; &amp;quot;Qiu, Lin; Liu, Xia; Xiao, Meng; Xie, Jing; Cao, W...
+#&amp;gt; $ abstract         &amp;lt;chr&amp;gt; &amp;quot;Background Severe acute respiratory syndrome coro...
+#&amp;gt; $ published_year   &amp;lt;dbl&amp;gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 20...
+#&amp;gt; $ published_month  &amp;lt;lgl&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
+#&amp;gt; $ journal          &amp;lt;chr&amp;gt; &amp;quot;Clinical Infectious Diseases&amp;quot;, &amp;quot;International Jou...
+#&amp;gt; $ volume           &amp;lt;chr&amp;gt; NA, &amp;quot;17&amp;quot;, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...
+#&amp;gt; $ issue            &amp;lt;chr&amp;gt; NA, &amp;quot;7&amp;quot;, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+#&amp;gt; $ pages            &amp;lt;chr&amp;gt; NA, &amp;quot;2430-2430&amp;quot;, &amp;quot;112275-112275&amp;quot;, NA, &amp;quot;1-4&amp;quot;, NA, N...
+#&amp;gt; $ accession_number &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, &amp;quot;32229574&amp;quot;, NA, NA, &amp;quot;3...
+#&amp;gt; $ doi              &amp;lt;chr&amp;gt; &amp;quot;10.1093/cid/ciaa375&amp;quot;, &amp;quot;10.3390/IJERPH17072430&amp;quot;, &amp;quot;...
+#&amp;gt; $ ref              &amp;lt;dbl&amp;gt; 26513, 26499, 26744, 26447, 27114, 26388, 26696, 2...
+#&amp;gt; $ covidence_number &amp;lt;chr&amp;gt; &amp;quot;#27487&amp;quot;, &amp;quot;#27413&amp;quot;, &amp;quot;#27869&amp;quot;, &amp;quot;#27815&amp;quot;, &amp;quot;#27905&amp;quot;, ...
+#&amp;gt; $ study            &amp;lt;chr&amp;gt; &amp;quot;Qiu 2020&amp;quot;, &amp;quot;Pulido 2020&amp;quot;, &amp;quot;Pillaiyar 2020&amp;quot;, &amp;quot;Piau...
+#&amp;gt; $ notes            &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
+#&amp;gt; $ tags             &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on &lt;code&gt;abstract&lt;/code&gt;. I was a little disappointied to find out that &lt;code&gt;published_month&lt;/code&gt; are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English, I find this function &lt;code&gt;stringi::stri_enc_isascii&lt;/code&gt; in an attempt to filter out non-English text, although this will not rid the text of German, French, Italian and other similar languages. I deleted some of them manually in the next step by expanding stop words. But this still left much room for improvement. Anyway, let’s move on for now.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- raw %&amp;gt;%
+  filter(!is.na(abstract),
+         stringi::stri_enc_isascii(abstract)) %&amp;gt;% 
+  select(title, abstract)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As illuatrated in &lt;a href=&#34;https://www.tidytextmining.com&#34;&gt;Text Mining with R&lt;/a&gt;, text analysis commonly requires preprocessing steps like tokenizing, eliminating stop words and word stemming. A little problem is that &lt;code&gt;unnest_tokens()&lt;/code&gt; recognize “covid” and “19” as two separated words, so I just add “19” to my custom stop words list. As a result, we have to bear in mind that most “covid” seen below is actually “covid19”.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidytext)
+library(SnowballC)
+
+words &amp;lt;- df %&amp;gt;% 
+  unnest_tokens(word, abstract) %&amp;gt;% 
+  mutate(word = wordStem(word)) %&amp;gt;% 
+  anti_join(stop_words %&amp;gt;% 
+              add_row(word = c(&amp;quot;19&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;manag&amp;quot;, &amp;quot;dai&amp;quot;, &amp;quot;studi&amp;quot;, &amp;quot;epidem&amp;quot;, &amp;quot;includ&amp;quot;, &amp;quot;coronaviru&amp;quot;, &amp;quot;diseas&amp;quot;, &amp;quot;emetin&amp;quot;, &amp;quot;dai&amp;quot;, &amp;quot;acut&amp;quot;, &amp;quot;dub&amp;quot;, &amp;quot;hospit&amp;quot;, &amp;quot;hfnc&amp;quot;, &amp;quot;caus&amp;quot;, &amp;quot;develop&amp;quot;, &amp;quot;thi&amp;quot;), 
+                      lexicon = &amp;quot;custom&amp;quot;)) 
+
+words
+#&amp;gt; # A tibble: 159,434 x 2
+#&amp;gt;    title                                                              word      
+#&amp;gt;    &amp;lt;chr&amp;gt;                                                              &amp;lt;chr&amp;gt;     
+#&amp;gt;  1 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ background
+#&amp;gt;  2 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sever     
+#&amp;gt;  3 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
+#&amp;gt;  4 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ syndrom   
+#&amp;gt;  5 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sar       
+#&amp;gt;  6 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ cov       
+#&amp;gt;  7 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ mainli    
+#&amp;gt;  8 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ spread    
+#&amp;gt;  9 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
+#&amp;gt; 10 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ droplet   
+#&amp;gt; # ... with 159,424 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;common-words-and-keywords-extraction&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Common words and keywords extraction&lt;/h1&gt;
+&lt;p&gt;An immediate question is, what are the most common words among all these publications?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;words %&amp;gt;% 
+  count(word, sort = TRUE) %&amp;gt;%
+  top_n(50) %&amp;gt;%
+  ggplot(aes(y = fct_reorder(word, n),
+             x = n)) + 
+  geom_col() + 
+  scale_x_continuous(expand = c(0.01, 0)) + 
+  labs(y = NULL,
+       x = &amp;quot;word counts&amp;quot;,
+       title = &amp;quot;Top 50 common words in COVID-19 publications&amp;quot;) +
+  theme(plot.title.position = &amp;quot;plot&amp;quot;,
+        axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by &lt;span class=&#34;citation&#34;&gt;Monroe, Colaresi, and Quinn (&lt;a href=&#34;#ref-monroe_colaresi_quinn&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt;, which a standardized metric from a complete statistical model. It is also implemented in the R package &lt;a href=&#34;https://github.com/juliasilge/tidylo&#34;&gt;&lt;code&gt;tidylo&lt;/code&gt;&lt;/a&gt;&lt;span class=&#34;citation&#34;&gt;(Schnoebelen and Silge &lt;a href=&#34;#ref-tidylo&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
+words %&amp;gt;%
+  count(title, word) %&amp;gt;% 
+  bind_log_odds(set = title, feature = word, n = n) %&amp;gt;%
+  top_n(20)
+#&amp;gt; # A tibble: 20 x 4
+#&amp;gt;    title                                             word             n log_odds
+#&amp;gt;    &amp;lt;chr&amp;gt;                                             &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt;    &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 A comparative study on the clinical features of ~ ncovid          20     5.06
+#&amp;gt;  2 A high ATP concentration enhances the cooperativ~ duplex          16     4.52
+#&amp;gt;  3 A serological survey of canine respiratory coron~ dog             11     3.53
+#&amp;gt;  4 A survey on awareness of digestive system injury~ 216             16     4.42
+#&amp;gt;  5 A survey on awareness of digestive system injury~ gastroenter~    14     4.23
+#&amp;gt;  6 Analysis of clinical features of 153 patients wi~ cd              12     3.80
+#&amp;gt;  7 Analysis of clinical features of 153 patients wi~ gt              60     4.92
+#&amp;gt;  8 Analysis of clinical features of 153 patients wi~ ital            26     3.59
+#&amp;gt;  9 Analysis of clinical features of 153 patients wi~ lt              74     5.03
+#&amp;gt; 10 Characterization and evolution of the coronaviru~ hljby           12     3.92
+#&amp;gt; 11 Characterization and evolution of the coronaviru~ pedv            21     3.92
+#&amp;gt; 12 Clinical characteristics of 113 deceased patient~ deceas          16     4.42
+#&amp;gt; 13 Construction of 5G intelligent medical service s~ 5g              14     4.23
+#&amp;gt; 14 Frequency and Distribution of Chest Radiographic~ cxr             12     3.92
+#&amp;gt; 15 Genetic, antigenic and pathogenic characterizati~ phcov           10     3.58
+#&amp;gt; 16 Medicinal chemistry strategies toward host targe~ hta             10     3.57
+#&amp;gt; 17 Pregnant women with new coronavirus infection: a~ placenta        14     3.76
+#&amp;gt; 18 Retrospective study of low-to-moderate dose gluc~ iqr             20     4.24
+#&amp;gt; 19 The clinical study on the relationship between s~ lym             14     3.54
+#&amp;gt; 20 Thoughts and suggestions on modern construction ~ modern          20     4.44&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fit-a-lda-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Fit a LDA model&lt;/h1&gt;
+&lt;p&gt;Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using &lt;code&gt;cast_dtm&lt;/code&gt;. There are various implementations of this kind of model, here I use &lt;code&gt;topicmodels::LDA()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dtm &amp;lt;- cast_dtm(words %&amp;gt;% count(title, word),
+                term = word,
+                document = title,
+                value = n)
+
+library(topicmodels)
+topic_model &amp;lt;- LDA(dtm, k = 6, method = &amp;quot;Gibbs&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Topic-term distributions are accessed by &lt;code&gt;tidy()&lt;/code&gt;, this gives a glance of the underlying meanin of these topics:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# topic-term distribution
+tidy(topic_model) %&amp;gt;% 
+  group_by(topic) %&amp;gt;% 
+  top_n(10) %&amp;gt;% 
+  ungroup() %&amp;gt;%
+  mutate(topic = factor(topic) %&amp;gt;% str_c(&amp;quot;topic&amp;quot;, .)) %&amp;gt;% 
+  ggplot(aes(y = reorder_within(term, beta, topic),
+         x = beta,
+         fill = topic)) + 
+  geom_col(show.legend = FALSE) + 
+  scale_y_reordered() + 
+  facet_wrap(~ topic, scales = &amp;quot;free_y&amp;quot;, nrow = 3) + 
+  labs(y = NULL,
+       x = &amp;quot;Docuemtn-term probabilities&amp;quot;,
+       title = &amp;quot;A 6-topic LDA model on abstract&amp;quot;) + 
+  theme(plot.title.position = &amp;quot;plot&amp;quot;,
+        axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;a-network-of-paired-words&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;A network of paired words&lt;/h1&gt;
+&lt;p&gt;Another question of interest is the relationship between words: what group of words tend to appear together? I look at the &lt;a href=&#34;https://en.wikipedia.org/wiki/Phi_coefficient&#34;&gt;phi coefficient&lt;/a&gt;, which is essentailly &lt;span class=&#34;math inline&#34;&gt;\(\chi^2\)&lt;/span&gt; statistc in a contingency table applied to categorical variables.&lt;/p&gt;
+&lt;p&gt;As each abstract is a natual unit of measure, a pair of words that both appear in the same abstract are seen as “appearing together”. We could compute &lt;span class=&#34;math inline&#34;&gt;\(\phi\)&lt;/span&gt; based on pairwise counts:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(widyr)
+
+word_cors &amp;lt;- words %&amp;gt;% 
+  add_count(word) %&amp;gt;% 
+  filter(n &amp;gt; 20) %&amp;gt;%
+  select(-n) %&amp;gt;%
+  pairwise_cor(item = word, feature = title, sort = TRUE)
+
+word_cors
+#&amp;gt; # A tibble: 1,386,506 x 3
+#&amp;gt;    item1     item2     correlation
+#&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 65288     65289           0.960
+#&amp;gt;  2 65289     65288           0.960
+#&amp;gt;  3 lopinavir ritonavir       0.955
+#&amp;gt;  4 ritonavir lopinavir       0.955
+#&amp;gt;  5 reserv    copyright       0.947
+#&amp;gt;  6 copyright reserv          0.947
+#&amp;gt;  7 glass     ground          0.946
+#&amp;gt;  8 ground    glass           0.946
+#&amp;gt;  9 effus     pleural         0.940
+#&amp;gt; 10 pleural   effus           0.940
+#&amp;gt; # ... with 1,386,496 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A network visualization of word correlation is a good idea:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggraph)
+library(tidygraph)
+
+word_cors %&amp;gt;% 
+  filter(correlation &amp;gt; 0.4) %&amp;gt;% 
+  as_tbl_graph() %&amp;gt;% 
+  ggraph(layout = &amp;quot;fr&amp;quot;) + 
+  geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
+  geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 5.5) + 
+  geom_node_text(aes(label = name), repel = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-monroe_colaresi_quinn&#34;&gt;
+&lt;p&gt;Monroe, Burt L., Michael P. Colaresi, and Kevin M. Quinn. 2008. “Fightin’ Words: Lexical Feature Selection and Evaluation for Identifying the Content of Political Conflict.” &lt;em&gt;Political Analysis&lt;/em&gt; 16 (4): 372–403. &lt;a href=&#34;https://doi.org/10.1093/pan/mpn018&#34;&gt;https://doi.org/10.1093/pan/mpn018&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-tidylo&#34;&gt;
+&lt;p&gt;Schnoebelen, Tyler, and Julia Silge. 2020. &lt;em&gt;Tidylo: Tidy Log Odds Ratio Weighted by Uninformative Prior&lt;/em&gt;. &lt;a href=&#34;http://github.com/juliasilge/tidylo&#34;&gt;http://github.com/juliasilge/tidylo&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

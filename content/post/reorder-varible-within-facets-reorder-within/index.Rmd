@@ -8,6 +8,8 @@ image:
   caption: "Photo by [Leah Kelley](https://www.pexels.com/@leah-kelley-50725)"
   focal_point: ""
   preview_only: true
+categories:
+  - R
 
 summary: '{ggetxt} provides convenient yet less-recognized graphing helpers to reorder an x or y axis within facets.'
 lastmod: '2020-04-05T21:38:24+08:00'

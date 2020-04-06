@@ -2,9 +2,12 @@
 title: 'Interactive view of nested objects in R: {listviewer}'
 author: Qiushi Yan
 date: '2019-11-30'
-slug: interactive-view-of-nested-objects-list-viewer
+slug: view-of-nested-objects-listviewer
 
 summary: '{listviewer} is a package of R htmlwidgets to interactively view and maybe modify lists'
+
+categories:
+  - R
 
 lastmod: '2019-11-30T14:04:22+08:00'
 link-citations: yes

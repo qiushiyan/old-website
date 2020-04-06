@@ -8,6 +8,10 @@ lastmod: '2020-04-06T12:54:24+08:00'
 featured: no
 bibliography: ../bib/covid19.bib
 link-citations: yes
+
+categories:
+  - Data Analysis
+
 image:
   caption: 'Image by [cottonbro](https://www.pexels.com/@cottonbro)'
   focal_point: ''
@@ -30,11 +34,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE,
 
 ```{r}
 library(tidyverse)
-library(showtext)
-font_add_google("Fira Sans")
-showtext_auto()
-theme_set(theme_light(base_family = "Fira Sans",
-                      base_size = 18))
+theme_set(theme_light(base_size = 18))
 
 
 raw <- read_csv("covid-research.csv") %>% 
@@ -82,7 +82,9 @@ words %>%
   scale_x_continuous(expand = c(0.01, 0)) + 
   labs(y = NULL,
        x = "word counts",
-       title = "Top 50 common words in COVID-19 publications") 
+       title = "Top 50 common words in COVID-19 publications") +
+  theme(plot.title.position = "plot",
+        axis.ticks.y = element_blank())
 ```
 
 I'm also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by @monroe_colaresi_quinn, which a standardized metric from a complete statistical model. It is also implemented in the R package [`tidylo`](https://github.com/juliasilge/tidylo)[@tidylo]. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:  
@@ -97,7 +99,7 @@ words %>%
 
 # Fit a LDA model  
 
-Let's then fit a 5-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using `cast_dtm`. There are various implementations of this kind of model, here I use `topicmodels::LDA()`.    
+Let's then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using `cast_dtm`. There are various implementations of this kind of model, here I use `topicmodels::LDA()`.    
 
 ```{r}
 dtm <- cast_dtm(words %>% count(title, word),
@@ -126,7 +128,9 @@ tidy(topic_model) %>%
   facet_wrap(~ topic, scales = "free_y", nrow = 3) + 
   labs(y = NULL,
        x = "Docuemtn-term probabilities",
-       title = "A 6-topic LDA model on abstract")
+       title = "A 6-topic LDA model on abstract") + 
+  theme(plot.title.position = "plot",
+        axis.ticks.y = element_blank())
 ```
 
 

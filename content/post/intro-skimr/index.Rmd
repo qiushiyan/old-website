@@ -9,6 +9,8 @@ summary: 'Develpoed by the rOpenSci conmmunity, skimr is designed to provide use
 bibliography: ../bib/introduction-to-skimr.bib
 link-citations: true
 lastmod: '2020-04-05T23:27:44+08:00'
+categories:
+  - R
 
 image:
   caption: 'Photo by [Josh Sorenson](https://www.pexels.com/@joshsorenson)'

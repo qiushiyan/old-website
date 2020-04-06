@@ -8,6 +8,10 @@ lastmod: '2020-04-06T12:54:24+08:00'
 featured: no
 bibliography: ../bib/covid19.bib
 link-citations: yes
+
+categories:
+  - Data Analysis
+
 image:
   caption: 'Image by [cottonbro](https://www.pexels.com/@cottonbro)'
   focal_point: ''
@@ -30,11 +34,7 @@ image:
 <div id="data-preprocessing" class="section level1">
 <h1>Data preprocessing</h1>
 <pre class="r"><code>library(tidyverse)
-library(showtext)
-font_add_google(&quot;Fira Sans&quot;)
-showtext_auto()
-theme_set(theme_light(base_family = &quot;Fira Sans&quot;,
-                      base_size = 18))
+theme_set(theme_light(base_size = 18))
 
 
 raw &lt;- read_csv(&quot;covid-research.csv&quot;) %&gt;% 
@@ -103,7 +103,9 @@ words
   scale_x_continuous(expand = c(0.01, 0)) + 
   labs(y = NULL,
        x = &quot;word counts&quot;,
-       title = &quot;Top 50 common words in COVID-19 publications&quot;) </code></pre>
+       title = &quot;Top 50 common words in COVID-19 publications&quot;) +
+  theme(plot.title.position = &quot;plot&quot;,
+        axis.ticks.y = element_blank())</code></pre>
 <p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-5-1.png" width="1152" /></p>
 <p>I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by <span class="citation">Monroe, Colaresi, and Quinn (<a href="#ref-monroe_colaresi_quinn" role="doc-biblioref">2008</a>)</span>, which a standardized metric from a complete statistical model. It is also implemented in the R package <a href="https://github.com/juliasilge/tidylo"><code>tidylo</code></a><span class="citation">(Schnoebelen and Silge <a href="#ref-tidylo" role="doc-biblioref">2020</a>)</span>. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:</p>
 <pre class="r"><code>library(tidylo)
@@ -137,7 +139,7 @@ words %&gt;%
 </div>
 <div id="fit-a-lda-model" class="section level1">
 <h1>Fit a LDA model</h1>
-<p>Let’s then fit a 5-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using <code>cast_dtm</code>. There are various implementations of this kind of model, here I use <code>topicmodels::LDA()</code>.</p>
+<p>Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using <code>cast_dtm</code>. There are various implementations of this kind of model, here I use <code>topicmodels::LDA()</code>.</p>
 <pre class="r"><code>dtm &lt;- cast_dtm(words %&gt;% count(title, word),
                 term = word,
                 document = title,
@@ -160,7 +162,9 @@ tidy(topic_model) %&gt;%
   facet_wrap(~ topic, scales = &quot;free_y&quot;, nrow = 3) + 
   labs(y = NULL,
        x = &quot;Docuemtn-term probabilities&quot;,
-       title = &quot;A 6-topic LDA model on abstract&quot;)</code></pre>
+       title = &quot;A 6-topic LDA model on abstract&quot;) + 
+  theme(plot.title.position = &quot;plot&quot;,
+        axis.ticks.y = element_blank())</code></pre>
 <p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-8-1.png" width="1152" /></p>
 </div>
 <div id="a-network-of-paired-words" class="section level1">

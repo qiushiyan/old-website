@@ -9,6 +9,9 @@ image:
   caption: "Source: https://smartodds.blog/2018/10/12/famous-statisticians-john-tukey/"
   focal_point: ""
   preview_only: true
+  
+categories:
+  - Readings
 
 bibliography: ../bib/50-years-of-data-science.bib
 link-citations: true

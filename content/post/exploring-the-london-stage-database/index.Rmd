@@ -6,7 +6,8 @@ slug: exploring-the-london-stage-database
 
 summary: 'A little playing with London Stage Database'
 lastmod: '2020-04-05T14:09:39+08:00'
-
+categories:
+  - Data Analysis
 
 image:
   placement: 2

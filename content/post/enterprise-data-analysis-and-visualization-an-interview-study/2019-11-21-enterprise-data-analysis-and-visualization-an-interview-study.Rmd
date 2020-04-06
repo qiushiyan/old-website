@@ -4,13 +4,8 @@ author: Qiushi Yan
 date: '2019-11-21'
 slug: enterprise-data-analysis-and-visualization-an-interview-study
 categories:
-  - Reading Notes
-tags:
-  - Data Science
-subtitle: ''
+  - Readings
 summary: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer'
-description: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer'
-authors: []
 lastmod: '2019-11-21T18:42:03+08:00'
 bibliography: ../bib/enterprise-data-analysis-and-visualization-an-interview-study.bib
 biblio-style: "apalike"
@@ -18,7 +13,7 @@ link-citations: true
 ---
 
 
-**"Enterprise Data Analysis and Visualization: An Interview Study"** is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, @2012-enterprise-analysis-interviews provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.  
+*Enterprise Data Analysis and Visualization: An Interview Study* is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, @2012-enterprise-analysis-interviews provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.  
 
 
 

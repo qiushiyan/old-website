@@ -32,5 +32,5 @@ user_groups:
 
 I'm currently a junior majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in `#rstats`.
 
-I take equal delight in ancient Chinese literature, game theory, network analysis and sports statistics. My favourite author is Bertrand Russell.:black_nib: 
+I take equal delight in ancient Chinese literature, game theory, network analysis and sports statistics. My favourite author is Bertrand Russell. :black_nib: 
 

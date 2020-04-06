@@ -5,11 +5,11 @@ name = "qiushi"
 google_fonts = "Arapey:400,400i|Karla:400,700|Roboto+Mono"
 
 # Font families
-heading_font = "Merriweather"
+heading_font = "Arapey"
 body_font = "Karla"
 nav_font = "Josefin Slab"
 mono_font = "Roboto Mono"
 
 # Font size
-font_size_medium = "18.5"
-font_size_small = "16.5"
+font_size = "20.5"
+font_size_small = "18.5"

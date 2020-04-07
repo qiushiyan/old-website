@@ -17,7 +17,11 @@
   name = "Posts"
   url = "#post"
   weight = 30
-
+  
+[[main]]
+  name = "About / Contact"
+  url = "/about"
+  weight = 40
   
 # [[main]]
 #   name = "Topics"

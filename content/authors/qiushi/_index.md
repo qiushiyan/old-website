@@ -1,7 +1,7 @@
 ---
 authors:
-- admin
-bio: Yet another rstats guy
+- qiushi
+bio: Yet another object of type closure
 education:
   courses:
   - course: BA in Data Journalism
@@ -10,7 +10,7 @@ education:
 email: "565702994@qq.com"
 interests:
 - R, Statistics, Visualization
-- Game Theory
+- Predictive modeling & machine learning
 - Ancient Chinese Literature
 name: Qiushi Yan
 organizations:
@@ -18,12 +18,15 @@ organizations:
   url: "http://www.cuc.edu.cn/"
 role: Junior student, Data Journalism
 social:
-- icon: envelope
-  icon_pack: fas
-  link: '#contact'
 - icon: github
   icon_pack: fab
   link: https://github.com/enixam
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/qiushizzzz
+- icon: address-card
+  icon_pack: fas
+  link: '/about'
 superuser: true
 user_groups:
 - Researchers

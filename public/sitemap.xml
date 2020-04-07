@@ -3,6 +3,14 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/about/pre-about-me/</loc>
+  </url>
+  
+  <url>
+    <loc>/about/about-me/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <lastmod>2020-04-07T15:48:14+08:00</lastmod>
   </url>
@@ -163,7 +171,11 @@
   </url>
   
   <url>
-    <loc>/authors/admin/</loc>
+    <loc>/authors/qiushi/</loc>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
   </url>
   
   <url>

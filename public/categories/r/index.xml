@@ -5,12 +5,223 @@
     <link>/categories/r/</link>
       <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>R</title>
       <link>/categories/r/</link>
     </image>
+    
+    <item>
+      <title>Using {infer} for Tidy Statistical Inference</title>
+      <link>/post/2020-04-07-using-infer-for-tidy-statistical-inference/</link>
+      <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-04-07-using-infer-for-tidy-statistical-inference/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#confidence-interval&#34;&gt;Confidence interval&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#difference-in-proportions&#34;&gt;Difference in proportions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#t-test&#34;&gt;t-test&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#one-sample-t-test&#34;&gt;One sample t test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#two-sample-t-test&#34;&gt;Two sample t test&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#chi-square-test&#34;&gt;Chi-square test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(infer) 
+theme_set(theme_light())&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;titanic &amp;lt;- Titanic %&amp;gt;% 
+  as_tibble() %&amp;gt;% 
+  uncount(n) %&amp;gt;% 
+  janitor::clean_names()
+
+titanic
+#&amp;gt; # A tibble: 2,201 x 4
+#&amp;gt;    class sex   age   survived
+#&amp;gt;    &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;   
+#&amp;gt;  1 3rd   Male  Child No      
+#&amp;gt;  2 3rd   Male  Child No      
+#&amp;gt;  3 3rd   Male  Child No      
+#&amp;gt;  4 3rd   Male  Child No      
+#&amp;gt;  5 3rd   Male  Child No      
+#&amp;gt;  6 3rd   Male  Child No      
+#&amp;gt;  7 3rd   Male  Child No      
+#&amp;gt;  8 3rd   Male  Child No      
+#&amp;gt;  9 3rd   Male  Child No      
+#&amp;gt; 10 3rd   Male  Child No      
+#&amp;gt; # ... with 2,191 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;confidence-interval&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Confidence interval&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;difference-in-proportions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Difference in proportions&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;obs_stat &amp;lt;- titanic %&amp;gt;% 
+  specify(survived ~ sex, success = &amp;quot;Yes&amp;quot;) %&amp;gt;%
+  calculate(stat = &amp;quot;diff in props&amp;quot;, order = c(&amp;quot;Female&amp;quot;, &amp;quot;Male&amp;quot;)) 
+
+null_distribution &amp;lt;- titanic %&amp;gt;% 
+  specify(survived ~ sex, success = &amp;quot;Yes&amp;quot;) %&amp;gt;% 
+  hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;%
+  generate(reps = 1000, type = &amp;quot;permute&amp;quot;) %&amp;gt;% 
+  calculate(stat = &amp;quot;diff in props&amp;quot;, order = c(&amp;quot;Female&amp;quot;, &amp;quot;Male&amp;quot;)) 
+
+ci &amp;lt;- null_distribution %&amp;gt;% 
+ get_ci(level = 0.95, type = &amp;quot;percentile&amp;quot;)
+
+null_distribution %&amp;gt;% 
+  visualise() +
+  shade_ci(endpoints = ci) + 
+  shade_p_value(obs_stat = obs_stat, direction = &amp;quot;greater&amp;quot;)  &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;t-test&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;t-test&lt;/h1&gt;
+&lt;div id=&#34;one-sample-t-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;One sample t test&lt;/h2&gt;
+&lt;p&gt;The data I used this t test section comes from &lt;code&gt;moderndive&lt;/code&gt; package and book &lt;span class=&#34;citation&#34;&gt;(Ismay and Kim &lt;a href=&#34;#ref-moderndive&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;, which actually first introduced to the &lt;code&gt;infer&lt;/code&gt; package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(moderndive)
+movies_sample
+#&amp;gt; # A tibble: 68 x 4
+#&amp;gt;    title                     year rating genre  
+#&amp;gt;    &amp;lt;chr&amp;gt;                    &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;  
+#&amp;gt;  1 Underworld                1985    3.1 Action 
+#&amp;gt;  2 Love Affair               1932    6.3 Romance
+#&amp;gt;  3 Junglee                   1961    6.8 Romance
+#&amp;gt;  4 Eversmile, New Jersey     1989    5   Romance
+#&amp;gt;  5 Search and Destroy        1979    4   Action 
+#&amp;gt;  6 Secreto de Romelia, El    1988    4.9 Romance
+#&amp;gt;  7 Amants du Pont-Neuf, Les  1991    7.4 Romance
+#&amp;gt;  8 Illicit Dreams            1995    3.5 Action 
+#&amp;gt;  9 Kabhi Kabhie              1976    7.7 Romance
+#&amp;gt; 10 Electric Horseman, The    1979    5.8 Romance
+#&amp;gt; # ... with 58 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since we are conducting a one-sample t test, the hypothesis is quite simple. We want to test if the average rating of all movies equals to 4, that is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+H_0: \mu = 5.5 \\
+H_1: \mu \not= 5.5
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;obs_stat &amp;lt;- movies_sample %&amp;gt;% 
+  specify(response = rating) %&amp;gt;% 
+  calculate(&amp;quot;mean&amp;quot;)
+
+null_distribution &amp;lt;- movies_sample %&amp;gt;% 
+  specify(response = rating) %&amp;gt;%
+  hypothesize(null = &amp;quot;point&amp;quot;, mu = 5.5) %&amp;gt;%
+  generate(reps = 1000, type = &amp;quot;bootstrap&amp;quot;) %&amp;gt;% 
+  calculate(stat = &amp;quot;mean&amp;quot;)
+
+
+null_distribution %&amp;gt;% 
+  visualize() +
+  shade_p_value(obs_stat = obs_stat, direction = &amp;quot;both&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+null_distribution %&amp;gt;% 
+  get_p_value(obs_stat = obs_stat, direction = &amp;quot;both&amp;quot;)
+#&amp;gt; # A tibble: 1 x 1
+#&amp;gt;   p_value
+#&amp;gt;     &amp;lt;dbl&amp;gt;
+#&amp;gt; 1   0.084&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;two-sample-t-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Two sample t test&lt;/h2&gt;
+&lt;p&gt;Continue with the &lt;code&gt;movies_sample&lt;/code&gt; data. Now we are interested in whether &lt;code&gt;Action&lt;/code&gt; or &lt;code&gt;Romance&lt;/code&gt; movies got a higher rating on average. Denote the the true mean of Action and Roamnce movies by &lt;span class=&#34;math inline&#34;&gt;\(\mu_1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mu_2\)&lt;/span&gt; respectively, that is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+H_0: \mu_1 = \mu_2 \\
+H_1: \mu_1 &amp;gt; \mu_2
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Two sample t test assumes that scores in both genre are normally distributed and each sample is taken independently:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(movies_sample, aes(rating)) + 
+  geom_histogram() + 
+  facet_wrap(~ genre)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If we We have t-statistic with &lt;em&gt;rough&lt;/em&gt; dof tunder the null hypothesis:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\frac{\mu_1 - \mu_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} \sim t_{n_1 + n_2 - 3} 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;obs_stat &amp;lt;- movies_sample %&amp;gt;% 
+  specify(rating ~ genre) %&amp;gt;% 
+  calculate(stat = &amp;quot;t&amp;quot;, order = c(&amp;quot;Action&amp;quot;, &amp;quot;Romance&amp;quot;))
+
+null_distribution &amp;lt;- movies_sample %&amp;gt;% 
+  specify(rating ~ genre) %&amp;gt;% 
+  hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;% 
+  generate(reps = 1000, type = &amp;quot;permute&amp;quot;) %&amp;gt;% 
+  calculate(stat = &amp;quot;t&amp;quot;, order = c(&amp;quot;Action&amp;quot;, &amp;quot;Romance&amp;quot;))
+
+null_distribution %&amp;gt;% 
+  visualize() + 
+  shade_p_value(obs_stat = obs_stat, direction = &amp;quot;greater&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+null_distribution %&amp;gt;% 
+  get_p_value(obs_stat = obs_stat, direction = &amp;quot;greater&amp;quot;)
+#&amp;gt; # A tibble: 1 x 1
+#&amp;gt;   p_value
+#&amp;gt;     &amp;lt;dbl&amp;gt;
+#&amp;gt; 1   0.998&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Without relying on t-statistic:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;obs_stat &amp;lt;- movies_sample %&amp;gt;% 
+  specify(rating ~ genre) %&amp;gt;% 
+  calculate(stat = &amp;quot;diff in means&amp;quot;, order = c(&amp;quot;Action&amp;quot;, &amp;quot;Romance&amp;quot;))
+
+null_distribution &amp;lt;- movies_sample %&amp;gt;% 
+  specify(rating ~ genre) %&amp;gt;% 
+  hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;% 
+  generate(reps = 1000, type = &amp;quot;permute&amp;quot;) %&amp;gt;% 
+  calculate(stat = &amp;quot;diff in means&amp;quot;, order = c(&amp;quot;Action&amp;quot;, &amp;quot;Romance&amp;quot;))
+
+
+null_distribution %&amp;gt;% 
+  visualize() + 
+  shade_p_value(obs_stat = obs_stat, direction = &amp;quot;greater&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+null_distribution %&amp;gt;% 
+  get_p_value(obs_stat = obs_stat， direction = &amp;quot;greater&amp;quot;)
+#&amp;gt; # A tibble: 1 x 1
+#&amp;gt;   p_value
+#&amp;gt;     &amp;lt;dbl&amp;gt;
+#&amp;gt; 1   0.997&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;chi-square-test&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Chi-square test&lt;/h1&gt;
+&lt;p&gt;Is sex correlated with class?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(titanic) + 
+  geom_bar(aes(class, fill = sex))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;obs_stat &amp;lt;- titanic %&amp;gt;% 
+    specify(class ~ sex) %&amp;gt;% # alternative: response = class, explanatory = sex
+    calculate(stat = &amp;quot;Chisq&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;chisq_null_permutation &amp;lt;- titanic %&amp;gt;%
+  specify(class ~ sex) %&amp;gt;% 
+  hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;%
+  generate(reps = 1000, type = &amp;quot;permute&amp;quot;) %&amp;gt;%
+  calculate(stat = &amp;quot;Chisq&amp;quot;)
+
+chisq_null_permutation %&amp;gt;% 
+  visualize() + 
+  shade_p_value(obs_stat = obs_stat, direction = &amp;quot;greater&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;As it is, I do not think &lt;code&gt;infer&lt;/code&gt; somehow has a significant advantage over its counterparts in base R, say &lt;code&gt;t.test()&lt;/code&gt;, &lt;code&gt;anova()&lt;/code&gt;, and &lt;code&gt;boot()&lt;/code&gt;, or other “non-tidy” packages in terms of common statistical inference procedure. While functions like &lt;code&gt;specify&lt;/code&gt;, &lt;code&gt;hypothesize&lt;/code&gt;, &lt;code&gt;generate&lt;/code&gt;, &lt;code&gt;visualize&lt;/code&gt; adhere nicely to the tidyverse principles of “providing English-like verbs that do one job at a time”, it is, in many cases, prone to verbosity. This is not to say that the idea of a unified interface in classical inference is bad, but that the sheer volumn of statistical tests and its variants have made impossible a complete framework. Perhaps it is more that R, as a programming language designed originally for statisticians, has long since been equipped with powerful inference tookits implemented separately to which many of us are exposed in our first R lesson. And I think one of the reasons that ggplot2 has gained such popularity is that plotting in base R is rather an arduous task, at any rate for me at first.&lt;/p&gt;
+&lt;p&gt;That said, I have to confess that I have only done one or two tests after finishing my introductory statistics class, and it seems classical inference is in decline particularly when p-value has been vehemently criticized and the big data meme shifted the interests of many statisticians elsewhere. It’s still good to see this type of friendly syntax in doing simple inferential statistics.&lt;/p&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-moderndive&#34;&gt;
+&lt;p&gt;Ismay, Chester, and Albert Kim. 2019. &lt;em&gt;Statistical Inference via Data Science: A Moderndive into R and the Tidyverse&lt;/em&gt;. &lt;a href=&#34;https://doi.org/10.1201/9780367409913&#34;&gt;https://doi.org/10.1201/9780367409913&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Interactive view of nested objects in R</title>

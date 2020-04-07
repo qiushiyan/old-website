@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.6.1">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Qiushi Yan">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="A note to self on conducting statistical inference using the {infer} package">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2020-04-07-using-infer-for-tidy-statistical-inference/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#328cc1">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2020-04-07-using-infer-for-tidy-statistical-inference/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@qiushizzzz">
+  <meta property="twitter:creator" content="@qiushizzzz">
+  
+  <meta property="og:site_name" content="Qiushi Yan">
+  <meta property="og:url" content="/post/2020-04-07-using-infer-for-tidy-statistical-inference/">
+  <meta property="og:title" content="Using {infer} for Tidy Statistical Inference | Qiushi Yan">
+  <meta property="og:description" content="A note to self on conducting statistical inference using the {infer} package"><meta property="og:image" content="/post/2020-04-07-using-infer-for-tidy-statistical-inference/featured.jpg">
+  <meta property="twitter:image" content="/post/2020-04-07-using-infer-for-tidy-statistical-inference/featured.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-04-07T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-04-07T15:48:14&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/2020-04-07-using-infer-for-tidy-statistical-inference/"
+  },
+  "headline": "Using {infer} for Tidy Statistical Inference",
+  
+  "image": [
+    "/post/2020-04-07-using-infer-for-tidy-statistical-inference/featured.jpg"
+  ],
+  
+  "datePublished": "2020-04-07T00:00:00Z",
+  "dateModified": "2020-04-07T15:48:14+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Qiushi Yan"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Qiushi Yan",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "A note to self on conducting statistical inference using the {infer} package"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Using {infer} for Tidy Statistical Inference | Qiushi Yan</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    
+    
+      <a class="navbar-brand" href="/">Qiushi Yan</a>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#post"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Using {infer} for Tidy Statistical Inference</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Apr 7, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/2020-04-07-using-infer-for-tidy-statistical-inference/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/statistics/">Statistics</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 480px;">
+  <div style="position: relative">
+    <img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/featured_hu3d03a01dcc18bc5be0e67db3d8d209a6_7315263_720x0_resize_q90_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Photo by <a href="https://www.pexels.com/@timmossholder">Tim Mossholder</a></span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#confidence-interval">Confidence interval</a></li>
+<li><a href="#difference-in-proportions">Difference in proportions</a></li>
+<li><a href="#t-test">t-test</a><ul>
+<li><a href="#one-sample-t-test">One sample t test</a></li>
+<li><a href="#two-sample-t-test">Two sample t test</a></li>
+</ul></li>
+<li><a href="#chi-square-test">Chi-square test</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</div>
+
+<pre class="r"><code>library(tidyverse)
+library(infer) 
+theme_set(theme_light())</code></pre>
+<pre class="r"><code>titanic &lt;- Titanic %&gt;% 
+  as_tibble() %&gt;% 
+  uncount(n) %&gt;% 
+  janitor::clean_names()
+
+titanic
+#&gt; # A tibble: 2,201 x 4
+#&gt;    class sex   age   survived
+#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   
+#&gt;  1 3rd   Male  Child No      
+#&gt;  2 3rd   Male  Child No      
+#&gt;  3 3rd   Male  Child No      
+#&gt;  4 3rd   Male  Child No      
+#&gt;  5 3rd   Male  Child No      
+#&gt;  6 3rd   Male  Child No      
+#&gt;  7 3rd   Male  Child No      
+#&gt;  8 3rd   Male  Child No      
+#&gt;  9 3rd   Male  Child No      
+#&gt; 10 3rd   Male  Child No      
+#&gt; # ... with 2,191 more rows</code></pre>
+<div id="confidence-interval" class="section level1">
+<h1>Confidence interval</h1>
+</div>
+<div id="difference-in-proportions" class="section level1">
+<h1>Difference in proportions</h1>
+<pre class="r"><code>obs_stat &lt;- titanic %&gt;% 
+  specify(survived ~ sex, success = &quot;Yes&quot;) %&gt;%
+  calculate(stat = &quot;diff in props&quot;, order = c(&quot;Female&quot;, &quot;Male&quot;)) 
+
+null_distribution &lt;- titanic %&gt;% 
+  specify(survived ~ sex, success = &quot;Yes&quot;) %&gt;% 
+  hypothesize(null = &quot;independence&quot;) %&gt;%
+  generate(reps = 1000, type = &quot;permute&quot;) %&gt;% 
+  calculate(stat = &quot;diff in props&quot;, order = c(&quot;Female&quot;, &quot;Male&quot;)) 
+
+ci &lt;- null_distribution %&gt;% 
+ get_ci(level = 0.95, type = &quot;percentile&quot;)
+
+null_distribution %&gt;% 
+  visualise() +
+  shade_ci(endpoints = ci) + 
+  shade_p_value(obs_stat = obs_stat, direction = &quot;greater&quot;)  </code></pre>
+<p><img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
+</div>
+<div id="t-test" class="section level1">
+<h1>t-test</h1>
+<div id="one-sample-t-test" class="section level2">
+<h2>One sample t test</h2>
+<p>The data I used this t test section comes from <code>moderndive</code> package and book <span class="citation">(Ismay and Kim <a href="#ref-moderndive" role="doc-biblioref">2019</a>)</span>, which actually first introduced to the <code>infer</code> package.</p>
+<pre class="r"><code>library(moderndive)
+movies_sample
+#&gt; # A tibble: 68 x 4
+#&gt;    title                     year rating genre  
+#&gt;    &lt;chr&gt;                    &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;  
+#&gt;  1 Underworld                1985    3.1 Action 
+#&gt;  2 Love Affair               1932    6.3 Romance
+#&gt;  3 Junglee                   1961    6.8 Romance
+#&gt;  4 Eversmile, New Jersey     1989    5   Romance
+#&gt;  5 Search and Destroy        1979    4   Action 
+#&gt;  6 Secreto de Romelia, El    1988    4.9 Romance
+#&gt;  7 Amants du Pont-Neuf, Les  1991    7.4 Romance
+#&gt;  8 Illicit Dreams            1995    3.5 Action 
+#&gt;  9 Kabhi Kabhie              1976    7.7 Romance
+#&gt; 10 Electric Horseman, The    1979    5.8 Romance
+#&gt; # ... with 58 more rows</code></pre>
+<p>Since we are conducting a one-sample t test, the hypothesis is quite simple. We want to test if the average rating of all movies equals to 4, that is</p>
+<p><span class="math display">\[
+H_0: \mu = 5.5 \\
+H_1: \mu \not= 5.5
+\]</span></p>
+<pre class="r"><code>obs_stat &lt;- movies_sample %&gt;% 
+  specify(response = rating) %&gt;% 
+  calculate(&quot;mean&quot;)
+
+null_distribution &lt;- movies_sample %&gt;% 
+  specify(response = rating) %&gt;%
+  hypothesize(null = &quot;point&quot;, mu = 5.5) %&gt;%
+  generate(reps = 1000, type = &quot;bootstrap&quot;) %&gt;% 
+  calculate(stat = &quot;mean&quot;)
+
+
+null_distribution %&gt;% 
+  visualize() +
+  shade_p_value(obs_stat = obs_stat, direction = &quot;both&quot;)</code></pre>
+<p><img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
+<pre class="r"><code>
+null_distribution %&gt;% 
+  get_p_value(obs_stat = obs_stat, direction = &quot;both&quot;)
+#&gt; # A tibble: 1 x 1
+#&gt;   p_value
+#&gt;     &lt;dbl&gt;
+#&gt; 1   0.084</code></pre>
+</div>
+<div id="two-sample-t-test" class="section level2">
+<h2>Two sample t test</h2>
+<p>Continue with the <code>movies_sample</code> data. Now we are interested in whether <code>Action</code> or <code>Romance</code> movies got a higher rating on average. Denote the the true mean of Action and Roamnce movies by <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span> respectively, that is</p>
+<p><span class="math display">\[
+H_0: \mu_1 = \mu_2 \\
+H_1: \mu_1 &gt; \mu_2
+\]</span></p>
+<p>Two sample t test assumes that scores in both genre are normally distributed and each sample is taken independently:</p>
+<pre class="r"><code>ggplot(movies_sample, aes(rating)) + 
+  geom_histogram() + 
+  facet_wrap(~ genre)</code></pre>
+<p><img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
+<p>If we We have t-statistic with <em>rough</em> dof tunder the null hypothesis:</p>
+<p><span class="math display">\[
+\frac{\mu_1 - \mu_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} \sim t_{n_1 + n_2 - 3} 
+\]</span></p>
+<pre class="r"><code>obs_stat &lt;- movies_sample %&gt;% 
+  specify(rating ~ genre) %&gt;% 
+  calculate(stat = &quot;t&quot;, order = c(&quot;Action&quot;, &quot;Romance&quot;))
+
+null_distribution &lt;- movies_sample %&gt;% 
+  specify(rating ~ genre) %&gt;% 
+  hypothesize(null = &quot;independence&quot;) %&gt;% 
+  generate(reps = 1000, type = &quot;permute&quot;) %&gt;% 
+  calculate(stat = &quot;t&quot;, order = c(&quot;Action&quot;, &quot;Romance&quot;))
+
+null_distribution %&gt;% 
+  visualize() + 
+  shade_p_value(obs_stat = obs_stat, direction = &quot;greater&quot;)</code></pre>
+<p><img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
+<pre class="r"><code>
+null_distribution %&gt;% 
+  get_p_value(obs_stat = obs_stat, direction = &quot;greater&quot;)
+#&gt; # A tibble: 1 x 1
+#&gt;   p_value
+#&gt;     &lt;dbl&gt;
+#&gt; 1   0.998</code></pre>
+<p>Without relying on t-statistic:</p>
+<pre class="r"><code>obs_stat &lt;- movies_sample %&gt;% 
+  specify(rating ~ genre) %&gt;% 
+  calculate(stat = &quot;diff in means&quot;, order = c(&quot;Action&quot;, &quot;Romance&quot;))
+
+null_distribution &lt;- movies_sample %&gt;% 
+  specify(rating ~ genre) %&gt;% 
+  hypothesize(null = &quot;independence&quot;) %&gt;% 
+  generate(reps = 1000, type = &quot;permute&quot;) %&gt;% 
+  calculate(stat = &quot;diff in means&quot;, order = c(&quot;Action&quot;, &quot;Romance&quot;))
+
+
+null_distribution %&gt;% 
+  visualize() + 
+  shade_p_value(obs_stat = obs_stat, direction = &quot;greater&quot;) </code></pre>
+<p><img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
+<pre class="r"><code>
+null_distribution %&gt;% 
+  get_p_value(obs_stat = obs_stat， direction = &quot;greater&quot;)
+#&gt; # A tibble: 1 x 1
+#&gt;   p_value
+#&gt;     &lt;dbl&gt;
+#&gt; 1   0.997</code></pre>
+</div>
+</div>
+<div id="chi-square-test" class="section level1">
+<h1>Chi-square test</h1>
+<p>Is sex correlated with class?</p>
+<pre class="r"><code>ggplot(titanic) + 
+  geom_bar(aes(class, fill = sex))</code></pre>
+<p><img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<pre class="r"><code>obs_stat &lt;- titanic %&gt;% 
+    specify(class ~ sex) %&gt;% # alternative: response = class, explanatory = sex
+    calculate(stat = &quot;Chisq&quot;)</code></pre>
+<pre class="r"><code>chisq_null_permutation &lt;- titanic %&gt;%
+  specify(class ~ sex) %&gt;% 
+  hypothesize(null = &quot;independence&quot;) %&gt;%
+  generate(reps = 1000, type = &quot;permute&quot;) %&gt;%
+  calculate(stat = &quot;Chisq&quot;)
+
+chisq_null_permutation %&gt;% 
+  visualize() + 
+  shade_p_value(obs_stat = obs_stat, direction = &quot;greater&quot;)</code></pre>
+<p><img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/index_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>As it is, I do not think <code>infer</code> somehow has a significant advantage over its counterparts in base R, say <code>t.test()</code>, <code>anova()</code>, and <code>boot()</code>, or other “non-tidy” packages in terms of common statistical inference procedure. While functions like <code>specify</code>, <code>hypothesize</code>, <code>generate</code>, <code>visualize</code> adhere nicely to the tidyverse principles of “providing English-like verbs that do one job at a time”, it is, in many cases, prone to verbosity. This is not to say that the idea of a unified interface in classical inference is bad, but that the sheer volumn of statistical tests and its variants have made impossible a complete framework. Perhaps it is more that R, as a programming language designed originally for statisticians, has long since been equipped with powerful inference tookits implemented separately to which many of us are exposed in our first R lesson. And I think one of the reasons that ggplot2 has gained such popularity is that plotting in base R is rather an arduous task, at any rate for me at first.</p>
+<p>That said, I have to confess that I have only done one or two tests after finishing my introductory statistics class, and it seems classical inference is in decline particularly when p-value has been vehemently criticized and the big data meme shifted the interests of many statisticians elsewhere. It’s still good to see this type of friendly syntax in doing simple inferential statistics.</p>
+<div id="refs" class="references">
+<div id="ref-moderndive">
+<p>Ismay, Chester, and Albert Kim. 2019. <em>Statistical Inference via Data Science: A Moderndive into R and the Tidyverse</em>. <a href="https://doi.org/10.1201/9780367409913">https://doi.org/10.1201/9780367409913</a>.</p>
+</div>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/2020-04-07-using-infer-for-tidy-statistical-inference/&amp;text=Using%20%7binfer%7d%20for%20Tidy%20Statistical%20Inference" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/2020-04-07-using-infer-for-tidy-statistical-inference/&amp;t=Using%20%7binfer%7d%20for%20Tidy%20Statistical%20Inference" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Using%20%7binfer%7d%20for%20Tidy%20Statistical%20Inference&amp;body=/post/2020-04-07-using-infer-for-tidy-statistical-inference/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/2020-04-07-using-infer-for-tidy-statistical-inference/&amp;title=Using%20%7binfer%7d%20for%20Tidy%20Statistical%20Inference" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Using%20%7binfer%7d%20for%20Tidy%20Statistical%20Inference%20/post/2020-04-07-using-infer-for-tidy-statistical-inference/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/2020-04-07-using-infer-for-tidy-statistical-inference/&amp;title=Using%20%7binfer%7d%20for%20Tidy%20Statistical%20Inference" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu2833603c9957d65d4c6e6cf5762ee973_72134_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Qiushi Yan</a></h5>
+      <h6 class="card-subtitle">Junior student, Data Journalism</h6>
+      <p class="card-text">Yet another rstats guy</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/enixam" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "qiushiyan" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/post/exploring-the-london-stage-database/" rel="next">Exploring the London Stage Database</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/analyzing-covid-19-publications/" rel="prev">Analyzing COVID-19 Publications</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" integrity="sha256-vOIuDSYDirTfyr+S2MjFnhOz6Rgiz4ODFAHATG0rFxw=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.0e040a4c8b8532fc173c2fe4328906d0.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/license/">LICENSE: CC-BY-NC <br> <i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-nc fa-2x"></i> </a><br>
+  </p>
+  
+
+  <p class="powered-by">
+    Qiushi Yan © 2020 &middot; 
+
+    Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and the 
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

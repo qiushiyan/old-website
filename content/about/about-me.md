@@ -47,4 +47,6 @@ subtitle = ""
  css_class = "mini"
 +++
 
-Hello there
+I live in Beijing, China, and am a junior student majoring in Data Journalism. 
+
+TO BE DONE

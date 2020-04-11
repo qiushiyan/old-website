@@ -1,14 +1,17 @@
 ---
-title: Of Certificate
-author: Qiushi Yan
-date: '2019-11-21'
-slug: of-certificate
-summary: "Do certificates necessarily enhance one's capabilities?"
-image:
-  placement: 3
-  preview_only: true
-categories:
-  - Writings
+title: Of Certificates
+linktitle: Of Certificates   
+toc: true
+type: docs
+date: "2019-05-05T00:00:00Z"
+draft: false
+menu:
+  writings:
+    parent: Random Thoughts
+    weight: 1
+
+# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
+weight: 1
 ---
 
 With the ever-growing expansion of higher education, today’s world has seen college graduates growing in larger numbers, leading to fierce competition in the talent market, where a subtle craze for various of certificates is on the rise and here to stay. Students took several weeks or months cramming for an examination to get one certificate for qualification, and they aimed at another certificate afterwards, irrespective of what previous cramming has brought him or future learning routes on the subject concerned. What’s more, various training institutions sprouting up these days are also in a ferment. They go out their way to inculcate in the minds of patrons the importance of those certificates. Implanted the beliefs, many are under the illusion that certificates are panacea and selling points for their resume, that it would open up hidden opportunities. These convictions, however inappropriate, add to the mania.

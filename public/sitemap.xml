@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/courses/writings/</loc>
+    <lastmod>2020-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/writings/of-certificate/</loc>
+    <lastmod>2019-05-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <lastmod>2020-04-07T15:48:14+08:00</lastmod>
   </url>
@@ -123,11 +133,6 @@
   </url>
   
   <url>
-    <loc>/post/of-certificate/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/project/r4ds/</loc>
     <lastmod>2019-11-21T00:00:00+00:00</lastmod>
   </url>
@@ -158,11 +163,6 @@
   </url>
   
   <url>
-    <loc>/categories/writings/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/license/</loc>
     <lastmod>2018-06-28T00:00:00+01:00</lastmod>
   </url>
@@ -173,6 +173,10 @@
   
   <url>
     <loc>/authors/</loc>
+  </url>
+  
+  <url>
+    <loc>/courses/</loc>
   </url>
   
   <url>

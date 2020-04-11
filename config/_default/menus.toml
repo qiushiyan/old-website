@@ -19,9 +19,14 @@
   weight = 30
   
 [[main]]
+  name = "Docs"
+  url = "courses/"
+  weight = 40
+  
+[[main]]
   name = "About / Contact"
   url = "/about"
-  weight = 40
+  weight = 50
   
 # [[main]]
 #   name = "Topics"

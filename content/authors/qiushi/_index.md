@@ -7,11 +7,11 @@ education:
   - course: BA in Data Journalism
     institution: Communication University of China
     year: 2021 (expected)
-email: "565702994@qq.com"
+email: "qiushi.yann@gmail.com"
 interests:
-- R, Statistics, Visualization
+- R, statistics, visualization
 - Predictive modeling & machine learning
-- Ancient Chinese Literature
+- Ancient Chinese literature
 name: Qiushi Yan
 organizations:
 - name: Communication University of China
@@ -32,6 +32,7 @@ user_groups:
 - Researchers
 - Visitors
 ---
+<br>
 
 I'm currently a junior majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in `#rstats`.
 

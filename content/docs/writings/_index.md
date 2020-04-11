@@ -1,6 +1,6 @@
 ---
 linktitle: Miscellaneous writings
-summary: An attempt to improve my Enlish writings, with short essays on various topics. 
+summary: An attempt to improve my English writings, with short essays on various topics. 
 weight: 1
 
 

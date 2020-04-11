@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Courses | Qiushi Yan</title>
+    <title>Docs | Qiushi Yan</title>
     <link>/docs/</link>
       <atom:link href="/docs/index.xml" rel="self" type="application/rss+xml" />
-    <description>Courses</description>
+    <description>Docs</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright>
     <image>
       <url>/img/icon-192.png</url>
-      <title>Courses</title>
+      <title>Docs</title>
       <link>/docs/</link>
     </image>
     

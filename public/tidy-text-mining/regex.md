@@ -31,7 +31,7 @@ References: [Sams Teach Yourself Regular Expressions in 10 Minutes](https://www.
 |`+`|`+?`|
 |`{n, }`|`{n, }?`|  
 
-, a common use case of lazy quantifiers is when we need to strip from html form text all its tags     
+A common use case of lazy quantifiers is when we need to strip from html form text all its tags: 
 
 
 ```r

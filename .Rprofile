@@ -1,5 +1,3 @@
-options(blogdown.new_bundle = TRUE)
-
 options(blogdown.author = "Qiushi Yan",
         blogdown.ext = ".Rmd",
         blogdown.subdir = "post",

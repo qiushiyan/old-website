@@ -113,7 +113,7 @@ office_hours = []
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
   {icon = "twitter", icon_pack = "fab", name = "DM me", link = "https://twitter.com/qiushizzzz"},
-  {icon = "github", icon_pack = "fab", name = "File an issue", link = "https://github.com/enixam/qiushi.rbind.io/issues"}
+  {icon = "github", icon_pack = "fab", name = "Raise an issue", link = "https://github.com/enixam/qiushi.rbind.io/issues"}
   # {icon = "weibo", icon_pack = "fab", name = "微博", link = "https://weibo.com/5539639708/"}
   # { icon = "skype", icon_pack = "fab", name = "Skype Me", link = "skype:echo123?call"},
   # { icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/"},
@@ -215,7 +215,7 @@ plugins_js  = []
   # Configuration of Disqus.
   [comments.disqus]
     shortname = "qiushiyan"  # Paste the shortname from your Disqus dashboard.
-    show_count = true  # Show comment count in page header? (true/false)
+    show_count = false  # Show comment count in page header? (true/false)
 
 ############################
 ## Search

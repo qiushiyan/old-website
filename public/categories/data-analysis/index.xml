@@ -5,12 +5,131 @@
     <link>/categories/data-analysis/</link>
       <atom:link href="/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Analysis</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Data Analysis</title>
       <link>/categories/data-analysis/</link>
     </image>
+    
+    <item>
+      <title>L1 Penalized Logistic Regression for Text Classification</title>
+      <link>/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## -- Attaching packages ------------------------------------- tidymodels 0.1.0 --&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## √ broom     0.5.6          √ recipes   0.1.12    
+## √ dials     0.0.6          √ rsample   0.0.6     
+## √ dplyr     0.8.5          √ tibble    3.0.1     
+## √ ggplot2   3.3.0.9000     √ tune      0.1.0     
+## √ infer     0.5.1          √ workflows 0.1.1     
+## √ parsnip   0.1.0          √ yardstick 0.0.6     
+## √ purrr     0.3.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## -- Conflicts ---------------------------------------- tidymodels_conflicts() --
+## x purrr::discard()  masks scales::discard()
+## x dplyr::filter()   masks stats::filter()
+## x dplyr::lag()      masks stats::lag()
+## x ggplot2::margin() masks dials::margin()
+## x recipes::step()   masks stats::step()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gutenbergr)
+
+titles &amp;lt;- c(
+  &amp;quot;The War of the Worlds&amp;quot;,
+  &amp;quot;Pride and Prejudice&amp;quot;
+)
+
+books &amp;lt;- gutenberg_works() %&amp;gt;% 
+  filter(title %in% titles) %&amp;gt;% 
+  gutenberg_download(meta_fields = &amp;quot;title&amp;quot;) %&amp;gt;% 
+  mutate(document = row_number())&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Determining mirror for Project Gutenberg from http://www.gutenberg.org/robot/harvest&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Using mirror http://aleph.gutenberg.org&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Who is Carrying There Team in OWL?</title>
+      <link>/post/2020-04-25-who-is-carrying-there-team-in-owl/</link>
+      <pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-04-25-who-is-carrying-there-team-in-owl/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#the-fleta-deadlift&#34;&gt;The Fleta deadlift&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#extend-the-stat-to-tanks-and-supports&#34;&gt;Extend the stat to tanks and supports&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;the-fleta-deadlift&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The Fleta deadlift&lt;/h1&gt;
+&lt;p&gt;The &lt;a href=&#34;https://overwatchleague.com/en-us/statslab&#34;&gt;Overwatch Stats Lab&lt;/a&gt; is a treasure trove holding vast digital riches for people who want to observe the Overwatch League in a more detailed manner. One of my favourite statistic is the &lt;strong&gt;Fleta deadlift&lt;/strong&gt;, calculated as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{Fleta deadlifts} = \frac{\text{final blows of a player}}{\text{final blows of the whole team}}
+\]&lt;/span&gt;
+It comes as no surprise that the index was named after Fleta, the current Shanghai dragons DPS player, who is known for his former amazing performance in a less talented team before he joined Seoul Dyanasty and entered OWL. If you are not familiar with esports or overwatch, I have some equivelent “Fleta deadlifted his team” examples in the NBA context:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Michael Jordan in the 1998 final&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Kobe Bryant (I miss him) in season 2006-2007, or perhaps half time in his career&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Lebron Jmaes in the 2015 final&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The player section on Overwatch Stats Lab even established a special tab for this stat, showing records with Fleta deadlift &amp;gt; 50% (see the last tab below):&lt;br /&gt;
+&lt;iframe src=&#34;https://overwatchleague.com/en-us/statslab-players&#34; width=&#34;768&#34; height=&#34;400px&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;It should be obvious though, that Fleta deadlifts are more suitable for describe performaces of DPS players, and less applicable to the other two positions, tanks and supports. Since final blows may not be a good measure for a player’s performance if his main responsibility indicates otherwise.&lt;/p&gt;
+&lt;p&gt;I used &lt;code&gt;load_data.R&lt;/code&gt; to laod in data and do soem preprocessing. You can browse it at.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(vroom)
+
+df &amp;lt;- vroom(&amp;quot;D:/RProjects/data/overwatch/fleta_deadlifts.csv&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;extend-the-stat-to-tanks-and-supports&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Extend the stat to tanks and supports&lt;/h2&gt;
+&lt;p&gt;However, since OWL mandates the 2-2-2 composition only after the third stage in season 2019. A player can belong to different positions even in the same map or match.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dpss &amp;lt;- c(&amp;quot;Hanzo&amp;quot;, &amp;quot;Junkrat&amp;quot;, &amp;quot;Tracer&amp;quot;, &amp;quot;Soldier: 76&amp;quot;, &amp;quot;Widowmaker&amp;quot;, &amp;quot;McCree&amp;quot;, &amp;quot;Pharah&amp;quot;, &amp;quot;Genji&amp;quot;, &amp;quot;Sombra&amp;quot;, &amp;quot;Reaper&amp;quot;, &amp;quot;Doomfist&amp;quot;, &amp;quot;Bastion&amp;quot;, &amp;quot;Mei&amp;quot;, &amp;quot;Torbjörn&amp;quot;, &amp;quot;Symmetra&amp;quot;, &amp;quot;Ashe&amp;quot;)
+tanks &amp;lt;- c(&amp;quot;Orisa&amp;quot;, &amp;quot;Winston&amp;quot;, &amp;quot;Roadhog&amp;quot;, &amp;quot;D.Va&amp;quot;, &amp;quot;Zarya&amp;quot;, &amp;quot;Reinhardt&amp;quot;, &amp;quot;Wrecking Ball&amp;quot;)
+supports &amp;lt;- c(&amp;quot;Lúcio&amp;quot;, &amp;quot;Mercy&amp;quot;, &amp;quot;Zenyatta&amp;quot;, &amp;quot;Brigitte&amp;quot;, &amp;quot;Moira&amp;quot;, &amp;quot;Ana&amp;quot;, &amp;quot;Sigma&amp;quot;, &amp;quot;Baptiste&amp;quot;)
+
+dps_records &amp;lt;- df %&amp;gt;% filter(hero %in% dpss)
+tank_records &amp;lt;- df %&amp;gt;% filter(hero %in% tanks)
+support_records &amp;lt;- df %&amp;gt;% filter(hero %in% supports)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For dps players, I will stick to the official measure of a Fleta deadlift: involved in more than 50% percent of team total final blows in a match.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dps_deadlifts &amp;lt;- dps_records %&amp;gt;% 
+  filter(stat_name == &amp;quot;Final Blows&amp;quot;) %&amp;gt;% 
+  mutate(final_blows = stat_amount) %&amp;gt;% 
+  select(-stat_name, -stat_amount) %&amp;gt;%
+  add_count(date, team, wt = final_blows, name = &amp;quot;team_final_blows&amp;quot;) %&amp;gt;%
+  filter(team_final_blows &amp;gt; 10) %&amp;gt;% 
+  group_by(date, player, team_final_blows) %&amp;gt;%
+  summarize(player_final_blows = sum(final_blows)) %&amp;gt;%
+  ungroup() %&amp;gt;%
+  mutate(rate = player_final_blows / team_final_blows) %&amp;gt;%
+  filter(rate &amp;gt; 0.5) 
+
+dps_deadlifts
+#&amp;gt; # A tibble: 828 x 5
+#&amp;gt;    date       player   team_final_blows player_final_blows  rate
+#&amp;gt;    &amp;lt;date&amp;gt;     &amp;lt;chr&amp;gt;               &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 2018-01-11 babybay                95                 48 0.505
+#&amp;gt;  2 2018-01-11 carpe                  44                 25 0.568
+#&amp;gt;  3 2018-01-11 EFFECT                139                 70 0.504
+#&amp;gt;  4 2018-01-11 Fleta                 131                 68 0.519
+#&amp;gt;  5 2018-01-11 Jake                   35                 20 0.571
+#&amp;gt;  6 2018-01-11 Profit                 90                 58 0.644
+#&amp;gt;  7 2018-01-11 TviQ                   80                 42 0.525
+#&amp;gt;  8 2018-01-11 Undead                 35                 18 0.514
+#&amp;gt;  9 2018-01-12 Jake                   95                 49 0.516
+#&amp;gt; 10 2018-01-13 Birdring              100                 52 0.52 
+#&amp;gt; # ... with 818 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Exploring the London Stage Database</title>

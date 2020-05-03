@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="See what players in all 3 positions are hard-carrying, let&#39;s go dude!!">
+  <meta name="description" content="Fleta deadlifts in all 3 positions">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/2020-04-25-who-is-carrying-there-team-in-owl/">
@@ -115,7 +115,7 @@
   <meta property="og:site_name" content="Qiushi Yan">
   <meta property="og:url" content="/post/2020-04-25-who-is-carrying-there-team-in-owl/">
   <meta property="og:title" content="Who is Carrying There Team in OWL? | Qiushi Yan">
-  <meta property="og:description" content="See what players in all 3 positions are hard-carrying, let&#39;s go dude!!"><meta property="og:image" content="/post/2020-04-25-who-is-carrying-there-team-in-owl/featured.jpg">
+  <meta property="og:description" content="Fleta deadlifts in all 3 positions"><meta property="og:image" content="/post/2020-04-25-who-is-carrying-there-team-in-owl/featured.jpg">
   <meta property="twitter:image" content="/post/2020-04-25-who-is-carrying-there-team-in-owl/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -171,7 +171,7 @@
       "url": "/img/icon-512.png"
     }
   },
-  "description": "See what players in all 3 positions are hard-carrying, let's go dude!!"
+  "description": "Fleta deadlifts in all 3 positions"
 }
 </script>
 
@@ -439,18 +439,19 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    0 min read
+    3 min read
   </span>
   
 
   
   
   
-  <span class="middot-divider"></span>
-  <a href="/post/2020-04-25-who-is-carrying-there-team-in-owl/#disqus_thread"></a>
-  
 
   
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/data-analysis/">Data Analysis</a>, <a href="/categories/overwatch/">Overwatch</a></span>
   
 
 </div>
@@ -480,8 +481,76 @@
     <div class="article-style">
       
 
+<div id="TOC">
+<ul>
+<li><a href="#the-fleta-deadlift">The Fleta deadlift</a><ul>
+<li><a href="#extend-the-stat-to-tanks-and-supports">Extend the stat to tanks and supports</a></li>
+</ul></li>
+</ul>
+</div>
 
+<div id="the-fleta-deadlift" class="section level1">
+<h1>The Fleta deadlift</h1>
+<p>The <a href="https://overwatchleague.com/en-us/statslab">Overwatch Stats Lab</a> is a treasure trove holding vast digital riches for people who want to observe the Overwatch League in a more detailed manner. One of my favourite statistic is the <strong>Fleta deadlift</strong>, calculated as</p>
+<p><span class="math display">\[
+\text{Fleta deadlifts} = \frac{\text{final blows of a player}}{\text{final blows of the whole team}}
+\]</span>
+It comes as no surprise that the index was named after Fleta, the current Shanghai dragons DPS player, who is known for his former amazing performance in a less talented team before he joined Seoul Dyanasty and entered OWL. If you are not familiar with esports or overwatch, I have some equivelent “Fleta deadlifted his team” examples in the NBA context:</p>
+<ul>
+<li>Michael Jordan in the 1998 final<br />
+</li>
+<li>Kobe Bryant (I miss him) in season 2006-2007, or perhaps half time in his career<br />
+</li>
+<li>Lebron Jmaes in the 2015 final</li>
+</ul>
+<p>The player section on Overwatch Stats Lab even established a special tab for this stat, showing records with Fleta deadlift &gt; 50% (see the last tab below):<br />
+<iframe src="https://overwatchleague.com/en-us/statslab-players" width="768" height="400px"></iframe></p>
+<p>It should be obvious though, that Fleta deadlifts are more suitable for describe performaces of DPS players, and less applicable to the other two positions, tanks and supports. Since final blows may not be a good measure for a player’s performance if his main responsibility indicates otherwise.</p>
+<p>I used <code>load_data.R</code> to laod in data and do soem preprocessing. You can browse it at.</p>
+<pre class="r"><code>library(tidyverse)
+library(vroom)
 
+df &lt;- vroom(&quot;D:/RProjects/data/overwatch/fleta_deadlifts.csv&quot;)</code></pre>
+<div id="extend-the-stat-to-tanks-and-supports" class="section level2">
+<h2>Extend the stat to tanks and supports</h2>
+<p>However, since OWL mandates the 2-2-2 composition only after the third stage in season 2019. A player can belong to different positions even in the same map or match.</p>
+<pre class="r"><code>dpss &lt;- c(&quot;Hanzo&quot;, &quot;Junkrat&quot;, &quot;Tracer&quot;, &quot;Soldier: 76&quot;, &quot;Widowmaker&quot;, &quot;McCree&quot;, &quot;Pharah&quot;, &quot;Genji&quot;, &quot;Sombra&quot;, &quot;Reaper&quot;, &quot;Doomfist&quot;, &quot;Bastion&quot;, &quot;Mei&quot;, &quot;Torbjörn&quot;, &quot;Symmetra&quot;, &quot;Ashe&quot;)
+tanks &lt;- c(&quot;Orisa&quot;, &quot;Winston&quot;, &quot;Roadhog&quot;, &quot;D.Va&quot;, &quot;Zarya&quot;, &quot;Reinhardt&quot;, &quot;Wrecking Ball&quot;)
+supports &lt;- c(&quot;Lúcio&quot;, &quot;Mercy&quot;, &quot;Zenyatta&quot;, &quot;Brigitte&quot;, &quot;Moira&quot;, &quot;Ana&quot;, &quot;Sigma&quot;, &quot;Baptiste&quot;)
+
+dps_records &lt;- df %&gt;% filter(hero %in% dpss)
+tank_records &lt;- df %&gt;% filter(hero %in% tanks)
+support_records &lt;- df %&gt;% filter(hero %in% supports)</code></pre>
+<p>For dps players, I will stick to the official measure of a Fleta deadlift: involved in more than 50% percent of team total final blows in a match.</p>
+<pre class="r"><code>dps_deadlifts &lt;- dps_records %&gt;% 
+  filter(stat_name == &quot;Final Blows&quot;) %&gt;% 
+  mutate(final_blows = stat_amount) %&gt;% 
+  select(-stat_name, -stat_amount) %&gt;%
+  add_count(date, team, wt = final_blows, name = &quot;team_final_blows&quot;) %&gt;%
+  filter(team_final_blows &gt; 10) %&gt;% 
+  group_by(date, player, team_final_blows) %&gt;%
+  summarize(player_final_blows = sum(final_blows)) %&gt;%
+  ungroup() %&gt;%
+  mutate(rate = player_final_blows / team_final_blows) %&gt;%
+  filter(rate &gt; 0.5) 
+
+dps_deadlifts
+#&gt; # A tibble: 828 x 5
+#&gt;    date       player   team_final_blows player_final_blows  rate
+#&gt;    &lt;date&gt;     &lt;chr&gt;               &lt;dbl&gt;              &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 2018-01-11 babybay                95                 48 0.505
+#&gt;  2 2018-01-11 carpe                  44                 25 0.568
+#&gt;  3 2018-01-11 EFFECT                139                 70 0.504
+#&gt;  4 2018-01-11 Fleta                 131                 68 0.519
+#&gt;  5 2018-01-11 Jake                   35                 20 0.571
+#&gt;  6 2018-01-11 Profit                 90                 58 0.644
+#&gt;  7 2018-01-11 TviQ                   80                 42 0.525
+#&gt;  8 2018-01-11 Undead                 35                 18 0.514
+#&gt;  9 2018-01-12 Jake                   95                 49 0.516
+#&gt; 10 2018-01-13 Birdring              100                 52 0.52 
+#&gt; # ... with 818 more rows</code></pre>
+</div>
+</div>
 
     </div>
 
@@ -706,6 +775,13 @@
 <div class="article-widget">
   
 <div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/" rel="next">L1 Penalized Logistic Regression for Text Classification</a>
+  </div>
   
   
   

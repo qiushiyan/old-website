@@ -5,12 +5,63 @@
     <link>/categories/machine-learning/</link>
       <atom:link href="/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Machine Learning</title>
       <link>/categories/machine-learning/</link>
     </image>
+    
+    <item>
+      <title>Evaluating Topic Models</title>
+      <link>/post/2020-05-03-evaluating-topic-models/</link>
+      <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-03-evaluating-topic-models/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>L1 Penalized Logistic Regression for Text Classification</title>
+      <link>/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## -- Attaching packages ------------------------------------- tidymodels 0.1.0 --&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## √ broom     0.5.6          √ recipes   0.1.12    
+## √ dials     0.0.6          √ rsample   0.0.6     
+## √ dplyr     0.8.5          √ tibble    3.0.1     
+## √ ggplot2   3.3.0.9000     √ tune      0.1.0     
+## √ infer     0.5.1          √ workflows 0.1.1     
+## √ parsnip   0.1.0          √ yardstick 0.0.6     
+## √ purrr     0.3.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## -- Conflicts ---------------------------------------- tidymodels_conflicts() --
+## x purrr::discard()  masks scales::discard()
+## x dplyr::filter()   masks stats::filter()
+## x dplyr::lag()      masks stats::lag()
+## x ggplot2::margin() masks dials::margin()
+## x recipes::step()   masks stats::step()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gutenbergr)
+
+titles &amp;lt;- c(
+  &amp;quot;The War of the Worlds&amp;quot;,
+  &amp;quot;Pride and Prejudice&amp;quot;
+)
+
+books &amp;lt;- gutenberg_works() %&amp;gt;% 
+  filter(title %in% titles) %&amp;gt;% 
+  gutenberg_download(meta_fields = &amp;quot;title&amp;quot;) %&amp;gt;% 
+  mutate(document = row_number())&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Determining mirror for Project Gutenberg from http://www.gutenberg.org/robot/harvest&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Using mirror http://aleph.gutenberg.org&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Tidy Comparison of Classification Methods</title>

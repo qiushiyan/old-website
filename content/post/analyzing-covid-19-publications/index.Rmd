@@ -11,6 +11,7 @@ link-citations: yes
 
 categories:
   - Data Analysis
+  - R
 
 image:
   caption: 'Image by [cottonbro](https://www.pexels.com/@cottonbro)'
@@ -24,9 +25,10 @@ In this post, I will be performing a simple text analysis on the abstract of pub
 
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(message = FALSE, warning = FALSE,
-                      comment = "#>", collapse = TRUE,
-                      cache = TRUE)
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE,
+                      comment = "#>", 
+                      collapse = TRUE)
 ```
 
 
@@ -34,14 +36,44 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE,
 
 ```{r}
 library(tidyverse)
-theme_set(theme_light(base_size = 18))
+```
+
+```{r, echo = FALSE}
+theme_bar <- function(base_size = 11,
+                      strip_text_size = 12,
+                      strip_text_margin = 5,
+                      subtitle_size = 13,
+                      subtitle_margin = 10,
+                      plot_title_size = 16,
+                      plot_title_margin = 10,
+                      ...) {
+  ret <- ggplot2::theme_minimal(base_size = base_size, ...)
+  ret$strip.text <- ggplot2::element_text(
+    hjust = 0, size = strip_text_size,
+    margin = ggplot2::margin(b = strip_text_margin)
+  )
+  ret$plot.subtitle <- ggplot2::element_text(
+    hjust = 0, size = subtitle_size,
+    margin = ggplot2::margin(b = subtitle_margin)
+  )
+  ret$plot.title <- ggplot2::element_text(
+    hjust = 0, size = plot_title_size,
+    margin = ggplot2::margin(b = plot_title_margin)
+  )
+  ret
+}
+
+theme_set(theme_bar())
+```
 
 
-raw <- read_csv("covid-research.csv") %>% 
+```{r}
+raw <- read_csv("D:/RProjects/data/covid-research.csv") %>% 
   janitor::clean_names() 
 
 glimpse(raw)
 ```
+
 
 For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on `abstract`. I was a little disappointied to find out that `published_month` are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English, I find this function `stringi::stri_enc_isascii` in an attempt to filter out non-English text, although this will not rid the text of German, French, Italian and other similar languages. I deleted some of them manually in the next step by expanding stop words. But this still left much room for improvement. Anyway, let's move on for now.
 ```{r}
@@ -81,9 +113,10 @@ words %>%
   geom_col() + 
   scale_x_continuous(expand = c(0.01, 0)) + 
   labs(y = NULL,
-       x = "word counts",
+       x = "# of words",
        title = "Top 50 common words in COVID-19 publications") +
-  theme(plot.title.position = "plot",
+  theme(text = element_text(size = 18),
+        plot.title = element_text(size = 35, face = "bold"),
         axis.ticks.y = element_blank())
 ```
 
@@ -91,28 +124,36 @@ I'm also interested in paper-specific properties, namely their keywords, what to
 
 ```{r}
 library(tidylo)
+
 words %>%
   count(title, word) %>% 
   bind_log_odds(set = title, feature = word, n = n) %>%
-  top_n(20)
+  top_n(20) %>% 
+  knitr::kable()
 ```
 
 # Fit a LDA model  
 
-Let's then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using `cast_dtm`. There are various implementations of this kind of model, here I use `topicmodels::LDA()`.    
+Let's then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using `cast_dtm`. There are various implementations of this kind of model, here I use `stm::stm`. The choice of $K$ (number of topics) here is somewhat arbitrary here, but [Julia Silge](https://juliasilge.com/) had a great [post](https://juliasilge.com/blog/evaluating-stm/) about it.    
 
 ```{r}
-dtm <- cast_dtm(words %>% count(title, word),
+dfm <- cast_dfm(words %>% count(title, word),
                 term = word,
                 document = title,
                 value = n)
+```
 
-library(topicmodels)
-topic_model <- LDA(dtm, k = 6, method = "Gibbs")
+```{r, eval = FALSE}
+library(stm)
+topic_model <- stm(dfm, K = 5, init.type = "LDA", verbose = FALSE)
+```
+
+```{r, eho = FALSE}
+topic_model <- pins::pin_get("covid-topic-model")
 ```
 
 
-Topic-term distributions are accessed by `tidy()`, this gives a glance of the underlying meanin of these topics:
+Topic-term probability distributions are accessed by `tidy()`, this gives a glance of the underlying meaning of these topics:
 ```{r, fig.height = 12, fig.width = 12}
 # topic-term distribution
 tidy(topic_model) %>% 
@@ -129,7 +170,9 @@ tidy(topic_model) %>%
   labs(y = NULL,
        x = "Docuemtn-term probabilities",
        title = "A 6-topic LDA model") + 
-  theme(plot.title.position = "plot",
+  theme(text = element_text(size = 18),
+        plot.title = element_text(size = 30, face = "bold"),
+        strip.text = element_text(size = 25, hjust = 0.05),
         axis.ticks.y = element_blank())
 ```
 
@@ -164,8 +207,8 @@ word_cors %>%
   as_tbl_graph() %>% 
   ggraph(layout = "fr") + 
   geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
-  geom_node_point(color = "lightblue", size = 5.5) + 
-  geom_node_text(aes(label = name), repel = TRUE)
+  geom_node_point(color = "lightblue", size = 6.5) + 
+  geom_node_text(aes(label = name), repel = TRUE, size = 5.5)
 ```
 
 As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle... Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.  

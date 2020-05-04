@@ -12,13 +12,30 @@ bibliography: ../bib/compare-classification.bib
 biblio-style: apalike
 link-citations: yes
 image:
-  caption: 'Screenshot taken from the [ISR](http://faculty.marshall.usc.edu/gareth-james/ISL/), book, page 152, Figure 4.11'
+  caption: 'Screenshot taken from the [ISR](http://faculty.marshall.usc.edu/gareth-james/ISL/) book, page 152, Figure 4.11'
   focal_point: ''
   preview_only: no
 draft: yes
 ---
 
 
-$$
-1 + 2 = 3
-$$
+```{r, echo = FALSE}
+library(tidyverse)
+library(broom)
+
+x <- rnorm(500)
+
+df <- tibble(x = x, 
+             noise = rnorm(500, sd = 0.001),
+             probability = 1 / (1 + exp(1 - x)) + noise,
+             y = factor(rbinom(n = 500, size = 1, prob = probability)))
+
+mod <- glm(y ~ x, family = "binomial", data = df) 
+
+
+pre <- if_else(predict(mod, type = "response") > 0.5,
+          "1", "0")
+
+table(pre == df$y)
+```
+

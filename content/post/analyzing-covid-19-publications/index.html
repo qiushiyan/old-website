@@ -11,6 +11,7 @@ link-citations: yes
 
 categories:
   - Data Analysis
+  - R
 
 image:
   caption: 'Image by [cottonbro](https://www.pexels.com/@cottonbro)'
@@ -33,11 +34,8 @@ image:
 <p>In this post, I will be performing a simple text analysis on the abstract of publications on the coronavirus disease (COVID-19), courtesy of <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/global-research-on-novel-coronavirus-2019-ncov">WHO</a>. We begin by steps of data preprocessing.</p>
 <div id="data-preprocessing" class="section level1">
 <h1>Data preprocessing</h1>
-<pre class="r"><code>library(tidyverse)
-theme_set(theme_light(base_size = 18))
-
-
-raw &lt;- read_csv(&quot;covid-research.csv&quot;) %&gt;% 
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre class="r"><code>raw &lt;- read_csv(&quot;D:/RProjects/data/covid-research.csv&quot;) %&gt;% 
   janitor::clean_names() 
 
 glimpse(raw)
@@ -102,52 +100,164 @@ words
   geom_col() + 
   scale_x_continuous(expand = c(0.01, 0)) + 
   labs(y = NULL,
-       x = &quot;word counts&quot;,
+       x = &quot;# of words&quot;,
        title = &quot;Top 50 common words in COVID-19 publications&quot;) +
-  theme(plot.title.position = &quot;plot&quot;,
+  theme(text = element_text(size = 18),
+        plot.title = element_text(size = 35, face = &quot;bold&quot;),
         axis.ticks.y = element_blank())</code></pre>
-<p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-5-1.png" width="1152" /></p>
+<p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-7-1.png" width="1152" /></p>
 <p>I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by <span class="citation">Monroe, Colaresi, and Quinn (<a href="#ref-monroe_colaresi_quinn" role="doc-biblioref">2008</a>)</span>, which a standardized metric from a complete statistical model. It is also implemented in the R package <a href="https://github.com/juliasilge/tidylo"><code>tidylo</code></a><span class="citation">(Schnoebelen and Silge <a href="#ref-tidylo" role="doc-biblioref">2020</a>)</span>. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:</p>
 <pre class="r"><code>library(tidylo)
+
 words %&gt;%
   count(title, word) %&gt;% 
   bind_log_odds(set = title, feature = word, n = n) %&gt;%
-  top_n(20)
-#&gt; # A tibble: 20 x 4
-#&gt;    title                                             word             n log_odds
-#&gt;    &lt;chr&gt;                                             &lt;chr&gt;        &lt;int&gt;    &lt;dbl&gt;
-#&gt;  1 A comparative study on the clinical features of ~ ncovid          20     5.06
-#&gt;  2 A high ATP concentration enhances the cooperativ~ duplex          16     4.52
-#&gt;  3 A serological survey of canine respiratory coron~ dog             11     3.53
-#&gt;  4 A survey on awareness of digestive system injury~ 216             16     4.42
-#&gt;  5 A survey on awareness of digestive system injury~ gastroenter~    14     4.23
-#&gt;  6 Analysis of clinical features of 153 patients wi~ cd              12     3.80
-#&gt;  7 Analysis of clinical features of 153 patients wi~ gt              60     4.92
-#&gt;  8 Analysis of clinical features of 153 patients wi~ ital            26     3.59
-#&gt;  9 Analysis of clinical features of 153 patients wi~ lt              74     5.03
-#&gt; 10 Characterization and evolution of the coronaviru~ hljby           12     3.92
-#&gt; 11 Characterization and evolution of the coronaviru~ pedv            21     3.92
-#&gt; 12 Clinical characteristics of 113 deceased patient~ deceas          16     4.42
-#&gt; 13 Construction of 5G intelligent medical service s~ 5g              14     4.23
-#&gt; 14 Frequency and Distribution of Chest Radiographic~ cxr             12     3.92
-#&gt; 15 Genetic, antigenic and pathogenic characterizati~ phcov           10     3.58
-#&gt; 16 Medicinal chemistry strategies toward host targe~ hta             10     3.57
-#&gt; 17 Pregnant women with new coronavirus infection: a~ placenta        14     3.76
-#&gt; 18 Retrospective study of low-to-moderate dose gluc~ iqr             20     4.24
-#&gt; 19 The clinical study on the relationship between s~ lym             14     3.54
-#&gt; 20 Thoughts and suggestions on modern construction ~ modern          20     4.44</code></pre>
+  top_n(20) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">title</th>
+<th align="left">word</th>
+<th align="right">n</th>
+<th align="right">log_odds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A comparative study on the clinical features of COVID-19 pneumonia to other pneumonias</td>
+<td align="left">ncovid</td>
+<td align="right">20</td>
+<td align="right">5.057257</td>
+</tr>
+<tr class="even">
+<td align="left">A high ATP concentration enhances the cooperative translocation of the SARS coronavirus helicase nsP13 in the unwinding of duplex RNA</td>
+<td align="left">duplex</td>
+<td align="right">16</td>
+<td align="right">4.524146</td>
+</tr>
+<tr class="odd">
+<td align="left">A serological survey of canine respiratory coronavirus in New Zealand</td>
+<td align="left">dog</td>
+<td align="right">11</td>
+<td align="right">3.528876</td>
+</tr>
+<tr class="even">
+<td align="left">A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists</td>
+<td align="left">216</td>
+<td align="right">16</td>
+<td align="right">4.423606</td>
+</tr>
+<tr class="odd">
+<td align="left">A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists</td>
+<td align="left">gastroenterologist</td>
+<td align="right">14</td>
+<td align="right">4.225689</td>
+</tr>
+<tr class="even">
+<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
+<td align="left">cd</td>
+<td align="right">12</td>
+<td align="right">3.800243</td>
+</tr>
+<tr class="odd">
+<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
+<td align="left">gt</td>
+<td align="right">60</td>
+<td align="right">4.917806</td>
+</tr>
+<tr class="even">
+<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
+<td align="left">ital</td>
+<td align="right">26</td>
+<td align="right">3.585456</td>
+</tr>
+<tr class="odd">
+<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
+<td align="left">lt</td>
+<td align="right">74</td>
+<td align="right">5.032569</td>
+</tr>
+<tr class="even">
+<td align="left">Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China</td>
+<td align="left">hljby</td>
+<td align="right">12</td>
+<td align="right">3.915206</td>
+</tr>
+<tr class="odd">
+<td align="left">Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China</td>
+<td align="left">pedv</td>
+<td align="right">21</td>
+<td align="right">3.922771</td>
+</tr>
+<tr class="even">
+<td align="left">Clinical characteristics of 113 deceased patients with coronavirus disease 2019: retrospective study</td>
+<td align="left">deceas</td>
+<td align="right">16</td>
+<td align="right">4.419020</td>
+</tr>
+<tr class="odd">
+<td align="left">Construction of 5G intelligent medical service system in novel coronavirus pneumonia prevention and control</td>
+<td align="left">5g</td>
+<td align="right">14</td>
+<td align="right">4.231003</td>
+</tr>
+<tr class="even">
+<td align="left">Frequency and Distribution of Chest Radiographic Findings in COVID-19 Positive Patients</td>
+<td align="left">cxr</td>
+<td align="right">12</td>
+<td align="right">3.915366</td>
+</tr>
+<tr class="odd">
+<td align="left">Genetic, antigenic and pathogenic characterization of avian coronaviruses isolated from pheasants (Phasianus colchicus) in China</td>
+<td align="left">phcov</td>
+<td align="right">10</td>
+<td align="right">3.576166</td>
+</tr>
+<tr class="even">
+<td align="left">Medicinal chemistry strategies toward host targeting antiviral agents</td>
+<td align="left">hta</td>
+<td align="right">10</td>
+<td align="right">3.573884</td>
+</tr>
+<tr class="odd">
+<td align="left">Pregnant women with new coronavirus infection: a clinical characteristics and placental pathological analysis of three cases</td>
+<td align="left">placenta</td>
+<td align="right">14</td>
+<td align="right">3.757207</td>
+</tr>
+<tr class="even">
+<td align="left">Retrospective study of low-to-moderate dose glucocorticoids on viral clearance in patients with novel coronavirus pneumonia</td>
+<td align="left">iqr</td>
+<td align="right">20</td>
+<td align="right">4.238798</td>
+</tr>
+<tr class="odd">
+<td align="left">The clinical study on the relationship between serum albumin concentration and lymphocyte levels in patients with 2019-novel coronavirus pneumonia</td>
+<td align="left">lym</td>
+<td align="right">14</td>
+<td align="right">3.536764</td>
+</tr>
+<tr class="even">
+<td align="left">Thoughts and suggestions on modern construction of disease prevention and control system</td>
+<td align="left">modern</td>
+<td align="right">20</td>
+<td align="right">4.443162</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="fit-a-lda-model" class="section level1">
 <h1>Fit a LDA model</h1>
-<p>Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using <code>cast_dtm</code>. There are various implementations of this kind of model, here I use <code>topicmodels::LDA()</code>.</p>
-<pre class="r"><code>dtm &lt;- cast_dtm(words %&gt;% count(title, word),
+<p>Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using <code>cast_dtm</code>. There are various implementations of this kind of model, here I use <code>stm::stm</code>. The choice of <span class="math inline">\(K\)</span> (number of topics) here is somewhat arbitrary here, but <a href="https://juliasilge.com/">Julia Silge</a> had a great <a href="https://juliasilge.com/blog/evaluating-stm/">post</a> about it.</p>
+<pre class="r"><code>dfm &lt;- cast_dfm(words %&gt;% count(title, word),
                 term = word,
                 document = title,
-                value = n)
-
-library(topicmodels)
-topic_model &lt;- LDA(dtm, k = 6, method = &quot;Gibbs&quot;)</code></pre>
-<p>Topic-term distributions are accessed by <code>tidy()</code>, this gives a glance of the underlying meanin of these topics:</p>
+                value = n)</code></pre>
+<pre class="r"><code>library(stm)
+topic_model &lt;- stm(dfm, K = 5, init.type = &quot;LDA&quot;, verbose = FALSE)</code></pre>
+<pre class="r"><code>topic_model &lt;- pins::pin_get(&quot;covid-topic-model&quot;)</code></pre>
+<p>Topic-term probability distributions are accessed by <code>tidy()</code>, this gives a glance of the underlying meaning of these topics:</p>
 <pre class="r"><code># topic-term distribution
 tidy(topic_model) %&gt;% 
   group_by(topic) %&gt;% 
@@ -163,9 +273,11 @@ tidy(topic_model) %&gt;%
   labs(y = NULL,
        x = &quot;Docuemtn-term probabilities&quot;,
        title = &quot;A 6-topic LDA model&quot;) + 
-  theme(plot.title.position = &quot;plot&quot;,
+  theme(text = element_text(size = 18),
+        plot.title = element_text(size = 30, face = &quot;bold&quot;),
+        strip.text = element_text(size = 25, hjust = 0.05),
         axis.ticks.y = element_blank())</code></pre>
-<p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-8-1.png" width="1152" /></p>
+<p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-12-1.png" width="1152" /></p>
 </div>
 <div id="a-network-of-paired-words" class="section level1">
 <h1>A network of paired words</h1>
@@ -203,9 +315,9 @@ word_cors %&gt;%
   as_tbl_graph() %&gt;% 
   ggraph(layout = &quot;fr&quot;) + 
   geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
-  geom_node_point(color = &quot;lightblue&quot;, size = 5.5) + 
-  geom_node_text(aes(label = name), repel = TRUE)</code></pre>
-<p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-10-1.png" width="1152" /></p>
+  geom_node_point(color = &quot;lightblue&quot;, size = 6.5) + 
+  geom_node_text(aes(label = name), repel = TRUE, size = 5.5)</code></pre>
+<p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-14-1.png" width="1152" /></p>
 <p>As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.</p>
 </div>
 <div id="references" class="section level1 unnumbered">

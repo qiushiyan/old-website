@@ -1,0 +1,327 @@
+---
+title: Text Classfication with Penalized Logistic Regression
+author: Qiushi Yan
+date: '2020-05-02'
+slug: text-classification-logistic
+categories: ["Data Analysis", "R", "Machine Learning"]
+summary: 'Teach models how to distinguish Charlotte Brontë from Emily Brontë'
+lastmod: '2020-05-02T23:33:49+08:00'
+draft: yes
+bibliography: ../bib/text-classification.bib
+biblio-style: apalike
+link-citations: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#comparing-word-frequency">Comparing word frequency</a></li>
+<li><a href="#modeling">Modeling</a><ul>
+<li><a href="#data-preprocessing">Data preprocessing</a></li>
+<li><a href="#train-a-penalized-logistic-regression-model">Train a penalized logistic regression model</a><ul>
+<li><a href="#tuning-lambda">Tuning lambda</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<p>In this post I aim to train a text classification model with penalized logistic regression using the <a href="https://www.tidymodels.org/"><code>tidymodels</code></a> framework. Data are from 5 books and downloaded via the <a href="https://docs.ropensci.org/gutenbergr/"><code>gutenbergr</code></a> package, written by either Emily Brontë or Charlotte Brontë. And the goal is to predict the author of a line, in other words the probability of line being written by one sister instead of another.</p>
+<pre class="r"><code>library(tidyverse)
+library(tidytext)
+library(gutenbergr)</code></pre>
+<pre class="r"><code>books &lt;- gutenberg_works() %&gt;% 
+  filter(str_detect(author, &quot;Brontë, Emily|Brontë, Charlotte&quot;)) %&gt;% 
+  gutenberg_download(meta_fields = c(&quot;title&quot;, &quot;author&quot;)) %&gt;% 
+  transmute(title,
+            author = if_else(author == &quot;Brontë, Emily&quot;, 
+                             &quot;Emily Brontë&quot;, 
+                             &quot;Charlotte Brontë&quot;) %&gt;% factor(),
+            line_index = row_number(),
+            text)</code></pre>
+<p><code>books</code> is at line level</p>
+<pre class="r"><code>books
+## # A tibble: 88,989 x 4
+##    title        author     line_index text                                      
+##    &lt;chr&gt;        &lt;fct&gt;           &lt;int&gt; &lt;chr&gt;                                     
+##  1 Wuthering H~ Emily Bro~          1 &quot;WUTHERING HEIGHTS&quot;                       
+##  2 Wuthering H~ Emily Bro~          2 &quot;&quot;                                        
+##  3 Wuthering H~ Emily Bro~          3 &quot;&quot;                                        
+##  4 Wuthering H~ Emily Bro~          4 &quot;CHAPTER I&quot;                               
+##  5 Wuthering H~ Emily Bro~          5 &quot;&quot;                                        
+##  6 Wuthering H~ Emily Bro~          6 &quot;&quot;                                        
+##  7 Wuthering H~ Emily Bro~          7 &quot;1801.--I have just returned from a visit~
+##  8 Wuthering H~ Emily Bro~          8 &quot;neighbour that I shall be troubled with.~
+##  9 Wuthering H~ Emily Bro~          9 &quot;country!  In all England, I do not belie~
+## 10 Wuthering H~ Emily Bro~         10 &quot;situation so completely removed from the~
+## # ... with 88,979 more rows</code></pre>
+<p>To obtain tidy text structure illustrated in <a href="https://www.tidytextmining.com/">Text Mining with R</a>, I use <code>unnest_tokens()</code> to perform tokenization and remove all the stop words. I also removed characters like <code>'</code>, <code>'s</code>, <code>'</code> and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff’s becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author’s total word counts) are removed. The cutoff may be a little too high and if you plot the histogram of that proportion, but I really need this to save computation efforts on my laptop :sweat_smile:.</p>
+<pre class="r"><code>clean_books &lt;- books %&gt;% 
+  unnest_tokens(word, text) %&gt;%
+  anti_join(stop_words) %&gt;% 
+  filter(!str_detect(word, &quot;^\\d+$&quot;)) %&gt;% 
+  mutate(word = str_remove_all(word, &quot;_|&#39;s|&#39;|\\s&quot;))
+  
+total_words &lt;- clean_books %&gt;%
+  count(author, name = &quot;total&quot;)
+
+tidy_books &lt;- clean_books %&gt;%
+  left_join(total_words) %&gt;% 
+  group_by(author, total, word) %&gt;%
+  filter(n() / total &gt; 0.0005) %&gt;% 
+  ungroup() </code></pre>
+<div id="comparing-word-frequency" class="section level1">
+<h1>Comparing word frequency</h1>
+<p>Before building an actual predictive model, lets’ do some EDA to see different usage tendency on the same word! This will also shed light on what we would expect from the text classification. Now, we will compare word frequency (proportion) between the two sisters.</p>
+<pre class="r"><code>tidy_books %&gt;% 
+  group_by(author, total) %&gt;%
+  count(word) %&gt;% 
+  mutate(prop = n / total) %&gt;% 
+  ungroup() %&gt;% 
+  select(-total, -n) %&gt;%
+  pivot_wider(names_from  = author, values_from = prop,
+              values_fill = list(prop = 0)) %&gt;% 
+  ggplot(aes(x = `Charlotte Brontë`, y = `Emily Brontë`, 
+             color = abs(`Emily Brontë` -  `Charlotte Brontë`))) + 
+  geom_jitter(width = 0.001, height = 0.001, alpha = 0.2, size = 2.5) + 
+  geom_abline(color = &quot;gray40&quot;, lty = 2) + 
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5, size = 7.5) + 
+  scale_color_gradient(low = &quot;darkslategray4&quot;, high = &quot;gray75&quot;) +
+  scale_x_continuous(labels = scales::label_percent()) + 
+  scale_y_continuous(labels = scales::label_percent()) +  
+  theme(legend.position = &quot;none&quot;) + 
+  coord_cartesian(xlim = c(0, NA)) + 
+  labs(title = &quot;Word frequency between two sisters&quot;) + 
+  theme(text = element_text(size = 18),
+        plot.title.position = &quot;plot&quot;)</code></pre>
+<p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png" width="1344" /></p>
+<p>Words lie near the line such as “home”, “head” and “half” indicate similar tedency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff”, “linton”, “catherine”, etc.</p>
+<p>What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model.</p>
+</div>
+<div id="modeling" class="section level1">
+<h1>Modeling</h1>
+<div id="data-preprocessing" class="section level2">
+<h2>Data preprocessing</h2>
+<p>There are 423 and features (words) and 47119 observations in total. Approximately 18% fo the response are 1 (Emily Brontë).</p>
+<pre class="r"><code>tidy_books %&gt;% 
+  count(author) %&gt;% 
+  mutate(prop = n / sum(n))
+## # A tibble: 2 x 3
+##   author               n  prop
+##   &lt;fct&gt;            &lt;int&gt; &lt;dbl&gt;
+## 1 Charlotte Brontë 64858 0.817
+## 2 Emily Brontë     14489 0.183</code></pre>
+<p>Now it’s time to widen our data to reach an appropriate model structure, this similar to a document-term matrix, with rows being a line and column word count.</p>
+<pre class="r"><code>library(tidymodels)
+set.seed(2020)
+doParallel::registerDoParallel()
+
+model_df &lt;- tidy_books %&gt;% 
+  count(line_index, word) %&gt;% 
+  pivot_wider(names_from = word, values_from = n,
+              values_fill = list(n = 0)) %&gt;% 
+  left_join(books, by = c(&quot;line_index&quot; = &quot;line_index&quot;)) %&gt;% 
+  select(-title, -text)
+
+model_df
+## # A tibble: 47,119 x 425
+##    line_index heights wuthering chapter returned visit heathcliff heaven black
+##         &lt;int&gt;   &lt;int&gt;     &lt;int&gt;   &lt;int&gt;    &lt;int&gt; &lt;int&gt;      &lt;int&gt;  &lt;int&gt; &lt;int&gt;
+##  1          1       1         1       0        0     0          0      0     0
+##  2          4       0         0       1        0     0          0      0     0
+##  3          7       0         0       0        1     1          0      0     0
+##  4         11       0         0       0        0     0          1      1     0
+##  5         13       0         0       0        0     0          0      0     1
+##  6         15       0         0       0        0     0          0      0     0
+##  7         18       0         0       0        0     0          1      0     0
+##  8         20       0         0       0        0     0          0      0     0
+##  9         22       0         0       0        0     0          0      0     0
+## 10         23       0         0       0        0     0          0      0     0
+## # ... with 47,109 more rows, and 416 more variables: eyes &lt;int&gt;, heart &lt;int&gt;,
+## #   fingers &lt;int&gt;, answer &lt;int&gt;, sir &lt;int&gt;, hope &lt;int&gt;, grange &lt;int&gt;,
+## #   heard &lt;int&gt;, thrushcross &lt;int&gt;, interrupted &lt;int&gt;, walk &lt;int&gt;,
+## #   closed &lt;int&gt;, uttered &lt;int&gt;, gate &lt;int&gt;, words &lt;int&gt;, horse &lt;int&gt;,
+## #   hand &lt;int&gt;, entered &lt;int&gt;, joseph &lt;int&gt;, bring &lt;int&gt;, suppose &lt;int&gt;,
+## #   nay &lt;int&gt;, dinner &lt;int&gt;, guess &lt;int&gt;, times &lt;int&gt;, wind &lt;int&gt;, house &lt;int&gt;,
+## #   strong &lt;int&gt;, set &lt;int&gt;, wall &lt;int&gt;, door &lt;int&gt;, earnshaw &lt;int&gt;,
+## #   hareton &lt;int&gt;, short &lt;int&gt;, appeared &lt;int&gt;, desire &lt;int&gt;, entrance &lt;int&gt;,
+## #   brought &lt;int&gt;, family &lt;int&gt;, sitting &lt;int&gt;, call &lt;int&gt;, kitchen &lt;int&gt;,
+## #   parlour &lt;int&gt;, deep &lt;int&gt;, observed &lt;int&gt;, light &lt;int&gt;, eye &lt;int&gt;,
+## #   lay &lt;int&gt;, floor &lt;int&gt;, white &lt;int&gt;, countenance &lt;int&gt;, arm &lt;int&gt;,
+## #   chair &lt;int&gt;, seated &lt;int&gt;, round &lt;int&gt;, table &lt;int&gt;, time &lt;int&gt;,
+## #   living &lt;int&gt;, dark &lt;int&gt;, people &lt;int&gt;, hate &lt;int&gt;, love &lt;int&gt;,
+## #   loved &lt;int&gt;, fast &lt;int&gt;, dear &lt;int&gt;, mother &lt;int&gt;, home &lt;int&gt;,
+## #   summer &lt;int&gt;, fine &lt;int&gt;, company &lt;int&gt;, creature &lt;int&gt;, notice &lt;int&gt;,
+## #   told &lt;int&gt;, head &lt;int&gt;, looked &lt;int&gt;, return &lt;int&gt;, poor &lt;int&gt;, till &lt;int&gt;,
+## #   doubt &lt;int&gt;, seat &lt;int&gt;, silence &lt;int&gt;, left &lt;int&gt;, dog &lt;int&gt;,
+## #   master &lt;int&gt;, sat &lt;int&gt;, scarcely &lt;int&gt;, half &lt;int&gt;, hearth &lt;int&gt;,
+## #   arms &lt;int&gt;, fire &lt;int&gt;, purpose &lt;int&gt;, tongue &lt;int&gt;, remained &lt;int&gt;,
+## #   devil &lt;int&gt;, manner &lt;int&gt;, matter &lt;int&gt;, ill &lt;int&gt;, muttered &lt;int&gt;,
+## #   worse &lt;int&gt;, leave &lt;int&gt;, ...</code></pre>
+</div>
+<div id="train-a-penalized-logistic-regression-model" class="section level2">
+<h2>Train a penalized logistic regression model</h2>
+<p>Split the data into training set and testing set.</p>
+<pre class="r"><code>book_split &lt;- initial_split(model_df)
+book_train &lt;- training(book_split)
+book_test &lt;- testing(book_split)</code></pre>
+<p>Specify a L1 penalized logistic model, center and scale all predictors and combine them in to a <code>workflow</code> object.</p>
+<pre class="r"><code>logistic_spec &lt;- logistic_reg(penalty = 0.05, mixture = 1) %&gt;%
+  set_engine(&quot;glmnet&quot;)
+
+book_rec &lt;- recipe(author ~ ., data = book_train) %&gt;% 
+  update_role(line_index, new_role = &quot;ID&quot;) %&gt;% 
+  step_zv(all_predictors()) %&gt;% 
+  step_normalize(all_predictors())
+
+book_wf &lt;- workflow() %&gt;% 
+  add_model(logistic_spec) %&gt;% 
+  add_recipe(book_rec)
+
+initial_fit &lt;- book_wf %&gt;% 
+  fit(data = book_train)</code></pre>
+<p><code>initial_fit</code> is a simple fitted regression model without any hyperparameters. By default <code>glmnet</code> calls for 100 values of lambda even if I specify <span class="math inline">\(\lambda = 0.05\)</span>. So the extracted result aren’t that helpful.</p>
+<pre class="r"><code>initial_fit %&gt;%
+  pull_workflow_fit() %&gt;% 
+  tidy()
+## # A tibble: 26,019 x 5
+##    term         step estimate lambda dev.ratio
+##    &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+##  1 (Intercept)     1 -1.64    0.0838  5.24e-14
+##  2 (Intercept)     2 -1.64    0.0764  8.68e- 3
+##  3 heathcliff      2  0.0469  0.0764  8.68e- 3
+##  4 linton          2  0.00120 0.0764  8.68e- 3
+##  5 (Intercept)     3 -1.64    0.0696  2.51e- 2
+##  6 heathcliff      3  0.0801  0.0696  2.51e- 2
+##  7 catherine       3  0.0269  0.0696  2.51e- 2
+##  8 linton          3  0.0413  0.0696  2.51e- 2
+##  9 (Intercept)     4 -1.64    0.0634  3.80e- 2
+## 10 heathcliff      4  0.107   0.0634  3.80e- 2
+## # ... with 26,009 more rows</code></pre>
+<p>We can make predictions with <code>initial_fit</code> anyway, and examine metrics like overall accuracy.</p>
+<pre class="r"><code>initial_predict &lt;- predict(initial_fit, book_test) %&gt;% 
+    bind_cols(predict(initial_fit, book_test, type = &quot;prob&quot;)) %&gt;%
+    bind_cols(book_test %&gt;% select(author, line_index))
+
+initial_predict
+## # A tibble: 11,779 x 5
+##    .pred_class     `.pred_Charlotte Bro~ `.pred_Emily Bron~ author    line_index
+##    &lt;fct&gt;                           &lt;dbl&gt;              &lt;dbl&gt; &lt;fct&gt;          &lt;int&gt;
+##  1 Charlotte Bron~                 0.844              0.156 Emily Br~          1
+##  2 Charlotte Bron~                 0.844              0.156 Emily Br~         13
+##  3 Charlotte Bron~                 0.844              0.156 Emily Br~         30
+##  4 Charlotte Bron~                 0.844              0.156 Emily Br~         31
+##  5 Charlotte Bron~                 0.844              0.156 Emily Br~         36
+##  6 Charlotte Bron~                 0.844              0.156 Emily Br~         56
+##  7 Charlotte Bron~                 0.844              0.156 Emily Br~         68
+##  8 Charlotte Bron~                 0.844              0.156 Emily Br~         75
+##  9 Charlotte Bron~                 0.844              0.156 Emily Br~         89
+## 10 Charlotte Bron~                 0.844              0.156 Emily Br~         96
+## # ... with 11,769 more rows</code></pre>
+<p>How good is our initial model?</p>
+<pre class="r"><code>initial_predict %&gt;% 
+  accuracy(truth = author, estimate = .pred_class)
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
+## 1 accuracy binary         0.844</code></pre>
+<p>Nearly 84% of all predictions are right. This isn’t a very statisfactory result since “Charlotte Brontë” accounts for 81% of <code>author</code>, making our model only slightly better than a classifier that would assngin all <code>author</code> with “Charlotte Brontë” anyway.</p>
+<div id="tuning-lambda" class="section level3">
+<h3>Tuning lambda</h3>
+<p>We can figure out an appropriate penalty using resampling and tune the model.</p>
+<pre class="r"><code>logistic_wf_tune &lt;- book_wf %&gt;%
+  update_model(logistic_spec %&gt;% set_args(penalty = tune()))
+
+lambda_grid &lt;- grid_regular(penalty(), levels = 100)
+book_folds &lt;- vfold_cv(book_train, v = 10)</code></pre>
+<p>Here and I build a set of 10 cross validations resamples, and set <code>levels = 100</code> to try 100 choices of lambda ranging from 0 to 1.</p>
+<p>Then I tune the grid:</p>
+<pre class="r"><code>logistic_results &lt;- logistic_wf_tune %&gt;%    
+  tune_grid(
+    resamples = book_folds,
+    grid = lambda_grid)</code></pre>
+<p>There is an <code>autoplot()</code> method for the tuned results, but I instead plot two metrics versus lambda respectivcely by myself.</p>
+<pre class="r"><code>logistic_results %&gt;% 
+  collect_metrics() %&gt;% 
+  mutate(lower_bound = mean - std_err,
+         upper_bound = mean + std_err) %&gt;%
+  ggplot(aes(penalty, mean)) + 
+  geom_line(aes(color = .metric), size = 1.5, show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = lower_bound, ymax = upper_bound)) + 
+  facet_wrap(~ .metric, nrow = 2) + 
+  labs(y = NULL,
+       x = expression(lambda),
+       title = &quot;Performance metric of logistic regession versus differenct choices of L1 regularization&quot;)</code></pre>
+<p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
+<p>Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess.</p>
+<pre class="r"><code>best_lambda &lt;- logistic_results %&gt;% 
+  select_best(metric = &quot;roc_auc&quot;)
+
+book_wf_final &lt;- finalize_workflow(logistic_wf_tune,
+                                  parameters = best_lambda)</code></pre>
+<p>Now the model specification in the workflow is filled by the best lambda (<span class="math inline">\(\lambda = 0.0007\)</span>)at hand judged by cross validation.</p>
+<pre class="r"><code>book_wf_final %&gt;% pull_workflow_spec()
+## Logistic Regression Model Specification (classification)
+## 
+## Main Arguments:
+##   penalty = 0.000585702081805666
+##   mixture = 1
+## 
+## Computational engine: glmnet</code></pre>
+<p>The next thing is to fit the best model with the training set, and evaluate against the test set.</p>
+<pre class="r"><code>logistic_final &lt;- last_fit(book_wf_final, split = book_split)
+
+logistic_final %&gt;% 
+  collect_metrics()
+## # A tibble: 2 x 3
+##   .metric  .estimator .estimate
+##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
+## 1 accuracy binary         0.940
+## 2 roc_auc  binary         0.915
+
+logistic_final %&gt;% 
+  collect_predictions() %&gt;%
+  roc_curve(truth = author, `.pred_Emily Brontë`) %&gt;% 
+  autoplot()</code></pre>
+<p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
+<p>The accuracy of our logisitc model rises by a rough 7% to 93%, with <code>roc_auc</code> being nearly 91.5%. This is pretty good!</p>
+<p>To evaluate model fit, I agian use <code>fit</code> and <code>pull_workflow</code>. Variable importance plots implemented in the <a href="https://koalaverse.github.io/vip/index.html">vip</a> provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.</p>
+<pre class="r"><code>library(vip)
+
+logistic_vi &lt;- book_wf_final %&gt;% 
+  fit(book_train) %&gt;% 
+  pull_workflow_fit() %&gt;%
+  vi(lambda = best_lambda$penalty) %&gt;% 
+  group_by(Sign) %&gt;% 
+  top_n(30, wt = abs(Importance)) %&gt;%
+  ungroup() %&gt;% 
+  mutate(Sign = if_else(Sign == &quot;POS&quot;, 
+                        &quot;More Emily Brontë&quot;, &quot;More Charlotte Brontë&quot;))
+
+logistic_vi %&gt;% 
+  ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
+             x = Importance)) + 
+  geom_col(aes(fill = Sign), show.legend = FALSE) +
+  scale_y_reordered() + 
+  facet_wrap(~ Sign, nrow = 1, scales = &quot;free&quot;) + 
+  labs(title = &quot;How word usage classifies Brontë sisters&quot;,
+       x = NULL,
+       y = NULL) + 
+  theme(axis.text = element_text(size = 18),
+        plot.title = element_text(size = 24),
+        plot.title.position = &quot;plot&quot;)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-22"></span>
+<img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-22-1.png" alt="Variable importance for penalized logistic regression" width="1056" />
+<p class="caption">
+Figure 1: Variable importance for penalized logistic regression
+</p>
+</div>
+<p>Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.</p>
+<p>Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the word frequency plot that Emily Brontë has more and stronger characteristic words. I am not sure if this is partly because imbalance in our data?</p>
+<p>Anyway, the model with the best lambda seems quite power in distinguishing these two authors. I look forward to build a multinomail classification model in <code>tidymodels</code> to include Anne Brontë some other time!</p>
+</div>
+</div>
+</div>

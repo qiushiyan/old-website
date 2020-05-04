@@ -13,41 +13,320 @@
     </image>
     
     <item>
-      <title>L1 Penalized Logistic Regression for Text Classification</title>
-      <link>/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/</link>
+      <title>Text Classfication with Penalized Logistic Regression</title>
+      <link>/post/text-classification-logistic/</link>
       <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/</guid>
+      <guid>/post/text-classification-logistic/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#comparing-word-frequency&#34;&gt;Comparing word frequency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling&#34;&gt;Modeling&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#data-preprocessing&#34;&gt;Data preprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#train-a-penalized-logistic-regression-model&#34;&gt;Train a penalized logistic regression model&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#tuning-lambda&#34;&gt;Tuning lambda&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## -- Attaching packages ------------------------------------- tidymodels 0.1.0 --&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## √ broom     0.5.6          √ recipes   0.1.12    
-## √ dials     0.0.6          √ rsample   0.0.6     
-## √ dplyr     0.8.5          √ tibble    3.0.1     
-## √ ggplot2   3.3.0.9000     √ tune      0.1.0     
-## √ infer     0.5.1          √ workflows 0.1.1     
-## √ parsnip   0.1.0          √ yardstick 0.0.6     
-## √ purrr     0.3.4&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## -- Conflicts ---------------------------------------- tidymodels_conflicts() --
-## x purrr::discard()  masks scales::discard()
-## x dplyr::filter()   masks stats::filter()
-## x dplyr::lag()      masks stats::lag()
-## x ggplot2::margin() masks dials::margin()
-## x recipes::step()   masks stats::step()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gutenbergr)
+&lt;p&gt;In this post I aim to train a text classification model with penalized logistic regression using the &lt;a href=&#34;https://www.tidymodels.org/&#34;&gt;&lt;code&gt;tidymodels&lt;/code&gt;&lt;/a&gt; framework. Data are from 5 books and downloaded via the &lt;a href=&#34;https://docs.ropensci.org/gutenbergr/&#34;&gt;&lt;code&gt;gutenbergr&lt;/code&gt;&lt;/a&gt; package, written by either Emily Brontë or Charlotte Brontë. And the goal is to predict the author of a line, in other words the probability of line being written by one sister instead of another.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(tidytext)
+library(gutenbergr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;books &amp;lt;- gutenberg_works() %&amp;gt;% 
+  filter(str_detect(author, &amp;quot;Brontë, Emily|Brontë, Charlotte&amp;quot;)) %&amp;gt;% 
+  gutenberg_download(meta_fields = c(&amp;quot;title&amp;quot;, &amp;quot;author&amp;quot;)) %&amp;gt;% 
+  transmute(title,
+            author = if_else(author == &amp;quot;Brontë, Emily&amp;quot;, 
+                             &amp;quot;Emily Brontë&amp;quot;, 
+                             &amp;quot;Charlotte Brontë&amp;quot;) %&amp;gt;% factor(),
+            line_index = row_number(),
+            text)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;books&lt;/code&gt; is at line level&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;books
+## # A tibble: 88,989 x 4
+##    title        author     line_index text                                      
+##    &amp;lt;chr&amp;gt;        &amp;lt;fct&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;                                     
+##  1 Wuthering H~ Emily Bro~          1 &amp;quot;WUTHERING HEIGHTS&amp;quot;                       
+##  2 Wuthering H~ Emily Bro~          2 &amp;quot;&amp;quot;                                        
+##  3 Wuthering H~ Emily Bro~          3 &amp;quot;&amp;quot;                                        
+##  4 Wuthering H~ Emily Bro~          4 &amp;quot;CHAPTER I&amp;quot;                               
+##  5 Wuthering H~ Emily Bro~          5 &amp;quot;&amp;quot;                                        
+##  6 Wuthering H~ Emily Bro~          6 &amp;quot;&amp;quot;                                        
+##  7 Wuthering H~ Emily Bro~          7 &amp;quot;1801.--I have just returned from a visit~
+##  8 Wuthering H~ Emily Bro~          8 &amp;quot;neighbour that I shall be troubled with.~
+##  9 Wuthering H~ Emily Bro~          9 &amp;quot;country!  In all England, I do not belie~
+## 10 Wuthering H~ Emily Bro~         10 &amp;quot;situation so completely removed from the~
+## # ... with 88,979 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To obtain tidy text structure illustrated in &lt;a href=&#34;https://www.tidytextmining.com/&#34;&gt;Text Mining with R&lt;/a&gt;, I use &lt;code&gt;unnest_tokens()&lt;/code&gt; to perform tokenization and remove all the stop words. I also removed characters like &lt;code&gt;&#39;&lt;/code&gt;, &lt;code&gt;&#39;s&lt;/code&gt;, &lt;code&gt;&#39;&lt;/code&gt; and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff’s becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author’s total word counts) are removed. The cutoff may be a little too high and if you plot the histogram of that proportion, but I really need this to save computation efforts on my laptop 😅.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;clean_books &amp;lt;- books %&amp;gt;% 
+  unnest_tokens(word, text) %&amp;gt;%
+  anti_join(stop_words) %&amp;gt;% 
+  filter(!str_detect(word, &amp;quot;^\\d+$&amp;quot;)) %&amp;gt;% 
+  mutate(word = str_remove_all(word, &amp;quot;_|&amp;#39;s|&amp;#39;|\\s&amp;quot;))
+  
+total_words &amp;lt;- clean_books %&amp;gt;%
+  count(author, name = &amp;quot;total&amp;quot;)
 
-titles &amp;lt;- c(
-  &amp;quot;The War of the Worlds&amp;quot;,
-  &amp;quot;Pride and Prejudice&amp;quot;
-)
+tidy_books &amp;lt;- clean_books %&amp;gt;%
+  left_join(total_words) %&amp;gt;% 
+  group_by(author, total, word) %&amp;gt;%
+  filter(n() / total &amp;gt; 0.0005) %&amp;gt;% 
+  ungroup() &lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;comparing-word-frequency&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Comparing word frequency&lt;/h1&gt;
+&lt;p&gt;Before building an actual predictive model, lets’ do some EDA to see different usage tendency on the same word! This will also shed light on what we would expect from the text classification. Now, we will compare word frequency (proportion) between the two sisters.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tidy_books %&amp;gt;% 
+  group_by(author, total) %&amp;gt;%
+  count(word) %&amp;gt;% 
+  mutate(prop = n / total) %&amp;gt;% 
+  ungroup() %&amp;gt;% 
+  select(-total, -n) %&amp;gt;%
+  pivot_wider(names_from  = author, values_from = prop,
+              values_fill = list(prop = 0)) %&amp;gt;% 
+  ggplot(aes(x = `Charlotte Brontë`, y = `Emily Brontë`, 
+             color = abs(`Emily Brontë` -  `Charlotte Brontë`))) + 
+  geom_jitter(width = 0.001, height = 0.001, alpha = 0.2, size = 2.5) + 
+  geom_abline(color = &amp;quot;gray40&amp;quot;, lty = 2) + 
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5, size = 7.5) + 
+  scale_color_gradient(low = &amp;quot;darkslategray4&amp;quot;, high = &amp;quot;gray75&amp;quot;) +
+  scale_x_continuous(labels = scales::label_percent()) + 
+  scale_y_continuous(labels = scales::label_percent()) +  
+  theme(legend.position = &amp;quot;none&amp;quot;) + 
+  coord_cartesian(xlim = c(0, NA)) + 
+  labs(title = &amp;quot;Word frequency between two sisters&amp;quot;) + 
+  theme(text = element_text(size = 18),
+        plot.title.position = &amp;quot;plot&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Words lie near the line such as “home”, “head” and “half” indicate similar tedency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff”, “linton”, “catherine”, etc.&lt;/p&gt;
+&lt;p&gt;What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;modeling&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Modeling&lt;/h1&gt;
+&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data preprocessing&lt;/h2&gt;
+&lt;p&gt;There are 423 and features (words) and 47119 observations in total. Approximately 18% fo the response are 1 (Emily Brontë).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tidy_books %&amp;gt;% 
+  count(author) %&amp;gt;% 
+  mutate(prop = n / sum(n))
+## # A tibble: 2 x 3
+##   author               n  prop
+##   &amp;lt;fct&amp;gt;            &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;
+## 1 Charlotte Brontë 64858 0.817
+## 2 Emily Brontë     14489 0.183&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now it’s time to widen our data to reach an appropriate model structure, this similar to a document-term matrix, with rows being a line and column word count.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
+set.seed(2020)
+doParallel::registerDoParallel()
 
-books &amp;lt;- gutenberg_works() %&amp;gt;% 
-  filter(title %in% titles) %&amp;gt;% 
-  gutenberg_download(meta_fields = &amp;quot;title&amp;quot;) %&amp;gt;% 
-  mutate(document = row_number())&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Determining mirror for Project Gutenberg from http://www.gutenberg.org/robot/harvest&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Using mirror http://aleph.gutenberg.org&lt;/code&gt;&lt;/pre&gt;
+model_df &amp;lt;- tidy_books %&amp;gt;% 
+  count(line_index, word) %&amp;gt;% 
+  pivot_wider(names_from = word, values_from = n,
+              values_fill = list(n = 0)) %&amp;gt;% 
+  left_join(books, by = c(&amp;quot;line_index&amp;quot; = &amp;quot;line_index&amp;quot;)) %&amp;gt;% 
+  select(-title, -text)
+
+model_df
+## # A tibble: 47,119 x 425
+##    line_index heights wuthering chapter returned visit heathcliff heaven black
+##         &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;     &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;    &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;  &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
+##  1          1       1         1       0        0     0          0      0     0
+##  2          4       0         0       1        0     0          0      0     0
+##  3          7       0         0       0        1     1          0      0     0
+##  4         11       0         0       0        0     0          1      1     0
+##  5         13       0         0       0        0     0          0      0     1
+##  6         15       0         0       0        0     0          0      0     0
+##  7         18       0         0       0        0     0          1      0     0
+##  8         20       0         0       0        0     0          0      0     0
+##  9         22       0         0       0        0     0          0      0     0
+## 10         23       0         0       0        0     0          0      0     0
+## # ... with 47,109 more rows, and 416 more variables: eyes &amp;lt;int&amp;gt;, heart &amp;lt;int&amp;gt;,
+## #   fingers &amp;lt;int&amp;gt;, answer &amp;lt;int&amp;gt;, sir &amp;lt;int&amp;gt;, hope &amp;lt;int&amp;gt;, grange &amp;lt;int&amp;gt;,
+## #   heard &amp;lt;int&amp;gt;, thrushcross &amp;lt;int&amp;gt;, interrupted &amp;lt;int&amp;gt;, walk &amp;lt;int&amp;gt;,
+## #   closed &amp;lt;int&amp;gt;, uttered &amp;lt;int&amp;gt;, gate &amp;lt;int&amp;gt;, words &amp;lt;int&amp;gt;, horse &amp;lt;int&amp;gt;,
+## #   hand &amp;lt;int&amp;gt;, entered &amp;lt;int&amp;gt;, joseph &amp;lt;int&amp;gt;, bring &amp;lt;int&amp;gt;, suppose &amp;lt;int&amp;gt;,
+## #   nay &amp;lt;int&amp;gt;, dinner &amp;lt;int&amp;gt;, guess &amp;lt;int&amp;gt;, times &amp;lt;int&amp;gt;, wind &amp;lt;int&amp;gt;, house &amp;lt;int&amp;gt;,
+## #   strong &amp;lt;int&amp;gt;, set &amp;lt;int&amp;gt;, wall &amp;lt;int&amp;gt;, door &amp;lt;int&amp;gt;, earnshaw &amp;lt;int&amp;gt;,
+## #   hareton &amp;lt;int&amp;gt;, short &amp;lt;int&amp;gt;, appeared &amp;lt;int&amp;gt;, desire &amp;lt;int&amp;gt;, entrance &amp;lt;int&amp;gt;,
+## #   brought &amp;lt;int&amp;gt;, family &amp;lt;int&amp;gt;, sitting &amp;lt;int&amp;gt;, call &amp;lt;int&amp;gt;, kitchen &amp;lt;int&amp;gt;,
+## #   parlour &amp;lt;int&amp;gt;, deep &amp;lt;int&amp;gt;, observed &amp;lt;int&amp;gt;, light &amp;lt;int&amp;gt;, eye &amp;lt;int&amp;gt;,
+## #   lay &amp;lt;int&amp;gt;, floor &amp;lt;int&amp;gt;, white &amp;lt;int&amp;gt;, countenance &amp;lt;int&amp;gt;, arm &amp;lt;int&amp;gt;,
+## #   chair &amp;lt;int&amp;gt;, seated &amp;lt;int&amp;gt;, round &amp;lt;int&amp;gt;, table &amp;lt;int&amp;gt;, time &amp;lt;int&amp;gt;,
+## #   living &amp;lt;int&amp;gt;, dark &amp;lt;int&amp;gt;, people &amp;lt;int&amp;gt;, hate &amp;lt;int&amp;gt;, love &amp;lt;int&amp;gt;,
+## #   loved &amp;lt;int&amp;gt;, fast &amp;lt;int&amp;gt;, dear &amp;lt;int&amp;gt;, mother &amp;lt;int&amp;gt;, home &amp;lt;int&amp;gt;,
+## #   summer &amp;lt;int&amp;gt;, fine &amp;lt;int&amp;gt;, company &amp;lt;int&amp;gt;, creature &amp;lt;int&amp;gt;, notice &amp;lt;int&amp;gt;,
+## #   told &amp;lt;int&amp;gt;, head &amp;lt;int&amp;gt;, looked &amp;lt;int&amp;gt;, return &amp;lt;int&amp;gt;, poor &amp;lt;int&amp;gt;, till &amp;lt;int&amp;gt;,
+## #   doubt &amp;lt;int&amp;gt;, seat &amp;lt;int&amp;gt;, silence &amp;lt;int&amp;gt;, left &amp;lt;int&amp;gt;, dog &amp;lt;int&amp;gt;,
+## #   master &amp;lt;int&amp;gt;, sat &amp;lt;int&amp;gt;, scarcely &amp;lt;int&amp;gt;, half &amp;lt;int&amp;gt;, hearth &amp;lt;int&amp;gt;,
+## #   arms &amp;lt;int&amp;gt;, fire &amp;lt;int&amp;gt;, purpose &amp;lt;int&amp;gt;, tongue &amp;lt;int&amp;gt;, remained &amp;lt;int&amp;gt;,
+## #   devil &amp;lt;int&amp;gt;, manner &amp;lt;int&amp;gt;, matter &amp;lt;int&amp;gt;, ill &amp;lt;int&amp;gt;, muttered &amp;lt;int&amp;gt;,
+## #   worse &amp;lt;int&amp;gt;, leave &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;train-a-penalized-logistic-regression-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Train a penalized logistic regression model&lt;/h2&gt;
+&lt;p&gt;Split the data into training set and testing set.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;book_split &amp;lt;- initial_split(model_df)
+book_train &amp;lt;- training(book_split)
+book_test &amp;lt;- testing(book_split)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Specify a L1 penalized logistic model, center and scale all predictors and combine them in to a &lt;code&gt;workflow&lt;/code&gt; object.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_spec &amp;lt;- logistic_reg(penalty = 0.05, mixture = 1) %&amp;gt;%
+  set_engine(&amp;quot;glmnet&amp;quot;)
+
+book_rec &amp;lt;- recipe(author ~ ., data = book_train) %&amp;gt;% 
+  update_role(line_index, new_role = &amp;quot;ID&amp;quot;) %&amp;gt;% 
+  step_zv(all_predictors()) %&amp;gt;% 
+  step_normalize(all_predictors())
+
+book_wf &amp;lt;- workflow() %&amp;gt;% 
+  add_model(logistic_spec) %&amp;gt;% 
+  add_recipe(book_rec)
+
+initial_fit &amp;lt;- book_wf %&amp;gt;% 
+  fit(data = book_train)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;initial_fit&lt;/code&gt; is a simple fitted regression model without any hyperparameters. By default &lt;code&gt;glmnet&lt;/code&gt; calls for 100 values of lambda even if I specify &lt;span class=&#34;math inline&#34;&gt;\(\lambda = 0.05\)&lt;/span&gt;. So the extracted result aren’t that helpful.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;initial_fit %&amp;gt;%
+  pull_workflow_fit() %&amp;gt;% 
+  tidy()
+## # A tibble: 26,019 x 5
+##    term         step estimate lambda dev.ratio
+##    &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+##  1 (Intercept)     1 -1.64    0.0838  5.24e-14
+##  2 (Intercept)     2 -1.64    0.0764  8.68e- 3
+##  3 heathcliff      2  0.0469  0.0764  8.68e- 3
+##  4 linton          2  0.00120 0.0764  8.68e- 3
+##  5 (Intercept)     3 -1.64    0.0696  2.51e- 2
+##  6 heathcliff      3  0.0801  0.0696  2.51e- 2
+##  7 catherine       3  0.0269  0.0696  2.51e- 2
+##  8 linton          3  0.0413  0.0696  2.51e- 2
+##  9 (Intercept)     4 -1.64    0.0634  3.80e- 2
+## 10 heathcliff      4  0.107   0.0634  3.80e- 2
+## # ... with 26,009 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can make predictions with &lt;code&gt;initial_fit&lt;/code&gt; anyway, and examine metrics like overall accuracy.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;initial_predict &amp;lt;- predict(initial_fit, book_test) %&amp;gt;% 
+    bind_cols(predict(initial_fit, book_test, type = &amp;quot;prob&amp;quot;)) %&amp;gt;%
+    bind_cols(book_test %&amp;gt;% select(author, line_index))
+
+initial_predict
+## # A tibble: 11,779 x 5
+##    .pred_class     `.pred_Charlotte Bro~ `.pred_Emily Bron~ author    line_index
+##    &amp;lt;fct&amp;gt;                           &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;          &amp;lt;int&amp;gt;
+##  1 Charlotte Bron~                 0.844              0.156 Emily Br~          1
+##  2 Charlotte Bron~                 0.844              0.156 Emily Br~         13
+##  3 Charlotte Bron~                 0.844              0.156 Emily Br~         30
+##  4 Charlotte Bron~                 0.844              0.156 Emily Br~         31
+##  5 Charlotte Bron~                 0.844              0.156 Emily Br~         36
+##  6 Charlotte Bron~                 0.844              0.156 Emily Br~         56
+##  7 Charlotte Bron~                 0.844              0.156 Emily Br~         68
+##  8 Charlotte Bron~                 0.844              0.156 Emily Br~         75
+##  9 Charlotte Bron~                 0.844              0.156 Emily Br~         89
+## 10 Charlotte Bron~                 0.844              0.156 Emily Br~         96
+## # ... with 11,769 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;How good is our initial model?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;initial_predict %&amp;gt;% 
+  accuracy(truth = author, estimate = .pred_class)
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
+## 1 accuracy binary         0.844&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Nearly 84% of all predictions are right. This isn’t a very statisfactory result since “Charlotte Brontë” accounts for 81% of &lt;code&gt;author&lt;/code&gt;, making our model only slightly better than a classifier that would assngin all &lt;code&gt;author&lt;/code&gt; with “Charlotte Brontë” anyway.&lt;/p&gt;
+&lt;div id=&#34;tuning-lambda&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Tuning lambda&lt;/h3&gt;
+&lt;p&gt;We can figure out an appropriate penalty using resampling and tune the model.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_wf_tune &amp;lt;- book_wf %&amp;gt;%
+  update_model(logistic_spec %&amp;gt;% set_args(penalty = tune()))
+
+lambda_grid &amp;lt;- grid_regular(penalty(), levels = 100)
+book_folds &amp;lt;- vfold_cv(book_train, v = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here and I build a set of 10 cross validations resamples, and set &lt;code&gt;levels = 100&lt;/code&gt; to try 100 choices of lambda ranging from 0 to 1.&lt;/p&gt;
+&lt;p&gt;Then I tune the grid:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_results &amp;lt;- logistic_wf_tune %&amp;gt;%    
+  tune_grid(
+    resamples = book_folds,
+    grid = lambda_grid)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is an &lt;code&gt;autoplot()&lt;/code&gt; method for the tuned results, but I instead plot two metrics versus lambda respectivcely by myself.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_results %&amp;gt;% 
+  collect_metrics() %&amp;gt;% 
+  mutate(lower_bound = mean - std_err,
+         upper_bound = mean + std_err) %&amp;gt;%
+  ggplot(aes(penalty, mean)) + 
+  geom_line(aes(color = .metric), size = 1.5, show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = lower_bound, ymax = upper_bound)) + 
+  facet_wrap(~ .metric, nrow = 2) + 
+  labs(y = NULL,
+       x = expression(lambda),
+       title = &amp;quot;Performance metric of logistic regession versus differenct choices of L1 regularization&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;best_lambda &amp;lt;- logistic_results %&amp;gt;% 
+  select_best(metric = &amp;quot;roc_auc&amp;quot;)
+
+book_wf_final &amp;lt;- finalize_workflow(logistic_wf_tune,
+                                  parameters = best_lambda)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the model specification in the workflow is filled by the best lambda (&lt;span class=&#34;math inline&#34;&gt;\(\lambda = 0.0007\)&lt;/span&gt;)at hand judged by cross validation.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;book_wf_final %&amp;gt;% pull_workflow_spec()
+## Logistic Regression Model Specification (classification)
+## 
+## Main Arguments:
+##   penalty = 0.000585702081805666
+##   mixture = 1
+## 
+## Computational engine: glmnet&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The next thing is to fit the best model with the training set, and evaluate against the test set.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final &amp;lt;- last_fit(book_wf_final, split = book_split)
+
+logistic_final %&amp;gt;% 
+  collect_metrics()
+## # A tibble: 2 x 3
+##   .metric  .estimator .estimate
+##   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
+## 1 accuracy binary         0.940
+## 2 roc_auc  binary         0.915
+
+logistic_final %&amp;gt;% 
+  collect_predictions() %&amp;gt;%
+  roc_curve(truth = author, `.pred_Emily Brontë`) %&amp;gt;% 
+  autoplot()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The accuracy of our logisitc model rises by a rough 7% to 93%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 91.5%. This is pretty good!&lt;/p&gt;
+&lt;p&gt;To evaluate model fit, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt;. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(vip)
+
+logistic_vi &amp;lt;- book_wf_final %&amp;gt;% 
+  fit(book_train) %&amp;gt;% 
+  pull_workflow_fit() %&amp;gt;%
+  vi(lambda = best_lambda$penalty) %&amp;gt;% 
+  group_by(Sign) %&amp;gt;% 
+  top_n(30, wt = abs(Importance)) %&amp;gt;%
+  ungroup() %&amp;gt;% 
+  mutate(Sign = if_else(Sign == &amp;quot;POS&amp;quot;, 
+                        &amp;quot;More Emily Brontë&amp;quot;, &amp;quot;More Charlotte Brontë&amp;quot;))
+
+logistic_vi %&amp;gt;% 
+  ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
+             x = Importance)) + 
+  geom_col(aes(fill = Sign), show.legend = FALSE) +
+  scale_y_reordered() + 
+  facet_wrap(~ Sign, nrow = 1, scales = &amp;quot;free&amp;quot;) + 
+  labs(title = &amp;quot;How word usage classifies Brontë sisters&amp;quot;,
+       x = NULL,
+       y = NULL) + 
+  theme(axis.text = element_text(size = 18),
+        plot.title = element_text(size = 24),
+        plot.title.position = &amp;quot;plot&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-22&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-22-1.png&#34; alt=&#34;Variable importance for penalized logistic regression&#34; width=&#34;1056&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Variable importance for penalized logistic regression
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.&lt;/p&gt;
+&lt;p&gt;Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the word frequency plot that Emily Brontë has more and stronger characteristic words. I am not sure if this is partly because imbalance in our data?&lt;/p&gt;
+&lt;p&gt;Anyway, the model with the best lambda seems quite power in distinguishing these two authors. I look forward to build a multinomail classification model in &lt;code&gt;tidymodels&lt;/code&gt; to include Anne Brontë some other time!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -186,11 +465,8 @@ london_stage
 &lt;p&gt;In this post, I will be performing a simple text analysis on the abstract of publications on the coronavirus disease (COVID-19), courtesy of &lt;a href=&#34;https://www.who.int/emergencies/diseases/novel-coronavirus-2019/global-research-on-novel-coronavirus-2019-ncov&#34;&gt;WHO&lt;/a&gt;. We begin by steps of data preprocessing.&lt;/p&gt;
 &lt;div id=&#34;data-preprocessing&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data preprocessing&lt;/h1&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
-theme_set(theme_light(base_size = 18))
-
-
-raw &amp;lt;- read_csv(&amp;quot;covid-research.csv&amp;quot;) %&amp;gt;% 
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;raw &amp;lt;- read_csv(&amp;quot;D:/RProjects/data/covid-research.csv&amp;quot;) %&amp;gt;% 
   janitor::clean_names() 
 
 glimpse(raw)
@@ -255,52 +531,164 @@ words
   geom_col() + 
   scale_x_continuous(expand = c(0.01, 0)) + 
   labs(y = NULL,
-       x = &amp;quot;word counts&amp;quot;,
+       x = &amp;quot;# of words&amp;quot;,
        title = &amp;quot;Top 50 common words in COVID-19 publications&amp;quot;) +
-  theme(plot.title.position = &amp;quot;plot&amp;quot;,
+  theme(text = element_text(size = 18),
+        plot.title = element_text(size = 35, face = &amp;quot;bold&amp;quot;),
         axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by &lt;span class=&#34;citation&#34;&gt;Monroe, Colaresi, and Quinn (&lt;a href=&#34;#ref-monroe_colaresi_quinn&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt;, which a standardized metric from a complete statistical model. It is also implemented in the R package &lt;a href=&#34;https://github.com/juliasilge/tidylo&#34;&gt;&lt;code&gt;tidylo&lt;/code&gt;&lt;/a&gt;&lt;span class=&#34;citation&#34;&gt;(Schnoebelen and Silge &lt;a href=&#34;#ref-tidylo&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
+
 words %&amp;gt;%
   count(title, word) %&amp;gt;% 
   bind_log_odds(set = title, feature = word, n = n) %&amp;gt;%
-  top_n(20)
-#&amp;gt; # A tibble: 20 x 4
-#&amp;gt;    title                                             word             n log_odds
-#&amp;gt;    &amp;lt;chr&amp;gt;                                             &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt;  1 A comparative study on the clinical features of ~ ncovid          20     5.06
-#&amp;gt;  2 A high ATP concentration enhances the cooperativ~ duplex          16     4.52
-#&amp;gt;  3 A serological survey of canine respiratory coron~ dog             11     3.53
-#&amp;gt;  4 A survey on awareness of digestive system injury~ 216             16     4.42
-#&amp;gt;  5 A survey on awareness of digestive system injury~ gastroenter~    14     4.23
-#&amp;gt;  6 Analysis of clinical features of 153 patients wi~ cd              12     3.80
-#&amp;gt;  7 Analysis of clinical features of 153 patients wi~ gt              60     4.92
-#&amp;gt;  8 Analysis of clinical features of 153 patients wi~ ital            26     3.59
-#&amp;gt;  9 Analysis of clinical features of 153 patients wi~ lt              74     5.03
-#&amp;gt; 10 Characterization and evolution of the coronaviru~ hljby           12     3.92
-#&amp;gt; 11 Characterization and evolution of the coronaviru~ pedv            21     3.92
-#&amp;gt; 12 Clinical characteristics of 113 deceased patient~ deceas          16     4.42
-#&amp;gt; 13 Construction of 5G intelligent medical service s~ 5g              14     4.23
-#&amp;gt; 14 Frequency and Distribution of Chest Radiographic~ cxr             12     3.92
-#&amp;gt; 15 Genetic, antigenic and pathogenic characterizati~ phcov           10     3.58
-#&amp;gt; 16 Medicinal chemistry strategies toward host targe~ hta             10     3.57
-#&amp;gt; 17 Pregnant women with new coronavirus infection: a~ placenta        14     3.76
-#&amp;gt; 18 Retrospective study of low-to-moderate dose gluc~ iqr             20     4.24
-#&amp;gt; 19 The clinical study on the relationship between s~ lym             14     3.54
-#&amp;gt; 20 Thoughts and suggestions on modern construction ~ modern          20     4.44&lt;/code&gt;&lt;/pre&gt;
+  top_n(20) %&amp;gt;% 
+  knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;title&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;word&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;log_odds&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;A comparative study on the clinical features of COVID-19 pneumonia to other pneumonias&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ncovid&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.057257&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;A high ATP concentration enhances the cooperative translocation of the SARS coronavirus helicase nsP13 in the unwinding of duplex RNA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;duplex&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.524146&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;A serological survey of canine respiratory coronavirus in New Zealand&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;dog&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.528876&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;216&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.423606&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;gastroenterologist&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.225689&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;cd&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.800243&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;gt&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;60&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.917806&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ital&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;26&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.585456&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;lt&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;74&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.032569&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;hljby&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.915206&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;pedv&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.922771&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Clinical characteristics of 113 deceased patients with coronavirus disease 2019: retrospective study&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;deceas&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.419020&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Construction of 5G intelligent medical service system in novel coronavirus pneumonia prevention and control&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5g&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.231003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Frequency and Distribution of Chest Radiographic Findings in COVID-19 Positive Patients&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;cxr&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.915366&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Genetic, antigenic and pathogenic characterization of avian coronaviruses isolated from pheasants (Phasianus colchicus) in China&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;phcov&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.576166&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Medicinal chemistry strategies toward host targeting antiviral agents&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;hta&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.573884&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Pregnant women with new coronavirus infection: a clinical characteristics and placental pathological analysis of three cases&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;placenta&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.757207&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Retrospective study of low-to-moderate dose glucocorticoids on viral clearance in patients with novel coronavirus pneumonia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;iqr&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.238798&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;The clinical study on the relationship between serum albumin concentration and lymphocyte levels in patients with 2019-novel coronavirus pneumonia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;lym&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.536764&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Thoughts and suggestions on modern construction of disease prevention and control system&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;modern&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.443162&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/div&gt;
 &lt;div id=&#34;fit-a-lda-model&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Fit a LDA model&lt;/h1&gt;
-&lt;p&gt;Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using &lt;code&gt;cast_dtm&lt;/code&gt;. There are various implementations of this kind of model, here I use &lt;code&gt;topicmodels::LDA()&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dtm &amp;lt;- cast_dtm(words %&amp;gt;% count(title, word),
+&lt;p&gt;Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using &lt;code&gt;cast_dtm&lt;/code&gt;. There are various implementations of this kind of model, here I use &lt;code&gt;stm::stm&lt;/code&gt;. The choice of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt; (number of topics) here is somewhat arbitrary here, but &lt;a href=&#34;https://juliasilge.com/&#34;&gt;Julia Silge&lt;/a&gt; had a great &lt;a href=&#34;https://juliasilge.com/blog/evaluating-stm/&#34;&gt;post&lt;/a&gt; about it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dfm &amp;lt;- cast_dfm(words %&amp;gt;% count(title, word),
                 term = word,
                 document = title,
-                value = n)
-
-library(topicmodels)
-topic_model &amp;lt;- LDA(dtm, k = 6, method = &amp;quot;Gibbs&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Topic-term distributions are accessed by &lt;code&gt;tidy()&lt;/code&gt;, this gives a glance of the underlying meanin of these topics:&lt;/p&gt;
+                value = n)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stm)
+topic_model &amp;lt;- stm(dfm, K = 5, init.type = &amp;quot;LDA&amp;quot;, verbose = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;topic_model &amp;lt;- pins::pin_get(&amp;quot;covid-topic-model&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Topic-term probability distributions are accessed by &lt;code&gt;tidy()&lt;/code&gt;, this gives a glance of the underlying meaning of these topics:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# topic-term distribution
 tidy(topic_model) %&amp;gt;% 
   group_by(topic) %&amp;gt;% 
@@ -316,9 +704,11 @@ tidy(topic_model) %&amp;gt;%
   labs(y = NULL,
        x = &amp;quot;Docuemtn-term probabilities&amp;quot;,
        title = &amp;quot;A 6-topic LDA model&amp;quot;) + 
-  theme(plot.title.position = &amp;quot;plot&amp;quot;,
+  theme(text = element_text(size = 18),
+        plot.title = element_text(size = 30, face = &amp;quot;bold&amp;quot;),
+        strip.text = element_text(size = 25, hjust = 0.05),
         axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;a-network-of-paired-words&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;A network of paired words&lt;/h1&gt;
@@ -356,9 +746,9 @@ word_cors %&amp;gt;%
   as_tbl_graph() %&amp;gt;% 
   ggraph(layout = &amp;quot;fr&amp;quot;) + 
   geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
-  geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 5.5) + 
-  geom_node_text(aes(label = name), repel = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+  geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 6.5) + 
+  geom_node_text(aes(label = name), repel = TRUE, size = 5.5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;

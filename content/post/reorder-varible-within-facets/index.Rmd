@@ -2,7 +2,7 @@
 title: 'Reordering within facets'
 author: Qiushi Yan
 date: '2019-11-29'
-slug: reorder-varible-within-facets-reorder-within
+slug: reorder-varible-within-facets
 
 image:
   caption: "Photo by [Leah Kelley](https://www.pexels.com/@leah-kelley-50725)"
@@ -26,8 +26,12 @@ Reordering and facetting for ggplot2
 # Common words in Jane Austen's books  
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(message = F, warning = TRUE, 
-                      comment = "#>", collapse = TRUE)
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = TRUE, 
+                      comment = "#>", 
+                      collapse = TRUE,
+                      fig.width = 10,
+                      fig.height = 8)
 ```
 
 Here is a simple task: we want to find the top-10 most common words in several Jane Austen's books, draw a bar graph, and then put them into different facets.  
@@ -36,10 +40,35 @@ Here is a simple task: we want to find the top-10 most common words in several J
 library(tidyverse)
 library(tidytext)
 library(janeaustenr)
-
-theme_set(theme_light())
 ```
 
+```{r, echo = FALSE}
+theme_bar <- function(base_size = 11,
+                      strip_text_size = 12,
+                      strip_text_margin = 5,
+                      subtitle_size = 13,
+                      subtitle_margin = 10,
+                      plot_title_size = 16,
+                      plot_title_margin = 10,
+                      ...) {
+  ret <- ggplot2::theme_minimal(base_size = base_size, ...)
+  ret$strip.text <- ggplot2::element_text(
+    hjust = 0, size = strip_text_size,
+    margin = ggplot2::margin(b = strip_text_margin)
+  )
+  ret$plot.subtitle <- ggplot2::element_text(
+    hjust = 0, size = subtitle_size,
+    margin = ggplot2::margin(b = subtitle_margin)
+  )
+  ret$plot.title <- ggplot2::element_text(
+    hjust = 0, size = plot_title_size,
+    margin = ggplot2::margin(b = plot_title_margin)
+  )
+  ret
+}
+
+theme_set(theme_bar())
+```
 
 
 
@@ -60,7 +89,6 @@ common_words
 For details many and other useful text mining techniques in R, I recommend reading [Text mining with R: A tidy approach](Text Mining with R: A tidy approach) by Julia Silge and David Robinson[-@silge2017text].  
 
 ```{r}
-# plot common words
 common_words %>% 
   ggplot(aes(y = word, 
              x = n, 
@@ -69,13 +97,16 @@ common_words %>%
   facet_wrap(~ book, ncol = 2, scales = "free_y") + 
   theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
-  rcartocolor::scale_fill_carto_d(palette = "PurpOr")
+  rcartocolor::scale_fill_carto_d(palette = "PurpOr") + 
+  labs(title = "Top 10 commono words in Jane Austen's novels, default ordering",
+       y = NULL,
+       x = "# of words")
 ```
 (**Reminder**: don't forget `scales = "free_y"` or `scales = "free"` in this case.)
 
-In its default setting, ggplot2 puts the names in alphabetical order, because they are of type character.  One common solution is to use `fct_reorder()` or its equivalent `reorder()` in baes R`:  
+By default, ggplot2 order y lables alphabetically, because they are of type character.  One common solution is to use `fct_reorder()` or its equivalent `reorder()` in baes R`:  
 
-```{r}
+```{r, fig.width = 10, fig.height = 8}
 common_words %>% 
   ggplot(aes(y = fct_reorder(word, n), 
              x = n, 
@@ -84,7 +115,10 @@ common_words %>%
   facet_wrap(~ book, ncol = 2, scales = "free_y") + 
   theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
-  rcartocolor::scale_fill_carto_d(palette = "PurpOr")
+  rcartocolor::scale_fill_carto_d(palette = "PurpOr") + 
+  labs(y = NULL,
+       title = "fct_reorder() on y",
+       x = "# of words")
 ```
 
 Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, `fct_reorder` or `reorder` only reorder all of these together, meaning that `word` are reordered in an overall level so that it cannot guarantee order in any specific subset of data.  
@@ -114,37 +148,30 @@ common_words %>%
   theme(axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 14)) +
   rcartocolor::scale_fill_carto_d(palette = "PurpOr") +
-  labs(title = "What are the most common words in Jane Austen's books?",
-       x = NULL,
+  labs(title = "Reordering with {ggtext} graph helpers",
+       x = "# of words",
        y = NULL)
 ```
 
 
 
-Without `scale_y_reordered` which overides ggplot2's default scale, the label of the reordered variable will carry a suffix related to the group variable, making lables way too long and uninformative. Here is an simple example to demonstrate this problem using the [babynames](https://github.com/hadley/babynames) data: 
-
-```{r}
-library(babynames)
-```
+Without `scale_y_reordered` which overides ggplot2's default scale, the label of the reordered variable will carry a suffix related to the group variable, making lables way too long and uninformative. 
 
 
-```{r}
-top_names <- babynames %>% 
-  filter(year >= 1950,
-           year < 1990) %>% 
-  mutate(decade = (year %/% 10) * 10) %>% 
-  group_by(decade) %>%
-  count(name, wt = n) %>% 
-  group_by(decade) %>% 
-  top_n(10)
 
-top_names %>% 
-  ggplot(aes(y = reorder_within(name, n, decade), 
+```{r, fig.width = 12, fig.height = 9}
+common_words %>% 
+  ggplot(aes(y = reorder_within(word, n, book), 
              x = n, 
-             fill = factor(decade))) + 
+             fill = book)) +
   geom_col(show.legend = FALSE) + 
-  facet_wrap(~ decade, scales = "free_y") +
-  labs(x = NULL, y = NULL)
+  facet_wrap(~ book, ncol = 2, scales = "free_y") + 
+  theme(axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(size = 14)) +
+  rcartocolor::scale_fill_carto_d(palette = "PurpOr") +
+  labs(title = "Without scale_y_reordered()",
+       x = "# of words",
+       y = NULL)
 ```
 
 

@@ -1,0 +1,336 @@
+---
+title: Text Classfication with Penalized Logistic Regression
+author: Qiushi Yan
+date: '2020-05-02'
+slug: text-classification-logistic
+categories: ["Data Analysis", "R", "Machine Learning"]
+summary: 'Teach models how to distinguish Charlotte Brontë from Emily Brontë'
+lastmod: '2020-05-02T23:33:49+08:00'
+draft: yes
+bibliography: ../bib/text-classification.bib
+biblio-style: apalike
+link-citations: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+---
+
+
+In this post I aim to train a text classification model with penalized logistic regression using the [`tidymodels`](https://www.tidymodels.org/) framework. Data are from 5 books and  downloaded via the [`gutenbergr`](https://docs.ropensci.org/gutenbergr/) package, written by either Emily Brontë or Charlotte Brontë. And the goal is to predict the author of a line, in other words the probability of line being written by one sister instead of another.  
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(message = FALSE,
+                      warning = FALSE,
+                      commet = "#>",
+                      collapse = TRUE,
+                      cache = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(tidytext)
+library(gutenbergr)
+```
+
+
+
+```{r, eval = FALSE}
+books <- gutenberg_works() %>% 
+  filter(str_detect(author, "Brontë, Emily|Brontë, Charlotte")) %>% 
+  gutenberg_download(meta_fields = c("title", "author")) %>% 
+  transmute(title,
+            author = if_else(author == "Brontë, Emily", 
+                             "Emily Brontë", 
+                             "Charlotte Brontë") %>% factor(),
+            line_index = row_number(),
+            text)
+```
+
+```{r, echo = FALSE}
+theme_bar <- function(base_size = 12,
+                      strip_text_size = 14,
+                      strip_text_margin = 5,
+                      subtitle_size = 14,
+                      subtitle_margin = 10,
+                      plot_title_size = 18,
+                      plot_title_margin = 10,
+                      ...) {
+  ret <- ggplot2::theme_minimal(base_size = base_size, ...)
+  ret$strip.text <- ggplot2::element_text(
+    hjust = 0, size = strip_text_size,
+    margin = ggplot2::margin(b = strip_text_margin)
+  )
+  ret$plot.subtitle <- ggplot2::element_text(
+    hjust = 0, size = subtitle_size,
+    margin = ggplot2::margin(b = subtitle_margin)
+  )
+  ret$plot.title <- ggplot2::element_text(
+    hjust = 0, size = plot_title_size,
+    margin = ggplot2::margin(b = plot_title_margin)
+  )
+  ret
+}
+
+theme_set(theme_bar())
+```
+
+```{r, echo = FALSE}
+books <- read_rds("D:/RProjects/data/blog/bronte-sisters-data.rds")
+```
+
+`books` is at line level
+
+```{r}
+books
+```
+
+
+To obtain tidy text structure illustrated in [Text Mining with R](https://www.tidytextmining.com/), I use `unnest_tokens()` to perform tokenization and remove all the stop words. I also removed characters like `'`, `'s`, `'` and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff's becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author's total word counts) are removed. The cutoff may be a little too high and if you plot the histogram of that proportion, but I really need this to save computation efforts on my laptop :sweat_smile:. 
+
+```{r}
+clean_books <- books %>% 
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>% 
+  filter(!str_detect(word, "^\\d+$")) %>% 
+  mutate(word = str_remove_all(word, "_|'s|'|\\s"))
+  
+total_words <- clean_books %>%
+  count(author, name = "total")
+
+tidy_books <- clean_books %>%
+  left_join(total_words) %>% 
+  group_by(author, total, word) %>%
+  filter(n() / total > 0.0005) %>% 
+  ungroup() 
+```
+
+# Comparing word frequency
+
+Before building an actual predictive model, lets' do some EDA to see different usage tendency on the same word! This will also shed light on what we would expect from the text classification. Now, we will compare word frequency (proportion) between the two sisters.
+
+```{r, fig.width = 14, fig.height = 9}
+tidy_books %>% 
+  group_by(author, total) %>%
+  count(word) %>% 
+  mutate(prop = n / total) %>% 
+  ungroup() %>% 
+  select(-total, -n) %>%
+  pivot_wider(names_from  = author, values_from = prop,
+              values_fill = list(prop = 0)) %>% 
+  ggplot(aes(x = `Charlotte Brontë`, y = `Emily Brontë`, 
+             color = abs(`Emily Brontë` -  `Charlotte Brontë`))) + 
+  geom_jitter(width = 0.001, height = 0.001, alpha = 0.2, size = 2.5) + 
+  geom_abline(color = "gray40", lty = 2) + 
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5, size = 7.5) + 
+  scale_color_gradient(low = "darkslategray4", high = "gray75") +
+  scale_x_continuous(labels = scales::label_percent()) + 
+  scale_y_continuous(labels = scales::label_percent()) +  
+  theme(legend.position = "none") + 
+  coord_cartesian(xlim = c(0, NA)) + 
+  labs(title = "Word frequency between two sisters") + 
+  theme(text = element_text(size = 18),
+        plot.title.position = "plot")
+```
+
+
+Words lie near the line such as "home", "head" and "half" indicate similar tedency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example "headthcliff", "linton", "catherine", etc. 
+
+What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model. 
+
+# Modeling
+
+## Data preprocessing  
+
+There are `r nrow(count(tidy_books, word))` and features (words) and `r nrow(count(tidy_books, line_index))` observations in total. Approximately 18% fo the response are 1 (Emily Brontë).
+
+```{r}
+tidy_books %>% 
+  count(author) %>% 
+  mutate(prop = n / sum(n))
+```
+
+
+Now it's time to widen our data to reach an appropriate model structure, this similar to a document-term matrix, with rows being a line and column word count. 
+
+```{r}
+library(tidymodels)
+set.seed(2020)
+doParallel::registerDoParallel()
+
+model_df <- tidy_books %>% 
+  count(line_index, word) %>% 
+  pivot_wider(names_from = word, values_from = n,
+              values_fill = list(n = 0)) %>% 
+  left_join(books, by = c("line_index" = "line_index")) %>% 
+  select(-title, -text)
+
+model_df
+```
+
+
+
+## Train a penalized logistic regression model 
+
+Split the data into training set and testing set.
+
+```{r}
+book_split <- initial_split(model_df)
+book_train <- training(book_split)
+book_test <- testing(book_split)
+```
+
+Specify a L1 penalized logistic model, center and scale all predictors and combine them in to a `workflow` object.  
+
+```{r}
+logistic_spec <- logistic_reg(penalty = 0.05, mixture = 1) %>%
+  set_engine("glmnet")
+
+book_rec <- recipe(author ~ ., data = book_train) %>% 
+  update_role(line_index, new_role = "ID") %>% 
+  step_zv(all_predictors()) %>% 
+  step_normalize(all_predictors())
+
+book_wf <- workflow() %>% 
+  add_model(logistic_spec) %>% 
+  add_recipe(book_rec)
+
+initial_fit <- book_wf %>% 
+  fit(data = book_train)
+```
+
+
+`initial_fit` is a simple fitted regression model without any hyperparameters. By default `glmnet` calls for 100 values of lambda even if I specify $\lambda = 0.05$. So the extracted result aren't that helpful.
+
+```{r}
+initial_fit %>%
+  pull_workflow_fit() %>% 
+  tidy()
+```
+
+We can make predictions with `initial_fit` anyway, and examine metrics like overall accuracy. 
+
+```{r}
+initial_predict <- predict(initial_fit, book_test) %>% 
+    bind_cols(predict(initial_fit, book_test, type = "prob")) %>%
+    bind_cols(book_test %>% select(author, line_index))
+
+initial_predict
+```
+
+
+How good is our initial model?
+
+```{r}
+initial_predict %>% 
+  accuracy(truth = author, estimate = .pred_class)
+```
+
+Nearly 84% of all predictions are right. This isn't a very statisfactory result since "Charlotte Brontë" accounts for 81% of `author`, making our model only slightly better than a classifier that would assngin all `author` with "Charlotte Brontë" anyway. 
+
+### Tuning lambda
+
+We can figure out an appropriate penalty using resampling and tune the model. 
+
+```{r}
+logistic_wf_tune <- book_wf %>%
+  update_model(logistic_spec %>% set_args(penalty = tune()))
+
+lambda_grid <- grid_regular(penalty(), levels = 100)
+book_folds <- vfold_cv(book_train, v = 10)
+```
+
+Here and I build a set of 10 cross validations resamples, and set `levels = 100` to try 100 choices of lambda ranging from 0 to 1.  
+
+Then I tune the grid: 
+```{r}
+logistic_results <- logistic_wf_tune %>%    
+  tune_grid(
+    resamples = book_folds,
+    grid = lambda_grid)
+```
+
+There is an `autoplot()` method for the tuned results, but I instead plot two metrics versus lambda respectivcely by myself. 
+```{r, fig.height = 10, fig.width = 10}
+logistic_results %>% 
+  collect_metrics() %>% 
+  mutate(lower_bound = mean - std_err,
+         upper_bound = mean + std_err) %>%
+  ggplot(aes(penalty, mean)) + 
+  geom_line(aes(color = .metric), size = 1.5, show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = lower_bound, ymax = upper_bound)) + 
+  facet_wrap(~ .metric, nrow = 2) + 
+  labs(y = NULL,
+       x = expression(lambda),
+       title = "Performance metric of logistic regession versus differenct choices of L1 regularization")
+```
+
+Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess. 
+```{r}
+best_lambda <- logistic_results %>% 
+  select_best(metric = "roc_auc")
+
+book_wf_final <- finalize_workflow(logistic_wf_tune,
+                                  parameters = best_lambda)
+```
+
+Now the model specification in the workflow is filled by the best lambda ($\lambda = 0.0007$)at hand judged by cross validation. 
+```{r}
+book_wf_final %>% pull_workflow_spec()
+```
+
+The next thing is to fit the best model with the training set, and evaluate against the test set. 
+
+```{r}
+logistic_final <- last_fit(book_wf_final, split = book_split)
+
+logistic_final %>% 
+  collect_metrics()
+
+logistic_final %>% 
+  collect_predictions() %>%
+  roc_curve(truth = author, `.pred_Emily Brontë`) %>% 
+  autoplot()
+```
+
+The accuracy of our logisitc model rises by a rough 7% to 93%, with `roc_auc` being nearly 91.5%. This is pretty good!
+
+To evaluate model fit, I agian use `fit` and `pull_workflow`. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
+
+
+```{r, fig.height = 11, fig.width = 11, fig.cap = "Variable importance for penalized logistic regression"}
+library(vip)
+
+logistic_vi <- book_wf_final %>% 
+  fit(book_train) %>% 
+  pull_workflow_fit() %>%
+  vi(lambda = best_lambda$penalty) %>% 
+  group_by(Sign) %>% 
+  top_n(30, wt = abs(Importance)) %>%
+  ungroup() %>% 
+  mutate(Sign = if_else(Sign == "POS", 
+                        "More Emily Brontë", "More Charlotte Brontë"))
+
+logistic_vi %>% 
+  ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
+             x = Importance)) + 
+  geom_col(aes(fill = Sign), show.legend = FALSE) +
+  scale_y_reordered() + 
+  facet_wrap(~ Sign, nrow = 1, scales = "free") + 
+  labs(title = "How word usage classifies Brontë sisters",
+       x = NULL,
+       y = NULL) + 
+  theme(axis.text = element_text(size = 18),
+        plot.title = element_text(size = 24),
+        plot.title.position = "plot")
+```
+
+Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.  
+
+Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the word frequency plot that Emily Brontë has more and stronger characteristic words. I am not sure if this is partly because imbalance in our data? 
+
+Anyway, the model with the best lambda seems quite power in distinguishing these two authors. I look forward to build a multinomail classification model in `tidymodels` to include Anne Brontë some other time!
+
+
+

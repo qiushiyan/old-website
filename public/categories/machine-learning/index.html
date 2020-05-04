@@ -380,10 +380,10 @@
   </div>
   
   <div>
-    <h2><a href="/post/2020-05-02-l1-penalized-logistic-regression-for-text-classification/">L1 Penalized Logistic Regression for Text Classification</a></h2>
+    <h2><a href="/post/text-classification-logistic/">Text Classfication with Penalized Logistic Regression</a></h2>
     <div class="article-style">
       
-      library(tidymodels)## -- Attaching packages ------------------------------------- tidymodels 0.1.0 --## √ broom 0.5.6 √ recipes 0.1.12 ## √ dials 0.0.6 √ rsample 0.0.6 ## √ dplyr 0.8.5 √ tibble 3.0.1 ## √ ggplot2 3.3.0.9000 √ tune 0.1.0 ## √ infer 0.5.1 √ workflows 0.1.1 ## √ parsnip 0.1.0 √ yardstick 0.0.6 ## √ purrr 0.3.4## -- Conflicts ---------------------------------------- tidymodels_conflicts() --## x purrr::discard() masks scales::discard()## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()## x ggplot2::margin() masks dials::margin()## x recipes::step() masks stats::step()library(gutenbergr)titles &lt;- c(&quot;The War of the Worlds&quot;,&quot;Pride and Prejudice&quot;)books &lt;- gutenberg_works() %&gt;% filter(title %in% titles) %&gt;% gutenberg_download(meta_fields = &quot;title&quot;) %&gt;% mutate(document = row_number())## Determining mirror for Project Gutenberg from http://www.
+      Teach models how to distinguish Charlotte Brontë from Emily Brontë
       
     </div>
   </div>

@@ -21,8 +21,9 @@ image:
 
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(message = F, warning = FALSE,
-                      collapse = TRUE, cache = TRUE,
+knitr::opts_chunk$set(message = F, 
+                      warning = FALSE,
+                      collapse = TRUE, 
                       comment = "#>")
 ```
 

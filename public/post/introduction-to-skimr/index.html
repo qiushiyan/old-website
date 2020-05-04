@@ -1121,7 +1121,9 @@ library(tidyverse)</code></pre>
 <pre class="r"><code>class(skim(iris))
 #&gt; [1] &quot;skim_df&quot;    &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;
 is_skim_df(skim(iris))
-#&gt; [1] TRUE</code></pre>
+#&gt; [1] TRUE
+#&gt; attr(,&quot;message&quot;)
+#&gt; character(0)</code></pre>
 <p>To explicitly show 2 columns <code>skim_type</code> and <code>skim_variable</code> and see the nature of this <code>skim_df</code> object, we can transfrom it to a <code>tibble</code> or <code>data.frame</code></p>
 <pre class="r"><code>iris %&gt;% 
   skim() %&gt;% 
@@ -1552,7 +1554,9 @@ skim(iris) %&gt;%
 <pre class="r"><code>skim(iris) %&gt;% 
   select(-skim_type, -skim_variable) %&gt;%
   is_skim_df()
-#&gt; [1] FALSE</code></pre>
+#&gt; [1] FALSE
+#&gt; attr(,&quot;message&quot;)
+#&gt; [1] &quot;Object is not a `skim_df`: missing column `skim_type`; missing column `skim_variable`&quot;</code></pre>
 </div>
 <div id="manipulation" class="section level1">
 <h1>Manipulating the results</h1>
@@ -2641,6 +2645,23 @@ m
     <li>
       <a href="https://twitter.com/qiushizzzz" target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/%E6%B1%82%E8%AF%86-%E9%97%AB-893a48194/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
       </a>
     </li>
   

@@ -4,8 +4,8 @@ author: Qiushi Yan
 date: '2020-04-15'
 slug: []
 categories:
-  - R
   - Machine Learning
+  - R
 summary: 'Evaluate performance of logistic regression, LDA, QDA and KNN in different scenarios using {tidymodels}.'
 featured: no
 bibliography: ../bib/compare-classification.bib

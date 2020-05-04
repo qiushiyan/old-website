@@ -73,7 +73,7 @@ support_records &amp;lt;- df %&amp;gt;% filter(hero %in% supports)&lt;/code&gt;&
   filter(rate &amp;gt; 0.5) 
 
 dps_deadlifts
-#&amp;gt; # A tibble: 828 x 5
+#&amp;gt; # A tibble: 827 x 5
 #&amp;gt;    date       player   team_final_blows player_final_blows  rate
 #&amp;gt;    &amp;lt;date&amp;gt;     &amp;lt;chr&amp;gt;               &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
 #&amp;gt;  1 2018-01-11 babybay                95                 48 0.505
@@ -86,7 +86,7 @@ dps_deadlifts
 #&amp;gt;  8 2018-01-11 Undead                 35                 18 0.514
 #&amp;gt;  9 2018-01-12 Jake                   95                 49 0.516
 #&amp;gt; 10 2018-01-13 Birdring              100                 52 0.52 
-#&amp;gt; # ... with 818 more rows&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # ... with 817 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

@@ -3,7 +3,7 @@ title: Text Classfication with Penalized Logistic Regression
 author: Qiushi Yan
 date: '2020-05-02'
 slug: text-classification-logistic
-categories: ["Data Analysis", "R", "Machine Learning"]
+categories: ["Data Analysis", "Machine Learning", "R"]
 summary: 'Teach models how to distinguish Charlotte Brontë from Emily Brontë'
 lastmod: '2020-05-02T23:33:49+08:00'
 bibliography: ../bib/text-classification.bib
@@ -319,8 +319,8 @@ Figure 1: Variable importance for penalized logistic regression
 </p>
 </div>
 <p>Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.</p>
-<p>Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the word frequency plot that Emily Brontë has more and stronger characteristic words. I am not sure if this is partly because imbalance in our data?</p>
-<p>Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomail classification model in <code>tidymodels</code> to include Anne Brontë some other time!</p>
+<p>Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the <a href="#comparing-word-frequency">word frequency</a> plot that Emily Brontë has more and stronger characteristic words.</p>
+<p>Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in <code>tidymodels</code> to include Anne Brontë some other time!</p>
 </div>
 </div>
 </div>

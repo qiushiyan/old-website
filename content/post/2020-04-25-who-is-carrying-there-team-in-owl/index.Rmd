@@ -2,7 +2,7 @@
 title: Who is Carrying There Team in OWL?
 author: Qiushi Yan
 date: '2020-04-25'
-categories: ["R", "Data Analysis", "Overwatch"]
+categories: ["Data Analysis", "Overwatch", "R"]
 summary: "Fleta deadlifts in all 3 positions"
 lastmod: '2020-04-25T00:09:45+08:00'
 featured: no

@@ -126,7 +126,7 @@ null_distribution %&amp;gt;%
 #&amp;gt; # A tibble: 1 x 1
 #&amp;gt;   p_value
 #&amp;gt;     &amp;lt;dbl&amp;gt;
-#&amp;gt; 1   0.084&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1   0.088&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;two-sample-t-test&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Two sample t test&lt;/h2&gt;
@@ -187,7 +187,7 @@ null_distribution %&amp;gt;%
 #&amp;gt; # A tibble: 1 x 1
 #&amp;gt;   p_value
 #&amp;gt;     &amp;lt;dbl&amp;gt;
-#&amp;gt; 1   0.997&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1   0.998&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;chi-square-test&#34; class=&#34;section level1&#34;&gt;

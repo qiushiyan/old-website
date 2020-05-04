@@ -322,8 +322,8 @@ Figure 1: Variable importance for penalized logistic regression
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.&lt;/p&gt;
-&lt;p&gt;Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the word frequency plot that Emily Brontë has more and stronger characteristic words. I am not sure if this is partly because imbalance in our data?&lt;/p&gt;
-&lt;p&gt;Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomail classification model in &lt;code&gt;tidymodels&lt;/code&gt; to include Anne Brontë some other time!&lt;/p&gt;
+&lt;p&gt;Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the &lt;a href=&#34;#comparing-word-frequency&#34;&gt;word frequency&lt;/a&gt; plot that Emily Brontë has more and stronger characteristic words.&lt;/p&gt;
+&lt;p&gt;Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in &lt;code&gt;tidymodels&lt;/code&gt; to include Anne Brontë some other time!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -391,7 +391,7 @@ support_records &amp;lt;- df %&amp;gt;% filter(hero %in% supports)&lt;/code&gt;&
   filter(rate &amp;gt; 0.5) 
 
 dps_deadlifts
-#&amp;gt; # A tibble: 828 x 5
+#&amp;gt; # A tibble: 827 x 5
 #&amp;gt;    date       player   team_final_blows player_final_blows  rate
 #&amp;gt;    &amp;lt;date&amp;gt;     &amp;lt;chr&amp;gt;               &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
 #&amp;gt;  1 2018-01-11 babybay                95                 48 0.505
@@ -404,7 +404,7 @@ dps_deadlifts
 #&amp;gt;  8 2018-01-11 Undead                 35                 18 0.514
 #&amp;gt;  9 2018-01-12 Jake                   95                 49 0.516
 #&amp;gt; 10 2018-01-13 Birdring              100                 52 0.52 
-#&amp;gt; # ... with 818 more rows&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # ... with 817 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

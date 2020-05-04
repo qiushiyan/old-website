@@ -57,7 +57,7 @@ library(gutenbergr)</code></pre>
 ##  9 Wuthering H~ Emily Bro~          9 &quot;country!  In all England, I do not belie~
 ## 10 Wuthering H~ Emily Bro~         10 &quot;situation so completely removed from the~
 ## # ... with 88,979 more rows</code></pre>
-<p>To obtain tidy text structure illustrated in <a href="https://www.tidytextmining.com/">Text Mining with R</a>, I use <code>unnest_tokens()</code> to perform tokenization and remove all the stop words. I also removed characters like <code>'</code>, <code>'s</code>, <code>'</code> and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff’s becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author’s total word counts) are removed. The cutoff may be a little too high and if you plot the histogram of that proportion, but I really need this to save computation efforts on my laptop :sweat_smile:.</p>
+<p>To obtain tidy text structure illustrated in <a href="https://www.tidytextmining.com/">Text Mining with R</a>, I use <code>unnest_tokens()</code> to perform tokenization and remove all the stop words. I also removed characters like <code>'</code>, <code>'s</code>, <code>'</code> and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff’s becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author’s total word counts) are removed. The cutoff may be a little too high if you plot that histogram, but I really need this to save computation efforts on my laptop :sweat_smile:.</p>
 <pre class="r"><code>clean_books &lt;- books %&gt;% 
   unnest_tokens(word, text) %&gt;%
   anti_join(stop_words) %&gt;% 
@@ -70,11 +70,11 @@ total_words &lt;- clean_books %&gt;%
 tidy_books &lt;- clean_books %&gt;%
   left_join(total_words) %&gt;% 
   group_by(author, total, word) %&gt;%
-  filter(n() / total &gt; 0.0005) %&gt;% 
+  filter((n() / total) &gt; 0.0005) %&gt;% 
   ungroup() </code></pre>
 <div id="comparing-word-frequency" class="section level1">
 <h1>Comparing word frequency</h1>
-<p>Before building an actual predictive model, lets’ do some EDA to see different usage tendency on the same word! This will also shed light on what we would expect from the text classification. Now, we will compare word frequency (proportion) between the two sisters.</p>
+<p>Before building an actual predictive model, let’s do some EDA to see different tendency to use a particular word! This will also shed light on what we would expect from the text classification. Now, we will compare word frequency (proportion) between the two sisters.</p>
 <pre class="r"><code>tidy_books %&gt;% 
   group_by(author, total) %&gt;%
   count(word) %&gt;% 
@@ -96,15 +96,15 @@ tidy_books &lt;- clean_books %&gt;%
   labs(title = &quot;Word frequency between two sisters&quot;) + 
   theme(text = element_text(size = 18),
         plot.title.position = &quot;plot&quot;)</code></pre>
-<p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png" width="1344" /></p>
-<p>Words lie near the line such as “home”, “head” and “half” indicate similar tedency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff”, “linton”, “catherine”, etc.</p>
+<p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png" width="1440" /></p>
+<p>Words lie near the line such as “home”, “head” and “half” indicate similar tendency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff”, “linton”, “catherine”, etc.</p>
 <p>What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model.</p>
 </div>
 <div id="modeling" class="section level1">
 <h1>Modeling</h1>
 <div id="data-preprocessing" class="section level2">
 <h2>Data preprocessing</h2>
-<p>There are 423 and features (words) and 47119 observations in total. Approximately 18% fo the response are 1 (Emily Brontë).</p>
+<p>There are 423 and features (words) and 47119 observations in total. Approximately 18% of the response are 1 (Emily Brontë).</p>
 <pre class="r"><code>tidy_books %&gt;% 
   count(author) %&gt;% 
   mutate(prop = n / sum(n))
@@ -236,7 +236,7 @@ initial_predict
 
 lambda_grid &lt;- grid_regular(penalty(), levels = 100)
 book_folds &lt;- vfold_cv(book_train, v = 10)</code></pre>
-<p>Here and I build a set of 10 cross validations resamples, and set <code>levels = 100</code> to try 100 choices of lambda ranging from 0 to 1.</p>
+<p>Here I build a set of 10 cross validations resamples, and set <code>levels = 100</code> to try 100 choices of lambda ranging from 0 to 1.</p>
 <p>Then I tune the grid:</p>
 <pre class="r"><code>logistic_results &lt;- logistic_wf_tune %&gt;%    
   tune_grid(
@@ -255,13 +255,13 @@ book_folds &lt;- vfold_cv(book_train, v = 10)</code></pre>
        x = expression(lambda),
        title = &quot;Performance metric of logistic regession versus differenct choices of L1 regularization&quot;)</code></pre>
 <p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
-<p>Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess.</p>
+<p>Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to their respective proportion of appearance in the data.</p>
 <pre class="r"><code>best_lambda &lt;- logistic_results %&gt;% 
   select_best(metric = &quot;roc_auc&quot;)
 
 book_wf_final &lt;- finalize_workflow(logistic_wf_tune,
                                   parameters = best_lambda)</code></pre>
-<p>Now the model specification in the workflow is filled by the best lambda (<span class="math inline">\(\lambda = 0.0007\)</span>)at hand judged by cross validation.</p>
+<p>Now the model specification in the workflow is filled with the best lambda (<span class="math inline">\(\lambda = 0.0007\)</span>) at hand judged by cross validation.</p>
 <pre class="r"><code>book_wf_final %&gt;% pull_workflow_spec()
 ## Logistic Regression Model Specification (classification)
 ## 

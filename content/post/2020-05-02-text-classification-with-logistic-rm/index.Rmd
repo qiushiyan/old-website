@@ -86,7 +86,7 @@ books
 ```
 
 
-To obtain tidy text structure illustrated in [Text Mining with R](https://www.tidytextmining.com/), I use `unnest_tokens()` to perform tokenization and remove all the stop words. I also removed characters like `'`, `'s`, `'` and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff's becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author's total word counts) are removed. The cutoff may be a little too high and if you plot the histogram of that proportion, but I really need this to save computation efforts on my laptop :sweat_smile:. 
+To obtain tidy text structure illustrated in [Text Mining with R](https://www.tidytextmining.com/), I use `unnest_tokens()` to perform tokenization and remove all the stop words. I also removed characters like `'`, `'s`, `'` and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff's becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author's total word counts) are removed. The cutoff may be a little too high if you plot that histogram, but I really need this to save computation efforts on my laptop :sweat_smile:. 
 
 ```{r}
 clean_books <- books %>% 
@@ -101,15 +101,15 @@ total_words <- clean_books %>%
 tidy_books <- clean_books %>%
   left_join(total_words) %>% 
   group_by(author, total, word) %>%
-  filter(n() / total > 0.0005) %>% 
+  filter((n() / total) > 0.0005) %>% 
   ungroup() 
 ```
 
 # Comparing word frequency
 
-Before building an actual predictive model, lets' do some EDA to see different usage tendency on the same word! This will also shed light on what we would expect from the text classification. Now, we will compare word frequency (proportion) between the two sisters.
+Before building an actual predictive model, let's do some EDA to see different tendency to use a particular word! This will also shed light on what we would expect from the text classification. Now, we will compare word frequency (proportion) between the two sisters.
 
-```{r, fig.width = 14, fig.height = 9}
+```{r, fig.width = 15, fig.height = 9}
 tidy_books %>% 
   group_by(author, total) %>%
   count(word) %>% 
@@ -134,7 +134,7 @@ tidy_books %>%
 ```
 
 
-Words lie near the line such as "home", "head" and "half" indicate similar tedency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example "headthcliff", "linton", "catherine", etc. 
+Words lie near the line such as "home", "head" and "half" indicate similar tendency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example "headthcliff", "linton", "catherine", etc. 
 
 What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model. 
 
@@ -142,7 +142,7 @@ What does this plot tell us? Judged only by word frequency, it looks that there 
 
 ## Data preprocessing  
 
-There are `r nrow(dplyr::count(tidy_books, word))` and features (words) and `r nrow(dplyr::count(tidy_books, line_index))` observations in total. Approximately 18% fo the response are 1 (Emily Brontë).
+There are `r nrow(dplyr::count(tidy_books, word))` and features (words) and `r nrow(dplyr::count(tidy_books, line_index))` observations in total. Approximately 18% of the response are 1 (Emily Brontë).
 
 ```{r}
 tidy_books %>% 
@@ -240,7 +240,7 @@ lambda_grid <- grid_regular(penalty(), levels = 100)
 book_folds <- vfold_cv(book_train, v = 10)
 ```
 
-Here and I build a set of 10 cross validations resamples, and set `levels = 100` to try 100 choices of lambda ranging from 0 to 1.  
+Here I build a set of 10 cross validations resamples, and set `levels = 100` to try 100 choices of lambda ranging from 0 to 1.  
 
 Then I tune the grid: 
 ```{r}
@@ -265,7 +265,7 @@ logistic_results %>%
        title = "Performance metric of logistic regession versus differenct choices of L1 regularization")
 ```
 
-Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess. 
+Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to their respective proportion of appearance in the data. 
 ```{r}
 best_lambda <- logistic_results %>% 
   select_best(metric = "roc_auc")
@@ -274,7 +274,7 @@ book_wf_final <- finalize_workflow(logistic_wf_tune,
                                   parameters = best_lambda)
 ```
 
-Now the model specification in the workflow is filled by the best lambda ($\lambda = 0.0007$)at hand judged by cross validation. 
+Now the model specification in the workflow is filled with the best lambda ($\lambda = 0.0007$) at hand judged by cross validation. 
 ```{r}
 book_wf_final %>% pull_workflow_spec()
 ```

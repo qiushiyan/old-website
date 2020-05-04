@@ -295,7 +295,7 @@ logistic_final %>%
 
 The accuracy of our logisitc model rises by a rough 7% to 93%, with `roc_auc` being nearly 91.5%. This is pretty good!
 
-To evaluate model fit, I agian use `fit` and `pull_workflow`. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
+To evaluate model fit, I agian use `fit` and `pull_workflow`. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) package provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
 
 
 ```{r, fig.height = 11, fig.width = 11, fig.cap = "Variable importance for penalized logistic regression"}
@@ -329,7 +329,7 @@ Is it cheating to use names of a character to classify authors? Perhaps I should
 
 Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the word frequency plot that Emily Brontë has more and stronger characteristic words. I am not sure if this is partly because imbalance in our data? 
 
-Anyway, the model with the best lambda seems quite power in distinguishing these two authors. I look forward to build a multinomail classification model in `tidymodels` to include Anne Brontë some other time!
+Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomail classification model in `tidymodels` to include Anne Brontë some other time!
 
 
 

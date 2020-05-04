@@ -287,7 +287,7 @@ logistic_final %&gt;%
   autoplot()</code></pre>
 <p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
 <p>The accuracy of our logisitc model rises by a rough 7% to 93%, with <code>roc_auc</code> being nearly 91.5%. This is pretty good!</p>
-<p>To evaluate model fit, I agian use <code>fit</code> and <code>pull_workflow</code>. Variable importance plots implemented in the <a href="https://koalaverse.github.io/vip/index.html">vip</a> provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.</p>
+<p>To evaluate model fit, I agian use <code>fit</code> and <code>pull_workflow</code>. Variable importance plots implemented in the <a href="https://koalaverse.github.io/vip/index.html">vip</a> package provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.</p>
 <pre class="r"><code>library(vip)
 
 logistic_vi &lt;- book_wf_final %&gt;% 
@@ -320,7 +320,7 @@ Figure 1: Variable importance for penalized logistic regression
 </div>
 <p>Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.</p>
 <p>Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the word frequency plot that Emily Brontë has more and stronger characteristic words. I am not sure if this is partly because imbalance in our data?</p>
-<p>Anyway, the model with the best lambda seems quite power in distinguishing these two authors. I look forward to build a multinomail classification model in <code>tidymodels</code> to include Anne Brontë some other time!</p>
+<p>Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomail classification model in <code>tidymodels</code> to include Anne Brontë some other time!</p>
 </div>
 </div>
 </div>

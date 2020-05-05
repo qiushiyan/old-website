@@ -296,7 +296,7 @@ The next thing is to fit the best model with the training set, and evaluate agai
 
 
 
-```{r, echo = TRUE}
+```{r}
 logistic_final <- last_fit(book_wf_final, split = book_split)
 
 logistic_final %>% 

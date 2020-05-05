@@ -72,20 +72,20 @@ library(gutenbergr)&lt;/code&gt;&lt;/pre&gt;
             text)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;books&lt;/code&gt; is at line level&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;books
-## # A tibble: 88,989 x 4
-##    title        author     line_index text                                      
-##    &amp;lt;chr&amp;gt;        &amp;lt;fct&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;                                     
-##  1 Wuthering H~ Emily Bro~          1 &amp;quot;WUTHERING HEIGHTS&amp;quot;                       
-##  2 Wuthering H~ Emily Bro~          2 &amp;quot;&amp;quot;                                        
-##  3 Wuthering H~ Emily Bro~          3 &amp;quot;&amp;quot;                                        
-##  4 Wuthering H~ Emily Bro~          4 &amp;quot;CHAPTER I&amp;quot;                               
-##  5 Wuthering H~ Emily Bro~          5 &amp;quot;&amp;quot;                                        
-##  6 Wuthering H~ Emily Bro~          6 &amp;quot;&amp;quot;                                        
-##  7 Wuthering H~ Emily Bro~          7 &amp;quot;1801.--I have just returned from a visit~
-##  8 Wuthering H~ Emily Bro~          8 &amp;quot;neighbour that I shall be troubled with.~
-##  9 Wuthering H~ Emily Bro~          9 &amp;quot;country!  In all England, I do not belie~
-## 10 Wuthering H~ Emily Bro~         10 &amp;quot;situation so completely removed from the~
-## # ... with 88,979 more rows&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 88,989 x 4
+#&amp;gt;    title        author     line_index text                                      
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;fct&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;                                     
+#&amp;gt;  1 Wuthering H~ Emily Bro~          1 &amp;quot;WUTHERING HEIGHTS&amp;quot;                       
+#&amp;gt;  2 Wuthering H~ Emily Bro~          2 &amp;quot;&amp;quot;                                        
+#&amp;gt;  3 Wuthering H~ Emily Bro~          3 &amp;quot;&amp;quot;                                        
+#&amp;gt;  4 Wuthering H~ Emily Bro~          4 &amp;quot;CHAPTER I&amp;quot;                               
+#&amp;gt;  5 Wuthering H~ Emily Bro~          5 &amp;quot;&amp;quot;                                        
+#&amp;gt;  6 Wuthering H~ Emily Bro~          6 &amp;quot;&amp;quot;                                        
+#&amp;gt;  7 Wuthering H~ Emily Bro~          7 &amp;quot;1801.--I have just returned from a visit~
+#&amp;gt;  8 Wuthering H~ Emily Bro~          8 &amp;quot;neighbour that I shall be troubled with.~
+#&amp;gt;  9 Wuthering H~ Emily Bro~          9 &amp;quot;country!  In all England, I do not belie~
+#&amp;gt; 10 Wuthering H~ Emily Bro~         10 &amp;quot;situation so completely removed from the~
+#&amp;gt; # ... with 88,979 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To obtain tidy text structure illustrated in &lt;a href=&#34;https://www.tidytextmining.com/&#34;&gt;Text Mining with R&lt;/a&gt;, I use &lt;code&gt;unnest_tokens()&lt;/code&gt; to perform tokenization and remove all the stop words. I also removed characters like &lt;code&gt;&#39;&lt;/code&gt;, &lt;code&gt;&#39;s&lt;/code&gt;, &lt;code&gt;&#39;&lt;/code&gt; and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff’s becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author’s total word counts) are removed. The cutoff may be a little too high if you plot that histogram, but I really need this to save computation efforts on my laptop 😅.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;clean_books &amp;lt;- books %&amp;gt;% 
   unnest_tokens(word, text) %&amp;gt;%
@@ -137,11 +137,11 @@ tidy_books &amp;lt;- clean_books %&amp;gt;%
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tidy_books %&amp;gt;% 
   count(author) %&amp;gt;% 
   mutate(prop = n / sum(n))
-## # A tibble: 2 x 3
-##   author               n  prop
-##   &amp;lt;fct&amp;gt;            &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;
-## 1 Charlotte Brontë 64858 0.817
-## 2 Emily Brontë     14489 0.183&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 2 x 3
+#&amp;gt;   author               n  prop
+#&amp;gt;   &amp;lt;fct&amp;gt;            &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Charlotte Brontë 64858 0.817
+#&amp;gt; 2 Emily Brontë     14489 0.183&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now it’s time to widen our data to reach an appropriate model structure, this similar to a document-term matrix, with rows being a line and column word count.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
 set.seed(2020)
@@ -155,40 +155,40 @@ model_df &amp;lt;- tidy_books %&amp;gt;%
   select(-title, -text)
 
 model_df
-## # A tibble: 47,119 x 425
-##    line_index heights wuthering chapter returned visit heathcliff heaven black
-##         &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;     &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;    &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;  &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
-##  1          1       1         1       0        0     0          0      0     0
-##  2          4       0         0       1        0     0          0      0     0
-##  3          7       0         0       0        1     1          0      0     0
-##  4         11       0         0       0        0     0          1      1     0
-##  5         13       0         0       0        0     0          0      0     1
-##  6         15       0         0       0        0     0          0      0     0
-##  7         18       0         0       0        0     0          1      0     0
-##  8         20       0         0       0        0     0          0      0     0
-##  9         22       0         0       0        0     0          0      0     0
-## 10         23       0         0       0        0     0          0      0     0
-## # ... with 47,109 more rows, and 416 more variables: eyes &amp;lt;int&amp;gt;, heart &amp;lt;int&amp;gt;,
-## #   fingers &amp;lt;int&amp;gt;, answer &amp;lt;int&amp;gt;, sir &amp;lt;int&amp;gt;, hope &amp;lt;int&amp;gt;, grange &amp;lt;int&amp;gt;,
-## #   heard &amp;lt;int&amp;gt;, thrushcross &amp;lt;int&amp;gt;, interrupted &amp;lt;int&amp;gt;, walk &amp;lt;int&amp;gt;,
-## #   closed &amp;lt;int&amp;gt;, uttered &amp;lt;int&amp;gt;, gate &amp;lt;int&amp;gt;, words &amp;lt;int&amp;gt;, horse &amp;lt;int&amp;gt;,
-## #   hand &amp;lt;int&amp;gt;, entered &amp;lt;int&amp;gt;, joseph &amp;lt;int&amp;gt;, bring &amp;lt;int&amp;gt;, suppose &amp;lt;int&amp;gt;,
-## #   nay &amp;lt;int&amp;gt;, dinner &amp;lt;int&amp;gt;, guess &amp;lt;int&amp;gt;, times &amp;lt;int&amp;gt;, wind &amp;lt;int&amp;gt;, house &amp;lt;int&amp;gt;,
-## #   strong &amp;lt;int&amp;gt;, set &amp;lt;int&amp;gt;, wall &amp;lt;int&amp;gt;, door &amp;lt;int&amp;gt;, earnshaw &amp;lt;int&amp;gt;,
-## #   hareton &amp;lt;int&amp;gt;, short &amp;lt;int&amp;gt;, appeared &amp;lt;int&amp;gt;, desire &amp;lt;int&amp;gt;, entrance &amp;lt;int&amp;gt;,
-## #   brought &amp;lt;int&amp;gt;, family &amp;lt;int&amp;gt;, sitting &amp;lt;int&amp;gt;, call &amp;lt;int&amp;gt;, kitchen &amp;lt;int&amp;gt;,
-## #   parlour &amp;lt;int&amp;gt;, deep &amp;lt;int&amp;gt;, observed &amp;lt;int&amp;gt;, light &amp;lt;int&amp;gt;, eye &amp;lt;int&amp;gt;,
-## #   lay &amp;lt;int&amp;gt;, floor &amp;lt;int&amp;gt;, white &amp;lt;int&amp;gt;, countenance &amp;lt;int&amp;gt;, arm &amp;lt;int&amp;gt;,
-## #   chair &amp;lt;int&amp;gt;, seated &amp;lt;int&amp;gt;, round &amp;lt;int&amp;gt;, table &amp;lt;int&amp;gt;, time &amp;lt;int&amp;gt;,
-## #   living &amp;lt;int&amp;gt;, dark &amp;lt;int&amp;gt;, people &amp;lt;int&amp;gt;, hate &amp;lt;int&amp;gt;, love &amp;lt;int&amp;gt;,
-## #   loved &amp;lt;int&amp;gt;, fast &amp;lt;int&amp;gt;, dear &amp;lt;int&amp;gt;, mother &amp;lt;int&amp;gt;, home &amp;lt;int&amp;gt;,
-## #   summer &amp;lt;int&amp;gt;, fine &amp;lt;int&amp;gt;, company &amp;lt;int&amp;gt;, creature &amp;lt;int&amp;gt;, notice &amp;lt;int&amp;gt;,
-## #   told &amp;lt;int&amp;gt;, head &amp;lt;int&amp;gt;, looked &amp;lt;int&amp;gt;, return &amp;lt;int&amp;gt;, poor &amp;lt;int&amp;gt;, till &amp;lt;int&amp;gt;,
-## #   doubt &amp;lt;int&amp;gt;, seat &amp;lt;int&amp;gt;, silence &amp;lt;int&amp;gt;, left &amp;lt;int&amp;gt;, dog &amp;lt;int&amp;gt;,
-## #   master &amp;lt;int&amp;gt;, sat &amp;lt;int&amp;gt;, scarcely &amp;lt;int&amp;gt;, half &amp;lt;int&amp;gt;, hearth &amp;lt;int&amp;gt;,
-## #   arms &amp;lt;int&amp;gt;, fire &amp;lt;int&amp;gt;, purpose &amp;lt;int&amp;gt;, tongue &amp;lt;int&amp;gt;, remained &amp;lt;int&amp;gt;,
-## #   devil &amp;lt;int&amp;gt;, manner &amp;lt;int&amp;gt;, matter &amp;lt;int&amp;gt;, ill &amp;lt;int&amp;gt;, muttered &amp;lt;int&amp;gt;,
-## #   worse &amp;lt;int&amp;gt;, leave &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 47,119 x 425
+#&amp;gt;    line_index heights wuthering chapter returned visit heathcliff heaven black
+#&amp;gt;         &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;     &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;    &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;  &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt;  1          1       1         1       0        0     0          0      0     0
+#&amp;gt;  2          4       0         0       1        0     0          0      0     0
+#&amp;gt;  3          7       0         0       0        1     1          0      0     0
+#&amp;gt;  4         11       0         0       0        0     0          1      1     0
+#&amp;gt;  5         13       0         0       0        0     0          0      0     1
+#&amp;gt;  6         15       0         0       0        0     0          0      0     0
+#&amp;gt;  7         18       0         0       0        0     0          1      0     0
+#&amp;gt;  8         20       0         0       0        0     0          0      0     0
+#&amp;gt;  9         22       0         0       0        0     0          0      0     0
+#&amp;gt; 10         23       0         0       0        0     0          0      0     0
+#&amp;gt; # ... with 47,109 more rows, and 416 more variables: eyes &amp;lt;int&amp;gt;, heart &amp;lt;int&amp;gt;,
+#&amp;gt; #   fingers &amp;lt;int&amp;gt;, answer &amp;lt;int&amp;gt;, sir &amp;lt;int&amp;gt;, hope &amp;lt;int&amp;gt;, grange &amp;lt;int&amp;gt;,
+#&amp;gt; #   heard &amp;lt;int&amp;gt;, thrushcross &amp;lt;int&amp;gt;, interrupted &amp;lt;int&amp;gt;, walk &amp;lt;int&amp;gt;,
+#&amp;gt; #   closed &amp;lt;int&amp;gt;, uttered &amp;lt;int&amp;gt;, gate &amp;lt;int&amp;gt;, words &amp;lt;int&amp;gt;, horse &amp;lt;int&amp;gt;,
+#&amp;gt; #   hand &amp;lt;int&amp;gt;, entered &amp;lt;int&amp;gt;, joseph &amp;lt;int&amp;gt;, bring &amp;lt;int&amp;gt;, suppose &amp;lt;int&amp;gt;,
+#&amp;gt; #   nay &amp;lt;int&amp;gt;, dinner &amp;lt;int&amp;gt;, guess &amp;lt;int&amp;gt;, times &amp;lt;int&amp;gt;, wind &amp;lt;int&amp;gt;, house &amp;lt;int&amp;gt;,
+#&amp;gt; #   strong &amp;lt;int&amp;gt;, set &amp;lt;int&amp;gt;, wall &amp;lt;int&amp;gt;, door &amp;lt;int&amp;gt;, earnshaw &amp;lt;int&amp;gt;,
+#&amp;gt; #   hareton &amp;lt;int&amp;gt;, short &amp;lt;int&amp;gt;, appeared &amp;lt;int&amp;gt;, desire &amp;lt;int&amp;gt;, entrance &amp;lt;int&amp;gt;,
+#&amp;gt; #   brought &amp;lt;int&amp;gt;, family &amp;lt;int&amp;gt;, sitting &amp;lt;int&amp;gt;, call &amp;lt;int&amp;gt;, kitchen &amp;lt;int&amp;gt;,
+#&amp;gt; #   parlour &amp;lt;int&amp;gt;, deep &amp;lt;int&amp;gt;, observed &amp;lt;int&amp;gt;, light &amp;lt;int&amp;gt;, eye &amp;lt;int&amp;gt;,
+#&amp;gt; #   lay &amp;lt;int&amp;gt;, floor &amp;lt;int&amp;gt;, white &amp;lt;int&amp;gt;, countenance &amp;lt;int&amp;gt;, arm &amp;lt;int&amp;gt;,
+#&amp;gt; #   chair &amp;lt;int&amp;gt;, seated &amp;lt;int&amp;gt;, round &amp;lt;int&amp;gt;, table &amp;lt;int&amp;gt;, time &amp;lt;int&amp;gt;,
+#&amp;gt; #   living &amp;lt;int&amp;gt;, dark &amp;lt;int&amp;gt;, people &amp;lt;int&amp;gt;, hate &amp;lt;int&amp;gt;, love &amp;lt;int&amp;gt;,
+#&amp;gt; #   loved &amp;lt;int&amp;gt;, fast &amp;lt;int&amp;gt;, dear &amp;lt;int&amp;gt;, mother &amp;lt;int&amp;gt;, home &amp;lt;int&amp;gt;,
+#&amp;gt; #   summer &amp;lt;int&amp;gt;, fine &amp;lt;int&amp;gt;, company &amp;lt;int&amp;gt;, creature &amp;lt;int&amp;gt;, notice &amp;lt;int&amp;gt;,
+#&amp;gt; #   told &amp;lt;int&amp;gt;, head &amp;lt;int&amp;gt;, looked &amp;lt;int&amp;gt;, return &amp;lt;int&amp;gt;, poor &amp;lt;int&amp;gt;, till &amp;lt;int&amp;gt;,
+#&amp;gt; #   doubt &amp;lt;int&amp;gt;, seat &amp;lt;int&amp;gt;, silence &amp;lt;int&amp;gt;, left &amp;lt;int&amp;gt;, dog &amp;lt;int&amp;gt;,
+#&amp;gt; #   master &amp;lt;int&amp;gt;, sat &amp;lt;int&amp;gt;, scarcely &amp;lt;int&amp;gt;, half &amp;lt;int&amp;gt;, hearth &amp;lt;int&amp;gt;,
+#&amp;gt; #   arms &amp;lt;int&amp;gt;, fire &amp;lt;int&amp;gt;, purpose &amp;lt;int&amp;gt;, tongue &amp;lt;int&amp;gt;, remained &amp;lt;int&amp;gt;,
+#&amp;gt; #   devil &amp;lt;int&amp;gt;, manner &amp;lt;int&amp;gt;, matter &amp;lt;int&amp;gt;, ill &amp;lt;int&amp;gt;, muttered &amp;lt;int&amp;gt;,
+#&amp;gt; #   worse &amp;lt;int&amp;gt;, leave &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;train-a-penalized-logistic-regression-model&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Train a penalized logistic regression model&lt;/h2&gt;
@@ -215,47 +215,47 @@ initial_fit &amp;lt;- book_wf %&amp;gt;%
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;initial_fit %&amp;gt;%
   pull_workflow_fit() %&amp;gt;% 
   tidy()
-## # A tibble: 26,019 x 5
-##    term         step estimate lambda dev.ratio
-##    &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
-##  1 (Intercept)     1 -1.64    0.0838  5.24e-14
-##  2 (Intercept)     2 -1.64    0.0764  8.68e- 3
-##  3 heathcliff      2  0.0469  0.0764  8.68e- 3
-##  4 linton          2  0.00120 0.0764  8.68e- 3
-##  5 (Intercept)     3 -1.64    0.0696  2.51e- 2
-##  6 heathcliff      3  0.0801  0.0696  2.51e- 2
-##  7 catherine       3  0.0269  0.0696  2.51e- 2
-##  8 linton          3  0.0413  0.0696  2.51e- 2
-##  9 (Intercept)     4 -1.64    0.0634  3.80e- 2
-## 10 heathcliff      4  0.107   0.0634  3.80e- 2
-## # ... with 26,009 more rows&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 26,019 x 5
+#&amp;gt;    term         step estimate lambda dev.ratio
+#&amp;gt;    &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 (Intercept)     1 -1.64    0.0838  5.24e-14
+#&amp;gt;  2 (Intercept)     2 -1.64    0.0764  8.68e- 3
+#&amp;gt;  3 heathcliff      2  0.0469  0.0764  8.68e- 3
+#&amp;gt;  4 linton          2  0.00120 0.0764  8.68e- 3
+#&amp;gt;  5 (Intercept)     3 -1.64    0.0696  2.51e- 2
+#&amp;gt;  6 heathcliff      3  0.0801  0.0696  2.51e- 2
+#&amp;gt;  7 catherine       3  0.0269  0.0696  2.51e- 2
+#&amp;gt;  8 linton          3  0.0413  0.0696  2.51e- 2
+#&amp;gt;  9 (Intercept)     4 -1.64    0.0634  3.80e- 2
+#&amp;gt; 10 heathcliff      4  0.107   0.0634  3.80e- 2
+#&amp;gt; # ... with 26,009 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can make predictions with &lt;code&gt;initial_fit&lt;/code&gt; anyway, and examine metrics like overall accuracy.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;initial_predict &amp;lt;- predict(initial_fit, book_test) %&amp;gt;% 
     bind_cols(predict(initial_fit, book_test, type = &amp;quot;prob&amp;quot;)) %&amp;gt;%
     bind_cols(book_test %&amp;gt;% select(author, line_index))
 
 initial_predict
-## # A tibble: 11,779 x 5
-##    .pred_class     `.pred_Charlotte Bro~ `.pred_Emily Bron~ author    line_index
-##    &amp;lt;fct&amp;gt;                           &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;          &amp;lt;int&amp;gt;
-##  1 Charlotte Bron~                 0.844              0.156 Emily Br~          1
-##  2 Charlotte Bron~                 0.844              0.156 Emily Br~         13
-##  3 Charlotte Bron~                 0.844              0.156 Emily Br~         30
-##  4 Charlotte Bron~                 0.844              0.156 Emily Br~         31
-##  5 Charlotte Bron~                 0.844              0.156 Emily Br~         36
-##  6 Charlotte Bron~                 0.844              0.156 Emily Br~         56
-##  7 Charlotte Bron~                 0.844              0.156 Emily Br~         68
-##  8 Charlotte Bron~                 0.844              0.156 Emily Br~         75
-##  9 Charlotte Bron~                 0.844              0.156 Emily Br~         89
-## 10 Charlotte Bron~                 0.844              0.156 Emily Br~         96
-## # ... with 11,769 more rows&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 11,779 x 5
+#&amp;gt;    .pred_class     `.pred_Charlotte Bro~ `.pred_Emily Bron~ author    line_index
+#&amp;gt;    &amp;lt;fct&amp;gt;                           &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;          &amp;lt;int&amp;gt;
+#&amp;gt;  1 Charlotte Bron~                 0.844              0.156 Emily Br~          1
+#&amp;gt;  2 Charlotte Bron~                 0.844              0.156 Emily Br~         13
+#&amp;gt;  3 Charlotte Bron~                 0.844              0.156 Emily Br~         30
+#&amp;gt;  4 Charlotte Bron~                 0.844              0.156 Emily Br~         31
+#&amp;gt;  5 Charlotte Bron~                 0.844              0.156 Emily Br~         36
+#&amp;gt;  6 Charlotte Bron~                 0.844              0.156 Emily Br~         56
+#&amp;gt;  7 Charlotte Bron~                 0.844              0.156 Emily Br~         68
+#&amp;gt;  8 Charlotte Bron~                 0.844              0.156 Emily Br~         75
+#&amp;gt;  9 Charlotte Bron~                 0.844              0.156 Emily Br~         89
+#&amp;gt; 10 Charlotte Bron~                 0.844              0.156 Emily Br~         96
+#&amp;gt; # ... with 11,769 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;How good is our initial model?&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;initial_predict %&amp;gt;% 
   accuracy(truth = author, estimate = .pred_class)
-## # A tibble: 1 x 3
-##   .metric  .estimator .estimate
-##   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
-## 1 accuracy binary         0.844&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 1 x 3
+#&amp;gt;   .metric  .estimator .estimate
+#&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 accuracy binary         0.844&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Nearly 84% of all predictions are right. This isn’t a very statisfactory result since “Charlotte Brontë” accounts for 81% of &lt;code&gt;author&lt;/code&gt;, making our model only slightly better than a classifier that would assngin all &lt;code&gt;author&lt;/code&gt; with “Charlotte Brontë” anyway.&lt;/p&gt;
 &lt;div id=&#34;tuning-lambda&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Tuning lambda&lt;/h3&gt;
@@ -284,45 +284,78 @@ book_folds &amp;lt;- vfold_cv(book_train, v = 10)&lt;/code&gt;&lt;/pre&gt;
        x = expression(lambda),
        title = &amp;quot;Performance metric of logistic regession versus differenct choices of L1 regularization&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to their respective proportion of appearance in the data.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;best_lambda &amp;lt;- logistic_results %&amp;gt;% 
+&lt;p&gt;Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to the author’s respective proportion of appearance in the data. This plot shows that the model is generally better at small penalty, suggesting that the majority of the predictors are fairly important to the model. We may lean towards larger penalty with slightly worse performance, bacause they lead to simpler models. It follows that we may want to choose lambda in top rows in the following data frame&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;top_models &amp;lt;- logistic_results %&amp;gt;% 
+    show_best(&amp;quot;roc_auc&amp;quot;, n = 100) %&amp;gt;%
+    arrange(desc(penalty)) %&amp;gt;% 
+    filter(mean &amp;gt; 0.9)
+
+top_models
+#&amp;gt; # A tibble: 76 x 6
+#&amp;gt;     penalty .metric .estimator  mean     n std_err
+#&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;      &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;   &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 0.00376  roc_auc binary     0.906    10 0.00215
+#&amp;gt;  2 0.00298  roc_auc binary     0.908    10 0.00219
+#&amp;gt;  3 0.00236  roc_auc binary     0.908    10 0.00222
+#&amp;gt;  4 0.00187  roc_auc binary     0.908    10 0.00227
+#&amp;gt;  5 0.00148  roc_auc binary     0.909    10 0.00209
+#&amp;gt;  6 0.00118  roc_auc binary     0.910    10 0.00207
+#&amp;gt;  7 0.000933 roc_auc binary     0.910    10 0.00202
+#&amp;gt;  8 0.000739 roc_auc binary     0.910    10 0.00205
+#&amp;gt;  9 0.000586 roc_auc binary     0.910    10 0.00209
+#&amp;gt; 10 0.000464 roc_auc binary     0.910    10 0.00210
+#&amp;gt; # ... with 66 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;select_best()&lt;/code&gt; with return the 9th row with &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.000586\)&lt;/span&gt; for its highest performance on &lt;code&gt;roc_auc&lt;/code&gt;. But I’ll stick to the parsimonious principle and pick &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.00376\)&lt;/span&gt; at the cost of a fall in roc_auc by 0.005 and in accuracy by 0.001.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_results %&amp;gt;% 
   select_best(metric = &amp;quot;roc_auc&amp;quot;)
+#&amp;gt; # A tibble: 1 x 1
+#&amp;gt;    penalty
+#&amp;gt;      &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 0.000586
 
 book_wf_final &amp;lt;- finalize_workflow(logistic_wf_tune,
-                                  parameters = best_lambda)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now the model specification in the workflow is filled with the best lambda (&lt;span class=&#34;math inline&#34;&gt;\(\lambda = 0.0007\)&lt;/span&gt;) at hand judged by cross validation.&lt;/p&gt;
+                                  parameters = top_models %&amp;gt;% slice(1))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the model specification in the workflow is filled with the picked lambda:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;book_wf_final %&amp;gt;% pull_workflow_spec()
-## Logistic Regression Model Specification (classification)
-## 
-## Main Arguments:
-##   penalty = 0.000585702081805666
-##   mixture = 1
-## 
-## Computational engine: glmnet&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; Logistic Regression Model Specification (classification)
+#&amp;gt; 
+#&amp;gt; Main Arguments:
+#&amp;gt;   penalty = 0.00376493580679246
+#&amp;gt;   mixture = 1
+#&amp;gt; 
+#&amp;gt; Computational engine: glmnet&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The next thing is to fit the best model with the training set, and evaluate against the test set.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final &amp;lt;- last_fit(book_wf_final, split = book_split)
 
 logistic_final %&amp;gt;% 
   collect_metrics()
-## # A tibble: 2 x 3
-##   .metric  .estimator .estimate
-##   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
-## 1 accuracy binary         0.940
-## 2 roc_auc  binary         0.915
+#&amp;gt; # A tibble: 2 x 3
+#&amp;gt;   .metric  .estimator .estimate
+#&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 accuracy binary         0.938
+#&amp;gt; 2 roc_auc  binary         0.904
 
 logistic_final %&amp;gt;% 
   collect_predictions() %&amp;gt;%
   roc_curve(truth = author, `.pred_Emily Brontë`) %&amp;gt;% 
   autoplot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;The accuracy of our logisitc model rises by a rough 7% to 93%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 91.5%. This is pretty good!&lt;/p&gt;
-&lt;p&gt;To evaluate model fit, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt;. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The accuracy of our logisitc model rises by a rough 7% to 93.8%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 0.904. This is pretty good!&lt;/p&gt;
+&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final %&amp;gt;%
+  collect_predictions() %&amp;gt;%
+  conf_mat(truth = author, estimate = .pred_class) 
+#&amp;gt;                   Truth
+#&amp;gt; Prediction         Charlotte Brontë Emily Brontë
+#&amp;gt;   Charlotte Brontë             9921          726
+#&amp;gt;   Emily Brontë                    1         1131&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To evaluate predictors, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt; to extract model fit. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(vip)
 
 logistic_vi &amp;lt;- book_wf_final %&amp;gt;% 
   fit(book_train) %&amp;gt;% 
   pull_workflow_fit() %&amp;gt;%
-  vi(lambda = best_lambda$penalty) %&amp;gt;% 
+  vi(lambda = top_models[1, ]$penalty) %&amp;gt;% 
   group_by(Sign) %&amp;gt;% 
   top_n(30, wt = abs(Importance)) %&amp;gt;%
   ungroup() %&amp;gt;% 
@@ -341,10 +374,10 @@ logistic_vi %&amp;gt;%
   theme(axis.text = element_text(size = 18),
         plot.title = element_text(size = 24),
         plot.title.position = &amp;quot;plot&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-22&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-22-1.png&#34; alt=&#34;Variable importance for penalized logistic regression&#34; width=&#34;1056&#34; /&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-24&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-24-1.png&#34; alt=&#34;Variable importance plot for penalized logistic regression&#34; width=&#34;1056&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
-Figure 1: Variable importance for penalized logistic regression
+Figure 1: Variable importance plot for penalized logistic regression
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.&lt;/p&gt;

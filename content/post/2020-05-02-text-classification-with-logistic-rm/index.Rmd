@@ -21,13 +21,13 @@ In this post I aim to train a text classification model with penalized logistic 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
-                      commet = "#>",
+                      comment = "#>",
                       collapse = TRUE,
                       cache = TRUE)
 ```
 
 
-```{r}
+```{r, cache = FALSE}
 library(tidyverse)
 library(tidytext)
 library(gutenbergr)
@@ -47,7 +47,7 @@ books <- gutenberg_works() %>%
             text)
 ```
 
-```{r, echo = FALSE}
+```{r, cache = FALSE, echo = FALSE}
 theme_bar <- function(base_size = 12,
                       strip_text_size = 14,
                       strip_text_margin = 5,
@@ -265,23 +265,38 @@ logistic_results %>%
        title = "Performance metric of logistic regession versus differenct choices of L1 regularization")
 ```
 
-Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to their respective proportion of appearance in the data. 
+Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to the author's respective proportion of appearance in the data. This plot shows that the model is generally better at small penalty, suggesting that the majority of the predictors are fairly important to the model. We may lean towards larger penalty with slightly worse performance, bacause they lead to simpler models. It follows that we may want to choose lambda in top rows in the following data frame
 ```{r}
-best_lambda <- logistic_results %>% 
+top_models <- logistic_results %>% 
+    show_best("roc_auc", n = 100) %>%
+    arrange(desc(penalty)) %>% 
+    filter(mean > 0.9)
+
+top_models
+```
+
+`select_best()` with return the 9th row with $\lambda \approx 0.000586$ for its highest performance on `roc_auc`. But I'll stick to the parsimonious principle and pick $\lambda \approx 0.00376$ at the cost of a fall in roc_auc by 0.005 and in accuracy by 0.001. 
+
+```{r}
+logistic_results %>% 
   select_best(metric = "roc_auc")
 
 book_wf_final <- finalize_workflow(logistic_wf_tune,
-                                  parameters = best_lambda)
+                                  parameters = top_models %>% slice(1))
 ```
 
-Now the model specification in the workflow is filled with the best lambda ($\lambda = 0.0007$) at hand judged by cross validation. 
-```{r}
+
+Now the model specification in the workflow is filled with the picked lambda: 
+```{r, echo = TRUE}
 book_wf_final %>% pull_workflow_spec()
 ```
 
 The next thing is to fit the best model with the training set, and evaluate against the test set. 
 
-```{r}
+
+
+
+```{r, echo = TRUE}
 logistic_final <- last_fit(book_wf_final, split = book_split)
 
 logistic_final %>% 
@@ -293,18 +308,26 @@ logistic_final %>%
   autoplot()
 ```
 
-The accuracy of our logisitc model rises by a rough 7% to 93%, with `roc_auc` being nearly 91.5%. This is pretty good!
+The accuracy of our logisitc model rises by a rough 7% to 93.8%, with `roc_auc` being nearly 0.904. This is pretty good!
 
-To evaluate model fit, I agian use `fit` and `pull_workflow`. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) package provides a intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
+There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity). 
+```{r, echo = TRUE}
+logistic_final %>%
+  collect_predictions() %>%
+  conf_mat(truth = author, estimate = .pred_class) 
+```
 
 
-```{r, fig.height = 11, fig.width = 11, fig.cap = "Variable importance for penalized logistic regression"}
+To evaluate predictors, I agian use `fit` and `pull_workflow` to extract model fit. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
+
+
+```{r, fig.height = 11, fig.width = 11, fig.cap = "Variable importance plot for penalized logistic regression"}
 library(vip)
 
 logistic_vi <- book_wf_final %>% 
   fit(book_train) %>% 
   pull_workflow_fit() %>%
-  vi(lambda = best_lambda$penalty) %>% 
+  vi(lambda = top_models[1, ]$penalty) %>% 
   group_by(Sign) %>% 
   top_n(30, wt = abs(Importance)) %>%
   ungroup() %>% 

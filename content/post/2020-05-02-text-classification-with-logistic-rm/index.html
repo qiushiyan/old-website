@@ -320,7 +320,7 @@ logistic_final %&gt;%
 #&gt; Prediction         Charlotte Brontë Emily Brontë
 #&gt;   Charlotte Brontë             9921          726
 #&gt;   Emily Brontë                    1         1131</code></pre>
-<p>To evaluate predictors, I agian use <code>fit</code> and <code>pull_workflow</code> to extract model fit. Variable importance plots implemented in the <a href="https://koalaverse.github.io/vip/index.html">vip</a> package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.</p>
+<p>To examine the effect of predictors, I agian use <code>fit</code> and <code>pull_workflow</code> to extract model fit. Variable importance plots implemented in the <a href="https://koalaverse.github.io/vip/index.html">vip</a> package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.</p>
 <pre class="r"><code>library(vip)
 
 logistic_vi &lt;- book_wf_final %&gt;% 
@@ -353,7 +353,7 @@ Figure 1: Variable importance plot for penalized logistic regression
 </div>
 <p>Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.</p>
 <p>Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the <a href="#comparing-word-frequency">word frequency</a> plot that Emily Brontë has more and stronger characteristic words.</p>
-<p>Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in <code>tidymodels</code> to include Anne Brontë some other time!</p>
+<p>In conclusion, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in <code>tidymodels</code> to include Anne Brontë some other time!</p>
 </div>
 </div>
 </div>

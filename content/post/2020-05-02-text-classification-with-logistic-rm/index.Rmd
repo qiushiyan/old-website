@@ -311,14 +311,14 @@ logistic_final %>%
 The accuracy of our logisitc model rises by a rough 7% to 93.8%, with `roc_auc` being nearly 0.904. This is pretty good!
 
 There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity). 
-```{r, echo = TRUE}
+```{r}
 logistic_final %>%
   collect_predictions() %>%
   conf_mat(truth = author, estimate = .pred_class) 
 ```
 
 
-To evaluate predictors, I agian use `fit` and `pull_workflow` to extract model fit. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
+To examine the effect of predictors, I agian use `fit` and `pull_workflow` to extract model fit. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
 
 
 ```{r, fig.height = 11, fig.width = 11, fig.cap = "Variable importance plot for penalized logistic regression"}
@@ -352,7 +352,7 @@ Is it cheating to use names of a character to classify authors? Perhaps I should
 
 Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the [word frequency](#comparing-word-frequency) plot that Emily Brontë has more and stronger characteristic words.
 
-Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in `tidymodels` to include Anne Brontë some other time!
+In conclusion, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in `tidymodels` to include Anne Brontë some other time!
 
 
 

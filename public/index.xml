@@ -349,7 +349,7 @@ logistic_final %&amp;gt;%
 #&amp;gt; Prediction         Charlotte Brontë Emily Brontë
 #&amp;gt;   Charlotte Brontë             9921          726
 #&amp;gt;   Emily Brontë                    1         1131&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To evaluate predictors, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt; to extract model fit. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
+&lt;p&gt;To examine the effect of predictors, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt; to extract model fit. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(vip)
 
 logistic_vi &amp;lt;- book_wf_final %&amp;gt;% 
@@ -382,7 +382,7 @@ Figure 1: Variable importance plot for penalized logistic regression
 &lt;/div&gt;
 &lt;p&gt;Is it cheating to use names of a character to classify authors? Perhaps I should consider include more books and remove names for text classification next time.&lt;/p&gt;
 &lt;p&gt;Note that variale importance in the left panel is generally smaller than the right, this corresponds to what we find in the &lt;a href=&#34;#comparing-word-frequency&#34;&gt;word frequency&lt;/a&gt; plot that Emily Brontë has more and stronger characteristic words.&lt;/p&gt;
-&lt;p&gt;Anyway, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in &lt;code&gt;tidymodels&lt;/code&gt; to include Anne Brontë some other time!&lt;/p&gt;
+&lt;p&gt;In conclusion, the model with the best lambda seems quite powerful in distinguishing these two authors. I look forward to build a multinomial classification model in &lt;code&gt;tidymodels&lt;/code&gt; to include Anne Brontë some other time!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

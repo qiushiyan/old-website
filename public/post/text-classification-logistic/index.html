@@ -769,13 +769,12 @@ logistic_final %&gt;%
 #&gt;   .metric  .estimator .estimate
 #&gt;   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
 #&gt; 1 accuracy binary         0.938
-#&gt; 2 roc_auc  binary         0.904
-
-logistic_final %&gt;% 
+#&gt; 2 roc_auc  binary         0.904</code></pre>
+<pre class="r"><code>logistic_final %&gt;% 
   collect_predictions() %&gt;%
   roc_curve(truth = author, `.pred_Emily Brontë`) %&gt;% 
   autoplot()</code></pre>
-<p><img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
+<p><img src="roc_curve.png" width="768" /></p>
 <p>The accuracy of our logisitc model rises by a rough 7% to 93.8%, with <code>roc_auc</code> being nearly 0.904. This is pretty good!</p>
 <p>There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity).</p>
 <pre class="r"><code>logistic_final %&gt;%
@@ -810,8 +809,8 @@ logistic_vi %&gt;%
   theme(axis.text = element_text(size = 18),
         plot.title = element_text(size = 24),
         plot.title.position = &quot;plot&quot;)</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-24"></span>
-<img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-24-1.png" alt="Variable importance plot for penalized logistic regression" width="1056" />
+<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<img src="/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-25-1.png" alt="Variable importance plot for penalized logistic regression" width="1056" />
 <p class="caption">
 Figure 1: Variable importance plot for penalized logistic regression
 </p>

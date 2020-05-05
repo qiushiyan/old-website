@@ -301,12 +301,19 @@ logistic_final <- last_fit(book_wf_final, split = book_split)
 
 logistic_final %>% 
   collect_metrics()
+```
 
+```r
 logistic_final %>% 
   collect_predictions() %>%
   roc_curve(truth = author, `.pred_Emily Brontë`) %>% 
   autoplot()
 ```
+
+```{r, echo = FALSE}
+knitr::include_graphics("roc_curve.png")
+```
+
 
 The accuracy of our logisitc model rises by a rough 7% to 93.8%, with `roc_auc` being nearly 0.904. This is pretty good!
 

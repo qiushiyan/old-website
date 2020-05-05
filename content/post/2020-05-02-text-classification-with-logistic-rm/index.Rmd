@@ -315,7 +315,7 @@ knitr::include_graphics("roc_curve.png")
 ```
 
 
-The accuracy of our logisitc model rises by a rough 7% to 93.8%, with `roc_auc` being nearly 0.904. This is pretty good!
+The accuracy of our logisitc model rises by a rough 9% to 93.8%, with `roc_auc` being nearly 0.904. This is pretty good!
 
 There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity). 
 ```{r}

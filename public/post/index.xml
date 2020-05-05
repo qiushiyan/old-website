@@ -325,7 +325,7 @@ logistic_final %&amp;gt;%
   roc_curve(truth = author, `.pred_Emily Brontë`) %&amp;gt;% 
   autoplot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;roc_curve.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;The accuracy of our logisitc model rises by a rough 7% to 93.8%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 0.904. This is pretty good!&lt;/p&gt;
+&lt;p&gt;The accuracy of our logisitc model rises by a rough 9% to 93.8%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 0.904. This is pretty good!&lt;/p&gt;
 &lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final %&amp;gt;%
   collect_predictions() %&amp;gt;%

@@ -58,9 +58,9 @@ logo = ""
 # Documentation: https://sourcethemes.com/academic/docs/writing-markdown-latex/#highlighting-options
 highlight = true
 # Add support for highlighting additional languages
-highlight_languages = ["bash", "cs", "http", "javascript", "json", "markdown", "r", "xml", "yaml"]
+highlight_languages = ["bash", "sql", "http", "javascript", "json", "markdown", "r", "xml", "yaml"]
 # For supported styles, see https://cdnjs.com/libraries/highlight.js/
-highlight_style = "monokai" 
+# highlight_style = "monokai" 
 
 
 # Enable LaTeX math rendering? true/false

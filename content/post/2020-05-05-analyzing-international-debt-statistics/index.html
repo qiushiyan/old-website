@@ -1,0 +1,72 @@
+---
+title: Analyzing International Debt Statistics
+author: Qiushi Yan
+date: '2020-05-05'
+slug: international-debt-sql
+categories:
+  - Data Analysis
+  - SQL
+  - Data Visualization
+summary: 'Write SQL queries to analyze international debt from the World Bank, and make ggplot2 visulizations.'
+lastmod: '2020-05-05T18:42:11+08:00'
+draft: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+---
+
+
+
+<p>In this post, I use SQL to retrieve and analyze international debt data collected by The World Bank. The dataset contains information about the amount of debt (in USD 💵) owed by developing countries across several categories. In fact, I adopted this from one <a href="https://learn.datacamp.com/projects/754">DataCamp project</a> without following its instructions. The project is still insightful and well-written, though. Also, the R Markdown documentation has a section on how to <a href="https://bookdown.org/yihui/rmarkdown/language-engines.html#sqls">embed SQL chunks</a></p>
+<p>After connecting the a database, I start by <code>CREATE</code> the <code>international_debt</code> table.</p>
+<pre class="sql"><code>CREATE TABLE international_debt (
+    country_name varchar(50),
+    country_code varchar(10),
+    indicator_name varchar(100),
+    indicator_code varchar(20),
+    debt decimal(12, 1)
+)</code></pre>
+<p>Then we can upload debt data into that table. If you happen to be a datacamp subscriber, <a href="https://support.datacamp.com/hc/en-us/articles/360020444334-How-to-Download-Project-Datasets">here</a> are some instructions on how to dowanload the data. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<pre class="sql"><code>COPY international_debt
+FROM &#39;D:/RProjects/data/blog/international_debt.csv&#39;
+WITH (FORMAT csv, header)</code></pre>
+<pre class="sql"><code>-- SELECT * FROM international_debt LIMIT 10
+SELECT DISTINCT(country_name) 
+FROM international_debt
+LIMIT 6</code></pre>
+<div class="knitsql-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">country_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fiji</td>
+</tr>
+<tr class="even">
+<td align="left">Costa Rica</td>
+</tr>
+<tr class="odd">
+<td align="left">Cambodia</td>
+</tr>
+<tr class="even">
+<td align="left">Eritrea</td>
+</tr>
+<tr class="odd">
+<td align="left">Guatemala</td>
+</tr>
+<tr class="even">
+<td align="left">Turkey</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The following chunk is not a real SQL query but plain text. The knitr SQL engine currently only looks for the keywords that are among <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>CREATE</code> and <code>SELECT</code>. You have to run the command inside the database.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>

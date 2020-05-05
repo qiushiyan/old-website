@@ -59,8 +59,10 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
       
     
 
@@ -741,7 +743,7 @@ top_models
 #&gt;  9 0.000586 roc_auc binary     0.910    10 0.00209
 #&gt; 10 0.000464 roc_auc binary     0.910    10 0.00210
 #&gt; # ... with 66 more rows</code></pre>
-<p><code>select_best()</code> with return the 9th row with <span class="math inline">\(\lambda \approx 0.000586\)</span> for its highest performance on <code>roc_auc</code>. But I’ll stick to the parsimonious principle and pick <span class="math inline">\(\lambda \approx 0.00376\)</span> at the cost of a fall in roc_auc by 0.005 and in accuracy by 0.001.</p>
+<p><code>select_best()</code> with return the 9th row with <span class="math inline">\(\lambda \approx 0.000586\)</span> for its highest performance on <code>roc_auc</code>. But I’ll stick to the parsimonious principle and pick <span class="math inline">\(\lambda \approx 0.00376\)</span> at the cost of a fall in <code>roc_auc</code> by 0.005 and in <code>accuracy</code> by 0.001.</p>
 <pre class="r"><code>logistic_results %&gt;% 
   select_best(metric = &quot;roc_auc&quot;)
 #&gt; # A tibble: 1 x 1
@@ -776,7 +778,7 @@ logistic_final %&gt;%
   autoplot()</code></pre>
 <p><img src="roc_curve.png" width="768" /></p>
 <p>The accuracy of our logisitc model rises by a rough 9% to 93.8%, with <code>roc_auc</code> being nearly 0.904. This is pretty good!</p>
-<p>There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity).</p>
+<p>There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).</p>
 <pre class="r"><code>logistic_final %&gt;%
   collect_predictions() %&gt;%
   conf_mat(truth = author, estimate = .pred_class) 
@@ -784,7 +786,7 @@ logistic_final %&gt;%
 #&gt; Prediction         Charlotte Brontë Emily Brontë
 #&gt;   Charlotte Brontë             9921          726
 #&gt;   Emily Brontë                    1         1131</code></pre>
-<p>To examine the effect of predictors, I agian use <code>fit</code> and <code>pull_workflow</code> to extract model fit. Variable importance plots implemented in the <a href="https://koalaverse.github.io/vip/index.html">vip</a> package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.</p>
+<p>To examine the effect of predictors, I agian use <code>fit</code> and <code>pull_workflow</code> to extract model fit. Variable importance plots implemented in the <a href="https://koalaverse.github.io/vip/index.html">vip</a> package provides an intuitive way to visualize importance of predictors in this scenario, using the absolute value of the t-statistic as a measure of VI.</p>
 <pre class="r"><code>library(vip)
 
 logistic_vi &lt;- book_wf_final %&gt;% 
@@ -795,12 +797,14 @@ logistic_vi &lt;- book_wf_final %&gt;%
   top_n(30, wt = abs(Importance)) %&gt;%
   ungroup() %&gt;% 
   mutate(Sign = if_else(Sign == &quot;POS&quot;, 
-                        &quot;More Emily Brontë&quot;, &quot;More Charlotte Brontë&quot;))
+                        &quot;More Emily Brontë&quot;, 
+                        &quot;More Charlotte Brontë&quot;))
 
 logistic_vi %&gt;% 
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
-  geom_col(aes(fill = Sign), show.legend = FALSE) +
+  geom_col(aes(fill = Sign), 
+           show.legend = FALSE, alpha = 0.8) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = &quot;free&quot;) + 
   labs(title = &quot;How word usage classifies Brontë sisters&quot;,
@@ -1117,7 +1121,7 @@ Figure 1: Variable importance plot for penalized logistic regression
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
         
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sql.min.js"></script>
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
         

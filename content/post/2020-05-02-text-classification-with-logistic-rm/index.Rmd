@@ -275,7 +275,7 @@ top_models <- logistic_results %>%
 top_models
 ```
 
-`select_best()` with return the 9th row with $\lambda \approx 0.000586$ for its highest performance on `roc_auc`. But I'll stick to the parsimonious principle and pick $\lambda \approx 0.00376$ at the cost of a fall in roc_auc by 0.005 and in accuracy by 0.001. 
+`select_best()` with return the 9th row with $\lambda \approx 0.000586$ for its highest performance on `roc_auc`. But I'll stick to the parsimonious principle and pick $\lambda \approx 0.00376$ at the cost of a fall in `roc_auc` by 0.005 and in `accuracy` by 0.001. 
 
 ```{r}
 logistic_results %>% 
@@ -317,7 +317,7 @@ knitr::include_graphics("roc_curve.png")
 
 The accuracy of our logisitc model rises by a rough 9% to 93.8%, with `roc_auc` being nearly 0.904. This is pretty good!
 
-There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity). 
+There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).
 ```{r}
 logistic_final %>%
   collect_predictions() %>%
@@ -325,7 +325,7 @@ logistic_final %>%
 ```
 
 
-To examine the effect of predictors, I agian use `fit` and `pull_workflow` to extract model fit. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.
+To examine the effect of predictors, I agian use `fit` and `pull_workflow` to extract model fit. Variable importance plots implemented in the [vip](https://koalaverse.github.io/vip/index.html) package provides an intuitive way to visualize importance of predictors in this scenario, using the absolute value of the t-statistic as a measure of VI.
 
 
 ```{r, fig.height = 11, fig.width = 11, fig.cap = "Variable importance plot for penalized logistic regression"}
@@ -339,12 +339,14 @@ logistic_vi <- book_wf_final %>%
   top_n(30, wt = abs(Importance)) %>%
   ungroup() %>% 
   mutate(Sign = if_else(Sign == "POS", 
-                        "More Emily Brontë", "More Charlotte Brontë"))
+                        "More Emily Brontë", 
+                        "More Charlotte Brontë"))
 
 logistic_vi %>% 
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
-  geom_col(aes(fill = Sign), show.legend = FALSE) +
+  geom_col(aes(fill = Sign), 
+           show.legend = FALSE, alpha = 0.8) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = "free") + 
   labs(title = "How word usage classifies Brontë sisters",

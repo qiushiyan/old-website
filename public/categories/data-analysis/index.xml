@@ -5,12 +5,75 @@
     <link>/categories/data-analysis/</link>
       <atom:link href="/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Analysis</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Data Analysis</title>
       <link>/categories/data-analysis/</link>
     </image>
+    
+    <item>
+      <title>Analyzing International Debt Statistics</title>
+      <link>/post/international-debt-sql/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/international-debt-sql/</guid>
+      <description>
+
+
+&lt;p&gt;In this post, I use SQL to retrieve and analyze international debt data collected by The World Bank. The dataset contains information about the amount of debt (in USD 💵) owed by developing countries across several categories. In fact, I adopted this from one &lt;a href=&#34;https://learn.datacamp.com/projects/754&#34;&gt;DataCamp project&lt;/a&gt; without following its instructions. The project is still insightful and well-written, though. Also, the R Markdown documentation has a section on how to &lt;a href=&#34;https://bookdown.org/yihui/rmarkdown/language-engines.html#sqls&#34;&gt;embed SQL chunks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After connecting the a database, I start by &lt;code&gt;CREATE&lt;/code&gt; the &lt;code&gt;international_debt&lt;/code&gt; table.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;CREATE TABLE international_debt (
+    country_name varchar(50),
+    country_code varchar(10),
+    indicator_name varchar(100),
+    indicator_code varchar(20),
+    debt decimal(12, 1)
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we can upload debt data into that table. If you happen to be a datacamp subscriber, &lt;a href=&#34;https://support.datacamp.com/hc/en-us/articles/360020444334-How-to-Download-Project-Datasets&#34;&gt;here&lt;/a&gt; are some instructions on how to dowanload the data. &lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;COPY international_debt
+FROM &amp;#39;D:/RProjects/data/blog/international_debt.csv&amp;#39;
+WITH (FORMAT csv, header)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- SELECT * FROM international_debt LIMIT 10
+SELECT DISTINCT(country_name) 
+FROM international_debt
+LIMIT 6&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Fiji&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Costa Rica&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cambodia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Eritrea&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Guatemala&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;The following chunk is not a real SQL query but plain text. The knitr SQL engine currently only looks for the keywords that are among &lt;code&gt;INSERT&lt;/code&gt;, &lt;code&gt;UPDATE&lt;/code&gt;, &lt;code&gt;DELETE&lt;/code&gt;, &lt;code&gt;CREATE&lt;/code&gt; and &lt;code&gt;SELECT&lt;/code&gt;. You have to run the command inside the database.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Text Classfication with Penalized Logistic Regression</title>
@@ -279,7 +342,7 @@ top_models
 #&amp;gt;  9 0.000586 roc_auc binary     0.910    10 0.00209
 #&amp;gt; 10 0.000464 roc_auc binary     0.910    10 0.00210
 #&amp;gt; # ... with 66 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;select_best()&lt;/code&gt; with return the 9th row with &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.000586\)&lt;/span&gt; for its highest performance on &lt;code&gt;roc_auc&lt;/code&gt;. But I’ll stick to the parsimonious principle and pick &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.00376\)&lt;/span&gt; at the cost of a fall in roc_auc by 0.005 and in accuracy by 0.001.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;select_best()&lt;/code&gt; with return the 9th row with &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.000586\)&lt;/span&gt; for its highest performance on &lt;code&gt;roc_auc&lt;/code&gt;. But I’ll stick to the parsimonious principle and pick &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.00376\)&lt;/span&gt; at the cost of a fall in &lt;code&gt;roc_auc&lt;/code&gt; by 0.005 and in &lt;code&gt;accuracy&lt;/code&gt; by 0.001.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_results %&amp;gt;% 
   select_best(metric = &amp;quot;roc_auc&amp;quot;)
 #&amp;gt; # A tibble: 1 x 1
@@ -314,7 +377,7 @@ logistic_final %&amp;gt;%
   autoplot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;roc_curve.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The accuracy of our logisitc model rises by a rough 9% to 93.8%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 0.904. This is pretty good!&lt;/p&gt;
-&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity).&lt;/p&gt;
+&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final %&amp;gt;%
   collect_predictions() %&amp;gt;%
   conf_mat(truth = author, estimate = .pred_class) 
@@ -322,7 +385,7 @@ logistic_final %&amp;gt;%
 #&amp;gt; Prediction         Charlotte Brontë Emily Brontë
 #&amp;gt;   Charlotte Brontë             9921          726
 #&amp;gt;   Emily Brontë                    1         1131&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To examine the effect of predictors, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt; to extract model fit. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
+&lt;p&gt;To examine the effect of predictors, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt; to extract model fit. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides an intuitive way to visualize importance of predictors in this scenario, using the absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(vip)
 
 logistic_vi &amp;lt;- book_wf_final %&amp;gt;% 
@@ -333,12 +396,14 @@ logistic_vi &amp;lt;- book_wf_final %&amp;gt;%
   top_n(30, wt = abs(Importance)) %&amp;gt;%
   ungroup() %&amp;gt;% 
   mutate(Sign = if_else(Sign == &amp;quot;POS&amp;quot;, 
-                        &amp;quot;More Emily Brontë&amp;quot;, &amp;quot;More Charlotte Brontë&amp;quot;))
+                        &amp;quot;More Emily Brontë&amp;quot;, 
+                        &amp;quot;More Charlotte Brontë&amp;quot;))
 
 logistic_vi %&amp;gt;% 
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
-  geom_col(aes(fill = Sign), show.legend = FALSE) +
+  geom_col(aes(fill = Sign), 
+           show.legend = FALSE, alpha = 0.8) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = &amp;quot;free&amp;quot;) + 
   labs(title = &amp;quot;How word usage classifies Brontë sisters&amp;quot;,

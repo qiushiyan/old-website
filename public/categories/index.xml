@@ -5,7 +5,7 @@
     <link>/categories/</link>
       <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Categories</title>
@@ -13,18 +13,34 @@
     </image>
     
     <item>
-      <title>Machine Learning</title>
-      <link>/categories/machine-learning/</link>
-      <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/machine-learning/</guid>
+      <title>Data Analysis</title>
+      <link>/categories/data-analysis/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <guid>/categories/data-analysis/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Data Analysis</title>
-      <link>/categories/data-analysis/</link>
-      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/data-analysis/</guid>
+      <title>Data Visualization</title>
+      <link>/categories/data-visualization/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <guid>/categories/data-visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>/categories/sql/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <guid>/categories/sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>/categories/machine-learning/</link>
+      <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
+      <guid>/categories/machine-learning/</guid>
       <description></description>
     </item>
     
@@ -49,14 +65,6 @@
       <link>/categories/statistics/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/categories/statistics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Visualization</title>
-      <link>/categories/data-visualization/</link>
-      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/categories/data-visualization/</guid>
       <description></description>
     </item>
     

@@ -5,12 +5,75 @@
     <link>/categories/data-visualization/</link>
       <atom:link href="/categories/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Visualization</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Data Visualization</title>
       <link>/categories/data-visualization/</link>
     </image>
+    
+    <item>
+      <title>Analyzing International Debt Statistics</title>
+      <link>/post/international-debt-sql/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/international-debt-sql/</guid>
+      <description>
+
+
+&lt;p&gt;In this post, I use SQL to retrieve and analyze international debt data collected by The World Bank. The dataset contains information about the amount of debt (in USD 💵) owed by developing countries across several categories. In fact, I adopted this from one &lt;a href=&#34;https://learn.datacamp.com/projects/754&#34;&gt;DataCamp project&lt;/a&gt; without following its instructions. The project is still insightful and well-written, though. Also, the R Markdown documentation has a section on how to &lt;a href=&#34;https://bookdown.org/yihui/rmarkdown/language-engines.html#sqls&#34;&gt;embed SQL chunks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After connecting the a database, I start by &lt;code&gt;CREATE&lt;/code&gt; the &lt;code&gt;international_debt&lt;/code&gt; table.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;CREATE TABLE international_debt (
+    country_name varchar(50),
+    country_code varchar(10),
+    indicator_name varchar(100),
+    indicator_code varchar(20),
+    debt decimal(12, 1)
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we can upload debt data into that table. If you happen to be a datacamp subscriber, &lt;a href=&#34;https://support.datacamp.com/hc/en-us/articles/360020444334-How-to-Download-Project-Datasets&#34;&gt;here&lt;/a&gt; are some instructions on how to dowanload the data. &lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;COPY international_debt
+FROM &amp;#39;D:/RProjects/data/blog/international_debt.csv&amp;#39;
+WITH (FORMAT csv, header)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- SELECT * FROM international_debt LIMIT 10
+SELECT DISTINCT(country_name) 
+FROM international_debt
+LIMIT 6&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Fiji&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Costa Rica&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cambodia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Eritrea&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Guatemala&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;The following chunk is not a real SQL query but plain text. The knitr SQL engine currently only looks for the keywords that are among &lt;code&gt;INSERT&lt;/code&gt;, &lt;code&gt;UPDATE&lt;/code&gt;, &lt;code&gt;DELETE&lt;/code&gt;, &lt;code&gt;CREATE&lt;/code&gt; and &lt;code&gt;SELECT&lt;/code&gt;. You have to run the command inside the database.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Reordering within facets</title>

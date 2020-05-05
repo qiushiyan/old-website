@@ -291,7 +291,7 @@ top_models
 #&amp;gt;  9 0.000586 roc_auc binary     0.910    10 0.00209
 #&amp;gt; 10 0.000464 roc_auc binary     0.910    10 0.00210
 #&amp;gt; # ... with 66 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;select_best()&lt;/code&gt; with return the 9th row with &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.000586\)&lt;/span&gt; for its highest performance on &lt;code&gt;roc_auc&lt;/code&gt;. But I’ll stick to the parsimonious principle and pick &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.00376\)&lt;/span&gt; at the cost of a fall in roc_auc by 0.005 and in accuracy by 0.001.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;select_best()&lt;/code&gt; with return the 9th row with &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.000586\)&lt;/span&gt; for its highest performance on &lt;code&gt;roc_auc&lt;/code&gt;. But I’ll stick to the parsimonious principle and pick &lt;span class=&#34;math inline&#34;&gt;\(\lambda \approx 0.00376\)&lt;/span&gt; at the cost of a fall in &lt;code&gt;roc_auc&lt;/code&gt; by 0.005 and in &lt;code&gt;accuracy&lt;/code&gt; by 0.001.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_results %&amp;gt;% 
   select_best(metric = &amp;quot;roc_auc&amp;quot;)
 #&amp;gt; # A tibble: 1 x 1
@@ -326,7 +326,7 @@ logistic_final %&amp;gt;%
   autoplot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;roc_curve.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The accuracy of our logisitc model rises by a rough 9% to 93.8%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 0.904. This is pretty good!&lt;/p&gt;
-&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, low specificity).&lt;/p&gt;
+&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final %&amp;gt;%
   collect_predictions() %&amp;gt;%
   conf_mat(truth = author, estimate = .pred_class) 
@@ -334,7 +334,7 @@ logistic_final %&amp;gt;%
 #&amp;gt; Prediction         Charlotte Brontë Emily Brontë
 #&amp;gt;   Charlotte Brontë             9921          726
 #&amp;gt;   Emily Brontë                    1         1131&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To examine the effect of predictors, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt; to extract model fit. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides an intuitive way to visualize importance of predictors in this scenario, using th absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
+&lt;p&gt;To examine the effect of predictors, I agian use &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;pull_workflow&lt;/code&gt; to extract model fit. Variable importance plots implemented in the &lt;a href=&#34;https://koalaverse.github.io/vip/index.html&#34;&gt;vip&lt;/a&gt; package provides an intuitive way to visualize importance of predictors in this scenario, using the absolute value of the t-statistic as a measure of VI.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(vip)
 
 logistic_vi &amp;lt;- book_wf_final %&amp;gt;% 
@@ -345,12 +345,14 @@ logistic_vi &amp;lt;- book_wf_final %&amp;gt;%
   top_n(30, wt = abs(Importance)) %&amp;gt;%
   ungroup() %&amp;gt;% 
   mutate(Sign = if_else(Sign == &amp;quot;POS&amp;quot;, 
-                        &amp;quot;More Emily Brontë&amp;quot;, &amp;quot;More Charlotte Brontë&amp;quot;))
+                        &amp;quot;More Emily Brontë&amp;quot;, 
+                        &amp;quot;More Charlotte Brontë&amp;quot;))
 
 logistic_vi %&amp;gt;% 
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
-  geom_col(aes(fill = Sign), show.legend = FALSE) +
+  geom_col(aes(fill = Sign), 
+           show.legend = FALSE, alpha = 0.8) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = &amp;quot;free&amp;quot;) + 
   labs(title = &amp;quot;How word usage classifies Brontë sisters&amp;quot;,

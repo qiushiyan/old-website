@@ -250,7 +250,7 @@ book_folds &lt;- vfold_cv(book_train, v = 10)</code></pre>
   ggplot(aes(penalty, mean)) + 
   geom_line(aes(color = .metric), size = 1.5, show.legend = FALSE) + 
   geom_errorbar(aes(ymin = lower_bound, ymax = upper_bound)) + 
-  facet_wrap(~ .metric, nrow = 2) + 
+  facet_wrap(~ .metric, nrow = 2, scales = &quot;free&quot;) + 
   labs(y = NULL,
        x = expression(lambda),
        title = &quot;Performance metric of logistic regession versus differenct choices of L1 regularization&quot;)</code></pre>
@@ -309,9 +309,9 @@ logistic_final %&gt;%
   collect_predictions() %&gt;%
   roc_curve(truth = author, `.pred_Emily Brontë`) %&gt;% 
   autoplot()</code></pre>
-<p><img src="roc_curve.png" width="768" /></p>
+<p><img src="roc_curve.png" width="100%" /></p>
 <p>The accuracy of our logisitc model rises by a rough 9% to 93.8%, with <code>roc_auc</code> being nearly 0.904. This is pretty good!</p>
-<p>There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).</p>
+<p>There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were written by Charlotte).</p>
 <pre class="r"><code>logistic_final %&gt;%
   collect_predictions() %&gt;%
   conf_mat(truth = author, estimate = .pred_class) 
@@ -337,7 +337,7 @@ logistic_vi %&gt;%
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
   geom_col(aes(fill = Sign), 
-           show.legend = FALSE, alpha = 0.8) +
+           show.legend = FALSE, alpha = 0.6) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = &quot;free&quot;) + 
   labs(title = &quot;How word usage classifies Brontë sisters&quot;,

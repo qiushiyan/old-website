@@ -253,7 +253,7 @@ book_folds &amp;lt;- vfold_cv(book_train, v = 10)&lt;/code&gt;&lt;/pre&gt;
   ggplot(aes(penalty, mean)) + 
   geom_line(aes(color = .metric), size = 1.5, show.legend = FALSE) + 
   geom_errorbar(aes(ymin = lower_bound, ymax = upper_bound)) + 
-  facet_wrap(~ .metric, nrow = 2) + 
+  facet_wrap(~ .metric, nrow = 2, scales = &amp;quot;free&amp;quot;) + 
   labs(y = NULL,
        x = expression(lambda),
        title = &amp;quot;Performance metric of logistic regession versus differenct choices of L1 regularization&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
@@ -312,9 +312,9 @@ logistic_final %&amp;gt;%
   collect_predictions() %&amp;gt;%
   roc_curve(truth = author, `.pred_Emily Brontë`) %&amp;gt;% 
   autoplot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;roc_curve.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;roc_curve.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The accuracy of our logisitc model rises by a rough 9% to 93.8%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 0.904. This is pretty good!&lt;/p&gt;
-&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).&lt;/p&gt;
+&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were written by Charlotte).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final %&amp;gt;%
   collect_predictions() %&amp;gt;%
   conf_mat(truth = author, estimate = .pred_class) 
@@ -340,7 +340,7 @@ logistic_vi %&amp;gt;%
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
   geom_col(aes(fill = Sign), 
-           show.legend = FALSE, alpha = 0.8) +
+           show.legend = FALSE, alpha = 0.6) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = &amp;quot;free&amp;quot;) + 
   labs(title = &amp;quot;How word usage classifies Brontë sisters&amp;quot;,

@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="A personal blog of Qiushi Yan about life and #rstats">
+  <meta name="description" content="Personal blog of Qiushi Yan">
 
   
   <link rel="alternate" hreflang="en-us" href="/categories/machine-learning/">
@@ -91,6 +91,42 @@
 
 
 
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165703248-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-165703248-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
   
 
 
@@ -120,7 +156,7 @@
   <meta property="og:site_name" content="Qiushi Yan">
   <meta property="og:url" content="/categories/machine-learning/">
   <meta property="og:title" content="Machine Learning | Qiushi Yan">
-  <meta property="og:description" content="A personal blog of Qiushi Yan about life and #rstats"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     <meta property="og:updated_time" content="2020-05-03T00:00:00&#43;00:00">

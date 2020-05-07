@@ -259,7 +259,7 @@ logistic_results %>%
   ggplot(aes(penalty, mean)) + 
   geom_line(aes(color = .metric), size = 1.5, show.legend = FALSE) + 
   geom_errorbar(aes(ymin = lower_bound, ymax = upper_bound)) + 
-  facet_wrap(~ .metric, nrow = 2) + 
+  facet_wrap(~ .metric, nrow = 2, scales = "free") + 
   labs(y = NULL,
        x = expression(lambda),
        title = "Performance metric of logistic regession versus differenct choices of L1 regularization")
@@ -310,14 +310,14 @@ logistic_final %>%
   autoplot()
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("roc_curve.png")
 ```
 
 
 The accuracy of our logisitc model rises by a rough 9% to 93.8%, with `roc_auc` being nearly 0.904. This is pretty good!
 
-There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).
+There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were written by Charlotte).
 ```{r}
 logistic_final %>%
   collect_predictions() %>%
@@ -346,7 +346,7 @@ logistic_vi %>%
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
   geom_col(aes(fill = Sign), 
-           show.legend = FALSE, alpha = 0.8) +
+           show.legend = FALSE, alpha = 0.6) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = "free") + 
   labs(title = "How word usage classifies Brontë sisters",

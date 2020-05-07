@@ -33,9 +33,17 @@
       <guid>/post/international-debt-sql/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#sql-quries&#34;&gt;SQL quries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#visulization-countries-with-highest-total-debt.&#34;&gt;Visulization: countries with highest total debt.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;p&gt;In this post, I use SQL to retrieve and analyze international debt data collected by The World Bank. The dataset contains information about the amount of debt (in USD 💵) owed by developing countries across several categories. In fact, I adopted this from one &lt;a href=&#34;https://learn.datacamp.com/projects/754&#34;&gt;DataCamp project&lt;/a&gt; without following its instructions. The project is still insightful and well-written, though. Also, the R Markdown documentation has a section on how to &lt;a href=&#34;https://bookdown.org/yihui/rmarkdown/language-engines.html#sqls&#34;&gt;embed SQL chunks&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;After connecting the a database, I start by &lt;code&gt;CREATE&lt;/code&gt; the &lt;code&gt;international_debt&lt;/code&gt; table.&lt;/p&gt;
+&lt;div id=&#34;sql-quries&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;SQL quries&lt;/h1&gt;
+&lt;p&gt;After connecting the a database, I start by &lt;code&gt;CREATE&lt;/code&gt; the &lt;code&gt;international_debt&lt;/code&gt; table, and load data into R as well.&lt;/p&gt;
 &lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;CREATE TABLE international_debt (
     country_name varchar(50),
     country_code varchar(10),
@@ -43,14 +51,493 @@
     indicator_code varchar(20),
     debt decimal(12, 1)
 )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+
+international_debt &amp;lt;- readr::read_csv(&amp;quot;D:/RProjects/data/blog/international_debt.csv&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then we can upload debt data into that table. If you happen to be a datacamp subscriber, &lt;a href=&#34;https://support.datacamp.com/hc/en-us/articles/360020444334-How-to-Download-Project-Datasets&#34;&gt;here&lt;/a&gt; are some instructions on how to dowanload the data. &lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;COPY international_debt
 FROM &amp;#39;D:/RProjects/data/blog/international_debt.csv&amp;#39;
 WITH (FORMAT csv, header)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- SELECT * FROM international_debt LIMIT 10
-SELECT DISTINCT(country_name) 
+&lt;p&gt;&lt;code&gt;international_debt&lt;/code&gt; has debt information about 124 countries and 4714 rows in total, with each row being one type of debt statistics owed by one country or region.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- a glance a debt data
+SELECT *
 FROM international_debt
-LIMIT 6&lt;/code&gt;&lt;/pre&gt;
+LIMIT 10&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;country_code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;indicator_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;indicator_code&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;debt&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Disbursements on external debt, long-term (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.DLXF.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;72894454&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Interest payments on external debt, long-term (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.DLXF.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53239440&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.BLAT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;61739337&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.BLAT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;49114729&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.BLAT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;39903620&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.MLAT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;39107845&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.MLAT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23779724&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.MLAT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;13335820&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.OFFT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;100847182&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.OFFT.CD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;72894454&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- how many countries
+SELECT COUNT(DISTINCT country_code) as n_countries FROM international_debt&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;n_countries&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- how many reords
+SELECT COUNT(*) AS n_records FROM international_debt&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;n_records&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2357&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;indicator_code&lt;/code&gt; column represents the category of these debts. Knowing about these various debt indicators will help us to understand the areas in which a country can possibly be indebted to.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT DISTINCT indicator_code FROM international_debt &lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;indicator_code&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.PCBK.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.DLXF.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.DLXF.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.DPNG.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.DLXF.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.PCBK.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.PROP.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.MLAT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.OFFT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.OFFT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.MLAT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.MLAT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.PRVT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.PBND.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.BLAT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.OFFT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.PCBK.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.PROP.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.PRVT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.PROP.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.PRVT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.INT.BLAT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.PBND.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.DIS.BLAT.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;DT.AMT.DPNG.CD&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Now, I come to answer questions involving some simple calculations&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What is the total amount of debt of all types? This is a measure of the health of the global economy.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT ROUND(SUM(debt), 2) AS total_debt FROM international_debt&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;total_debt&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;3079734487675.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Which country has the highest total debt?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT country_name, SUM(debt) AS total_debt
+FROM international_debt
+GROUP BY country_name
+ORDER BY total_debt DESC
+LIMIT 20&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-10&#34;&gt;Table 1: &lt;/span&gt;Countries with highest debt&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;total_debt&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;China&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;285793494734&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Brazil&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;280623966141&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;South Asia&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;247608723991&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Least developed countries: UN classification&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;212880992792&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Russian Federation&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;191289057259&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;IDA only&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;179048127207&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;151125758035&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;133627060958&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;124596786217&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Indonesia&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;113435696694&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cameroon&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;86491206347&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Angola&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71368842500&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Kazakhstan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;70159942694&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Egypt, Arab Rep.&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62077727757&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Vietnam&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45851299896&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Colombia&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45430117605&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Pakistan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45139315399&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Romania&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42813979498&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;South Africa&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36703940743&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Venezuela, RB&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36048260108&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Here we see the top 20 countries with highest overall debt. In fact, some of the entries in &lt;code&gt;country_name&lt;/code&gt; are not countries but regions, such “South Asia”, “Least developed countries: UN classification” and “IDA only”.&lt;/p&gt;
+&lt;p&gt;Now that we know China is in most debt, we could break China’s dbet down to see the proportion for which different types of loan accounted.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT  indicator_name, debt, 
+        (debt / sum(debt) OVER()) AS proportion
+FROM international_debt
+WHERE country_name = &amp;#39;China&amp;#39;
+ORDER BY proportion DESC&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Two of all categories of debt, long-term and private nonguaranteed principle repayments on external debt take up more than 50% of China’s total debt.&lt;/p&gt;
+&lt;p&gt;We can dig even further to find out on an average how much debt a country owes? This will give us a better sense of the distribution of the amount of debt across different indicators.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT indicator_name, avg(debt) AS mean_debt
+FROM international_debt
+GROUP BY indicator_name
+ORDER BY mean_debt DESC&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;indicator_name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;mean_debt&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5904868401&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5161194334&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Disbursements on external debt, long-term (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2152041217&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1958983453&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, private creditors (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1803694102&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Interest payments on external debt, long-term (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1644024068&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1223139290&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1220410844&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1191187963&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bonds (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1082623948&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;839843679&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bonds (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;804733377&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, other private creditors (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;746888800&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, commercial banks (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;734868743&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, private creditors (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;719740180&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;712619635&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;490062193&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, private creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;311323265&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;297677339&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, commercial banks (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;293305196&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;164093286&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, commercial banks (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;156647613&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;136230719&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, other private creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;81135161&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, other private creditors (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34250651&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;A bit of visualization might help here, I’ ll make a density plot of mean debt across all indicators.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- international_debt %&amp;gt;% 
+  group_by(indicator_name) %&amp;gt;% 
+  summarize(mean_debt = mean(debt)) %&amp;gt;%
+  ggplot() + 
+  geom_density(aes(mean_debt), fill = &amp;quot;midnightblue&amp;quot;, alpha = 0.4) + 
+  scale_x_continuous(labels = scales::label_number_si(prefix = &amp;quot;$&amp;quot;)) +
+  theme_minimal() + 
+  theme(axis.text.y = element_blank()) + 
+  labs(title = &amp;quot;Distribution of the average debt across different indicators&amp;quot;,
+        y = NULL,
+        x = NULL)
+
+p&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;One may notice that principle repayment of long term debts tops the table of average debt and debt proportion of China. As such, we can find the top 10 countries with highest amount of debt in the category of long term debts (&lt;code&gt;DT.AMT.DLXF.CD&lt;/code&gt;)&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT DISTINCT country_name
+FROM international_debt
+WHERE country_name IN (
+    SELECT country_name 
+    FROM international_debt
+    WHERE indicator_code = &amp;#39;DT.AMT.DLXF.CD&amp;#39; 
+    ORDER BY debt DESC
+    LIMIT 10
+)&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;knitsql-table&#34;&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -60,25 +547,375 @@ LIMIT 6&lt;/code&gt;&lt;/pre&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Fiji&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Costa Rica&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Cambodia&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Eritrea&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Guatemala&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Russian Federation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Brazil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Least developed countries: UN classification&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;South Asia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;China&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Kazakhstan&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Indonesia&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;We saw that long-term debt is the topmost category when it comes to the average amount of debt. But is it the most common indicator in which the countries owe their debt?&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT indicator_name, COUNT(indicator_name) As n_indicator
+FROM international_debt
+GROUP BY indicator_name 
+ORDER BY n_indicator DESC&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;indicator_name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n_indicator&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Interest payments on external debt, long-term (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;124&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Disbursements on external debt, long-term (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;123&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;122&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, multilateral (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;120&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bilateral (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;113&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, private creditors (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;98&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, private creditors (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;98&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, commercial banks (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;84&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, commercial banks (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;84&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;79&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;79&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bonds (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;69&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, bonds (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;69&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, other private creditors (INT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;54&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, other private creditors (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;54&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, private creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, commercial banks (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;51&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, other private creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;19&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Turns out it is the second most common category of debt. But what is the average amount of the most common debt type, &lt;code&gt;DT.INT.OFFT.CD&lt;/code&gt;?&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT avg(debt) as mean_debt
+FROM international_debt
+WHERE indicator_code = &amp;#39;DT.INT.OFFT.CD&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;mean_debt&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;297677338.957258&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By inspecting the six indicaotors in which all the countries listed in our dataset have taken debt (&lt;code&gt;n_indicator = 124&lt;/code&gt;), we have a clue that all these countries are suffering from some common economic issues. Another problem is what is the most serious issus each country has? We can look into this by retrieveing maximum of debt of all categories of each country.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- some countries have tied max debt on multiple categories
+WITH max_debt AS (
+    SELECT country_name, max(debt) AS maximum
+    FROM international_debt
+    GROUP BY country_name
+    HAVING max(debt) &amp;lt;&amp;gt; 0
+)
+SELECT  max_debt.country_name, indicator_name, maximum FROM max_debt
+  LEFT JOIN (SELECT country_name, indicator_name, debt FROM international_debt) AS debt 
+    ON max_debt.maximum = debt.debt
+    AND max_debt.country_name = debt.country_name
+ORDER BY maximum DESC
+LIMIT 20&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;indicator_name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;maximum&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;China&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;96218620836&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Brazil&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90041840304&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Russian Federation&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;66589761834&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;51555031006&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;South Asia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48756295898&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Least developed countries: UN classification&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Disbursements on external debt, long-term (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40160766262&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;IDA only&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Disbursements on external debt, long-term (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34531188113&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;31923507001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Indonesia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30916112654&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Kazakhstan&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27482093686&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;25218503927&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cameroon&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Disbursements on external debt, long-term (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;18186662060&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Romania&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;14013783350&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Colombia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11985674439&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Angola&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11067045628&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Venezuela, RB&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9878659207&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Egypt, Arab Rep.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9692114177&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Lebanon&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9506919670&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;South Africa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Principal repayments on external debt, long-term (AMT, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9474257552&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Bangladesh&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PPG, official creditors (DIS, current US$)&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9050557612&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visulization-countries-with-highest-total-debt.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Visulization: countries with highest total debt.&lt;/h1&gt;
+&lt;p&gt;Finally, let’s make a plot again to show the top 20 countries with highest debt, as in table &lt;a href=&#34;#tab:countries-with-highest-debt&#34;&gt;&lt;strong&gt;??&lt;/strong&gt;&lt;/a&gt;, plus the specific category in which they take highest debt in.
+This time I exclude non-country entries.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# prepare data for plot
+maximum_category &amp;lt;- international_debt %&amp;gt;% 
+  group_by(country_name) %&amp;gt;% 
+  top_n(1, debt) %&amp;gt;%
+  distinct(country_name, .keep_all = TRUE) %&amp;gt;% 
+  select(country_name, indicator_name)
+
+countries &amp;lt;- international_debt %&amp;gt;% 
+  filter(!country_name %in% c(&amp;quot;South Asia&amp;quot;,
+                              &amp;quot;Least developed countries: UN classification&amp;quot;,
+                              &amp;quot;IDA only&amp;quot;)) %&amp;gt;%
+  group_by(country_name) %&amp;gt;% 
+  summarize(total_debt = sum(debt)) %&amp;gt;% 
+  top_n(20, total_debt) %&amp;gt;% 
+  left_join(maximum_category) 
+
+countries
+#&amp;gt; # A tibble: 20 x 3
+#&amp;gt;    country_name       total_debt indicator_name                                 
+#&amp;gt;    &amp;lt;chr&amp;gt;                   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;                                          
+#&amp;gt;  1 Angola                7.14e10 Principal repayments on external debt, long-te~
+#&amp;gt;  2 Bangladesh            3.50e10 Disbursements on external debt, long-term (DIS~
+#&amp;gt;  3 Brazil                2.81e11 Principal repayments on external debt, long-te~
+#&amp;gt;  4 Cameroon              8.65e10 Disbursements on external debt, long-term (DIS~
+#&amp;gt;  5 China                 2.86e11 Principal repayments on external debt, long-te~
+#&amp;gt;  6 Colombia              4.54e10 Principal repayments on external debt, long-te~
+#&amp;gt;  7 Egypt, Arab Rep.      6.21e10 Principal repayments on external debt, long-te~
+#&amp;gt;  8 India                 1.34e11 Principal repayments on external debt, long-te~
+#&amp;gt;  9 Indonesia             1.13e11 Principal repayments on external debt, long-te~
+#&amp;gt; 10 Kazakhstan            7.02e10 Principal repayments on external debt, long-te~
+#&amp;gt; 11 Lebanon               2.97e10 Principal repayments on external debt, long-te~
+#&amp;gt; 12 Mexico                1.25e11 Principal repayments on external debt, long-te~
+#&amp;gt; 13 Pakistan              4.51e10 Principal repayments on external debt, long-te~
+#&amp;gt; 14 Romania               4.28e10 Principal repayments on external debt, long-te~
+#&amp;gt; 15 Russian Federat~      1.91e11 Principal repayments on external debt, long-te~
+#&amp;gt; 16 South Africa          3.67e10 Principal repayments on external debt, long-te~
+#&amp;gt; 17 Turkey                1.51e11 Principal repayments on external debt, long-te~
+#&amp;gt; 18 Ukraine               2.85e10 Principal repayments on external debt, long-te~
+#&amp;gt; 19 Venezuela, RB         3.60e10 Principal repayments on external debt, long-te~
+#&amp;gt; 20 Vietnam               4.59e10 Principal repayments on external debt, long-te~&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggchicklet)
+library(ggtext)
+library(showtext)
+font_add_google(&amp;quot;Overpass Mono&amp;quot;, &amp;quot;Overpass Mono&amp;quot;)
+font_add_google(&amp;quot;Roboto Condensed&amp;quot;, &amp;quot;Roboto Condensed&amp;quot;)
+showtext_auto()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(countries) + 
+  geom_chicklet(aes(x =  fct_reorder(country_name, total_debt),
+                    y = total_debt,
+                    fill = indicator_name), 
+           color = NA, width = 0.8) + 
+  geom_text(aes(country_name, total_debt, label = scales::label_number_si()(total_debt)),
+            color = &amp;quot;white&amp;quot;, nudge_y = -10000000000, family = &amp;quot;Overpass Mono&amp;quot;) + 
+  scale_y_continuous(labels = scales::label_number_si(prefix = &amp;quot;$&amp;quot;)) + 
+  hrbrthemes::theme_modern_rc() + 
+  nord::scale_fill_nord(palette = &amp;quot;afternoon_prarie&amp;quot;, name = NA) + 
+  coord_flip(clip = &amp;quot;off&amp;quot;) +
+  labs(x = NULL,
+       y = NULL,
+       title = &amp;quot;Top 20 Countries with Highest Total Debts&amp;quot;,
+       subtitle = &amp;quot;highest contributions from long term &amp;lt;span style=&amp;#39;color:#F0D8C0&amp;#39;&amp;gt;repayments&amp;lt;/span&amp;gt; or &amp;lt;span style=&amp;#39;color:#6078A8&amp;#39;&amp;gt;disbursements&amp;lt;/span&amp;gt;&amp;quot;) + 
+  theme(legend.position = &amp;quot;none&amp;quot;,
+        plot.title = element_text(size = 28, family = &amp;quot;Roboto Condensed&amp;quot;),
+        plot.title.position = &amp;quot;plot&amp;quot;,
+        plot.subtitle = element_markdown(family = &amp;quot;Roboto Condensed&amp;quot;),
+        axis.text.x = element_text(face = &amp;quot;bold&amp;quot;, size = 14),
+        axis.text.y = element_text(face = &amp;quot;bold&amp;quot;, size = 18),
+        panel.grid.major.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
@@ -342,7 +1179,7 @@ book_folds &amp;lt;- vfold_cv(book_train, v = 10)&lt;/code&gt;&lt;/pre&gt;
   ggplot(aes(penalty, mean)) + 
   geom_line(aes(color = .metric), size = 1.5, show.legend = FALSE) + 
   geom_errorbar(aes(ymin = lower_bound, ymax = upper_bound)) + 
-  facet_wrap(~ .metric, nrow = 2) + 
+  facet_wrap(~ .metric, nrow = 2, scales = &amp;quot;free&amp;quot;) + 
   labs(y = NULL,
        x = expression(lambda),
        title = &amp;quot;Performance metric of logistic regession versus differenct choices of L1 regularization&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
@@ -401,9 +1238,9 @@ logistic_final %&amp;gt;%
   collect_predictions() %&amp;gt;%
   roc_curve(truth = author, `.pred_Emily Brontë`) %&amp;gt;% 
   autoplot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;roc_curve.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;roc_curve.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The accuracy of our logisitc model rises by a rough 9% to 93.8%, with &lt;code&gt;roc_auc&lt;/code&gt; being nearly 0.904. This is pretty good!&lt;/p&gt;
-&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were writtern by Charlotte).&lt;/p&gt;
+&lt;p&gt;There is also the confusion matrix to check. The model does well in identifying Charlotte Brontë (low false positive rate, high sensitivity), yet suffers relatively high false negative rate (mistakenly identify 39% of Emily Brontë as Charlotte Brontë, aka low specificity). In part, this is due to class imbalance (four out of five books were written by Charlotte).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logistic_final %&amp;gt;%
   collect_predictions() %&amp;gt;%
   conf_mat(truth = author, estimate = .pred_class) 
@@ -429,7 +1266,7 @@ logistic_vi %&amp;gt;%
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance)) + 
   geom_col(aes(fill = Sign), 
-           show.legend = FALSE, alpha = 0.8) +
+           show.legend = FALSE, alpha = 0.6) +
   scale_y_reordered() + 
   facet_wrap(~ Sign, nrow = 1, scales = &amp;quot;free&amp;quot;) + 
   labs(title = &amp;quot;How word usage classifies Brontë sisters&amp;quot;,

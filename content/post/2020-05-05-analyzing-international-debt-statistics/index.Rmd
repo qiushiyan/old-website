@@ -18,17 +18,21 @@ image:
 
 In this post, I use SQL to retrieve and analyze international debt data collected by The World Bank. The dataset contains information about the amount of debt (in USD `r emo::ji("dollar")`) owed by developing countries across several categories. In fact, I adopted this from one [DataCamp project](https://learn.datacamp.com/projects/754) without following its instructions. The project is still insightful and well-written, though.  Also, the R Markdown documentation has a section on how to [embed SQL chunks](https://bookdown.org/yihui/rmarkdown/language-engines.html#sqls)
 
+# SQL quries
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
                       comment = "#>",
                       collapse = TRUE,
                       tab.cap = NA)
+
+knitr::opts_knit$set(sql.max.print = NA)
 ```
 
 
 
-After connecting the a database, I start by `CREATE` the `international_debt` table.
+After connecting the a database, I start by `CREATE` the `international_debt` table, and load data into R as well.
 ```{r, include = FALSE}
 library(RPostgreSQL)
 library(DBI)
@@ -39,8 +43,6 @@ con <- dbConnect(DBI::dbDriver('PostgreSQL'),
                  port = 5432,
                  user = "postgres",
                  password = "Yanqiushi123")
-
-international_debt <- readr::read_csv("D:/RProjects/data/blog/international_debt.csv")
 ```
 
 
@@ -55,6 +57,13 @@ CREATE TABLE international_debt (
 )
 ```
 
+```{r}
+library(tidyverse)
+
+international_debt <- readr::read_csv("D:/RProjects/data/blog/international_debt.csv")
+```
+
+
 Then we can upload debt data into that table. If you happen to be a datacamp subscriber, [here](https://support.datacamp.com/hc/en-us/articles/360020444334-How-to-Download-Project-Datasets) are some instructions on how to dowanload the data. ^[The following chunk is not a real SQL query but plain text. The knitr SQL engine currently only looks for the keywords that are among `INSERT`, `UPDATE`, `DELETE`, `CREATE` and `SELECT`. You have to run the command inside the database.]
 
 ```sql
@@ -63,17 +72,219 @@ FROM 'D:/RProjects/data/blog/international_debt.csv'
 WITH (FORMAT csv, header)
 ```
 
+`international_debt` has debt information about 124 countries and 4714 rows in total, with each row being one type of debt statistics owed by one country or region.
+```{sql connection=con}
+-- a glance a debt data
+SELECT *
+FROM international_debt
+LIMIT 10
+```
 
 ```{sql connection=con}
--- SELECT * FROM international_debt LIMIT 10
-SELECT DISTINCT(country_name) 
+-- how many countries
+SELECT COUNT(DISTINCT country_code) as n_countries FROM international_debt
+```
+
+
+
+```{sql connection=con}
+-- how many reords
+SELECT COUNT(*) AS n_records FROM international_debt
+```
+
+The `indicator_code` column represents the category of these debts. Knowing about these various debt indicators will help us to understand the areas in which a country can possibly be indebted to.   
+
+```{sql connection=con}
+SELECT DISTINCT indicator_code FROM international_debt 
+```
+
+Now, I come to answer questions involving some simple calculations 
+
+- What is the total amount of debt of all types? This is a measure of the health of the global economy.
+
+```{sql connection=con}
+SELECT ROUND(SUM(debt), 2) AS total_debt FROM international_debt
+```
+
+
+- Which country has the highest total debt? 
+
+
+```{sql connection=con, tab.cap = "Countries with highest debt"}
+SELECT country_name, SUM(debt) AS total_debt
 FROM international_debt
-LIMIT 6
+GROUP BY country_name
+ORDER BY total_debt DESC
+LIMIT 20
+```
+
+Here we see the top 20 countries with highest overall debt. In fact, some of the entries in `country_name` are not countries but regions, such "South Asia", "Least developed countries: UN classification" and "IDA only". 
+
+Now that we know China is in most debt, we could break China's dbet down to see the proportion for which different types of loan accounted. 
+
+```{sql connection=con, eval = FALSE}
+SELECT  indicator_name, debt, 
+        (debt / sum(debt) OVER()) AS proportion
+FROM international_debt
+WHERE country_name = 'China'
+ORDER BY proportion DESC
 ```
 
 
 
 
+Two of all categories of debt, long-term and private nonguaranteed principle repayments  on external debt take up more than 50% of China's total debt.
 
+We can dig even further to find out on an average how much debt a country owes? This will give us a better sense of the distribution of the amount of debt across different indicators.
+
+```{sql connection=con}
+SELECT indicator_name, avg(debt) AS mean_debt
+FROM international_debt
+GROUP BY indicator_name
+ORDER BY mean_debt DESC
+```
+
+A bit of visualization might help here, I' ll make a density plot of mean debt across all indicators.
+
+```{r, fig.width = 8.5, fig.height = 5.5}
+p <- international_debt %>% 
+  group_by(indicator_name) %>% 
+  summarize(mean_debt = mean(debt)) %>%
+  ggplot() + 
+  geom_density(aes(mean_debt), fill = "midnightblue", alpha = 0.4) + 
+  scale_x_continuous(labels = scales::label_number_si(prefix = "$")) +
+  theme_minimal() + 
+  theme(axis.text.y = element_blank()) + 
+  labs(title = "Distribution of the average debt across different indicators",
+        y = NULL,
+        x = NULL)
+
+p
+```
+
+One may notice that principle repayment of long term debts tops the table of average debt and debt proportion of China. As such, we can find the top 10 countries with highest amount of debt in the category of long term debts (`DT.AMT.DLXF.CD`)  
+
+```{sql connection=con}
+SELECT DISTINCT country_name
+FROM international_debt
+WHERE country_name IN (
+    SELECT country_name 
+    FROM international_debt
+    WHERE indicator_code = 'DT.AMT.DLXF.CD' 
+    ORDER BY debt DESC
+    LIMIT 10
+)
+```
+
+
+We saw that long-term debt is the topmost category when it comes to the average amount of debt. But is it the most common indicator in which the countries owe their debt?  
+
+
+```{sql connection=con}
+SELECT indicator_name, COUNT(indicator_name) As n_indicator
+FROM international_debt
+GROUP BY indicator_name 
+ORDER BY n_indicator DESC
+```
+
+Turns out it is the second most common category of debt. But what is the average amount of the most common debt type, `DT.INT.OFFT.CD`?  
+
+```{sql connection=con}
+SELECT avg(debt) as mean_debt
+FROM international_debt
+WHERE indicator_code = 'DT.INT.OFFT.CD'
+```
+
+```{r, echo = FALSE, fig.width = 8.5, fig.height = 5.5}
+df <- tibble(x = c(297677339, 5904868401),
+             y = c(0.00000000065, 0.0000000003),
+             label = c("Average amount of the most common debt category",
+                      "Average amount of long term debt"))
+
+p + 
+  geom_vline(xintercept = 297677339, size = 2, color = "red") + 
+  geom_vline(xintercept = 5904868401, size = 2, color = "red") + 
+  ggrepel::geom_text_repel(aes(x = x, y = y, label = label), data = df)
+```
+
+
+By inspecting the six indicaotors in which all the countries listed in our dataset have taken debt (`n_indicator = 124`), we have a clue that all these countries are suffering from some common economic issues. Another problem is what is the most serious issus each country has? We can look into this by retrieveing maximum of debt of all categories of each country. 
+
+```{sql connection=con}
+-- some countries have tied max debt on multiple categories
+WITH max_debt AS (
+	SELECT country_name, max(debt) AS maximum
+	FROM international_debt
+	GROUP BY country_name
+	HAVING max(debt) <> 0
+)
+SELECT  max_debt.country_name, indicator_name, maximum FROM max_debt
+  LEFT JOIN (SELECT country_name, indicator_name, debt FROM international_debt) AS debt 
+	ON max_debt.maximum = debt.debt
+	AND max_debt.country_name = debt.country_name
+ORDER BY maximum DESC
+LIMIT 20
+```
+
+
+# Visulization: countries with highest total debt. 
+
+Finally, let's make a plot again to show the top 20 countries with highest debt, as in table \@ref(tab:countries-with-highest-debt), plus the specific category in which they take highest debt in.
+This time I exclude non-country entries. 
+
+```{r}
+# prepare data for plot
+maximum_category <- international_debt %>% 
+  group_by(country_name) %>% 
+  top_n(1, debt) %>%
+  distinct(country_name, .keep_all = TRUE) %>% 
+  select(country_name, indicator_name)
+
+countries <- international_debt %>% 
+  filter(!country_name %in% c("South Asia",
+                              "Least developed countries: UN classification",
+                              "IDA only")) %>%
+  group_by(country_name) %>% 
+  summarize(total_debt = sum(debt)) %>% 
+  top_n(20, total_debt) %>% 
+  left_join(maximum_category) 
+
+countries
+``` 
+
+```{r}
+library(ggchicklet)
+library(ggtext)
+library(showtext)
+font_add_google("Overpass Mono", "Overpass Mono")
+font_add_google("Roboto Condensed", "Roboto Condensed")
+showtext_auto()
+```
+
+
+```{r, fig.width = 14, fig.height = 11}
+ggplot(countries) + 
+  geom_chicklet(aes(x =  fct_reorder(country_name, total_debt),
+                    y = total_debt,
+                    fill = indicator_name), 
+           color = NA, width = 0.8) + 
+  geom_text(aes(country_name, total_debt, label = scales::label_number_si()(total_debt)),
+            color = "white", nudge_y = -10000000000, family = "Overpass Mono") + 
+  scale_y_continuous(labels = scales::label_number_si(prefix = "$")) + 
+  hrbrthemes::theme_modern_rc() + 
+  nord::scale_fill_nord(palette = "afternoon_prarie", name = NA) + 
+  coord_flip(clip = "off") +
+  labs(x = NULL,
+       y = NULL,
+       title = "Top 20 Countries with Highest Total Debts",
+       subtitle = "highest contributions from long term <span style='color:#F0D8C0'>repayments</span> or <span style='color:#6078A8'>disbursements</span>") + 
+  theme(legend.position = "none",
+        plot.title = element_text(size = 28, family = "Roboto Condensed"),
+        plot.title.position = "plot",
+        plot.subtitle = element_markdown(family = "Roboto Condensed"),
+        axis.text.x = element_text(face = "bold", size = 14),
+        axis.text.y = element_text(face = "bold", size = 18),
+        panel.grid.major.y = element_blank())
+```
 
 

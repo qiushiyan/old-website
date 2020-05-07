@@ -477,7 +477,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    10 min read
+    12 min read
   </span>
   
 
@@ -667,89 +667,115 @@ SELECT COUNT(*) AS n_records FROM international_debt</code></pre>
 </table>
 </div>
 <p>The <code>indicator_code</code> column represents the category of these debts. Knowing about these various debt indicators will help us to understand the areas in which a country can possibly be indebted to.</p>
-<pre class="sql"><code>SELECT DISTINCT indicator_code FROM international_debt </code></pre>
+<pre class="sql"><code>SELECT DISTINCT indicator_code, indicator_name FROM international_debt </code></pre>
 <div class="knitsql-table">
 <table>
 <thead>
 <tr class="header">
 <th align="left">indicator_code</th>
+<th align="left">indicator_name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">DT.AMT.PCBK.CD</td>
+<td align="left">DT.INT.BLAT.CD</td>
+<td align="left">PPG, bilateral (INT, current US$)</td>
 </tr>
 <tr class="even">
-<td align="left">DT.DIS.DLXF.CD</td>
+<td align="left">DT.AMT.BLAT.CD</td>
+<td align="left">PPG, bilateral (AMT, current US$)</td>
 </tr>
 <tr class="odd">
-<td align="left">DT.INT.DLXF.CD</td>
+<td align="left">DT.DIS.BLAT.CD</td>
+<td align="left">PPG, bilateral (DIS, current US$)</td>
 </tr>
 <tr class="even">
-<td align="left">DT.INT.DPNG.CD</td>
-</tr>
-<tr class="odd">
-<td align="left">DT.AMT.DLXF.CD</td>
-</tr>
-<tr class="even">
-<td align="left">DT.DIS.PCBK.CD</td>
-</tr>
-<tr class="odd">
-<td align="left">DT.AMT.PROP.CD</td>
-</tr>
-<tr class="even">
-<td align="left">DT.AMT.MLAT.CD</td>
-</tr>
-<tr class="odd">
-<td align="left">DT.AMT.OFFT.CD</td>
-</tr>
-<tr class="even">
-<td align="left">DT.INT.OFFT.CD</td>
-</tr>
-<tr class="odd">
 <td align="left">DT.INT.MLAT.CD</td>
+<td align="left">PPG, multilateral (INT, current US$)</td>
+</tr>
+<tr class="odd">
+<td align="left">DT.AMT.PCBK.CD</td>
+<td align="left">PPG, commercial banks (AMT, current US$)</td>
 </tr>
 <tr class="even">
 <td align="left">DT.DIS.MLAT.CD</td>
+<td align="left">PPG, multilateral (DIS, current US$)</td>
 </tr>
 <tr class="odd">
-<td align="left">DT.INT.PRVT.CD</td>
-</tr>
-<tr class="even">
-<td align="left">DT.INT.PBND.CD</td>
-</tr>
-<tr class="odd">
-<td align="left">DT.AMT.BLAT.CD</td>
+<td align="left">DT.INT.DLXF.CD</td>
+<td align="left">Interest payments on external debt, long-term (INT, current US$)</td>
 </tr>
 <tr class="even">
 <td align="left">DT.DIS.OFFT.CD</td>
+<td align="left">PPG, official creditors (DIS, current US$)</td>
 </tr>
 <tr class="odd">
-<td align="left">DT.INT.PCBK.CD</td>
+<td align="left">DT.INT.PROP.CD</td>
+<td align="left">PPG, other private creditors (INT, current US$)</td>
 </tr>
 <tr class="even">
-<td align="left">DT.INT.PROP.CD</td>
+<td align="left">DT.AMT.DPNG.CD</td>
+<td align="left">Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$)</td>
 </tr>
 <tr class="odd">
 <td align="left">DT.AMT.PRVT.CD</td>
+<td align="left">PPG, private creditors (AMT, current US$)</td>
 </tr>
 <tr class="even">
-<td align="left">DT.DIS.PROP.CD</td>
+<td align="left">DT.DIS.DLXF.CD</td>
+<td align="left">Disbursements on external debt, long-term (DIS, current US$)</td>
 </tr>
 <tr class="odd">
 <td align="left">DT.DIS.PRVT.CD</td>
+<td align="left">PPG, private creditors (DIS, current US$)</td>
 </tr>
 <tr class="even">
-<td align="left">DT.INT.BLAT.CD</td>
+<td align="left">DT.AMT.OFFT.CD</td>
+<td align="left">PPG, official creditors (AMT, current US$)</td>
+</tr>
+<tr class="odd">
+<td align="left">DT.DIS.PROP.CD</td>
+<td align="left">PPG, other private creditors (DIS, current US$)</td>
+</tr>
+<tr class="even">
+<td align="left">DT.AMT.PROP.CD</td>
+<td align="left">PPG, other private creditors (AMT, current US$)</td>
+</tr>
+<tr class="odd">
+<td align="left">DT.AMT.MLAT.CD</td>
+<td align="left">PPG, multilateral (AMT, current US$)</td>
+</tr>
+<tr class="even">
+<td align="left">DT.INT.DPNG.CD</td>
+<td align="left">Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)</td>
 </tr>
 <tr class="odd">
 <td align="left">DT.AMT.PBND.CD</td>
+<td align="left">PPG, bonds (AMT, current US$)</td>
 </tr>
 <tr class="even">
-<td align="left">DT.DIS.BLAT.CD</td>
+<td align="left">DT.INT.PRVT.CD</td>
+<td align="left">PPG, private creditors (INT, current US$)</td>
 </tr>
 <tr class="odd">
-<td align="left">DT.AMT.DPNG.CD</td>
+<td align="left">DT.INT.PBND.CD</td>
+<td align="left">PPG, bonds (INT, current US$)</td>
+</tr>
+<tr class="even">
+<td align="left">DT.DIS.PCBK.CD</td>
+<td align="left">PPG, commercial banks (DIS, current US$)</td>
+</tr>
+<tr class="odd">
+<td align="left">DT.AMT.DLXF.CD</td>
+<td align="left">Principal repayments on external debt, long-term (AMT, current US$)</td>
+</tr>
+<tr class="even">
+<td align="left">DT.INT.PCBK.CD</td>
+<td align="left">PPG, commercial banks (INT, current US$)</td>
+</tr>
+<tr class="odd">
+<td align="left">DT.INT.OFFT.CD</td>
+<td align="left">PPG, official creditors (INT, current US$)</td>
 </tr>
 </tbody>
 </table>
@@ -881,8 +907,141 @@ LIMIT 20</code></pre>
 FROM international_debt
 WHERE country_name = &#39;China&#39;
 ORDER BY proportion DESC</code></pre>
+<div class="knitsql-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">indicator_name</th>
+<th align="right">debt</th>
+<th align="right">proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Principal repayments on external debt, long-term (AMT, current US$)</td>
+<td align="right">96218620836</td>
+<td align="right">0.3366718</td>
+</tr>
+<tr class="even">
+<td align="left">Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$)</td>
+<td align="right">72392986214</td>
+<td align="right">0.2533052</td>
+</tr>
+<tr class="odd">
+<td align="left">Interest payments on external debt, long-term (INT, current US$)</td>
+<td align="right">17866548651</td>
+<td align="right">0.0625156</td>
+</tr>
+<tr class="even">
+<td align="left">Disbursements on external debt, long-term (DIS, current US$)</td>
+<td align="right">15692563746</td>
+<td align="right">0.0549088</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, private creditors (AMT, current US$)</td>
+<td align="right">14677464466</td>
+<td align="right">0.0513569</td>
+</tr>
+<tr class="even">
+<td align="left">Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)</td>
+<td align="right">14142718752</td>
+<td align="right">0.0494858</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, bonds (AMT, current US$)</td>
+<td align="right">9834677000</td>
+<td align="right">0.0344118</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, official creditors (AMT, current US$)</td>
+<td align="right">9148170156</td>
+<td align="right">0.0320097</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, bilateral (AMT, current US$)</td>
+<td align="right">6532446442</td>
+<td align="right">0.0228572</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, private creditors (DIS, current US$)</td>
+<td align="right">4111062474</td>
+<td align="right">0.0143847</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, commercial banks (AMT, current US$)</td>
+<td align="right">4046243299</td>
+<td align="right">0.0141579</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, commercial banks (DIS, current US$)</td>
+<td align="right">3777050273</td>
+<td align="right">0.0132160</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, official creditors (DIS, current US$)</td>
+<td align="right">3079501272</td>
+<td align="right">0.0107753</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, multilateral (DIS, current US$)</td>
+<td align="right">3079501272</td>
+<td align="right">0.0107753</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, multilateral (AMT, current US$)</td>
+<td align="right">2615723714</td>
+<td align="right">0.0091525</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, private creditors (INT, current US$)</td>
+<td align="right">2350524518</td>
+<td align="right">0.0082246</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, official creditors (INT, current US$)</td>
+<td align="right">1373305382</td>
+<td align="right">0.0048052</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, bonds (INT, current US$)</td>
+<td align="right">1224249000</td>
+<td align="right">0.0042837</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, commercial banks (INT, current US$)</td>
+<td align="right">969933090</td>
+<td align="right">0.0033938</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, multilateral (INT, current US$)</td>
+<td align="right">858406975</td>
+<td align="right">0.0030036</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, other private creditors (AMT, current US$)</td>
+<td align="right">796544167</td>
+<td align="right">0.0027871</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, bilateral (INT, current US$)</td>
+<td align="right">514898407</td>
+<td align="right">0.0018016</td>
+</tr>
+<tr class="odd">
+<td align="left">PPG, other private creditors (DIS, current US$)</td>
+<td align="right">334012201</td>
+<td align="right">0.0011687</td>
+</tr>
+<tr class="even">
+<td align="left">PPG, other private creditors (INT, current US$)</td>
+<td align="right">156342428</td>
+<td align="right">0.0005470</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Two of all categories of debt, long-term and private nonguaranteed principle repayments on external debt take up more than 50% of China’s total debt.</p>
-<p>We can dig even further to find out on an average how much debt a country owes? This will give us a better sense of the distribution of the amount of debt across different indicators.</p>
+<p>We can dig even further to find out on an average how much debt a country owes. This will give us a better sense of the distribution of the amount of debt across different indicators.</p>
 <pre class="sql"><code>SELECT indicator_name, avg(debt) AS mean_debt
 FROM international_debt
 GROUP BY indicator_name
@@ -1331,7 +1490,7 @@ LIMIT 20</code></pre>
 </div>
 <div id="visulization-countries-with-highest-total-debt." class="section level1">
 <h1>Visulization: countries with highest total debt.</h1>
-<p>Finally, let’s make a plot again to show the top 20 countries with highest debt, as in table <a href="#tab:countries-with-highest-debt"><strong>??</strong></a>, plus the specific category in which they take highest debt in.
+<p>Finally, let’s make a plot again to show the top 20 countries with highest debt, as in table 1, plus the specific category in which they take highest debt in.
 This time I exclude non-country entries.</p>
 <pre class="r"><code># prepare data for plot
 maximum_category &lt;- international_debt %&gt;% 

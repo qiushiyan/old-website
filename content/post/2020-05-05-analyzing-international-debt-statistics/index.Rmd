@@ -94,7 +94,7 @@ SELECT COUNT(*) AS n_records FROM international_debt
 The `indicator_code` column represents the category of these debts. Knowing about these various debt indicators will help us to understand the areas in which a country can possibly be indebted to.   
 
 ```{sql connection=con}
-SELECT DISTINCT indicator_code FROM international_debt 
+SELECT DISTINCT indicator_code, indicator_name FROM international_debt 
 ```
 
 Now, I come to answer questions involving some simple calculations 
@@ -121,7 +121,7 @@ Here we see the top 20 countries with highest overall debt. In fact, some of the
 
 Now that we know China is in most debt, we could break China's dbet down to see the proportion for which different types of loan accounted. 
 
-```{sql connection=con, eval = FALSE}
+```{sql connection=con}
 SELECT  indicator_name, debt, 
         (debt / sum(debt) OVER()) AS proportion
 FROM international_debt
@@ -134,7 +134,7 @@ ORDER BY proportion DESC
 
 Two of all categories of debt, long-term and private nonguaranteed principle repayments  on external debt take up more than 50% of China's total debt.
 
-We can dig even further to find out on an average how much debt a country owes? This will give us a better sense of the distribution of the amount of debt across different indicators.
+We can dig even further to find out on an average how much debt a country owes. This will give us a better sense of the distribution of the amount of debt across different indicators.
 
 ```{sql connection=con}
 SELECT indicator_name, avg(debt) AS mean_debt
@@ -195,15 +195,19 @@ WHERE indicator_code = 'DT.INT.OFFT.CD'
 ```
 
 ```{r, echo = FALSE, fig.width = 8.5, fig.height = 5.5}
-df <- tibble(x = c(297677339, 5904868401),
-             y = c(0.00000000065, 0.0000000003),
-             label = c("Average amount of the most common debt category",
-                      "Average amount of long term debt"))
+df1 <- tibble(x = 297677339,
+             y = 0.00000000065,
+             label = "Average amount of the most common debt category")
+
+df2 <- tibble(x = 5904868401,
+              y = 0.0000000003,
+              label = "Average amount of long term debt")
 
 p + 
   geom_vline(xintercept = 297677339, size = 2, color = "red") + 
   geom_vline(xintercept = 5904868401, size = 2, color = "red") + 
-  ggrepel::geom_text_repel(aes(x = x, y = y, label = label), data = df)
+  ggrepel::geom_text_repel(aes(x = x, y = y, label = label), nudge_x = 1200000000, data = df1) + 
+  ggrepel::geom_text_repel(aes(x = x, y = y, label = label), data = df2)
 ```
 
 
@@ -228,7 +232,7 @@ LIMIT 20
 
 # Visulization: countries with highest total debt. 
 
-Finally, let's make a plot again to show the top 20 countries with highest debt, as in table \@ref(tab:countries-with-highest-debt), plus the specific category in which they take highest debt in.
+Finally, let's make a plot again to show the top 20 countries with highest debt, as in table 1, plus the specific category in which they take highest debt in.
 This time I exclude non-country entries. 
 
 ```{r}

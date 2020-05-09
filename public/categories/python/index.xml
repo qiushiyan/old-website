@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python | Qiushi Yan</title>
+    <link>/categories/python/</link>
+      <atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <description>Python</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Python</title>
+      <link>/categories/python/</link>
+    </image>
+    
+    <item>
+      <title>Machine Learning with Titanic Data</title>
+      <link>/post/2020-05-08-machine-learning-with-titanic-data/</link>
+      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-08-machine-learning-with-titanic-data/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&#34; class=&#34;uri&#34;&gt;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from scipy.stats import pearsonr
+import math
+import random 
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+from datetime import datetime
+import itertools&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Random sample of all titanic passengers.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic = pd.read_excel(&amp;#39;D:/RProjects/data/blog/titanic.xls&amp;#39;)
+titanic.head()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    pclass  survived  ...   body                        home.dest
+## 0       1         1  ...    NaN                     St Louis, MO
+## 1       1         1  ...    NaN  Montreal, PQ / Chesterville, ON
+## 2       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
+## 3       1         0  ...  135.0  Montreal, PQ / Chesterville, ON
+## 4       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
+## 
+## [5 rows x 14 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic.info()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
+## RangeIndex: 1309 entries, 0 to 1308
+## Data columns (total 14 columns):
+## pclass       1309 non-null int64
+## survived     1309 non-null int64
+## name         1309 non-null object
+## sex          1309 non-null object
+## age          1046 non-null float64
+## sibsp        1309 non-null int64
+## parch        1309 non-null int64
+## ticket       1309 non-null object
+## fare         1308 non-null float64
+## cabin        295 non-null object
+## embarked     1307 non-null object
+## boat         486 non-null object
+## body         121 non-null float64
+## home.dest    745 non-null object
+## dtypes: float64(3), int64(4), object(7)
+## memory usage: 143.3+ KB&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Exploring Lego Sets</title>
+      <link>/post/exploring-lego/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/exploring-lego/</guid>
+      <description>
+
+
+&lt;p&gt;are available &lt;a href=&#34;https://rebrickable.com/downloads/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+
+colors = pd.read_csv(&amp;quot;D:/RProjects/data/blog/lego/colors.csv&amp;quot;)
+colors.head()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    id            name     rgb is_trans
+## 0  -1       [Unknown]  0033B2        f
+## 1   0           Black  05131D        f
+## 2   1            Blue  0055BF        f
+## 3   2           Green  237841        f
+## 4   3  Dark Turquoise  008F9B        f&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;How many colors are available?&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;colors[&amp;#39;name&amp;#39;].shape[0]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 184&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

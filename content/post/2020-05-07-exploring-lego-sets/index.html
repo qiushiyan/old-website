@@ -1,0 +1,35 @@
+---
+title: Exploring Lego Sets
+author: Qiushi Yan
+date: '2020-05-07'
+slug: exploring-lego
+categories:
+  - Python
+  - Data Analysis
+tags: []
+summary: 'Dig into small bricks with pandas data frames.'
+authors: []
+lastmod: '2020-05-07T23:15:47+08:00'
+draft: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+---
+
+
+
+<p>are available <a href="https://rebrickable.com/downloads/">here</a></p>
+<pre class="python"><code>import pandas as pd
+
+colors = pd.read_csv(&quot;D:/RProjects/data/blog/lego/colors.csv&quot;)
+colors.head()</code></pre>
+<pre><code>##    id            name     rgb is_trans
+## 0  -1       [Unknown]  0033B2        f
+## 1   0           Black  05131D        f
+## 2   1            Blue  0055BF        f
+## 3   2           Green  237841        f
+## 4   3  Dark Turquoise  008F9B        f</code></pre>
+<p>How many colors are available?</p>
+<pre class="python"><code>colors[&#39;name&#39;].shape[0]</code></pre>
+<pre><code>## 184</code></pre>

@@ -159,7 +159,7 @@
     
       <meta property="article:published_time" content="2020-04-06T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2020-04-06T12:54:24&#43;08:00">
+    <meta property="article:modified_time" content="2020-05-08T12:54:24&#43;08:00">
   
 
   
@@ -194,7 +194,7 @@
   ],
   
   "datePublished": "2020-04-06T00:00:00Z",
-  "dateModified": "2020-04-06T12:54:24+08:00",
+  "dateModified": "2020-05-08T12:54:24+08:00",
   
   "author": {
     "@type": "Person",
@@ -476,7 +476,7 @@
           Last updated on
       
     
-    Apr 6, 2020
+    May 8, 2020
   </span>
   
 
@@ -485,7 +485,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    9 min read
+    10 min read
   </span>
   
 
@@ -538,7 +538,7 @@
 <ul>
 <li><a href="#data-preprocessing">Data preprocessing</a></li>
 <li><a href="#common-words-and-keywords-extraction">Common words and keywords extraction</a></li>
-<li><a href="#fit-a-lda-model">Fit a LDA model</a></li>
+<li><a href="#fit-a-lda-topic-model">Fit a LDA topic model</a></li>
 <li><a href="#a-network-of-paired-words">A network of paired words</a></li>
 <li><a href="#references">References</a></li>
 </ul>
@@ -570,37 +570,84 @@ glimpse(raw)
 #&gt; $ study            &lt;chr&gt; &quot;Qiu 2020&quot;, &quot;Pulido 2020&quot;, &quot;Pillaiyar 2020&quot;, &quot;Piau...
 #&gt; $ notes            &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
 #&gt; $ tags             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...</code></pre>
-<p>For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on <code>abstract</code>. I was a little disappointied to find out that <code>published_month</code> are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English, I find this function <code>stringi::stri_enc_isascii</code> in an attempt to filter out non-English text, although this will not rid the text of German, French, Italian and other similar languages. I deleted some of them manually in the next step by expanding stop words. But this still left much room for improvement. Anyway, let’s move on for now.</p>
-<pre class="r"><code>df &lt;- raw %&gt;%
-  filter(!is.na(abstract),
-         stringi::stri_enc_isascii(abstract)) %&gt;% 
-  select(title, abstract)</code></pre>
-<p>As illuatrated in <a href="https://www.tidytextmining.com">Text Mining with R</a>, text analysis commonly requires preprocessing steps like tokenizing, eliminating stop words and word stemming. A little problem is that <code>unnest_tokens()</code> recognize “covid” and “19” as two separated words, so I just add “19” to my custom stop words list. As a result, we have to bear in mind that most “covid” seen below is actually “covid19”.</p>
+<p>For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on <code>abstract</code>. I was a little disappointied to find out that <code>published_month</code> are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English.
+The <code>detect_language()</code> from the <a href="https://github.com/ropensci/cld3"><code>cdl3</code></a> can detect language forms at a fairly high success rate. It’s a R wrapper for Google’s Compact Language Detector 3, which is a neural network model for language identification.</p>
+<pre class="r"><code>library(cld3)
+raw %&gt;% 
+  count(language = detect_language(abstract), sort = TRUE)
+#&gt; # A tibble: 13 x 2
+#&gt;    language     n
+#&gt;    &lt;chr&gt;    &lt;int&gt;
+#&gt;  1 en        2482
+#&gt;  2 ig        1618
+#&gt;  3 es          26
+#&gt;  4 pt          18
+#&gt;  5 de          11
+#&gt;  6 ru          10
+#&gt;  7 fr           7
+#&gt;  8 zh           7
+#&gt;  9 &lt;NA&gt;         5
+#&gt; 10 fi           2
+#&gt; 11 ja           2
+#&gt; 12 cs           1
+#&gt; 13 it           1</code></pre>
+<p>In this post I keep only the rows that were classified as “en”. Also, as illuatrated in <a href="https://www.tidytextmining.com">Text Mining with R</a>, text analysis commonly requires preprocessing steps like tokenizing, eliminating stop words and word stemming. I added custom keywords and did some maunual transformation to make up for misclassifications by <code>detect_language</code>, but there will still be non-English words, though. My transformations (say, both “covid” and “19” now become “covid19”) will certainly induce errors, but there is no better workaround I could think of now.</p>
 <pre class="r"><code>library(tidytext)
 library(SnowballC)
 
-words &lt;- df %&gt;% 
+words &lt;- raw %&gt;% 
+  filter(detect_language(abstract) == &quot;en&quot;) %&gt;% 
   unnest_tokens(word, abstract) %&gt;% 
-  mutate(word = wordStem(word)) %&gt;% 
+  mutate(word = wordStem(word)) %&gt;%
+  mutate(word = case_when(
+    word == &quot;19&quot; ~ &quot;covid19&quot;,
+    word == &quot;covid&quot; ~ &quot;covid19&quot;,
+    word == &quot;coronaviru&quot; ~ &quot;coronavirus&quot;,
+    word == &quot;viru&quot; ~ &quot;virus&quot;,
+    word == &quot;epidem&quot; ~ &quot;epidemic&quot;,
+    word == &quot;studi&quot; ~ &quot;study&quot;,
+    word == &quot;respiratori&quot; ~ &quot;respiratory&quot;,
+    word == &quot;emetin&quot; ~ &quot;emetine&quot;,
+    word == &quot;acut&quot; ~ &quot;acute&quot;,
+    word == &quot;sever&quot; ~ &quot;severe&quot;,
+    word == &quot;manag&quot; ~ &quot;manage&quot;,
+    word == &quot;hospit&quot; ~ &quot;hospital&quot;,
+    word == &quot;diseas&quot; ~ &quot;disease&quot;,
+    word == &quot;deceas&quot; ~ &quot;disease&quot;,
+    word == &quot;caus&quot; ~ &quot;cause&quot;,
+    word == &quot;emerg&quot; ~ &quot;emerge&quot;,
+    word == &quot;includ&quot; ~ &quot;include&quot;, 
+    word == &quot;dai&quot; ~ &quot;wet nurse&quot;,
+    word == &quot;ncovid&quot; ~ &quot;ncov&quot;,
+    word == &quot;countri&quot; ~ &quot;country&quot;,
+    word == &quot;provid&quot; ~ &quot;provide&quot;,
+    word == &quot;peopl&quot; ~ &quot;people&quot;,
+    TRUE ~ word
+  )) %&gt;% 
   anti_join(stop_words %&gt;% 
-              add_row(word = c(&quot;19&quot;, &quot;2&quot;, &quot;1&quot;, &quot;manag&quot;, &quot;dai&quot;, &quot;studi&quot;, &quot;epidem&quot;, &quot;includ&quot;, &quot;coronaviru&quot;, &quot;diseas&quot;, &quot;emetin&quot;, &quot;dai&quot;, &quot;acut&quot;, &quot;dub&quot;, &quot;hospit&quot;, &quot;hfnc&quot;, &quot;caus&quot;, &quot;develop&quot;, &quot;thi&quot;), 
-                      lexicon = &quot;custom&quot;)) 
+            add_row(word = c( &quot;2&quot;, &quot;1&quot;,  &quot;dub&quot;, &quot;thi&quot;, &quot;ha&quot;, &quot;wa&quot;, &quot;检查&quot;, &quot;cd&quot;, &quot;gt&quot;,
+                              &quot;lt&quot;, &quot;tnt&quot;, &quot;thei&quot;), 
+                    lexicon = &quot;custom&quot;)) %&gt;% 
+  filter(!(str_detect(word, &quot;^\\d+$&quot;) | str_detect(word, &quot;^\\d+\\w$&quot;)))
+
 
 words
-#&gt; # A tibble: 159,434 x 2
-#&gt;    title                                                              word      
-#&gt;    &lt;chr&gt;                                                              &lt;chr&gt;     
-#&gt;  1 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ background
-#&gt;  2 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sever     
-#&gt;  3 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
-#&gt;  4 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ syndrom   
-#&gt;  5 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sar       
-#&gt;  6 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ cov       
-#&gt;  7 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ mainli    
-#&gt;  8 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ spread    
-#&gt;  9 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
-#&gt; 10 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ droplet   
-#&gt; # ... with 159,424 more rows</code></pre>
+#&gt; # A tibble: 245,052 x 16
+#&gt;    title authors published_year published_month journal volume issue pages
+#&gt;    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;           &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;
+#&gt;  1 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  2 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  3 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  4 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  5 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  6 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  7 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  8 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt;  9 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt; 10 SARS~ Qiu, L~           2020 NA              Clinic~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 
+#&gt; # ... with 245,042 more rows, and 8 more variables: accession_number &lt;chr&gt;,
+#&gt; #   doi &lt;chr&gt;, ref &lt;dbl&gt;, covidence_number &lt;chr&gt;, study &lt;chr&gt;, notes &lt;chr&gt;,
+#&gt; #   tags &lt;chr&gt;, word &lt;chr&gt;</code></pre>
 </div>
 <div id="common-words-and-keywords-extraction" class="section level1">
 <h1>Common words and keywords extraction</h1>
@@ -616,10 +663,11 @@ words
        x = &quot;# of words&quot;,
        title = &quot;Top 50 common words in COVID-19 publications&quot;) +
   theme(text = element_text(size = 18),
+        plot.title.position = &quot;plot&quot;,
         plot.title = element_text(size = 35, face = &quot;bold&quot;),
         axis.ticks.y = element_blank())</code></pre>
 <p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-7-1.png" width="1152" /></p>
-<p>I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by <span class="citation">Monroe, Colaresi, and Quinn (<a href="#ref-monroe_colaresi_quinn" role="doc-biblioref">2008</a>)</span>, which a standardized metric from a complete statistical model. It is also implemented in the R package <a href="https://github.com/juliasilge/tidylo"><code>tidylo</code></a><span class="citation">(Schnoebelen and Silge <a href="#ref-tidylo" role="doc-biblioref">2020</a>)</span>. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:</p>
+<p>I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by <span class="citation">Monroe, Colaresi, and Quinn (<a href="#ref-monroe_colaresi_quinn" role="doc-biblioref">2008</a>)</span>, which a standardized metric from a complete statistical model. It is also implemented in the R package <a href="https://github.com/juliasilge/tidylo"><code>tidylo</code></a><span class="citation">(Schnoebelen and Silge <a href="#ref-tidylo" role="doc-biblioref">2020</a>)</span>. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications.</p>
 <pre class="r"><code>library(tidylo)
 
 words %&gt;%
@@ -638,138 +686,139 @@ words %&gt;%
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">A comparative study on the clinical features of COVID-19 pneumonia to other pneumonias</td>
-<td align="left">ncovid</td>
-<td align="right">20</td>
-<td align="right">5.057257</td>
-</tr>
-<tr class="even">
 <td align="left">A high ATP concentration enhances the cooperative translocation of the SARS coronavirus helicase nsP13 in the unwinding of duplex RNA</td>
 <td align="left">duplex</td>
 <td align="right">16</td>
-<td align="right">4.524146</td>
-</tr>
-<tr class="odd">
-<td align="left">A serological survey of canine respiratory coronavirus in New Zealand</td>
-<td align="left">dog</td>
-<td align="right">11</td>
-<td align="right">3.528876</td>
+<td align="right">4.525439</td>
 </tr>
 <tr class="even">
-<td align="left">A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists</td>
-<td align="left">216</td>
-<td align="right">16</td>
-<td align="right">4.423606</td>
-</tr>
-<tr class="odd">
 <td align="left">A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists</td>
 <td align="left">gastroenterologist</td>
 <td align="right">14</td>
-<td align="right">4.225689</td>
-</tr>
-<tr class="even">
-<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
-<td align="left">cd</td>
-<td align="right">12</td>
-<td align="right">3.800243</td>
+<td align="right">4.230132</td>
 </tr>
 <tr class="odd">
-<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
-<td align="left">gt</td>
-<td align="right">60</td>
-<td align="right">4.917806</td>
-</tr>
-<tr class="even">
-<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
-<td align="left">ital</td>
-<td align="right">26</td>
-<td align="right">3.585456</td>
-</tr>
-<tr class="odd">
-<td align="left">Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing</td>
-<td align="left">lt</td>
-<td align="right">74</td>
-<td align="right">5.032569</td>
-</tr>
-<tr class="even">
 <td align="left">Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China</td>
 <td align="left">hljby</td>
 <td align="right">12</td>
-<td align="right">3.915206</td>
+<td align="right">3.917622</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China</td>
 <td align="left">pedv</td>
 <td align="right">21</td>
-<td align="right">3.922771</td>
-</tr>
-<tr class="even">
-<td align="left">Clinical characteristics of 113 deceased patients with coronavirus disease 2019: retrospective study</td>
-<td align="left">deceas</td>
-<td align="right">16</td>
-<td align="right">4.419020</td>
+<td align="right">3.760966</td>
 </tr>
 <tr class="odd">
-<td align="left">Construction of 5G intelligent medical service system in novel coronavirus pneumonia prevention and control</td>
-<td align="left">5g</td>
-<td align="right">14</td>
-<td align="right">4.231003</td>
+<td align="left">Clinical characteristics of 30 medical workers infected with new coronavirus pneumonia</td>
+<td align="left">petient</td>
+<td align="right">10</td>
+<td align="right">3.575936</td>
 </tr>
 <tr class="even">
+<td align="left">Effect of TLR agonist on infections bronchitis virus replication and cytokine expression in embryonated chicken eggs</td>
+<td align="left">tlr</td>
+<td align="right">14</td>
+<td align="right">3.608637</td>
+</tr>
+<tr class="odd">
+<td align="left">Emetine, Ipecac, Ipecac Alkaloids and Analogues as Potential Antiviral Agents for Coronaviruses</td>
+<td align="left">emetine</td>
+<td align="right">10</td>
+<td align="right">3.577769</td>
+</tr>
+<tr class="even">
+<td align="left">Experimental Treatment with Favipiravir for COVID-19: An Open-Label Control Study</td>
+<td align="left">fpv</td>
+<td align="right">10</td>
+<td align="right">3.576505</td>
+</tr>
+<tr class="odd">
+<td align="left">Expert consensus on Pulmonary Function Testing during the epidemic of Corona Virus Disease 2019</td>
+<td align="left">检查</td>
+<td align="right">11</td>
+<td align="right">3.749430</td>
+</tr>
+<tr class="even">
+<td align="left">Facemask shortage and the novel coronavirus disease (COVID-19) outbreak: Reflections on public health measures</td>
+<td align="left">facemask</td>
+<td align="right">28</td>
+<td align="right">5.637175</td>
+</tr>
+<tr class="odd">
 <td align="left">Frequency and Distribution of Chest Radiographic Findings in COVID-19 Positive Patients</td>
 <td align="left">cxr</td>
 <td align="right">12</td>
-<td align="right">3.915366</td>
+<td align="right">3.607049</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Genetic, antigenic and pathogenic characterization of avian coronaviruses isolated from pheasants (Phasianus colchicus) in China</td>
 <td align="left">phcov</td>
 <td align="right">10</td>
-<td align="right">3.576166</td>
+<td align="right">3.577311</td>
+</tr>
+<tr class="odd">
+<td align="left">Influence of trust on two different risk perceptions as an affective and cognitive dimension during Middle East respiratory syndrome coronavirus (MERS-CoV) outbreak in South Korea: serial cross-sectional surveys</td>
+<td align="left">percept</td>
+<td align="right">16</td>
+<td align="right">4.250063</td>
 </tr>
 <tr class="even">
-<td align="left">Medicinal chemistry strategies toward host targeting antiviral agents</td>
-<td align="left">hta</td>
-<td align="right">10</td>
-<td align="right">3.573884</td>
+<td align="left">Microneedle array delivered recombinant coronavirus vaccines: Immunogenicity and rapid translational development</td>
+<td align="left">mna</td>
+<td align="right">13</td>
+<td align="right">3.871558</td>
 </tr>
 <tr class="odd">
 <td align="left">Pregnant women with new coronavirus infection: a clinical characteristics and placental pathological analysis of three cases</td>
 <td align="left">placenta</td>
 <td align="right">14</td>
-<td align="right">3.757207</td>
+<td align="right">3.762505</td>
 </tr>
 <tr class="even">
-<td align="left">Retrospective study of low-to-moderate dose glucocorticoids on viral clearance in patients with novel coronavirus pneumonia</td>
-<td align="left">iqr</td>
-<td align="right">20</td>
-<td align="right">4.238798</td>
+<td align="left">Responding to the COVID-19 pandemic in complex humanitarian crises</td>
+<td align="left">humanitarian</td>
+<td align="right">14</td>
+<td align="right">3.681217</td>
 </tr>
 <tr class="odd">
-<td align="left">The clinical study on the relationship between serum albumin concentration and lymphocyte levels in patients with 2019-novel coronavirus pneumonia</td>
-<td align="left">lym</td>
-<td align="right">14</td>
-<td align="right">3.536764</td>
+<td align="left">Serial interval in determining the estimation of reproduction number of the novel coronavirus disease (COVID-19) during the early outbreak | Journal of Travel Medicine | Oxford Academic</td>
+<td align="left">si</td>
+<td align="right">19</td>
+<td align="right">4.108847</td>
+</tr>
+<tr class="even">
+<td align="left">Short-term effects of ambient PM1 and PM2.5 air pollution on hospital admission for respiratory diseases: Case-crossover evidence from Shenzhen, China</td>
+<td align="left">pm1</td>
+<td align="right">12</td>
+<td align="right">3.918315</td>
+</tr>
+<tr class="odd">
+<td align="left">The experience of high-flow nasal cannula in hospitalized patients with 2019 novel coronavirus-infected pneumonia in two hospitals of Chongqing, China</td>
+<td align="left">hfnc</td>
+<td align="right">12</td>
+<td align="right">3.706804</td>
 </tr>
 <tr class="even">
 <td align="left">Thoughts and suggestions on modern construction of disease prevention and control system</td>
 <td align="left">modern</td>
 <td align="right">20</td>
-<td align="right">4.443162</td>
+<td align="right">4.138237</td>
 </tr>
 </tbody>
 </table>
+<p>Many words listed here are acronyms in biology, chemistry and medicine. For example, “hljby” is a type of porcine epidemic diarrhoea virus which “pedv” stands “for”, fpv means Favipiravir (a type of drug), and “tlr” represents Toll-like receptors.</p>
 </div>
-<div id="fit-a-lda-model" class="section level1">
-<h1>Fit a LDA model</h1>
-<p>Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using <code>cast_dtm</code>. There are various implementations of this kind of model, here I use <code>stm::stm</code>. The choice of <span class="math inline">\(K\)</span> (number of topics) here is somewhat arbitrary here, but <a href="https://juliasilge.com/">Julia Silge</a> had a great <a href="https://juliasilge.com/blog/evaluating-stm/">post</a> about it.</p>
+<div id="fit-a-lda-topic-model" class="section level1">
+<h1>Fit a LDA topic model</h1>
+<p>Let’s then fit a 5-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using <code>cast_dtm</code>. There are various implementations of this kind of model, here I use <code>stm::stm</code>. The choice of <span class="math inline">\(K\)</span> (number of topics) here is somewhat arbitrary here, but <a href="https://juliasilge.com/">Julia Silge</a> had a great <a href="https://juliasilge.com/blog/evaluating-stm/">post</a> about it.</p>
 <pre class="r"><code>dfm &lt;- cast_dfm(words %&gt;% count(title, word),
                 term = word,
                 document = title,
                 value = n)</code></pre>
+<p><code>dfm</code> is a document-term matrix with 2415 documents and 13383 features.</p>
 <pre class="r"><code>library(stm)
 topic_model &lt;- stm(dfm, K = 5, init.type = &quot;LDA&quot;, verbose = FALSE)</code></pre>
-<pre class="r"><code>topic_model &lt;- pins::pin_get(&quot;covid-topic-model&quot;)</code></pre>
 <p>Topic-term probability distributions are accessed by <code>tidy()</code>, this gives a glance of the underlying meaning of these topics:</p>
 <pre class="r"><code># topic-term distribution
 tidy(topic_model) %&gt;% 
@@ -791,6 +840,7 @@ tidy(topic_model) %&gt;%
         strip.text = element_text(size = 25, hjust = 0.05),
         axis.ticks.y = element_blank())</code></pre>
 <p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-12-1.png" width="1152" /></p>
+<p>It’s hard to interpret these topics without domain knwoledge. But it seems to me that topic3 is related to clinical findings, topic4 to china and wuhan, the epicenter of covid19.</p>
 </div>
 <div id="a-network-of-paired-words" class="section level1">
 <h1>A network of paired words</h1>
@@ -805,20 +855,20 @@ word_cors &lt;- words %&gt;%
   pairwise_cor(item = word, feature = title, sort = TRUE)
 
 word_cors
-#&gt; # A tibble: 1,386,506 x 3
-#&gt;    item1     item2     correlation
-#&gt;    &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;
-#&gt;  1 65288     65289           0.960
-#&gt;  2 65289     65288           0.960
-#&gt;  3 lopinavir ritonavir       0.955
-#&gt;  4 ritonavir lopinavir       0.955
-#&gt;  5 reserv    copyright       0.947
-#&gt;  6 copyright reserv          0.947
-#&gt;  7 glass     ground          0.946
-#&gt;  8 ground    glass           0.946
-#&gt;  9 effus     pleural         0.940
-#&gt; 10 pleural   effus           0.940
-#&gt; # ... with 1,386,496 more rows</code></pre>
+#&gt; # A tibble: 2,385,480 x 3
+#&gt;    item1        item2        correlation
+#&gt;    &lt;chr&gt;        &lt;chr&gt;              &lt;dbl&gt;
+#&gt;  1 arabia       saudi              1    
+#&gt;  2 saudi        arabia             1    
+#&gt;  3 pave         crazi              0.970
+#&gt;  4 crazi        pave               0.970
+#&gt;  5 kong         hong               0.935
+#&gt;  6 hong         kong               0.935
+#&gt;  7 dehydrogenas lactat             0.931
+#&gt;  8 lactat       dehydrogenas       0.931
+#&gt;  9 reserv       copyright          0.928
+#&gt; 10 copyright    reserv             0.928
+#&gt; # ... with 2,385,470 more rows</code></pre>
 <p>A network visualization of word correlation is a good idea:</p>
 <pre class="r"><code>library(ggraph)
 library(tidygraph)
@@ -831,7 +881,7 @@ word_cors %&gt;%
   geom_node_point(color = &quot;lightblue&quot;, size = 6.5) + 
   geom_node_text(aes(label = name), repel = TRUE, size = 5.5)</code></pre>
 <p><img src="/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-14-1.png" width="1152" /></p>
-<p>As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.</p>
+<p>As you can see, there are still some non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>

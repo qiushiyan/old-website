@@ -5,12 +5,233 @@
     <link>/categories/machine-learning/</link>
       <atom:link href="/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Machine Learning</title>
       <link>/categories/machine-learning/</link>
     </image>
+    
+    <item>
+      <title>Machine Learning with Titanic Data</title>
+      <link>/post/2020-05-08-machine-learning-with-titanic-data/</link>
+      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-08-machine-learning-with-titanic-data/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&#34; class=&#34;uri&#34;&gt;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from scipy.stats import pearsonr
+import math
+import random 
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+from datetime import datetime
+import itertools&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Random sample of all titanic passengers.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic = pd.read_excel(&amp;#39;D:/RProjects/data/blog/titanic.xls&amp;#39;)
+titanic.head()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    pclass  survived  ...   body                        home.dest
+## 0       1         1  ...    NaN                     St Louis, MO
+## 1       1         1  ...    NaN  Montreal, PQ / Chesterville, ON
+## 2       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
+## 3       1         0  ...  135.0  Montreal, PQ / Chesterville, ON
+## 4       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
+## 
+## [5 rows x 14 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic.info()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
+## RangeIndex: 1309 entries, 0 to 1308
+## Data columns (total 14 columns):
+## pclass       1309 non-null int64
+## survived     1309 non-null int64
+## name         1309 non-null object
+## sex          1309 non-null object
+## age          1046 non-null float64
+## sibsp        1309 non-null int64
+## parch        1309 non-null int64
+## ticket       1309 non-null object
+## fare         1308 non-null float64
+## cabin        295 non-null object
+## embarked     1307 non-null object
+## boat         486 non-null object
+## body         121 non-null float64
+## home.dest    745 non-null object
+## dtypes: float64(3), int64(4), object(7)
+## memory usage: 143.3+ KB&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Animal Crossing Reviews</title>
+      <link>/post/2020-05-07-analyzing-animal-crossing-reviews/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-07-analyzing-animal-crossing-reviews/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#eda-and-data-cleaning&#34;&gt;EDA and data cleaning&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#results&#34;&gt;Results&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#repeated-reviews&#34;&gt;Repeated reviews&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#incomplete-reviews-because-they-are-too-long&#34;&gt;Incomplete reviews because they are too long&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#non-english-reviews&#34;&gt;Non-English reviews&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#section&#34;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sentiment-analysis-of-user-reviews&#34;&gt;Sentiment analysis of user reviews&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#predictive-modeling-for-grades-with-user-reviews&#34;&gt;Predictive modeling for grades with user reviews&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Our modeling goal is to predict the rating for the life simulation video game, Animal Crossing, from its user reviews. The data comes from &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05/readme.md&#34;&gt;this weeks’s &lt;code&gt;#TidyTuesday&lt;/code&gt;&lt;/a&gt;, scraped from &lt;a href=&#34;https://github.com/jefflomacy/villagerdb&#34;&gt;VillagerDB&lt;/a&gt; and &lt;a href=&#34;https://www.metacritic.com/game/switch/animal-crossing-new-horizons/critic-reviews&#34;&gt;Metacritic&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(tidytext)
+set.seed(2020)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;eda-and-data-cleaning&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;EDA and data cleaning&lt;/h1&gt;
+&lt;p&gt;The reviews data contains four columns:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;grade&lt;/code&gt;: 0-100 score given by the critic (missing for some) where higher score = better.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;user_name&lt;/code&gt;: user name of the reviewer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;text&lt;/code&gt;: review of the reviewer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;date&lt;/code&gt;: when the review is published&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews &amp;lt;- readr::read_tsv(&amp;quot;D:/RProjects/data/blog/animal-crossing-reviews.tsv&amp;quot;)
+glimpse(reviews)
+#&amp;gt; Rows: 1,473
+#&amp;gt; Columns: 4
+#&amp;gt; $ grade     &amp;lt;dbl&amp;gt; 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, ...
+#&amp;gt; $ user_name &amp;lt;chr&amp;gt; &amp;quot;mds27272&amp;quot;, &amp;quot;lolo2178&amp;quot;, &amp;quot;Roachant&amp;quot;, &amp;quot;Houndf&amp;quot;, &amp;quot;ProfessorF...
+#&amp;gt; $ text      &amp;lt;chr&amp;gt; &amp;quot;My gf started playing before me. No option to create my ...
+#&amp;gt; $ date      &amp;lt;date&amp;gt; 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;An bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut &lt;code&gt;grades&lt;/code&gt; into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews %&amp;gt;% 
+  count(grade) %&amp;gt;% 
+  ggplot() + 
+  geom_col(aes(x = factor(grade), 
+               y = n),
+           fill = &amp;quot;midnightblue&amp;quot;, alpha = 0.6) + 
+  labs(x = &amp;quot;grade&amp;quot;, y = NULL)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The data is messy in several ways (I have chosen 3 lines for example):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;reviews that exceed certian length are incomplete and end with “Expand”. The following review also contains repetition.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;non-English reviews&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;results&#34; class=&#34;section level2 tabset&#34;&gt;
+&lt;h2&gt;Results&lt;/h2&gt;
+&lt;div id=&#34;repeated-reviews&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Repeated reviews&lt;/h3&gt;
+&lt;p&gt;“While the game itself is great, really relaxing and gorgeous, i can’t ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you haveWhile the game itself is great, really relaxing and gorgeous, i can’t ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you have the other usershouse and furniture. I hope nintendo can soon fix this big issue, because for now, this killed any intentions i had to play the game.… Expand”&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;incomplete-reviews-because-they-are-too-long&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Incomplete reviews because they are too long&lt;/h3&gt;
+&lt;p&gt;“One island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company thatOne island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company that sees fit to make such decisions.… Expand”&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;non-english-reviews&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Non-English reviews&lt;/h3&gt;
+&lt;p&gt;“Una sola isla , es un asco . No puedes seguir avanzando, solo te queda recoger madera”&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;p&gt;I use regular expressions to remove reptitions and “Expand” at the end. Repetitions happen when the review is long, and the repetition part often takes up 4 to 5 lines (here I use 350 or more characters to indicate the repetition part).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;clr::detect_language&lt;/code&gt; is used to exclude non-English text. This a R wrapper around Google’s Compact Language Detector 3, a neural network model for language identification . There will be misclassifications, though. As the proportion of exclusion is fairly low, we’re OK.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(cld3)
+reviews %&amp;gt;% 
+  mutate(language = detect_language(text)) %&amp;gt;% 
+  count(language, sort = TRUE)
+#&amp;gt; # A tibble: 11 x 2
+#&amp;gt;    language     n
+#&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;int&amp;gt;
+#&amp;gt;  1 en        1394
+#&amp;gt;  2 es          48
+#&amp;gt;  3 ru           7
+#&amp;gt;  4 it           6
+#&amp;gt;  5 fr           5
+#&amp;gt;  6 pt           5
+#&amp;gt;  7 de           3
+#&amp;gt;  8 &amp;lt;NA&amp;gt;         2
+#&amp;gt;  9 ja           1
+#&amp;gt; 10 pl           1
+#&amp;gt; 11 th           1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews_en &amp;lt;- reviews %&amp;gt;% 
+  filter(detect_language(text) == &amp;quot;en&amp;quot;)
+
+
+repetition_clean &amp;lt;- reviews %&amp;gt;% 
+  filter(str_detect(text, &amp;quot;(.{350,})\\1.+&amp;quot;)) %&amp;gt;% 
+  mutate(text = str_replace(text, &amp;quot;(.{350,})\\1(.+)Expand$&amp;quot;, &amp;quot;\\1\\2&amp;quot;))
+
+reviews_clean &amp;lt;- anti_join(reviews_en, repetition_clean, 
+                           by = c(&amp;quot;user_name&amp;quot; = &amp;quot;user_name&amp;quot;)) %&amp;gt;% 
+  bind_rows(repetition_clean)
+
+# draw some sample reviews
+reviews_clean %&amp;gt;% 
+  sample_n(3) %&amp;gt;% 
+  pull(text)
+#&amp;gt; [1] &amp;quot;I am currently playing this game single player however I feel compelled to review this game based on the multiplayer experience. The decision to lock the game to one island per console is nothing short of a cash grab. I am a long time Nintendo fan since I received a SNES for Christmas as a child but this behavior disgusts me and I am reluctant to spend any more money with this company if they do not address this problem. Nintendo consoles have always been family focused machines that encourage multiplayer and this seems to go against everything they have ever done to date.Sadly they have likely already sold enough units to cover costs and will simply ignore the outrage from their customers.… &amp;quot;
+#&amp;gt; [2] &amp;quot;This game is excellent, I can&amp;#39;t stop playing it, it&amp;#39;s fun and has so many thing to do that I can spend hours and hours playing it and still don&amp;#39;t get tiredBest game that I have played in a while&amp;quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+#&amp;gt; [3] &amp;quot;Cast: 6/10Story: 6/10Fun: 9/10Gameplay: 8/10Recommended----------------------&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can examine how this cleaning process works by comparing the distribution of review length, before and after. The cleaning should reduce the amount of medium long and long reviews, in exchange for shorter ones.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews %&amp;gt;%
+  transmute(length = str_length(text),
+            type = &amp;quot;before&amp;quot;) %&amp;gt;% 
+  bind_rows(reviews_clean %&amp;gt;%
+              transmute(length = str_length(text), type = &amp;quot;after&amp;quot;)) %&amp;gt;%
+  ggplot() + 
+  geom_density(aes(length, fill = type), alpha = 0.2) + 
+  scale_fill_discrete(name = NULL) + 
+  labs(title = &amp;quot;Distribution of review length before and after cleaning&amp;quot;,
+       x = NULL,
+       y = NULL)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sentiment-analysis-of-user-reviews&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Sentiment analysis of user reviews&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;predictive-modeling-for-grades-with-user-reviews&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Predictive modeling for grades with user reviews&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+reviews %&amp;gt;% 
+  transmute(rating = case_when(
+    grade &amp;lt;= 4 ~ &amp;quot;low&amp;quot;,
+    grade &amp;gt; 4 &amp;amp; grade &amp;lt;= 8 ~ &amp;quot;medium&amp;quot;,
+    grade &amp;gt; 8 ~ &amp;quot;high&amp;quot;,
+  ),
+  text) %&amp;gt;% 
+  unnest_tokens(line, text, token = &amp;quot;lines&amp;quot;) 
+#&amp;gt; # A tibble: 1,473 x 2
+#&amp;gt;    rating line                                                                  
+#&amp;gt;    &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;                                                                 
+#&amp;gt;  1 high   cant stop playing!                                                    
+#&amp;gt;  2 high   as a first timer to the animal crossing series, it was a bit hard to ~
+#&amp;gt;  3 high   this is my first animal crossing game i’ve ever played. i am seriousl~
+#&amp;gt;  4 high   i like it so far. unfair to rate the game a 0 because of a poor desig~
+#&amp;gt;  5 high   this game is absolutely amazing as a constant side game for one&amp;#39;s day~
+#&amp;gt;  6 high   probably the best animal crossing has ever been, and to fans of the s~
+#&amp;gt;  7 high   an amazing game and the best ac yet! if you don’t understand there is~
+#&amp;gt;  8 high   an absolutely awesome addition to the franchise. everything about thi~
+#&amp;gt;  9 high   this review contains spoilers, click expand to view.                 ~
+#&amp;gt; 10 high   there are no words to describe the flawlessly, gorgeous graphics and ~
+#&amp;gt; # ... with 1,463 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Evaluating Topic Models</title>

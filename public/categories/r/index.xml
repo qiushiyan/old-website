@@ -5,12 +5,186 @@
     <link>/categories/r/</link>
       <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>R</title>
       <link>/categories/r/</link>
     </image>
+    
+    <item>
+      <title>Programmers and their Choice of Words</title>
+      <link>/post/programmer-word-choice/</link>
+      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/programmer-word-choice/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;a href=&#34;https://medium.com/swlh/what-programming-language-has-the-happiest-developers-f0636b08e898&#34; class=&#34;uri&#34;&gt;https://medium.com/swlh/what-programming-language-has-the-happiest-developers-f0636b08e898&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-words&#34; class=&#34;uri&#34;&gt;https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-words&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Animal Crossing Reviews</title>
+      <link>/post/2020-05-07-analyzing-animal-crossing-reviews/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-07-analyzing-animal-crossing-reviews/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#eda-and-data-cleaning&#34;&gt;EDA and data cleaning&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#results&#34;&gt;Results&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#repeated-reviews&#34;&gt;Repeated reviews&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#incomplete-reviews-because-they-are-too-long&#34;&gt;Incomplete reviews because they are too long&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#non-english-reviews&#34;&gt;Non-English reviews&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#section&#34;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sentiment-analysis-of-user-reviews&#34;&gt;Sentiment analysis of user reviews&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#predictive-modeling-for-grades-with-user-reviews&#34;&gt;Predictive modeling for grades with user reviews&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Our modeling goal is to predict the rating for the life simulation video game, Animal Crossing, from its user reviews. The data comes from &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05/readme.md&#34;&gt;this weeks’s &lt;code&gt;#TidyTuesday&lt;/code&gt;&lt;/a&gt;, scraped from &lt;a href=&#34;https://github.com/jefflomacy/villagerdb&#34;&gt;VillagerDB&lt;/a&gt; and &lt;a href=&#34;https://www.metacritic.com/game/switch/animal-crossing-new-horizons/critic-reviews&#34;&gt;Metacritic&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(tidytext)
+set.seed(2020)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;eda-and-data-cleaning&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;EDA and data cleaning&lt;/h1&gt;
+&lt;p&gt;The reviews data contains four columns:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;grade&lt;/code&gt;: 0-100 score given by the critic (missing for some) where higher score = better.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;user_name&lt;/code&gt;: user name of the reviewer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;text&lt;/code&gt;: review of the reviewer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;date&lt;/code&gt;: when the review is published&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews &amp;lt;- readr::read_tsv(&amp;quot;D:/RProjects/data/blog/animal-crossing-reviews.tsv&amp;quot;)
+glimpse(reviews)
+#&amp;gt; Rows: 1,473
+#&amp;gt; Columns: 4
+#&amp;gt; $ grade     &amp;lt;dbl&amp;gt; 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, ...
+#&amp;gt; $ user_name &amp;lt;chr&amp;gt; &amp;quot;mds27272&amp;quot;, &amp;quot;lolo2178&amp;quot;, &amp;quot;Roachant&amp;quot;, &amp;quot;Houndf&amp;quot;, &amp;quot;ProfessorF...
+#&amp;gt; $ text      &amp;lt;chr&amp;gt; &amp;quot;My gf started playing before me. No option to create my ...
+#&amp;gt; $ date      &amp;lt;date&amp;gt; 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;An bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut &lt;code&gt;grades&lt;/code&gt; into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews %&amp;gt;% 
+  count(grade) %&amp;gt;% 
+  ggplot() + 
+  geom_col(aes(x = factor(grade), 
+               y = n),
+           fill = &amp;quot;midnightblue&amp;quot;, alpha = 0.6) + 
+  labs(x = &amp;quot;grade&amp;quot;, y = NULL)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The data is messy in several ways (I have chosen 3 lines for example):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;reviews that exceed certian length are incomplete and end with “Expand”. The following review also contains repetition.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;non-English reviews&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;results&#34; class=&#34;section level2 tabset&#34;&gt;
+&lt;h2&gt;Results&lt;/h2&gt;
+&lt;div id=&#34;repeated-reviews&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Repeated reviews&lt;/h3&gt;
+&lt;p&gt;“While the game itself is great, really relaxing and gorgeous, i can’t ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you haveWhile the game itself is great, really relaxing and gorgeous, i can’t ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you have the other usershouse and furniture. I hope nintendo can soon fix this big issue, because for now, this killed any intentions i had to play the game.… Expand”&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;incomplete-reviews-because-they-are-too-long&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Incomplete reviews because they are too long&lt;/h3&gt;
+&lt;p&gt;“One island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company thatOne island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company that sees fit to make such decisions.… Expand”&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;non-english-reviews&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Non-English reviews&lt;/h3&gt;
+&lt;p&gt;“Una sola isla , es un asco . No puedes seguir avanzando, solo te queda recoger madera”&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;p&gt;I use regular expressions to remove reptitions and “Expand” at the end. Repetitions happen when the review is long, and the repetition part often takes up 4 to 5 lines (here I use 350 or more characters to indicate the repetition part).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;clr::detect_language&lt;/code&gt; is used to exclude non-English text. This a R wrapper around Google’s Compact Language Detector 3, a neural network model for language identification . There will be misclassifications, though. As the proportion of exclusion is fairly low, we’re OK.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(cld3)
+reviews %&amp;gt;% 
+  mutate(language = detect_language(text)) %&amp;gt;% 
+  count(language, sort = TRUE)
+#&amp;gt; # A tibble: 11 x 2
+#&amp;gt;    language     n
+#&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;int&amp;gt;
+#&amp;gt;  1 en        1394
+#&amp;gt;  2 es          48
+#&amp;gt;  3 ru           7
+#&amp;gt;  4 it           6
+#&amp;gt;  5 fr           5
+#&amp;gt;  6 pt           5
+#&amp;gt;  7 de           3
+#&amp;gt;  8 &amp;lt;NA&amp;gt;         2
+#&amp;gt;  9 ja           1
+#&amp;gt; 10 pl           1
+#&amp;gt; 11 th           1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews_en &amp;lt;- reviews %&amp;gt;% 
+  filter(detect_language(text) == &amp;quot;en&amp;quot;)
+
+
+repetition_clean &amp;lt;- reviews %&amp;gt;% 
+  filter(str_detect(text, &amp;quot;(.{350,})\\1.+&amp;quot;)) %&amp;gt;% 
+  mutate(text = str_replace(text, &amp;quot;(.{350,})\\1(.+)Expand$&amp;quot;, &amp;quot;\\1\\2&amp;quot;))
+
+reviews_clean &amp;lt;- anti_join(reviews_en, repetition_clean, 
+                           by = c(&amp;quot;user_name&amp;quot; = &amp;quot;user_name&amp;quot;)) %&amp;gt;% 
+  bind_rows(repetition_clean)
+
+# draw some sample reviews
+reviews_clean %&amp;gt;% 
+  sample_n(3) %&amp;gt;% 
+  pull(text)
+#&amp;gt; [1] &amp;quot;I am currently playing this game single player however I feel compelled to review this game based on the multiplayer experience. The decision to lock the game to one island per console is nothing short of a cash grab. I am a long time Nintendo fan since I received a SNES for Christmas as a child but this behavior disgusts me and I am reluctant to spend any more money with this company if they do not address this problem. Nintendo consoles have always been family focused machines that encourage multiplayer and this seems to go against everything they have ever done to date.Sadly they have likely already sold enough units to cover costs and will simply ignore the outrage from their customers.… &amp;quot;
+#&amp;gt; [2] &amp;quot;This game is excellent, I can&amp;#39;t stop playing it, it&amp;#39;s fun and has so many thing to do that I can spend hours and hours playing it and still don&amp;#39;t get tiredBest game that I have played in a while&amp;quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+#&amp;gt; [3] &amp;quot;Cast: 6/10Story: 6/10Fun: 9/10Gameplay: 8/10Recommended----------------------&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can examine how this cleaning process works by comparing the distribution of review length, before and after. The cleaning should reduce the amount of medium long and long reviews, in exchange for shorter ones.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews %&amp;gt;%
+  transmute(length = str_length(text),
+            type = &amp;quot;before&amp;quot;) %&amp;gt;% 
+  bind_rows(reviews_clean %&amp;gt;%
+              transmute(length = str_length(text), type = &amp;quot;after&amp;quot;)) %&amp;gt;%
+  ggplot() + 
+  geom_density(aes(length, fill = type), alpha = 0.2) + 
+  scale_fill_discrete(name = NULL) + 
+  labs(title = &amp;quot;Distribution of review length before and after cleaning&amp;quot;,
+       x = NULL,
+       y = NULL)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sentiment-analysis-of-user-reviews&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Sentiment analysis of user reviews&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;predictive-modeling-for-grades-with-user-reviews&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Predictive modeling for grades with user reviews&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+reviews %&amp;gt;% 
+  transmute(rating = case_when(
+    grade &amp;lt;= 4 ~ &amp;quot;low&amp;quot;,
+    grade &amp;gt; 4 &amp;amp; grade &amp;lt;= 8 ~ &amp;quot;medium&amp;quot;,
+    grade &amp;gt; 8 ~ &amp;quot;high&amp;quot;,
+  ),
+  text) %&amp;gt;% 
+  unnest_tokens(line, text, token = &amp;quot;lines&amp;quot;) 
+#&amp;gt; # A tibble: 1,473 x 2
+#&amp;gt;    rating line                                                                  
+#&amp;gt;    &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;                                                                 
+#&amp;gt;  1 high   cant stop playing!                                                    
+#&amp;gt;  2 high   as a first timer to the animal crossing series, it was a bit hard to ~
+#&amp;gt;  3 high   this is my first animal crossing game i’ve ever played. i am seriousl~
+#&amp;gt;  4 high   i like it so far. unfair to rate the game a 0 because of a poor desig~
+#&amp;gt;  5 high   this game is absolutely amazing as a constant side game for one&amp;#39;s day~
+#&amp;gt;  6 high   probably the best animal crossing has ever been, and to fans of the s~
+#&amp;gt;  7 high   an amazing game and the best ac yet! if you don’t understand there is~
+#&amp;gt;  8 high   an absolutely awesome addition to the franchise. everything about thi~
+#&amp;gt;  9 high   this review contains spoilers, click expand to view.                 ~
+#&amp;gt; 10 high   there are no words to describe the flawlessly, gorgeous graphics and ~
+#&amp;gt; # ... with 1,463 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Text Classfication with Penalized Logistic Regression</title>
@@ -688,7 +862,7 @@ chisq_null_permutation %&amp;gt;%
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#data-preprocessing&#34;&gt;Data preprocessing&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#common-words-and-keywords-extraction&#34;&gt;Common words and keywords extraction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#fit-a-lda-model&#34;&gt;Fit a LDA model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#fit-a-lda-topic-model&#34;&gt;Fit a LDA topic model&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#a-network-of-paired-words&#34;&gt;A network of paired words&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -720,37 +894,84 @@ glimpse(raw)
 #&amp;gt; $ study            &amp;lt;chr&amp;gt; &amp;quot;Qiu 2020&amp;quot;, &amp;quot;Pulido 2020&amp;quot;, &amp;quot;Pillaiyar 2020&amp;quot;, &amp;quot;Piau...
 #&amp;gt; $ notes            &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
 #&amp;gt; $ tags             &amp;lt;chr&amp;gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on &lt;code&gt;abstract&lt;/code&gt;. I was a little disappointied to find out that &lt;code&gt;published_month&lt;/code&gt; are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English, I find this function &lt;code&gt;stringi::stri_enc_isascii&lt;/code&gt; in an attempt to filter out non-English text, although this will not rid the text of German, French, Italian and other similar languages. I deleted some of them manually in the next step by expanding stop words. But this still left much room for improvement. Anyway, let’s move on for now.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- raw %&amp;gt;%
-  filter(!is.na(abstract),
-         stringi::stri_enc_isascii(abstract)) %&amp;gt;% 
-  select(title, abstract)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As illuatrated in &lt;a href=&#34;https://www.tidytextmining.com&#34;&gt;Text Mining with R&lt;/a&gt;, text analysis commonly requires preprocessing steps like tokenizing, eliminating stop words and word stemming. A little problem is that &lt;code&gt;unnest_tokens()&lt;/code&gt; recognize “covid” and “19” as two separated words, so I just add “19” to my custom stop words list. As a result, we have to bear in mind that most “covid” seen below is actually “covid19”.&lt;/p&gt;
+&lt;p&gt;For simplicity I ignore many of the vairables (mostly for identification) and rows with missing values on &lt;code&gt;abstract&lt;/code&gt;. I was a little disappointied to find out that &lt;code&gt;published_month&lt;/code&gt; are all missing, otherwise we may see a trend of some sort on research topics there. One remaining problem is that some of the papers are not written in English.
+The &lt;code&gt;detect_language()&lt;/code&gt; from the &lt;a href=&#34;https://github.com/ropensci/cld3&#34;&gt;&lt;code&gt;cdl3&lt;/code&gt;&lt;/a&gt; can detect language forms at a fairly high success rate. It’s a R wrapper for Google’s Compact Language Detector 3, which is a neural network model for language identification.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(cld3)
+raw %&amp;gt;% 
+  count(language = detect_language(abstract), sort = TRUE)
+#&amp;gt; # A tibble: 13 x 2
+#&amp;gt;    language     n
+#&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;int&amp;gt;
+#&amp;gt;  1 en        2482
+#&amp;gt;  2 ig        1618
+#&amp;gt;  3 es          26
+#&amp;gt;  4 pt          18
+#&amp;gt;  5 de          11
+#&amp;gt;  6 ru          10
+#&amp;gt;  7 fr           7
+#&amp;gt;  8 zh           7
+#&amp;gt;  9 &amp;lt;NA&amp;gt;         5
+#&amp;gt; 10 fi           2
+#&amp;gt; 11 ja           2
+#&amp;gt; 12 cs           1
+#&amp;gt; 13 it           1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this post I keep only the rows that were classified as “en”. Also, as illuatrated in &lt;a href=&#34;https://www.tidytextmining.com&#34;&gt;Text Mining with R&lt;/a&gt;, text analysis commonly requires preprocessing steps like tokenizing, eliminating stop words and word stemming. I added custom keywords and did some maunual transformation to make up for misclassifications by &lt;code&gt;detect_language&lt;/code&gt;, but there will still be non-English words, though. My transformations (say, both “covid” and “19” now become “covid19”) will certainly induce errors, but there is no better workaround I could think of now.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidytext)
 library(SnowballC)
 
-words &amp;lt;- df %&amp;gt;% 
+words &amp;lt;- raw %&amp;gt;% 
+  filter(detect_language(abstract) == &amp;quot;en&amp;quot;) %&amp;gt;% 
   unnest_tokens(word, abstract) %&amp;gt;% 
-  mutate(word = wordStem(word)) %&amp;gt;% 
+  mutate(word = wordStem(word)) %&amp;gt;%
+  mutate(word = case_when(
+    word == &amp;quot;19&amp;quot; ~ &amp;quot;covid19&amp;quot;,
+    word == &amp;quot;covid&amp;quot; ~ &amp;quot;covid19&amp;quot;,
+    word == &amp;quot;coronaviru&amp;quot; ~ &amp;quot;coronavirus&amp;quot;,
+    word == &amp;quot;viru&amp;quot; ~ &amp;quot;virus&amp;quot;,
+    word == &amp;quot;epidem&amp;quot; ~ &amp;quot;epidemic&amp;quot;,
+    word == &amp;quot;studi&amp;quot; ~ &amp;quot;study&amp;quot;,
+    word == &amp;quot;respiratori&amp;quot; ~ &amp;quot;respiratory&amp;quot;,
+    word == &amp;quot;emetin&amp;quot; ~ &amp;quot;emetine&amp;quot;,
+    word == &amp;quot;acut&amp;quot; ~ &amp;quot;acute&amp;quot;,
+    word == &amp;quot;sever&amp;quot; ~ &amp;quot;severe&amp;quot;,
+    word == &amp;quot;manag&amp;quot; ~ &amp;quot;manage&amp;quot;,
+    word == &amp;quot;hospit&amp;quot; ~ &amp;quot;hospital&amp;quot;,
+    word == &amp;quot;diseas&amp;quot; ~ &amp;quot;disease&amp;quot;,
+    word == &amp;quot;deceas&amp;quot; ~ &amp;quot;disease&amp;quot;,
+    word == &amp;quot;caus&amp;quot; ~ &amp;quot;cause&amp;quot;,
+    word == &amp;quot;emerg&amp;quot; ~ &amp;quot;emerge&amp;quot;,
+    word == &amp;quot;includ&amp;quot; ~ &amp;quot;include&amp;quot;, 
+    word == &amp;quot;dai&amp;quot; ~ &amp;quot;wet nurse&amp;quot;,
+    word == &amp;quot;ncovid&amp;quot; ~ &amp;quot;ncov&amp;quot;,
+    word == &amp;quot;countri&amp;quot; ~ &amp;quot;country&amp;quot;,
+    word == &amp;quot;provid&amp;quot; ~ &amp;quot;provide&amp;quot;,
+    word == &amp;quot;peopl&amp;quot; ~ &amp;quot;people&amp;quot;,
+    TRUE ~ word
+  )) %&amp;gt;% 
   anti_join(stop_words %&amp;gt;% 
-              add_row(word = c(&amp;quot;19&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;manag&amp;quot;, &amp;quot;dai&amp;quot;, &amp;quot;studi&amp;quot;, &amp;quot;epidem&amp;quot;, &amp;quot;includ&amp;quot;, &amp;quot;coronaviru&amp;quot;, &amp;quot;diseas&amp;quot;, &amp;quot;emetin&amp;quot;, &amp;quot;dai&amp;quot;, &amp;quot;acut&amp;quot;, &amp;quot;dub&amp;quot;, &amp;quot;hospit&amp;quot;, &amp;quot;hfnc&amp;quot;, &amp;quot;caus&amp;quot;, &amp;quot;develop&amp;quot;, &amp;quot;thi&amp;quot;), 
-                      lexicon = &amp;quot;custom&amp;quot;)) 
+            add_row(word = c( &amp;quot;2&amp;quot;, &amp;quot;1&amp;quot;,  &amp;quot;dub&amp;quot;, &amp;quot;thi&amp;quot;, &amp;quot;ha&amp;quot;, &amp;quot;wa&amp;quot;, &amp;quot;检查&amp;quot;, &amp;quot;cd&amp;quot;, &amp;quot;gt&amp;quot;,
+                              &amp;quot;lt&amp;quot;, &amp;quot;tnt&amp;quot;, &amp;quot;thei&amp;quot;), 
+                    lexicon = &amp;quot;custom&amp;quot;)) %&amp;gt;% 
+  filter(!(str_detect(word, &amp;quot;^\\d+$&amp;quot;) | str_detect(word, &amp;quot;^\\d+\\w$&amp;quot;)))
+
 
 words
-#&amp;gt; # A tibble: 159,434 x 2
-#&amp;gt;    title                                                              word      
-#&amp;gt;    &amp;lt;chr&amp;gt;                                                              &amp;lt;chr&amp;gt;     
-#&amp;gt;  1 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ background
-#&amp;gt;  2 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sever     
-#&amp;gt;  3 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
-#&amp;gt;  4 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ syndrom   
-#&amp;gt;  5 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ sar       
-#&amp;gt;  6 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ cov       
-#&amp;gt;  7 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ mainli    
-#&amp;gt;  8 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ spread    
-#&amp;gt;  9 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ respirato~
-#&amp;gt; 10 SARS-CoV-2 is not detectable in the vaginal fluid of women with s~ droplet   
-#&amp;gt; # ... with 159,424 more rows&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 245,052 x 16
+#&amp;gt;    title authors published_year published_month journal volume issue pages
+#&amp;gt;    &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;            &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;           &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
+#&amp;gt;  1 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  2 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  3 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  4 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  5 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  6 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  7 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  8 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt;  9 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt; 10 SARS~ Qiu, L~           2020 NA              Clinic~ &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;  &amp;lt;NA&amp;gt; 
+#&amp;gt; # ... with 245,042 more rows, and 8 more variables: accession_number &amp;lt;chr&amp;gt;,
+#&amp;gt; #   doi &amp;lt;chr&amp;gt;, ref &amp;lt;dbl&amp;gt;, covidence_number &amp;lt;chr&amp;gt;, study &amp;lt;chr&amp;gt;, notes &amp;lt;chr&amp;gt;,
+#&amp;gt; #   tags &amp;lt;chr&amp;gt;, word &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;common-words-and-keywords-extraction&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Common words and keywords extraction&lt;/h1&gt;
@@ -766,10 +987,11 @@ words
        x = &amp;quot;# of words&amp;quot;,
        title = &amp;quot;Top 50 common words in COVID-19 publications&amp;quot;) +
   theme(text = element_text(size = 18),
+        plot.title.position = &amp;quot;plot&amp;quot;,
         plot.title = element_text(size = 35, face = &amp;quot;bold&amp;quot;),
         axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by &lt;span class=&#34;citation&#34;&gt;Monroe, Colaresi, and Quinn (&lt;a href=&#34;#ref-monroe_colaresi_quinn&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt;, which a standardized metric from a complete statistical model. It is also implemented in the R package &lt;a href=&#34;https://github.com/juliasilge/tidylo&#34;&gt;&lt;code&gt;tidylo&lt;/code&gt;&lt;/a&gt;&lt;span class=&#34;citation&#34;&gt;(Schnoebelen and Silge &lt;a href=&#34;#ref-tidylo&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications:&lt;/p&gt;
+&lt;p&gt;I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by &lt;span class=&#34;citation&#34;&gt;Monroe, Colaresi, and Quinn (&lt;a href=&#34;#ref-monroe_colaresi_quinn&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt;, which a standardized metric from a complete statistical model. It is also implemented in the R package &lt;a href=&#34;https://github.com/juliasilge/tidylo&#34;&gt;&lt;code&gt;tidylo&lt;/code&gt;&lt;/a&gt;&lt;span class=&#34;citation&#34;&gt;(Schnoebelen and Silge &lt;a href=&#34;#ref-tidylo&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
 
 words %&amp;gt;%
@@ -788,138 +1010,139 @@ words %&amp;gt;%
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;A comparative study on the clinical features of COVID-19 pneumonia to other pneumonias&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ncovid&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;5.057257&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;A high ATP concentration enhances the cooperative translocation of the SARS coronavirus helicase nsP13 in the unwinding of duplex RNA&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;duplex&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;16&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.524146&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;A serological survey of canine respiratory coronavirus in New Zealand&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;dog&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.528876&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.525439&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;216&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;16&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.423606&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;A survey on awareness of digestive system injury caused by corona virus disease 2019 in gastroenterologists&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;gastroenterologist&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.225689&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;cd&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.800243&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.230132&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;gt&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;60&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.917806&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ital&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;26&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.585456&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Analysis of clinical features of 153 patients with novel coronavirus pneumonia in Chongqing&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;lt&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;74&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;5.032569&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;hljby&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.915206&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.917622&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Characterization and evolution of the coronavirus porcine epidemic diarrhoea virus HLJBY isolated in China&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;pedv&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;21&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.922771&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Clinical characteristics of 113 deceased patients with coronavirus disease 2019: retrospective study&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;deceas&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;16&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.419020&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.760966&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Construction of 5G intelligent medical service system in novel coronavirus pneumonia prevention and control&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;5g&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.231003&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Clinical characteristics of 30 medical workers infected with new coronavirus pneumonia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;petient&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.575936&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Effect of TLR agonist on infections bronchitis virus replication and cytokine expression in embryonated chicken eggs&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;tlr&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.608637&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Emetine, Ipecac, Ipecac Alkaloids and Analogues as Potential Antiviral Agents for Coronaviruses&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;emetine&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.577769&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Experimental Treatment with Favipiravir for COVID-19: An Open-Label Control Study&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;fpv&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.576505&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Expert consensus on Pulmonary Function Testing during the epidemic of Corona Virus Disease 2019&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;检查&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.749430&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Facemask shortage and the novel coronavirus disease (COVID-19) outbreak: Reflections on public health measures&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;facemask&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.637175&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Frequency and Distribution of Chest Radiographic Findings in COVID-19 Positive Patients&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;cxr&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.915366&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.607049&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Genetic, antigenic and pathogenic characterization of avian coronaviruses isolated from pheasants (Phasianus colchicus) in China&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;phcov&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.576166&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.577311&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Influence of trust on two different risk perceptions as an affective and cognitive dimension during Middle East respiratory syndrome coronavirus (MERS-CoV) outbreak in South Korea: serial cross-sectional surveys&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;percept&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.250063&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Medicinal chemistry strategies toward host targeting antiviral agents&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;hta&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.573884&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Microneedle array delivered recombinant coronavirus vaccines: Immunogenicity and rapid translational development&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;mna&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;13&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.871558&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Pregnant women with new coronavirus infection: a clinical characteristics and placental pathological analysis of three cases&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;placenta&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.757207&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.762505&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Retrospective study of low-to-moderate dose glucocorticoids on viral clearance in patients with novel coronavirus pneumonia&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;iqr&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.238798&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Responding to the COVID-19 pandemic in complex humanitarian crises&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;humanitarian&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.681217&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;The clinical study on the relationship between serum albumin concentration and lymphocyte levels in patients with 2019-novel coronavirus pneumonia&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;lym&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;14&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3.536764&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Serial interval in determining the estimation of reproduction number of the novel coronavirus disease (COVID-19) during the early outbreak | Journal of Travel Medicine | Oxford Academic&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;si&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;19&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.108847&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Short-term effects of ambient PM1 and PM2.5 air pollution on hospital admission for respiratory diseases: Case-crossover evidence from Shenzhen, China&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;pm1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.918315&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;The experience of high-flow nasal cannula in hospitalized patients with 2019 novel coronavirus-infected pneumonia in two hospitals of Chongqing, China&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;hfnc&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.706804&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Thoughts and suggestions on modern construction of disease prevention and control system&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;modern&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4.443162&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.138237&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;p&gt;Many words listed here are acronyms in biology, chemistry and medicine. For example, “hljby” is a type of porcine epidemic diarrhoea virus which “pedv” stands “for”, fpv means Favipiravir (a type of drug), and “tlr” represents Toll-like receptors.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;fit-a-lda-model&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Fit a LDA model&lt;/h1&gt;
-&lt;p&gt;Let’s then fit a 6-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using &lt;code&gt;cast_dtm&lt;/code&gt;. There are various implementations of this kind of model, here I use &lt;code&gt;stm::stm&lt;/code&gt;. The choice of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt; (number of topics) here is somewhat arbitrary here, but &lt;a href=&#34;https://juliasilge.com/&#34;&gt;Julia Silge&lt;/a&gt; had a great &lt;a href=&#34;https://juliasilge.com/blog/evaluating-stm/&#34;&gt;post&lt;/a&gt; about it.&lt;/p&gt;
+&lt;div id=&#34;fit-a-lda-topic-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Fit a LDA topic model&lt;/h1&gt;
+&lt;p&gt;Let’s then fit a 5-topic LDA topic model, before that we should convert the data frame to a docuemnt term matrix using &lt;code&gt;cast_dtm&lt;/code&gt;. There are various implementations of this kind of model, here I use &lt;code&gt;stm::stm&lt;/code&gt;. The choice of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt; (number of topics) here is somewhat arbitrary here, but &lt;a href=&#34;https://juliasilge.com/&#34;&gt;Julia Silge&lt;/a&gt; had a great &lt;a href=&#34;https://juliasilge.com/blog/evaluating-stm/&#34;&gt;post&lt;/a&gt; about it.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dfm &amp;lt;- cast_dfm(words %&amp;gt;% count(title, word),
                 term = word,
                 document = title,
                 value = n)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;dfm&lt;/code&gt; is a document-term matrix with 2415 documents and 13383 features.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stm)
 topic_model &amp;lt;- stm(dfm, K = 5, init.type = &amp;quot;LDA&amp;quot;, verbose = FALSE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;topic_model &amp;lt;- pins::pin_get(&amp;quot;covid-topic-model&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Topic-term probability distributions are accessed by &lt;code&gt;tidy()&lt;/code&gt;, this gives a glance of the underlying meaning of these topics:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# topic-term distribution
 tidy(topic_model) %&amp;gt;% 
@@ -941,6 +1164,7 @@ tidy(topic_model) %&amp;gt;%
         strip.text = element_text(size = 25, hjust = 0.05),
         axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It’s hard to interpret these topics without domain knwoledge. But it seems to me that topic3 is related to clinical findings, topic4 to china and wuhan, the epicenter of covid19.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;a-network-of-paired-words&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;A network of paired words&lt;/h1&gt;
@@ -955,20 +1179,20 @@ word_cors &amp;lt;- words %&amp;gt;%
   pairwise_cor(item = word, feature = title, sort = TRUE)
 
 word_cors
-#&amp;gt; # A tibble: 1,386,506 x 3
-#&amp;gt;    item1     item2     correlation
-#&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt;
-#&amp;gt;  1 65288     65289           0.960
-#&amp;gt;  2 65289     65288           0.960
-#&amp;gt;  3 lopinavir ritonavir       0.955
-#&amp;gt;  4 ritonavir lopinavir       0.955
-#&amp;gt;  5 reserv    copyright       0.947
-#&amp;gt;  6 copyright reserv          0.947
-#&amp;gt;  7 glass     ground          0.946
-#&amp;gt;  8 ground    glass           0.946
-#&amp;gt;  9 effus     pleural         0.940
-#&amp;gt; 10 pleural   effus           0.940
-#&amp;gt; # ... with 1,386,496 more rows&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 2,385,480 x 3
+#&amp;gt;    item1        item2        correlation
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 arabia       saudi              1    
+#&amp;gt;  2 saudi        arabia             1    
+#&amp;gt;  3 pave         crazi              0.970
+#&amp;gt;  4 crazi        pave               0.970
+#&amp;gt;  5 kong         hong               0.935
+#&amp;gt;  6 hong         kong               0.935
+#&amp;gt;  7 dehydrogenas lactat             0.931
+#&amp;gt;  8 lactat       dehydrogenas       0.931
+#&amp;gt;  9 reserv       copyright          0.928
+#&amp;gt; 10 copyright    reserv             0.928
+#&amp;gt; # ... with 2,385,470 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;A network visualization of word correlation is a good idea:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggraph)
 library(tidygraph)
@@ -981,7 +1205,7 @@ word_cors %&amp;gt;%
   geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 6.5) + 
   geom_node_text(aes(label = name), repel = TRUE, size = 5.5)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;As you can see, there are still many non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.&lt;/p&gt;
+&lt;p&gt;As you can see, there are still some non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;

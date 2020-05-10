@@ -342,7 +342,7 @@ model_df <- reviews_clean %>%
   anti_join(stop_words) %>%
   count(user_name, t, rating, word, name = "word_count") %>% 
   group_by(word) %>% 
-  filter(n() > 20, word != "rating") %>% 
+  filter(n() > 20, word != "rating", !str_detect(word, "^\\d+$")) %>% 
   ungroup() %>% 
   pivot_wider(names_from = word, values_from = word_count, 
               values_fill = list(word_count = 0), names_repair = "minimal")
@@ -351,7 +351,7 @@ model_df <- reviews_clean %>%
 model_df
 ```
 
-After tokenizing, filtering and some other steps, I have 1394 x 331 design matrix at hand. `user_name` is an ID variable, `t` indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response `rating`, are word counts. 
+After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. `user_name` is an ID variable, `t` indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response `rating`, are word counts. 
 
 
 Next I split the data into training and testing test with stratified sampling on `rating`.
@@ -459,7 +459,7 @@ $$
 
 The absolute value of variable importance for predictor $x_1$ is $|\hat{\beta}_{21}| + |\hat{\beta}_{31}|$.  
 
-Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise.
+Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise, similar to sentiment analysis.
 
 ```{r}
 final_fit <- wf_final %>% fit(data = reviews_train)
@@ -474,7 +474,7 @@ final_fit %>%
   group_by(Sign) %>% 
   top_n(30, wt = abs(Importance)) %>% 
   ungroup() %>%
-  mutate(Sign = if_else(Sign == "POS", "high ratings", "lowo ratings")) %>% 
+  mutate(Sign = if_else(Sign == "NEG", "lower ratings", "higher ratings")) %>% 
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance,
              fill = Sign)) + 

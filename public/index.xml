@@ -433,14 +433,14 @@ model_df &amp;lt;- reviews_clean %&amp;gt;%
   anti_join(stop_words) %&amp;gt;%
   count(user_name, t, rating, word, name = &amp;quot;word_count&amp;quot;) %&amp;gt;% 
   group_by(word) %&amp;gt;% 
-  filter(n() &amp;gt; 20, word != &amp;quot;rating&amp;quot;) %&amp;gt;% 
+  filter(n() &amp;gt; 20, word != &amp;quot;rating&amp;quot;, !str_detect(word, &amp;quot;^\\d+$&amp;quot;)) %&amp;gt;% 
   ungroup() %&amp;gt;% 
   pivot_wider(names_from = word, values_from = word_count, 
               values_fill = list(word_count = 0), names_repair = &amp;quot;minimal&amp;quot;)
   
 
 model_df
-#&amp;gt; # A tibble: 1,393 x 331
+#&amp;gt; # A tibble: 1,392 x 320
 #&amp;gt;    user_name     t rating playing  stop ability accounts   buy `can’t` console
 #&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;    &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;    &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;
 #&amp;gt;  1 000PLAYE~     0 high         1     1       0        0     0       0       0
@@ -453,7 +453,7 @@ model_df
 #&amp;gt;  8 8bheotap~     6 low          0     0       0        0     0       0       2
 #&amp;gt;  9 A_Mighty~     6 medium       3     0       0        1     3       0       0
 #&amp;gt; 10 a0972354      4 high         0     0       0        0     0       0       0
-#&amp;gt; # ... with 1,383 more rows, and 321 more variables: consoles &amp;lt;int&amp;gt;,
+#&amp;gt; # ... with 1,382 more rows, and 310 more variables: consoles &amp;lt;int&amp;gt;,
 #&amp;gt; #   `don’t` &amp;lt;int&amp;gt;, excited &amp;lt;int&amp;gt;, extremely &amp;lt;int&amp;gt;, families &amp;lt;int&amp;gt;,
 #&amp;gt; #   forcing &amp;lt;int&amp;gt;, fun &amp;lt;int&amp;gt;, game &amp;lt;int&amp;gt;, games &amp;lt;int&amp;gt;, greedy &amp;lt;int&amp;gt;,
 #&amp;gt; #   household &amp;lt;int&amp;gt;, island &amp;lt;int&amp;gt;, money &amp;lt;int&amp;gt;, multiple &amp;lt;int&amp;gt;, nintendo &amp;lt;int&amp;gt;,
@@ -462,20 +462,20 @@ model_df
 #&amp;gt; #   fix &amp;lt;int&amp;gt;, people &amp;lt;int&amp;gt;, progress &amp;lt;int&amp;gt;, `1st` &amp;lt;int&amp;gt;, animal &amp;lt;int&amp;gt;,
 #&amp;gt; #   crossing &amp;lt;int&amp;gt;, experience &amp;lt;int&amp;gt;, gorgeous &amp;lt;int&amp;gt;, idea &amp;lt;int&amp;gt;, love &amp;lt;int&amp;gt;,
 #&amp;gt; #   makes &amp;lt;int&amp;gt;, player &amp;lt;int&amp;gt;, reason &amp;lt;int&amp;gt;, score &amp;lt;int&amp;gt;, worth &amp;lt;int&amp;gt;,
-#&amp;gt; #   `0` &amp;lt;int&amp;gt;, `1` &amp;lt;int&amp;gt;, `10` &amp;lt;int&amp;gt;, control &amp;lt;int&amp;gt;, family &amp;lt;int&amp;gt;,
-#&amp;gt; #   giving &amp;lt;int&amp;gt;, grab &amp;lt;int&amp;gt;, kids &amp;lt;int&amp;gt;, negative &amp;lt;int&amp;gt;, resources &amp;lt;int&amp;gt;,
-#&amp;gt; #   review &amp;lt;int&amp;gt;, switch &amp;lt;int&amp;gt;, unacceptable &amp;lt;int&amp;gt;, user &amp;lt;int&amp;gt;, users &amp;lt;int&amp;gt;,
-#&amp;gt; #   girlfriend &amp;lt;int&amp;gt;, players &amp;lt;int&amp;gt;, time &amp;lt;int&amp;gt;, wait &amp;lt;int&amp;gt;, day &amp;lt;int&amp;gt;,
-#&amp;gt; #   horizons &amp;lt;int&amp;gt;, house &amp;lt;int&amp;gt;, leaf &amp;lt;int&amp;gt;, past &amp;lt;int&amp;gt;, played &amp;lt;int&amp;gt;,
-#&amp;gt; #   view &amp;lt;int&amp;gt;, allowing &amp;lt;int&amp;gt;, designed &amp;lt;int&amp;gt;, gamecube &amp;lt;int&amp;gt;, real &amp;lt;int&amp;gt;,
-#&amp;gt; #   single &amp;lt;int&amp;gt;, version &amp;lt;int&amp;gt;, `2020` &amp;lt;int&amp;gt;, bought &amp;lt;int&amp;gt;, buying &amp;lt;int&amp;gt;,
-#&amp;gt; #   choice &amp;lt;int&amp;gt;, community &amp;lt;int&amp;gt;, decision &amp;lt;int&amp;gt;, expected &amp;lt;int&amp;gt;,
-#&amp;gt; #   features &amp;lt;int&amp;gt;, feel &amp;lt;int&amp;gt;, feels &amp;lt;int&amp;gt;, fine &amp;lt;int&amp;gt;, forced &amp;lt;int&amp;gt;,
-#&amp;gt; #   future &amp;lt;int&amp;gt;, gameplay &amp;lt;int&amp;gt;, huge &amp;lt;int&amp;gt;, issue &amp;lt;int&amp;gt;, left &amp;lt;int&amp;gt;,
-#&amp;gt; #   lot &amp;lt;int&amp;gt;, mechanics &amp;lt;int&amp;gt;, multiplayer &amp;lt;int&amp;gt;, op &amp;lt;int&amp;gt;, person &amp;lt;int&amp;gt;,
-#&amp;gt; #   plays &amp;lt;int&amp;gt;, reviews &amp;lt;int&amp;gt;, shame &amp;lt;int&amp;gt;, sharing &amp;lt;int&amp;gt;, started &amp;lt;int&amp;gt;,
-#&amp;gt; #   system &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After tokenizing, filtering and some other steps, I have 1394 x 331 design matrix at hand. &lt;code&gt;user_name&lt;/code&gt; is an ID variable, &lt;code&gt;t&lt;/code&gt; indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response &lt;code&gt;rating&lt;/code&gt;, are word counts.&lt;/p&gt;
+#&amp;gt; #   control &amp;lt;int&amp;gt;, family &amp;lt;int&amp;gt;, giving &amp;lt;int&amp;gt;, grab &amp;lt;int&amp;gt;, kids &amp;lt;int&amp;gt;,
+#&amp;gt; #   negative &amp;lt;int&amp;gt;, resources &amp;lt;int&amp;gt;, review &amp;lt;int&amp;gt;, switch &amp;lt;int&amp;gt;,
+#&amp;gt; #   unacceptable &amp;lt;int&amp;gt;, user &amp;lt;int&amp;gt;, users &amp;lt;int&amp;gt;, girlfriend &amp;lt;int&amp;gt;,
+#&amp;gt; #   players &amp;lt;int&amp;gt;, time &amp;lt;int&amp;gt;, wait &amp;lt;int&amp;gt;, day &amp;lt;int&amp;gt;, horizons &amp;lt;int&amp;gt;,
+#&amp;gt; #   house &amp;lt;int&amp;gt;, leaf &amp;lt;int&amp;gt;, past &amp;lt;int&amp;gt;, played &amp;lt;int&amp;gt;, view &amp;lt;int&amp;gt;,
+#&amp;gt; #   allowing &amp;lt;int&amp;gt;, designed &amp;lt;int&amp;gt;, gamecube &amp;lt;int&amp;gt;, real &amp;lt;int&amp;gt;, single &amp;lt;int&amp;gt;,
+#&amp;gt; #   version &amp;lt;int&amp;gt;, bought &amp;lt;int&amp;gt;, buying &amp;lt;int&amp;gt;, choice &amp;lt;int&amp;gt;, community &amp;lt;int&amp;gt;,
+#&amp;gt; #   decision &amp;lt;int&amp;gt;, expected &amp;lt;int&amp;gt;, features &amp;lt;int&amp;gt;, feel &amp;lt;int&amp;gt;, feels &amp;lt;int&amp;gt;,
+#&amp;gt; #   fine &amp;lt;int&amp;gt;, forced &amp;lt;int&amp;gt;, future &amp;lt;int&amp;gt;, gameplay &amp;lt;int&amp;gt;, huge &amp;lt;int&amp;gt;,
+#&amp;gt; #   issue &amp;lt;int&amp;gt;, left &amp;lt;int&amp;gt;, lot &amp;lt;int&amp;gt;, mechanics &amp;lt;int&amp;gt;, multiplayer &amp;lt;int&amp;gt;,
+#&amp;gt; #   op &amp;lt;int&amp;gt;, person &amp;lt;int&amp;gt;, plays &amp;lt;int&amp;gt;, reviews &amp;lt;int&amp;gt;, shame &amp;lt;int&amp;gt;,
+#&amp;gt; #   sharing &amp;lt;int&amp;gt;, started &amp;lt;int&amp;gt;, system &amp;lt;int&amp;gt;, bombing &amp;lt;int&amp;gt;, dont &amp;lt;int&amp;gt;,
+#&amp;gt; #   hate &amp;lt;int&amp;gt;, islands &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. &lt;code&gt;user_name&lt;/code&gt; is an ID variable, &lt;code&gt;t&lt;/code&gt; indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response &lt;code&gt;rating&lt;/code&gt;, are word counts.&lt;/p&gt;
 &lt;p&gt;Next I split the data into training and testing test with stratified sampling on &lt;code&gt;rating&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
 
@@ -527,7 +527,7 @@ best_lambda
 #&amp;gt; # A tibble: 1 x 8
 #&amp;gt;   penalty .metric .estimator  mean     n std_err .best .bound
 #&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;      &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;
-#&amp;gt; 1  0.0152 kap     multiclass 0.519    25 0.00657 0.523  0.518&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1  0.0192 kap     multiclass 0.527    25 0.00685 0.533  0.526&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can finalize and fill the model with this lambda.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wf_final &amp;lt;- finalize_workflow(wf, best_lambda)
 
@@ -539,9 +539,9 @@ final_model &amp;lt;- last_fit(wf_final, split = reviews_split,
   conf_mat(rating, estimate = .pred_class)
 #&amp;gt;           Truth
 #&amp;gt; Prediction low medium high
-#&amp;gt;     low    109     17   10
-#&amp;gt;     medium  27      8    9
-#&amp;gt;     high    17      7  143&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt;     low    104     17    7
+#&amp;gt;     medium  31      8   12
+#&amp;gt;     high    18      7  143&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Thanks to downsmapling, the classifier performs quite consistently in predicting these 3 categories. Detection for low ratings may leave some room for improvement.&lt;/p&gt;
 &lt;p&gt;Then we could examine these metrics on the model applied to testing set.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;final_model %&amp;gt;% 
@@ -549,9 +549,9 @@ final_model &amp;lt;- last_fit(wf_final, split = reviews_split,
 #&amp;gt; # A tibble: 3 x 3
 #&amp;gt;   .metric  .estimator .estimate
 #&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 accuracy multiclass     0.749
-#&amp;gt; 2 kap      multiclass     0.576
-#&amp;gt; 3 roc_auc  hand_till      0.767&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 accuracy multiclass     0.735
+#&amp;gt; 2 kap      multiclass     0.556
+#&amp;gt; 3 roc_auc  hand_till      0.746&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the &lt;code&gt;step_upsampling&lt;/code&gt; step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about those go to extremes. For another, the best penality is judged by the Kappa statistic, which shows reasonable agreement.&lt;/p&gt;
 &lt;p&gt;Varible importance plot could help us to identify useful features. For multiclass logit models, importance is defined as the sum of absolute value of coef of a variable. For example, in our baseline logit models:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
@@ -561,7 +561,7 @@ final_model &amp;lt;- last_fit(wf_final, split = reviews_split,
 \end{aligned}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The absolute value of variable importance for predictor &lt;span class=&#34;math inline&#34;&gt;\(x_1\)&lt;/span&gt; is &lt;span class=&#34;math inline&#34;&gt;\(|\hat{\beta}_{21}| + |\hat{\beta}_{31}|\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise.&lt;/p&gt;
+&lt;p&gt;Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise, similar to sentiment analysis.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;final_fit &amp;lt;- wf_final %&amp;gt;% fit(data = reviews_train)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(vip)
 
@@ -571,7 +571,7 @@ final_fit %&amp;gt;%
   group_by(Sign) %&amp;gt;% 
   top_n(30, wt = abs(Importance)) %&amp;gt;% 
   ungroup() %&amp;gt;%
-  mutate(Sign = if_else(Sign == &amp;quot;POS&amp;quot;, &amp;quot;high ratings&amp;quot;, &amp;quot;lowo ratings&amp;quot;)) %&amp;gt;% 
+  mutate(Sign = if_else(Sign == &amp;quot;NEG&amp;quot;, &amp;quot;lower ratings&amp;quot;, &amp;quot;higher ratings&amp;quot;)) %&amp;gt;% 
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance,
              fill = Sign)) + 
@@ -5420,28 +5420,12 @@ lines (the “payload”) belong to the record&lt;a href=&#34;#fnref2&#34; class
     </item>
     
     <item>
-      <title>ggplot2 tips and beautiful maps in R</title>
-      <link>/project/ggplot2-tips-and-maps/</link>
-      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/project/ggplot2-tips-and-maps/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>R4DS</title>
       <link>/project/r4ds/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/project/r4ds/</guid>
       <description>&lt;p&gt;&lt;em&gt;R for Data Science&lt;/em&gt; is arguably a perfect resource for building essetional data skills in R.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Readings</title>
-      <link>/project/readings/</link>
-      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/project/readings/</guid>
-      <description></description>
     </item>
     
     <item>

@@ -306,14 +306,14 @@ model_df &lt;- reviews_clean %&gt;%
   anti_join(stop_words) %&gt;%
   count(user_name, t, rating, word, name = &quot;word_count&quot;) %&gt;% 
   group_by(word) %&gt;% 
-  filter(n() &gt; 20, word != &quot;rating&quot;) %&gt;% 
+  filter(n() &gt; 20, word != &quot;rating&quot;, !str_detect(word, &quot;^\\d+$&quot;)) %&gt;% 
   ungroup() %&gt;% 
   pivot_wider(names_from = word, values_from = word_count, 
               values_fill = list(word_count = 0), names_repair = &quot;minimal&quot;)
   
 
 model_df
-#&gt; # A tibble: 1,393 x 331
+#&gt; # A tibble: 1,392 x 320
 #&gt;    user_name     t rating playing  stop ability accounts   buy `can’t` console
 #&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;fct&gt;    &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
 #&gt;  1 000PLAYE~     0 high         1     1       0        0     0       0       0
@@ -326,7 +326,7 @@ model_df
 #&gt;  8 8bheotap~     6 low          0     0       0        0     0       0       2
 #&gt;  9 A_Mighty~     6 medium       3     0       0        1     3       0       0
 #&gt; 10 a0972354      4 high         0     0       0        0     0       0       0
-#&gt; # ... with 1,383 more rows, and 321 more variables: consoles &lt;int&gt;,
+#&gt; # ... with 1,382 more rows, and 310 more variables: consoles &lt;int&gt;,
 #&gt; #   `don’t` &lt;int&gt;, excited &lt;int&gt;, extremely &lt;int&gt;, families &lt;int&gt;,
 #&gt; #   forcing &lt;int&gt;, fun &lt;int&gt;, game &lt;int&gt;, games &lt;int&gt;, greedy &lt;int&gt;,
 #&gt; #   household &lt;int&gt;, island &lt;int&gt;, money &lt;int&gt;, multiple &lt;int&gt;, nintendo &lt;int&gt;,
@@ -335,20 +335,20 @@ model_df
 #&gt; #   fix &lt;int&gt;, people &lt;int&gt;, progress &lt;int&gt;, `1st` &lt;int&gt;, animal &lt;int&gt;,
 #&gt; #   crossing &lt;int&gt;, experience &lt;int&gt;, gorgeous &lt;int&gt;, idea &lt;int&gt;, love &lt;int&gt;,
 #&gt; #   makes &lt;int&gt;, player &lt;int&gt;, reason &lt;int&gt;, score &lt;int&gt;, worth &lt;int&gt;,
-#&gt; #   `0` &lt;int&gt;, `1` &lt;int&gt;, `10` &lt;int&gt;, control &lt;int&gt;, family &lt;int&gt;,
-#&gt; #   giving &lt;int&gt;, grab &lt;int&gt;, kids &lt;int&gt;, negative &lt;int&gt;, resources &lt;int&gt;,
-#&gt; #   review &lt;int&gt;, switch &lt;int&gt;, unacceptable &lt;int&gt;, user &lt;int&gt;, users &lt;int&gt;,
-#&gt; #   girlfriend &lt;int&gt;, players &lt;int&gt;, time &lt;int&gt;, wait &lt;int&gt;, day &lt;int&gt;,
-#&gt; #   horizons &lt;int&gt;, house &lt;int&gt;, leaf &lt;int&gt;, past &lt;int&gt;, played &lt;int&gt;,
-#&gt; #   view &lt;int&gt;, allowing &lt;int&gt;, designed &lt;int&gt;, gamecube &lt;int&gt;, real &lt;int&gt;,
-#&gt; #   single &lt;int&gt;, version &lt;int&gt;, `2020` &lt;int&gt;, bought &lt;int&gt;, buying &lt;int&gt;,
-#&gt; #   choice &lt;int&gt;, community &lt;int&gt;, decision &lt;int&gt;, expected &lt;int&gt;,
-#&gt; #   features &lt;int&gt;, feel &lt;int&gt;, feels &lt;int&gt;, fine &lt;int&gt;, forced &lt;int&gt;,
-#&gt; #   future &lt;int&gt;, gameplay &lt;int&gt;, huge &lt;int&gt;, issue &lt;int&gt;, left &lt;int&gt;,
-#&gt; #   lot &lt;int&gt;, mechanics &lt;int&gt;, multiplayer &lt;int&gt;, op &lt;int&gt;, person &lt;int&gt;,
-#&gt; #   plays &lt;int&gt;, reviews &lt;int&gt;, shame &lt;int&gt;, sharing &lt;int&gt;, started &lt;int&gt;,
-#&gt; #   system &lt;int&gt;, ...</code></pre>
-<p>After tokenizing, filtering and some other steps, I have 1394 x 331 design matrix at hand. <code>user_name</code> is an ID variable, <code>t</code> indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response <code>rating</code>, are word counts.</p>
+#&gt; #   control &lt;int&gt;, family &lt;int&gt;, giving &lt;int&gt;, grab &lt;int&gt;, kids &lt;int&gt;,
+#&gt; #   negative &lt;int&gt;, resources &lt;int&gt;, review &lt;int&gt;, switch &lt;int&gt;,
+#&gt; #   unacceptable &lt;int&gt;, user &lt;int&gt;, users &lt;int&gt;, girlfriend &lt;int&gt;,
+#&gt; #   players &lt;int&gt;, time &lt;int&gt;, wait &lt;int&gt;, day &lt;int&gt;, horizons &lt;int&gt;,
+#&gt; #   house &lt;int&gt;, leaf &lt;int&gt;, past &lt;int&gt;, played &lt;int&gt;, view &lt;int&gt;,
+#&gt; #   allowing &lt;int&gt;, designed &lt;int&gt;, gamecube &lt;int&gt;, real &lt;int&gt;, single &lt;int&gt;,
+#&gt; #   version &lt;int&gt;, bought &lt;int&gt;, buying &lt;int&gt;, choice &lt;int&gt;, community &lt;int&gt;,
+#&gt; #   decision &lt;int&gt;, expected &lt;int&gt;, features &lt;int&gt;, feel &lt;int&gt;, feels &lt;int&gt;,
+#&gt; #   fine &lt;int&gt;, forced &lt;int&gt;, future &lt;int&gt;, gameplay &lt;int&gt;, huge &lt;int&gt;,
+#&gt; #   issue &lt;int&gt;, left &lt;int&gt;, lot &lt;int&gt;, mechanics &lt;int&gt;, multiplayer &lt;int&gt;,
+#&gt; #   op &lt;int&gt;, person &lt;int&gt;, plays &lt;int&gt;, reviews &lt;int&gt;, shame &lt;int&gt;,
+#&gt; #   sharing &lt;int&gt;, started &lt;int&gt;, system &lt;int&gt;, bombing &lt;int&gt;, dont &lt;int&gt;,
+#&gt; #   hate &lt;int&gt;, islands &lt;int&gt;, ...</code></pre>
+<p>After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. <code>user_name</code> is an ID variable, <code>t</code> indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response <code>rating</code>, are word counts.</p>
 <p>Next I split the data into training and testing test with stratified sampling on <code>rating</code>.</p>
 <pre class="r"><code>library(tidymodels)
 
@@ -400,7 +400,7 @@ best_lambda
 #&gt; # A tibble: 1 x 8
 #&gt;   penalty .metric .estimator  mean     n std_err .best .bound
 #&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1  0.0152 kap     multiclass 0.519    25 0.00657 0.523  0.518</code></pre>
+#&gt; 1  0.0192 kap     multiclass 0.527    25 0.00685 0.533  0.526</code></pre>
 <p>We can finalize and fill the model with this lambda.</p>
 <pre class="r"><code>wf_final &lt;- finalize_workflow(wf, best_lambda)
 
@@ -412,9 +412,9 @@ final_model &lt;- last_fit(wf_final, split = reviews_split,
   conf_mat(rating, estimate = .pred_class)
 #&gt;           Truth
 #&gt; Prediction low medium high
-#&gt;     low    109     17   10
-#&gt;     medium  27      8    9
-#&gt;     high    17      7  143</code></pre>
+#&gt;     low    104     17    7
+#&gt;     medium  31      8   12
+#&gt;     high    18      7  143</code></pre>
 <p>Thanks to downsmapling, the classifier performs quite consistently in predicting these 3 categories. Detection for low ratings may leave some room for improvement.</p>
 <p>Then we could examine these metrics on the model applied to testing set.</p>
 <pre class="r"><code>final_model %&gt;% 
@@ -422,9 +422,9 @@ final_model &lt;- last_fit(wf_final, split = reviews_split,
 #&gt; # A tibble: 3 x 3
 #&gt;   .metric  .estimator .estimate
 #&gt;   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-#&gt; 1 accuracy multiclass     0.749
-#&gt; 2 kap      multiclass     0.576
-#&gt; 3 roc_auc  hand_till      0.767</code></pre>
+#&gt; 1 accuracy multiclass     0.735
+#&gt; 2 kap      multiclass     0.556
+#&gt; 3 roc_auc  hand_till      0.746</code></pre>
 <p>These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the <code>step_upsampling</code> step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about those go to extremes. For another, the best penality is judged by the Kappa statistic, which shows reasonable agreement.</p>
 <p>Varible importance plot could help us to identify useful features. For multiclass logit models, importance is defined as the sum of absolute value of coef of a variable. For example, in our baseline logit models:</p>
 <p><span class="math display">\[
@@ -434,7 +434,7 @@ final_model &lt;- last_fit(wf_final, split = reviews_split,
 \end{aligned}
 \]</span></p>
 <p>The absolute value of variable importance for predictor <span class="math inline">\(x_1\)</span> is <span class="math inline">\(|\hat{\beta}_{21}| + |\hat{\beta}_{31}|\)</span>.</p>
-<p>Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise.</p>
+<p>Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise, similar to sentiment analysis.</p>
 <pre class="r"><code>final_fit &lt;- wf_final %&gt;% fit(data = reviews_train)</code></pre>
 <pre class="r"><code>library(vip)
 
@@ -444,7 +444,7 @@ final_fit %&gt;%
   group_by(Sign) %&gt;% 
   top_n(30, wt = abs(Importance)) %&gt;% 
   ungroup() %&gt;%
-  mutate(Sign = if_else(Sign == &quot;POS&quot;, &quot;high ratings&quot;, &quot;lowo ratings&quot;)) %&gt;% 
+  mutate(Sign = if_else(Sign == &quot;NEG&quot;, &quot;lower ratings&quot;, &quot;higher ratings&quot;)) %&gt;% 
   ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
              x = Importance,
              fill = Sign)) + 

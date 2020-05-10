@@ -121,7 +121,7 @@ glimpse(reviews)
 #&amp;gt; $ user_name &amp;lt;chr&amp;gt; &amp;quot;mds27272&amp;quot;, &amp;quot;lolo2178&amp;quot;, &amp;quot;Roachant&amp;quot;, &amp;quot;Houndf&amp;quot;, &amp;quot;ProfessorF...
 #&amp;gt; $ text      &amp;lt;chr&amp;gt; &amp;quot;My gf started playing before me. No option to create my ...
 #&amp;gt; $ date      &amp;lt;date&amp;gt; 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;An bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut &lt;code&gt;grades&lt;/code&gt; into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models.&lt;/p&gt;
+&lt;p&gt;A bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut &lt;code&gt;grades&lt;/code&gt; into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews %&amp;gt;% 
   count(grade) %&amp;gt;% 
   ggplot() + 
@@ -130,7 +130,7 @@ glimpse(reviews)
            fill = &amp;quot;midnightblue&amp;quot;, alpha = 0.6) + 
   labs(x = &amp;quot;grade&amp;quot;, y = NULL)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;The data is messy in several ways (I have chosen 3 lines for example):&lt;/p&gt;
+&lt;p&gt;The data is messy in several ways (I have chosen 3 observations from the &lt;code&gt;text&lt;/code&gt; column for example):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines&lt;/li&gt;
 &lt;/ul&gt;
@@ -370,7 +370,7 @@ word_cors %&amp;gt;%
 &lt;/div&gt;
 &lt;div id=&#34;predictive-modeling-for-rating&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Predictive modeling for rating&lt;/h1&gt;
-&lt;p&gt;It takes some steps to derive from &lt;code&gt;reviews_clean&lt;/code&gt; a design matrix for modeling. The &lt;a href=&#34;https://tidymodels.github.io/textrecipes/index.html&#34;&gt;&lt;code&gt;textrecipes&lt;/code&gt;&lt;/a&gt; package contains extra steps for the &lt;code&gt;recipes&lt;/code&gt; for preprocessing text data that could have replaced my manual wrangling. But I havn’t digged into that now.&lt;/p&gt;
+&lt;p&gt;It takes some steps to derive from &lt;code&gt;reviews_clean&lt;/code&gt; a design matrix for modeling. The &lt;a href=&#34;https://tidymodels.github.io/textrecipes/index.html&#34;&gt;&lt;code&gt;textrecipes&lt;/code&gt;&lt;/a&gt; package contains extra steps for &lt;code&gt;recipes&lt;/code&gt; for preprocessing text data that could have replaced my manual wrangling. But I havn’t digged into that now.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lubridate)
 
 model_df &amp;lt;- reviews_clean %&amp;gt;% 
@@ -469,7 +469,7 @@ multinom_search &amp;lt;- tune_grid(wf,
   labs(y = NULL, x = expression(lambda)) + 
   theme(legend.position = &amp;quot;none&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;It’s clear from the plot that all 3 metrics benenfit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the “one-standard error rule” that selects model with largesst lambda that is within one standard error of the numerically optimal Kappa metric.&lt;/p&gt;
+&lt;p&gt;It’s clear from the plot that all 3 metrics benefit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the “one-standard error rule” that selects model with largest lambda that is within one standard error of the numerically optimal Kappa metric.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;best_lambda &amp;lt;- multinom_search %&amp;gt;% 
   select_by_one_std_err(metric = &amp;quot;kap&amp;quot;, desc(penalty))
 
@@ -502,8 +502,8 @@ final_model &amp;lt;- last_fit(wf_final, split = reviews_split,
 #&amp;gt; 1 accuracy multiclass     0.749
 #&amp;gt; 2 kap      multiclass     0.576
 #&amp;gt; 3 roc_auc  hand_till      0.767&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the &lt;code&gt;step_upsampling&lt;/code&gt; step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about people go to extremes. For another, the best penality is judged by the Kappa statistic&lt;/p&gt;
-&lt;p&gt;Varible importance plot help us to know useful features. For multiclass models, importance is defined as sum of absolute value of coef of a variable. For example, in our baseline logit models:&lt;/p&gt;
+&lt;p&gt;These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the &lt;code&gt;step_upsampling&lt;/code&gt; step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about those go to extremes. For another, the best penality is judged by the Kappa statistic, which shows reasonable agreement.&lt;/p&gt;
+&lt;p&gt;Varible importance plot could help us to identify useful features. For multiclass logit models, importance is defined as the sum of absolute value of coef of a variable. For example, in our baseline logit models:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
 \begin{aligned}
 \log(\frac{P(medium)}{P(low)}) &amp;amp;= \beta_20 + \beta_{21}x_1 + \cdots + \beta_{2p}x_p \\

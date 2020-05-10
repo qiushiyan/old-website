@@ -475,7 +475,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    15 min read
+    16 min read
   </span>
   
 
@@ -546,7 +546,7 @@ glimpse(reviews)
 #&gt; $ user_name &lt;chr&gt; &quot;mds27272&quot;, &quot;lolo2178&quot;, &quot;Roachant&quot;, &quot;Houndf&quot;, &quot;ProfessorF...
 #&gt; $ text      &lt;chr&gt; &quot;My gf started playing before me. No option to create my ...
 #&gt; $ date      &lt;date&gt; 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-...</code></pre>
-<p>An bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut <code>grades</code> into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models.</p>
+<p>A bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut <code>grades</code> into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models.</p>
 <pre class="r"><code>reviews %&gt;% 
   count(grade) %&gt;% 
   ggplot() + 
@@ -555,7 +555,7 @@ glimpse(reviews)
            fill = &quot;midnightblue&quot;, alpha = 0.6) + 
   labs(x = &quot;grade&quot;, y = NULL)</code></pre>
 <p><img src="/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
-<p>The data is messy in several ways (I have chosen 3 lines for example):</p>
+<p>The data is messy in several ways (I have chosen 3 observations from the <code>text</code> column for example):</p>
 <ul>
 <li>Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines</li>
 </ul>
@@ -795,7 +795,7 @@ word_cors %&gt;%
 </div>
 <div id="predictive-modeling-for-rating" class="section level1">
 <h1>Predictive modeling for rating</h1>
-<p>It takes some steps to derive from <code>reviews_clean</code> a design matrix for modeling. The <a href="https://tidymodels.github.io/textrecipes/index.html"><code>textrecipes</code></a> package contains extra steps for the <code>recipes</code> for preprocessing text data that could have replaced my manual wrangling. But I havn’t digged into that now.</p>
+<p>It takes some steps to derive from <code>reviews_clean</code> a design matrix for modeling. The <a href="https://tidymodels.github.io/textrecipes/index.html"><code>textrecipes</code></a> package contains extra steps for <code>recipes</code> for preprocessing text data that could have replaced my manual wrangling. But I havn’t digged into that now.</p>
 <pre class="r"><code>library(lubridate)
 
 model_df &lt;- reviews_clean %&gt;% 
@@ -894,7 +894,7 @@ multinom_search &lt;- tune_grid(wf,
   labs(y = NULL, x = expression(lambda)) + 
   theme(legend.position = &quot;none&quot;)</code></pre>
 <p><img src="/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
-<p>It’s clear from the plot that all 3 metrics benenfit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the “one-standard error rule” that selects model with largesst lambda that is within one standard error of the numerically optimal Kappa metric.</p>
+<p>It’s clear from the plot that all 3 metrics benefit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the “one-standard error rule” that selects model with largest lambda that is within one standard error of the numerically optimal Kappa metric.</p>
 <pre class="r"><code>best_lambda &lt;- multinom_search %&gt;% 
   select_by_one_std_err(metric = &quot;kap&quot;, desc(penalty))
 
@@ -927,8 +927,8 @@ final_model &lt;- last_fit(wf_final, split = reviews_split,
 #&gt; 1 accuracy multiclass     0.749
 #&gt; 2 kap      multiclass     0.576
 #&gt; 3 roc_auc  hand_till      0.767</code></pre>
-<p>These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the <code>step_upsampling</code> step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about people go to extremes. For another, the best penality is judged by the Kappa statistic</p>
-<p>Varible importance plot help us to know useful features. For multiclass models, importance is defined as sum of absolute value of coef of a variable. For example, in our baseline logit models:</p>
+<p>These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the <code>step_upsampling</code> step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about those go to extremes. For another, the best penality is judged by the Kappa statistic, which shows reasonable agreement.</p>
+<p>Varible importance plot could help us to identify useful features. For multiclass logit models, importance is defined as the sum of absolute value of coef of a variable. For example, in our baseline logit models:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \log(\frac{P(medium)}{P(low)}) &amp;= \beta_20 + \beta_{21}x_1 + \cdots + \beta_{2p}x_p \\

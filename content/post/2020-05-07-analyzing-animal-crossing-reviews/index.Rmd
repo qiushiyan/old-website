@@ -76,7 +76,7 @@ glimpse(reviews)
  
 
 
-An bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut `grades` into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models. 
+A bar plot of all grades show a bimodal distribution. This is perhaps not that astonishing when it comes to reviewing, since people tend to go to extremes and give polarized opinions. This may suggest that we cut `grades` into discrete levels and build a classification model afterwards, rather than modeling bare grades itself with regression models. 
 ```{r}
 reviews %>% 
   count(grade) %>% 
@@ -88,7 +88,7 @@ reviews %>%
 ```
 
 
-The data is messy in several ways (I have chosen 3 lines for example):  
+The data is messy in several ways (I have chosen 3 observations from the `text` column for example):  
 
 - Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines
 
@@ -328,7 +328,7 @@ word_cors %>%
 
 # Predictive modeling for rating
 
-It takes some steps to derive from `reviews_clean` a design matrix for modeling. The [`textrecipes`](https://tidymodels.github.io/textrecipes/index.html) package contains extra steps for the `recipes` for preprocessing text data that could have replaced my manual wrangling. But I havn't digged into that now. 
+It takes some steps to derive from `reviews_clean` a design matrix for modeling. The [`textrecipes`](https://tidymodels.github.io/textrecipes/index.html) package contains extra steps for `recipes` for preprocessing text data that could have replaced my manual wrangling. But I havn't digged into that now. 
 
 ```{r}
 library(lubridate)
@@ -408,7 +408,7 @@ multinom_search %>%
   theme(legend.position = "none")
 ```
 
-It's clear from the plot that all 3 metrics benenfit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the "one-standard error rule" that selects model with largesst lambda that is within one standard error of the numerically optimal Kappa metric.
+It's clear from the plot that all 3 metrics benefit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the "one-standard error rule" that selects model with largest lambda that is within one standard error of the numerically optimal Kappa metric.
 
 ```{r}
 best_lambda <- multinom_search %>% 
@@ -446,9 +446,9 @@ final_model %>%
 ```
 
 
-These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the `step_upsampling` step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about people go to extremes. For another, the best penality is judged by the Kappa statistic   
+These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the `step_upsampling` step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about those go to extremes. For another, the best penality is judged by the Kappa statistic, which shows reasonable agreement.
 
-Varible importance plot help us to know useful features. For multiclass models, importance is defined as sum of absolute value of coef of a variable. For example, in our baseline logit models:  
+Varible importance plot could help us to identify useful features. For multiclass logit models, importance is defined as the sum of absolute value of coef of a variable. For example, in our baseline logit models:  
 
 
 $$

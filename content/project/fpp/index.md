@@ -1,6 +1,6 @@
 ---
 date: "2020-03-04T00:00:00Z"
-external_link: /fpp
+external_link: https://bookdown.org/Maxine/fpp
 summary: Notes for "Forecasting：Principles and Practice, 3rd edition"
 tags:
 - R

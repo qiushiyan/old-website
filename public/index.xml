@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Qiushi Yan</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 09 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Qiushi Yan</title>
@@ -23,6 +23,42 @@
 &lt;p&gt;For another, learning is an end in itself. It is those confounding moments, self-discovery after self-doubt that make knowledge so desirable. A healthy way of learning inculcates in students a love for the subject, not just what the test requires, so the students can, and most importantly will, make the subject their business to learn. Most students, on the other hand, are swamped by exam-oriented education, deprived of the joy of mental adventure, so that creativity and ingenuous pursuit of knowledge can never be attained. While they are preparing for the examination related to certificates, reference books, didactic teaching, rote learning and cramming schooling play a major role. They are told so, and without serious consideration, another quiz begins. This process, however, produces only dilettantes with a smattering of knowledge that would soon grow unlearned. Of greater concern is that they may become unable to explore a new field without an all-knowing guide, but there is rarely a guide in practical working experience.&lt;/p&gt;
 &lt;p&gt;By no means am I making the conclusion that certificates are pure evil, for they can be equally used for good. Certificates and examinations correlated to one’s interests and consistent with his / her professional aspirations can, in most cases, cultivate one’s ability and guide them through the job market.&lt;/p&gt;
 &lt;p&gt;On balance, I believe that certificates do little to enhance one’s capability until we have poured in meaning efforts in something that would give meaning help in the days to come. Certificates itself is neutral, and we could use it to our advantage once we follow an appropriate way to learn. We should always acquire knowledge from the process and keep exploring and thinking instead of be guided by utilitarianism. Only in this way can we truly improve our abilities.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Manual of Classification Metrics</title>
+      <link>/post/classification-metrics/</link>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/classification-metrics/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#terminology&#34;&gt;Terminology&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#evaluating-predicted-classes&#34;&gt;Evaluating predicted classes&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#accuracy-based-criteria&#34;&gt;Accuracy based criteria&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://tidymodels.github.io/yardstick/reference/f_meas.html&#34; class=&#34;uri&#34;&gt;https://tidymodels.github.io/yardstick/reference/f_meas.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&#34; class=&#34;uri&#34;&gt;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;terminology&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Terminology&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;evaluating-predicted-classes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Evaluating predicted classes&lt;/h1&gt;
+&lt;div id=&#34;accuracy-based-criteria&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Accuracy based criteria&lt;/h2&gt;
+&lt;p&gt;To make this more concrete. Suppose the event is having a disease, and sensitivity, specificity and prevalence are known. Then:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{sensitivity} = P(\text{true}|\text{disease}) \\
+\text{specificity} = P(\text{true}|\text{no disease}) \\
+\text{prevalence} = P(\text{disease})
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -87,7 +123,7 @@ titanic.head()&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Programmers and their Choice of Words</title>
+      <title>Programmers and Their Choice of Words</title>
       <link>/post/programmer-word-choice/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
       <guid>/post/programmer-word-choice/</guid>
@@ -108,23 +144,16 @@ titanic.head()&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#eda-and-data-cleaning&#34;&gt;EDA and data cleaning&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#results&#34;&gt;Results&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#repeated-reviews&#34;&gt;Repeated reviews&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#incomplete-reviews-because-they-are-too-long&#34;&gt;Incomplete reviews because they are too long&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#non-english-reviews&#34;&gt;Non-English reviews&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#section&#34;&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sentiment-analysis-of-user-reviews&#34;&gt;Sentiment analysis of user reviews&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#predictive-modeling-for-grades-with-user-reviews&#34;&gt;Predictive modeling for grades with user reviews&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#eda-and-data-cleaning&#34;&gt;EDA and data cleaning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#text-analysis-of-user-reviews&#34;&gt;Text analysis of user reviews&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#predictive-modeling-for-rating&#34;&gt;Predictive modeling for rating&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Our modeling goal is to predict the rating for the life simulation video game, Animal Crossing, from its user reviews. The data comes from &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05/readme.md&#34;&gt;this weeks’s &lt;code&gt;#TidyTuesday&lt;/code&gt;&lt;/a&gt;, scraped from &lt;a href=&#34;https://github.com/jefflomacy/villagerdb&#34;&gt;VillagerDB&lt;/a&gt; and &lt;a href=&#34;https://www.metacritic.com/game/switch/animal-crossing-new-horizons/critic-reviews&#34;&gt;Metacritic&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this post I analyzed reviews for the life simulation video game, Animal Crossing. The data came from &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05/readme.md&#34;&gt;this weeks’s &lt;code&gt;#TidyTuesday&lt;/code&gt;&lt;/a&gt;, scraped from &lt;a href=&#34;https://github.com/jefflomacy/villagerdb&#34;&gt;VillagerDB&lt;/a&gt; and &lt;a href=&#34;https://www.metacritic.com/game/switch/animal-crossing-new-horizons/critic-reviews&#34;&gt;Metacritic&lt;/a&gt;. I used only the &lt;code&gt;reviews&lt;/code&gt; table, but there are a lot more to analyze such as characters and items in the game.&lt;/p&gt;
+&lt;p&gt;The data appeared a bit messy after some EDA, and regular expressions played a major role in data cleaning. After that I made some plots concerning the review text, such as common words or high score words from an algorithm. Highly correlated words in user reviews were shown with nodes and edges. Then I built a multicategory logit model to predict ratings (low, medium or high) with predictors including the reviewing date and usage of specific words.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
-library(tidytext)
-set.seed(2020)&lt;/code&gt;&lt;/pre&gt;
+library(tidytext)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;eda-and-data-cleaning&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;EDA and data cleaning&lt;/h1&gt;
 &lt;p&gt;The reviews data contains four columns:&lt;/p&gt;
@@ -153,30 +182,28 @@ glimpse(reviews)
 &lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The data is messy in several ways (I have chosen 3 lines for example):&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;reviews that exceed certian length are incomplete and end with “Expand”. The following review also contains repetition.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;non-English reviews&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div id=&#34;results&#34; class=&#34;section level2 tabset&#34;&gt;
-&lt;h2&gt;Results&lt;/h2&gt;
-&lt;div id=&#34;repeated-reviews&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Repeated reviews&lt;/h3&gt;
+&lt;blockquote&gt;
 &lt;p&gt;“While the game itself is great, really relaxing and gorgeous, i can’t ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you haveWhile the game itself is great, really relaxing and gorgeous, i can’t ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you have the other usershouse and furniture. I hope nintendo can soon fix this big issue, because for now, this killed any intentions i had to play the game.… Expand”&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;incomplete-reviews-because-they-are-too-long&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Incomplete reviews because they are too long&lt;/h3&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Reviews that exceed certian length are incomplete and end with “Expand”. The following review also contains repeated lines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
 &lt;p&gt;“One island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company thatOne island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company that sees fit to make such decisions.… Expand”&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;non-english-reviews&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Non-English reviews&lt;/h3&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;non-English reviews&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
 &lt;p&gt;“Una sola isla , es un asco . No puedes seguir avanzando, solo te queda recoger madera”&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;section&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;&lt;/h2&gt;
-&lt;p&gt;I use regular expressions to remove reptitions and “Expand” at the end. Repetitions happen when the review is long, and the repetition part often takes up 4 to 5 lines (here I use 350 or more characters to indicate the repetition part).&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;clr::detect_language&lt;/code&gt; is used to exclude non-English text. This a R wrapper around Google’s Compact Language Detector 3, a neural network model for language identification . There will be misclassifications, though. As the proportion of exclusion is fairly low, we’re OK.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I use regular expressions to remove repeated lines as well as “Expand” at the end. Repetitions happen when the review is long, and the repetition part often takes up 4 to 5 lines (here I use 350 or more characters to indicate the repetition part).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;clr::detect_language&lt;/code&gt; is used to exclude non-English text. This a R wrapper around Google’s Compact Language Detector 3, a neural network model for language identification. There will be misclassifications, though. As the proportion of exclusion is fairly low, we’re OK. Lastyly, et’s split &lt;code&gt;grade&lt;/code&gt; 3 ordered categories, low, medium and high.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(cld3)
+
+# most text are detected as English
 reviews %&amp;gt;% 
   mutate(language = detect_language(text)) %&amp;gt;% 
   count(language, sort = TRUE)
@@ -198,21 +225,27 @@ reviews %&amp;gt;%
   filter(detect_language(text) == &amp;quot;en&amp;quot;)
 
 
-repetition_clean &amp;lt;- reviews %&amp;gt;% 
+repetition_clean &amp;lt;- reviews_en %&amp;gt;% 
   filter(str_detect(text, &amp;quot;(.{350,})\\1.+&amp;quot;)) %&amp;gt;% 
   mutate(text = str_replace(text, &amp;quot;(.{350,})\\1(.+)Expand$&amp;quot;, &amp;quot;\\1\\2&amp;quot;))
 
 reviews_clean &amp;lt;- anti_join(reviews_en, repetition_clean, 
                            by = c(&amp;quot;user_name&amp;quot; = &amp;quot;user_name&amp;quot;)) %&amp;gt;% 
-  bind_rows(repetition_clean)
-
-# draw some sample reviews
-reviews_clean %&amp;gt;% 
-  sample_n(3) %&amp;gt;% 
-  pull(text)
-#&amp;gt; [1] &amp;quot;I am currently playing this game single player however I feel compelled to review this game based on the multiplayer experience. The decision to lock the game to one island per console is nothing short of a cash grab. I am a long time Nintendo fan since I received a SNES for Christmas as a child but this behavior disgusts me and I am reluctant to spend any more money with this company if they do not address this problem. Nintendo consoles have always been family focused machines that encourage multiplayer and this seems to go against everything they have ever done to date.Sadly they have likely already sold enough units to cover costs and will simply ignore the outrage from their customers.… &amp;quot;
-#&amp;gt; [2] &amp;quot;This game is excellent, I can&amp;#39;t stop playing it, it&amp;#39;s fun and has so many thing to do that I can spend hours and hours playing it and still don&amp;#39;t get tiredBest game that I have played in a while&amp;quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-#&amp;gt; [3] &amp;quot;Cast: 6/10Story: 6/10Fun: 9/10Gameplay: 8/10Recommended----------------------&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+  bind_rows(repetition_clean) %&amp;gt;% 
+  mutate(rating = case_when(
+    grade &amp;lt;= 2 ~ &amp;quot;low&amp;quot;,
+    grade &amp;gt; 2 &amp;amp; grade &amp;lt; 8 ~ &amp;quot;medium&amp;quot;,
+    grade &amp;gt;= 8 ~ &amp;quot;high&amp;quot;,
+  ) %&amp;gt;% factor(levels = c(&amp;quot;low&amp;quot;, &amp;quot;medium&amp;quot;, &amp;quot;high&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, &lt;code&gt;rating&lt;/code&gt; is a factor with 3 levels. Low and high ratings are rougly the same size, and medium ratings are relatively rare.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews_clean %&amp;gt;% 
+  count(rating)
+#&amp;gt; # A tibble: 3 x 2
+#&amp;gt;   rating     n
+#&amp;gt;   &amp;lt;fct&amp;gt;  &amp;lt;int&amp;gt;
+#&amp;gt; 1 low      626
+#&amp;gt; 2 medium   136
+#&amp;gt; 3 high     632&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can examine how this cleaning process works by comparing the distribution of review length, before and after. The cleaning should reduce the amount of medium long and long reviews, in exchange for shorter ones.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;reviews %&amp;gt;%
   transmute(length = str_length(text),
@@ -222,40 +255,334 @@ reviews_clean %&amp;gt;%
   ggplot() + 
   geom_density(aes(length, fill = type), alpha = 0.2) + 
   scale_fill_discrete(name = NULL) + 
-  labs(title = &amp;quot;Distribution of review length before and after cleaning&amp;quot;,
+  labs(title = &amp;quot;Distribution of review length (characters) before and after cleaning&amp;quot;,
        x = NULL,
        y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
+&lt;div id=&#34;text-analysis-of-user-reviews&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Text analysis of user reviews&lt;/h1&gt;
+&lt;p&gt;Our text analysis begin by tokenizing review text to find out what are the most common words (by term frequency) for each category of reviews.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;words &amp;lt;- reviews_clean %&amp;gt;% 
+  select(rating, text) %&amp;gt;% 
+  unnest_tokens(word, text) %&amp;gt;% 
+  anti_join(stop_words) %&amp;gt;% 
+  filter(!str_detect(word, &amp;quot;^\\d+$&amp;quot;))
+ 
+
+common_words &amp;lt;- words %&amp;gt;% 
+  count(rating, word, sort = TRUE, name = &amp;quot;term_count&amp;quot;) %&amp;gt;% 
+  add_count(rating, wt = term_count, name = &amp;quot;total_count&amp;quot;) %&amp;gt;% 
+  mutate(term_freq = term_count / total_count)  %&amp;gt;% 
+  group_by(rating) %&amp;gt;% 
+  top_n(30, term_freq)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(common_words, 
+       aes(y = reorder_within(word, term_freq, rating),
+           x = term_freq,
+           fill = rating)) + 
+  geom_col(show.legend = FALSE, alpha = 0.6) + 
+  scale_y_reordered() + 
+  scale_x_continuous(label = scales::label_percent()) + 
+  nord::scale_fill_nord(palette = &amp;quot;afternoon_prarie&amp;quot;) +
+  facet_wrap(~ rating, scales = &amp;quot;free_y&amp;quot;, strip.position = &amp;quot;bottom&amp;quot;) + 
+  labs(title = &amp;quot;Most common words in different levels of reviews&amp;quot;,
+       x = &amp;quot;term frequency&amp;quot;,
+       y = NULL) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(panel.grid.major.y = element_blank(),
+        plot.title = element_text(face = &amp;quot;bold&amp;quot;, size = 28),
+        plot.title.position = &amp;quot;plot&amp;quot;,
+        axis.text.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 16), 
+        strip.text = element_text(size = 20, color = &amp;quot;white&amp;quot;)) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As it is, this plot aren’t that helpful for all categories share a very similar set of words. For this reason I turn to two other algorithms developed for information retrieval: tf-idf and weighted log odds.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
+
+key_words &amp;lt;- words %&amp;gt;% 
+  count(rating, word, sort = TRUE) %&amp;gt;% 
+  bind_tf_idf(term = word, document = rating, n = n) %&amp;gt;%
+  left_join(words %&amp;gt;% 
+              count(rating, word, sort = TRUE) %&amp;gt;% 
+              bind_log_odds(set = rating, feature = word, n = n),
+            by = c(&amp;quot;rating&amp;quot; = &amp;quot;rating&amp;quot;, &amp;quot;word&amp;quot;, &amp;quot;word&amp;quot;, &amp;quot;n&amp;quot; = &amp;quot;n&amp;quot;)) %&amp;gt;% 
+  select(rating, word, tf_idf, log_odds)
+
+key_words
+#&amp;gt; # A tibble: 9,162 x 4
+#&amp;gt;    rating word     tf_idf log_odds
+#&amp;gt;    &amp;lt;fct&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 low    game          0   -0.392
+#&amp;gt;  2 high   game          0    1.25 
+#&amp;gt;  3 low    island        0    3.60 
+#&amp;gt;  4 low    switch        0    5.25 
+#&amp;gt;  5 low    play          0    5.24 
+#&amp;gt;  6 low    player        0    7.31 
+#&amp;gt;  7 high   island        0   -3.44 
+#&amp;gt;  8 low    nintendo      0    6.54 
+#&amp;gt;  9 medium game          0   -0.882
+#&amp;gt; 10 high   animal        0    7.55 
+#&amp;gt; # ... with 9,152 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Make separate plot for two measures and then combine them togther.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tf_idf &amp;lt;- key_words %&amp;gt;% 
+  group_by(rating) %&amp;gt;% 
+  arrange(-tf_idf) %&amp;gt;% 
+  slice(1:20) %&amp;gt;% 
+  ggplot(aes(
+    y = reorder_within(word, tf_idf, rating),
+    x = tf_idf,
+    fill = rating)) + 
+  geom_col(show.legend = FALSE, alpha = 0.6) + 
+  scale_y_reordered() + 
+  scale_x_continuous(position = &amp;quot;top&amp;quot;) + 
+  nord::scale_fill_nord(palette = &amp;quot;afternoon_prarie&amp;quot;) +
+  facet_wrap(~ rating, scales = &amp;quot;free_y&amp;quot;, strip.position = &amp;quot;bottom&amp;quot;) + 
+  labs(title = &amp;quot;High tf-idf words&amp;quot;,
+       x = NULL,
+       y = NULL) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(panel.grid.major.y = element_blank(),
+        plot.title = element_text(face = &amp;quot;bold&amp;quot;, size = 28),
+        plot.title.position = &amp;quot;plot&amp;quot;,
+        axis.text.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 16), 
+        strip.text = element_text(size = 24, color = &amp;quot;white&amp;quot;)) 
+
+log_odds &amp;lt;- key_words %&amp;gt;% 
+  group_by(rating) %&amp;gt;% 
+  top_n(20, log_odds) %&amp;gt;%
+  ggplot(aes(
+    y = reorder_within(word, log_odds, rating),
+    x = log_odds,
+    fill = rating)) + 
+  geom_col(show.legend = FALSE, alpha = 0.6) + 
+  scale_y_reordered() + 
+  scale_x_continuous(position = &amp;quot;top&amp;quot;) +  
+  nord::scale_fill_nord(palette = &amp;quot;afternoon_prarie&amp;quot;) +
+  facet_wrap(~ rating, scales = &amp;quot;free_y&amp;quot;, strip.position = &amp;quot;bottom&amp;quot;) + 
+  labs(title = &amp;quot;High log-odds words&amp;quot;,
+       x = NULL,
+       y = NULL) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(panel.grid.major.y = element_blank(),
+        plot.title = element_text(face = &amp;quot;bold&amp;quot;, size = 28),
+        plot.title.position = &amp;quot;plot&amp;quot;,
+        axis.text.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 16), 
+        strip.text = element_blank()) 
+
+patchwork::wrap_plots(tf_idf, log_odds, nrow = 2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Emmm… this is a little better, isn’t it 😅? The &lt;code&gt;tf_idf&lt;/code&gt; plot performed well in identifying characteristic words in low ratings like “unacceptable”, “wtf” and “boring”, While the &lt;code&gt;log_odds&lt;/code&gt; plo shows a somewhat dominance of words like “fun”, “cute” and “relaxing” in high ratings.&lt;/p&gt;
+&lt;p&gt;Additionally, we may also be interested in words that tend to co-occur within a particular review. For simplicity I focus on long reivews only (more than 800 characters).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(widyr)
+
+word_cors &amp;lt;- reviews_clean %&amp;gt;%  
+  filter(str_length(text) &amp;gt; 800) %&amp;gt;%
+  select(user_name, text) %&amp;gt;% 
+  unnest_tokens(word, text) %&amp;gt;% 
+  anti_join(stop_words) %&amp;gt;% 
+  filter(!str_detect(word, &amp;quot;^\\d+$&amp;quot;)) %&amp;gt;% 
+  group_by(word) %&amp;gt;% 
+  filter(n() &amp;gt; 10) %&amp;gt;% 
+  count(user_name, word) %&amp;gt;% 
+  pairwise_cor(item = word, feature = user_name, value = n)
+
+word_cors
+#&amp;gt; # A tibble: 102,720 x 3
+#&amp;gt;    item1      item2 correlation
+#&amp;gt;    &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 ability    3ds       -0.0402
+#&amp;gt;  2 absolutely 3ds       -0.0125
+#&amp;gt;  3 ac         3ds        0.158 
+#&amp;gt;  4 access     3ds       -0.0457
+#&amp;gt;  5 account    3ds        0.170 
+#&amp;gt;  6 accounts   3ds        0.271 
+#&amp;gt;  7 activities 3ds        0.0348
+#&amp;gt;  8 add        3ds        0.0216
+#&amp;gt;  9 addition   3ds        0.0770
+#&amp;gt; 10 additional 3ds       -0.0414
+#&amp;gt; # ... with 102,710 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggraph)
+library(tidygraph)
+
+word_cors %&amp;gt;%
+  filter(correlation &amp;gt; 0.4) %&amp;gt;% 
+  as_tbl_graph() %&amp;gt;% 
+  ggraph(layout = &amp;quot;fr&amp;quot;) + 
+  geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
+  geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 6.5) + 
+  geom_node_text(aes(label = name), repel = TRUE, size = 5.5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;sentiment-analysis-of-user-reviews&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Sentiment analysis of user reviews&lt;/h1&gt;
-&lt;/div&gt;
-&lt;div id=&#34;predictive-modeling-for-grades-with-user-reviews&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Predictive modeling for grades with user reviews&lt;/h1&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
-reviews %&amp;gt;% 
-  transmute(rating = case_when(
-    grade &amp;lt;= 4 ~ &amp;quot;low&amp;quot;,
-    grade &amp;gt; 4 &amp;amp; grade &amp;lt;= 8 ~ &amp;quot;medium&amp;quot;,
-    grade &amp;gt; 8 ~ &amp;quot;high&amp;quot;,
-  ),
-  text) %&amp;gt;% 
-  unnest_tokens(line, text, token = &amp;quot;lines&amp;quot;) 
-#&amp;gt; # A tibble: 1,473 x 2
-#&amp;gt;    rating line                                                                  
-#&amp;gt;    &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;                                                                 
-#&amp;gt;  1 high   cant stop playing!                                                    
-#&amp;gt;  2 high   as a first timer to the animal crossing series, it was a bit hard to ~
-#&amp;gt;  3 high   this is my first animal crossing game i’ve ever played. i am seriousl~
-#&amp;gt;  4 high   i like it so far. unfair to rate the game a 0 because of a poor desig~
-#&amp;gt;  5 high   this game is absolutely amazing as a constant side game for one&amp;#39;s day~
-#&amp;gt;  6 high   probably the best animal crossing has ever been, and to fans of the s~
-#&amp;gt;  7 high   an amazing game and the best ac yet! if you don’t understand there is~
-#&amp;gt;  8 high   an absolutely awesome addition to the franchise. everything about thi~
-#&amp;gt;  9 high   this review contains spoilers, click expand to view.                 ~
-#&amp;gt; 10 high   there are no words to describe the flawlessly, gorgeous graphics and ~
-#&amp;gt; # ... with 1,463 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;predictive-modeling-for-rating&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Predictive modeling for rating&lt;/h1&gt;
+&lt;p&gt;It takes some steps to derive from &lt;code&gt;reviews_clean&lt;/code&gt; a design matrix for modeling. The &lt;a href=&#34;https://tidymodels.github.io/textrecipes/index.html&#34;&gt;&lt;code&gt;textrecipes&lt;/code&gt;&lt;/a&gt; package contains extra steps for the &lt;code&gt;recipes&lt;/code&gt; for preprocessing text data that could have replaced my manual wrangling. But I havn’t digged into that now.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lubridate)
+
+model_df &amp;lt;- reviews_clean %&amp;gt;% 
+  filter_all(all_vars(!is.na(.))) %&amp;gt;% 
+  transmute(rating, 
+            user_name, 
+            text,
+            t = as.numeric(date - ymd(&amp;quot;2020-03-20&amp;quot;))) %&amp;gt;%
+  unnest_tokens(word, text) %&amp;gt;% 
+  anti_join(stop_words) %&amp;gt;%
+  count(user_name, t, rating, word, name = &amp;quot;word_count&amp;quot;) %&amp;gt;% 
+  group_by(word) %&amp;gt;% 
+  filter(n() &amp;gt; 20, word != &amp;quot;rating&amp;quot;) %&amp;gt;% 
+  ungroup() %&amp;gt;% 
+  pivot_wider(names_from = word, values_from = word_count, 
+              values_fill = list(word_count = 0), names_repair = &amp;quot;minimal&amp;quot;)
+  
+
+model_df
+#&amp;gt; # A tibble: 1,393 x 331
+#&amp;gt;    user_name     t rating playing  stop ability accounts   buy `can’t` console
+#&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;    &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;    &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;   &amp;lt;int&amp;gt;
+#&amp;gt;  1 000PLAYE~     0 high         1     1       0        0     0       0       0
+#&amp;gt;  2 11_11         4 low          1     0       1        3     2       1       2
+#&amp;gt;  3 12hwilso      4 low          0     0       0        1     0       0       2
+#&amp;gt;  4 3nd3r02       6 low          0     0       0        0     0       0       0
+#&amp;gt;  5 425_Flex      3 low          0     0       0        0     0       0       0
+#&amp;gt;  6 486eHyMy      2 low          0     0       0        0     0       0       0
+#&amp;gt;  7 4Plants       5 high         0     0       0        0     0       0       0
+#&amp;gt;  8 8bheotap~     6 low          0     0       0        0     0       0       2
+#&amp;gt;  9 A_Mighty~     6 medium       3     0       0        1     3       0       0
+#&amp;gt; 10 a0972354      4 high         0     0       0        0     0       0       0
+#&amp;gt; # ... with 1,383 more rows, and 321 more variables: consoles &amp;lt;int&amp;gt;,
+#&amp;gt; #   `don’t` &amp;lt;int&amp;gt;, excited &amp;lt;int&amp;gt;, extremely &amp;lt;int&amp;gt;, families &amp;lt;int&amp;gt;,
+#&amp;gt; #   forcing &amp;lt;int&amp;gt;, fun &amp;lt;int&amp;gt;, game &amp;lt;int&amp;gt;, games &amp;lt;int&amp;gt;, greedy &amp;lt;int&amp;gt;,
+#&amp;gt; #   household &amp;lt;int&amp;gt;, island &amp;lt;int&amp;gt;, money &amp;lt;int&amp;gt;, multiple &amp;lt;int&amp;gt;, nintendo &amp;lt;int&amp;gt;,
+#&amp;gt; #   play &amp;lt;int&amp;gt;, purchase &amp;lt;int&amp;gt;, saves &amp;lt;int&amp;gt;, separate &amp;lt;int&amp;gt;, sister &amp;lt;int&amp;gt;,
+#&amp;gt; #   spent &amp;lt;int&amp;gt;, stupid &amp;lt;int&amp;gt;, true &amp;lt;int&amp;gt;, account &amp;lt;int&amp;gt;, broken &amp;lt;int&amp;gt;,
+#&amp;gt; #   fix &amp;lt;int&amp;gt;, people &amp;lt;int&amp;gt;, progress &amp;lt;int&amp;gt;, `1st` &amp;lt;int&amp;gt;, animal &amp;lt;int&amp;gt;,
+#&amp;gt; #   crossing &amp;lt;int&amp;gt;, experience &amp;lt;int&amp;gt;, gorgeous &amp;lt;int&amp;gt;, idea &amp;lt;int&amp;gt;, love &amp;lt;int&amp;gt;,
+#&amp;gt; #   makes &amp;lt;int&amp;gt;, player &amp;lt;int&amp;gt;, reason &amp;lt;int&amp;gt;, score &amp;lt;int&amp;gt;, worth &amp;lt;int&amp;gt;,
+#&amp;gt; #   `0` &amp;lt;int&amp;gt;, `1` &amp;lt;int&amp;gt;, `10` &amp;lt;int&amp;gt;, control &amp;lt;int&amp;gt;, family &amp;lt;int&amp;gt;,
+#&amp;gt; #   giving &amp;lt;int&amp;gt;, grab &amp;lt;int&amp;gt;, kids &amp;lt;int&amp;gt;, negative &amp;lt;int&amp;gt;, resources &amp;lt;int&amp;gt;,
+#&amp;gt; #   review &amp;lt;int&amp;gt;, switch &amp;lt;int&amp;gt;, unacceptable &amp;lt;int&amp;gt;, user &amp;lt;int&amp;gt;, users &amp;lt;int&amp;gt;,
+#&amp;gt; #   girlfriend &amp;lt;int&amp;gt;, players &amp;lt;int&amp;gt;, time &amp;lt;int&amp;gt;, wait &amp;lt;int&amp;gt;, day &amp;lt;int&amp;gt;,
+#&amp;gt; #   horizons &amp;lt;int&amp;gt;, house &amp;lt;int&amp;gt;, leaf &amp;lt;int&amp;gt;, past &amp;lt;int&amp;gt;, played &amp;lt;int&amp;gt;,
+#&amp;gt; #   view &amp;lt;int&amp;gt;, allowing &amp;lt;int&amp;gt;, designed &amp;lt;int&amp;gt;, gamecube &amp;lt;int&amp;gt;, real &amp;lt;int&amp;gt;,
+#&amp;gt; #   single &amp;lt;int&amp;gt;, version &amp;lt;int&amp;gt;, `2020` &amp;lt;int&amp;gt;, bought &amp;lt;int&amp;gt;, buying &amp;lt;int&amp;gt;,
+#&amp;gt; #   choice &amp;lt;int&amp;gt;, community &amp;lt;int&amp;gt;, decision &amp;lt;int&amp;gt;, expected &amp;lt;int&amp;gt;,
+#&amp;gt; #   features &amp;lt;int&amp;gt;, feel &amp;lt;int&amp;gt;, feels &amp;lt;int&amp;gt;, fine &amp;lt;int&amp;gt;, forced &amp;lt;int&amp;gt;,
+#&amp;gt; #   future &amp;lt;int&amp;gt;, gameplay &amp;lt;int&amp;gt;, huge &amp;lt;int&amp;gt;, issue &amp;lt;int&amp;gt;, left &amp;lt;int&amp;gt;,
+#&amp;gt; #   lot &amp;lt;int&amp;gt;, mechanics &amp;lt;int&amp;gt;, multiplayer &amp;lt;int&amp;gt;, op &amp;lt;int&amp;gt;, person &amp;lt;int&amp;gt;,
+#&amp;gt; #   plays &amp;lt;int&amp;gt;, reviews &amp;lt;int&amp;gt;, shame &amp;lt;int&amp;gt;, sharing &amp;lt;int&amp;gt;, started &amp;lt;int&amp;gt;,
+#&amp;gt; #   system &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After tokenizing, filtering and some other steps, I have 1394 x 331 design matrix at hand. &lt;code&gt;user_name&lt;/code&gt; is an ID variable, &lt;code&gt;t&lt;/code&gt; indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response &lt;code&gt;rating&lt;/code&gt;, are word counts.&lt;/p&gt;
+&lt;p&gt;Next I split the data into training and testing test with stratified sampling on &lt;code&gt;rating&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
+
+set.seed(2020)
+reviews_split &amp;lt;- initial_split(model_df, strata = rating)
+reviews_train &amp;lt;- training(reviews_split)
+reviews_test &amp;lt;- testing(reviews_split)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I choose to fit a multinomial logisitic regression model run by the &lt;code&gt;glmnet&lt;/code&gt; package, with L1 regularization as in the lasso model. To detect medium ratings more accurately, the minority class, &lt;code&gt;step_upsample&lt;/code&gt; will bring the number of meidum and high ratings up to the same (&lt;code&gt;over_ratio = 1&lt;/code&gt; ) as that of low ratings. And &lt;code&gt;tune_gird()&lt;/code&gt; will calculate model performance metrics averaged over 25 bootstrap resamples for 100 choices of lambda.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;multinom_spec &amp;lt;- multinom_reg(mixture = 1, penalty = tune()) %&amp;gt;% 
+  set_engine(&amp;quot;glmnet&amp;quot;) %&amp;gt;% 
+  set_mode(&amp;quot;classification&amp;quot;) 
+
+library(themis)
+rec &amp;lt;- recipe(rating ~ ., data = reviews_train) %&amp;gt;%
+  update_role(user_name, new_role = &amp;quot;ID&amp;quot;) %&amp;gt;% 
+  step_upsample(rating, over_ratio = 1) %&amp;gt;% 
+  step_normalize(all_predictors())
+
+lambda_grid &amp;lt;- grid_regular(penalty(), levels = 100)
+  
+reviews_folds &amp;lt;- bootstraps(reviews_train, strata = rating)
+
+wf &amp;lt;- workflow() %&amp;gt;% 
+  add_model(multinom_spec) %&amp;gt;% 
+  add_recipe(rec)
+
+doParallel::registerDoParallel()
+
+multinom_search &amp;lt;- tune_grid(wf, 
+                    resamples = reviews_folds,
+                    grid = lambda_grid,
+                    metrics = metric_set(roc_auc, accuracy, kap))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Available metrics are ROC AUC, accuracy and Kappa. In multiclass cases, accuracy and Kappa use the same definitions as their binary counterpart, with accuracy counting up the number of correctly predicted true values out of the total number of true values, and Kappa being a linear combination of two accuracy values, sensitivity and specificity. Multiclass ROC AUC, however, is implemented as the “hand_till” method which I won’t venture to interpret now.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;multinom_search %&amp;gt;%
+  collect_metrics() %&amp;gt;% 
+  ggplot(aes(penalty, mean, color = .metric)) + 
+  geom_line() + 
+  geom_errorbar(aes(ymax = mean + std_err, ymin = mean - std_err)) + 
+  scale_x_log10(labels = scales::label_number_auto()) + 
+  facet_wrap(~ .metric, scales = &amp;quot;free_y&amp;quot;) + 
+  labs(y = NULL, x = expression(lambda)) + 
+  theme(legend.position = &amp;quot;none&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It’s clear from the plot that all 3 metrics benenfit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the “one-standard error rule” that selects model with largesst lambda that is within one standard error of the numerically optimal Kappa metric.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;best_lambda &amp;lt;- multinom_search %&amp;gt;% 
+  select_by_one_std_err(metric = &amp;quot;kap&amp;quot;, desc(penalty))
+
+best_lambda
+#&amp;gt; # A tibble: 1 x 8
+#&amp;gt;   penalty .metric .estimator  mean     n std_err .best .bound
+#&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;      &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;
+#&amp;gt; 1  0.0152 kap     multiclass 0.519    25 0.00657 0.523  0.518&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can finalize and fill the model with this lambda.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wf_final &amp;lt;- finalize_workflow(wf, best_lambda)
+
+final_model &amp;lt;- last_fit(wf_final, split = reviews_split, 
+                        metrics = metric_set(roc_auc, accuracy, kap))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For our model, the confusion matrix becomes 3 x 3.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;final_model %&amp;gt;% 
+  collect_predictions() %&amp;gt;% 
+  conf_mat(rating, estimate = .pred_class)
+#&amp;gt;           Truth
+#&amp;gt; Prediction low medium high
+#&amp;gt;     low    109     17   10
+#&amp;gt;     medium  27      8    9
+#&amp;gt;     high    17      7  143&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Thanks to downsmapling, the classifier performs quite consistently in predicting these 3 categories. Detection for low ratings may leave some room for improvement.&lt;/p&gt;
+&lt;p&gt;Then we could examine these metrics on the model applied to testing set.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;final_model %&amp;gt;% 
+  collect_metrics()
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt;   .metric  .estimator .estimate
+#&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 accuracy multiclass     0.749
+#&amp;gt; 2 kap      multiclass     0.576
+#&amp;gt; 3 roc_auc  hand_till      0.767&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the &lt;code&gt;step_upsampling&lt;/code&gt; step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about people go to extremes. For another, the best penality is judged by the Kappa statistic&lt;/p&gt;
+&lt;p&gt;Varible importance plot help us to know useful features. For multiclass models, importance is defined as sum of absolute value of coef of a variable. For example, in our baseline logit models:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{aligned}
+\log(\frac{P(medium)}{P(low)}) &amp;amp;= \beta_20 + \beta_{21}x_1 + \cdots + \beta_{2p}x_p \\
+\log(\frac{P(high)}{P(low)}) &amp;amp;= \beta_30 + \beta_{31}x_1 + \cdots + \beta_{3p}x_p
+\end{aligned}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The absolute value of variable importance for predictor &lt;span class=&#34;math inline&#34;&gt;\(x_1\)&lt;/span&gt; is &lt;span class=&#34;math inline&#34;&gt;\(|\hat{\beta}_{21}| + |\hat{\beta}_{31}|\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;final_fit &amp;lt;- wf_final %&amp;gt;% fit(data = reviews_train)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(vip)
+
+final_fit %&amp;gt;% 
+  pull_workflow_fit() %&amp;gt;% 
+  vi(lambda = best_lambda$penalty) %&amp;gt;%
+  group_by(Sign) %&amp;gt;% 
+  top_n(30, wt = abs(Importance)) %&amp;gt;% 
+  ungroup() %&amp;gt;%
+  mutate(Sign = if_else(Sign == &amp;quot;POS&amp;quot;, &amp;quot;high ratings&amp;quot;, &amp;quot;lowo ratings&amp;quot;)) %&amp;gt;% 
+  ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
+             x = Importance,
+             fill = Sign)) + 
+  geom_col(show.legend = FALSE, alpha = 0.5) +
+  scale_y_reordered() + 
+  facet_wrap(~ Sign, scales = &amp;quot;free&amp;quot;) + 
+  labs(y = NULL) + 
+  theme(axis.text = element_text(size = 20),
+        panel.grid.major.y = element_blank(),
+        strip.text = element_text(size = 24, face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -2336,7 +2663,7 @@ words %&amp;gt;%
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Many words listed here are acronyms in biology, chemistry and medicine. For example, “hljby” is a type of porcine epidemic diarrhoea virus which “pedv” stands “for”, fpv means Favipiravir (a type of drug), and “tlr” represents Toll-like receptors.&lt;/p&gt;
+&lt;p&gt;Many words listed here are acronyms and terms in biology, chemistry and medicine. For example, “hljby” is a type of &lt;strong&gt;p&lt;/strong&gt;orcine &lt;strong&gt;e&lt;/strong&gt;pidemic &lt;strong&gt;d&lt;/strong&gt;iarrhoea &lt;strong&gt;v&lt;/strong&gt;irus which “pedv” stands for, “fpv” means &lt;strong&gt;F&lt;/strong&gt;avi&lt;strong&gt;p&lt;/strong&gt;ira&lt;strong&gt;v&lt;/strong&gt;ir (a type of drug), and “tlr” represents &lt;strong&gt;T&lt;/strong&gt;oll-&lt;strong&gt;l&lt;/strong&gt;ike &lt;strong&gt;r&lt;/strong&gt;eceptors.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;fit-a-lda-topic-model&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Fit a LDA topic model&lt;/h1&gt;
@@ -5106,7 +5433,6 @@ lines (the “payload”) belong to the record&lt;a href=&#34;#fnref2&#34; class
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/project/r4ds/</guid>
       <description>&lt;p&gt;&lt;em&gt;R for Data Science&lt;/em&gt; is arguably a perfect resource for building essetional data skills in R.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
 </description>
     </item>
     

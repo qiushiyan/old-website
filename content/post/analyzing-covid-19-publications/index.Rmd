@@ -163,7 +163,7 @@ words %>%
   knitr::kable()
 ```
 
-Many words listed here are acronyms in biology, chemistry and medicine. For example, "hljby" is a type of porcine epidemic diarrhoea virus which "pedv" stands "for", fpv means Favipiravir (a type of drug), and "tlr" represents Toll-like receptors. 
+Many words listed here are acronyms and terms in biology, chemistry and medicine. For example, "hljby" is a type of **p**orcine **e**pidemic **d**iarrhoea **v**irus which "pedv" stands for, "fpv" means **F**avi**p**ira**v**ir (a type of drug), and "tlr" represents **T**oll-**l**ike **r**eceptors. 
 
 # Fit a LDA topic model  
 

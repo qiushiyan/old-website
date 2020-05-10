@@ -5,12 +5,48 @@
     <link>/categories/readings/</link>
       <atom:link href="/categories/readings/index.xml" rel="self" type="application/rss+xml" />
     <description>Readings</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 09 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Readings</title>
       <link>/categories/readings/</link>
     </image>
+    
+    <item>
+      <title>A Manual of Classification Metrics</title>
+      <link>/post/classification-metrics/</link>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/classification-metrics/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#terminology&#34;&gt;Terminology&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#evaluating-predicted-classes&#34;&gt;Evaluating predicted classes&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#accuracy-based-criteria&#34;&gt;Accuracy based criteria&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://tidymodels.github.io/yardstick/reference/f_meas.html&#34; class=&#34;uri&#34;&gt;https://tidymodels.github.io/yardstick/reference/f_meas.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&#34; class=&#34;uri&#34;&gt;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;terminology&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Terminology&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;evaluating-predicted-classes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Evaluating predicted classes&lt;/h1&gt;
+&lt;div id=&#34;accuracy-based-criteria&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Accuracy based criteria&lt;/h2&gt;
+&lt;p&gt;To make this more concrete. Suppose the event is having a disease, and sensitivity, specificity and prevalence are known. Then:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{sensitivity} = P(\text{true}|\text{disease}) \\
+\text{specificity} = P(\text{true}|\text{no disease}) \\
+\text{prevalence} = P(\text{disease})
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Better science in less time</title>

@@ -7,7 +7,7 @@ categories:
   - Machine Learning
   - R
 tags: []
-subtitle: ''
+summary: 'Practice on data cleaning, text analysis and multicategory logistic models with penalization'
 draft: yes
 image:
   caption: ''
@@ -15,17 +15,18 @@ image:
   preview_only: yes
 ---
 
-Our modeling goal is to predict the rating for the life simulation video game, Animal Crossing, from its user reviews. The data comes from [this weeks's `#TidyTuesday`](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05/readme.md), scraped from [VillagerDB](https://github.com/jefflomacy/villagerdb) and [Metacritic](https://www.metacritic.com/game/switch/animal-crossing-new-horizons/critic-reviews). 
+In this post I analyzed reviews for the life simulation video game, Animal Crossing. The data came from [this weeks's `#TidyTuesday`](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05/readme.md), scraped from [VillagerDB](https://github.com/jefflomacy/villagerdb) and [Metacritic](https://www.metacritic.com/game/switch/animal-crossing-new-horizons/critic-reviews). I used only the `reviews` table, but there are a lot more to analyze such as characters and items in the game.   
+
+The data appeared a bit messy after some EDA, and regular expressions played a major role in data cleaning. After that I made some plots concerning the review text, such as common words or high score words from an algorithm. Highly correlated words in user reviews were shown with nodes and edges. Then I built a multicategory logit model to predict ratings (low, medium or high) with predictors including the reviewing date and usage of specific words.  
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, 
-                      comment = "#>", collapse = TRUE)
+                      comment = "#>", collapse = TRUE, cache = TRUE)
 ```
 
 ```{r}
 library(tidyverse)
 library(tidytext)
-set.seed(2020)
 ```
 
 ```{r, echo = FALSE}
@@ -91,34 +92,31 @@ The data is messy in several ways (I have chosen 3 lines for example):
 
 - Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines
 
-___
 
-"While the game itself is great, really relaxing and gorgeous, i can't ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you haveWhile the game itself is great, really relaxing and gorgeous, i can't ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you have the other usershouse and furniture. I hope nintendo can soon fix this big issue, because for now, this killed any intentions i had to play the game.… Expand"   
-___
+
+> "While the game itself is great, really relaxing and gorgeous, i can't ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you haveWhile the game itself is great, really relaxing and gorgeous, i can't ignore one thing that ruins the whole experience for me and a lot of other people as seen by the different user reviews.That thing is that you only have 1 island per console. This decision limits to one person being able to enjoy the full experience. It also nukes any creative control of the island, since you have the other usershouse and furniture. I hope nintendo can soon fix this big issue, because for now, this killed any intentions i had to play the game.… Expand"   
 
 
 - Reviews that exceed certian length are incomplete and end with "Expand". The following review also contains repeated lines.
 
-___
 
-"One island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company thatOne island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company that sees fit to make such decisions.… Expand" 
+> "One island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company thatOne island per console is a design decision that is, at best, in poor taste, and at worst, straight-up predatory behavior.Per console, only one player gets to experience the game at its fullest. The other players see less dialogue, experience less events, and are locked out entirely from certain parts of the game.No matter how good a game is, I cannot stand behind a company that sees fit to make such decisions.… Expand" 
 
-___
 
 - non-English reviews
 
-___
 
-"Una sola isla , es un asco . No puedes seguir avanzando, solo te queda recoger madera"  
-___
+> "Una sola isla , es un asco . No puedes seguir avanzando, solo te queda recoger madera"  
 
 
-I use regular expressions to remove reptitions and "Expand" at the end. Repetitions happen when the review is long, and the repetition part often takes up 4 to 5 lines (here I use 350 or more characters to indicate the repetition part). 
+I use regular expressions to remove repeated lines as well as "Expand" at the end. Repetitions happen when the review is long, and the repetition part often takes up 4 to 5 lines (here I use 350 or more characters to indicate the repetition part). 
 
-`clr::detect_language` is used to exclude non-English text. This a R wrapper around Google's Compact Language Detector 3, a neural network model for language identification . There will be misclassifications, though. As the proportion of exclusion is fairly low, we're OK.  
+`clr::detect_language` is used to exclude non-English text. This a R wrapper around Google's Compact Language Detector 3, a neural network model for language identification. There will be misclassifications, though. As the proportion of exclusion is fairly low, we're OK.  Lastyly, et's split `grade` 3  ordered categories, low, medium and high.
 
 ```{r}
 library(cld3)
+
+# most text are detected as English
 reviews %>% 
   mutate(language = detect_language(text)) %>% 
   count(language, sort = TRUE)
@@ -131,19 +129,27 @@ reviews_en <- reviews %>%
   filter(detect_language(text) == "en")
 
 
-repetition_clean <- reviews %>% 
+repetition_clean <- reviews_en %>% 
   filter(str_detect(text, "(.{350,})\\1.+")) %>% 
   mutate(text = str_replace(text, "(.{350,})\\1(.+)Expand$", "\\1\\2"))
 
 reviews_clean <- anti_join(reviews_en, repetition_clean, 
                            by = c("user_name" = "user_name")) %>% 
-  bind_rows(repetition_clean)
-
-# draw some sample reviews
-reviews_clean %>% 
-  sample_n(3) %>% 
-  pull(text)
+  bind_rows(repetition_clean) %>% 
+  mutate(rating = case_when(
+    grade <= 2 ~ "low",
+    grade > 2 & grade < 8 ~ "medium",
+    grade >= 8 ~ "high",
+  ) %>% factor(levels = c("low", "medium", "high")))
 ```
+
+Now, `rating` is a factor with 3 levels. Low and high ratings are rougly the same size, and medium ratings are relatively rare.
+```{r}
+reviews_clean %>% 
+  count(rating)
+```
+
+
 
 We can examine how this cleaning process works by comparing the distribution of review length, before and after. The cleaning should reduce the amount of medium long and long reviews, in exchange for shorter ones.
 ```{r}
@@ -155,26 +161,333 @@ reviews %>%
   ggplot() + 
   geom_density(aes(length, fill = type), alpha = 0.2) + 
   scale_fill_discrete(name = NULL) + 
-  labs(title = "Distribution of review length before and after cleaning",
+  labs(title = "Distribution of review length (characters) before and after cleaning",
        x = NULL,
        y = NULL)
 ```
 
-# Sentiment analysis of user reviews
 
-# Predictive modeling for grades with user reviews  
+
+
+# Text analysis of user reviews 
+
+Our text analysis begin by tokenizing review text to find out what are the most common words (by term frequency) for each category of reviews.  
+
 
 ```{r}
+words <- reviews_clean %>% 
+  select(rating, text) %>% 
+  unnest_tokens(word, text) %>% 
+  anti_join(stop_words) %>% 
+  filter(!str_detect(word, "^\\d+$"))
+ 
 
-reviews %>% 
-  transmute(rating = case_when(
-    grade <= 4 ~ "low",
-    grade > 4 & grade <= 8 ~ "medium",
-    grade > 8 ~ "high",
-  ),
-  text) %>% 
-  unnest_tokens(line, text, token = "lines") 
+common_words <- words %>% 
+  count(rating, word, sort = TRUE, name = "term_count") %>% 
+  add_count(rating, wt = term_count, name = "total_count") %>% 
+  mutate(term_freq = term_count / total_count)  %>% 
+  group_by(rating) %>% 
+  top_n(30, term_freq)
 ```
+
+```{r, fig.width = 14, fig.height = 10}
+ggplot(common_words, 
+       aes(y = reorder_within(word, term_freq, rating),
+           x = term_freq,
+           fill = rating)) + 
+  geom_col(show.legend = FALSE, alpha = 0.6) + 
+  scale_y_reordered() + 
+  scale_x_continuous(label = scales::label_percent()) + 
+  nord::scale_fill_nord(palette = "afternoon_prarie") +
+  facet_wrap(~ rating, scales = "free_y", strip.position = "bottom") + 
+  labs(title = "Most common words in different levels of reviews",
+       x = "term frequency",
+       y = NULL) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(panel.grid.major.y = element_blank(),
+        plot.title = element_text(face = "bold", size = 28),
+        plot.title.position = "plot",
+        axis.text.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 16), 
+        strip.text = element_text(size = 20, color = "white")) 
+  
+```
+
+
+As it is, this plot aren't that helpful for all categories share a very similar set of words. For this reason I turn to two other algorithms developed for information retrieval: tf-idf and weighted log odds.
+
+```{r}
+library(tidylo)
+
+key_words <- words %>% 
+  count(rating, word, sort = TRUE) %>% 
+  bind_tf_idf(term = word, document = rating, n = n) %>%
+  left_join(words %>% 
+              count(rating, word, sort = TRUE) %>% 
+              bind_log_odds(set = rating, feature = word, n = n),
+            by = c("rating" = "rating", "word", "word", "n" = "n")) %>% 
+  select(rating, word, tf_idf, log_odds)
+
+key_words
+```
+
+
+Make separate plot for two measures and then combine them togther. 
+
+```{r, fig.height = 20, fig.width = 14}
+tf_idf <- key_words %>% 
+  group_by(rating) %>% 
+  arrange(-tf_idf) %>% 
+  slice(1:20) %>% 
+  ggplot(aes(
+    y = reorder_within(word, tf_idf, rating),
+    x = tf_idf,
+    fill = rating)) + 
+  geom_col(show.legend = FALSE, alpha = 0.6) + 
+  scale_y_reordered() + 
+  scale_x_continuous(position = "top") + 
+  nord::scale_fill_nord(palette = "afternoon_prarie") +
+  facet_wrap(~ rating, scales = "free_y", strip.position = "bottom") + 
+  labs(title = "High tf-idf words",
+       x = NULL,
+       y = NULL) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(panel.grid.major.y = element_blank(),
+        plot.title = element_text(face = "bold", size = 28),
+        plot.title.position = "plot",
+        axis.text.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 16), 
+        strip.text = element_text(size = 24, color = "white")) 
+
+log_odds <- key_words %>% 
+  group_by(rating) %>% 
+  top_n(20, log_odds) %>%
+  ggplot(aes(
+    y = reorder_within(word, log_odds, rating),
+    x = log_odds,
+    fill = rating)) + 
+  geom_col(show.legend = FALSE, alpha = 0.6) + 
+  scale_y_reordered() + 
+  scale_x_continuous(position = "top") +  
+  nord::scale_fill_nord(palette = "afternoon_prarie") +
+  facet_wrap(~ rating, scales = "free_y", strip.position = "bottom") + 
+  labs(title = "High log-odds words",
+       x = NULL,
+       y = NULL) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(panel.grid.major.y = element_blank(),
+        plot.title = element_text(face = "bold", size = 28),
+        plot.title.position = "plot",
+        axis.text.y = element_text(size = 16),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 16), 
+        strip.text = element_blank()) 
+
+patchwork::wrap_plots(tf_idf, log_odds, nrow = 2)
+```
+
+Emmm... this is a little better, isn't it :sweat_smile:? The `tf_idf` plot performed well in identifying characteristic words in low ratings like "unacceptable", "wtf" and "boring", While the `log_odds` plo shows a somewhat dominance of words like "fun", "cute" and "relaxing" in high ratings.
+
+
+Additionally, we may also be interested in words that tend to co-occur within a particular review. For simplicity I focus on long reivews only (more than 800 characters).   
+
+```{r}
+library(widyr)
+
+word_cors <- reviews_clean %>%  
+  filter(str_length(text) > 800) %>%
+  select(user_name, text) %>% 
+  unnest_tokens(word, text) %>% 
+  anti_join(stop_words) %>% 
+  filter(!str_detect(word, "^\\d+$")) %>% 
+  group_by(word) %>% 
+  filter(n() > 10) %>% 
+  count(user_name, word) %>% 
+  pairwise_cor(item = word, feature = user_name, value = n)
+
+word_cors
+```
+
+```{r, fig.width = 10, fig.height = 10}
+library(ggraph)
+library(tidygraph)
+
+word_cors %>%
+  filter(correlation > 0.4) %>% 
+  as_tbl_graph() %>% 
+  ggraph(layout = "fr") + 
+  geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
+  geom_node_point(color = "lightblue", size = 6.5) + 
+  geom_node_text(aes(label = name), repel = TRUE, size = 5.5)
+```
+
+
+
+
+# Predictive modeling for rating
+
+It takes some steps to derive from `reviews_clean` a design matrix for modeling. The [`textrecipes`](https://tidymodels.github.io/textrecipes/index.html) package contains extra steps for the `recipes` for preprocessing text data that could have replaced my manual wrangling. But I havn't digged into that now. 
+
+```{r}
+library(lubridate)
+
+model_df <- reviews_clean %>% 
+  filter_all(all_vars(!is.na(.))) %>% 
+  transmute(rating, 
+            user_name, 
+            text,
+            t = as.numeric(date - ymd("2020-03-20"))) %>%
+  unnest_tokens(word, text) %>% 
+  anti_join(stop_words) %>%
+  count(user_name, t, rating, word, name = "word_count") %>% 
+  group_by(word) %>% 
+  filter(n() > 20, word != "rating") %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = word, values_from = word_count, 
+              values_fill = list(word_count = 0), names_repair = "minimal")
+  
+
+model_df
+```
+
+After tokenizing, filtering and some other steps, I have 1394 x 331 design matrix at hand. `user_name` is an ID variable, `t` indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response `rating`, are word counts. 
+
+
+Next I split the data into training and testing test with stratified sampling on `rating`.
+```{r}
+library(tidymodels)
+
+set.seed(2020)
+reviews_split <- initial_split(model_df, strata = rating)
+reviews_train <- training(reviews_split)
+reviews_test <- testing(reviews_split)
+```
+
+I choose to fit a multinomial logisitic regression model run by the `glmnet` package, with L1 regularization as in the lasso model. To detect medium ratings more accurately, the minority class, `step_upsample` will bring the number of meidum and high ratings up to the same (`over_ratio = 1` ) as that of low ratings. And `tune_gird()` will calculate model performance metrics averaged over 25 bootstrap resamples for 100 choices of lambda. 
+```{r}
+multinom_spec <- multinom_reg(mixture = 1, penalty = tune()) %>% 
+  set_engine("glmnet") %>% 
+  set_mode("classification") 
+
+library(themis)
+rec <- recipe(rating ~ ., data = reviews_train) %>%
+  update_role(user_name, new_role = "ID") %>% 
+  step_upsample(rating, over_ratio = 1) %>% 
+  step_normalize(all_predictors())
+
+lambda_grid <- grid_regular(penalty(), levels = 100)
+  
+reviews_folds <- bootstraps(reviews_train, strata = rating)
+
+wf <- workflow() %>% 
+  add_model(multinom_spec) %>% 
+  add_recipe(rec)
+
+doParallel::registerDoParallel()
+
+multinom_search <- tune_grid(wf, 
+                    resamples = reviews_folds,
+                    grid = lambda_grid,
+                    metrics = metric_set(roc_auc, accuracy, kap))
+```
+
+
+Available metrics are ROC AUC, accuracy and Kappa. In multiclass cases, accuracy and Kappa use the same definitions as their binary counterpart, with accuracy counting up the number of correctly predicted true values out of the total number of true values, and Kappa being a linear combination of two accuracy values, sensitivity and specificity. Multiclass ROC AUC, however, is implemented as the "hand_till" method which I won't venture to interpret now. 
+
+```{r, fig.width = 10}
+multinom_search %>%
+  collect_metrics() %>% 
+  ggplot(aes(penalty, mean, color = .metric)) + 
+  geom_line() + 
+  geom_errorbar(aes(ymax = mean + std_err, ymin = mean - std_err)) + 
+  scale_x_log10(labels = scales::label_number_auto()) + 
+  facet_wrap(~ .metric, scales = "free_y") + 
+  labs(y = NULL, x = expression(lambda)) + 
+  theme(legend.position = "none")
+```
+
+It's clear from the plot that all 3 metrics benenfit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the "one-standard error rule" that selects model with largesst lambda that is within one standard error of the numerically optimal Kappa metric.
+
+```{r}
+best_lambda <- multinom_search %>% 
+  select_by_one_std_err(metric = "kap", desc(penalty))
+
+best_lambda
+```
+
+We can finalize and fill the model with this lambda. 
+
+```{r}
+wf_final <- finalize_workflow(wf, best_lambda)
+
+final_model <- last_fit(wf_final, split = reviews_split, 
+                        metrics = metric_set(roc_auc, accuracy, kap))
+```
+
+
+For our model, the confusion matrix becomes 3 x 3. 
+
+```{r}
+final_model %>% 
+  collect_predictions() %>% 
+  conf_mat(rating, estimate = .pred_class)
+```
+
+Thanks to downsmapling, the classifier performs quite consistently in predicting these 3 categories. Detection for low ratings may leave some room for improvement. 
+
+
+Then we could examine these metrics on the model applied to testing set. 
+
+```{r}
+final_model %>% 
+  collect_metrics()
+```
+
+
+These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the `step_upsampling` step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about people go to extremes. For another, the best penality is judged by the Kappa statistic   
+
+Varible importance plot help us to know useful features. For multiclass models, importance is defined as sum of absolute value of coef of a variable. For example, in our baseline logit models:  
+
+
+$$
+\begin{aligned}
+\log(\frac{P(medium)}{P(low)}) &= \beta_20 + \beta_{21}x_1 + \cdots + \beta_{2p}x_p \\
+\log(\frac{P(high)}{P(low)}) &= \beta_30 + \beta_{31}x_1 + \cdots + \beta_{3p}x_p
+\end{aligned}
+$$
+
+The absolute value of variable importance for predictor $x_1$ is $|\hat{\beta}_{21}| + |\hat{\beta}_{31}|$.  
+
+Now I inspect predictors with top absolute variable importance to conclude this minimal project. If a predictor has high positive / negative importance, then it help us to judge whether a user is more intended to give higher ratings or otherwise.
+
+```{r}
+final_fit <- wf_final %>% fit(data = reviews_train)
+```
+
+```{r, fig.height = 12, fig.width = 12}
+library(vip)
+
+final_fit %>% 
+  pull_workflow_fit() %>% 
+  vi(lambda = best_lambda$penalty) %>%
+  group_by(Sign) %>% 
+  top_n(30, wt = abs(Importance)) %>% 
+  ungroup() %>%
+  mutate(Sign = if_else(Sign == "POS", "high ratings", "lowo ratings")) %>% 
+  ggplot(aes(y = reorder_within(Variable, abs(Importance), Sign),
+             x = Importance,
+             fill = Sign)) + 
+  geom_col(show.legend = FALSE, alpha = 0.5) +
+  scale_y_reordered() + 
+  facet_wrap(~ Sign, scales = "free") + 
+  labs(y = NULL) + 
+  theme(axis.text = element_text(size = 20),
+        panel.grid.major.y = element_blank(),
+        strip.text = element_text(size = 24, face = "bold"))
+```
+
 
 
 

@@ -28,7 +28,7 @@ library(tidyverse)
 library(tidytext)
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, cache = FALSE}
 theme_bar <- function(base_size = 12,
                       strip_text_size = 14,
                       strip_text_margin = 5,
@@ -53,7 +53,7 @@ theme_bar <- function(base_size = 12,
   ret
 }
 
-theme_set(theme_bar())
+ggplot2::theme_set(theme_bar())
 ```
 
 
@@ -465,7 +465,7 @@ Now I inspect predictors with top absolute variable importance to conclude this 
 final_fit <- wf_final %>% fit(data = reviews_train)
 ```
 
-```{r, fig.height = 12, fig.width = 12}
+```{r, fig.height = 12.5, fig.width = 12}
 library(vip)
 
 final_fit %>% 

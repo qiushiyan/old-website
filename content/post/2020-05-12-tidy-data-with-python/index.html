@@ -320,7 +320,7 @@ codes
 #&gt;  9 A08   &quot;Viral and other specified\nintestinal infections&quot;                   
 #&gt; 10 A09   &quot;Diarrhea and gastroenteritis\nof infectious origin&quot;                 
 #&gt; # ... with 1,841 more rows</code></pre>
-<p>Thanks to the <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>, we can mix R and Python code seamlessly. Here is a line plot made with <code>seaborn</code> demonstrating total deaths per hour:</p>
+<p>Thanks to the <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> package, we can mix R and Python code seamlessly. Here is a line plot made with <code>seaborn</code> demonstrating total deaths per hour:</p>
 <pre class="python"><code># Python
 deaths = r.deaths
 deaths_per_hour = deaths[&quot;hod&quot;].value_counts()
@@ -428,7 +428,7 @@ dist %&gt;%
 #&gt;  9 &quot;Contact with hornets, wasps,\nand bees&quot;                           86 0.00118
 #&gt; 10 &quot;Exposure to smoke, fire, and\nflames, undetermined intent&quot;        51 0.00110
 #&gt; # ... with 437 more rows</code></pre>
-<p>Here we see causes of death with highest <code>dist</code> are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot.</p>
+<p>Here we see causes of death with highest <code>dist</code> are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot, so that the result based solely on the <code>dist</code> column would be biased in favour of rare causes.</p>
 <pre class="r"><code>dist %&gt;% 
   ggplot(aes(n, dist)) + 
   geom_jitter() + 
@@ -441,7 +441,7 @@ dist %&gt;%
        y = NULL,
        x = &quot;total death&quot;)</code></pre>
 <p><img src="/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-23-1.png" width="960" /></p>
-<p>Thus, our final solution is to build a model with <code>n</code> as predictor, andn <code>dist</code> as response. And cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I’m simply going to use linear regression (Hadley use robust linear model in the paper).</p>
+<p>Thus, our final solution is to build a model with <code>n</code> as predictor, and <code>dist</code> as response. The cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I opt for linear regression (Hadley used robust linear model in the paper).</p>
 <pre class="r"><code>library(broom)
 lm_fit &lt;- lm(log(dist) ~ log(n), data = dist)
 tidy(lm_fit)
@@ -450,7 +450,7 @@ tidy(lm_fit)
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 (Intercept)   -3.74     0.110      -34.0 8.34e-126
 #&gt; 2 log(n)        -0.869    0.0186     -46.8 7.55e-174</code></pre>
-<p>Let’s plot those residuals:</p>
+<p>Let’s plot these residuals against the predictor <code>log(n)</code>:</p>
 <pre class="r"><code>augment(lm_fit) %&gt;% 
   ggplot(aes(log.n., .resid)) + 
   geom_hline(yintercept = 0, color = &quot;red&quot;) + 
@@ -501,9 +501,9 @@ unusual
   facet_wrap(~ cause, scales = &quot;free_y&quot;) + 
   labs(x = &quot;hour&quot;, y = NULL, title = &quot;Most deviated causes of death&quot;, 
        subtitle = &quot;comparing cause-specific temporal pattern to overall trend&quot;) + 
-  theme_minimal(base_size = 20) +
+  theme_minimal(base_size = 22) +
   theme(legend.position = &quot;top&quot;) </code></pre>
-<p><img src="/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png" width="1440" /></p>
+<p><img src="/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png" width="1536" /></p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>

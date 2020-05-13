@@ -225,7 +225,7 @@ codes <- read_csv("D:/RProjects/data/blog/codes.csv")
 codes
 ```
 
-Thanks to the [`reticulate`](https://rstudio.github.io/reticulate/), we can mix R and Python code seamlessly. Here is a line plot made with `seaborn` demonstrating total deaths per hour:
+Thanks to the [`reticulate`](https://rstudio.github.io/reticulate/) package, we can mix R and Python code seamlessly. Here is a line plot made with `seaborn` demonstrating total deaths per hour:
 
 
 ```{python}
@@ -293,7 +293,7 @@ dist %>%
   arrange(desc(dist))
 ```
 
-Here we see causes of death with highest `dist` are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot.
+Here we see causes of death with highest `dist` are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot, so that the result based solely on the `dist` column would be biased in favour of rare causes.
 
 
 ```{r, fig.height = 10, fig.width = 10}
@@ -311,7 +311,7 @@ dist %>%
 ```
 
 
-Thus, our final solution is to build a model with `n` as predictor, andn `dist` as response. And cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I'm simply going to use linear regression (Hadley use robust linear model in the paper). 
+Thus, our final solution is to build a model with `n` as predictor, and `dist` as response. The cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I opt for linear regression (Hadley used robust linear model in the paper). 
 
 ```{r}
 library(broom)
@@ -319,7 +319,7 @@ lm_fit <- lm(log(dist) ~ log(n), data = dist)
 tidy(lm_fit)
 ```
 
-Let's plot those residuals:
+Let's plot these residuals against the predictor `log(n)`:
 
 ```{r}
 augment(lm_fit) %>% 
@@ -349,7 +349,7 @@ unusual
 
 Finally, we plot the temporal course for each unusual cause of death.  
 
-```{r, fig.height = 18, fig.width = 15}
+```{r, fig.height = 18, fig.width = 16}
 prop1 %>% 
   filter(cause %in% unusual$cause) %>% 
   left_join(prop2, on = "hod") %>% 
@@ -362,7 +362,7 @@ prop1 %>%
   facet_wrap(~ cause, scales = "free_y") + 
   labs(x = "hour", y = NULL, title = "Most deviated causes of death", 
        subtitle = "comparing cause-specific temporal pattern to overall trend") + 
-  theme_minimal(base_size = 20) +
+  theme_minimal(base_size = 22) +
   theme(legend.position = "top") 
 ```
 

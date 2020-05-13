@@ -337,7 +337,7 @@ codes
 #&amp;gt;  9 A08   &amp;quot;Viral and other specified\nintestinal infections&amp;quot;                   
 #&amp;gt; 10 A09   &amp;quot;Diarrhea and gastroenteritis\nof infectious origin&amp;quot;                 
 #&amp;gt; # ... with 1,841 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Thanks to the &lt;a href=&#34;https://rstudio.github.io/reticulate/&#34;&gt;&lt;code&gt;reticulate&lt;/code&gt;&lt;/a&gt;, we can mix R and Python code seamlessly. Here is a line plot made with &lt;code&gt;seaborn&lt;/code&gt; demonstrating total deaths per hour:&lt;/p&gt;
+&lt;p&gt;Thanks to the &lt;a href=&#34;https://rstudio.github.io/reticulate/&#34;&gt;&lt;code&gt;reticulate&lt;/code&gt;&lt;/a&gt; package, we can mix R and Python code seamlessly. Here is a line plot made with &lt;code&gt;seaborn&lt;/code&gt; demonstrating total deaths per hour:&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
 deaths = r.deaths
 deaths_per_hour = deaths[&amp;quot;hod&amp;quot;].value_counts()
@@ -445,7 +445,7 @@ dist %&amp;gt;%
 #&amp;gt;  9 &amp;quot;Contact with hornets, wasps,\nand bees&amp;quot;                           86 0.00118
 #&amp;gt; 10 &amp;quot;Exposure to smoke, fire, and\nflames, undetermined intent&amp;quot;        51 0.00110
 #&amp;gt; # ... with 437 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here we see causes of death with highest &lt;code&gt;dist&lt;/code&gt; are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot.&lt;/p&gt;
+&lt;p&gt;Here we see causes of death with highest &lt;code&gt;dist&lt;/code&gt; are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot, so that the result based solely on the &lt;code&gt;dist&lt;/code&gt; column would be biased in favour of rare causes.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dist %&amp;gt;% 
   ggplot(aes(n, dist)) + 
   geom_jitter() + 
@@ -458,7 +458,7 @@ dist %&amp;gt;%
        y = NULL,
        x = &amp;quot;total death&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Thus, our final solution is to build a model with &lt;code&gt;n&lt;/code&gt; as predictor, andn &lt;code&gt;dist&lt;/code&gt; as response. And cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I’m simply going to use linear regression (Hadley use robust linear model in the paper).&lt;/p&gt;
+&lt;p&gt;Thus, our final solution is to build a model with &lt;code&gt;n&lt;/code&gt; as predictor, and &lt;code&gt;dist&lt;/code&gt; as response. The cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I opt for linear regression (Hadley used robust linear model in the paper).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(broom)
 lm_fit &amp;lt;- lm(log(dist) ~ log(n), data = dist)
 tidy(lm_fit)
@@ -467,7 +467,7 @@ tidy(lm_fit)
 #&amp;gt;   &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
 #&amp;gt; 1 (Intercept)   -3.74     0.110      -34.0 8.34e-126
 #&amp;gt; 2 log(n)        -0.869    0.0186     -46.8 7.55e-174&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let’s plot those residuals:&lt;/p&gt;
+&lt;p&gt;Let’s plot these residuals against the predictor &lt;code&gt;log(n)&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;augment(lm_fit) %&amp;gt;% 
   ggplot(aes(log.n., .resid)) + 
   geom_hline(yintercept = 0, color = &amp;quot;red&amp;quot;) + 
@@ -518,9 +518,9 @@ unusual
   facet_wrap(~ cause, scales = &amp;quot;free_y&amp;quot;) + 
   labs(x = &amp;quot;hour&amp;quot;, y = NULL, title = &amp;quot;Most deviated causes of death&amp;quot;, 
        subtitle = &amp;quot;comparing cause-specific temporal pattern to overall trend&amp;quot;) + 
-  theme_minimal(base_size = 20) +
+  theme_minimal(base_size = 22) +
   theme(legend.position = &amp;quot;top&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;1440&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;1536&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;

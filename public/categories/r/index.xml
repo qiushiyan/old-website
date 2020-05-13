@@ -29,7 +29,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;This week I’ve been doing some recap on how to do basic data processing and cleaning in Python with the &lt;code&gt;pandas&lt;/code&gt; and &lt;code&gt;NumPy&lt;/code&gt; library. So this post is mostly a self-remainder on how to deal with messy data in Python, by reproducing data cleaning examples presented in Hadley Wickham’s &lt;a href=&#34;https://vita.had.co.nz/papers/tidy-data.pdf&#34;&gt;Tidy Data&lt;/a&gt; paper, &lt;span class=&#34;citation&#34;&gt;Wickham (&lt;a href=&#34;#ref-JSSv059i10&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This week I’ve been doing some recap on how to do basic data processing and cleaning in Python with the &lt;code&gt;pandas&lt;/code&gt; and &lt;code&gt;NumPy&lt;/code&gt; library. So this post is mostly a self-reminder on how to deal with messy data in Python, by reproducing data cleaning examples presented in Hadley Wickham’s &lt;a href=&#34;https://vita.had.co.nz/papers/tidy-data.pdf&#34;&gt;Tidy Data&lt;/a&gt; paper, &lt;span class=&#34;citation&#34;&gt;Wickham (&lt;a href=&#34;#ref-JSSv059i10&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;The most significant contribution of this well-known work is that it gave clear definition on what “tidy” means for a dataset. There are 3 main requirements, as illustrated on &lt;a href=&#34;https://tidyr.tidyverse.org/&#34;&gt;&lt;code&gt;tidyr&lt;/code&gt;&lt;/a&gt;’s website (evolving from what Hadley originally proposed):&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Every column is a variable.&lt;/li&gt;

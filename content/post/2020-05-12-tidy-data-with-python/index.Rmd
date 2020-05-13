@@ -15,7 +15,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-This week I've been doing some recap on how to do basic data processing and cleaning in Python with the `pandas` and `NumPy` library. So this post is mostly a self-remainder on how to deal with messy data in Python, by reproducing data cleaning examples presented in Hadley Wickham's [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) paper, @JSSv059i10. 
+This week I've been doing some recap on how to do basic data processing and cleaning in Python with the `pandas` and `NumPy` library. So this post is mostly a self-reminder on how to deal with messy data in Python, by reproducing data cleaning examples presented in Hadley Wickham's [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) paper, @JSSv059i10. 
 
 
 The most significant contribution of this well-known work is that it gave clear definition on what "tidy" means for a dataset. There are 3 main requirements, as illustrated on [`tidyr`](https://tidyr.tidyverse.org/)'s website (evolving from what Hadley originally proposed): 

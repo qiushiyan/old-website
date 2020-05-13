@@ -10,7 +10,6 @@ categories:
 summary: "A play with messy data in Hadley Wickham's Tidy Data paper in pandas, finish by exploring a real-world dataset using both R and Python."
 subtitle: "A play with messy data in Hadley Wickham's Tidy Data paper in pandas, finish by exploring a real-world dataset using both R and Python."
 lastmod: '2020-05-12T22:11:05+08:00'
-draft: yes
 bibliography: ../bib/python-tidy-data.bib
 biblio-style: apalike
 link-citations: yes

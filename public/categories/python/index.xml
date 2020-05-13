@@ -5,12 +5,525 @@
     <link>/categories/python/</link>
       <atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Python</title>
       <link>/categories/python/</link>
     </image>
+    
+    <item>
+      <title>Tidy Data with Python</title>
+      <link>/post/python-tidy-data/</link>
+      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/python-tidy-data/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#column-headers-are-values-not-variable-names&#34;&gt;Column headers are values, not variable names&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#multiple-variables-stored-in-one-column&#34;&gt;Multiple variables stored in one column&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#variables-are-stored-in-both-rows-and-columns&#34;&gt;Variables are stored in both rows and columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case-study-mortality-data-from-mexico&#34;&gt;Case study: mortality data from Mexico&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This week I’ve been doing some recap on how to do basic data processing and cleaning in Python with the &lt;code&gt;pandas&lt;/code&gt; and &lt;code&gt;NumPy&lt;/code&gt; library. So this post is mostly a self-remainder on how to deal with messy data in Python, by reproducing data cleaning examples presented in Hadley Wickham’s &lt;a href=&#34;https://vita.had.co.nz/papers/tidy-data.pdf&#34;&gt;Tidy Data&lt;/a&gt; paper, &lt;span class=&#34;citation&#34;&gt;Wickham (&lt;a href=&#34;#ref-JSSv059i10&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The most significant contribution of this well-known work is that it gave clear definition on what “tidy” means for a dataset. There are 3 main requirements, as illustrated on &lt;a href=&#34;https://tidyr.tidyverse.org/&#34;&gt;&lt;code&gt;tidyr&lt;/code&gt;&lt;/a&gt;’s website (evolving from what Hadley originally proposed):&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Every column is a variable.&lt;/li&gt;
+&lt;li&gt;Every row is an observation.&lt;/li&gt;
+&lt;li&gt;Every cell is a single value.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Messy data are, by extension, datasets in volation againest these 3 rules. The author then described the five most common problems with messy datasets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Column headers are values, not variable names.&lt;/li&gt;
+&lt;li&gt;Multiple variables are stored in one column.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Variables are stored in both rows and columns.&lt;/li&gt;
+&lt;li&gt;Multiple types of observational units are stored in the same table.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;A single observational unit is stored in multiple tables.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this post I will be focusing on the first 3 symptoms since the other two violations often occur when working with databases. All &lt;a href=&#34;(https://github.com/chendaniely/scipy-2019-pandas/tree/master/data)&#34;&gt;datasets&lt;/a&gt; are from Hadley’s paper &lt;a href=&#34;https://github.com/hadley/tidy-data&#34;&gt;repo&lt;/a&gt; and &lt;a href=&#34;https://chendaniely.github.io/&#34;&gt;Daniel Chen&lt;/a&gt;’s 2019 SciPy talk on data manipulation with pandas.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;column-headers-are-values-not-variable-names&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Column headers are values, not variable names&lt;/h1&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;pew = pd.read_csv(&amp;quot;D:/RProjects/data/blog/pew.csv&amp;quot;)
+pew.head()
+#&amp;gt;              religion  &amp;lt;$10k  $10-20k  ...  $100-150k  &amp;gt;150k  Don&amp;#39;t know/refused
+#&amp;gt; 0            Agnostic     27       34  ...        109     84                  96
+#&amp;gt; 1             Atheist     12       27  ...         59     74                  76
+#&amp;gt; 2            Buddhist     27       21  ...         39     53                  54
+#&amp;gt; 3            Catholic    418      617  ...        792    633                1489
+#&amp;gt; 4  Don’t know/refused     15       14  ...         17     18                 116
+#&amp;gt; 
+#&amp;gt; [5 rows x 11 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;pew&lt;/code&gt; dataset explores the relationship between income and religion in the US, produced by the Pew Research Center. To tidy it, we think of its “right” form if we are to answer data analysis questions. Say, what if we want to a person’s income is influenced by his religion or the other way around. It should be obvious that we need to derive from &lt;code&gt;pew&lt;/code&gt; a column to indicate the level of a person’s income, and another column being count of any combination of income and religion. &lt;code&gt;pew&lt;/code&gt; is messy in the sense that all column names besides &lt;code&gt;religion&lt;/code&gt;, from &lt;code&gt;&amp;lt;$10k&lt;/code&gt; to &lt;code&gt;Don&#39;t know/refused&lt;/code&gt;, should be different levels (values) of a column storing information about income.&lt;/p&gt;
+&lt;p&gt;The code to do this is fairly easy in pandas, the &lt;code&gt;.melt&lt;/code&gt; method is very similar to &lt;code&gt;tidyr::pivot_longer&lt;/code&gt; and its namesake in the retired &lt;code&gt;reshape2&lt;/code&gt; package.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tidy_pew = pew.melt(id_vars = &amp;quot;religion&amp;quot;, var_name = &amp;quot;income&amp;quot;, value_name = &amp;quot;count&amp;quot;)
+tidy_pew.head(20)
+#&amp;gt;                    religion   income  count
+#&amp;gt; 0                  Agnostic    &amp;lt;$10k     27
+#&amp;gt; 1                   Atheist    &amp;lt;$10k     12
+#&amp;gt; 2                  Buddhist    &amp;lt;$10k     27
+#&amp;gt; 3                  Catholic    &amp;lt;$10k    418
+#&amp;gt; 4        Don’t know/refused    &amp;lt;$10k     15
+#&amp;gt; 5          Evangelical Prot    &amp;lt;$10k    575
+#&amp;gt; 6                     Hindu    &amp;lt;$10k      1
+#&amp;gt; 7   Historically Black Prot    &amp;lt;$10k    228
+#&amp;gt; 8         Jehovah&amp;#39;s Witness    &amp;lt;$10k     20
+#&amp;gt; 9                    Jewish    &amp;lt;$10k     19
+#&amp;gt; 10            Mainline Prot    &amp;lt;$10k    289
+#&amp;gt; 11                   Mormon    &amp;lt;$10k     29
+#&amp;gt; 12                   Muslim    &amp;lt;$10k      6
+#&amp;gt; 13                 Orthodox    &amp;lt;$10k     13
+#&amp;gt; 14          Other Christian    &amp;lt;$10k      9
+#&amp;gt; 15             Other Faiths    &amp;lt;$10k     20
+#&amp;gt; 16    Other World Religions    &amp;lt;$10k      5
+#&amp;gt; 17             Unaffiliated    &amp;lt;$10k    217
+#&amp;gt; 18                 Agnostic  $10-20k     34
+#&amp;gt; 19                  Atheist  $10-20k     27&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now let’s calculate the &lt;span class=&#34;math inline&#34;&gt;\(\chi^2\)&lt;/span&gt; statistic in R and the corresponding p value；&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R 
+library(infer)
+chisq_stat &amp;lt;- py$tidy_pew %&amp;gt;%
+  tidyr::uncount(count) %&amp;gt;% 
+  specify(religion ~ income) %&amp;gt;% 
+  hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;%
+  calculate(stat = &amp;quot;Chisq&amp;quot;)
+
+py$tidy_pew %&amp;gt;%
+  tidyr::uncount(count) %&amp;gt;% 
+  specify(religion ~ income) %&amp;gt;% 
+  hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;%
+  visualize(method = &amp;quot;theoretical&amp;quot;) +
+  shade_p_value(obs_stat = chisq_stat, direction = &amp;quot;right&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This shows strong relationship between &lt;code&gt;income&lt;/code&gt; and &lt;code&gt;religion&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Another common use of this wide data format is to record regularly spaced observations over time, illustrated by the &lt;code&gt;billboard&lt;/code&gt; dataset. Ther rank of a specific track in each week after it enters the Billboard top 100 is recorded in 75 columns, &lt;code&gt;wk1&lt;/code&gt; to &lt;code&gt;wk75&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;billboard = pd.read_csv(&amp;quot;D:/RProjects/data/blog/billboard.csv&amp;quot;)
+billboard
+#&amp;gt;      year            artist                    track  ... wk74 wk75  wk76
+#&amp;gt; 0    2000             2 Pac  Baby Don&amp;#39;t Cry (Keep...  ...  NaN  NaN   NaN
+#&amp;gt; 1    2000           2Ge+her  The Hardest Part Of ...  ...  NaN  NaN   NaN
+#&amp;gt; 2    2000      3 Doors Down               Kryptonite  ...  NaN  NaN   NaN
+#&amp;gt; 3    2000      3 Doors Down                    Loser  ...  NaN  NaN   NaN
+#&amp;gt; 4    2000          504 Boyz            Wobble Wobble  ...  NaN  NaN   NaN
+#&amp;gt; ..    ...               ...                      ...  ...  ...  ...   ...
+#&amp;gt; 312  2000       Yankee Grey     Another Nine Minutes  ...  NaN  NaN   NaN
+#&amp;gt; 313  2000  Yearwood, Trisha          Real Live Woman  ...  NaN  NaN   NaN
+#&amp;gt; 314  2000   Ying Yang Twins  Whistle While You Tw...  ...  NaN  NaN   NaN
+#&amp;gt; 315  2000     Zombie Nation            Kernkraft 400  ...  NaN  NaN   NaN
+#&amp;gt; 316  2000   matchbox twenty                     Bent  ...  NaN  NaN   NaN
+#&amp;gt; 
+#&amp;gt; [317 rows x 81 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we are to answer questions like “what are the average ranking of artisits across all weeks?”, &lt;code&gt;wk&lt;/code&gt; like columns need to be transformed into values:&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tidy_billboard = billboard.melt(id_vars = [&amp;quot;year&amp;quot;, &amp;quot;artist&amp;quot;, &amp;quot;track&amp;quot;, &amp;quot;time&amp;quot;, &amp;quot;date.entered&amp;quot;],
+                                var_name = &amp;quot;week&amp;quot;,
+                                value_name = &amp;quot;rank&amp;quot;)
+                                
+tidy_billboard
+#&amp;gt;        year            artist                    track  ... date.entered  week  rank
+#&amp;gt; 0      2000             2 Pac  Baby Don&amp;#39;t Cry (Keep...  ...   2000-02-26   wk1  87.0
+#&amp;gt; 1      2000           2Ge+her  The Hardest Part Of ...  ...   2000-09-02   wk1  91.0
+#&amp;gt; 2      2000      3 Doors Down               Kryptonite  ...   2000-04-08   wk1  81.0
+#&amp;gt; 3      2000      3 Doors Down                    Loser  ...   2000-10-21   wk1  76.0
+#&amp;gt; 4      2000          504 Boyz            Wobble Wobble  ...   2000-04-15   wk1  57.0
+#&amp;gt; ...     ...               ...                      ...  ...          ...   ...   ...
+#&amp;gt; 24087  2000       Yankee Grey     Another Nine Minutes  ...   2000-04-29  wk76   NaN
+#&amp;gt; 24088  2000  Yearwood, Trisha          Real Live Woman  ...   2000-04-01  wk76   NaN
+#&amp;gt; 24089  2000   Ying Yang Twins  Whistle While You Tw...  ...   2000-03-18  wk76   NaN
+#&amp;gt; 24090  2000     Zombie Nation            Kernkraft 400  ...   2000-09-02  wk76   NaN
+#&amp;gt; 24091  2000   matchbox twenty                     Bent  ...   2000-04-29  wk76   NaN
+#&amp;gt; 
+#&amp;gt; [24092 rows x 7 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can compute the average ranking:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;(tidy_billboard.
+  groupby(&amp;quot;artist&amp;quot;)[[&amp;quot;rank&amp;quot;]].
+  mean().
+  sort_values(by = &amp;quot;rank&amp;quot;)
+)
+#&amp;gt;                                    rank
+#&amp;gt; artist                                 
+#&amp;gt; Santana                       10.500000
+#&amp;gt; Elliott, Missy &amp;quot;Misdemeanor&amp;quot;  14.333333
+#&amp;gt; matchbox twenty               18.641026
+#&amp;gt; N&amp;#39;Sync                        18.648649
+#&amp;gt; Janet                         19.416667
+#&amp;gt; ...                                 ...
+#&amp;gt; Lil&amp;#39; Mo                       98.142857
+#&amp;gt; LL Cool J                     98.500000
+#&amp;gt; Zombie Nation                 99.000000
+#&amp;gt; Fragma                        99.000000
+#&amp;gt; Smith, Will                   99.000000
+#&amp;gt; 
+#&amp;gt; [228 rows x 1 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multiple-variables-stored-in-one-column&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Multiple variables stored in one column&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;tb&lt;/code&gt; daaset comes from the World Health Organisation, and records the counts of confirmed tuberculosis cases by country, year, and demographic group. The demographic groups are broken down by sex (m, f) and age (0–14, 15–25, 25–34, 35–44.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tb = pd.read_csv(&amp;quot;D:/RProjects/data/blog/tb.csv&amp;quot;)
+tb
+#&amp;gt;     country  year   m014   m1524   m2534  ...   f3544  f4554  f5564   f65  fu
+#&amp;gt; 0        AD  2000    0.0     0.0     1.0  ...     NaN    NaN    NaN   NaN NaN
+#&amp;gt; 1        AE  2000    2.0     4.0     4.0  ...     3.0    0.0    0.0   4.0 NaN
+#&amp;gt; 2        AF  2000   52.0   228.0   183.0  ...   339.0  205.0   99.0  36.0 NaN
+#&amp;gt; 3        AG  2000    0.0     0.0     0.0  ...     0.0    0.0    0.0   0.0 NaN
+#&amp;gt; 4        AL  2000    2.0    19.0    21.0  ...     8.0    8.0    5.0  11.0 NaN
+#&amp;gt; ..      ...   ...    ...     ...     ...  ...     ...    ...    ...   ...  ..
+#&amp;gt; 196      YE  2000  110.0   789.0   689.0  ...   517.0  345.0  247.0  92.0 NaN
+#&amp;gt; 197      YU  2000    NaN     NaN     NaN  ...     NaN    NaN    NaN   NaN NaN
+#&amp;gt; 198      ZA  2000  116.0   723.0  1999.0  ...   933.0  423.0  167.0  80.0 NaN
+#&amp;gt; 199      ZM  2000  349.0  2175.0  2610.0  ...  1305.0  186.0  112.0  75.0 NaN
+#&amp;gt; 200      ZW  2000    NaN     NaN     NaN  ...     NaN    NaN    NaN   NaN NaN
+#&amp;gt; 
+#&amp;gt; [201 rows x 18 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To clean this data, we first melt all columns except for &lt;code&gt;country&lt;/code&gt; and &lt;code&gt;year&lt;/code&gt; in return for a longer version of &lt;code&gt;tb&lt;/code&gt;, and then seperate the &lt;code&gt;variable&lt;/code&gt; column into two pieces of information, &lt;code&gt;sex&lt;/code&gt; and &lt;code&gt;age&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tb_long = tb.melt(id_vars = [&amp;quot;country&amp;quot;, &amp;quot;year&amp;quot;])
+sex = tb_long[&amp;quot;variable&amp;quot;].str.split(pat = &amp;quot;(m|f)(.+)&amp;quot;).str.get(1)
+age = tb_long[&amp;quot;variable&amp;quot;].str.split(pat = &amp;quot;(m|f)(.+)&amp;quot;).str.get(2)
+
+print(sex)
+#&amp;gt; 0       m
+#&amp;gt; 1       m
+#&amp;gt; 2       m
+#&amp;gt; 3       m
+#&amp;gt; 4       m
+#&amp;gt;        ..
+#&amp;gt; 3211    f
+#&amp;gt; 3212    f
+#&amp;gt; 3213    f
+#&amp;gt; 3214    f
+#&amp;gt; 3215    f
+#&amp;gt; Name: variable, Length: 3216, dtype: object
+print(age)
+#&amp;gt; 0       014
+#&amp;gt; 1       014
+#&amp;gt; 2       014
+#&amp;gt; 3       014
+#&amp;gt; 4       014
+#&amp;gt;        ... 
+#&amp;gt; 3211      u
+#&amp;gt; 3212      u
+#&amp;gt; 3213      u
+#&amp;gt; 3214      u
+#&amp;gt; 3215      u
+#&amp;gt; Name: variable, Length: 3216, dtype: object&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Add these two columns and drop the redundant &lt;code&gt;variable&lt;/code&gt; column&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tidy_tb = tb_long.assign(sex = sex, age = age).drop(&amp;quot;variable&amp;quot;, axis = &amp;quot;columns&amp;quot;)
+tidy_tb
+#&amp;gt;      country  year  value sex  age
+#&amp;gt; 0         AD  2000    0.0   m  014
+#&amp;gt; 1         AE  2000    2.0   m  014
+#&amp;gt; 2         AF  2000   52.0   m  014
+#&amp;gt; 3         AG  2000    0.0   m  014
+#&amp;gt; 4         AL  2000    2.0   m  014
+#&amp;gt; ...      ...   ...    ...  ..  ...
+#&amp;gt; 3211      YE  2000    NaN   f    u
+#&amp;gt; 3212      YU  2000    NaN   f    u
+#&amp;gt; 3213      ZA  2000    NaN   f    u
+#&amp;gt; 3214      ZM  2000    NaN   f    u
+#&amp;gt; 3215      ZW  2000    NaN   f    u
+#&amp;gt; 
+#&amp;gt; [3216 rows x 5 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variables-are-stored-in-both-rows-and-columns&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Variables are stored in both rows and columns&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;weather&lt;/code&gt; data shows daily weather data from the Global Historical Climatology Network for one weather station (MX17004) in Mexico for five months in 2010.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;weather = pd.read_csv(&amp;quot;D:/RProjects/data/blog/weather.csv&amp;quot;)
+weather
+#&amp;gt;          id  year  month element    d1  ...   d27   d28   d29   d30   d31
+#&amp;gt; 0   MX17004  2010      1    tmax   NaN  ...   NaN   NaN   NaN  27.8   NaN
+#&amp;gt; 1   MX17004  2010      1    tmin   NaN  ...   NaN   NaN   NaN  14.5   NaN
+#&amp;gt; 2   MX17004  2010      2    tmax   NaN  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 3   MX17004  2010      2    tmin   NaN  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 4   MX17004  2010      3    tmax   NaN  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 5   MX17004  2010      3    tmin   NaN  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 6   MX17004  2010      4    tmax   NaN  ...  36.3   NaN   NaN   NaN   NaN
+#&amp;gt; 7   MX17004  2010      4    tmin   NaN  ...  16.7   NaN   NaN   NaN   NaN
+#&amp;gt; 8   MX17004  2010      5    tmax   NaN  ...  33.2   NaN   NaN   NaN   NaN
+#&amp;gt; 9   MX17004  2010      5    tmin   NaN  ...  18.2   NaN   NaN   NaN   NaN
+#&amp;gt; 10  MX17004  2010      6    tmax   NaN  ...   NaN   NaN  30.1   NaN   NaN
+#&amp;gt; 11  MX17004  2010      6    tmin   NaN  ...   NaN   NaN  18.0   NaN   NaN
+#&amp;gt; 12  MX17004  2010      7    tmax   NaN  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 13  MX17004  2010      7    tmin   NaN  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 14  MX17004  2010      8    tmax   NaN  ...   NaN   NaN  28.0   NaN  25.4
+#&amp;gt; 15  MX17004  2010      8    tmin   NaN  ...   NaN   NaN  15.3   NaN  15.4
+#&amp;gt; 16  MX17004  2010     10    tmax   NaN  ...   NaN  31.2   NaN   NaN   NaN
+#&amp;gt; 17  MX17004  2010     10    tmin   NaN  ...   NaN  15.0   NaN   NaN   NaN
+#&amp;gt; 18  MX17004  2010     11    tmax   NaN  ...  27.7   NaN   NaN   NaN   NaN
+#&amp;gt; 19  MX17004  2010     11    tmin   NaN  ...  14.2   NaN   NaN   NaN   NaN
+#&amp;gt; 20  MX17004  2010     12    tmax  29.9  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 21  MX17004  2010     12    tmin  13.8  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 
+#&amp;gt; [22 rows x 35 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are two major problems with &lt;code&gt;weather&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;d1&lt;/code&gt;, &lt;code&gt;d2&lt;/code&gt;, …, &lt;code&gt;d31&lt;/code&gt; should be values instead of column names (solved by &lt;code&gt;.melt&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;On the other hand, values in the &lt;code&gt;element&lt;/code&gt; column should be names, it should be spread into two columns named &lt;code&gt;tmax&lt;/code&gt;, &lt;code&gt;tmin&lt;/code&gt; (solved by &lt;code&gt;.pivot_table&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;(weather.
+  melt(id_vars = [&amp;quot;id&amp;quot;, &amp;quot;year&amp;quot;, &amp;quot;month&amp;quot;, &amp;quot;element&amp;quot;], var_name = &amp;quot;day&amp;quot;, value_name = &amp;quot;temp&amp;quot;).
+  pivot_table(index = [&amp;quot;id&amp;quot;, &amp;quot;year&amp;quot;, &amp;quot;month&amp;quot;, &amp;quot;day&amp;quot;],
+              columns = &amp;quot;element&amp;quot;,
+              values = &amp;quot;temp&amp;quot;).
+  reset_index().
+  head()
+)
+#&amp;gt; element       id  year  month  day  tmax  tmin
+#&amp;gt; 0        MX17004  2010      1  d30  27.8  14.5
+#&amp;gt; 1        MX17004  2010      2  d11  29.7  13.4
+#&amp;gt; 2        MX17004  2010      2   d2  27.3  14.4
+#&amp;gt; 3        MX17004  2010      2  d23  29.9  10.7
+#&amp;gt; 4        MX17004  2010      2   d3  24.1  14.4&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case-study-mortality-data-from-mexico&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Case study: mortality data from Mexico&lt;/h1&gt;
+&lt;p&gt;After stating these common problems and their remidies, Hadley presented a case study section on how tidy dataset can facilitate data analysis. The case study uses individual-level mortality data from Mexico. The goal is to find causes of death with unusual temporal patterns, at hour level. It’s time to move back from Python to R!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+deaths &amp;lt;- read_csv(&amp;quot;D:/RProjects/data/blog/mexico-deaths.csv&amp;quot;) %&amp;gt;% na.omit()
+deaths
+#&amp;gt; # A tibble: 513,273 x 5
+#&amp;gt;      yod   mod   dod   hod cod  
+#&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;
+#&amp;gt;  1  1920    11    17     3 W78  
+#&amp;gt;  2  1923     2     4    16 J44  
+#&amp;gt;  3  1923     6    23    19 E12  
+#&amp;gt;  4  1926     2     5    16 C67  
+#&amp;gt;  5  1926     4     1    16 J44  
+#&amp;gt;  6  1928    10    30    19 I27  
+#&amp;gt;  7  1929     4    23    15 I25  
+#&amp;gt;  8  1930     9    11    19 E14  
+#&amp;gt;  9  1930    12    22    19 E11  
+#&amp;gt; 10  1931     5    26    11 K65  
+#&amp;gt; # ... with 513,263 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The columns are year, month, day, hour and cause of specific death respectively. Another table &lt;code&gt;codes&lt;/code&gt; explains what acronyms in &lt;code&gt;cod&lt;/code&gt; mean.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;codes &amp;lt;- read_csv(&amp;quot;D:/RProjects/data/blog/codes.csv&amp;quot;)
+codes
+#&amp;gt; # A tibble: 1,851 x 2
+#&amp;gt;    cod   disease                                                              
+#&amp;gt;    &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;                                                                
+#&amp;gt;  1 A00   &amp;quot;Cholera&amp;quot;                                                            
+#&amp;gt;  2 A01   &amp;quot;Typhoid and paratyphoid\nfevers&amp;quot;                                    
+#&amp;gt;  3 A02   &amp;quot;Other salmonella infections&amp;quot;                                        
+#&amp;gt;  4 A03   &amp;quot;Shigellosis&amp;quot;                                                        
+#&amp;gt;  5 A04   &amp;quot;Other bacterial intestinal\ninfections&amp;quot;                             
+#&amp;gt;  6 A05   &amp;quot;Other bacterial foodborne\nintoxications, not elsewhere\nclassified&amp;quot;
+#&amp;gt;  7 A06   &amp;quot;Amebiasis&amp;quot;                                                          
+#&amp;gt;  8 A07   &amp;quot;Other protozoal intestinal\ndiseases&amp;quot;                               
+#&amp;gt;  9 A08   &amp;quot;Viral and other specified\nintestinal infections&amp;quot;                   
+#&amp;gt; 10 A09   &amp;quot;Diarrhea and gastroenteritis\nof infectious origin&amp;quot;                 
+#&amp;gt; # ... with 1,841 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Thanks to the &lt;a href=&#34;https://rstudio.github.io/reticulate/&#34;&gt;&lt;code&gt;reticulate&lt;/code&gt;&lt;/a&gt;, we can mix R and Python code seamlessly. Here is a line plot made with &lt;code&gt;seaborn&lt;/code&gt; demonstrating total deaths per hour:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+deaths = r.deaths
+deaths_per_hour = deaths[&amp;quot;hod&amp;quot;].value_counts()
+deaths_per_hour
+#&amp;gt; 18.0    24380
+#&amp;gt; 10.0    24321
+#&amp;gt; 16.0    23890
+#&amp;gt; 11.0    23843
+#&amp;gt; 6.0     23787
+#&amp;gt; 17.0    23625
+#&amp;gt; 12.0    23392
+#&amp;gt; 13.0    23284
+#&amp;gt; 15.0    23278
+#&amp;gt; 14.0    23053
+#&amp;gt; 20.0    22926
+#&amp;gt; 19.0    22919
+#&amp;gt; 9.0     22401
+#&amp;gt; 5.0     22126
+#&amp;gt; 8.0     21915
+#&amp;gt; 7.0     21822
+#&amp;gt; 23.0    21446
+#&amp;gt; 21.0    20995
+#&amp;gt; 22.0    20510
+#&amp;gt; 1.0     20430
+#&amp;gt; 4.0     20239
+#&amp;gt; 3.0     19729
+#&amp;gt; 2.0     18962
+#&amp;gt; Name: hod, dtype: int64
+sns.lineplot(x = deaths_per_hour.index, y = deaths_per_hour.values)
+plt.title(&amp;quot;Temporal pattern of all causes of death&amp;quot;)
+plt.xlabel(&amp;quot;Hour of the day&amp;quot;)
+plt.ylabel(&amp;quot;Number of deaths&amp;quot;)
+plt.show()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;To provide informative labels for causes, we next join the dataset to the &lt;code&gt;codes&lt;/code&gt; dataset, on the &lt;code&gt;cod&lt;/code&gt; variable.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;deaths &amp;lt;- left_join(deaths, codes) %&amp;gt;%
+  rename(cause = disease)
+head(deaths)
+#&amp;gt; # A tibble: 6 x 6
+#&amp;gt;     yod   mod   dod   hod cod   cause                                         
+#&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;                                         
+#&amp;gt; 1  1920    11    17     3 W78   &amp;quot;Inhalation of gastric\ncontents&amp;quot;             
+#&amp;gt; 2  1923     2     4    16 J44   &amp;quot;Other chronic obstructive\npulmonary disease&amp;quot;
+#&amp;gt; 3  1923     6    23    19 E12   &amp;quot;Malnutrition-related diabetes\nmellitus&amp;quot;     
+#&amp;gt; 4  1926     2     5    16 C67   &amp;quot;Malignant neoplasm of bladder&amp;quot;               
+#&amp;gt; 5  1926     4     1    16 J44   &amp;quot;Other chronic obstructive\npulmonary disease&amp;quot;
+#&amp;gt; 6  1928    10    30    19 I27   &amp;quot;Other pulmonary heart\ndiseases&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The total deaths for each cause varies over several orders of magnitude: there are 46,794 deaths from heart attack but only 1 from Tularemia.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+(deaths.groupby([&amp;quot;cod&amp;quot;]).
+  size().
+  reset_index(name = &amp;quot;per_cause&amp;quot;).
+  sort_values(by = &amp;quot;per_cause&amp;quot;, ascending = False)
+)
+#&amp;gt;       cod  per_cause
+#&amp;gt; 417   I21      46794
+#&amp;gt; 260   E11      42421
+#&amp;gt; 262   E14      27330
+#&amp;gt; 495   J44      16043
+#&amp;gt; 566   K70      12860
+#&amp;gt; ...   ...        ...
+#&amp;gt; 1079  X24          1
+#&amp;gt; 521   K02          1
+#&amp;gt; 939   V30          1
+#&amp;gt; 940   V33          1
+#&amp;gt; 182   D04          1
+#&amp;gt; 
+#&amp;gt; [1194 rows x 2 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This means that rather than the total number, it makes more sense to think in proportions. If a cause of death departs from the overall temporal pattern, then its proportion of deaths in a given hour compared to the total deaths of that cause should differ significantly from that of the hourly deaths at the same time compared to total deaths. I denote these two proportions as &lt;code&gt;prop1&lt;/code&gt; and &lt;code&gt;prop2&lt;/code&gt; respectively. To ensure that the causes we consider are sufficiently representative we’ll only work with causes with more than 50 total deaths.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;prop1 &amp;lt;- deaths %&amp;gt;% 
+  count(hod, cause, name = &amp;quot;per_hour_per_cause&amp;quot;) %&amp;gt;% 
+  add_count(cause, wt = per_hour_per_cause, name = &amp;quot;per_cause&amp;quot;) %&amp;gt;% 
+  mutate(prop1 = per_hour_per_cause / per_cause)
+
+prop2 &amp;lt;- deaths %&amp;gt;% 
+  count(hod, name = &amp;quot;per_hour&amp;quot;) %&amp;gt;% 
+  add_count(wt = per_hour, name = &amp;quot;total&amp;quot;) %&amp;gt;% 
+  mutate(prop2 = per_hour / total)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hadley used mean square error between the two proportions as a kind of distance, to indicate the average degree of anomaly of a cause, and I follow:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dist &amp;lt;- prop1 %&amp;gt;% 
+  filter(per_cause &amp;gt; 50) %&amp;gt;% 
+  left_join(prop2, on = &amp;quot;hod&amp;quot;) %&amp;gt;% 
+  select(hour = hod,
+         cause,
+         n = per_cause,
+         prop1,
+         prop2) %&amp;gt;% 
+  group_by(cause, n) %&amp;gt;% 
+  summarize(dist = mean((prop1 - prop2) ^ 2)) %&amp;gt;% 
+  ungroup()
+
+dist %&amp;gt;% 
+  arrange(desc(dist))
+#&amp;gt; # A tibble: 447 x 3
+#&amp;gt;    cause                                                               n    dist
+#&amp;gt;    &amp;lt;chr&amp;gt;                                                           &amp;lt;int&amp;gt;   &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 &amp;quot;Accident to powered aircraft\ncausing injury to occupant&amp;quot;         57 0.00573
+#&amp;gt;  2 &amp;quot;Victim of lightning&amp;quot;                                              97 0.00513
+#&amp;gt;  3 &amp;quot;Bus occupant injured in other\nand unspecified transport\nacc~    52 0.00419
+#&amp;gt;  4 &amp;quot;Assault (homicide) by smoke,\nfire, and flames&amp;quot;                   51 0.00229
+#&amp;gt;  5 &amp;quot;Exposure to electric\ntransmission lines&amp;quot;                         77 0.00161
+#&amp;gt;  6 &amp;quot;Sudden infant death syndrome&amp;quot;                                    323 0.00156
+#&amp;gt;  7 &amp;quot;Drowning and submersion while\nin natural water&amp;quot;                 469 0.00133
+#&amp;gt;  8 &amp;quot;Motorcycle rider injured in\ncollision with car, pickup\ntruc~    66 0.00126
+#&amp;gt;  9 &amp;quot;Contact with hornets, wasps,\nand bees&amp;quot;                           86 0.00118
+#&amp;gt; 10 &amp;quot;Exposure to smoke, fire, and\nflames, undetermined intent&amp;quot;        51 0.00110
+#&amp;gt; # ... with 437 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we see causes of death with highest &lt;code&gt;dist&lt;/code&gt; are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dist %&amp;gt;% 
+  ggplot(aes(n, dist)) + 
+  geom_jitter() + 
+  ggrepel::geom_text_repel(aes(label = cause),
+                           top_n(dist, 10)) + 
+  scale_x_log10() + 
+  scale_y_log10() + 
+  geom_smooth(method = &amp;quot;lm&amp;quot;) + 
+  labs(title = &amp;quot;Temporal deviation of causes of deaths in Mexico&amp;quot;,
+       y = NULL,
+       x = &amp;quot;total death&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Thus, our final solution is to build a model with &lt;code&gt;n&lt;/code&gt; as predictor, andn &lt;code&gt;dist&lt;/code&gt; as response. And cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I’m simply going to use linear regression (Hadley use robust linear model in the paper).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(broom)
+lm_fit &amp;lt;- lm(log(dist) ~ log(n), data = dist)
+tidy(lm_fit)
+#&amp;gt; # A tibble: 2 x 5
+#&amp;gt;   term        estimate std.error statistic   p.value
+#&amp;gt;   &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 (Intercept)   -3.74     0.110      -34.0 8.34e-126
+#&amp;gt; 2 log(n)        -0.869    0.0186     -46.8 7.55e-174&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s plot those residuals:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;augment(lm_fit) %&amp;gt;% 
+  ggplot(aes(log.n., .resid)) + 
+  geom_hline(yintercept = 0, color = &amp;quot;red&amp;quot;) + 
+  geom_point()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The plot shows an empty region around a residual of 1.5. So somewhat arbitrarily, we’ll select those diseases with a residual greater than 1.5&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rows &amp;lt;- augment(lm_fit) %&amp;gt;% 
+  mutate(row = row_number()) %&amp;gt;% 
+  filter(.resid &amp;gt; 1.5) %&amp;gt;% 
+  select(row) %&amp;gt;% 
+  pull(row)
+
+
+unusual &amp;lt;- dist %&amp;gt;%
+  mutate(row = row_number()) %&amp;gt;% 
+  filter(row %in% rows) %&amp;gt;% 
+  select(cause, n)
+
+unusual
+#&amp;gt; # A tibble: 13 x 2
+#&amp;gt;    cause                                                                       n
+#&amp;gt;    &amp;lt;chr&amp;gt;                                                                   &amp;lt;int&amp;gt;
+#&amp;gt;  1 &amp;quot;Accident to powered aircraft\ncausing injury to occupant&amp;quot;                 57
+#&amp;gt;  2 &amp;quot;Assault (homicide) by other\nand unspecified firearm\ndischarge&amp;quot;        7228
+#&amp;gt;  3 &amp;quot;Assault (homicide) by sharp\nobject&amp;quot;                                    1575
+#&amp;gt;  4 &amp;quot;Bus occupant injured in other\nand unspecified transport\naccidents&amp;quot;      52
+#&amp;gt;  5 &amp;quot;Drowning and submersion while\nin natural water&amp;quot;                         469
+#&amp;gt;  6 &amp;quot;Exposure to unspecified\nelectric current&amp;quot;                               456
+#&amp;gt;  7 &amp;quot;Motor- or nonmotor-vehicle\naccident, type of vehicle\nunspecified&amp;quot;     4061
+#&amp;gt;  8 &amp;quot;Other specified drowning and\nsubmersion&amp;quot;                                303
+#&amp;gt;  9 &amp;quot;Pedestrian injured in other\nand unspecified transport\naccidents&amp;quot;      3956
+#&amp;gt; 10 &amp;quot;Sudden infant death syndrome&amp;quot;                                            323
+#&amp;gt; 11 &amp;quot;Traffic accident of specified\ntype but victim&amp;#39;s mode of\ntransport u~  2545
+#&amp;gt; 12 &amp;quot;Unspecified drowning and\nsubmersion&amp;quot;                                   1283
+#&amp;gt; 13 &amp;quot;Victim of lightning&amp;quot;                                                      97&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, we plot the temporal course for each unusual cause of death.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;prop1 %&amp;gt;% 
+  filter(cause %in% unusual$cause) %&amp;gt;% 
+  left_join(prop2, on = &amp;quot;hod&amp;quot;) %&amp;gt;% 
+  pivot_longer(c(prop1, prop2)) %&amp;gt;% 
+  ggplot(aes(hod, value, color = name)) + 
+  geom_line() + 
+  scale_color_manual(name = NULL,
+                     labels = c(&amp;quot;cause-specific&amp;quot;, &amp;quot;overall&amp;quot;), 
+                     values = c(&amp;quot;#FFBF0F&amp;quot;, &amp;quot;#0382E5&amp;quot;)) + 
+  facet_wrap(~ cause, scales = &amp;quot;free_y&amp;quot;) + 
+  labs(x = &amp;quot;hour&amp;quot;, y = NULL, title = &amp;quot;Most deviated causes of death&amp;quot;, 
+       subtitle = &amp;quot;comparing cause-specific temporal pattern to overall trend&amp;quot;) + 
+  theme_minimal(base_size = 20) +
+  theme(legend.position = &amp;quot;top&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;1440&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-JSSv059i10&#34;&gt;
+&lt;p&gt;Wickham, Hadley. 2014. “Tidy Data.” &lt;em&gt;Journal of Statistical Software, Articles&lt;/em&gt; 59 (10): 1–23. &lt;a href=&#34;https://doi.org/10.18637/jss.v059.i10&#34;&gt;https://doi.org/10.18637/jss.v059.i10&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Although pandas and dplyr 1.0 can perform rowwise operatios in a breeze, it’s not considered best practice in such case.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Machine Learning with Titanic Data</title>
@@ -73,14 +586,14 @@ titanic.head()&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Exploring Lego Sets</title>
+      <title>Exploring Lego Database</title>
       <link>/post/exploring-lego/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
       <guid>/post/exploring-lego/</guid>
       <description>
 
 
-&lt;p&gt;are available &lt;a href=&#34;https://rebrickable.com/downloads/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This week I’ve had some recap on data wrangling in Python, specifically in &lt;code&gt;pandas&lt;/code&gt; and &lt;code&gt;NumPy&lt;/code&gt;. As an exercise, are available &lt;a href=&#34;https://rebrickable.com/downloads/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
 
 colors = pd.read_csv(&amp;quot;D:/RProjects/data/blog/lego/colors.csv&amp;quot;)
@@ -92,8 +605,13 @@ colors.head()&lt;/code&gt;&lt;/pre&gt;
 ## 3   2           Green  237841        f
 ## 4   3  Dark Turquoise  008F9B        f&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;How many colors are available?&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;colors[&amp;#39;name&amp;#39;].shape[0]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 184&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;colors[[&amp;#39;name&amp;#39;]].info()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
+## RangeIndex: 184 entries, 0 to 183
+## Data columns (total 1 columns):
+## name    184 non-null object
+## dtypes: object(1)
+## memory usage: 1.6+ KB&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

@@ -1,5 +1,5 @@
 ---
-title: Exploring Lego Sets
+title: Exploring Lego Database
 author: Qiushi Yan
 date: '2020-05-07'
 slug: exploring-lego
@@ -19,7 +19,7 @@ image:
 
 
 
-<p>are available <a href="https://rebrickable.com/downloads/">here</a></p>
+<p>This week I’ve had some recap on data wrangling in Python, specifically in <code>pandas</code> and <code>NumPy</code>. As an exercise, are available <a href="https://rebrickable.com/downloads/">here</a></p>
 <pre class="python"><code>import pandas as pd
 
 colors = pd.read_csv(&quot;D:/RProjects/data/blog/lego/colors.csv&quot;)
@@ -31,5 +31,10 @@ colors.head()</code></pre>
 ## 3   2           Green  237841        f
 ## 4   3  Dark Turquoise  008F9B        f</code></pre>
 <p>How many colors are available?</p>
-<pre class="python"><code>colors[&#39;name&#39;].shape[0]</code></pre>
-<pre><code>## 184</code></pre>
+<pre class="python"><code>colors[[&#39;name&#39;]].info()</code></pre>
+<pre><code>## &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+## RangeIndex: 184 entries, 0 to 183
+## Data columns (total 1 columns):
+## name    184 non-null object
+## dtypes: object(1)
+## memory usage: 1.6+ KB</code></pre>

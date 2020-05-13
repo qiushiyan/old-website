@@ -152,7 +152,7 @@
   
   <meta property="og:site_name" content="Qiushi Yan">
   <meta property="og:url" content="/post/exploring-lego/">
-  <meta property="og:title" content="Exploring Lego Sets | Qiushi Yan">
+  <meta property="og:title" content="Exploring Lego Database | Qiushi Yan">
   <meta property="og:description" content="Dig into small bricks with pandas data frames."><meta property="og:image" content="/post/exploring-lego/featured.jpg">
   <meta property="twitter:image" content="/post/exploring-lego/featured.jpg"><meta property="og:locale" content="en-us">
   
@@ -187,7 +187,7 @@
     "@type": "WebPage",
     "@id": "/post/exploring-lego/"
   },
-  "headline": "Exploring Lego Sets",
+  "headline": "Exploring Lego Database",
   
   "image": [
     "/post/exploring-lego/featured.jpg"
@@ -227,7 +227,7 @@
 
 
 
-  <title>Exploring Lego Sets | Qiushi Yan</title>
+  <title>Exploring Lego Database | Qiushi Yan</title>
 
 </head>
 
@@ -342,7 +342,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          <a class="nav-link " href="/#post"><span>Posts</span></a>
         </li>
 
         
@@ -371,7 +371,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#post"><span>Posts</span></a>
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
         </li>
 
         
@@ -447,7 +447,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>Exploring Lego Sets</h1>
+  <h1>Exploring Lego Database</h1>
 
   
 
@@ -520,7 +520,7 @@
       
 
 
-<p>are available <a href="https://rebrickable.com/downloads/">here</a></p>
+<p>This week I’ve had some recap on data wrangling in Python, specifically in <code>pandas</code> and <code>NumPy</code>. As an exercise, are available <a href="https://rebrickable.com/downloads/">here</a></p>
 <pre class="python"><code>import pandas as pd
 
 colors = pd.read_csv(&quot;D:/RProjects/data/blog/lego/colors.csv&quot;)
@@ -532,8 +532,13 @@ colors.head()</code></pre>
 ## 3   2           Green  237841        f
 ## 4   3  Dark Turquoise  008F9B        f</code></pre>
 <p>How many colors are available?</p>
-<pre class="python"><code>colors[&#39;name&#39;].shape[0]</code></pre>
-<pre><code>## 184</code></pre>
+<pre class="python"><code>colors[[&#39;name&#39;]].info()</code></pre>
+<pre><code>## &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+## RangeIndex: 184 entries, 0 to 183
+## Data columns (total 1 columns):
+## name    184 non-null object
+## dtypes: object(1)
+## memory usage: 1.6+ KB</code></pre>
 
     </div>
 
@@ -556,7 +561,7 @@ colors.head()</code></pre>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/exploring-lego/&amp;text=Exploring%20Lego%20Sets" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/exploring-lego/&amp;text=Exploring%20Lego%20Database" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -569,7 +574,7 @@ colors.head()</code></pre>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/exploring-lego/&amp;t=Exploring%20Lego%20Sets" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/exploring-lego/&amp;t=Exploring%20Lego%20Database" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -582,7 +587,7 @@ colors.head()</code></pre>
       
       
       <li>
-        <a href="mailto:?subject=Exploring%20Lego%20Sets&amp;body=/post/exploring-lego/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Exploring%20Lego%20Database&amp;body=/post/exploring-lego/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -595,7 +600,7 @@ colors.head()</code></pre>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/exploring-lego/&amp;title=Exploring%20Lego%20Sets" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/exploring-lego/&amp;title=Exploring%20Lego%20Database" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -608,7 +613,7 @@ colors.head()</code></pre>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Exploring%20Lego%20Sets%20/post/exploring-lego/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Exploring%20Lego%20Database%20/post/exploring-lego/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -621,7 +626,7 @@ colors.head()</code></pre>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/exploring-lego/&amp;title=Exploring%20Lego%20Sets" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/exploring-lego/&amp;title=Exploring%20Lego%20Database" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>

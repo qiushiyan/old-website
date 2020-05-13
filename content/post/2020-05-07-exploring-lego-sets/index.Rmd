@@ -1,5 +1,5 @@
 ---
-title: Exploring Lego Sets
+title: Exploring Lego Database
 author: Qiushi Yan
 date: '2020-05-07'
 slug: exploring-lego
@@ -17,7 +17,7 @@ image:
   preview_only: yes
 ---
 
-are available [here](https://rebrickable.com/downloads/)
+This week I've had some recap on data wrangling in Python, specifically in `pandas` and `NumPy`. As an exercise, are available [here](https://rebrickable.com/downloads/)
 
 ```{python}
 import pandas as pd
@@ -30,6 +30,7 @@ colors.head()
 How many colors are available? 
 
 ```{python}
-colors['name'].shape[0]
+colors[['name']].info()
 ```
+
 

@@ -13,12 +13,42 @@
   </url>
   
   <url>
-    <loc>/post/classification-metrics/</loc>
-    <lastmod>2020-05-09T14:58:21+08:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/python/</loc>
+    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/python-tidy-data/</loc>
+    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/classification-metrics/</loc>
     <lastmod>2020-05-09T14:58:21+08:00</lastmod>
   </url>
   
@@ -28,23 +58,8 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2020-05-09T14:58:21+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-05-09T14:58:21+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/readings/</loc>
     <lastmod>2020-05-09T14:58:21+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/data-analysis/</loc>
-    <lastmod>2020-05-08T20:21:30+08:00</lastmod>
   </url>
   
   <url>
@@ -54,16 +69,6 @@
   
   <url>
     <loc>/post/programmer-word-choice/</loc>
-    <lastmod>2020-05-08T20:21:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2020-05-08T11:34:35+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
     <lastmod>2020-05-08T20:21:30+08:00</lastmod>
   </url>
   

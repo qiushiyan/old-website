@@ -108,7 +108,7 @@ words <- raw %>%
     word == "manag" ~ "manage",
     word == "hospit" ~ "hospital",
     word == "diseas" ~ "disease",
-    word == "deceas" ~ "disease",
+    word == "deceas" ~ "dicease",
     word == "caus" ~ "cause",
     word == "emerg" ~ "emerge",
     word == "includ" ~ "include", 

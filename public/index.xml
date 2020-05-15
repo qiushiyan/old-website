@@ -35,11 +35,14 @@
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#json-data-in-r&#34;&gt;JSON data in R&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#the-tidyjson-package&#34;&gt;The tidyjson package&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#case-study-1-clean-google-analytics-customer-data&#34;&gt;Case study 1: clean google analytics customer data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case-study-clean-google-analytics-customer-data&#34;&gt;Case study: clean google analytics customer data&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
+&lt;div id=&#34;json-data-in-r&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;JSON data in R&lt;/h1&gt;
 &lt;p&gt;JSON, as a lightweight and flexible data format originating in JavaScript, has been widely used in web APIs, NoSQL databases and relational databases. There is a natural mapping from js datatypes to that in R. Arrays containing primitives in js are seen as an analogy for atomic vectors in R, as js objects are for R’s named lists. The &lt;a href=&#34;https://github.com/jeroen/jsonlite&#34;&gt;&lt;code&gt;jsonlite&lt;/code&gt;&lt;/a&gt; package is a famous converter of this sort for R users. For example:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(jsonlite)
 library(tidyverse)
@@ -189,6 +192,7 @@ tibble(index = 1:3, json_col_1, json_col_2) %&amp;gt;%
 #&amp;gt; 1    A   1000    10.0
 #&amp;gt; 2    B   5000     9.0
 #&amp;gt; 3    C   2000     9.5&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;div id=&#34;the-tidyjson-package&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;The tidyjson package&lt;/h1&gt;
 &lt;p&gt;The &lt;a href=&#34;https://github.com/colearendt/tidyjson&#34;&gt;&lt;code&gt;tidyjson&lt;/code&gt;&lt;/a&gt; package provides many untility functions for working with in json data in R, extending &lt;code&gt;formJSON&lt;/code&gt;. &lt;code&gt;spread_all&lt;/code&gt; is the core function:&lt;/p&gt;
@@ -206,7 +210,7 @@ people %&amp;gt;% spread_all()
 #&amp;gt; 1 &amp;quot;{\&amp;quot;age\&amp;quot;:32,\&amp;quot;name...&amp;quot;           1    32 Bob        Smith    
 #&amp;gt; 2 &amp;quot;{\&amp;quot;age\&amp;quot;:54,\&amp;quot;name...&amp;quot;           2    54 Susan      Doe      
 #&amp;gt; 3 &amp;quot;{\&amp;quot;age\&amp;quot;:18,\&amp;quot;name...&amp;quot;           3    18 Ann        Jones&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This produces a &lt;code&gt;tbl_json&lt;/code&gt; object, where each row corresponds to an element of the people vector (a “document” in tidyjson). The JSON attribute of the &lt;code&gt;tbl_json&lt;/code&gt; object is shown first, then the columns of the tibble are shown - a &lt;code&gt;document.id&lt;/code&gt; indicating document in which the row originated.&lt;/p&gt;
+&lt;p&gt;This produces a &lt;code&gt;tbl_json&lt;/code&gt; object, where each row corresponds to an element of the people vector (a “document” in tidyjson). The JSON attribute of the &lt;code&gt;tbl_json&lt;/code&gt; object is shown first, then the columns of the tibble are shown: a &lt;code&gt;document.id&lt;/code&gt; indicating document in which the row originated.&lt;/p&gt;
 &lt;p&gt;On the other hand, &lt;code&gt;spread_all&lt;/code&gt; cannot spread arrays, this is when &lt;code&gt;gather_array&lt;/code&gt; come into use. Consider the &lt;code&gt;worldbank&lt;/code&gt; data built in the package, it is a 500 length character vector of projects funded by the world bank&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;%
   spread_all()
@@ -226,7 +230,7 @@ people %&amp;gt;% spread_all()
 #&amp;gt; # ... with 490 more rows, and 3 more variables: regionname &amp;lt;chr&amp;gt;,
 #&amp;gt; #   totalamt &amp;lt;dbl&amp;gt;, `_id.$oid` &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you take a careful look at the actual object in js, you’ll notice that one key is missing in the 9 columns printed above, namely &lt;code&gt;majorsector_percent&lt;/code&gt;, because its paired value is an array.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;% head(1)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank[1]
 #&amp;gt; [1] &amp;quot;{\&amp;quot;_id\&amp;quot;:{\&amp;quot;$oid\&amp;quot;:\&amp;quot;52b213b38594d8a2be17c780\&amp;quot;},\&amp;quot;boardapprovaldate\&amp;quot;:\&amp;quot;2013-11-12T00:00:00Z\&amp;quot;,\&amp;quot;closingdate\&amp;quot;:\&amp;quot;2018-07-07T00:00:00Z\&amp;quot;,\&amp;quot;countryshortname\&amp;quot;:\&amp;quot;Ethiopia\&amp;quot;,\&amp;quot;majorsector_percent\&amp;quot;:[{\&amp;quot;Name\&amp;quot;:\&amp;quot;Education\&amp;quot;,\&amp;quot;Percent\&amp;quot;:46},{\&amp;quot;Name\&amp;quot;:\&amp;quot;Education\&amp;quot;,\&amp;quot;Percent\&amp;quot;:26},{\&amp;quot;Name\&amp;quot;:\&amp;quot;Public Administration, Law, and Justice\&amp;quot;,\&amp;quot;Percent\&amp;quot;:16},{\&amp;quot;Name\&amp;quot;:\&amp;quot;Education\&amp;quot;,\&amp;quot;Percent\&amp;quot;:12}],\&amp;quot;project_name\&amp;quot;:\&amp;quot;Ethiopia General Education Quality Improvement Project II\&amp;quot;,\&amp;quot;regionname\&amp;quot;:\&amp;quot;Africa\&amp;quot;,\&amp;quot;totalamt\&amp;quot;:130000000}&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can validate this first using &lt;code&gt;gather_object&lt;/code&gt; (separates a JSON object into multiple rows of name-value pairs), and then look at each value’s data type in JS with &lt;code&gt;json_types&lt;/code&gt; (inspects the json associated with each row)&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;% 
@@ -341,9 +345,9 @@ people_array %&amp;gt;%
 #&amp;gt; 10           6 Pheobe   guitar      musician&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The potential disadvantage of using &lt;code&gt;tidyjson&lt;/code&gt; is that it’s built on the &lt;code&gt;tbl_json&lt;/code&gt; object, which is often automatically created from a single character vector when using &lt;code&gt;spread_&lt;/code&gt; functions. Yet &lt;code&gt;tbl_json&lt;/code&gt; assumes only one special column storing json format data. So when faced with data frame with multiple json columns, we may have to take a little detour to clean them separately and combine the results manually. For another, there are problems with parsing arrays.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;case-study-1-clean-google-analytics-customer-data&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Case study 1: clean google analytics customer data&lt;/h1&gt;
-&lt;p&gt;This data comes from a &lt;a href=&#34;https://www.kaggle.com/c/ga-customer-revenue-prediction/data?select=test.csv&#34;&gt;Kaggle dataset&lt;/a&gt;. I read in only the top 100 rows and relevant json columns.&lt;/p&gt;
+&lt;div id=&#34;case-study-clean-google-analytics-customer-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Case study: clean google analytics customer data&lt;/h1&gt;
+&lt;p&gt;This data comes from &lt;a href=&#34;https://www.kaggle.com/c/ga-customer-revenue-prediction/data?select=test.csv&#34;&gt;Kaggle&lt;/a&gt;. I read in only the top 100 rows and relevant json columns.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ga &amp;lt;- read_csv(&amp;quot;D:/RProjects/data/ga-customer-revenue-prediction/test.csv&amp;quot;,
          n_max = 100,
          col_types = cols_only(

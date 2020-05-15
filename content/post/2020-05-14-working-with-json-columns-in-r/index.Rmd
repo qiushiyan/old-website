@@ -11,6 +11,7 @@ authors: []
 lastmod: '2020-05-15T17:40:47+08:00'
 ---
 
+# JSON data in R
 
 
 ```{r, include = FALSE}
@@ -162,7 +163,7 @@ people <- c('{"age": 32, "name": {"first": "Bob",   "last": "Smith"}}',
 # Tidy the JSON data
 people %>% spread_all()
 ```
-This produces a `tbl_json` object, where each row corresponds to an element of the people vector (a “document” in tidyjson). The JSON attribute of the `tbl_json` object is shown first, then the columns of the tibble are shown - a `document.id` indicating document in which the row originated.  
+This produces a `tbl_json` object, where each row corresponds to an element of the people vector (a “document” in tidyjson). The JSON attribute of the `tbl_json` object is shown first, then the columns of the tibble are shown: a `document.id` indicating document in which the row originated.  
 
 On the other hand, `spread_all` cannot spread arrays, this is when `gather_array` come into use. Consider the `worldbank` data built in the package, it is a 500 length character vector of projects funded by the world bank
 
@@ -175,8 +176,9 @@ worldbank %>%
 If you take a careful look at the actual object in js, you'll notice that one key is missing in the 9 columns printed above, namely `majorsector_percent`, because its paired value is an array. 
 
 ```{r}
-worldbank %>% head(1)
+worldbank[1]
 ```
+
 
 We can validate this first using `gather_object` (separates a JSON object into multiple rows of name-value pairs), and then look at each value's data type in JS with `json_types`  (inspects the json associated with each row) 
 
@@ -252,9 +254,9 @@ friends %>%
 
 The potential disadvantage of using `tidyjson` is that it's built on the `tbl_json` object, which is often automatically created from a single character vector when using `spread_` functions. Yet `tbl_json` assumes only one special column storing json format data. So when faced with data frame with multiple json columns, we may have to take a little detour to clean them separately and combine the results manually. For another, there are problems with parsing arrays. 
 
-# Case study 1: clean google analytics customer data
+# Case study: clean google analytics customer data
 
-This data comes from a [Kaggle dataset](https://www.kaggle.com/c/ga-customer-revenue-prediction/data?select=test.csv). I read in only the top 100 rows and relevant json columns.
+This data comes from [Kaggle](https://www.kaggle.com/c/ga-customer-revenue-prediction/data?select=test.csv). I read in only the top 100 rows and relevant json columns.
 
 ```{r}
 ga <- read_csv("D:/RProjects/data/ga-customer-revenue-prediction/test.csv",

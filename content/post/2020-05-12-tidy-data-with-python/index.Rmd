@@ -24,7 +24,7 @@ The most significant contribution of this well-known work is that it gave clear 
 2. Every row is an observation.
 3. Every cell is a single value. 
 
-Messy data are, by extension, datasets in volation againest these 3 rules. The author then described the five most common problems with messy datasets:  
+Messy data are, by extension, datasets in volation of these 3 rules. The author then described the five most common problems with messy datasets:  
 
 - Column headers are values, not variable names.
 - Multiple variables are stored in one column.  
@@ -32,7 +32,7 @@ Messy data are, by extension, datasets in volation againest these 3 rules. The a
 - Multiple types of observational units are stored in the same table.  
 - A single observational unit is stored in multiple tables.  
 
-In this post I will be focusing on  the first 3 symptoms since the other two violations often occur when working with databases. All [datasets]((https://github.com/chendaniely/scipy-2019-pandas/tree/master/data)) are from Hadley's paper [repo](https://github.com/hadley/tidy-data) and [Daniel Chen](https://chendaniely.github.io/)'s 2019 SciPy talk on data manipulation with pandas.
+In this post I will be focusing on  the first 3 symptoms since the other two violations often occur when working with databases. All datasets come from Hadley's [repo](https://github.com/hadley/tidy-data) containing materials for the paper and [Daniel Chen](https://chendaniely.github.io/)'s 2019 SciPy tutorial on data processing with pandas.
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(warning = FALSE,

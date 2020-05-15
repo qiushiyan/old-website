@@ -161,7 +161,7 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;More than 50 years ago, John Tukey in his renowned “The Future of Dat Analysis” envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / analysis” trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
+&lt;p&gt;More than 50 years ago, John Tukey in his renowned &lt;em&gt;The Future of Dat Analysis&lt;/em&gt; envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / data analysis” trend, to soar above theoretical statistics which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
 &lt;div id=&#34;data-science-vs.-statistics&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data Science vs. Statistics&lt;/h1&gt;
 &lt;p&gt;The author first starts to distinguish data science from traditional statistics. Yet 3 commonly used indicators are discredited:&lt;/p&gt;
@@ -182,14 +182,14 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;blockquote&gt;
 &lt;p&gt;All in all I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Tukey identified four driving forces in the new science &lt;span class=&#34;citation&#34;&gt;(Tukey &lt;a href=&#34;#ref-tukey1962future&#34; role=&#34;doc-biblioref&#34;&gt;1962&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;Tukey identified four driving forces in the new science &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-tukey1962future&#34; role=&#34;doc-biblioref&#34;&gt;1962&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;The formal theories of statistics&lt;/li&gt;
 &lt;li&gt;Accelerating developments in computers and display devices&lt;/li&gt;
 &lt;li&gt;The challenge, in many fields, of more and ever larger bodies of data&lt;/li&gt;
 &lt;li&gt;The emphasis on quantification in an ever wider variety of disciplines&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Let’s spend a minute admiring Tukey’s prophecy…&lt;/p&gt;
+&lt;p&gt;I’m spend a minute admiring Tukey’s prophecy …&lt;/p&gt;
 &lt;p&gt;Among other things, Tukey also pointed out that:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;…data analysis is a very difficult field. It must adapt itself to what people can and need to do with data. In the sense that biology is more complex than physics, and the behavioral sciences are more complex than either, it is likely that the general problems of data analysis are more complex than those of all three. It is too much to ask for close and effective guidance for data analysis from any highly formalized structure, either now or in the near future.&lt;/p&gt;
@@ -198,12 +198,12 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;p&gt;Data analysis can gain much from formal statistics, but only if the connection is kept adequately loose.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;John Chambers presented a choice between “greater” or “lesser” statistics. He argued
-&lt;span class=&#34;citation&#34;&gt;(Chambers &lt;a href=&#34;#ref-chambers1993greater&#34; role=&#34;doc-biblioref&#34;&gt;1993&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-chambers1993greater&#34; role=&#34;doc-biblioref&#34;&gt;1993&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The statistics profession faces a choice in its future research between continuing concentration on traditional topics—based largely on data analysis supported by mathematical statistics—and a broader viewpoint—based on an inclusive concept of learning from data. The latter course presents severe challenges as well as exciting opportunities. The former risks seeing statistics become increasingly marginal…&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;C. F. Jeff Wu characterized statistical work as a trilogy of data collection, data modeling and analysis, and decision making, and called for courses outside out the statistics department.&lt;/p&gt;
-&lt;p&gt;William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today’s perspective &lt;span class=&#34;citation&#34;&gt;(Cleveland &lt;a href=&#34;#ref-cleveland2001data&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today’s perspective &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-cleveland2001data&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Multidisciplinary investigations (25%)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Models and Methods for Data (20%)&lt;/p&gt;&lt;/li&gt;
@@ -212,7 +212,7 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;li&gt;&lt;p&gt;Tool Evaluation (5%)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Theory (20%)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;UC Berkeley statistician Leo Breiman brought his “two modeling cultures theory” into the exhortation. He asserted &lt;span class=&#34;citation&#34;&gt;(Breiman and others &lt;a href=&#34;#ref-breiman2001statistical&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt; :&lt;/p&gt;
+&lt;p&gt;UC Berkeley based statistician Leo Breiman brought his “two modeling cultures theory” into this exhortation. He asserted &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-breiman2001statistical&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt; :&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;There are two goals in analyzing the data:&lt;br /&gt;
 Prediction: To be able to predict what the responses are going to be to future input variables;&lt;br /&gt;

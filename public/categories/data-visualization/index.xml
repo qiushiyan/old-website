@@ -5,12 +5,27 @@
     <link>/categories/data-visualization/</link>
       <atom:link href="/categories/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Visualization</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Data Visualization</title>
       <link>/categories/data-visualization/</link>
     </image>
+    
+    <item>
+      <title>Volcano Eruptions</title>
+      <link>/post/2020-05-14-volcano-eruptions/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-14-volcano-eruptions/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tuesdata &amp;lt;- tidytuesdayR::tt_load(&amp;#39;2020-05-12&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;volcano &amp;lt;- tuesdata$volcano
+eruptions &amp;lt;- tuesdata$eruptions&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Analyzing International Debt Statistics</title>

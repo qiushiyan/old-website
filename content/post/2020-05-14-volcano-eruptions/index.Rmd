@@ -1,0 +1,48 @@
+---
+title: Volcano Eruptions
+author: Qiushi Yan
+date: '2020-05-14'
+slug: []
+categories:
+  - R
+  - Data Analysis
+  - Data Visualization
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-05-14T11:36:16+08:00'
+draft: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE,
+                      comment = "#>", collapse = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r, eval = FALSE}
+tuesdata <- tidytuesdayR::tt_load('2020-05-12')
+```
+
+```{r, echo = FALSE}
+tuesdata <- pins::pin_get("tidytuesday-volcano")
+```
+
+
+```{r}
+volcano <- tuesdata$volcano
+eruptions <- tuesdata$eruptions
+```
+

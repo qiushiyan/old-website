@@ -1,0 +1,21 @@
+---
+title: Analyzing Ted Talks
+author: Qiushi Yan
+date: '2020-05-14'
+slug: []
+categories:
+  - Data Analysis
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-05-14T15:37:00+08:00'
+draft: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+
+ted talk with topics: https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset?, upto 2020-5

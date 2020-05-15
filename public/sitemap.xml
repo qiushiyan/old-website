@@ -14,32 +14,57 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/data-analysis/</loc>
-    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/json-column-r/</loc>
+    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/police-activity-pandas/</loc>
+    <lastmod>2020-05-14T00:55:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020-05-14-analyzing-ted-talks/</loc>
+    <lastmod>2020-05-14T15:37:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2020-05-14T15:37:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/data-visualization/</loc>
+    <lastmod>2020-05-14T11:36:16+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/python/</loc>
+    <lastmod>2020-05-14T00:55:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020-05-14-volcano-eruptions/</loc>
+    <lastmod>2020-05-14T11:36:16+08:00</lastmod>
   </url>
   
   <url>
@@ -84,11 +109,6 @@
   
   <url>
     <loc>/post/international-debt-sql/</loc>
-    <lastmod>2020-05-05T18:42:11+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/data-visualization/</loc>
     <lastmod>2020-05-05T18:42:11+08:00</lastmod>
   </url>
   

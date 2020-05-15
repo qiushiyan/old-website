@@ -2,16 +2,16 @@
 authors:
 - qiushi
 bio: Yet another object of type closure
-education:
-  courses:
-  - course: BA in Data Journalism
-    institution: Communication University of China
-    year: 2021 (expected)
+#education:
+#  courses:
+#  - course: BA in Data Journalism
+#    institution: Communication University of China
+#    year: 2021 (expected)
 email: "qiushi.yann@gmail.com"
 interests:
-- R, statistics, visualization
-- Predictive modeling & machine learning
-- Ancient Chinese literature
+- R, Statistics, Visualization
+- Predictive Modeling & Statistical Learning
+- Chinese and English Literature
 name: Qiushi Yan
 organizations:
 - name: Communication University of China

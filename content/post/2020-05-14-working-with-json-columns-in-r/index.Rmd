@@ -1,0 +1,314 @@
+---
+title: Working with JSON Columns in R
+author: Qiushi Yan
+date: '2020-05-15'
+slug: json-column-r
+categories:
+  - R
+subtitle: 'data cleaning tips in R when your df contains a json column'
+summary: 'data cleaning tips in R when your df contains a json column'
+authors: []
+lastmod: '2020-05-15T17:40:47+08:00'
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE,
+                      comment = "#>", collapse = TRUE)
+```
+
+
+JSON, as a lightweight and flexible data format originating in JavaScript, has been widely used in web APIs, NoSQL databases and relational databases. There is a natural mapping from js datatypes to that in R. Arrays containing primitives in js are seen as an analogy for atomic vectors in R, as js objects are for R's named lists. The [`jsonlite`](https://github.com/jeroen/jsonlite) package is a famous converter of this sort for R users. For example:  
+
+```{r}
+library(jsonlite)
+library(tidyverse)
+
+# a json-like string
+my_json <- '{"firt_name": "Qiushi", "last_name": "Yan"}'
+fromJSON(my_json)
+```
+
+Note that for `fromJSON` to work properly, one has to use double quotes for or JS keys and strings. 
+
+Further, if we wrap the string in brackets, which makes it a array in js, `fromJSON` will convert it into a data frame. Or you could use `fromJSON + as_tibble` without brackets.
+
+```{r}
+str_c("[", my_json, "]") %>%
+  fromJSON()
+
+my_json %>% 
+  fromJSON() %>% 
+  as_tibble()
+```
+
+However, `fromJSON` is more tailored to the need for converting a single long json string, not a character vector. Yet it is often the case that we find a column containing series of json strings in our data frame. I'll start with a character vector:
+
+```{r}
+# a character vector containing json-like strings
+friends <- c('{"name": "Monica", "detail": {"job": ["chef"], "hobby": "cleaning"}}',
+            '{"name": "Ross", "detail": {"job": ["paleontologist", "professor"], "hobby": "dinosaurs"}}',
+            '{"name": "Chandler", "detail": {"job": ["IT procurement", "copywriter"], "hobby": "bubble bath"}}',
+            '{"name": "Joey", "detail": {"job": ["actor"], "hobby": "sandwich"}}',
+            '{"name": "Rachel", "detail": {"job": ["waitress", "fashion exec"], "hobby": "shopping"}}',
+            '{"name": "Pheobe", "detail": {"job": ["masseuse", "musician"],   "hobby": "guitar"}}')
+```
+
+
+
+```{r, error = TRUE}
+# this will work
+fromJSON(friends[[2]]) 
+
+# this won't
+fromJSON(friends)
+```
+
+
+**Solution A**: Collapse the character vector into a single string.
+
+```{r}
+friends_df <- str_c(friends, collapse = ", ") %>% 
+  str_c("[", ., "]") %>% 
+  fromJSON() %>% 
+  as_tibble()
+
+friends_df
+```
+
+`fromJSON` makes a successful parsing, though the results are a bit strange. `detail` is a data frame column inside the top resulting data frame `friends_df`. This is because `friends` has a hierarchical structure, with `name` and `detail` on the top, and `job`, `hobby` below the `detail` branch. 
+
+```{r}
+friends_df$detail
+```
+
+`tidyr::unpack()` makes data wider by expanding thsi df-column back out into individual columns.  
+
+```{r}
+friends_df %>% 
+  unpack(detail)
+```
+
+Now, we have a much simplified data frame at hand. `job` is still a list-column, but we could unnest it easily or leave it be anyway.
+
+
+**Solution B**: Use `map` family functions or `for` loop. Both ways tidy this vector with the same strategy, which is to split it, apply `fromJSON` to each element, and combine the results.   
+
+```{r}
+friends %>% 
+  map_dfr(~ fromJSON(.x) %>% 
+        as.data.frame)
+```
+
+
+
+For real data frames containing json columns, we could simply pull that column out, apply the strategies above, and combine the results back to the original df,  as shown below: 
+```{r}
+parser <- function(df, col) {
+  json_df <- df %>% 
+    pull({{ col }}) %>% 
+    str_c(collapse = ",") %>% 
+    str_c("[", ., "]") %>% 
+    fromJSON() %>% 
+    unpack(detail)
+  
+  bind_cols(df %>% select(-{{ col }}), json_df)
+} 
+
+tibble(index = 1:6, friends = friends) %>% 
+  parser(friends)
+```
+
+But this works only when there is only one json column, namely `col`. A general approach is to use `map` family functions again, this time looping through multiple json columns.
+
+```{r}
+json_col_1 <-  c('{"name": "A", "salary": 1000}',
+                '{"name": "B", "salary": 5000}',
+                '{"name": "C", "salary": 2000}')
+json_col_2 <- c('{"ratings": 10}',
+                '{"ratings": 9}',
+                '{"ratings": 9.5}')
+
+parser_multiple <- function(x) {
+  str_c(x, collapse = ",") %>% 
+    str_c("[", ., "]") %>% 
+    fromJSON()
+} 
+
+
+tibble(index = 1:3, json_col_1, json_col_2) %>% 
+  select(json_col_1, json_col_2) %>% 
+  map_dfc(parser_multiple)
+```
+
+
+
+# The tidyjson package
+
+The [`tidyjson`](https://github.com/colearendt/tidyjson) package provides many untility functions for working with in json data in R, extending `formJSON`. `spread_all` is the core function:
+
+```{r}
+library(tidyjson)
+```
+
+
+```{r}
+# Define a simple people JSON collection
+people <- c('{"age": 32, "name": {"first": "Bob",   "last": "Smith"}}',
+            '{"age": 54, "name": {"first": "Susan", "last": "Doe"}}',
+            '{"age": 18, "name": {"first": "Ann",   "last": "Jones"}}')
+
+# Tidy the JSON data
+people %>% spread_all()
+```
+This produces a `tbl_json` object, where each row corresponds to an element of the people vector (a “document” in tidyjson). The JSON attribute of the `tbl_json` object is shown first, then the columns of the tibble are shown - a `document.id` indicating document in which the row originated.  
+
+On the other hand, `spread_all` cannot spread arrays, this is when `gather_array` come into use. Consider the `worldbank` data built in the package, it is a 500 length character vector of projects funded by the world bank
+
+
+```{r}
+worldbank %>%
+  spread_all()
+```
+
+If you take a careful look at the actual object in js, you'll notice that one key is missing in the 9 columns printed above, namely `majorsector_percent`, because its paired value is an array. 
+
+```{r}
+worldbank %>% head(1)
+```
+
+We can validate this first using `gather_object` (separates a JSON object into multiple rows of name-value pairs), and then look at each value's data type in JS with `json_types`  (inspects the json associated with each row) 
+
+```{r}
+worldbank %>% 
+  gather_object() %>% 
+  json_types() %>% 
+  count(name, type)
+```
+
+We can use `enter_object` to extract any name-value pair from the entire json string, then use `gather_array` and `spread_all`:
+
+```{r}
+worldbank %>% 
+  enter_object(majorsector_percent) %>%
+  gather_array() %>%
+  spread_all()
+```
+
+These steps can be readily combined with the initial spread, just enter into the unsolved `majorsector_percent` after the first `spread_all`
+
+```{r}
+worldbank %>%
+  spread_all() %>% 
+  enter_object(majorsector_percent) %>% 
+  gather_array() %>% 
+  spread_all()
+```
+
+Sometimes the array contains just numbers or strings, where `spread_all` again fails to extract. But in such simple cases one can use regular expressions anyway. And I find this trick that if you enter into an array, you can copy the `..JSON` column with `mutate`, and the result is a lovely list column. 
+
+```{r}
+people_array <- c('{"age": 32, "name": {"first": "Bob",   "last": "Smith"}, 
+                  "workday": ["Monday", "Tuesday"]}',
+                  '{"age": 54, "name": {"first": "Susan", "last": "Doe"}, 
+                  "workday":["Monday", "Wednesday", "Sunday"]}',
+                  '{"age": 18, "name": {"first": "Ann",   "last": "Jones"}, 
+                  "workday": ["Tuesday"]}')
+
+
+# enter into array and copy the ..JSON column
+people_array %>% 
+  spread_all %>% 
+  enter_object(workday) %>% 
+  mutate(workday = ..JSON)
+```
+
+
+```{r, message = TRUE}
+# this doesn't work
+people_array %>% 
+  spread_all %>% 
+  enter_object(workday) %>% 
+  spread_all()
+```
+
+
+The `spread_values` function gives even more fine-tuend control on extract specific values from json objects, much similiar to `tidyr::hoist`. See its [documentation](https://cran.r-project.org/web/packages/tidyjson/) for more details. 
+
+
+Here is an example of `spread_values` on `friends`
+```{r}
+friends %>% 
+  spread_values(
+    name = jstring("name"),
+    hobby = jstring("detail", "hobby")
+  ) %>% 
+  enter_object(detail, job) %>% 
+  mutate(job = ..JSON) %>% 
+  unnest_longer(job)
+```
+
+
+The potential disadvantage of using `tidyjson` is that it's built on the `tbl_json` object, which is often automatically created from a single character vector when using `spread_` functions. Yet `tbl_json` assumes only one special column storing json format data. So when faced with data frame with multiple json columns, we may have to take a little detour to clean them separately and combine the results manually. For another, there are problems with parsing arrays. 
+
+# Case study 1: clean google analytics customer data
+
+This data comes from a [Kaggle dataset](https://www.kaggle.com/c/ga-customer-revenue-prediction/data?select=test.csv). I read in only the top 100 rows and relevant json columns.
+
+```{r}
+ga <- read_csv("D:/RProjects/data/ga-customer-revenue-prediction/test.csv",
+         n_max = 100,
+         col_types = cols_only(
+           device = col_character(),
+           geoNetwork = col_character(),
+           totals = col_character(),
+           trafficSource = col_character()
+         )) 
+
+glimpse(ga)
+```
+
+All four columns are json columns. First let's define function that is used to parse a single json character vector:
+
+```{r}
+parse_json_col <- function(col) {
+  map_dfr(col, ~ fromJSON(.) %>% as_tibble)
+} 
+```
+
+The `traffixSource` column need some special treatments, otherwise row length would not match. But the other three can be parsed at the same time. 
+
+```{r}
+ga[1:3] %>% 
+  map_dfc(parse_json_col) %>% 
+  bind_cols(ga$trafficSource %>% 
+              map_dfr(~ fromJSON(.) %>% 
+                        as_tibble %>% 
+                        nest(data = c(adwordsClickInfo))))
+```
+
+There are 38 columns in total, we can verify this by applying `spread_all` to each columns: (the following tally exludes `..JSON` and `document.id`)  
+```{r}
+# 16 columns
+spread_all(ga$device)
+
+# 11 columns
+spread_all(ga$geoNetwork)
+
+# 4 columns
+spread_all(ga$totals)
+
+# 7 columns, all adwordsClickInfo columns are seen as one column
+spread_all(ga$trafficSource)
+```
+
+And this may reminds you of a even simpler solution with the `tidyjson` package. 
+
+```{r}
+ga %>% 
+  map_dfc(spread_all)
+```
+
+
+

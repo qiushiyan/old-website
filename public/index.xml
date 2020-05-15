@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Qiushi Yan</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 15 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Qiushi Yan</title>
@@ -23,6 +23,524 @@
 &lt;p&gt;For another, learning is an end in itself. It is those confounding moments, self-discovery after self-doubt that make knowledge so desirable. A healthy way of learning inculcates in students a love for the subject, not just what the test requires, so the students can, and most importantly will, make the subject their business to learn. Most students, on the other hand, are swamped by exam-oriented education, deprived of the joy of mental adventure, so that creativity and ingenuous pursuit of knowledge can never be attained. While they are preparing for the examination related to certificates, reference books, didactic teaching, rote learning and cramming schooling play a major role. They are told so, and without serious consideration, another quiz begins. This process, however, produces only dilettantes with a smattering of knowledge that would soon grow unlearned. Of greater concern is that they may become unable to explore a new field without an all-knowing guide, but there is rarely a guide in practical working experience.&lt;/p&gt;
 &lt;p&gt;By no means am I making the conclusion that certificates are pure evil, for they can be equally used for good. Certificates and examinations correlated to one’s interests and consistent with his / her professional aspirations can, in most cases, cultivate one’s ability and guide them through the job market.&lt;/p&gt;
 &lt;p&gt;On balance, I believe that certificates do little to enhance one’s capability until we have poured in meaning efforts in something that would give meaning help in the days to come. Certificates itself is neutral, and we could use it to our advantage once we follow an appropriate way to learn. We should always acquire knowledge from the process and keep exploring and thinking instead of be guided by utilitarianism. Only in this way can we truly improve our abilities.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Working with JSON Columns in R</title>
+      <link>/post/json-column-r/</link>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/json-column-r/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#the-tidyjson-package&#34;&gt;The tidyjson package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case-study-1-clean-google-analytics-customer-data&#34;&gt;Case study 1: clean google analytics customer data&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;JSON, as a lightweight and flexible data format originating in JavaScript, has been widely used in web APIs, NoSQL databases and relational databases. There is a natural mapping from js datatypes to that in R. Arrays containing primitives in js are seen as an analogy for atomic vectors in R, as js objects are for R’s named lists. The &lt;a href=&#34;https://github.com/jeroen/jsonlite&#34;&gt;&lt;code&gt;jsonlite&lt;/code&gt;&lt;/a&gt; package is a famous converter of this sort for R users. For example:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(jsonlite)
+library(tidyverse)
+
+# a json-like string
+my_json &amp;lt;- &amp;#39;{&amp;quot;firt_name&amp;quot;: &amp;quot;Qiushi&amp;quot;, &amp;quot;last_name&amp;quot;: &amp;quot;Yan&amp;quot;}&amp;#39;
+fromJSON(my_json)
+#&amp;gt; $firt_name
+#&amp;gt; [1] &amp;quot;Qiushi&amp;quot;
+#&amp;gt; 
+#&amp;gt; $last_name
+#&amp;gt; [1] &amp;quot;Yan&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that for &lt;code&gt;fromJSON&lt;/code&gt; to work properly, one has to use double quotes for or JS keys and strings.&lt;/p&gt;
+&lt;p&gt;Further, if we wrap the string in brackets, which makes it a array in js, &lt;code&gt;fromJSON&lt;/code&gt; will convert it into a data frame. Or you could use &lt;code&gt;fromJSON + as_tibble&lt;/code&gt; without brackets.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str_c(&amp;quot;[&amp;quot;, my_json, &amp;quot;]&amp;quot;) %&amp;gt;%
+  fromJSON()
+#&amp;gt;   firt_name last_name
+#&amp;gt; 1    Qiushi       Yan
+
+my_json %&amp;gt;% 
+  fromJSON() %&amp;gt;% 
+  as_tibble()
+#&amp;gt; # A tibble: 1 x 2
+#&amp;gt;   firt_name last_name
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    
+#&amp;gt; 1 Qiushi    Yan&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, &lt;code&gt;fromJSON&lt;/code&gt; is more tailored to the need for converting a single long json string, not a character vector. Yet it is often the case that we find a column containing series of json strings in our data frame. I’ll start with a character vector:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# a character vector containing json-like strings
+friends &amp;lt;- c(&amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;Monica&amp;quot;, &amp;quot;detail&amp;quot;: {&amp;quot;job&amp;quot;: [&amp;quot;chef&amp;quot;], &amp;quot;hobby&amp;quot;: &amp;quot;cleaning&amp;quot;}}&amp;#39;,
+            &amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;Ross&amp;quot;, &amp;quot;detail&amp;quot;: {&amp;quot;job&amp;quot;: [&amp;quot;paleontologist&amp;quot;, &amp;quot;professor&amp;quot;], &amp;quot;hobby&amp;quot;: &amp;quot;dinosaurs&amp;quot;}}&amp;#39;,
+            &amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;Chandler&amp;quot;, &amp;quot;detail&amp;quot;: {&amp;quot;job&amp;quot;: [&amp;quot;IT procurement&amp;quot;, &amp;quot;copywriter&amp;quot;], &amp;quot;hobby&amp;quot;: &amp;quot;bubble bath&amp;quot;}}&amp;#39;,
+            &amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;Joey&amp;quot;, &amp;quot;detail&amp;quot;: {&amp;quot;job&amp;quot;: [&amp;quot;actor&amp;quot;], &amp;quot;hobby&amp;quot;: &amp;quot;sandwich&amp;quot;}}&amp;#39;,
+            &amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;Rachel&amp;quot;, &amp;quot;detail&amp;quot;: {&amp;quot;job&amp;quot;: [&amp;quot;waitress&amp;quot;, &amp;quot;fashion exec&amp;quot;], &amp;quot;hobby&amp;quot;: &amp;quot;shopping&amp;quot;}}&amp;#39;,
+            &amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;Pheobe&amp;quot;, &amp;quot;detail&amp;quot;: {&amp;quot;job&amp;quot;: [&amp;quot;masseuse&amp;quot;, &amp;quot;musician&amp;quot;],   &amp;quot;hobby&amp;quot;: &amp;quot;guitar&amp;quot;}}&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# this will work
+fromJSON(friends[[2]]) 
+#&amp;gt; $name
+#&amp;gt; [1] &amp;quot;Ross&amp;quot;
+#&amp;gt; 
+#&amp;gt; $detail
+#&amp;gt; $detail$job
+#&amp;gt; [1] &amp;quot;paleontologist&amp;quot; &amp;quot;professor&amp;quot;     
+#&amp;gt; 
+#&amp;gt; $detail$hobby
+#&amp;gt; [1] &amp;quot;dinosaurs&amp;quot;
+
+# this won&amp;#39;t
+fromJSON(friends)
+#&amp;gt; Error: parse error: trailing garbage
+#&amp;gt;           hef&amp;quot;], &amp;quot;hobby&amp;quot;: &amp;quot;cleaning&amp;quot;}} {&amp;quot;name&amp;quot;: &amp;quot;Ross&amp;quot;, &amp;quot;detail&amp;quot;: {&amp;quot;jo
+#&amp;gt;                      (right here) ------^&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Solution A&lt;/strong&gt;: Collapse the character vector into a single string.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;friends_df &amp;lt;- str_c(friends, collapse = &amp;quot;, &amp;quot;) %&amp;gt;% 
+  str_c(&amp;quot;[&amp;quot;, ., &amp;quot;]&amp;quot;) %&amp;gt;% 
+  fromJSON() %&amp;gt;% 
+  as_tibble()
+
+friends_df
+#&amp;gt; # A tibble: 6 x 2
+#&amp;gt;   name     detail$job $hobby     
+#&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;list&amp;gt;     &amp;lt;chr&amp;gt;      
+#&amp;gt; 1 Monica   &amp;lt;chr [1]&amp;gt;  cleaning   
+#&amp;gt; 2 Ross     &amp;lt;chr [2]&amp;gt;  dinosaurs  
+#&amp;gt; 3 Chandler &amp;lt;chr [2]&amp;gt;  bubble bath
+#&amp;gt; 4 Joey     &amp;lt;chr [1]&amp;gt;  sandwich   
+#&amp;gt; 5 Rachel   &amp;lt;chr [2]&amp;gt;  shopping   
+#&amp;gt; 6 Pheobe   &amp;lt;chr [2]&amp;gt;  guitar&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;fromJSON&lt;/code&gt; makes a successful parsing, though the results are a bit strange. &lt;code&gt;detail&lt;/code&gt; is a data frame column inside the top resulting data frame &lt;code&gt;friends_df&lt;/code&gt;. This is because &lt;code&gt;friends&lt;/code&gt; has a hierarchical structure, with &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;detail&lt;/code&gt; on the top, and &lt;code&gt;job&lt;/code&gt;, &lt;code&gt;hobby&lt;/code&gt; below the &lt;code&gt;detail&lt;/code&gt; branch.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;friends_df$detail
+#&amp;gt;                          job       hobby
+#&amp;gt; 1                       chef    cleaning
+#&amp;gt; 2  paleontologist, professor   dinosaurs
+#&amp;gt; 3 IT procurement, copywriter bubble bath
+#&amp;gt; 4                      actor    sandwich
+#&amp;gt; 5     waitress, fashion exec    shopping
+#&amp;gt; 6         masseuse, musician      guitar&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;tidyr::unpack()&lt;/code&gt; makes data wider by expanding thsi df-column back out into individual columns.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;friends_df %&amp;gt;% 
+  unpack(detail)
+#&amp;gt; # A tibble: 6 x 3
+#&amp;gt;   name     job       hobby      
+#&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;list&amp;gt;    &amp;lt;chr&amp;gt;      
+#&amp;gt; 1 Monica   &amp;lt;chr [1]&amp;gt; cleaning   
+#&amp;gt; 2 Ross     &amp;lt;chr [2]&amp;gt; dinosaurs  
+#&amp;gt; 3 Chandler &amp;lt;chr [2]&amp;gt; bubble bath
+#&amp;gt; 4 Joey     &amp;lt;chr [1]&amp;gt; sandwich   
+#&amp;gt; 5 Rachel   &amp;lt;chr [2]&amp;gt; shopping   
+#&amp;gt; 6 Pheobe   &amp;lt;chr [2]&amp;gt; guitar&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, we have a much simplified data frame at hand. &lt;code&gt;job&lt;/code&gt; is still a list-column, but we could unnest it easily or leave it be anyway.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Solution B&lt;/strong&gt;: Use &lt;code&gt;map&lt;/code&gt; family functions or &lt;code&gt;for&lt;/code&gt; loop. Both ways tidy this vector with the same strategy, which is to split it, apply &lt;code&gt;fromJSON&lt;/code&gt; to each element, and combine the results.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;friends %&amp;gt;% 
+  map_dfr(~ fromJSON(.x) %&amp;gt;% 
+        as.data.frame)
+#&amp;gt;        name     detail.job detail.hobby
+#&amp;gt; 1    Monica           chef     cleaning
+#&amp;gt; 2      Ross paleontologist    dinosaurs
+#&amp;gt; 3      Ross      professor    dinosaurs
+#&amp;gt; 4  Chandler IT procurement  bubble bath
+#&amp;gt; 5  Chandler     copywriter  bubble bath
+#&amp;gt; 6      Joey          actor     sandwich
+#&amp;gt; 7    Rachel       waitress     shopping
+#&amp;gt; 8    Rachel   fashion exec     shopping
+#&amp;gt; 9    Pheobe       masseuse       guitar
+#&amp;gt; 10   Pheobe       musician       guitar&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For real data frames containing json columns, we could simply pull that column out, apply the strategies above, and combine the results back to the original df, as shown below:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;parser &amp;lt;- function(df, col) {
+  json_df &amp;lt;- df %&amp;gt;% 
+    pull({{ col }}) %&amp;gt;% 
+    str_c(collapse = &amp;quot;,&amp;quot;) %&amp;gt;% 
+    str_c(&amp;quot;[&amp;quot;, ., &amp;quot;]&amp;quot;) %&amp;gt;% 
+    fromJSON() %&amp;gt;% 
+    unpack(detail)
+  
+  bind_cols(df %&amp;gt;% select(-{{ col }}), json_df)
+} 
+
+tibble(index = 1:6, friends = friends) %&amp;gt;% 
+  parser(friends)
+#&amp;gt; # A tibble: 6 x 4
+#&amp;gt;   index name     job       hobby      
+#&amp;gt;   &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;list&amp;gt;    &amp;lt;chr&amp;gt;      
+#&amp;gt; 1     1 Monica   &amp;lt;chr [1]&amp;gt; cleaning   
+#&amp;gt; 2     2 Ross     &amp;lt;chr [2]&amp;gt; dinosaurs  
+#&amp;gt; 3     3 Chandler &amp;lt;chr [2]&amp;gt; bubble bath
+#&amp;gt; 4     4 Joey     &amp;lt;chr [1]&amp;gt; sandwich   
+#&amp;gt; 5     5 Rachel   &amp;lt;chr [2]&amp;gt; shopping   
+#&amp;gt; 6     6 Pheobe   &amp;lt;chr [2]&amp;gt; guitar&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But this works only when there is only one json column, namely &lt;code&gt;col&lt;/code&gt;. A general approach is to use &lt;code&gt;map&lt;/code&gt; family functions again, this time looping through multiple json columns.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;json_col_1 &amp;lt;-  c(&amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;A&amp;quot;, &amp;quot;salary&amp;quot;: 1000}&amp;#39;,
+                &amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;B&amp;quot;, &amp;quot;salary&amp;quot;: 5000}&amp;#39;,
+                &amp;#39;{&amp;quot;name&amp;quot;: &amp;quot;C&amp;quot;, &amp;quot;salary&amp;quot;: 2000}&amp;#39;)
+json_col_2 &amp;lt;- c(&amp;#39;{&amp;quot;ratings&amp;quot;: 10}&amp;#39;,
+                &amp;#39;{&amp;quot;ratings&amp;quot;: 9}&amp;#39;,
+                &amp;#39;{&amp;quot;ratings&amp;quot;: 9.5}&amp;#39;)
+
+parser_multiple &amp;lt;- function(x) {
+  str_c(x, collapse = &amp;quot;,&amp;quot;) %&amp;gt;% 
+    str_c(&amp;quot;[&amp;quot;, ., &amp;quot;]&amp;quot;) %&amp;gt;% 
+    fromJSON()
+} 
+
+
+tibble(index = 1:3, json_col_1, json_col_2) %&amp;gt;% 
+  select(json_col_1, json_col_2) %&amp;gt;% 
+  map_dfc(parser_multiple)
+#&amp;gt;   name salary ratings
+#&amp;gt; 1    A   1000    10.0
+#&amp;gt; 2    B   5000     9.0
+#&amp;gt; 3    C   2000     9.5&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;the-tidyjson-package&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The tidyjson package&lt;/h1&gt;
+&lt;p&gt;The &lt;a href=&#34;https://github.com/colearendt/tidyjson&#34;&gt;&lt;code&gt;tidyjson&lt;/code&gt;&lt;/a&gt; package provides many untility functions for working with in json data in R, extending &lt;code&gt;formJSON&lt;/code&gt;. &lt;code&gt;spread_all&lt;/code&gt; is the core function:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyjson)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Define a simple people JSON collection
+people &amp;lt;- c(&amp;#39;{&amp;quot;age&amp;quot;: 32, &amp;quot;name&amp;quot;: {&amp;quot;first&amp;quot;: &amp;quot;Bob&amp;quot;,   &amp;quot;last&amp;quot;: &amp;quot;Smith&amp;quot;}}&amp;#39;,
+            &amp;#39;{&amp;quot;age&amp;quot;: 54, &amp;quot;name&amp;quot;: {&amp;quot;first&amp;quot;: &amp;quot;Susan&amp;quot;, &amp;quot;last&amp;quot;: &amp;quot;Doe&amp;quot;}}&amp;#39;,
+            &amp;#39;{&amp;quot;age&amp;quot;: 18, &amp;quot;name&amp;quot;: {&amp;quot;first&amp;quot;: &amp;quot;Ann&amp;quot;,   &amp;quot;last&amp;quot;: &amp;quot;Jones&amp;quot;}}&amp;#39;)
+
+# Tidy the JSON data
+people %&amp;gt;% spread_all()
+#&amp;gt; # A tbl_json: 3 x 5 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;   ..JSON                  document.id   age name.first name.last
+#&amp;gt;   &amp;lt;chr&amp;gt;                         &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;    
+#&amp;gt; 1 &amp;quot;{\&amp;quot;age\&amp;quot;:32,\&amp;quot;name...&amp;quot;           1    32 Bob        Smith    
+#&amp;gt; 2 &amp;quot;{\&amp;quot;age\&amp;quot;:54,\&amp;quot;name...&amp;quot;           2    54 Susan      Doe      
+#&amp;gt; 3 &amp;quot;{\&amp;quot;age\&amp;quot;:18,\&amp;quot;name...&amp;quot;           3    18 Ann        Jones&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This produces a &lt;code&gt;tbl_json&lt;/code&gt; object, where each row corresponds to an element of the people vector (a “document” in tidyjson). The JSON attribute of the &lt;code&gt;tbl_json&lt;/code&gt; object is shown first, then the columns of the tibble are shown - a &lt;code&gt;document.id&lt;/code&gt; indicating document in which the row originated.&lt;/p&gt;
+&lt;p&gt;On the other hand, &lt;code&gt;spread_all&lt;/code&gt; cannot spread arrays, this is when &lt;code&gt;gather_array&lt;/code&gt; come into use. Consider the &lt;code&gt;worldbank&lt;/code&gt; data built in the package, it is a 500 length character vector of projects funded by the world bank&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;%
+  spread_all()
+#&amp;gt; # A tbl_json: 500 x 9 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON document.id boardapprovalda~ closingdate countryshortname project_name
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;       
+#&amp;gt;  1 &amp;quot;{\&amp;quot;_~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
+#&amp;gt;  2 &amp;quot;{\&amp;quot;_~           2 2013-11-04T00:0~ &amp;lt;NA&amp;gt;        Tunisia          TN: DTF Soc~
+#&amp;gt;  3 &amp;quot;{\&amp;quot;_~           3 2013-11-01T00:0~ &amp;lt;NA&amp;gt;        Tuvalu           Tuvalu Avia~
+#&amp;gt;  4 &amp;quot;{\&amp;quot;_~           4 2013-10-31T00:0~ &amp;lt;NA&amp;gt;        Yemen, Republic~ Gov&amp;#39;t and C~
+#&amp;gt;  5 &amp;quot;{\&amp;quot;_~           5 2013-10-31T00:0~ 2019-04-30~ Lesotho          Second Priv~
+#&amp;gt;  6 &amp;quot;{\&amp;quot;_~           6 2013-10-31T00:0~ &amp;lt;NA&amp;gt;        Kenya            Additional ~
+#&amp;gt;  7 &amp;quot;{\&amp;quot;_~           7 2013-10-29T00:0~ 2019-06-30~ India            National Hi~
+#&amp;gt;  8 &amp;quot;{\&amp;quot;_~           8 2013-10-29T00:0~ &amp;lt;NA&amp;gt;        China            China Renew~
+#&amp;gt;  9 &amp;quot;{\&amp;quot;_~           9 2013-10-29T00:0~ 2018-12-31~ India            Rajasthan R~
+#&amp;gt; 10 &amp;quot;{\&amp;quot;_~          10 2013-10-29T00:0~ 2014-12-31~ Morocco          MA Accounta~
+#&amp;gt; # ... with 490 more rows, and 3 more variables: regionname &amp;lt;chr&amp;gt;,
+#&amp;gt; #   totalamt &amp;lt;dbl&amp;gt;, `_id.$oid` &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you take a careful look at the actual object in js, you’ll notice that one key is missing in the 9 columns printed above, namely &lt;code&gt;majorsector_percent&lt;/code&gt;, because its paired value is an array.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;% head(1)
+#&amp;gt; [1] &amp;quot;{\&amp;quot;_id\&amp;quot;:{\&amp;quot;$oid\&amp;quot;:\&amp;quot;52b213b38594d8a2be17c780\&amp;quot;},\&amp;quot;boardapprovaldate\&amp;quot;:\&amp;quot;2013-11-12T00:00:00Z\&amp;quot;,\&amp;quot;closingdate\&amp;quot;:\&amp;quot;2018-07-07T00:00:00Z\&amp;quot;,\&amp;quot;countryshortname\&amp;quot;:\&amp;quot;Ethiopia\&amp;quot;,\&amp;quot;majorsector_percent\&amp;quot;:[{\&amp;quot;Name\&amp;quot;:\&amp;quot;Education\&amp;quot;,\&amp;quot;Percent\&amp;quot;:46},{\&amp;quot;Name\&amp;quot;:\&amp;quot;Education\&amp;quot;,\&amp;quot;Percent\&amp;quot;:26},{\&amp;quot;Name\&amp;quot;:\&amp;quot;Public Administration, Law, and Justice\&amp;quot;,\&amp;quot;Percent\&amp;quot;:16},{\&amp;quot;Name\&amp;quot;:\&amp;quot;Education\&amp;quot;,\&amp;quot;Percent\&amp;quot;:12}],\&amp;quot;project_name\&amp;quot;:\&amp;quot;Ethiopia General Education Quality Improvement Project II\&amp;quot;,\&amp;quot;regionname\&amp;quot;:\&amp;quot;Africa\&amp;quot;,\&amp;quot;totalamt\&amp;quot;:130000000}&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can validate this first using &lt;code&gt;gather_object&lt;/code&gt; (separates a JSON object into multiple rows of name-value pairs), and then look at each value’s data type in JS with &lt;code&gt;json_types&lt;/code&gt; (inspects the json associated with each row)&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;% 
+  gather_object() %&amp;gt;% 
+  json_types() %&amp;gt;% 
+  count(name, type)
+#&amp;gt; # A tibble: 8 x 3
+#&amp;gt;   name                type       n
+#&amp;gt;   &amp;lt;chr&amp;gt;               &amp;lt;fct&amp;gt;  &amp;lt;int&amp;gt;
+#&amp;gt; 1 _id                 object   500
+#&amp;gt; 2 boardapprovaldate   string   500
+#&amp;gt; 3 closingdate         string   370
+#&amp;gt; 4 countryshortname    string   500
+#&amp;gt; 5 majorsector_percent array    500
+#&amp;gt; 6 project_name        string   500
+#&amp;gt; 7 regionname          string   500
+#&amp;gt; 8 totalamt            number   500&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can use &lt;code&gt;enter_object&lt;/code&gt; to extract any name-value pair from the entire json string, then use &lt;code&gt;gather_array&lt;/code&gt; and &lt;code&gt;spread_all&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;% 
+  enter_object(majorsector_percent) %&amp;gt;%
+  gather_array() %&amp;gt;%
+  spread_all()
+#&amp;gt; # A tbl_json: 1,405 x 5 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON            document.id array.index Name                        Percent
+#&amp;gt;    &amp;lt;chr&amp;gt;                   &amp;lt;int&amp;gt;       &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;                         &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Edu~           1           1 Education                        46
+#&amp;gt;  2 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Edu~           1           2 Education                        26
+#&amp;gt;  3 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Pub~           1           3 Public Administration, Law~      16
+#&amp;gt;  4 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Edu~           1           4 Education                        12
+#&amp;gt;  5 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Pub~           2           1 Public Administration, Law~      70
+#&amp;gt;  6 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Pub~           2           2 Public Administration, Law~      30
+#&amp;gt;  7 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Tra~           3           1 Transportation                  100
+#&amp;gt;  8 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Hea~           4           1 Health and other social se~     100
+#&amp;gt;  9 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Ind~           5           1 Industry and trade               50
+#&amp;gt; 10 &amp;quot;{\&amp;quot;Name\&amp;quot;:\&amp;quot;Ind~           5           2 Industry and trade               40
+#&amp;gt; # ... with 1,395 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;These steps can be readily combined with the initial spread, just enter into the unsolved &lt;code&gt;majorsector_percent&lt;/code&gt; after the first &lt;code&gt;spread_all&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;worldbank %&amp;gt;%
+  spread_all() %&amp;gt;% 
+  enter_object(majorsector_percent) %&amp;gt;% 
+  gather_array() %&amp;gt;% 
+  spread_all()
+#&amp;gt; # A tbl_json: 1,405 x 12 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON document.id boardapprovalda~ closingdate countryshortname project_name
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;       
+#&amp;gt;  1 &amp;quot;{\&amp;quot;N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
+#&amp;gt;  2 &amp;quot;{\&amp;quot;N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
+#&amp;gt;  3 &amp;quot;{\&amp;quot;N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
+#&amp;gt;  4 &amp;quot;{\&amp;quot;N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
+#&amp;gt;  5 &amp;quot;{\&amp;quot;N~           2 2013-11-04T00:0~ &amp;lt;NA&amp;gt;        Tunisia          TN: DTF Soc~
+#&amp;gt;  6 &amp;quot;{\&amp;quot;N~           2 2013-11-04T00:0~ &amp;lt;NA&amp;gt;        Tunisia          TN: DTF Soc~
+#&amp;gt;  7 &amp;quot;{\&amp;quot;N~           3 2013-11-01T00:0~ &amp;lt;NA&amp;gt;        Tuvalu           Tuvalu Avia~
+#&amp;gt;  8 &amp;quot;{\&amp;quot;N~           4 2013-10-31T00:0~ &amp;lt;NA&amp;gt;        Yemen, Republic~ Gov&amp;#39;t and C~
+#&amp;gt;  9 &amp;quot;{\&amp;quot;N~           5 2013-10-31T00:0~ 2019-04-30~ Lesotho          Second Priv~
+#&amp;gt; 10 &amp;quot;{\&amp;quot;N~           5 2013-10-31T00:0~ 2019-04-30~ Lesotho          Second Priv~
+#&amp;gt; # ... with 1,395 more rows, and 6 more variables: regionname &amp;lt;chr&amp;gt;,
+#&amp;gt; #   totalamt &amp;lt;dbl&amp;gt;, `_id.$oid` &amp;lt;chr&amp;gt;, array.index &amp;lt;int&amp;gt;, Name &amp;lt;chr&amp;gt;,
+#&amp;gt; #   Percent &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Sometimes the array contains just numbers or strings, where &lt;code&gt;spread_all&lt;/code&gt; again fails to extract. But in such simple cases one can use regular expressions anyway. And I find this trick that if you enter into an array, you can copy the &lt;code&gt;..JSON&lt;/code&gt; column with &lt;code&gt;mutate&lt;/code&gt;, and the result is a lovely list column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;people_array &amp;lt;- c(&amp;#39;{&amp;quot;age&amp;quot;: 32, &amp;quot;name&amp;quot;: {&amp;quot;first&amp;quot;: &amp;quot;Bob&amp;quot;,   &amp;quot;last&amp;quot;: &amp;quot;Smith&amp;quot;}, 
+                  &amp;quot;workday&amp;quot;: [&amp;quot;Monday&amp;quot;, &amp;quot;Tuesday&amp;quot;]}&amp;#39;,
+                  &amp;#39;{&amp;quot;age&amp;quot;: 54, &amp;quot;name&amp;quot;: {&amp;quot;first&amp;quot;: &amp;quot;Susan&amp;quot;, &amp;quot;last&amp;quot;: &amp;quot;Doe&amp;quot;}, 
+                  &amp;quot;workday&amp;quot;:[&amp;quot;Monday&amp;quot;, &amp;quot;Wednesday&amp;quot;, &amp;quot;Sunday&amp;quot;]}&amp;#39;,
+                  &amp;#39;{&amp;quot;age&amp;quot;: 18, &amp;quot;name&amp;quot;: {&amp;quot;first&amp;quot;: &amp;quot;Ann&amp;quot;,   &amp;quot;last&amp;quot;: &amp;quot;Jones&amp;quot;}, 
+                  &amp;quot;workday&amp;quot;: [&amp;quot;Tuesday&amp;quot;]}&amp;#39;)
+
+
+# enter into array and copy the ..JSON column
+people_array %&amp;gt;% 
+  spread_all %&amp;gt;% 
+  enter_object(workday) %&amp;gt;% 
+  mutate(workday = ..JSON)
+#&amp;gt; # A tbl_json: 3 x 6 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;   ..JSON                  document.id   age name.first name.last workday   
+#&amp;gt;   &amp;lt;chr&amp;gt;                         &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;     &amp;lt;list&amp;gt;    
+#&amp;gt; 1 &amp;quot;[\&amp;quot;Monday\&amp;quot;,\&amp;quot;Tues...&amp;quot;           1    32 Bob        Smith     &amp;lt;list [2]&amp;gt;
+#&amp;gt; 2 &amp;quot;[\&amp;quot;Monday\&amp;quot;,\&amp;quot;Wedn...&amp;quot;           2    54 Susan      Doe       &amp;lt;list [3]&amp;gt;
+#&amp;gt; 3 &amp;quot;[\&amp;quot;Tuesday\&amp;quot;]&amp;quot;                   3    18 Ann        Jones     &amp;lt;list [1]&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# this doesn&amp;#39;t work
+people_array %&amp;gt;% 
+  spread_all %&amp;gt;% 
+  enter_object(workday) %&amp;gt;% 
+  spread_all()
+#&amp;gt; # A tbl_json: 3 x 5 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;   ..JSON                  document.id   age name.first name.last
+#&amp;gt;   &amp;lt;chr&amp;gt;                         &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;    
+#&amp;gt; 1 &amp;quot;[\&amp;quot;Monday\&amp;quot;,\&amp;quot;Tues...&amp;quot;           1    32 Bob        Smith    
+#&amp;gt; 2 &amp;quot;[\&amp;quot;Monday\&amp;quot;,\&amp;quot;Wedn...&amp;quot;           2    54 Susan      Doe      
+#&amp;gt; 3 &amp;quot;[\&amp;quot;Tuesday\&amp;quot;]&amp;quot;                   3    18 Ann        Jones&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;spread_values&lt;/code&gt; function gives even more fine-tuend control on extract specific values from json objects, much similiar to &lt;code&gt;tidyr::hoist&lt;/code&gt;. See its &lt;a href=&#34;https://cran.r-project.org/web/packages/tidyjson/&#34;&gt;documentation&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;p&gt;Here is an example of &lt;code&gt;spread_values&lt;/code&gt; on &lt;code&gt;friends&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;friends %&amp;gt;% 
+  spread_values(
+    name = jstring(&amp;quot;name&amp;quot;),
+    hobby = jstring(&amp;quot;detail&amp;quot;, &amp;quot;hobby&amp;quot;)
+  ) %&amp;gt;% 
+  enter_object(detail, job) %&amp;gt;% 
+  mutate(job = ..JSON) %&amp;gt;% 
+  unnest_longer(job)
+#&amp;gt; # A tibble: 10 x 4
+#&amp;gt;    document.id name     hobby       job           
+#&amp;gt;          &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;         
+#&amp;gt;  1           1 Monica   cleaning    chef          
+#&amp;gt;  2           2 Ross     dinosaurs   paleontologist
+#&amp;gt;  3           2 Ross     dinosaurs   professor     
+#&amp;gt;  4           3 Chandler bubble bath IT procurement
+#&amp;gt;  5           3 Chandler bubble bath copywriter    
+#&amp;gt;  6           4 Joey     sandwich    actor         
+#&amp;gt;  7           5 Rachel   shopping    waitress      
+#&amp;gt;  8           5 Rachel   shopping    fashion exec  
+#&amp;gt;  9           6 Pheobe   guitar      masseuse      
+#&amp;gt; 10           6 Pheobe   guitar      musician&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The potential disadvantage of using &lt;code&gt;tidyjson&lt;/code&gt; is that it’s built on the &lt;code&gt;tbl_json&lt;/code&gt; object, which is often automatically created from a single character vector when using &lt;code&gt;spread_&lt;/code&gt; functions. Yet &lt;code&gt;tbl_json&lt;/code&gt; assumes only one special column storing json format data. So when faced with data frame with multiple json columns, we may have to take a little detour to clean them separately and combine the results manually. For another, there are problems with parsing arrays.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case-study-1-clean-google-analytics-customer-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Case study 1: clean google analytics customer data&lt;/h1&gt;
+&lt;p&gt;This data comes from a &lt;a href=&#34;https://www.kaggle.com/c/ga-customer-revenue-prediction/data?select=test.csv&#34;&gt;Kaggle dataset&lt;/a&gt;. I read in only the top 100 rows and relevant json columns.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ga &amp;lt;- read_csv(&amp;quot;D:/RProjects/data/ga-customer-revenue-prediction/test.csv&amp;quot;,
+         n_max = 100,
+         col_types = cols_only(
+           device = col_character(),
+           geoNetwork = col_character(),
+           totals = col_character(),
+           trafficSource = col_character()
+         )) 
+
+glimpse(ga)
+#&amp;gt; Rows: 100
+#&amp;gt; Columns: 4
+#&amp;gt; $ device        &amp;lt;chr&amp;gt; &amp;quot;{\&amp;quot;browser\&amp;quot;: \&amp;quot;Chrome\&amp;quot;, \&amp;quot;browserVersion\&amp;quot;: \&amp;quot;not ...
+#&amp;gt; $ geoNetwork    &amp;lt;chr&amp;gt; &amp;quot;{\&amp;quot;continent\&amp;quot;: \&amp;quot;Asia\&amp;quot;, \&amp;quot;subContinent\&amp;quot;: \&amp;quot;Southe...
+#&amp;gt; $ totals        &amp;lt;chr&amp;gt; &amp;quot;{\&amp;quot;visits\&amp;quot;: \&amp;quot;1\&amp;quot;, \&amp;quot;hits\&amp;quot;: \&amp;quot;4\&amp;quot;, \&amp;quot;pageviews\&amp;quot;: ...
+#&amp;gt; $ trafficSource &amp;lt;chr&amp;gt; &amp;quot;{\&amp;quot;campaign\&amp;quot;: \&amp;quot;(not set)\&amp;quot;, \&amp;quot;source\&amp;quot;: \&amp;quot;google\&amp;quot;...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;All four columns are json columns. First let’s define function that is used to parse a single json character vector:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;parse_json_col &amp;lt;- function(col) {
+  map_dfr(col, ~ fromJSON(.) %&amp;gt;% as_tibble)
+} &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;traffixSource&lt;/code&gt; column need some special treatments, otherwise row length would not match. But the other three can be parsed at the same time.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ga[1:3] %&amp;gt;% 
+  map_dfc(parse_json_col) %&amp;gt;% 
+  bind_cols(ga$trafficSource %&amp;gt;% 
+              map_dfr(~ fromJSON(.) %&amp;gt;% 
+                        as_tibble %&amp;gt;% 
+                        nest(data = c(adwordsClickInfo))))
+#&amp;gt; # A tibble: 100 x 38
+#&amp;gt;    browser browserVersion browserSize operatingSystem operatingSystem~ isMobile
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;           &amp;lt;chr&amp;gt;            &amp;lt;lgl&amp;gt;   
+#&amp;gt;  1 Chrome  not available~ not availa~ Macintosh       not available i~ FALSE   
+#&amp;gt;  2 Chrome  not available~ not availa~ Windows         not available i~ FALSE   
+#&amp;gt;  3 Chrome  not available~ not availa~ Macintosh       not available i~ FALSE   
+#&amp;gt;  4 Safari  not available~ not availa~ iOS             not available i~ TRUE    
+#&amp;gt;  5 Safari  not available~ not availa~ Macintosh       not available i~ FALSE   
+#&amp;gt;  6 Chrome  not available~ not availa~ Linux           not available i~ FALSE   
+#&amp;gt;  7 Chrome  not available~ not availa~ Macintosh       not available i~ FALSE   
+#&amp;gt;  8 Chrome  not available~ not availa~ Windows         not available i~ FALSE   
+#&amp;gt;  9 Chrome  not available~ not availa~ Macintosh       not available i~ FALSE   
+#&amp;gt; 10 Chrome  not available~ not availa~ Windows         not available i~ FALSE   
+#&amp;gt; # ... with 90 more rows, and 32 more variables: mobileDeviceBranding &amp;lt;chr&amp;gt;,
+#&amp;gt; #   mobileDeviceModel &amp;lt;chr&amp;gt;, mobileInputSelector &amp;lt;chr&amp;gt;, mobileDeviceInfo &amp;lt;chr&amp;gt;,
+#&amp;gt; #   mobileDeviceMarketingName &amp;lt;chr&amp;gt;, flashVersion &amp;lt;chr&amp;gt;, language &amp;lt;chr&amp;gt;,
+#&amp;gt; #   screenColors &amp;lt;chr&amp;gt;, screenResolution &amp;lt;chr&amp;gt;, deviceCategory &amp;lt;chr&amp;gt;,
+#&amp;gt; #   continent &amp;lt;chr&amp;gt;, subContinent &amp;lt;chr&amp;gt;, country &amp;lt;chr&amp;gt;, region &amp;lt;chr&amp;gt;,
+#&amp;gt; #   metro &amp;lt;chr&amp;gt;, city &amp;lt;chr&amp;gt;, cityId &amp;lt;chr&amp;gt;, networkDomain &amp;lt;chr&amp;gt;, latitude &amp;lt;chr&amp;gt;,
+#&amp;gt; #   longitude &amp;lt;chr&amp;gt;, networkLocation &amp;lt;chr&amp;gt;, visits &amp;lt;chr&amp;gt;, hits &amp;lt;chr&amp;gt;,
+#&amp;gt; #   pageviews &amp;lt;chr&amp;gt;, newVisits &amp;lt;chr&amp;gt;, campaign &amp;lt;chr&amp;gt;, source &amp;lt;chr&amp;gt;,
+#&amp;gt; #   medium &amp;lt;chr&amp;gt;, keyword &amp;lt;chr&amp;gt;, isTrueDirect &amp;lt;lgl&amp;gt;, data &amp;lt;list&amp;gt;,
+#&amp;gt; #   referralPath &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are 38 columns in total, we can verify this by applying &lt;code&gt;spread_all&lt;/code&gt; to each columns: (the following tally exludes &lt;code&gt;..JSON&lt;/code&gt; and &lt;code&gt;document.id&lt;/code&gt;)&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# 16 columns
+spread_all(ga$device)
+#&amp;gt; # A tbl_json: 100 x 18 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON document.id browser browserVersion browserSize operatingSystem
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;          
+#&amp;gt;  1 &amp;quot;{\&amp;quot;b~           1 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt;  2 &amp;quot;{\&amp;quot;b~           2 Chrome  not available~ not availa~ Windows        
+#&amp;gt;  3 &amp;quot;{\&amp;quot;b~           3 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt;  4 &amp;quot;{\&amp;quot;b~           4 Safari  not available~ not availa~ iOS            
+#&amp;gt;  5 &amp;quot;{\&amp;quot;b~           5 Safari  not available~ not availa~ Macintosh      
+#&amp;gt;  6 &amp;quot;{\&amp;quot;b~           6 Chrome  not available~ not availa~ Linux          
+#&amp;gt;  7 &amp;quot;{\&amp;quot;b~           7 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt;  8 &amp;quot;{\&amp;quot;b~           8 Chrome  not available~ not availa~ Windows        
+#&amp;gt;  9 &amp;quot;{\&amp;quot;b~           9 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt; 10 &amp;quot;{\&amp;quot;b~          10 Chrome  not available~ not availa~ Windows        
+#&amp;gt; # ... with 90 more rows, and 12 more variables: operatingSystemVersion &amp;lt;chr&amp;gt;,
+#&amp;gt; #   isMobile &amp;lt;lgl&amp;gt;, mobileDeviceBranding &amp;lt;chr&amp;gt;, mobileDeviceModel &amp;lt;chr&amp;gt;,
+#&amp;gt; #   mobileInputSelector &amp;lt;chr&amp;gt;, mobileDeviceInfo &amp;lt;chr&amp;gt;,
+#&amp;gt; #   mobileDeviceMarketingName &amp;lt;chr&amp;gt;, flashVersion &amp;lt;chr&amp;gt;, language &amp;lt;chr&amp;gt;,
+#&amp;gt; #   screenColors &amp;lt;chr&amp;gt;, screenResolution &amp;lt;chr&amp;gt;, deviceCategory &amp;lt;chr&amp;gt;
+
+# 11 columns
+spread_all(ga$geoNetwork)
+#&amp;gt; # A tbl_json: 100 x 13 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON document.id continent subContinent country region metro city  cityId
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; 
+#&amp;gt;  1 &amp;quot;{\&amp;quot;c~           1 Asia      Southeast A~ Singap~ (not ~ (not~ (not~ not a~
+#&amp;gt;  2 &amp;quot;{\&amp;quot;c~           2 Europe    Southern Eu~ Spain   Aragon (not~ Zara~ not a~
+#&amp;gt;  3 &amp;quot;{\&amp;quot;c~           3 Europe    Western Eur~ France  not a~ not ~ not ~ not a~
+#&amp;gt;  4 &amp;quot;{\&amp;quot;c~           4 Americas  Northern Am~ United~ Calif~ San ~ Moun~ not a~
+#&amp;gt;  5 &amp;quot;{\&amp;quot;c~           5 Americas  Northern Am~ United~ Calif~ San ~ San ~ not a~
+#&amp;gt;  6 &amp;quot;{\&amp;quot;c~           6 Americas  Northern Am~ United~ not a~ not ~ not ~ not a~
+#&amp;gt;  7 &amp;quot;{\&amp;quot;c~           7 Americas  Northern Am~ United~ not a~ not ~ not ~ not a~
+#&amp;gt;  8 &amp;quot;{\&amp;quot;c~           8 Americas  Northern Am~ United~ not a~ not ~ not ~ not a~
+#&amp;gt;  9 &amp;quot;{\&amp;quot;c~           9 Europe    Southern Eu~ Portug~ Lisbon (not~ Lisb~ not a~
+#&amp;gt; 10 &amp;quot;{\&amp;quot;c~          10 Europe    Southern Eu~ Spain   Aragon (not~ Zara~ not a~
+#&amp;gt; # ... with 90 more rows, and 4 more variables: networkDomain &amp;lt;chr&amp;gt;,
+#&amp;gt; #   latitude &amp;lt;chr&amp;gt;, longitude &amp;lt;chr&amp;gt;, networkLocation &amp;lt;chr&amp;gt;
+
+# 4 columns
+spread_all(ga$totals)
+#&amp;gt; # A tbl_json: 100 x 6 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON                    document.id visits hits  pageviews newVisits
+#&amp;gt;    &amp;lt;chr&amp;gt;                           &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    
+#&amp;gt;  1 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           1 1      4     4         &amp;lt;NA&amp;gt;     
+#&amp;gt;  2 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           2 1      5     5         1        
+#&amp;gt;  3 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           3 1      7     7         1        
+#&amp;gt;  4 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           4 1      8     4         1        
+#&amp;gt;  5 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           5 1      9     4         1        
+#&amp;gt;  6 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           6 1      11    5         1        
+#&amp;gt;  7 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           7 1      37    15        1        
+#&amp;gt;  8 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           8 1      52    22        1        
+#&amp;gt;  9 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;           9 1      5     5         &amp;lt;NA&amp;gt;     
+#&amp;gt; 10 &amp;quot;{\&amp;quot;visits\&amp;quot;:\&amp;quot;1\&amp;quot;,\&amp;quot;...&amp;quot;          10 1      6     6         1        
+#&amp;gt; # ... with 90 more rows
+
+# 7 columns, all adwordsClickInfo columns are seen as one column
+spread_all(ga$trafficSource)
+#&amp;gt; # A tbl_json: 100 x 14 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON document.id campaign source medium keyword isTrueDirect referralPath
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;   &amp;lt;lgl&amp;gt;        &amp;lt;chr&amp;gt;       
+#&amp;gt;  1 &amp;quot;{\&amp;quot;c~           1 (not se~ google organ~ (not p~ TRUE         &amp;lt;NA&amp;gt;        
+#&amp;gt;  2 &amp;quot;{\&amp;quot;c~           2 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt;  3 &amp;quot;{\&amp;quot;c~           3 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt;  4 &amp;quot;{\&amp;quot;c~           4 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt;  5 &amp;quot;{\&amp;quot;c~           5 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt;  6 &amp;quot;{\&amp;quot;c~           6 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt;  7 &amp;quot;{\&amp;quot;c~           7 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt;  8 &amp;quot;{\&amp;quot;c~           8 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt;  9 &amp;quot;{\&amp;quot;c~           9 (not se~ google organ~ (not p~ TRUE         &amp;lt;NA&amp;gt;        
+#&amp;gt; 10 &amp;quot;{\&amp;quot;c~          10 (not se~ google organ~ (not p~ NA           &amp;lt;NA&amp;gt;        
+#&amp;gt; # ... with 90 more rows, and 6 more variables:
+#&amp;gt; #   adwordsClickInfo.criteriaParameters &amp;lt;chr&amp;gt;, adwordsClickInfo.page &amp;lt;chr&amp;gt;,
+#&amp;gt; #   adwordsClickInfo.slot &amp;lt;chr&amp;gt;, adwordsClickInfo.gclId &amp;lt;chr&amp;gt;,
+#&amp;gt; #   adwordsClickInfo.adNetworkType &amp;lt;chr&amp;gt;, adwordsClickInfo.isVideoAd &amp;lt;lgl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And this may reminds you of a even simpler solution with the &lt;code&gt;tidyjson&lt;/code&gt; package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ga %&amp;gt;% 
+  map_dfc(spread_all)
+#&amp;gt; # A tbl_json: 100 x 51 tibble with a &amp;quot;JSON&amp;quot; attribute
+#&amp;gt;    ..JSON document.id browser browserVersion browserSize operatingSystem
+#&amp;gt;    &amp;lt;chr&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;          
+#&amp;gt;  1 &amp;quot;{\&amp;quot;b~           1 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt;  2 &amp;quot;{\&amp;quot;b~           2 Chrome  not available~ not availa~ Windows        
+#&amp;gt;  3 &amp;quot;{\&amp;quot;b~           3 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt;  4 &amp;quot;{\&amp;quot;b~           4 Safari  not available~ not availa~ iOS            
+#&amp;gt;  5 &amp;quot;{\&amp;quot;b~           5 Safari  not available~ not availa~ Macintosh      
+#&amp;gt;  6 &amp;quot;{\&amp;quot;b~           6 Chrome  not available~ not availa~ Linux          
+#&amp;gt;  7 &amp;quot;{\&amp;quot;b~           7 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt;  8 &amp;quot;{\&amp;quot;b~           8 Chrome  not available~ not availa~ Windows        
+#&amp;gt;  9 &amp;quot;{\&amp;quot;b~           9 Chrome  not available~ not availa~ Macintosh      
+#&amp;gt; 10 &amp;quot;{\&amp;quot;b~          10 Chrome  not available~ not availa~ Windows        
+#&amp;gt; # ... with 90 more rows, and 45 more variables: operatingSystemVersion &amp;lt;chr&amp;gt;,
+#&amp;gt; #   isMobile &amp;lt;lgl&amp;gt;, mobileDeviceBranding &amp;lt;chr&amp;gt;, mobileDeviceModel &amp;lt;chr&amp;gt;,
+#&amp;gt; #   mobileInputSelector &amp;lt;chr&amp;gt;, mobileDeviceInfo &amp;lt;chr&amp;gt;,
+#&amp;gt; #   mobileDeviceMarketingName &amp;lt;chr&amp;gt;, flashVersion &amp;lt;chr&amp;gt;, language &amp;lt;chr&amp;gt;,
+#&amp;gt; #   screenColors &amp;lt;chr&amp;gt;, screenResolution &amp;lt;chr&amp;gt;, deviceCategory &amp;lt;chr&amp;gt;,
+#&amp;gt; #   document.id1 &amp;lt;int&amp;gt;, continent &amp;lt;chr&amp;gt;, subContinent &amp;lt;chr&amp;gt;, country &amp;lt;chr&amp;gt;,
+#&amp;gt; #   region &amp;lt;chr&amp;gt;, metro &amp;lt;chr&amp;gt;, city &amp;lt;chr&amp;gt;, cityId &amp;lt;chr&amp;gt;, networkDomain &amp;lt;chr&amp;gt;,
+#&amp;gt; #   latitude &amp;lt;chr&amp;gt;, longitude &amp;lt;chr&amp;gt;, networkLocation &amp;lt;chr&amp;gt;, ..JSON1 &amp;lt;list&amp;gt;,
+#&amp;gt; #   document.id2 &amp;lt;int&amp;gt;, visits &amp;lt;chr&amp;gt;, hits &amp;lt;chr&amp;gt;, pageviews &amp;lt;chr&amp;gt;,
+#&amp;gt; #   newVisits &amp;lt;chr&amp;gt;, ..JSON2 &amp;lt;list&amp;gt;, document.id3 &amp;lt;int&amp;gt;, campaign &amp;lt;chr&amp;gt;,
+#&amp;gt; #   source &amp;lt;chr&amp;gt;, medium &amp;lt;chr&amp;gt;, keyword &amp;lt;chr&amp;gt;, isTrueDirect &amp;lt;lgl&amp;gt;,
+#&amp;gt; #   referralPath &amp;lt;chr&amp;gt;, adwordsClickInfo.criteriaParameters &amp;lt;chr&amp;gt;,
+#&amp;gt; #   adwordsClickInfo.page &amp;lt;chr&amp;gt;, adwordsClickInfo.slot &amp;lt;chr&amp;gt;,
+#&amp;gt; #   adwordsClickInfo.gclId &amp;lt;chr&amp;gt;, adwordsClickInfo.adNetworkType &amp;lt;chr&amp;gt;,
+#&amp;gt; #   adwordsClickInfo.isVideoAd &amp;lt;lgl&amp;gt;, ..JSON3 &amp;lt;list&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Police Activity with Pandas</title>
+      <link>/post/police-activity-pandas/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/police-activity-pandas/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Ted Talks</title>
+      <link>/post/2020-05-14-analyzing-ted-talks/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-14-analyzing-ted-talks/</guid>
+      <description>
+
+
+&lt;p&gt;ted talk with topics: &lt;a href=&#34;https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset&lt;/a&gt;?, upto 2020-5&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Volcano Eruptions</title>
+      <link>/post/2020-05-14-volcano-eruptions/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-14-volcano-eruptions/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tuesdata &amp;lt;- tidytuesdayR::tt_load(&amp;#39;2020-05-12&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;volcano &amp;lt;- tuesdata$volcano
+eruptions &amp;lt;- tuesdata$eruptions&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -50,7 +568,7 @@
 &lt;li&gt;Every row is an observation.&lt;/li&gt;
 &lt;li&gt;Every cell is a single value.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Messy data are, by extension, datasets in volation againest these 3 rules. The author then described the five most common problems with messy datasets:&lt;/p&gt;
+&lt;p&gt;Messy data are, by extension, datasets in volation of these 3 rules. The author then described the five most common problems with messy datasets:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Column headers are values, not variable names.&lt;/li&gt;
 &lt;li&gt;Multiple variables are stored in one column.&lt;br /&gt;
@@ -60,11 +578,13 @@
 &lt;/li&gt;
 &lt;li&gt;A single observational unit is stored in multiple tables.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;In this post I will be focusing on the first 3 symptoms since the other two violations often occur when working with databases. All &lt;a href=&#34;(https://github.com/chendaniely/scipy-2019-pandas/tree/master/data)&#34;&gt;datasets&lt;/a&gt; are from Hadley’s paper &lt;a href=&#34;https://github.com/hadley/tidy-data&#34;&gt;repo&lt;/a&gt; and &lt;a href=&#34;https://chendaniely.github.io/&#34;&gt;Daniel Chen&lt;/a&gt;’s 2019 SciPy talk on data manipulation with pandas.&lt;/p&gt;
+&lt;p&gt;In this post I will be focusing on the first 3 symptoms since the other two violations often occur when working with databases. All datasets come from Hadley’s &lt;a href=&#34;https://github.com/hadley/tidy-data&#34;&gt;repo&lt;/a&gt; containing materials for the paper and &lt;a href=&#34;https://chendaniely.github.io/&#34;&gt;Daniel Chen&lt;/a&gt;’s 2019 SciPy tutorial on data processing with pandas.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns&lt;/code&gt;&lt;/pre&gt;
+import seaborn as sns
+#&amp;gt; D:\Anaconda\lib\site-packages\statsmodels\tools\_testing.py:19: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+#&amp;gt;   import pandas.util.testing as tm&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;column-headers-are-values-not-variable-names&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Column headers are values, not variable names&lt;/h1&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;pew = pd.read_csv(&amp;quot;D:/RProjects/data/blog/pew.csv&amp;quot;)
@@ -5661,7 +6181,7 @@ m
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;More than 50 years ago, John Tukey in his renowned “The Future of Dat Analysis” envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / analysis” trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
+&lt;p&gt;More than 50 years ago, John Tukey in his renowned &lt;em&gt;The Future of Dat Analysis&lt;/em&gt; envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / data analysis” trend, to soar above theoretical statistics which was characterized by theorems, proofs, etc. In this article, David Donoho&lt;span class=&#34;citation&#34;&gt;(Donoho &lt;a href=&#34;#ref-doi:10.1080/10618600.2017.1384734&#34; role=&#34;doc-biblioref&#34;&gt;2017&lt;/a&gt;)&lt;/span&gt; presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.&lt;/p&gt;
 &lt;div id=&#34;data-science-vs.-statistics&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data Science vs. Statistics&lt;/h1&gt;
 &lt;p&gt;The author first starts to distinguish data science from traditional statistics. Yet 3 commonly used indicators are discredited:&lt;/p&gt;
@@ -5682,14 +6202,14 @@ m
 &lt;blockquote&gt;
 &lt;p&gt;All in all I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Tukey identified four driving forces in the new science &lt;span class=&#34;citation&#34;&gt;(Tukey &lt;a href=&#34;#ref-tukey1962future&#34; role=&#34;doc-biblioref&#34;&gt;1962&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;Tukey identified four driving forces in the new science &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-tukey1962future&#34; role=&#34;doc-biblioref&#34;&gt;1962&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;The formal theories of statistics&lt;/li&gt;
 &lt;li&gt;Accelerating developments in computers and display devices&lt;/li&gt;
 &lt;li&gt;The challenge, in many fields, of more and ever larger bodies of data&lt;/li&gt;
 &lt;li&gt;The emphasis on quantification in an ever wider variety of disciplines&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Let’s spend a minute admiring Tukey’s prophecy…&lt;/p&gt;
+&lt;p&gt;I’m spend a minute admiring Tukey’s prophecy …&lt;/p&gt;
 &lt;p&gt;Among other things, Tukey also pointed out that:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;…data analysis is a very difficult field. It must adapt itself to what people can and need to do with data. In the sense that biology is more complex than physics, and the behavioral sciences are more complex than either, it is likely that the general problems of data analysis are more complex than those of all three. It is too much to ask for close and effective guidance for data analysis from any highly formalized structure, either now or in the near future.&lt;/p&gt;
@@ -5698,12 +6218,12 @@ m
 &lt;p&gt;Data analysis can gain much from formal statistics, but only if the connection is kept adequately loose.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;John Chambers presented a choice between “greater” or “lesser” statistics. He argued
-&lt;span class=&#34;citation&#34;&gt;(Chambers &lt;a href=&#34;#ref-chambers1993greater&#34; role=&#34;doc-biblioref&#34;&gt;1993&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-chambers1993greater&#34; role=&#34;doc-biblioref&#34;&gt;1993&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The statistics profession faces a choice in its future research between continuing concentration on traditional topics—based largely on data analysis supported by mathematical statistics—and a broader viewpoint—based on an inclusive concept of learning from data. The latter course presents severe challenges as well as exciting opportunities. The former risks seeing statistics become increasingly marginal…&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;C. F. Jeff Wu characterized statistical work as a trilogy of data collection, data modeling and analysis, and decision making, and called for courses outside out the statistics department.&lt;/p&gt;
-&lt;p&gt;William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today’s perspective &lt;span class=&#34;citation&#34;&gt;(Cleveland &lt;a href=&#34;#ref-cleveland2001data&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today’s perspective &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-cleveland2001data&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Multidisciplinary investigations (25%)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Models and Methods for Data (20%)&lt;/p&gt;&lt;/li&gt;
@@ -5712,7 +6232,7 @@ m
 &lt;li&gt;&lt;p&gt;Tool Evaluation (5%)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Theory (20%)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;UC Berkeley statistician Leo Breiman brought his “two modeling cultures theory” into the exhortation. He asserted &lt;span class=&#34;citation&#34;&gt;(Breiman and others &lt;a href=&#34;#ref-breiman2001statistical&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt; :&lt;/p&gt;
+&lt;p&gt;UC Berkeley based statistician Leo Breiman brought his “two modeling cultures theory” into this exhortation. He asserted &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-breiman2001statistical&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt; :&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;There are two goals in analyzing the data:&lt;br /&gt;
 Prediction: To be able to predict what the responses are going to be to future input variables;&lt;br /&gt;

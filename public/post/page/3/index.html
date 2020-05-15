@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="A personal blog of Qiushi Yan about life and #rstats">
+  <meta name="description" content="Personal blog of Qiushi Yan">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/">
@@ -59,8 +59,10 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
       
     
 
@@ -87,6 +89,42 @@
   
 
 
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165703248-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-165703248-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
 
 
   
@@ -118,10 +156,10 @@
   <meta property="og:site_name" content="Qiushi Yan">
   <meta property="og:url" content="/post/">
   <meta property="og:title" content="Posts | Qiushi Yan">
-  <meta property="og:description" content="A personal blog of Qiushi Yan about life and #rstats"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-05-03T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-05-15T00:00:00&#43;00:00">
   
 
   
@@ -253,7 +291,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          <a class="nav-link " href="/#post"><span>Posts</span></a>
         </li>
 
         
@@ -282,7 +320,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#post"><span>Posts</span></a>
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
         </li>
 
         
@@ -394,12 +432,103 @@
   <div class="media-body">
 
     <h3 class="article-title mb-0 mt-0">
-      <a href="/post/exploring-the-london-stage-database/" >Exploring the London Stage Database</a>
+      <a href="/post/better-sicence-in-less-time/better-science-in-less-time/" >Better science in less time</a>
     </h3>
 
     
     <div class="article-style">
-      A little playing with London Stage Database
+      Reading notes on &ldquo;Our path to better science in less time using open data science tools&rdquo; by the Ocean Health Index project
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+        
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Nov 25, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/readings/">Readings</a></span>
+  
+
+</div>
+
+      
+    </div>
+
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+    
+  
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/post/introduction-to-skimr/" >Skimming through {skimr}</a>
+    </h3>
+
+    
+    <div class="article-style">
+      Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics of data frames
     </div>
     
 
@@ -433,7 +562,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    14 min read
   </span>
   
 
@@ -445,7 +574,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/data-analysis/">Data Analysis</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a></span>
   
 
 </div>
@@ -460,8 +589,8 @@
     
     
     
-    <a href="/post/exploring-the-london-stage-database/" >
-      <img src="/post/exploring-the-london-stage-database/featured_hu3d03a01dcc18bc5be0e67db3d8d209a6_3369290_150x0_resize_q90_lanczos.jpg" alt="">
+    <a href="/post/introduction-to-skimr/" >
+      <img src="/post/introduction-to-skimr/featured_hu3d03a01dcc18bc5be0e67db3d8d209a6_122988_150x0_resize_q90_lanczos.jpg" alt="">
     </a>
     
   </div>
@@ -490,12 +619,106 @@
   <div class="media-body">
 
     <h3 class="article-title mb-0 mt-0">
-      <a href="/post/2020-04-07-using-infer-for-tidy-statistical-inference/" >Using {infer} for Tidy Statistical Inference</a>
+      <a href="/post/50-years-of-data-science/" >50 Years of Data Science</a>
     </h3>
 
     
     <div class="article-style">
-      A note to self on conducting statistical inference using the {infer} package
+      Reading notes on &ldquo;50 Years of Data Science&rdquo; by David Dinoho
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+        
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Nov 21, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/readings/">Readings</a></span>
+  
+
+</div>
+
+      
+    </div>
+
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/post/50-years-of-data-science/" >
+      <img src="/post/50-years-of-data-science/featured_hu45f0a4a8f78db2b9ed069bfa0ed11625_264626_150x0_resize_q90_lanczos.jpg" alt="">
+    </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/" >Enterprise Data Analysis and Visualization: An Interview Study</a>
+    </h3>
+
+    
+    <div class="article-style">
+      Reading notes on &ldquo;Enterprise Data Analysis and Visualization: An Interview Study&rdquo; by Sean Kandel, Andreas Paepcke, Joseph …
     </div>
     
 
@@ -520,7 +743,7 @@
           Last updated on
       
     
-    Apr 7, 2020
+    Nov 21, 2019
   </span>
   
 
@@ -529,7 +752,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    5 min read
+    7 min read
   </span>
   
 
@@ -541,7 +764,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/statistics/">Statistics</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/categories/readings/">Readings</a></span>
   
 
 </div>
@@ -555,11 +778,6 @@
   <div class="ml-3">
     
     
-    
-    <a href="/post/2020-04-07-using-infer-for-tidy-statistical-inference/" >
-      <img src="/post/2020-04-07-using-infer-for-tidy-statistical-inference/featured_hu3d03a01dcc18bc5be0e67db3d8d209a6_7315263_150x0_resize_q90_lanczos.jpg" alt="">
-    </a>
-    
   </div>
 </div>
 
@@ -572,8 +790,6 @@
     
     <li class="page-item"><a class="page-link" href="/post/page/2/">&laquo;</a></li>
     
-    
-    <li class="page-item"><a class="page-link" href="/post/page/4/">&raquo;</a></li>
     
   </ul>
 </nav>
@@ -608,7 +824,7 @@
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
         
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sql.min.js"></script>
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
         

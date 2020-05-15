@@ -5,7 +5,7 @@
     <link>/categories/</link>
       <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 15 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Categories</title>
@@ -13,26 +13,34 @@
     </image>
     
     <item>
+      <title>R</title>
+      <link>/categories/r/</link>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
+      <guid>/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data Analysis</title>
       <link>/categories/data-analysis/</link>
-      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
       <guid>/categories/data-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Visualization</title>
+      <link>/categories/data-visualization/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/categories/data-visualization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
       <link>/categories/python/</link>
-      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
       <guid>/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/r/</guid>
       <description></description>
     </item>
     
@@ -49,14 +57,6 @@
       <link>/categories/readings/</link>
       <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
       <guid>/categories/readings/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Visualization</title>
-      <link>/categories/data-visualization/</link>
-      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/data-visualization/</guid>
       <description></description>
     </item>
     

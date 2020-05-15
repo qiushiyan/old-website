@@ -4,7 +4,7 @@ author: Qiushi Yan
 date: '2019-11-21'
 slug: 50-years-of-data-science
 summary: 'Reading notes on "50 Years of Data Science" by David Dinoho'
-
+subtitle: 'Reading notes on "50 Years of Data Science" by David Dinoho'
 image:
   caption: "Source: https://smartodds.blog/2018/10/12/famous-statisticians-john-tukey/"
   focal_point: ""
@@ -17,7 +17,7 @@ bibliography: ../bib/50-years-of-data-science.bib
 link-citations: true
 ---
 
-More than 50 years ago, John Tukey in his renowned "The Future of Dat Analysis" envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like  John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called "data sicence / analysis" trend, to soar above theoretical statisticals which was characterized by theorems, proofs, etc. In this article, David Donoho[@doi:10.1080/10618600.2017.1384734] presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.    
+More than 50 years ago, John Tukey in his renowned *The Future of Dat Analysis* envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called "data sicence / data analysis" trend, to soar above theoretical statistics which was characterized by theorems, proofs, etc. In this article, David Donoho[@doi:10.1080/10618600.2017.1384734] presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.    
 
 
 
@@ -25,7 +25,7 @@ More than 50 years ago, John Tukey in his renowned "The Future of Dat Analysis" 
 
 The author first starts to distinguish data science from traditional statistics. Yet 3 commonly used indicators are discredited:   
 
-* “Big data” is not a credible criterion for meaningful distinction between statistics and data science, for both historical and scientific reasons, viz:
+* “Big data” is not a credible criterion for meaningful distinction between statistics and data science, for both historical and scientific reasons, viz:  
   * The very term “statistics” was coined at the beginning of modern efforts to compile census data, roughly the size of today's big data
   * Statisticians have long since delved into large databases, and come up with sufficient measures
 
@@ -44,14 +44,14 @@ Based on the timeline, the author then organizes insights that have been publish
 > All in all I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data
 
 
-Tukey identified four driving forces in the new science [@tukey1962future]: 
+Tukey identified four driving forces in the new science [-@tukey1962future]: 
 
 1. The formal theories of statistics
 2. Accelerating developments in computers and display devices
 3. The challenge, in many fields, of more and ever larger bodies of data
 4. The emphasis on quantification in an ever wider variety of disciplines
 
-Let's spend a minute admiring Tukey's prophecy...  
+I'm spend a minute admiring Tukey's prophecy ...  
 
 Among other things, Tukey also pointed out that: 
  
@@ -61,7 +61,7 @@ Among other things, Tukey also pointed out that:
 
 
 John Chambers presented a choice between "greater" or "lesser" statistics. He argued 
-[@chambers1993greater]:  
+[-@chambers1993greater]:  
 
 > The statistics profession faces a choice in its future research between continuing concentration on traditional topics—based largely on data analysis supported by mathematical statistics—and a broader viewpoint—based on an inclusive concept of learning from data. The latter course presents severe challenges as well as exciting opportunities. The former risks seeing statistics become increasingly marginal…
 
@@ -70,7 +70,7 @@ C. F. Jeff Wu characterized statistical work as a trilogy of data collection, da
 
 
 
-William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today's perspective [@cleveland2001data]:  
+William S. Cleveland put forward 6 foci of data science, which offered a great conceptual framework to study the filed even from today's perspective [-@cleveland2001data]:  
 
 * Multidisciplinary investigations (25%)
 
@@ -87,7 +87,7 @@ William S. Cleveland put forward 6 foci of data science, which offered a great c
 
 
 
-UC Berkeley statistician Leo Breiman brought his "two modeling cultures theory" into the exhortation. He asserted [@breiman2001statistical]  :  
+UC Berkeley based statistician Leo Breiman brought his "two modeling cultures theory" into this exhortation. He asserted [-@breiman2001statistical]  :  
 
 > There are two goals in analyzing the data:  
 Prediction: To be able to predict what the responses are going to be to future input variables;  

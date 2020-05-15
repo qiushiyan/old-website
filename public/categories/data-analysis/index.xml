@@ -5,12 +5,51 @@
     <link>/categories/data-analysis/</link>
       <atom:link href="/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Analysis</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Data Analysis</title>
       <link>/categories/data-analysis/</link>
     </image>
+    
+    <item>
+      <title>Analyzing Police Activity with Pandas</title>
+      <link>/post/police-activity-pandas/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/police-activity-pandas/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Ted Talks</title>
+      <link>/post/2020-05-14-analyzing-ted-talks/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-14-analyzing-ted-talks/</guid>
+      <description>
+
+
+&lt;p&gt;ted talk with topics: &lt;a href=&#34;https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset&lt;/a&gt;?, upto 2020-5&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Volcano Eruptions</title>
+      <link>/post/2020-05-14-volcano-eruptions/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-14-volcano-eruptions/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tuesdata &amp;lt;- tidytuesdayR::tt_load(&amp;#39;2020-05-12&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;volcano &amp;lt;- tuesdata$volcano
+eruptions &amp;lt;- tuesdata$eruptions&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Tidy Data with Python</title>
@@ -36,7 +75,7 @@
 &lt;li&gt;Every row is an observation.&lt;/li&gt;
 &lt;li&gt;Every cell is a single value.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Messy data are, by extension, datasets in volation againest these 3 rules. The author then described the five most common problems with messy datasets:&lt;/p&gt;
+&lt;p&gt;Messy data are, by extension, datasets in volation of these 3 rules. The author then described the five most common problems with messy datasets:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Column headers are values, not variable names.&lt;/li&gt;
 &lt;li&gt;Multiple variables are stored in one column.&lt;br /&gt;
@@ -46,11 +85,13 @@
 &lt;/li&gt;
 &lt;li&gt;A single observational unit is stored in multiple tables.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;In this post I will be focusing on the first 3 symptoms since the other two violations often occur when working with databases. All &lt;a href=&#34;(https://github.com/chendaniely/scipy-2019-pandas/tree/master/data)&#34;&gt;datasets&lt;/a&gt; are from Hadley’s paper &lt;a href=&#34;https://github.com/hadley/tidy-data&#34;&gt;repo&lt;/a&gt; and &lt;a href=&#34;https://chendaniely.github.io/&#34;&gt;Daniel Chen&lt;/a&gt;’s 2019 SciPy talk on data manipulation with pandas.&lt;/p&gt;
+&lt;p&gt;In this post I will be focusing on the first 3 symptoms since the other two violations often occur when working with databases. All datasets come from Hadley’s &lt;a href=&#34;https://github.com/hadley/tidy-data&#34;&gt;repo&lt;/a&gt; containing materials for the paper and &lt;a href=&#34;https://chendaniely.github.io/&#34;&gt;Daniel Chen&lt;/a&gt;’s 2019 SciPy tutorial on data processing with pandas.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns&lt;/code&gt;&lt;/pre&gt;
+import seaborn as sns
+#&amp;gt; D:\Anaconda\lib\site-packages\statsmodels\tools\_testing.py:19: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+#&amp;gt;   import pandas.util.testing as tm&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;column-headers-are-values-not-variable-names&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Column headers are values, not variable names&lt;/h1&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;pew = pd.read_csv(&amp;quot;D:/RProjects/data/blog/pew.csv&amp;quot;)

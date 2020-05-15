@@ -33,7 +33,7 @@ link-citations: yes
 <li>Every row is an observation.</li>
 <li>Every cell is a single value.</li>
 </ol>
-<p>Messy data are, by extension, datasets in volation againest these 3 rules. The author then described the five most common problems with messy datasets:</p>
+<p>Messy data are, by extension, datasets in volation of these 3 rules. The author then described the five most common problems with messy datasets:</p>
 <ul>
 <li>Column headers are values, not variable names.</li>
 <li>Multiple variables are stored in one column.<br />
@@ -43,11 +43,13 @@ link-citations: yes
 </li>
 <li>A single observational unit is stored in multiple tables.</li>
 </ul>
-<p>In this post I will be focusing on the first 3 symptoms since the other two violations often occur when working with databases. All <a href="(https://github.com/chendaniely/scipy-2019-pandas/tree/master/data)">datasets</a> are from Hadley’s paper <a href="https://github.com/hadley/tidy-data">repo</a> and <a href="https://chendaniely.github.io/">Daniel Chen</a>’s 2019 SciPy talk on data manipulation with pandas.</p>
+<p>In this post I will be focusing on the first 3 symptoms since the other two violations often occur when working with databases. All datasets come from Hadley’s <a href="https://github.com/hadley/tidy-data">repo</a> containing materials for the paper and <a href="https://chendaniely.github.io/">Daniel Chen</a>’s 2019 SciPy tutorial on data processing with pandas.</p>
 <pre class="python"><code>import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns</code></pre>
+import seaborn as sns
+#&gt; D:\Anaconda\lib\site-packages\statsmodels\tools\_testing.py:19: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+#&gt;   import pandas.util.testing as tm</code></pre>
 <div id="column-headers-are-values-not-variable-names" class="section level1">
 <h1>Column headers are values, not variable names</h1>
 <pre class="python"><code>pew = pd.read_csv(&quot;D:/RProjects/data/blog/pew.csv&quot;)

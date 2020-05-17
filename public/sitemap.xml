@@ -13,23 +13,48 @@
   </url>
   
   <url>
+    <loc>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</loc>
+    <lastmod>2020-05-17T21:56:42+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
+    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/rhode-policing-activity/</loc>
+    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/machine-learning/</loc>
+    <lastmod>2020-05-17T21:56:42+08:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
+    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/python/</loc>
+    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
+    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
+    <lastmod>2020-05-17T21:56:42+08:00</lastmod>
   </url>
   
   <url>
@@ -48,18 +73,8 @@
   </url>
   
   <url>
-    <loc>/categories/data-analysis/</loc>
-    <lastmod>2020-05-14T15:37:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/data-visualization/</loc>
     <lastmod>2020-05-14T11:36:16+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2020-05-14T00:55:41+08:00</lastmod>
   </url>
   
   <url>
@@ -74,11 +89,6 @@
   
   <url>
     <loc>/post/classification-metrics/</loc>
-    <lastmod>2020-05-09T14:58:21+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/machine-learning/</loc>
     <lastmod>2020-05-09T14:58:21+08:00</lastmod>
   </url>
   

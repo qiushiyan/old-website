@@ -1,0 +1,29 @@
+---
+title: Biterm Topic Modeling for Danmaku on Bilibili
+author: Qiushi Yan
+date: 2020-05-17
+slug: []
+categories:
+  - Machine Learning
+  - R
+  - Data Analysis
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-05-17T21:56:42+08:00'
+draft: yes
+bibliography: ../bib/biterm-topic-modeling.bib
+biblio-style: apalike
+link-citations: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+btm package: https://github.com/bnosac/BTM
+
+definition of danmaku https://blogs.ubc.ca/titus283/2018/02/03/43/
+
+bilibili https://en.wikipedia.org/wiki/Bilibili

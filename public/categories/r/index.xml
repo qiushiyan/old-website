@@ -5,12 +5,26 @@
     <link>/categories/r/</link>
       <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 15 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>R</title>
       <link>/categories/r/</link>
     </image>
+    
+    <item>
+      <title>Biterm Topic Modeling for Danmaku on Bilibili</title>
+      <link>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</link>
+      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</guid>
+      <description>
+
+
+&lt;p&gt;btm package: &lt;a href=&#34;https://github.com/bnosac/BTM&#34; class=&#34;uri&#34;&gt;https://github.com/bnosac/BTM&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;definition of danmaku &lt;a href=&#34;https://blogs.ubc.ca/titus283/2018/02/03/43/&#34; class=&#34;uri&#34;&gt;https://blogs.ubc.ca/titus283/2018/02/03/43/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;bilibili &lt;a href=&#34;https://en.wikipedia.org/wiki/Bilibili&#34; class=&#34;uri&#34;&gt;https://en.wikipedia.org/wiki/Bilibili&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Working with JSON Columns in R</title>

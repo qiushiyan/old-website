@@ -5,12 +5,339 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 15 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Biterm Topic Modeling for Danmaku on Bilibili</title>
+      <link>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</link>
+      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</guid>
+      <description>
+
+
+&lt;p&gt;btm package: &lt;a href=&#34;https://github.com/bnosac/BTM&#34; class=&#34;uri&#34;&gt;https://github.com/bnosac/BTM&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;definition of danmaku &lt;a href=&#34;https://blogs.ubc.ca/titus283/2018/02/03/43/&#34; class=&#34;uri&#34;&gt;https://blogs.ubc.ca/titus283/2018/02/03/43/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;bilibili &lt;a href=&#34;https://en.wikipedia.org/wiki/Bilibili&#34; class=&#34;uri&#34;&gt;https://en.wikipedia.org/wiki/Bilibili&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Exploring policing activity in Rhode Island</title>
+      <link>/post/rhode-policing-activity/</link>
+      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/rhode-policing-activity/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#data-preprocessing&#34;&gt;Data preprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#exploring-the-relationship-between-gender-race-and-policing&#34;&gt;Exploring the relationship between gender, race and policing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#temporal-pattern-of-drug-related-stops-search-rates&#34;&gt;Temporal pattern of drug related stops search rates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#distribution-of-violation-across-zones&#34;&gt;Distribution of violation across zones&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#weather-impact-on-policing-behaviour&#34;&gt;Weather Impact on policing behaviour&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This post is about completing an exploratory data analysis project using the &lt;code&gt;pandas&lt;/code&gt; library in Python. The data comes from the &lt;a href=&#34;https://openpolicing.stanford.edu&#34;&gt;Stanford Open Policing Project&lt;/a&gt;, which releases cleaned data about vehicle and pedestrian stops from the police across over 30 states in the USA. I focus only on traffic stops by police officers in the state of Rhode Island here.&lt;/p&gt;
+&lt;p&gt;Some questions include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The relationship between search rate, types of search, types of violation, gender and race.&lt;/li&gt;
+&lt;li&gt;How do the number of drug related stops and search rate change during the past few years?&lt;/li&gt;
+&lt;li&gt;Is there a patten in violations across different zones of Rhode Island?&lt;/li&gt;
+&lt;li&gt;Does weather affect arrest rate?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Data preprocessing&lt;/h1&gt;
+&lt;p&gt;Let’s begin by loading the library and data:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri = pd.read_csv(&amp;quot;D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv&amp;quot;)
+print(ri.head())
+#&amp;gt;   state   stop_date stop_time  ...  stop_duration drugs_related_stop district
+#&amp;gt; 0    RI  2005-01-04     12:55  ...       0-15 Min              False  Zone X4
+#&amp;gt; 1    RI  2005-01-23     23:15  ...       0-15 Min              False  Zone K3
+#&amp;gt; 2    RI  2005-02-17     04:15  ...       0-15 Min              False  Zone X4
+#&amp;gt; 3    RI  2005-02-20     17:15  ...      16-30 Min              False  Zone X1
+#&amp;gt; 4    RI  2005-02-24     01:20  ...       0-15 Min              False  Zone X3
+#&amp;gt; 
+#&amp;gt; [5 rows x 15 columns]
+print(ri.columns)
+#&amp;gt; Index([&amp;#39;state&amp;#39;, &amp;#39;stop_date&amp;#39;, &amp;#39;stop_time&amp;#39;, &amp;#39;county_name&amp;#39;, &amp;#39;driver_gender&amp;#39;,
+#&amp;gt;        &amp;#39;driver_race&amp;#39;, &amp;#39;violation_raw&amp;#39;, &amp;#39;violation&amp;#39;, &amp;#39;search_conducted&amp;#39;,
+#&amp;gt;        &amp;#39;search_type&amp;#39;, &amp;#39;stop_outcome&amp;#39;, &amp;#39;is_arrested&amp;#39;, &amp;#39;stop_duration&amp;#39;,
+#&amp;gt;        &amp;#39;drugs_related_stop&amp;#39;, &amp;#39;district&amp;#39;],
+#&amp;gt;       dtype=&amp;#39;object&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To save future efforts, we have some preprocessing jobs to do:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;drop columns and rows&lt;/li&gt;
+&lt;li&gt;make sure that relevant columnns are in the right data type.&lt;/li&gt;
+&lt;li&gt;make use of pandas’s datetime index&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A glance at missing values will show that &lt;code&gt;county_name&lt;/code&gt; are all missing. Also, those observations with missing &lt;code&gt;driver_gender&lt;/code&gt; and &lt;code&gt;driver_race&lt;/code&gt; is of little value for our purposes. And the &lt;code&gt;state&lt;/code&gt; column is redundant.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri.isnull().mean()
+#&amp;gt; state                 0.000000
+#&amp;gt; stop_date             0.000000
+#&amp;gt; stop_time             0.000000
+#&amp;gt; county_name           1.000000
+#&amp;gt; driver_gender         0.056736
+#&amp;gt; driver_race           0.056703
+#&amp;gt; violation_raw         0.056703
+#&amp;gt; violation             0.056703
+#&amp;gt; search_conducted      0.000000
+#&amp;gt; search_type           0.963953
+#&amp;gt; stop_outcome          0.056703
+#&amp;gt; is_arrested           0.056703
+#&amp;gt; stop_duration         0.056703
+#&amp;gt; drugs_related_stop    0.000000
+#&amp;gt; district              0.000000
+#&amp;gt; dtype: float64&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As to data types, &lt;code&gt;is_arrested&lt;/code&gt; is now recognized as objects, but should be boolean values instead.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri.dtypes
+#&amp;gt; state                  object
+#&amp;gt; stop_date              object
+#&amp;gt; stop_time              object
+#&amp;gt; county_name           float64
+#&amp;gt; driver_gender          object
+#&amp;gt; driver_race            object
+#&amp;gt; violation_raw          object
+#&amp;gt; violation              object
+#&amp;gt; search_conducted         bool
+#&amp;gt; search_type            object
+#&amp;gt; stop_outcome           object
+#&amp;gt; is_arrested            object
+#&amp;gt; stop_duration          object
+#&amp;gt; drugs_related_stop       bool
+#&amp;gt; district               object
+#&amp;gt; dtype: object&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri[&amp;quot;is_arrested&amp;quot;].head()
+#&amp;gt; 0    False
+#&amp;gt; 1    False
+#&amp;gt; 2    False
+#&amp;gt; 3     True
+#&amp;gt; 4    False
+#&amp;gt; Name: is_arrested, dtype: object&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Lastly, &lt;code&gt;stop_date&lt;/code&gt; and &lt;code&gt;stop_time&lt;/code&gt; will be turned into best advantage as a datetime index.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri[[&amp;quot;stop_date&amp;quot;, &amp;quot;stop_time&amp;quot;]].head()
+#&amp;gt;     stop_date stop_time
+#&amp;gt; 0  2005-01-04     12:55
+#&amp;gt; 1  2005-01-23     23:15
+#&amp;gt; 2  2005-02-17     04:15
+#&amp;gt; 3  2005-02-20     17:15
+#&amp;gt; 4  2005-02-24     01:20&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Combine these steps yields a relatively clean version of this dataset.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri[&amp;quot;is_arrested&amp;quot;] = ri.is_arrested.astype(&amp;quot;bool&amp;quot;)
+dt_index = ri.stop_date.str.cat(ri.stop_time, sep = &amp;quot; &amp;quot;)
+ri[&amp;quot;stop_datetime&amp;quot;] = pd.to_datetime(dt_index)
+
+ri_clean = (ri.
+  drop([&amp;quot;county_name&amp;quot;, &amp;quot;state&amp;quot;], axis = &amp;quot;columns&amp;quot;).
+  dropna(subset = [&amp;quot;driver_gender&amp;quot;, &amp;quot;driver_race&amp;quot;]).
+  set_index(&amp;quot;stop_datetime&amp;quot;)
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean.head()
+#&amp;gt;                       stop_date stop_time  ... drugs_related_stop district
+#&amp;gt; stop_datetime                              ...                            
+#&amp;gt; 2005-01-04 12:55:00  2005-01-04     12:55  ...              False  Zone X4
+#&amp;gt; 2005-01-23 23:15:00  2005-01-23     23:15  ...              False  Zone K3
+#&amp;gt; 2005-02-17 04:15:00  2005-02-17     04:15  ...              False  Zone X4
+#&amp;gt; 2005-02-20 17:15:00  2005-02-20     17:15  ...              False  Zone X1
+#&amp;gt; 2005-02-24 01:20:00  2005-02-24     01:20  ...              False  Zone X3
+#&amp;gt; 
+#&amp;gt; [5 rows x 13 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;exploring-the-relationship-between-gender-race-and-policing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Exploring the relationship between gender, race and policing&lt;/h1&gt;
+&lt;p&gt;The &lt;code&gt;search_conducted&lt;/code&gt; column indicates whether or not a vehicle were searched by an officer:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean.search_conducted.head()
+#&amp;gt; stop_datetime
+#&amp;gt; 2005-01-04 12:55:00    False
+#&amp;gt; 2005-01-23 23:15:00    False
+#&amp;gt; 2005-02-17 04:15:00    False
+#&amp;gt; 2005-02-20 17:15:00    False
+#&amp;gt; 2005-02-24 01:20:00    False
+#&amp;gt; Name: search_conducted, dtype: bool&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can break the average search rate by gender&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# search rate for men and women
+ri_clean.groupby(&amp;quot;driver_gender&amp;quot;).search_conducted.mean()
+#&amp;gt; driver_gender
+#&amp;gt; F    0.019181
+#&amp;gt; M    0.045426
+#&amp;gt; Name: search_conducted, dtype: float64&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is a marked difference considering the base volume. This could be misleading due to the existance of some confounding variables. For exmaple, the difference in search rate between males and females could be explained by the fact that they tend to commit different violations. For this reason I’ll divide the result by types of violation to see if there is a universal rise in the possibility of being searched from women to men.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean.groupby([&amp;quot;violation&amp;quot;, &amp;quot;driver_gender&amp;quot;]).search_conducted.mean()
+#&amp;gt; violation            driver_gender
+#&amp;gt; Equipment            F                0.039984
+#&amp;gt;                      M                0.071496
+#&amp;gt; Moving violation     F                0.039257
+#&amp;gt;                      M                0.061524
+#&amp;gt; Other                F                0.041018
+#&amp;gt;                      M                0.046191
+#&amp;gt; Registration/plates  F                0.054924
+#&amp;gt;                      M                0.108802
+#&amp;gt; Seat belt            F                0.017301
+#&amp;gt;                      M                0.035119
+#&amp;gt; Speeding             F                0.008309
+#&amp;gt;                      M                0.027885
+#&amp;gt; Name: search_conducted, dtype: float64&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variales, by and large.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;search_type&lt;/code&gt; column contains information about categories of searching on the part of the police. I investigate the relative proportion of the most common search types for 4 races.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;condition = ri_clean.driver_race.isin([&amp;quot;White&amp;quot;, &amp;quot;Black&amp;quot;, &amp;quot;Hispanic&amp;quot;, &amp;quot;Asian&amp;quot;]) &amp;amp; ri_clean.search_type.isin([&amp;quot;Incident to Arrest&amp;quot;, &amp;#39;Probable Cause&amp;#39;, &amp;#39;Inventory&amp;#39;])
+
+search_type_by_race = (ri_clean[condition].
+  groupby(&amp;quot;driver_race&amp;quot;).
+  search_type.
+  value_counts(normalize = True).
+  unstack()
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import matplotlib.pyplot as plt
+search_type_by_race.plot(kind = &amp;quot;bar&amp;quot;)
+plt.title(&amp;quot;Proportion of common search types across 4 races&amp;quot;)
+plt.show()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in &lt;code&gt;search_type&lt;/code&gt; by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if &lt;code&gt;search_type&lt;/code&gt; contains protective firsk, and calculate its rate across races.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean[&amp;quot;frisk&amp;quot;] = ri_clean.search_type.str.contains(&amp;quot;Protective Frisk&amp;quot;).astype(&amp;quot;bool&amp;quot;)
+
+(ri_clean[ri_clean.search_conducted == True].
+  groupby(&amp;quot;driver_race&amp;quot;).
+  frisk.
+  mean())
+#&amp;gt; driver_race
+#&amp;gt; Asian       0.081633
+#&amp;gt; Black       0.080194
+#&amp;gt; Hispanic    0.063545
+#&amp;gt; Other       0.000000
+#&amp;gt; White       0.106325
+#&amp;gt; Name: frisk, dtype: float64&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It looks like white people has a slightly higher frisk rate. But there is no conclusion to be made without more detailed background information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;temporal-pattern-of-drug-related-stops-search-rates&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Temporal pattern of drug related stops search rates&lt;/h1&gt;
+&lt;p&gt;The &lt;code&gt;drugs_related_stop&lt;/code&gt; shows if a traffic stop eneded in the spotting of drugs in the vehicle. Resampling the column annually gives the drug rate over years, and annual search rate is calculated as a reference.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;annual_drug_rate = ri_clean.drugs_related_stop.resample(&amp;quot;A&amp;quot;).mean()
+annual_search_rate = ri_clean.search_conducted.resample(&amp;quot;A&amp;quot;).mean()
+annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&amp;quot;columns&amp;quot;)
+annual.plot(subplots = True)
+#&amp;gt; array([&amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002ABB2B48&amp;gt;,
+#&amp;gt;        &amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AFA6048&amp;gt;],
+#&amp;gt;       dtype=object)
+plt.show()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The rate of drug-related stops increased even though the search rate decreased.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;distribution-of-violation-across-zones&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Distribution of violation across zones&lt;/h1&gt;
+&lt;p&gt;Speeding is the most common violation in all districts.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;all_zones = pd.crosstab(ri_clean.district, ri_clean.violation)
+all_zones.plot(kind = &amp;#39;bar&amp;#39;)
+plt.show()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;weather-impact-on-policing-behaviour&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Weather Impact on policing behaviour&lt;/h1&gt;
+&lt;p&gt;This section uses a second dataset to explore the impact of weather conditions on police behavior during traffic stops.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;weather = pd.read_csv(&amp;quot;D:/RProjects/data/stanford-open-policing/rhode_weather.csv&amp;quot;)
+weather.head()
+#&amp;gt;        STATION        DATE  TAVG  TMIN  TMAX  ...  WT17  WT18  WT19  WT21  WT22
+#&amp;gt; 0  USW00014765  2005-01-01  44.0    35    53  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 1  USW00014765  2005-01-02  36.0    28    44  ...   NaN   1.0   NaN   NaN   NaN
+#&amp;gt; 2  USW00014765  2005-01-03  49.0    44    53  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 3  USW00014765  2005-01-04  42.0    39    45  ...   NaN   NaN   NaN   NaN   NaN
+#&amp;gt; 4  USW00014765  2005-01-05  36.0    28    43  ...   NaN   1.0   NaN   NaN   NaN
+#&amp;gt; 
+#&amp;gt; [5 rows x 27 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;weather&lt;/code&gt; data is collected by the national centers for environmental information. Because &lt;code&gt;ri&lt;/code&gt; lacks spatial information like latitude / longitutde, we use only the data observed by a weather station in the center of Rhode Island. Columns in &lt;code&gt;weather&lt;/code&gt; that starts with &lt;code&gt;WT&lt;/code&gt; represents a bad weather condition, and take value at either 1 (present) or 0 (present).&lt;/p&gt;
+&lt;p&gt;To measure overall weather conditions on a single day, I tally all the &lt;code&gt;WT&lt;/code&gt; columns.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;weather[&amp;quot;bad_conditions&amp;quot;] = (weather.loc[:,&amp;#39;WT01&amp;#39;:&amp;#39;WT22&amp;#39;].
+  fillna(0).
+  sum(axis = &amp;quot;columns&amp;quot;).
+  astype(&amp;quot;int&amp;quot;))
+  
+weather.bad_conditions.plot(kind = &amp;quot;hist&amp;quot;, bins = 10)
+plt.show()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Next, I split the daily weather into a categorical variable with 3 categories based on &lt;code&gt;bad_conditions&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from pandas.api.types import CategoricalDtype
+mapping = {0:&amp;#39;good&amp;#39;, 1:&amp;#39;bad&amp;#39;, 2:&amp;#39;bad&amp;#39;, 3: &amp;quot;bad&amp;quot;, 4: &amp;quot;bad&amp;quot;,
+    5: &amp;quot;worse&amp;quot;, 6: &amp;quot;worse&amp;quot;, 7: &amp;quot;worse&amp;quot;, 8: &amp;quot;worse&amp;quot;, 9: &amp;quot;worse&amp;quot;
+}
+
+weather[&amp;#39;rating&amp;#39;] = (weather.bad_conditions.
+  map(mapping).
+  astype(CategoricalDtype(categories = [&amp;#39;good&amp;#39;, &amp;#39;bad&amp;#39;, &amp;quot;worse&amp;quot;], ordered = True)))
+
+# Count the unique values in &amp;#39;rating&amp;#39;
+print(weather.rating.value_counts())
+#&amp;gt; bad      1836
+#&amp;gt; good     1749
+#&amp;gt; worse     432
+#&amp;gt; Name: rating, dtype: int64&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;weather.head()
+#&amp;gt;        STATION        DATE  TAVG  TMIN  ...  WT21  WT22  bad_conditions  rating
+#&amp;gt; 0  USW00014765  2005-01-01  44.0    35  ...   NaN   NaN               2     bad
+#&amp;gt; 1  USW00014765  2005-01-02  36.0    28  ...   NaN   NaN               2     bad
+#&amp;gt; 2  USW00014765  2005-01-03  49.0    44  ...   NaN   NaN               3     bad
+#&amp;gt; 3  USW00014765  2005-01-04  42.0    39  ...   NaN   NaN               4     bad
+#&amp;gt; 4  USW00014765  2005-01-05  36.0    28  ...   NaN   NaN               4     bad
+#&amp;gt; 
+#&amp;gt; [5 rows x 29 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now &lt;code&gt;rating&lt;/code&gt; turn to be a easy indicator of weather condition, I’ll join two dataframes, &lt;code&gt;ri_clean&lt;/code&gt; and &lt;code&gt;weather&lt;/code&gt;, to finalize the analysis.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean = ri_clean.reset_index()
+
+weather_rating = weather[[&amp;quot;DATE&amp;quot;, &amp;quot;rating&amp;quot;]].rename(columns = {&amp;quot;DATE&amp;quot;: &amp;quot;stop_date&amp;quot;})
+ri_weather = pd.merge(ri_clean, weather_rating, how = &amp;quot;left&amp;quot;).set_index(&amp;quot;stop_datetime&amp;quot;)
+ri_weather.head()
+#&amp;gt;                       stop_date stop_time driver_gender  ... district frisk rating
+#&amp;gt; stop_datetime                                            ...                      
+#&amp;gt; 2005-01-04 12:55:00  2005-01-04     12:55             M  ...  Zone X4  True    bad
+#&amp;gt; 2005-01-23 23:15:00  2005-01-23     23:15             M  ...  Zone K3  True  worse
+#&amp;gt; 2005-02-17 04:15:00  2005-02-17     04:15             M  ...  Zone X4  True   good
+#&amp;gt; 2005-02-20 17:15:00  2005-02-20     17:15             M  ...  Zone X1  True    bad
+#&amp;gt; 2005-02-24 01:20:00  2005-02-24     01:20             F  ...  Zone X3  True    bad
+#&amp;gt; 
+#&amp;gt; [5 rows x 15 columns]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s compare the arrest rate, divided by weather condition and types of violation.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;arrest_rate = ri_weather.groupby([&amp;quot;violation&amp;quot;, &amp;quot;rating&amp;quot;]).is_arrested.mean()
+arrest_rate
+#&amp;gt; violation            rating
+#&amp;gt; Equipment            good      0.059007
+#&amp;gt;                      bad       0.066311
+#&amp;gt;                      worse     0.097357
+#&amp;gt; Moving violation     good      0.056227
+#&amp;gt;                      bad       0.058050
+#&amp;gt;                      worse     0.065860
+#&amp;gt; Other                good      0.076966
+#&amp;gt;                      bad       0.087443
+#&amp;gt;                      worse     0.062893
+#&amp;gt; Registration/plates  good      0.081574
+#&amp;gt;                      bad       0.098160
+#&amp;gt;                      worse     0.115625
+#&amp;gt; Seat belt            good      0.028587
+#&amp;gt;                      bad       0.022493
+#&amp;gt;                      worse     0.000000
+#&amp;gt; Speeding             good      0.013405
+#&amp;gt;                      bad       0.013314
+#&amp;gt;                      worse     0.016886
+#&amp;gt; Name: is_arrested, dtype: float64
+arrest_rate.unstack().plot(kind = &amp;quot;bar&amp;quot;)
+plt.show()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Generally, the arrest rate is higher when weather condition gets worse. This doesn’t prove a causal link, but it’s quite an interesting result! Also, this plot can be illustrated via a pivot table.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_weather.pivot_table(index = &amp;quot;violation&amp;quot;, columns = &amp;quot;rating&amp;quot;, values = &amp;quot;is_arrested&amp;quot;)
+#&amp;gt; rating                   good       bad     worse
+#&amp;gt; violation                                        
+#&amp;gt; Equipment            0.059007  0.066311  0.097357
+#&amp;gt; Moving violation     0.056227  0.058050  0.065860
+#&amp;gt; Other                0.076966  0.087443  0.062893
+#&amp;gt; Registration/plates  0.081574  0.098160  0.115625
+#&amp;gt; Seat belt            0.028587  0.022493  0.000000
+#&amp;gt; Speeding             0.013405  0.013314  0.016886&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Working with JSON Columns in R</title>

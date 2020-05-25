@@ -11,7 +11,7 @@ subtitle: ''
 summary: 'Reveal true effect of the pandanic with year-on-year death rates'
 authors: []
 lastmod: '2020-05-21T17:56:35+08:00'
-draft: no
+draft: yes
 image:
   caption: ''
   focal_point: ''

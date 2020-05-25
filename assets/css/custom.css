@@ -193,7 +193,7 @@ iframe {
 
 /* -----------div tips------------- */
 
-div.normal, div.puzzle, div.fyi, div.demo, div.note {
+div.box, div.puzzle, div.fyi, div.demo, div.note {
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
@@ -206,7 +206,10 @@ div.normal, div.puzzle, div.fyi, div.demo, div.note {
     border: solid 5px #dfedff;
 }
   
-  
+div.box {
+  background-image: none;
+}
+
 div.puzzle {
   background-image: url("../Your-turn.png");
 }

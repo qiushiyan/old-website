@@ -5,12 +5,56 @@
     <link>/categories/data-analysis/</link>
       <atom:link href="/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Analysis</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Data Analysis</title>
       <link>/categories/data-analysis/</link>
     </image>
+    
+    <item>
+      <title>Excess Death for 2020</title>
+      <link>/post/2020-05-21-excess-death-for-2020/</link>
+      <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-21-excess-death-for-2020/</guid>
+      <description>
+
+
+&lt;div class=&#34;box&#34;&gt;
+&lt;p&gt;This is my normal chunk&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;puzzle&#34;&gt;
+&lt;p&gt;this my puzzle chunk&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Predicting Graduate Admission for Internaitonal student</title>
+      <link>/post/2020-05-18-predicting-graduate-admission/</link>
+      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-18-predicting-graduate-admission/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com/eswarchandt/admission&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com/eswarchandt/admission&lt;/a&gt;?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+
+
+admission &amp;lt;- readxl::read_excel(&amp;quot;D:/RProjects/data/blog/admission.xlsx&amp;quot;) %&amp;gt;% 
+  janitor::clean_names() %&amp;gt;% 
+  mutate(admit = factor(admit))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
+
+admission_split &amp;lt;- initial_split(admission)
+admission_test &amp;lt;- testing(admission_split)
+admission_train &amp;lt;- training(admission_split)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rec &amp;lt;- recipe(admit ~ ., data = admission_train) %&amp;gt;% 
+  step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&amp;gt;%
+  step_dummy(all_nominal(), -all_outcomes()) %&amp;gt;% 
+  step_normalize(gre, gpa)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Biterm Topic Modeling for Danmaku on Bilibili</title>
@@ -37,7 +81,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#data-preprocessing&#34;&gt;Data preprocessing&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#exploring-the-relationship-between-gender-race-and-policing&#34;&gt;Exploring the relationship between gender, race and policing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#temporal-pattern-of-drug-related-stops-search-rates&#34;&gt;Temporal pattern of drug related stops search rates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#temporal-pattern-of-drug-related-stops-and-search-rates&#34;&gt;Temporal pattern of drug related stops and search rates&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#distribution-of-violation-across-zones&#34;&gt;Distribution of violation across zones&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#weather-impact-on-policing-behaviour&#34;&gt;Weather Impact on policing behaviour&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -214,15 +258,15 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 #&amp;gt; Name: frisk, dtype: float64&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It looks like white people has a slightly higher frisk rate. But there is no conclusion to be made without more detailed background information.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;temporal-pattern-of-drug-related-stops-search-rates&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Temporal pattern of drug related stops search rates&lt;/h1&gt;
+&lt;div id=&#34;temporal-pattern-of-drug-related-stops-and-search-rates&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Temporal pattern of drug related stops and search rates&lt;/h1&gt;
 &lt;p&gt;The &lt;code&gt;drugs_related_stop&lt;/code&gt; shows if a traffic stop eneded in the spotting of drugs in the vehicle. Resampling the column annually gives the drug rate over years, and annual search rate is calculated as a reference.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;annual_drug_rate = ri_clean.drugs_related_stop.resample(&amp;quot;A&amp;quot;).mean()
 annual_search_rate = ri_clean.search_conducted.resample(&amp;quot;A&amp;quot;).mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&amp;quot;columns&amp;quot;)
 annual.plot(subplots = True)
-#&amp;gt; array([&amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002ABB2B48&amp;gt;,
-#&amp;gt;        &amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AFA6048&amp;gt;],
+#&amp;gt; array([&amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AADF548&amp;gt;,
+#&amp;gt;        &amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000000050650DC8&amp;gt;],
 #&amp;gt;       dtype=object)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;

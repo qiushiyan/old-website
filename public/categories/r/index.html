@@ -159,7 +159,7 @@
   <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-05-17T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-05-21T00:00:00&#43;00:00">
   
 
   
@@ -411,6 +411,25 @@
   
   
   <div>
+    <h2><a href="/post/2020-05-21-excess-death-for-2020/">Excess Death for 2020</a></h2>
+    <div class="article-style">
+      
+      Reveal true effect of the pandanic with year-on-year death rates
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/2020-05-18-predicting-graduate-admission/">Predicting Graduate Admission for Internaitonal student</a></h2>
+    <div class="article-style">
+      
+      https://www.kaggle.com/eswarchandt/admission?
+library(tidyverse)admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% janitor::clean_names() %&gt;% mutate(admit = factor(admit))library(tidymodels)admission_split &lt;- initial_split(admission)admission_test &lt;- testing(admission_split)admission_train &lt;- training(admission_split)rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%step_dummy(all_nominal(), -all_outcomes()) %&gt;% step_normalize(gre, gpa)
+      
+    </div>
+  </div>
+  
+  <div>
     <h2><a href="/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/">Biterm Topic Modeling for Danmaku on Bilibili</a></h2>
     <div class="article-style">
       
@@ -481,24 +500,6 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
     <div class="article-style">
       
       Fleta deadlifts in all 3 positions
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-04-15-tidy-comparison-of-classification-methods/">Tidy Comparison of Classification Methods</a></h2>
-    <div class="article-style">
-      
-      Evaluate performance of logistic regression, LDA, QDA and KNN in different scenarios using {tidymodels}.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-04-07-using-infer-for-tidy-statistical-inference/">Using {infer} for Tidy Statistical Inference</a></h2>
-    <div class="article-style">
-      
-      A note to self on conducting statistical inference using the {infer} package
       
     </div>
   </div>

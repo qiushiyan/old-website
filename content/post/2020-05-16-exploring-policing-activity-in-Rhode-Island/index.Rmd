@@ -155,7 +155,7 @@ It looks like white people has a slightly higher frisk rate. But there is no con
 
 
 
-# Temporal pattern of drug related stops search rates
+# Temporal pattern of drug related stops and search rates
 The `drugs_related_stop` shows if a traffic stop eneded in the spotting of drugs in the vehicle. Resampling the column annually gives the drug rate over years, and annual search rate is calculated as a reference. 
 
 ```{python}

@@ -159,7 +159,7 @@
   <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-05-17T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-05-18T00:00:00&#43;00:00">
   
 
   
@@ -409,6 +409,16 @@
   
 
   
+  
+  <div>
+    <h2><a href="/post/2020-05-18-predicting-graduate-admission/">Predicting Graduate Admission for Internaitonal student</a></h2>
+    <div class="article-style">
+      
+      https://www.kaggle.com/eswarchandt/admission?
+library(tidyverse)admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% janitor::clean_names() %&gt;% mutate(admit = factor(admit))library(tidymodels)admission_split &lt;- initial_split(admission)admission_test &lt;- testing(admission_split)admission_train &lt;- training(admission_split)rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%step_dummy(all_nominal(), -all_outcomes()) %&gt;% step_normalize(gre, gpa)
+      
+    </div>
+  </div>
   
   <div>
     <h2><a href="/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/">Biterm Topic Modeling for Danmaku on Bilibili</a></h2>

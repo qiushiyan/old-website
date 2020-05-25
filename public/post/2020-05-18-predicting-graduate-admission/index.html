@@ -28,10 +28,11 @@
   
     
   
-  <meta name="description" content="Personal blog of Qiushi Yan">
+  <meta name="description" content="https://www.kaggle.com/eswarchandt/admission?
+library(tidyverse)admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% janitor::clean_names() %&gt;% mutate(admit = factor(admit))library(tidymodels)admission_split &lt;- initial_split(admission)admission_test &lt;- testing(admission_split)admission_train &lt;- training(admission_split)rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%step_dummy(all_nominal(), -all_outcomes()) %&gt;% step_normalize(gre, gpa)">
 
   
-  <link rel="alternate" hreflang="en-us" href="/categories/data-analysis/">
+  <link rel="alternate" hreflang="en-us" href="/post/2020-05-18-predicting-graduate-admission/">
 
   
 
@@ -131,14 +132,12 @@
 
 
   
-  <link rel="alternate" href="/categories/data-analysis/index.xml" type="application/rss+xml" title="Qiushi Yan">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/categories/data-analysis/">
+  <link rel="canonical" href="/post/2020-05-18-predicting-graduate-admission/">
 
   
   
@@ -154,18 +153,66 @@
   <meta property="twitter:creator" content="@qiushizzzz">
   
   <meta property="og:site_name" content="Qiushi Yan">
-  <meta property="og:url" content="/categories/data-analysis/">
-  <meta property="og:title" content="Data Analysis | Qiushi Yan">
-  <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/post/2020-05-18-predicting-graduate-admission/">
+  <meta property="og:title" content="Predicting Graduate Admission for Internaitonal student | Qiushi Yan">
+  <meta property="og:description" content="https://www.kaggle.com/eswarchandt/admission?
+library(tidyverse)admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% janitor::clean_names() %&gt;% mutate(admit = factor(admit))library(tidymodels)admission_split &lt;- initial_split(admission)admission_test &lt;- testing(admission_split)admission_train &lt;- training(admission_split)rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%step_dummy(all_nominal(), -all_outcomes()) %&gt;% step_normalize(gre, gpa)"><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-05-21T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2020-05-18T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-05-18T18:29:49&#43;08:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/2020-05-18-predicting-graduate-admission/"
+  },
+  "headline": "Predicting Graduate Admission for Internaitonal student",
+  
+  "datePublished": "2020-05-18T00:00:00Z",
+  "dateModified": "2020-05-18T18:29:49+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Qiushi Yan"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Qiushi Yan",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "\rhttps://www.kaggle.com/eswarchandt/admission?\nlibrary(tidyverse)\radmission \u0026lt;- readxl::read_excel(\u0026quot;D:/RProjects/data/blog/admission.xlsx\u0026quot;) %\u0026gt;% janitor::clean_names() %\u0026gt;% mutate(admit = factor(admit))\rlibrary(tidymodels)\radmission_split \u0026lt;- initial_split(admission)\radmission_test \u0026lt;- testing(admission_split)\radmission_train \u0026lt;- training(admission_split)\rrec \u0026lt;- recipe(admit ~ ., data = admission_train) %\u0026gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %\u0026gt;%\rstep_dummy(all_nominal(), -all_outcomes()) %\u0026gt;% step_normalize(gre, gpa)\r"
+}
+</script>
+
+  
 
   
 
@@ -173,10 +220,13 @@
   
 
 
+  
 
 
 
-  <title>Data Analysis | Qiushi Yan</title>
+
+
+  <title>Predicting Graduate Admission for Internaitonal student | Qiushi Yan</title>
 
 </head>
 
@@ -375,117 +425,385 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
   
   
+  
+<div class="article-container pt-3">
+  <h1>Predicting Graduate Admission for Internaitonal student</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1>Data Analysis</h1>
+
+
+<div class="article-metadata">
 
   
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    May 18, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/data-analysis/">Data Analysis</a>, <a href="/categories/machine-learning/">Machine Learning</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 </div>
 
 
 
-<div class="universal-wrapper">
-  
+  <div class="article-container">
 
-  
-  
-  <div>
-    <h2><a href="/post/2020-05-07-analyzing-animal-crossing-reviews/">Analyzing Animal Crossing Reviews</a></h2>
     <div class="article-style">
       
-      Practice on data cleaning, text analysis and multicategory logistic models with penalization
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/exploring-lego/">Exploring Lego Database</a></h2>
-    <div class="article-style">
-      
-      Dig into small bricks with pandas data frames.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/international-debt-sql/">Analyzing International Debt Statistics</a></h2>
-    <div class="article-style">
-      
-      Write SQL queries to analyze international debt from the World Bank, and make ggplot2 visulizations.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/text-classification-logistic/">Text Classfication with Penalized Logistic Regression</a></h2>
-    <div class="article-style">
-      
-      Teach models how to distinguish Charlotte Brontë from Emily Brontë
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-04-25-who-is-carrying-there-team-in-owl/">Who is Carrying There Team in OWL?</a></h2>
-    <div class="article-style">
-      
-      Fleta deadlifts in all 3 positions
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/exploring-the-london-stage-database/">Exploring the London Stage Database</a></h2>
-    <div class="article-style">
-      
-      A little playing with London Stage Database
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/analyzing-covid-19-publications/">Analyzing COVID-19 Publications</a></h2>
-    <div class="article-style">
-      
-      A simple text analysis on the abstract of up-to-date COVID-19 publications.
-      
-    </div>
-  </div>
-  
 
-  
-<nav>
-  <ul class="pagination justify-content-center">
+
+<p><a href="https://www.kaggle.com/eswarchandt/admission" class="uri">https://www.kaggle.com/eswarchandt/admission</a>?</p>
+<pre class="r"><code>library(tidyverse)
+
+
+admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  mutate(admit = factor(admit))</code></pre>
+<pre class="r"><code>library(tidymodels)
+
+admission_split &lt;- initial_split(admission)
+admission_test &lt;- testing(admission_split)
+admission_train &lt;- training(admission_split)</code></pre>
+<pre class="r"><code>rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% 
+  step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%
+  step_dummy(all_nominal(), -all_outcomes()) %&gt;% 
+  step_normalize(gre, gpa)</code></pre>
+
+    </div>
+
     
-    <li class="page-item"><a class="page-link" href="/categories/data-analysis/">&laquo;</a></li>
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
     
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/2020-05-18-predicting-graduate-admission/&amp;text=Predicting%20Graduate%20Admission%20for%20Internaitonal%20student" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/2020-05-18-predicting-graduate-admission/&amp;t=Predicting%20Graduate%20Admission%20for%20Internaitonal%20student" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Predicting%20Graduate%20Admission%20for%20Internaitonal%20student&amp;body=/post/2020-05-18-predicting-graduate-admission/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/2020-05-18-predicting-graduate-admission/&amp;title=Predicting%20Graduate%20Admission%20for%20Internaitonal%20student" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Predicting%20Graduate%20Admission%20for%20Internaitonal%20student%20/post/2020-05-18-predicting-graduate-admission/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/2020-05-18-predicting-graduate-admission/&amp;title=Predicting%20Graduate%20Admission%20for%20Internaitonal%20student" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
     
   </ul>
-</nav>
+</div>
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/qiushi/avatar_hu2833603c9957d65d4c6e6cf5762ee973_72134_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Qiushi Yan</a></h5>
+      <h6 class="card-subtitle">Junior student, Data Journalism</h6>
+      <p class="card-text">Yet another object of type closure</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/enixam" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/qiushizzzz" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/%E6%B1%82%E8%AF%86-%E9%97%AB-893a48194/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/about" >
+        <i class="fas fa-address-card"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "qiushiyan" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/post/2020-05-21-excess-death-for-2020/" rel="next">Excess Death for 2020</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/" rel="prev">Biterm Topic Modeling for Danmaku on Bilibili</a>
+  </div>
+  
+</div>
 
 </div>
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
 
       
 

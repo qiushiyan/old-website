@@ -5,12 +5,39 @@
     <link>/categories/machine-learning/</link>
       <atom:link href="/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Mon, 18 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Machine Learning</title>
       <link>/categories/machine-learning/</link>
     </image>
+    
+    <item>
+      <title>Predicting Graduate Admission for Internaitonal student</title>
+      <link>/post/2020-05-18-predicting-graduate-admission/</link>
+      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020-05-18-predicting-graduate-admission/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com/eswarchandt/admission&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com/eswarchandt/admission&lt;/a&gt;?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+
+
+admission &amp;lt;- readxl::read_excel(&amp;quot;D:/RProjects/data/blog/admission.xlsx&amp;quot;) %&amp;gt;% 
+  janitor::clean_names() %&amp;gt;% 
+  mutate(admit = factor(admit))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
+
+admission_split &amp;lt;- initial_split(admission)
+admission_test &amp;lt;- testing(admission_split)
+admission_train &amp;lt;- training(admission_split)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rec &amp;lt;- recipe(admit ~ ., data = admission_train) %&amp;gt;% 
+  step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&amp;gt;%
+  step_dummy(all_nominal(), -all_outcomes()) %&amp;gt;% 
+  step_normalize(gre, gpa)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Biterm Topic Modeling for Danmaku on Bilibili</title>

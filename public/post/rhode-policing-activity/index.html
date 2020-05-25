@@ -525,7 +525,7 @@
 <ul>
 <li><a href="#data-preprocessing">Data preprocessing</a></li>
 <li><a href="#exploring-the-relationship-between-gender-race-and-policing">Exploring the relationship between gender, race and policing</a></li>
-<li><a href="#temporal-pattern-of-drug-related-stops-search-rates">Temporal pattern of drug related stops search rates</a></li>
+<li><a href="#temporal-pattern-of-drug-related-stops-and-search-rates">Temporal pattern of drug related stops and search rates</a></li>
 <li><a href="#distribution-of-violation-across-zones">Distribution of violation across zones</a></li>
 <li><a href="#weather-impact-on-policing-behaviour">Weather Impact on policing behaviour</a></li>
 </ul>
@@ -702,15 +702,15 @@ plt.show()</code></pre>
 #&gt; Name: frisk, dtype: float64</code></pre>
 <p>It looks like white people has a slightly higher frisk rate. But there is no conclusion to be made without more detailed background information.</p>
 </div>
-<div id="temporal-pattern-of-drug-related-stops-search-rates" class="section level1">
-<h1>Temporal pattern of drug related stops search rates</h1>
+<div id="temporal-pattern-of-drug-related-stops-and-search-rates" class="section level1">
+<h1>Temporal pattern of drug related stops and search rates</h1>
 <p>The <code>drugs_related_stop</code> shows if a traffic stop eneded in the spotting of drugs in the vehicle. Resampling the column annually gives the drug rate over years, and annual search rate is calculated as a reference.</p>
 <pre class="python"><code>annual_drug_rate = ri_clean.drugs_related_stop.resample(&quot;A&quot;).mean()
 annual_search_rate = ri_clean.search_conducted.resample(&quot;A&quot;).mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&quot;columns&quot;)
 annual.plot(subplots = True)
-#&gt; array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002ABB2B48&gt;,
-#&gt;        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AFA6048&gt;],
+#&gt; array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AADF548&gt;,
+#&gt;        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000000050650DC8&gt;],
 #&gt;       dtype=object)
 plt.show()</code></pre>
 <p><img src="/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-16-1.png" width="768" /></p>

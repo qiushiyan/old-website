@@ -351,7 +351,7 @@ model_df <- reviews_clean %>%
 model_df
 ```
 
-After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. `user_name` is an ID variable, `t` indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response `rating`, are word counts. 
+After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. `user_name` is an ID variable, `t` indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response `rating`, are word counts used as term weighting.  
 
 
 Next I split the data into training and testing test with stratified sampling on `rating`.

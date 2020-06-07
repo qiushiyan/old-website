@@ -5,12 +5,26 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 02 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>A Taste of dplyr 1.0.0</title>
+      <link>/post/taste-dplyr-1.0.0/</link>
+      <pubDate>Tue, 02 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/post/taste-dplyr-1.0.0/</guid>
+      <description>
+
+
+&lt;center&gt;
+&lt;img src=&#34;news.png&#34; /&gt;
+&lt;/center&gt;
+</description>
+    </item>
     
     <item>
       <title>Excess Death for 2020</title>
@@ -1869,7 +1883,7 @@ model_df
 #&amp;gt; #   op &amp;lt;int&amp;gt;, person &amp;lt;int&amp;gt;, plays &amp;lt;int&amp;gt;, reviews &amp;lt;int&amp;gt;, shame &amp;lt;int&amp;gt;,
 #&amp;gt; #   sharing &amp;lt;int&amp;gt;, started &amp;lt;int&amp;gt;, system &amp;lt;int&amp;gt;, bombing &amp;lt;int&amp;gt;, dont &amp;lt;int&amp;gt;,
 #&amp;gt; #   hate &amp;lt;int&amp;gt;, islands &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. &lt;code&gt;user_name&lt;/code&gt; is an ID variable, &lt;code&gt;t&lt;/code&gt; indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response &lt;code&gt;rating&lt;/code&gt;, are word counts.&lt;/p&gt;
+&lt;p&gt;After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. &lt;code&gt;user_name&lt;/code&gt; is an ID variable, &lt;code&gt;t&lt;/code&gt; indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response &lt;code&gt;rating&lt;/code&gt;, are word counts used as term weighting.&lt;/p&gt;
 &lt;p&gt;Next I split the data into training and testing test with stratified sampling on &lt;code&gt;rating&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
 
@@ -1978,36 +1992,6 @@ final_fit %&amp;gt;%
         strip.text = element_text(size = 24, face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Exploring Lego Database</title>
-      <link>/post/exploring-lego/</link>
-      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/exploring-lego/</guid>
-      <description>
-
-
-&lt;p&gt;This week I’ve had some recap on data wrangling in Python, specifically in &lt;code&gt;pandas&lt;/code&gt; and &lt;code&gt;NumPy&lt;/code&gt;. As an exercise, are available &lt;a href=&#34;https://rebrickable.com/downloads/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
-
-colors = pd.read_csv(&amp;quot;D:/RProjects/data/blog/lego/colors.csv&amp;quot;)
-colors.head()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    id            name     rgb is_trans
-## 0  -1       [Unknown]  0033B2        f
-## 1   0           Black  05131D        f
-## 2   1            Blue  0055BF        f
-## 3   2           Green  237841        f
-## 4   3  Dark Turquoise  008F9B        f&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;How many colors are available?&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;colors[[&amp;#39;name&amp;#39;]].info()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
-## RangeIndex: 184 entries, 0 to 183
-## Data columns (total 1 columns):
-## name    184 non-null object
-## dtypes: object(1)
-## memory usage: 1.6+ KB&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

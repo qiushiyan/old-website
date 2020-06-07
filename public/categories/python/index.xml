@@ -912,35 +912,5 @@ titanic.head()&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
-    <item>
-      <title>Exploring Lego Database</title>
-      <link>/post/exploring-lego/</link>
-      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/exploring-lego/</guid>
-      <description>
-
-
-&lt;p&gt;This week I’ve had some recap on data wrangling in Python, specifically in &lt;code&gt;pandas&lt;/code&gt; and &lt;code&gt;NumPy&lt;/code&gt;. As an exercise, are available &lt;a href=&#34;https://rebrickable.com/downloads/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
-
-colors = pd.read_csv(&amp;quot;D:/RProjects/data/blog/lego/colors.csv&amp;quot;)
-colors.head()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    id            name     rgb is_trans
-## 0  -1       [Unknown]  0033B2        f
-## 1   0           Black  05131D        f
-## 2   1            Blue  0055BF        f
-## 3   2           Green  237841        f
-## 4   3  Dark Turquoise  008F9B        f&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;How many colors are available?&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;colors[[&amp;#39;name&amp;#39;]].info()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
-## RangeIndex: 184 entries, 0 to 183
-## Data columns (total 1 columns):
-## name    184 non-null object
-## dtypes: object(1)
-## memory usage: 1.6+ KB&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
   </channel>
 </rss>

@@ -8,7 +8,7 @@ active = true  # Activate this widget? true/false
 weight = 30  # Order that this section will appear.
 
 title = "Posts"
-subtitle = "I maily post about R-related things and minimal data analysis projects."
+subtitle = "I mainly post about minimal data analysis projects, and programming in R and Python."
 
 [content]
   # Page type to display. E.g. post, talk, or publication.

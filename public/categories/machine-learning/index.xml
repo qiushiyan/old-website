@@ -489,7 +489,7 @@ model_df
 #&amp;gt; #   op &amp;lt;int&amp;gt;, person &amp;lt;int&amp;gt;, plays &amp;lt;int&amp;gt;, reviews &amp;lt;int&amp;gt;, shame &amp;lt;int&amp;gt;,
 #&amp;gt; #   sharing &amp;lt;int&amp;gt;, started &amp;lt;int&amp;gt;, system &amp;lt;int&amp;gt;, bombing &amp;lt;int&amp;gt;, dont &amp;lt;int&amp;gt;,
 #&amp;gt; #   hate &amp;lt;int&amp;gt;, islands &amp;lt;int&amp;gt;, ...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. &lt;code&gt;user_name&lt;/code&gt; is an ID variable, &lt;code&gt;t&lt;/code&gt; indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response &lt;code&gt;rating&lt;/code&gt;, are word counts.&lt;/p&gt;
+&lt;p&gt;After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. &lt;code&gt;user_name&lt;/code&gt; is an ID variable, &lt;code&gt;t&lt;/code&gt; indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response &lt;code&gt;rating&lt;/code&gt;, are word counts used as term weighting.&lt;/p&gt;
 &lt;p&gt;Next I split the data into training and testing test with stratified sampling on &lt;code&gt;rating&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
 

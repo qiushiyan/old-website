@@ -1,0 +1,71 @@
+---
+title: A Taste of dplyr 1.0.0
+author: Qiushi Yan
+date: '2020-06-02'
+slug: taste-dplyr-1.0.0
+categories:
+  - R
+summary: 'A self reminder on new features in dplyr 1.0.0'
+lastmod: '2020-06-02T11:52:30+08:00'
+draft: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+<center>
+![](news.png)
+</center>
+
+the `penguins` dataset [@10.1371/journal.pone.0090081] as an alternative to iris,   
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE,
+                      collpase = TRUE, comment = "#>")
+```
+
+```{r}
+ggplot2::theme_set(ggplot2::theme_classic())
+```
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+packageVersion("dplyr")
+```
+
+
+
+
+```{r}
+penguins <- readr::read_csv("D:/RProjects/data/blog/penguins.csv")
+penguins
+```
+
+
+```{r}
+penguins %>% 
+  ggplot(aes(culmen_length_mm, culmen_depth_mm, color = species, shape = species)) + 
+  geom_point()
+```
+
+# Working within columns 
+
+The new `across` function supersedes functionalities of `_at`, `_if`, `_all` variants
+
+```{r}
+penguins %>% 
+  group_by(species) %>% 
+  summarize(across(starts_with("culmen"), mean, na.rm = TRUE),
+            flipper_length_mean = mean(flipper_length_mm, na.rm = TRUE))
+```
+
+
+
+
+# References 
+
+

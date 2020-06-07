@@ -348,7 +348,7 @@ model_df
 #&gt; #   op &lt;int&gt;, person &lt;int&gt;, plays &lt;int&gt;, reviews &lt;int&gt;, shame &lt;int&gt;,
 #&gt; #   sharing &lt;int&gt;, started &lt;int&gt;, system &lt;int&gt;, bombing &lt;int&gt;, dont &lt;int&gt;,
 #&gt; #   hate &lt;int&gt;, islands &lt;int&gt;, ...</code></pre>
-<p>After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. <code>user_name</code> is an ID variable, <code>t</code> indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response <code>rating</code>, are word counts.</p>
+<p>After tokenizing, filtering and some other steps, I have a ready-for-modeling design matrix at hand. <code>user_name</code> is an ID variable, <code>t</code> indicates the number of days after 2020-03-20 when the first review was made. All other columns, besides the response <code>rating</code>, are word counts used as term weighting.</p>
 <p>Next I split the data into training and testing test with stratified sampling on <code>rating</code>.</p>
 <pre class="r"><code>library(tidymodels)
 

@@ -33,10 +33,763 @@
       <guid>/post/taste-dplyr-1.0.0/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#working-within-columns&#34;&gt;Working within columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#working-within-rows&#34;&gt;Working within rows&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#basic-usage&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#list-columns&#34;&gt;List-columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#simulaiton&#34;&gt;Simulaiton&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#group-wise-models&#34;&gt;Group-wise models&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#new-summarize-features&#34;&gt;New &lt;code&gt;summarize&lt;/code&gt; features&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#multiple-rows-and-columns&#34;&gt;Multiple rows and columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#use-summarize-in-non-summary-context&#34;&gt;Use &lt;code&gt;summarize&lt;/code&gt; in non-summary context&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#move-columns-around-within-data-frames&#34;&gt;Move columns around within data frames&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#row-mutation&#34;&gt;Row mutation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#superseded-functions&#34;&gt;Superseded functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other-changes&#34;&gt;Other changes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#use-cases&#34;&gt;Use cases&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#replace-missing-values-in-many-columns&#34;&gt;Replace missing values in many columns&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
-&lt;center&gt;
-&lt;img src=&#34;news.png&#34; /&gt;
-&lt;/center&gt;
+&lt;p&gt;This post uses the &lt;code&gt;penguins&lt;/code&gt; dataset &lt;span class=&#34;citation&#34;&gt;(Gorman &lt;a href=&#34;#ref-10.1371/journal.pone.0090081&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt; for most demonstration puporses, modified by &lt;a href=&#34;https://github.com/allisonhorst/penguins&#34;&gt;Allison Horst&lt;/a&gt; (as an alternative to iris).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+library(ggplot2)
+
+packageVersion(&amp;quot;dplyr&amp;quot;)
+#&amp;gt; [1] &amp;#39;1.0.0&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins &amp;lt;- readr::read_csv(&amp;quot;D:/RProjects/data/blog/penguins.csv&amp;quot;)
+penguins
+#&amp;gt; # A tibble: 344 x 7
+#&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Adelie  Torge~             39.1            18.7              181        3750
+#&amp;gt;  2 Adelie  Torge~             39.5            17.4              186        3800
+#&amp;gt;  3 Adelie  Torge~             40.3            18                195        3250
+#&amp;gt;  4 Adelie  Torge~             NA              NA                 NA          NA
+#&amp;gt;  5 Adelie  Torge~             36.7            19.3              193        3450
+#&amp;gt;  6 Adelie  Torge~             39.3            20.6              190        3650
+#&amp;gt;  7 Adelie  Torge~             38.9            17.8              181        3625
+#&amp;gt;  8 Adelie  Torge~             39.2            19.6              195        4675
+#&amp;gt;  9 Adelie  Torge~             34.1            18.1              193        3475
+#&amp;gt; 10 Adelie  Torge~             42              20.2              190        4250
+#&amp;gt; # ... with 334 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
+  ggplot(aes(culmen_length_mm, culmen_depth_mm, color = species, shape = species)) + 
+  geom_point()
+#&amp;gt; Warning: Removed 2 rows containing missing values (geom_point).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-06-02-a-taste-of-dplyr-1-0-0/index.en_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;working-within-columns&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Working within columns&lt;/h1&gt;
+&lt;p&gt;The new &lt;code&gt;across()&lt;/code&gt; function supersedes functionalities of &lt;code&gt;_at&lt;/code&gt;, &lt;code&gt;_if&lt;/code&gt;, &lt;code&gt;_all&lt;/code&gt; variants. The first argument, &lt;code&gt;.cols&lt;/code&gt;, selects the columns you want to operate on. It uses tidy selection (like select()) so you can pick variables by position, name, and type. The second argument, &lt;code&gt;.fns&lt;/code&gt;, is a function or list of functions to apply to each column. This can also be a purrr style formula&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins_grouped &amp;lt;- penguins %&amp;gt;% group_by(species)
+
+penguins_grouped %&amp;gt;% 
+  summarize(across(starts_with(&amp;quot;culmen&amp;quot;), mean, na.rm = TRUE),
+            n = n())
+#&amp;gt; # A tibble: 3 x 4
+#&amp;gt;   species   culmen_length_mm culmen_depth_mm     n
+#&amp;gt;   &amp;lt;chr&amp;gt;                &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1 Adelie                38.8            18.3   152
+#&amp;gt; 2 Chinstrap             48.8            18.4    68
+#&amp;gt; 3 Gentoo                47.5            15.0   124&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For conditional selection (previous &lt;code&gt;_if&lt;/code&gt; variants), predicate function should be wrapped in &lt;code&gt;where&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# double all numeric columns
+penguins %&amp;gt;% 
+  mutate(across(where(is.numeric), ~ .x * 2))
+#&amp;gt; # A tibble: 344 x 7
+#&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Adelie  Torge~             78.2            37.4              362        7500
+#&amp;gt;  2 Adelie  Torge~             79              34.8              372        7600
+#&amp;gt;  3 Adelie  Torge~             80.6            36                390        6500
+#&amp;gt;  4 Adelie  Torge~             NA              NA                 NA          NA
+#&amp;gt;  5 Adelie  Torge~             73.4            38.6              386        6900
+#&amp;gt;  6 Adelie  Torge~             78.6            41.2              380        7300
+#&amp;gt;  7 Adelie  Torge~             77.8            35.6              362        7250
+#&amp;gt;  8 Adelie  Torge~             78.4            39.2              390        9350
+#&amp;gt;  9 Adelie  Torge~             68.2            36.2              386        6950
+#&amp;gt; 10 Adelie  Torge~             84              40.4              380        8500
+#&amp;gt; # ... with 334 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;
+
+# count unique values of all character columns
+penguins %&amp;gt;%
+  summarize(across(where(is.character), ~ length(unique(.x))))
+#&amp;gt; # A tibble: 1 x 3
+#&amp;gt;   species island   sex
+#&amp;gt;     &amp;lt;int&amp;gt;  &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1       3      3     4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Apply multiple functions using list and use the &lt;code&gt;.names&lt;/code&gt; argument to control column names.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins_grouped %&amp;gt;% 
+  summarize(across(matches(&amp;quot;mm&amp;quot;), 
+                   list(min = ~ min(.x, na.rm = TRUE),
+                        max = ~ max(.x, na.rm = TRUE)),
+                   .names = &amp;quot;{fn}_{col}&amp;quot;))
+#&amp;gt; # A tibble: 3 x 7
+#&amp;gt;   species min_culmen_leng~ max_culmen_leng~ min_culmen_dept~ max_culmen_dept~
+#&amp;gt;   &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie              32.1             46               15.5             21.5
+#&amp;gt; 2 Chinst~             40.9             58               16.4             20.8
+#&amp;gt; 3 Gentoo              40.9             59.6             13.1             17.3
+#&amp;gt; # ... with 2 more variables: min_flipper_length_mm &amp;lt;dbl&amp;gt;,
+#&amp;gt; #   max_flipper_length_mm &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;working-within-rows&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Working within rows&lt;/h1&gt;
+&lt;div id=&#34;basic-usage&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Basic usage&lt;/h2&gt;
+&lt;p&gt;Row-wise operations require a special type of grouping where each group consists of a single row. You create this with &lt;code&gt;rowwise()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- tibble(
+  student_id = 1:4, 
+  test1 = 10:13, 
+  test2 = 20:23, 
+  test3 = 30:33, 
+  test4 = 40:43
+)
+df %&amp;gt;% rowwise()
+#&amp;gt; # A tibble: 4 x 5
+#&amp;gt; # Rowwise: 
+#&amp;gt;   student_id test1 test2 test3 test4
+#&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1          1    10    20    30    40
+#&amp;gt; 2          2    11    21    31    41
+#&amp;gt; 3          3    12    22    32    42
+#&amp;gt; 4          4    13    23    33    43&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;rowwise&lt;/code&gt; doesn’t need any additional arguments unless you have variables that identify the rows, like &lt;code&gt;student_id&lt;/code&gt; here. This can be helpful when you want to keep a row identifier.&lt;/p&gt;
+&lt;p&gt;Like &lt;code&gt;group_by&lt;/code&gt;, &lt;code&gt;rowwise&lt;/code&gt; doesn’t really do anything itself; it just changes how the other verbs work.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% mutate(avg = mean(c(test1, test2, test3, test4)))
+#&amp;gt; # A tibble: 4 x 6
+#&amp;gt;   student_id test1 test2 test3 test4   avg
+#&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1          1    10    20    30    40  26.5
+#&amp;gt; 2          2    11    21    31    41  26.5
+#&amp;gt; 3          3    12    22    32    42  26.5
+#&amp;gt; 4          4    13    23    33    43  26.5
+
+df %&amp;gt;% rowwise() %&amp;gt;% mutate(avg = mean(c(test1, test2, test3, test4)))
+#&amp;gt; # A tibble: 4 x 6
+#&amp;gt; # Rowwise: 
+#&amp;gt;   student_id test1 test2 test3 test4   avg
+#&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1          1    10    20    30    40    25
+#&amp;gt; 2          2    11    21    31    41    26
+#&amp;gt; 3          3    12    22    32    42    27
+#&amp;gt; 4          4    13    23    33    43    28&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In its essence, &lt;code&gt;rowwise&lt;/code&gt; vectorize / parallelize a function to acheive rowwisee computation. And in this case, the &lt;code&gt;mean()&lt;/code&gt; function is vectorized. If there are alternative ways of computing row-wise summaries that take advantage of built-in vectorisation then we do not need &lt;code&gt;rowwise&lt;/code&gt; at all.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% mutate(s = test1 + test2 + test3)
+#&amp;gt; # A tibble: 4 x 6
+#&amp;gt;   student_id test1 test2 test3 test4     s
+#&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1          1    10    20    30    40    60
+#&amp;gt; 2          2    11    21    31    41    63
+#&amp;gt; 3          3    12    22    32    42    66
+#&amp;gt; 4          4    13    23    33    43    69
+
+df %&amp;gt;% rowwise() %&amp;gt;% mutate(s = test1 + test2 + test3)
+#&amp;gt; # A tibble: 4 x 6
+#&amp;gt; # Rowwise: 
+#&amp;gt;   student_id test1 test2 test3 test4     s
+#&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1          1    10    20    30    40    60
+#&amp;gt; 2          2    11    21    31    41    63
+#&amp;gt; 3          3    12    22    32    42    66
+#&amp;gt; 4          4    13    23    33    43    69&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another family of summary functions have “parallel” extensions where you can provide multiple variables in the arguments:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  mutate(min = pmin(test1, test2, test3, test4),
+         max = pmax(test1, test2, test3, test4),
+         string = paste(test1, test2, test3, test4, sep = &amp;quot;-&amp;quot;))
+#&amp;gt; # A tibble: 4 x 8
+#&amp;gt;   student_id test1 test2 test3 test4   min   max string     
+#&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;      
+#&amp;gt; 1          1    10    20    30    40    10    40 10-20-30-40
+#&amp;gt; 2          2    11    21    31    41    11    41 11-21-31-41
+#&amp;gt; 3          3    12    22    32    42    12    42 12-22-32-42
+#&amp;gt; 4          4    13    23    33    43    13    43 13-23-33-43&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where these functions exist, they’ll usually be faster than &lt;code&gt;rowwise&lt;/code&gt;. The advantage of &lt;code&gt;rowwise&lt;/code&gt; is that it works with any function, not just those that are already vectorised.&lt;/p&gt;
+&lt;p&gt;However, an advantage of &lt;code&gt;rowwise&lt;/code&gt; even there is other ways is that it’s paired with &lt;code&gt;c_across()&lt;/code&gt;, which works like &lt;code&gt;c()&lt;/code&gt; but uses the same tidyselect syntax as &lt;code&gt;across()&lt;/code&gt;. That makes it easy to operate on multiple variables:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  rowwise() %&amp;gt;% 
+  mutate(min = min(c_across(starts_with(&amp;quot;test&amp;quot;))),
+         max = max(c_across(starts_with(&amp;quot;test&amp;quot;))))
+#&amp;gt; # A tibble: 4 x 7
+#&amp;gt; # Rowwise: 
+#&amp;gt;   student_id test1 test2 test3 test4   min   max
+#&amp;gt;        &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1          1    10    20    30    40    10    40
+#&amp;gt; 2          2    11    21    31    41    11    41
+#&amp;gt; 3          3    12    22    32    42    12    42
+#&amp;gt; 4          4    13    23    33    43    13    43&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plus, a rowwise df will naturally contain exactly the same rows after &lt;code&gt;summarize()&lt;/code&gt;, the same as &lt;code&gt;mutate&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  rowwise() %&amp;gt;% 
+  summarize(across(starts_with(&amp;quot;test&amp;quot;), ~ .x, .names = &amp;quot;{col}_same&amp;quot;))
+#&amp;gt; # A tibble: 4 x 4
+#&amp;gt;   test1_same test2_same test3_same test4_same
+#&amp;gt;        &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;
+#&amp;gt; 1         10         20         30         40
+#&amp;gt; 2         11         21         31         41
+#&amp;gt; 3         12         22         32         42
+#&amp;gt; 4         13         23         33         43&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;list-columns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;List-columns&lt;/h2&gt;
+&lt;p&gt;Because lists can contain anything, you can use list-columns to keep related objects together, regardless of what type of thing they are. List-columns give you a convenient storage mechanism and &lt;code&gt;rowwise&lt;/code&gt; gives you a convenient computation mechanism.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- tibble(
+  x = list(1, 2:3, 4:6),
+  y = list(TRUE, 1, &amp;quot;a&amp;quot;),
+  z = list(sum, mean, sd)
+)
+df
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt;   x         y         z     
+#&amp;gt;   &amp;lt;list&amp;gt;    &amp;lt;list&amp;gt;    &amp;lt;list&amp;gt;
+#&amp;gt; 1 &amp;lt;dbl [1]&amp;gt; &amp;lt;lgl [1]&amp;gt; &amp;lt;fn&amp;gt;  
+#&amp;gt; 2 &amp;lt;int [2]&amp;gt; &amp;lt;dbl [1]&amp;gt; &amp;lt;fn&amp;gt;  
+#&amp;gt; 3 &amp;lt;int [3]&amp;gt; &amp;lt;chr [1]&amp;gt; &amp;lt;fn&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  rowwise() %&amp;gt;% 
+  summarize(
+    x_length = length(x),
+    y_type = typeof(y),
+    z_call = z(1:5)
+  )
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt;   x_length y_type    z_call
+#&amp;gt;      &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;      &amp;lt;dbl&amp;gt;
+#&amp;gt; 1        1 logical    15   
+#&amp;gt; 2        2 double      3   
+#&amp;gt; 3        3 character   1.58&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;simulaiton&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Simulaiton&lt;/h2&gt;
+&lt;p&gt;The basic idea of using &lt;code&gt;rowwise&lt;/code&gt; to perform simulation is to store all your simulation paramters in a data frame, similar to &lt;code&gt;purrr::pmap&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- tribble(
+  ~id, ~ n, ~ min, ~ max,
+    1,   3,     0,     1,
+    2,   2,    10,   100,
+    3,   2,   100,  1000,
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then you can either generate a list-column containing the simulated values with &lt;code&gt;mutate&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  rowwise() %&amp;gt;% 
+  mutate(sim = list(runif(n, min, max)))
+#&amp;gt; # A tibble: 3 x 5
+#&amp;gt; # Rowwise: 
+#&amp;gt;      id     n   min   max sim      
+#&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;list&amp;gt;   
+#&amp;gt; 1     1     3     0     1 &amp;lt;dbl [3]&amp;gt;
+#&amp;gt; 2     2     2    10   100 &amp;lt;dbl [2]&amp;gt;
+#&amp;gt; 3     3     2   100  1000 &amp;lt;dbl [2]&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or take advantage of &lt;code&gt;summarize&lt;/code&gt;’s new features to return multiple rows per group&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  rowwise(everything()) %&amp;gt;% 
+  summarize(sim = runif(n, min, max))
+#&amp;gt; # A tibble: 7 x 5
+#&amp;gt; # Groups:   id, n, min, max [3]
+#&amp;gt;      id     n   min   max     sim
+#&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
+#&amp;gt; 1     1     3     0     1   0.388
+#&amp;gt; 2     1     3     0     1   0.563
+#&amp;gt; 3     1     3     0     1   0.742
+#&amp;gt; 4     2     2    10   100  92.7  
+#&amp;gt; 5     2     2    10   100  23.0  
+#&amp;gt; 6     3     2   100  1000 101.   
+#&amp;gt; 7     3     2   100  1000 705.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The previous approach&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;%
+  mutate(sim = purrr::pmap(., ~ runif(..2, ..3, ..4)))
+#&amp;gt; # A tibble: 3 x 5
+#&amp;gt;      id     n   min   max sim      
+#&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;list&amp;gt;   
+#&amp;gt; 1     1     3     0     1 &amp;lt;dbl [3]&amp;gt;
+#&amp;gt; 2     2     2    10   100 &amp;lt;dbl [2]&amp;gt;
+#&amp;gt; 3     3     2   100  1000 &amp;lt;dbl [2]&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;group-wise-models&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Group-wise models&lt;/h2&gt;
+&lt;p&gt;The new &lt;code&gt;nest_by()&lt;/code&gt; function works similarly to &lt;code&gt;group_nest()&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;by_species &amp;lt;- penguins %&amp;gt;% nest_by(species)
+by_species
+#&amp;gt; # A tibble: 3 x 2
+#&amp;gt; # Rowwise:  species
+#&amp;gt;   species                 data
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;list&amp;lt;tbl_df[,6]&amp;gt;&amp;gt;
+#&amp;gt; 1 Adelie             [152 x 6]
+#&amp;gt; 2 Chinstrap           [68 x 6]
+#&amp;gt; 3 Gentoo             [124 x 6]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can use &lt;code&gt;mutate&lt;/code&gt; to fit a model to each data frame:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;by_species &amp;lt;- by_species %&amp;gt;% 
+  rowwise(species) %&amp;gt;% 
+  mutate(model = list(lm(culmen_length_mm ~ culmen_depth_mm, data = data)))
+
+by_species
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt; # Rowwise:  species
+#&amp;gt;   species                 data model 
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;list&amp;lt;tbl_df[,6]&amp;gt;&amp;gt; &amp;lt;list&amp;gt;
+#&amp;gt; 1 Adelie             [152 x 6] &amp;lt;lm&amp;gt;  
+#&amp;gt; 2 Chinstrap           [68 x 6] &amp;lt;lm&amp;gt;  
+#&amp;gt; 3 Gentoo             [124 x 6] &amp;lt;lm&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then extract model summaries or coefficients with &lt;code&gt;summarise()&lt;/code&gt; and broom functions (note &lt;code&gt;by_species&lt;/code&gt; is still a rowwise data frame):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;by_species %&amp;gt;% 
+  summarize(broom::glance(model))
+#&amp;gt; # A tibble: 3 x 12
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
+#&amp;gt;   &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie      0.153         0.148  2.46      27.0 6.67e- 7     2  -349.  704.
+#&amp;gt; 2 Chinst~     0.427         0.418  2.55      49.2 1.53e- 9     2  -159.  324.
+#&amp;gt; 3 Gentoo      0.414         0.409  2.37      85.5 1.02e-15     2  -280.  565.
+#&amp;gt; # ... with 3 more variables: BIC &amp;lt;dbl&amp;gt;, deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;
+
+by_species %&amp;gt;% 
+  summarize(broom::tidy(model))
+#&amp;gt; # A tibble: 6 x 6
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species   term            estimate std.error statistic  p.value
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie    (Intercept)       23.1       3.03       7.60 3.01e-12
+#&amp;gt; 2 Adelie    culmen_depth_mm    0.857     0.165      5.19 6.67e- 7
+#&amp;gt; 3 Chinstrap (Intercept)       13.4       5.06       2.66 9.92e- 3
+#&amp;gt; 4 Chinstrap culmen_depth_mm    1.92      0.274      7.01 1.53e- 9
+#&amp;gt; 5 Gentoo    (Intercept)       17.2       3.28       5.25 6.60e- 7
+#&amp;gt; 6 Gentoo    culmen_depth_mm    2.02      0.219      9.24 1.02e-15&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;An alternative approach:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;%
+  group_by(species) %&amp;gt;% 
+  group_modify(~ broom::tidy(lm(culmen_length_mm ~ culmen_depth_mm, data = .x)))
+#&amp;gt; # A tibble: 6 x 6
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species   term            estimate std.error statistic  p.value
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie    (Intercept)       23.1       3.03       7.60 3.01e-12
+#&amp;gt; 2 Adelie    culmen_depth_mm    0.857     0.165      5.19 6.67e- 7
+#&amp;gt; 3 Chinstrap (Intercept)       13.4       5.06       2.66 9.92e- 3
+#&amp;gt; 4 Chinstrap culmen_depth_mm    1.92      0.274      7.01 1.53e- 9
+#&amp;gt; 5 Gentoo    (Intercept)       17.2       3.28       5.25 6.60e- 7
+#&amp;gt; 6 Gentoo    culmen_depth_mm    2.02      0.219      9.24 1.02e-15&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;new-summarize-features&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;New &lt;code&gt;summarize&lt;/code&gt; features&lt;/h1&gt;
+&lt;div id=&#34;multiple-rows-and-columns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Multiple rows and columns&lt;/h2&gt;
+&lt;p&gt;Two big changes make &lt;code&gt;summarize()&lt;/code&gt; much more flexible. A single summary expression can now return:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A vector of any length, creating multiple rows. (so we can use summary that returns multiple values without &lt;code&gt;list&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A data frame, creating multiple columns.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins_grouped %&amp;gt;%
+  summarize(culmen_length_dist = quantile(culmen_length_mm, 
+                                          c(0.25, 0.5, 0.75),
+                                          na.rm = TRUE), 
+            q = c(0.25, 0.5, 0.75))
+#&amp;gt; # A tibble: 9 x 3
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species   culmen_length_dist     q
+#&amp;gt;   &amp;lt;chr&amp;gt;                  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie                  36.8  0.25
+#&amp;gt; 2 Adelie                  38.8  0.5 
+#&amp;gt; 3 Adelie                  40.8  0.75
+#&amp;gt; 4 Chinstrap               46.3  0.25
+#&amp;gt; 5 Chinstrap               49.6  0.5 
+#&amp;gt; 6 Chinstrap               51.1  0.75
+#&amp;gt; 7 Gentoo                  45.3  0.25
+#&amp;gt; 8 Gentoo                  47.3  0.5 
+#&amp;gt; 9 Gentoo                  49.6  0.75&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or return multiple columns from a single summary expression:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins_grouped %&amp;gt;% 
+  summarize(tibble(min = min(culmen_depth_mm, na.rm = TRUE),
+                   max = max(culmen_depth_mm, na.rm = TRUE)))
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt;   species     min   max
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie     15.5  21.5
+#&amp;gt; 2 Chinstrap  16.4  20.8
+#&amp;gt; 3 Gentoo     13.1  17.3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At the first glance this may seem not so different with supplying multiple name-value pairs. But this can be useful inside functions. For example, in the previous &lt;code&gt;quantile&lt;/code&gt; code it would be nice to be able to reduce the duplication so that we don’t have to type the quantile values twice. We can now write a simple function because summary expressions can now be data frames or tibbles:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quibble &amp;lt;- function(x, q = c(0.25, 0.5, 0.75), na.rm = TRUE) {
+  tibble(x = quantile(x, q, na.rm = na.rm), q = q)
+}
+
+penguins_grouped %&amp;gt;% 
+  summarize(quibble(culmen_depth_mm))
+#&amp;gt; # A tibble: 9 x 3
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species       x     q
+#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie     17.5  0.25
+#&amp;gt; 2 Adelie     18.4  0.5 
+#&amp;gt; 3 Adelie     19    0.75
+#&amp;gt; 4 Chinstrap  17.5  0.25
+#&amp;gt; 5 Chinstrap  18.4  0.5 
+#&amp;gt; 6 Chinstrap  19.4  0.75
+#&amp;gt; 7 Gentoo     14.2  0.25
+#&amp;gt; 8 Gentoo     15    0.5 
+#&amp;gt; 9 Gentoo     15.7  0.75&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When combining glue syntax and tidy evaluation, it is easy to dynamically name the column names.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quibble &amp;lt;- function(x, q = c(0.25, 0.5, 0.75), na.rm = TRUE) {
+  tibble(&amp;quot;{{ x }}_quantile&amp;quot; := quantile(x, q, na.rm = na.rm), 
+         &amp;quot;{{ x }}_q&amp;quot; := q)
+}
+
+penguins_grouped %&amp;gt;% 
+  summarize(quibble(flipper_length_mm))
+#&amp;gt; # A tibble: 9 x 3
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species   flipper_length_mm_quantile flipper_length_mm_q
+#&amp;gt;   &amp;lt;chr&amp;gt;                          &amp;lt;dbl&amp;gt;               &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie                           186                0.25
+#&amp;gt; 2 Adelie                           190                0.5 
+#&amp;gt; 3 Adelie                           195                0.75
+#&amp;gt; 4 Chinstrap                        191                0.25
+#&amp;gt; 5 Chinstrap                        196                0.5 
+#&amp;gt; 6 Chinstrap                        201                0.75
+#&amp;gt; 7 Gentoo                           212                0.25
+#&amp;gt; 8 Gentoo                           216                0.5 
+#&amp;gt; 9 Gentoo                           221                0.75&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As an aside, if we name the tibble expression in &lt;code&gt;summarize()&lt;/code&gt; that part will be packed in the result, which can be solved by &lt;code&gt;tidyr::unpack&lt;/code&gt;. That’s because when we leave the name off, the data frame result is automatically unpacked.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins_grouped %&amp;gt;% 
+  summarize(df = quibble(flipper_length_mm))
+#&amp;gt; # A tibble: 9 x 2
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species   df$flipper_length_mm_quantile $flipper_length_mm_q
+#&amp;gt;   &amp;lt;chr&amp;gt;                             &amp;lt;dbl&amp;gt;                &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie                              186                 0.25
+#&amp;gt; 2 Adelie                              190                 0.5 
+#&amp;gt; 3 Adelie                              195                 0.75
+#&amp;gt; 4 Chinstrap                           191                 0.25
+#&amp;gt; 5 Chinstrap                           196                 0.5 
+#&amp;gt; 6 Chinstrap                           201                 0.75
+#&amp;gt; 7 Gentoo                              212                 0.25
+#&amp;gt; 8 Gentoo                              216                 0.5 
+#&amp;gt; 9 Gentoo                              221                 0.75&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;use-summarize-in-non-summary-context&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Use &lt;code&gt;summarize&lt;/code&gt; in non-summary context&lt;/h2&gt;
+&lt;p&gt;In combination with rowwise operations, &lt;code&gt;summarize()&lt;/code&gt; is now sufficiently powerful to replace many workflows that previously required a &lt;code&gt;map()&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;For example, to read all the all the .csv files in the current directory, you could write:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tibble(path = dir(pattern = &amp;quot;\\.csv$&amp;quot;)) %&amp;gt;% 
+  rowwise(path) %&amp;gt;% 
+  summarize(read_csv(path))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;move-columns-around-within-data-frames&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Move columns around within data frames&lt;/h1&gt;
+&lt;p&gt;New verb &lt;code&gt;relocate&lt;/code&gt; is provided to change column positions with the same syntax as &lt;code&gt;select&lt;/code&gt;. The default behaviour is to move selected columns to the left-hand side&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% relocate(island)
+#&amp;gt; # A tibble: 344 x 7
+#&amp;gt;    island species culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
+#&amp;gt;    &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Torge~ Adelie              39.1            18.7              181        3750
+#&amp;gt;  2 Torge~ Adelie              39.5            17.4              186        3800
+#&amp;gt;  3 Torge~ Adelie              40.3            18                195        3250
+#&amp;gt;  4 Torge~ Adelie              NA              NA                 NA          NA
+#&amp;gt;  5 Torge~ Adelie              36.7            19.3              193        3450
+#&amp;gt;  6 Torge~ Adelie              39.3            20.6              190        3650
+#&amp;gt;  7 Torge~ Adelie              38.9            17.8              181        3625
+#&amp;gt;  8 Torge~ Adelie              39.2            19.6              195        4675
+#&amp;gt;  9 Torge~ Adelie              34.1            18.1              193        3475
+#&amp;gt; 10 Torge~ Adelie              42              20.2              190        4250
+#&amp;gt; # ... with 334 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;
+
+penguins %&amp;gt;% relocate(starts_with(&amp;quot;culmen&amp;quot;))
+#&amp;gt; # A tibble: 344 x 7
+#&amp;gt;    culmen_length_mm culmen_depth_mm species island flipper_length_~ body_mass_g
+#&amp;gt;               &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1             39.1            18.7 Adelie  Torge~              181        3750
+#&amp;gt;  2             39.5            17.4 Adelie  Torge~              186        3800
+#&amp;gt;  3             40.3            18   Adelie  Torge~              195        3250
+#&amp;gt;  4             NA              NA   Adelie  Torge~               NA          NA
+#&amp;gt;  5             36.7            19.3 Adelie  Torge~              193        3450
+#&amp;gt;  6             39.3            20.6 Adelie  Torge~              190        3650
+#&amp;gt;  7             38.9            17.8 Adelie  Torge~              181        3625
+#&amp;gt;  8             39.2            19.6 Adelie  Torge~              195        4675
+#&amp;gt;  9             34.1            18.1 Adelie  Torge~              193        3475
+#&amp;gt; 10             42              20.2 Adelie  Torge~              190        4250
+#&amp;gt; # ... with 334 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;
+
+penguins %&amp;gt;% relocate(sex, body_mass_g, .after = species)
+#&amp;gt; # A tibble: 344 x 7
+#&amp;gt;    species sex   body_mass_g island culmen_length_mm culmen_depth_mm
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Adelie  MALE         3750 Torge~             39.1            18.7
+#&amp;gt;  2 Adelie  FEMA~        3800 Torge~             39.5            17.4
+#&amp;gt;  3 Adelie  FEMA~        3250 Torge~             40.3            18  
+#&amp;gt;  4 Adelie  &amp;lt;NA&amp;gt;           NA Torge~             NA              NA  
+#&amp;gt;  5 Adelie  FEMA~        3450 Torge~             36.7            19.3
+#&amp;gt;  6 Adelie  MALE         3650 Torge~             39.3            20.6
+#&amp;gt;  7 Adelie  FEMA~        3625 Torge~             38.9            17.8
+#&amp;gt;  8 Adelie  MALE         4675 Torge~             39.2            19.6
+#&amp;gt;  9 Adelie  &amp;lt;NA&amp;gt;         3475 Torge~             34.1            18.1
+#&amp;gt; 10 Adelie  &amp;lt;NA&amp;gt;         4250 Torge~             42              20.2
+#&amp;gt; # ... with 334 more rows, and 1 more variable: flipper_length_mm &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similarly, &lt;code&gt;mutate&lt;/code&gt; gains new arguments &lt;code&gt;.after&lt;/code&gt; and &lt;code&gt;.before&lt;/code&gt; to control where new columns should appear.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
+  mutate(mass_double = body_mass_g * 2, .before = 1)
+#&amp;gt; # A tibble: 344 x 8
+#&amp;gt;    mass_double species island culmen_length_mm culmen_depth_mm flipper_length_~
+#&amp;gt;          &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;
+#&amp;gt;  1        7500 Adelie  Torge~             39.1            18.7              181
+#&amp;gt;  2        7600 Adelie  Torge~             39.5            17.4              186
+#&amp;gt;  3        6500 Adelie  Torge~             40.3            18                195
+#&amp;gt;  4          NA Adelie  Torge~             NA              NA                 NA
+#&amp;gt;  5        6900 Adelie  Torge~             36.7            19.3              193
+#&amp;gt;  6        7300 Adelie  Torge~             39.3            20.6              190
+#&amp;gt;  7        7250 Adelie  Torge~             38.9            17.8              181
+#&amp;gt;  8        9350 Adelie  Torge~             39.2            19.6              195
+#&amp;gt;  9        6950 Adelie  Torge~             34.1            18.1              193
+#&amp;gt; 10        8500 Adelie  Torge~             42              20.2              190
+#&amp;gt; # ... with 334 more rows, and 2 more variables: body_mass_g &amp;lt;dbl&amp;gt;, sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;row-mutation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Row mutation&lt;/h1&gt;
+&lt;p&gt;dplyr has a new experimental family of row mutation functions inspired by SQL’s &lt;code&gt;UPDATE&lt;/code&gt;, &lt;code&gt;INSERT&lt;/code&gt;, &lt;code&gt;UPSERT&lt;/code&gt;, and &lt;code&gt;DELETE&lt;/code&gt;. Like the join functions, they all work with a pair of data frames:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;rows_update(x, y)&lt;/code&gt; updates existing rows in x with values in y.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;rows_patch(x, y)&lt;/code&gt; works like rows_update() but only changes &lt;code&gt;NA&lt;/code&gt; values.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;rows_insert(x, y)&lt;/code&gt; adds new rows to x from y.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;rows_upsert(x, y)&lt;/code&gt; updates existing rows in x and adds new rows from y.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;rows_delete(x, y)&lt;/code&gt; deletes rows in x that match rows in y.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;code&gt;rows_&lt;/code&gt; functions match x and y using &lt;strong&gt;keys&lt;/strong&gt;. All of them check that the keys of x and y are valid (i.e. unique) before doing anything.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- tibble(a = 1:3, b = letters[c(1:2, NA)], c = 0.5 + 0:2)
+df
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt;       a b         c
+#&amp;gt;   &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1     1 a       0.5
+#&amp;gt; 2     2 b       1.5
+#&amp;gt; 3     3 &amp;lt;NA&amp;gt;    2.5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can use &lt;code&gt;rows_insert()&lt;/code&gt; to add new rows:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;new &amp;lt;- tibble(a = c(4, 5), b = c(&amp;quot;d&amp;quot;, &amp;quot;e&amp;quot;), c = c(3.5, 4.5))
+
+rows_insert(df, new)
+#&amp;gt; # A tibble: 5 x 3
+#&amp;gt;       a b         c
+#&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1     1 a       0.5
+#&amp;gt; 2     2 b       1.5
+#&amp;gt; 3     3 &amp;lt;NA&amp;gt;    2.5
+#&amp;gt; 4     4 d       3.5
+#&amp;gt; 5     5 e       4.5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that &lt;code&gt;rows_insert()&lt;/code&gt; will fail if we attempt to insert a row that already exists:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% rows_insert(tibble(a = 3, b = &amp;quot;c&amp;quot;))
+#&amp;gt; Error: Attempting to insert duplicate rows.
+
+df %&amp;gt;% rows_insert(tibble(a = 3, b = &amp;quot;c&amp;quot;), by = c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;))
+#&amp;gt; # A tibble: 4 x 3
+#&amp;gt;       a b         c
+#&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1     1 a       0.5
+#&amp;gt; 2     2 b       1.5
+#&amp;gt; 3     3 &amp;lt;NA&amp;gt;    2.5
+#&amp;gt; 4     3 c      NA&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to update existing values, use &lt;code&gt;rows_update()&lt;/code&gt;. As you might expect, it’ll error if one of the rows to update doesn’t exist:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% rows_update(tibble(a = 3, b = &amp;quot;c&amp;quot;))
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt;       a b         c
+#&amp;gt;   &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1     1 a       0.5
+#&amp;gt; 2     2 b       1.5
+#&amp;gt; 3     3 c       2.5
+
+df %&amp;gt;% rows_update(tibble(a = 4, b = &amp;quot;d&amp;quot;))
+#&amp;gt; Error: Attempting to update missing rows.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;rows_patch()&lt;/code&gt; is a variant of &lt;code&gt;rows_update()&lt;/code&gt; that will only update values in x that are &lt;code&gt;NA&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% rows_patch(tibble(a = 1:3, b = &amp;quot;patch&amp;quot;))
+#&amp;gt; # A tibble: 3 x 3
+#&amp;gt;       a b         c
+#&amp;gt;   &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1     1 a       0.5
+#&amp;gt; 2     2 b       1.5
+#&amp;gt; 3     3 patch   2.5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;row_upsert&lt;/code&gt; update a df or insert new rows.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  rows_upsert(tibble(a = 3, b = &amp;quot;c&amp;quot;)) %&amp;gt;%  # update
+  rows_upsert(tibble(a = 4, b = &amp;quot;d&amp;quot;)) # insert
+#&amp;gt; # A tibble: 4 x 3
+#&amp;gt;       a b         c
+#&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1     1 a       0.5
+#&amp;gt; 2     2 b       1.5
+#&amp;gt; 3     3 c       2.5
+#&amp;gt; 4     4 d      NA&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;superseded-functions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Superseded functions&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;top_n()&lt;/code&gt;, &lt;code&gt;sample_n()&lt;/code&gt;, and &lt;code&gt;sample_frac()&lt;/code&gt; have been superseded in favour of a new family of slice helpers: &lt;code&gt;slice_min()&lt;/code&gt;, &lt;code&gt;slice_max()&lt;/code&gt;, &lt;code&gt;slice_head()&lt;/code&gt;, &lt;code&gt;slice_tail()&lt;/code&gt;, &lt;code&gt;slice_random()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select penguins per group on body mass
+penguins_grouped %&amp;gt;% 
+  slice_max(body_mass_g, 1)
+#&amp;gt; # A tibble: 3 x 7
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
+#&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie  Biscoe             43.2            19                197        4775
+#&amp;gt; 2 Chinst~ Dream              52              20.7              210        4800
+#&amp;gt; 3 Gentoo  Biscoe             49.2            15.2              221        6300
+#&amp;gt; # ... with 1 more variable: sex &amp;lt;chr&amp;gt;
+
+penguins_grouped %&amp;gt;% 
+  slice_min(body_mass_g, 1)
+#&amp;gt; # A tibble: 4 x 7
+#&amp;gt; # Groups:   species [3]
+#&amp;gt;   species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
+#&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie  Biscoe             36.5            16.6              181        2850
+#&amp;gt; 2 Adelie  Biscoe             36.4            17.1              184        2850
+#&amp;gt; 3 Chinst~ Dream              46.9            16.6              192        2700
+#&amp;gt; 4 Gentoo  Biscoe             42.7            13.7              208        3950
+#&amp;gt; # ... with 1 more variable: sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# random sampling
+penguins %&amp;gt;% 
+  slice_sample(n = 10)
+#&amp;gt; # A tibble: 10 x 7
+#&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Chinst~ Dream              46.9            16.6              192        2700
+#&amp;gt;  2 Adelie  Biscoe             41.4            18.6              191        3700
+#&amp;gt;  3 Adelie  Biscoe             39              17.5              186        3550
+#&amp;gt;  4 Adelie  Dream              44.1            19.7              196        4400
+#&amp;gt;  5 Gentoo  Biscoe             46.8            16.1              215        5500
+#&amp;gt;  6 Gentoo  Biscoe             44.5            14.3              216        4100
+#&amp;gt;  7 Adelie  Biscoe             41.1            19.1              188        4100
+#&amp;gt;  8 Chinst~ Dream              50.2            18.8              202        3800
+#&amp;gt;  9 Adelie  Torge~             39.6            17.2              196        3550
+#&amp;gt; 10 Chinst~ Dream              55.8            19.8              207        4000
+#&amp;gt; # ... with 1 more variable: sex &amp;lt;chr&amp;gt;
+
+penguins %&amp;gt;% 
+  slice_sample(prop = 0.1)
+#&amp;gt; # A tibble: 34 x 7
+#&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Adelie  Dream              39.6            18.8              190        4600
+#&amp;gt;  2 Chinst~ Dream              53.5            19.9              205        4500
+#&amp;gt;  3 Chinst~ Dream              49.8            17.3              198        3675
+#&amp;gt;  4 Adelie  Dream              37.6            19.3              181        3300
+#&amp;gt;  5 Adelie  Biscoe             38.2            18.1              185        3950
+#&amp;gt;  6 Gentoo  Biscoe             52.2            17.1              228        5400
+#&amp;gt;  7 Gentoo  Biscoe             42.6            13.7              213        4950
+#&amp;gt;  8 Adelie  Dream              39              18.7              185        3650
+#&amp;gt;  9 Adelie  Torge~             40.2            17                176        3450
+#&amp;gt; 10 Gentoo  Biscoe             46.2            14.9              221        5300
+#&amp;gt; # ... with 24 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;summarize()&lt;/code&gt; gains new argument &lt;code&gt;.groups&lt;/code&gt; to control grouping structure of theh result.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;.groups = &#34;drop_last&#34;&lt;/code&gt; drops the last grouping level (i.e. the default behaviour).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;.groups = &#34;drop&#34;&lt;/code&gt; drops all grouping levels and returns a tibble.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;.groups = &#34;keep&#34;&lt;/code&gt; preserves the grouping of the input.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;.groups = &#34;rowwise&#34;&lt;/code&gt; turns each row into its own group.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;other-changes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Other changes&lt;/h1&gt;
+&lt;p&gt;The new &lt;code&gt;rename_with()&lt;/code&gt; makes it easier to rename variables programmatically:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;%
+  rename_with(stringr::str_to_upper)
+#&amp;gt; # A tibble: 344 x 7
+#&amp;gt;    SPECIES ISLAND CULMEN_LENGTH_MM CULMEN_DEPTH_MM FLIPPER_LENGTH_~ BODY_MASS_G
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Adelie  Torge~             39.1            18.7              181        3750
+#&amp;gt;  2 Adelie  Torge~             39.5            17.4              186        3800
+#&amp;gt;  3 Adelie  Torge~             40.3            18                195        3250
+#&amp;gt;  4 Adelie  Torge~             NA              NA                 NA          NA
+#&amp;gt;  5 Adelie  Torge~             36.7            19.3              193        3450
+#&amp;gt;  6 Adelie  Torge~             39.3            20.6              190        3650
+#&amp;gt;  7 Adelie  Torge~             38.9            17.8              181        3625
+#&amp;gt;  8 Adelie  Torge~             39.2            19.6              195        4675
+#&amp;gt;  9 Adelie  Torge~             34.1            18.1              193        3475
+#&amp;gt; 10 Adelie  Torge~             42              20.2              190        4250
+#&amp;gt; # ... with 334 more rows, and 1 more variable: SEX &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can optionally choose which columns to apply the transformation to with the second argument:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;%
+  rename_with(stringr::str_to_upper, starts_with(&amp;quot;culmen&amp;quot;))
+#&amp;gt; # A tibble: 344 x 7
+#&amp;gt;    species island CULMEN_LENGTH_MM CULMEN_DEPTH_MM flipper_length_~ body_mass_g
+#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 Adelie  Torge~             39.1            18.7              181        3750
+#&amp;gt;  2 Adelie  Torge~             39.5            17.4              186        3800
+#&amp;gt;  3 Adelie  Torge~             40.3            18                195        3250
+#&amp;gt;  4 Adelie  Torge~             NA              NA                 NA          NA
+#&amp;gt;  5 Adelie  Torge~             36.7            19.3              193        3450
+#&amp;gt;  6 Adelie  Torge~             39.3            20.6              190        3650
+#&amp;gt;  7 Adelie  Torge~             38.9            17.8              181        3625
+#&amp;gt;  8 Adelie  Torge~             39.2            19.6              195        4675
+#&amp;gt;  9 Adelie  Torge~             34.1            18.1              193        3475
+#&amp;gt; 10 Adelie  Torge~             42              20.2              190        4250
+#&amp;gt; # ... with 334 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;mutate()&lt;/code&gt; gains argument &lt;code&gt;.keep&lt;/code&gt; that allows you to control which columns are retained in the output:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% mutate(double_mass = body_mass_g * 2,
+                    island_lower = stringr::str_to_lower(island), 
+                    .keep = &amp;quot;used&amp;quot;)
+#&amp;gt; # A tibble: 344 x 4
+#&amp;gt;    island    body_mass_g double_mass island_lower
+#&amp;gt;    &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       
+#&amp;gt;  1 Torgersen        3750        7500 torgersen   
+#&amp;gt;  2 Torgersen        3800        7600 torgersen   
+#&amp;gt;  3 Torgersen        3250        6500 torgersen   
+#&amp;gt;  4 Torgersen          NA          NA torgersen   
+#&amp;gt;  5 Torgersen        3450        6900 torgersen   
+#&amp;gt;  6 Torgersen        3650        7300 torgersen   
+#&amp;gt;  7 Torgersen        3625        7250 torgersen   
+#&amp;gt;  8 Torgersen        4675        9350 torgersen   
+#&amp;gt;  9 Torgersen        3475        6950 torgersen   
+#&amp;gt; 10 Torgersen        4250        8500 torgersen   
+#&amp;gt; # ... with 334 more rows
+
+penguins %&amp;gt;% mutate(double_mass = body_mass_g * 2, .keep = &amp;quot;none&amp;quot;)
+#&amp;gt; # A tibble: 344 x 1
+#&amp;gt;    double_mass
+#&amp;gt;          &amp;lt;dbl&amp;gt;
+#&amp;gt;  1        7500
+#&amp;gt;  2        7600
+#&amp;gt;  3        6500
+#&amp;gt;  4          NA
+#&amp;gt;  5        6900
+#&amp;gt;  6        7300
+#&amp;gt;  7        7250
+#&amp;gt;  8        9350
+#&amp;gt;  9        6950
+#&amp;gt; 10        8500
+#&amp;gt; # ... with 334 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;use-cases&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Use cases&lt;/h1&gt;
+&lt;p&gt;This in-progress section documents tasks that would otherwise been impossible or laborious with previous version of dplyr.&lt;/p&gt;
+&lt;div id=&#34;replace-missing-values-in-many-columns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Replace missing values in many columns&lt;/h2&gt;
+&lt;p&gt;Since &lt;code&gt;tidyr::replace_na&lt;/code&gt; does not support tidy select syntax, replacing NA values in multiple columns could be a drudgery. Now this is made easy with &lt;code&gt;coalesce&lt;/code&gt; and &lt;code&gt;across&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% summarize(across(starts_with(&amp;quot;culmen&amp;quot;), ~ sum(is.na(.x))))
+#&amp;gt; # A tibble: 1 x 2
+#&amp;gt;   culmen_length_mm culmen_depth_mm
+#&amp;gt;              &amp;lt;int&amp;gt;           &amp;lt;int&amp;gt;
+#&amp;gt; 1                2               2
+
+penguins %&amp;gt;% 
+  mutate(across(starts_with(&amp;quot;culmen&amp;quot;), ~ coalesce(.x, 0))) %&amp;gt;% 
+  summarize(across(starts_with(&amp;quot;culmen&amp;quot;), ~ sum(is.na(.x))))
+#&amp;gt; # A tibble: 1 x 2
+#&amp;gt;   culmen_length_mm culmen_depth_mm
+#&amp;gt;              &amp;lt;int&amp;gt;           &amp;lt;int&amp;gt;
+#&amp;gt; 1                0               0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-10.1371/journal.pone.0090081&#34;&gt;
+&lt;p&gt;Gorman, Tony D. AND Fraser, Kristen B. AND Williams. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” &lt;em&gt;PLOS ONE&lt;/em&gt; 9 (3): 1–14. &lt;a href=&#34;https://doi.org/10.1371/journal.pone.0090081&#34;&gt;https://doi.org/10.1371/journal.pone.0090081&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Probability Theory | Qiushi Yan</title>
+    <link>/tags/probability-theory/</link>
+      <atom:link href="/tags/probability-theory/index.xml" rel="self" type="application/rss+xml" />
+    <description>Probability Theory</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 17 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Probability Theory</title>
+      <link>/tags/probability-theory/</link>
+    </image>
+    
+    <item>
+      <title>Mathematical Notes for Machine Learning</title>
+      <link>/project/math-foundations/</link>
+      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/project/math-foundations/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Qiushi Yan</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 02 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 17 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Qiushi Yan</title>
@@ -24,6 +24,14 @@
 &lt;p&gt;By no means am I making the conclusion that certificates are pure evil, for they can be equally used for good. Certificates and examinations correlated to one’s interests and consistent with his / her professional aspirations can, in most cases, cultivate one’s ability and guide them through the job market.&lt;/p&gt;
 &lt;p&gt;On balance, I believe that certificates do little to enhance one’s capability until we have poured in meaning efforts in something that would give meaning help in the days to come. Certificates itself is neutral, and we could use it to our advantage once we follow an appropriate way to learn. We should always acquire knowledge from the process and keep exploring and thinking instead of be guided by utilitarianism. Only in this way can we truly improve our abilities.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Mathematical Notes for Machine Learning</title>
+      <link>/project/math-foundations/</link>
+      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/project/math-foundations/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -48,10 +56,12 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#move-columns-around-within-data-frames&#34;&gt;Move columns around within data frames&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#row-mutation&#34;&gt;Row mutation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#context-dependent-expressions&#34;&gt;Context dependent expressions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#superseded-functions&#34;&gt;Superseded functions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#other-changes&#34;&gt;Other changes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#use-cases&#34;&gt;Use cases&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#replace-missing-values-in-many-columns&#34;&gt;Replace missing values in many columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#rolling-regression&#34;&gt;Rolling regression&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -81,8 +91,7 @@ penguins
 #&amp;gt; # ... with 334 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   ggplot(aes(culmen_length_mm, culmen_depth_mm, color = species, shape = species)) + 
-  geom_point()
-#&amp;gt; Warning: Removed 2 rows containing missing values (geom_point).&lt;/code&gt;&lt;/pre&gt;
+  geom_point()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2020-06-02-a-taste-of-dplyr-1-0-0/index.en_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;div id=&#34;working-within-columns&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Working within columns&lt;/h1&gt;
@@ -295,12 +304,12 @@ df
 #&amp;gt;      id     n   min   max     sim
 #&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
 #&amp;gt; 1     1     3     0     1   0.388
-#&amp;gt; 2     1     3     0     1   0.563
-#&amp;gt; 3     1     3     0     1   0.742
-#&amp;gt; 4     2     2    10   100  92.7  
-#&amp;gt; 5     2     2    10   100  23.0  
-#&amp;gt; 6     3     2   100  1000 101.   
-#&amp;gt; 7     3     2   100  1000 705.&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 2     1     3     0     1   0.769
+#&amp;gt; 3     1     3     0     1   0.945
+#&amp;gt; 4     2     2    10   100  71.6  
+#&amp;gt; 5     2     2    10   100  58.3  
+#&amp;gt; 6     3     2   100  1000 897.   
+#&amp;gt; 7     3     2   100  1000 949.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The previous approach&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;%
   mutate(sim = purrr::pmap(., ~ runif(..2, ..3, ..4)))
@@ -339,14 +348,15 @@ by_species
 &lt;p&gt;And then extract model summaries or coefficients with &lt;code&gt;summarise()&lt;/code&gt; and broom functions (note &lt;code&gt;by_species&lt;/code&gt; is still a rowwise data frame):&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;by_species %&amp;gt;% 
   summarize(broom::glance(model))
-#&amp;gt; # A tibble: 3 x 12
+#&amp;gt; # A tibble: 3 x 13
 #&amp;gt; # Groups:   species [3]
 #&amp;gt;   species r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
-#&amp;gt;   &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 Adelie      0.153         0.148  2.46      27.0 6.67e- 7     2  -349.  704.
-#&amp;gt; 2 Chinst~     0.427         0.418  2.55      49.2 1.53e- 9     2  -159.  324.
-#&amp;gt; 3 Gentoo      0.414         0.409  2.37      85.5 1.02e-15     2  -280.  565.
-#&amp;gt; # ... with 3 more variables: BIC &amp;lt;dbl&amp;gt;, deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;
+#&amp;gt;   &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 Adelie      0.153         0.148  2.46      27.0 6.67e- 7     1  -349.  704.
+#&amp;gt; 2 Chinst~     0.427         0.418  2.55      49.2 1.53e- 9     1  -159.  324.
+#&amp;gt; 3 Gentoo      0.414         0.409  2.37      85.5 1.02e-15     1  -280.  565.
+#&amp;gt; # ... with 4 more variables: BIC &amp;lt;dbl&amp;gt;, deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;,
+#&amp;gt; #   nobs &amp;lt;int&amp;gt;
 
 by_species %&amp;gt;% 
   summarize(broom::tidy(model))
@@ -591,7 +601,7 @@ df %&amp;gt;% rows_insert(tibble(a = 3, b = &amp;quot;c&amp;quot;), by = c(&amp;
 #&amp;gt; 2     2 b       1.5
 #&amp;gt; 3     3 &amp;lt;NA&amp;gt;    2.5
 #&amp;gt; 4     3 c      NA&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you want to update existing values, use &lt;code&gt;rows_update()&lt;/code&gt;. As you might expect, it’ll error if one of the rows to update doesn’t exist:&lt;/p&gt;
+&lt;p&gt;If you want to update existing values, use &lt;code&gt;rows_update()&lt;/code&gt;. It will throw an error if one of the rows to update does not exist:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% rows_update(tibble(a = 3, b = &amp;quot;c&amp;quot;))
 #&amp;gt; # A tibble: 3 x 3
 #&amp;gt;       a b         c
@@ -622,9 +632,63 @@ df %&amp;gt;% rows_update(tibble(a = 4, b = &amp;quot;d&amp;quot;))
 #&amp;gt; 3     3 c       2.5
 #&amp;gt; 4     4 d      NA&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+&lt;div id=&#34;context-dependent-expressions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Context dependent expressions&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;n()&lt;/code&gt; is a special function in dplyr which return the number of observations in the current group. Now the new version comes with more such special functions, aka context dependent expressions. These functions return information about the “current” group or “current” variable, so only work inside specific contexts like &lt;code&gt;summarize()&lt;/code&gt; and &lt;code&gt;mutate()&lt;/code&gt;. Specifically, a family of &lt;code&gt;cur_&lt;/code&gt; functions are added:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;cur_data()&lt;/code&gt; gives the current data for the current group (exclusing grouping variables, &lt;code&gt;cur_data_all&lt;/code&gt; in developmental version returns grouping variables as well)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;cur_group()&lt;/code&gt; gives the group keys, a tibble with one row and one column for each grouping variable.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;cur_group_id()&lt;/code&gt; gives a unique numeric identifier for the current group&lt;br /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;cur_column()&lt;/code&gt; gives the &lt;strong&gt;name&lt;/strong&gt; of the current column (in &lt;code&gt;across()&lt;/code&gt; only).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- tibble(
+  g = sample(rep(letters[1:3], 1:3)),
+  x = runif(6),
+  y = runif(6)
+)
+gf &amp;lt;- df %&amp;gt;% group_by(g)
+
+gf %&amp;gt;% summarize(row = cur_group_rows())
+#&amp;gt; # A tibble: 6 x 2
+#&amp;gt; # Groups:   g [3]
+#&amp;gt;   g       row
+#&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1 a         6
+#&amp;gt; 2 b         1
+#&amp;gt; 3 b         4
+#&amp;gt; 4 c         2
+#&amp;gt; 5 c         3
+#&amp;gt; 6 c         5
+gf %&amp;gt;% summarize(data = list(cur_group()))
+#&amp;gt; # A tibble: 3 x 2
+#&amp;gt;   g     data            
+#&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;list&amp;gt;          
+#&amp;gt; 1 a     &amp;lt;tibble [1 x 1]&amp;gt;
+#&amp;gt; 2 b     &amp;lt;tibble [1 x 1]&amp;gt;
+#&amp;gt; 3 c     &amp;lt;tibble [1 x 1]&amp;gt;
+gf %&amp;gt;% summarize(data = list(cur_data()))
+#&amp;gt; # A tibble: 3 x 2
+#&amp;gt;   g     data            
+#&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;list&amp;gt;          
+#&amp;gt; 1 a     &amp;lt;tibble [1 x 2]&amp;gt;
+#&amp;gt; 2 b     &amp;lt;tibble [2 x 2]&amp;gt;
+#&amp;gt; 3 c     &amp;lt;tibble [3 x 2]&amp;gt;
+gf %&amp;gt;% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
+#&amp;gt; # A tibble: 6 x 3
+#&amp;gt; # Groups:   g [3]
+#&amp;gt;   g     x      y     
+#&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; 
+#&amp;gt; 1 b     x 0.36 y 0.67
+#&amp;gt; 2 c     x 0.53 y 0.68
+#&amp;gt; 3 c     x 0.82 y 0.63
+#&amp;gt; 4 b     x 0.58 y 0.01
+#&amp;gt; 5 c     x 0.95 y 0.05
+#&amp;gt; 6 a     x 0.53 y 0.8&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;div id=&#34;superseded-functions&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Superseded functions&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;top_n()&lt;/code&gt;, &lt;code&gt;sample_n()&lt;/code&gt;, and &lt;code&gt;sample_frac()&lt;/code&gt; have been superseded in favour of a new family of slice helpers: &lt;code&gt;slice_min()&lt;/code&gt;, &lt;code&gt;slice_max()&lt;/code&gt;, &lt;code&gt;slice_head()&lt;/code&gt;, &lt;code&gt;slice_tail()&lt;/code&gt;, &lt;code&gt;slice_random()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;top_n()&lt;/code&gt;, &lt;code&gt;sample_n()&lt;/code&gt;, and &lt;code&gt;sample_frac()&lt;/code&gt; have been superseded in favor of a new family of slice helpers: &lt;code&gt;slice_min()&lt;/code&gt;, &lt;code&gt;slice_max()&lt;/code&gt;, &lt;code&gt;slice_head()&lt;/code&gt;, &lt;code&gt;slice_tail()&lt;/code&gt;, &lt;code&gt;slice_random()&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select penguins per group on body mass
 penguins_grouped %&amp;gt;% 
   slice_max(body_mass_g, 1)
@@ -654,16 +718,16 @@ penguins %&amp;gt;%
 #&amp;gt; # A tibble: 10 x 7
 #&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
-#&amp;gt;  1 Chinst~ Dream              46.9            16.6              192        2700
-#&amp;gt;  2 Adelie  Biscoe             41.4            18.6              191        3700
-#&amp;gt;  3 Adelie  Biscoe             39              17.5              186        3550
-#&amp;gt;  4 Adelie  Dream              44.1            19.7              196        4400
-#&amp;gt;  5 Gentoo  Biscoe             46.8            16.1              215        5500
-#&amp;gt;  6 Gentoo  Biscoe             44.5            14.3              216        4100
-#&amp;gt;  7 Adelie  Biscoe             41.1            19.1              188        4100
-#&amp;gt;  8 Chinst~ Dream              50.2            18.8              202        3800
-#&amp;gt;  9 Adelie  Torge~             39.6            17.2              196        3550
-#&amp;gt; 10 Chinst~ Dream              55.8            19.8              207        4000
+#&amp;gt;  1 Adelie  Dream              37              16.5              185        3400
+#&amp;gt;  2 Adelie  Torge~             38.9            17.8              181        3625
+#&amp;gt;  3 Gentoo  Biscoe             47.2            13.7              214        4925
+#&amp;gt;  4 Chinst~ Dream              54.2            20.8              201        4300
+#&amp;gt;  5 Adelie  Dream              39.6            18.1              186        4450
+#&amp;gt;  6 Chinst~ Dream              47.6            18.3              195        3850
+#&amp;gt;  7 Gentoo  Biscoe             46.8            14.3              215        4850
+#&amp;gt;  8 Adelie  Dream              39.2            18.6              190        4250
+#&amp;gt;  9 Gentoo  Biscoe             48.8            16.2              222        6000
+#&amp;gt; 10 Adelie  Dream              40.8            18.9              208        4300
 #&amp;gt; # ... with 1 more variable: sex &amp;lt;chr&amp;gt;
 
 penguins %&amp;gt;% 
@@ -671,16 +735,16 @@ penguins %&amp;gt;%
 #&amp;gt; # A tibble: 34 x 7
 #&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
-#&amp;gt;  1 Adelie  Dream              39.6            18.8              190        4600
-#&amp;gt;  2 Chinst~ Dream              53.5            19.9              205        4500
-#&amp;gt;  3 Chinst~ Dream              49.8            17.3              198        3675
-#&amp;gt;  4 Adelie  Dream              37.6            19.3              181        3300
-#&amp;gt;  5 Adelie  Biscoe             38.2            18.1              185        3950
-#&amp;gt;  6 Gentoo  Biscoe             52.2            17.1              228        5400
-#&amp;gt;  7 Gentoo  Biscoe             42.6            13.7              213        4950
-#&amp;gt;  8 Adelie  Dream              39              18.7              185        3650
-#&amp;gt;  9 Adelie  Torge~             40.2            17                176        3450
-#&amp;gt; 10 Gentoo  Biscoe             46.2            14.9              221        5300
+#&amp;gt;  1 Adelie  Torge~             42.8            18.5              195        4250
+#&amp;gt;  2 Adelie  Torge~             41.4            18.5              202        3875
+#&amp;gt;  3 Adelie  Dream              35.6            17.5              191        3175
+#&amp;gt;  4 Adelie  Dream              32.1            15.5              188        3050
+#&amp;gt;  5 Gentoo  Biscoe             48.7            14.1              210        4450
+#&amp;gt;  6 Adelie  Torge~             46              21.5              194        4200
+#&amp;gt;  7 Adelie  Dream              36.5            18                182        3150
+#&amp;gt;  8 Gentoo  Biscoe             46.7            15.3              219        5200
+#&amp;gt;  9 Adelie  Biscoe             37.8            20                190        4250
+#&amp;gt; 10 Adelie  Biscoe             40.1            18.9              188        4300
 #&amp;gt; # ... with 24 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;summarize()&lt;/code&gt; gains new argument &lt;code&gt;.groups&lt;/code&gt; to control grouping structure of theh result.&lt;/p&gt;
 &lt;ul&gt;
@@ -780,6 +844,62 @@ penguins %&amp;gt;%
 #&amp;gt;   culmen_length_mm culmen_depth_mm
 #&amp;gt;              &amp;lt;int&amp;gt;           &amp;lt;int&amp;gt;
 #&amp;gt; 1                0               0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rolling-regression&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Rolling regression&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;cur_data()&lt;/code&gt; is particularly useful for rolling regression, in conjunction with the &lt;a href=&#34;https://davisvaughan.github.io/slider/&#34;&gt;slider&lt;/a&gt; package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(slider)
+library(lubridate)
+# historical stock prices from 2014-2018 for Google, Amazon, Facebook and Apple
+stock &amp;lt;- tsibbledata::gafa_stock %&amp;gt;% select(Symbol, Date, Close, Volume)
+stock
+#&amp;gt; # A tibble: 5,032 x 4
+#&amp;gt;    Symbol Date       Close    Volume
+#&amp;gt;    &amp;lt;chr&amp;gt;  &amp;lt;date&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+#&amp;gt;  1 AAPL   2014-01-02  79.0  58671200
+#&amp;gt;  2 AAPL   2014-01-03  77.3  98116900
+#&amp;gt;  3 AAPL   2014-01-06  77.7 103152700
+#&amp;gt;  4 AAPL   2014-01-07  77.1  79302300
+#&amp;gt;  5 AAPL   2014-01-08  77.6  64632400
+#&amp;gt;  6 AAPL   2014-01-09  76.6  69787200
+#&amp;gt;  7 AAPL   2014-01-10  76.1  76244000
+#&amp;gt;  8 AAPL   2014-01-13  76.5  94623200
+#&amp;gt;  9 AAPL   2014-01-14  78.1  83140400
+#&amp;gt; 10 AAPL   2014-01-15  79.6  97909700
+#&amp;gt; # ... with 5,022 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Arrange and group by `Symbol` (i.e. Google)
+stock &amp;lt;- stock %&amp;gt;%
+  arrange(Symbol, Date) %&amp;gt;%
+  group_by(Symbol) 
+
+linear_model &amp;lt;- function(df) {
+  lm(Close ~ Volume, data = df)
+}
+
+# 10 day rolling regression per group 
+stock %&amp;gt;% 
+  mutate(model = slide_index(
+    .x = cur_data(),
+    .i = Date,
+    .f = linear_model,
+    .before = days(9),
+    .complete = TRUE
+  )) 
+#&amp;gt; # A tibble: 5,032 x 5
+#&amp;gt; # Groups:   Symbol [4]
+#&amp;gt;    Symbol Date       Close    Volume model 
+#&amp;gt;    &amp;lt;chr&amp;gt;  &amp;lt;date&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;list&amp;gt;
+#&amp;gt;  1 AAPL   2014-01-02  79.0  58671200 &amp;lt;NULL&amp;gt;
+#&amp;gt;  2 AAPL   2014-01-03  77.3  98116900 &amp;lt;NULL&amp;gt;
+#&amp;gt;  3 AAPL   2014-01-06  77.7 103152700 &amp;lt;NULL&amp;gt;
+#&amp;gt;  4 AAPL   2014-01-07  77.1  79302300 &amp;lt;NULL&amp;gt;
+#&amp;gt;  5 AAPL   2014-01-08  77.6  64632400 &amp;lt;NULL&amp;gt;
+#&amp;gt;  6 AAPL   2014-01-09  76.6  69787200 &amp;lt;NULL&amp;gt;
+#&amp;gt;  7 AAPL   2014-01-10  76.1  76244000 &amp;lt;NULL&amp;gt;
+#&amp;gt;  8 AAPL   2014-01-13  76.5  94623200 &amp;lt;lm&amp;gt;  
+#&amp;gt;  9 AAPL   2014-01-14  78.1  83140400 &amp;lt;lm&amp;gt;  
+#&amp;gt; 10 AAPL   2014-01-15  79.6  97909700 &amp;lt;lm&amp;gt;  
+#&amp;gt; # ... with 5,022 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;

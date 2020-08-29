@@ -5,6 +5,6 @@ email_form: 2
 headless: true
 subtitle: ""
 title: Contact
-weight: 50
+weight: 200
 widget: contact
 ---

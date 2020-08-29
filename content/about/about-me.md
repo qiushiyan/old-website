@@ -49,6 +49,5 @@ subtitle = ""
 
 I live in Beijing, China, and am a junior student majoring in Data Journalism. 
 
-Some of my writing practices are listed [here](/docs/writings).
+This personal blog is dedicated to ...
 
-TO BE DONE

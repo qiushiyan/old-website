@@ -26,7 +26,7 @@ social:
   link: https://twitter.com/qiushizzzz
 - icon: linkedin-in
   icon_pack: fab
-  link: https://www.linkedin.com/in/%E6%B1%82%E8%AF%86-%E9%97%AB-893a48194/
+  link: https://www.linkedin.com/in/qiushi-yan-893a48194/
 - icon: address-card
   icon_pack: fas
   link: '/about'

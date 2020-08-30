@@ -48,4 +48,4 @@ subtitle = ""
 +++
 
 
-In my spare time, I enojoy watching natural documentaries and old-school movies. I play basketball and video games like Overwatch. Other than statistics and data science, I read books about cultural history, ecology, English writing, and most importantly all works by Bertrand Russell.  
+In my spare time, I enojoy watching natural documentaries and old-school movies, with the exception of the TV series *Friends*. I play basketball and video games like Overwatch. Other than technical things, I read books about cultural history, ecology, English writing, ancient Chinese poetry, and most importantly all works by Bertrand Russell.  

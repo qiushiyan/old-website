@@ -48,11 +48,17 @@ subtitle = ""
 +++
 
 
-I have developed great passion for data science and statistics in colledge, both in their rigourous beauty resided in mathematical thoery, and in applications devoted to real-world problems. Various literature in statistical machine learning, text mining, generalized linear models and recommender systems are current topics in which I spent most hours immerse myself. One of my treasured collectios are certificates of  received from relevant  courses
+I have developed great passion for data science and statistics in colledge, both in their rigourous beauty resided in mathematical thoery, and in applications devoted to real-world problems. Various literature in statistical machine learning, text mining, generalized linear models and recommender systems are current topics in which I spent most hours immerse myself.
+
+I take much delight in participating any course relevant to data science and statistics. One of my proud collections are certificates received from such courses, here is a short list
 
 - [Statistical Learning](https://courses.edx.org/certificates/25fafd2ee0f6458eaa0da0e5eefdac26) from StanfordOnline and edX
 
 - [Foundations of Big Data Analysis with SQL](https://www.coursera.org/account/accomplishments/records/KGR7GX67ZX5V) from Cloudera and Coursera
+
+- Machine Learning: Regression from University of UW and Coursera
+
+- Mathematics for Machine Learning: Multivariate Calculus From ICL and Coursera
 
 It's hard to tell why and when I fell in love with statistics and data science. Perhaps the vast branches of modern science with which it is inextricably interwoven dazzled me, or perhaps the cover of its textbooks are often well-desinged. Although I'm not a statistics major at college, I believe that there is a mission to solve real-world problems with statistical science. This conviction certainly became more explicit seeing talented researchers apply statistical methods to make active contributions during Covid-19. I also made poured in my own humble effort into the [Wuhan2020](https://github.com/wuhan2020/wuhan2020/blob/master/README_EN.md) project, which is a information collection platform for Covid-19 epidemic prevention.
 

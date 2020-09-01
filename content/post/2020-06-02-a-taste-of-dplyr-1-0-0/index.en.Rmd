@@ -239,7 +239,7 @@ by_species <- by_species %>%
 
 by_species
 ```
-And then extract model summaries or coefficients with `summarise()` and broom functions (note `by_species` is still a rowwise data frame):
+And then extract model summaries or coefficients with `summarize()` and `broom` functions (note that `by_species` is still a rowwise data frame):
 
 ```{r}
 by_species %>% 

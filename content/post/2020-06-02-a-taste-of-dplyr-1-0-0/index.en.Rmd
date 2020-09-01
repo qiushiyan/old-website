@@ -441,6 +441,7 @@ gf <- df %>% group_by(g)
 gf %>% summarize(row = cur_group_rows())
 gf %>% summarize(data = list(cur_group()))
 gf %>% summarize(data = list(cur_data()))
+# has nothing to do with groups
 gf %>% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
 ```
 
@@ -456,10 +457,10 @@ gf %>% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
 ```{r}
 # select penguins per group on body mass
 penguins_grouped %>% 
-  slice_max(body_mass_g, 1)
+  slice_max(body_mass_g, n = 1)
 
 penguins_grouped %>% 
-  slice_min(body_mass_g, 1)
+  slice_min(body_mass_g, n = 1)
 ```
 
 ```{r}

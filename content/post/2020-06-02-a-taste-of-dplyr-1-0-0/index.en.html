@@ -6,7 +6,7 @@ slug: taste-dplyr-1.0.0
 categories:
   - R
 summary: 'Hopefully this will remind myself of new features in dplyr 1.0.0'
-lastmod: '2020-07-17'
+lastmod: '2020-09-01'
 draft: no
 
 bibliography: ../bib/updated-dplyr.bib
@@ -50,7 +50,7 @@ image:
 library(ggplot2)
 
 packageVersion(&quot;dplyr&quot;)
-#&gt; [1] &#39;1.0.0&#39;</code></pre>
+#&gt; [1] &#39;1.0.2.9000&#39;</code></pre>
 <pre class="r"><code>penguins &lt;- readr::read_csv(&quot;D:/RProjects/data/blog/penguins.csv&quot;)
 penguins
 #&gt; # A tibble: 344 x 7
@@ -281,13 +281,13 @@ df
 #&gt; # Groups:   id, n, min, max [3]
 #&gt;      id     n   min   max     sim
 #&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1     1     3     0     1   0.388
-#&gt; 2     1     3     0     1   0.769
-#&gt; 3     1     3     0     1   0.945
-#&gt; 4     2     2    10   100  71.6  
-#&gt; 5     2     2    10   100  58.3  
-#&gt; 6     3     2   100  1000 897.   
-#&gt; 7     3     2   100  1000 949.</code></pre>
+#&gt; 1     1     3     0     1   0.374
+#&gt; 2     1     3     0     1   0.970
+#&gt; 3     1     3     0     1   0.245
+#&gt; 4     2     2    10   100  50.7  
+#&gt; 5     2     2    10   100  33.6  
+#&gt; 6     3     2   100  1000 393.   
+#&gt; 7     3     2   100  1000 477.</code></pre>
 <p>The previous approach</p>
 <pre class="r"><code>df %&gt;%
   mutate(sim = purrr::pmap(., ~ runif(..2, ..3, ..4)))
@@ -323,7 +323,7 @@ by_species
 #&gt; 1 Adelie             [152 x 6] &lt;lm&gt;  
 #&gt; 2 Chinstrap           [68 x 6] &lt;lm&gt;  
 #&gt; 3 Gentoo             [124 x 6] &lt;lm&gt;</code></pre>
-<p>And then extract model summaries or coefficients with <code>summarise()</code> and broom functions (note <code>by_species</code> is still a rowwise data frame):</p>
+<p>And then extract model summaries or coefficients with <code>summarize()</code> and <code>broom</code> functions (note that <code>by_species</code> is still a rowwise data frame):</p>
 <pre class="r"><code>by_species %&gt;% 
   summarize(broom::glance(model))
 #&gt; # A tibble: 3 x 13
@@ -632,12 +632,12 @@ gf %&gt;% summarize(row = cur_group_rows())
 #&gt; # Groups:   g [3]
 #&gt;   g       row
 #&gt;   &lt;chr&gt; &lt;int&gt;
-#&gt; 1 a         6
-#&gt; 2 b         1
+#&gt; 1 a         5
+#&gt; 2 b         2
 #&gt; 3 b         4
-#&gt; 4 c         2
+#&gt; 4 c         1
 #&gt; 5 c         3
-#&gt; 6 c         5
+#&gt; 6 c         6
 gf %&gt;% summarize(data = list(cur_group()))
 #&gt; # A tibble: 3 x 2
 #&gt;   g     data            
@@ -652,24 +652,25 @@ gf %&gt;% summarize(data = list(cur_data()))
 #&gt; 1 a     &lt;tibble [1 x 2]&gt;
 #&gt; 2 b     &lt;tibble [2 x 2]&gt;
 #&gt; 3 c     &lt;tibble [3 x 2]&gt;
+# has nothing to do with groups
 gf %&gt;% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
 #&gt; # A tibble: 6 x 3
 #&gt; # Groups:   g [3]
 #&gt;   g     x      y     
 #&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; 
-#&gt; 1 b     x 0.36 y 0.67
-#&gt; 2 c     x 0.53 y 0.68
-#&gt; 3 c     x 0.82 y 0.63
-#&gt; 4 b     x 0.58 y 0.01
-#&gt; 5 c     x 0.95 y 0.05
-#&gt; 6 a     x 0.53 y 0.8</code></pre>
+#&gt; 1 c     x 0.54 y 0.31
+#&gt; 2 b     x 0.3  y 0.44
+#&gt; 3 c     x 0.76 y 0.76
+#&gt; 4 b     x 0.05 y 0.02
+#&gt; 5 a     x 0.82 y 0.74
+#&gt; 6 c     x 0.11 y 0.04</code></pre>
 </div>
 <div id="superseded-functions" class="section level1">
 <h1>Superseded functions</h1>
 <p><code>top_n()</code>, <code>sample_n()</code>, and <code>sample_frac()</code> have been superseded in favor of a new family of slice helpers: <code>slice_min()</code>, <code>slice_max()</code>, <code>slice_head()</code>, <code>slice_tail()</code>, <code>slice_random()</code>.</p>
 <pre class="r"><code># select penguins per group on body mass
 penguins_grouped %&gt;% 
-  slice_max(body_mass_g, 1)
+  slice_max(body_mass_g, n = 1)
 #&gt; # A tibble: 3 x 7
 #&gt; # Groups:   species [3]
 #&gt;   species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
@@ -680,7 +681,7 @@ penguins_grouped %&gt;%
 #&gt; # ... with 1 more variable: sex &lt;chr&gt;
 
 penguins_grouped %&gt;% 
-  slice_min(body_mass_g, 1)
+  slice_min(body_mass_g, n = 1)
 #&gt; # A tibble: 4 x 7
 #&gt; # Groups:   species [3]
 #&gt;   species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
@@ -696,16 +697,16 @@ penguins %&gt;%
 #&gt; # A tibble: 10 x 7
 #&gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&gt;    &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
-#&gt;  1 Adelie  Dream              37              16.5              185        3400
-#&gt;  2 Adelie  Torge~             38.9            17.8              181        3625
-#&gt;  3 Gentoo  Biscoe             47.2            13.7              214        4925
-#&gt;  4 Chinst~ Dream              54.2            20.8              201        4300
-#&gt;  5 Adelie  Dream              39.6            18.1              186        4450
-#&gt;  6 Chinst~ Dream              47.6            18.3              195        3850
-#&gt;  7 Gentoo  Biscoe             46.8            14.3              215        4850
-#&gt;  8 Adelie  Dream              39.2            18.6              190        4250
-#&gt;  9 Gentoo  Biscoe             48.8            16.2              222        6000
-#&gt; 10 Adelie  Dream              40.8            18.9              208        4300
+#&gt;  1 Adelie  Biscoe             35.7            16.9              185        3150
+#&gt;  2 Adelie  Biscoe             40.6            18.8              193        3800
+#&gt;  3 Adelie  Biscoe             38.6            17.2              199        3750
+#&gt;  4 Adelie  Dream              40.2            17.1              193        3400
+#&gt;  5 Gentoo  Biscoe             50              15.9              224        5350
+#&gt;  6 Chinst~ Dream              50.6            19.4              193        3800
+#&gt;  7 Chinst~ Dream              46              18.9              195        4150
+#&gt;  8 Adelie  Torge~             NA              NA                 NA          NA
+#&gt;  9 Gentoo  Biscoe             44.5            14.3              216        4100
+#&gt; 10 Adelie  Dream              37.3            16.8              192        3000
 #&gt; # ... with 1 more variable: sex &lt;chr&gt;
 
 penguins %&gt;% 
@@ -713,16 +714,16 @@ penguins %&gt;%
 #&gt; # A tibble: 34 x 7
 #&gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&gt;    &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
-#&gt;  1 Adelie  Torge~             42.8            18.5              195        4250
-#&gt;  2 Adelie  Torge~             41.4            18.5              202        3875
-#&gt;  3 Adelie  Dream              35.6            17.5              191        3175
-#&gt;  4 Adelie  Dream              32.1            15.5              188        3050
-#&gt;  5 Gentoo  Biscoe             48.7            14.1              210        4450
-#&gt;  6 Adelie  Torge~             46              21.5              194        4200
-#&gt;  7 Adelie  Dream              36.5            18                182        3150
-#&gt;  8 Gentoo  Biscoe             46.7            15.3              219        5200
-#&gt;  9 Adelie  Biscoe             37.8            20                190        4250
-#&gt; 10 Adelie  Biscoe             40.1            18.9              188        4300
+#&gt;  1 Adelie  Biscoe             41.1            19.1              188        4100
+#&gt;  2 Gentoo  Biscoe             48.7            15.7              208        5350
+#&gt;  3 Adelie  Biscoe             38.1            16.5              198        3825
+#&gt;  4 Adelie  Biscoe             35.3            18.9              187        3800
+#&gt;  5 Gentoo  Biscoe             42.6            13.7              213        4950
+#&gt;  6 Gentoo  Biscoe             45.5            13.7              214        4650
+#&gt;  7 Gentoo  Biscoe             47.5            14                212        4875
+#&gt;  8 Chinst~ Dream              47              17.3              185        3700
+#&gt;  9 Adelie  Torge~             40.2            17                176        3450
+#&gt; 10 Adelie  Biscoe             34.5            18.1              187        2900
 #&gt; # ... with 24 more rows, and 1 more variable: sex &lt;chr&gt;</code></pre>
 <p><code>summarize()</code> gains new argument <code>.groups</code> to control grouping structure of theh result.</p>
 <ul>

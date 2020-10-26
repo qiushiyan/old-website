@@ -3,7 +3,8 @@ options(blogdown.author = "Qiushi Yan",
         blogdown.subdir = "post",
         blogdown.yaml.empty = TRUE,
         blogdown.new_bundle = TRUE,
-        blogdown.title_case = TRUE)
+        blogdown.title_case = TRUE,
+        blogdown.hugo.version = "0.64.1")
 rprofile <- Sys.getenv("R_PROFILE_USER", "~/.Rprofile")
 
 if (file.exists(rprofile)) {

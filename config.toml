@@ -23,7 +23,7 @@ copyright = "Qiushi Yan &copy; {year}"
 theme = "hugo-academic"
 
 # Get last modified date for content from Git?
-enableGitInfo = false
+enableGitInfo = blogdownfalse
 
 # Default language to use (if you setup multilingual support)
 defaultContentLanguage = "en"

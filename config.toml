@@ -23,7 +23,7 @@ copyright = "Qiushi Yan &copy; {year}"
 theme = "hugo-academic"
 
 # Get last modified date for content from Git?
-enableGitInfo = blogdownfalse
+enableGitInfo = true
 
 # Default language to use (if you setup multilingual support)
 defaultContentLanguage = "en"
@@ -69,4 +69,8 @@ ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "
   publication_type = "publication_types"
   author = "authors"
   
-
+# https://github.com/rstudio/blogdown/issues/447
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

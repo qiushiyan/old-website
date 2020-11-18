@@ -11,6 +11,7 @@ email: "qiushi.yann@gmail.com"
 interests:
 - R, Statistics, Visualization
 - Predictive Modeling & Statistical Learning
+- Text Mining
 - Chinese and English Literature
 name: Qiushi Yan
 organizations:
@@ -37,7 +38,27 @@ user_groups:
 ---
 <br>
 
-I'm currently a junior majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in `#rstats`.
+I have been applying to graduate programs mainly in MSc in Data Science, Statistics and Analytics. If you find this site, you probably want to know me more as a promising candidate through the following links
+
+- [Modeling Titanic Survival](/files/titanic-survival.pdf): A 30-page case study in the most updated and comprehensive Titanic survival data. A binary logistic model is built to analyze survival probability given characteristics such as age, gender, cabin class, nationality, embarkation point, etc. I demonstrate the overall modeling process, including preprocessing, exploratory analysis,  model fitting, adjustment, bootstrap internal validation and interpretation as well as other relevant techniques such as redundancy analysis and multiple imputation for missing data. The article also touches on key issues such as the choice of a statistical model or a machine learning model, using bootstrap to alleviate selection bias, disadvantages of the holdout sample approach in validation, and more. 
+
+- My [Mathematical Notes for Data Science and Statistics](https://enixam.github.io/math-foundations/): in-progress notes in Linear Algebra, Multivariate Calculus, Optimization, and Probability Theory
+
+- [Classify Brontë Sisiters with Penalized Logistic Regression](post/text-classification-logistic/): I train a logistic model with lasso penalty to predict the probability of a line being authored by Emily Brontë or Charlotte Brontë, featuring data cleaning of text, cross validation and grid search, and interpretation based on variable importance plots.  
+
+- [Tidy Data with Python](post/python-tidy-data/): a blog post on tidying messing data in Hadley Wickham’s Tidy Data paper, using python's pandas library
+
+- [Analyzing COVID-19 Publications](/post/analyzing-covid-19-publications/):  Text analysis on the abstract of publications on the coronavirus disease (COVID-19). Use weighted log odds and LDA topic model for information extraction. Finish with a network visualization of word correlation.  
+
+- A "My Life In Months" [plot](/img/life_in_months.png) illustrating my relevant experience in the field
+
+- [About](/about): where I elaborate on my passion and interests in statistics and data science, my skills, working experience, and [certificates](about#skills-interests-1) earned in online courses 
+
+- My [Github profile](github.com/enixam): I have been active in coding and contributing to open source projects ever since I decide to pursue such a career 
+
+- [More Posts](/post): a list of all my other projects in data analysis and machine learning
+
+I am currently a fourth-year student majoring in data journalism at [Communication University of China](http://www.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in `#rstats`.
 
 I take equal delight in ancient Chinese literature, game theory, network analysis and sports statistics. My favourite author is Bertrand Russell. :black_nib: 
 

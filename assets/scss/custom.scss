@@ -111,3 +111,35 @@ img {
 	background: #fff;
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
+
+/* buttons */
+
+.btn.btn-sm, .btn-group-sm > .btn {
+  border-radius: 0rem; /*undo rounded corners*/
+  font-size: 0.8rem;
+}
+
+.btn.btn-outline-primary.my-1.mr-1 {
+  border-radius: 0px; /*undo rounded corners*/
+  font-size: 0.8rem;
+}
+
+.btn {
+  font-family: Lora;
+  text-transform: lowercase;
+  font-style: italic;
+  border-radius: 0px;
+}
+
+.btn-toolbar .btn:first-child {
+  border-radius: 0px;
+}
+
+.btn-toolbar .btn:last-child {
+  border-radius: 0px;
+}
+
+.btn-toolbar {
+  justify-content: center;
+}
+

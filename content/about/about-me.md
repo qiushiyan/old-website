@@ -47,7 +47,8 @@ subtitle = ""
  css_class = "mini"
 +++
 
-My name is Qiushi Yan. I am now a junior student majoring in Data Journalism, though you might not find too many news stories here. As I am trying to earn a bachelor degree it comes to me that I want to spend more time engaging myself in data science and quantitative analysis type of work. I am looking for opportunities for master programs in applied statistics, data science, biostatistics in north America, fall 2021. Please let me know if you have any suggestion :smile:
+My name is Qiushi Yan. I am now a junior student majoring in Data Journalism, though you might not find too many news stories here. As I am trying to earn a bachelor degree it comes to me that I want to spend more time engaging myself in data science and quantitative analysis type of work. I am currently applying to graduate programs in data science, applied statistics and analytics. 
 
-This personal blog is dedicated to learning and sharing. Most of the posts involve doing data analysis and machine learning with a programming language, or reading notes in similar areas.  
+This blog is dedicated to learning and sharing. Most of the posts involve doing data analysis and machine learning with a programming language, or reading notes in the field.
 
+The following experience list describes roughly what I have learned and done in this area,  during internships and in schools. 

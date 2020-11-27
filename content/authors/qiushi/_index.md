@@ -44,7 +44,7 @@ Lately I have been applying to graduate programs mainly in MSc in Data Science, 
 
 - My [Mathematical Notes for Data Science and Statistics](https://enixam.github.io/math-foundations/): in-progress notes in Linear Algebra, Multivariate Calculus, Optimization and Probability Theory
 
-- [Classify Brontë Sisiters with Penalized Logistic Regression](post/text-classification-logistic/): I trained a logistic model with lasso penalty to predict the probability of a line being authored by Emily Brontë or Charlotte Brontë, featuring text processing, cross validation and grid search, and interpretation based on variable importance plots. A later [post](post/2020-05-07-analyzing-animal-crossing-reviews) extended this idea to build a multinomial regressor classifying customer reviews into 3 categories, taking advantage of upsampling to counteract class imbalance.  
+- [Classify Brontë Sisters with Penalized Logistic Regression](post/text-classification-logistic/): I trained a logistic model with lasso penalty to predict the probability of a line being authored by Emily Brontë or Charlotte Brontë, featuring text processing, cross validation and grid search, and interpretation based on variable importance plots. A later [post](post/2020-05-07-analyzing-animal-crossing-reviews) extended this idea to build a multinomial regressor classifying customer reviews into 3 categories, taking advantage of upsampling to counteract class imbalance.  
 
 - My personal R package [ymisc](https://github.com/enixam/ymisc). This is my first attempt at developing an R package, which currently contains miscellaneous functions for general hypothesis testing in multiple linear regression, converting multiple file encodings, writing a grouped by data frame to separate files. 
 

@@ -55,7 +55,7 @@ date_format = "January 2006"
   date_start = "2020-09-01"
   date_end = ""
   description = """
-   At a leading K-12 online English education company, the data team I am dedicated to fostering personal development of our tutors. We are now building an integrated performance system to inform of teachers their strength and weakness in recent classes. This metric system includes hardware setup, in-class interactivity , use of teaching tools, organization of materials and customer review under stratification by user level. I am involved throughout the program from problem formulation, exploratory analysis, feature engineering to developing end-to-end web applications. 
+   At a leading K-12 online English education company, the data team and I are dedicated to fostering personal development of tutors. We are establishing an integrated performance system to inform of teachers their strengths and weaknesses in recent classes. With R and Python, I did extensive exploratory analysis and research in how factors such as hardware setup, use of teaching tools, speaking speed, facial expressions and time management could coimpact conversion rate and customer review. I am involved throughout the project in problem definition, data cleaning, feature engineering, regression modeling and developing end-to-end web applications. 
   """
 
 [[experience]]
@@ -66,7 +66,7 @@ date_format = "January 2006"
   date_start = "2020-06-01"
   date_end = "2020-09-01"
   description = """
-   Formulating business hypothesis and testing them by implementing minimal tracking events and analysis of behavioural data. Present these results to client management with interactive reports and dashboards, and implement recommendations in collaboration with client team members.
+   Constantly innovating our web and app analytics service in aspects of data visualization tools and user interface. Provide supports for users across industries by designing tracking events and analysis of user behavioural data. At a client-facing role, I translated numbers into interactive reports and dashboards written in R Markdown and JavaScript, receiving immense positive feedback from client management.
   """
 
 
@@ -78,28 +78,24 @@ date_format = "January 2006"
   date_start = "2019-03-01"
   date_end = "2019-08-01"
   description = """
-  comprehensive marketing research analytics using AB testing, customer segmentation and AHP
-  
-  sentiment analysis and statistical network visualization of customer review
-  
-  attribution analysis of customer behaviour data
+  Build fast, scalable and extensible AB testing environment with R and C++. Conduct comprehensive overseas geo-marketing research targeting South America and Australia with techniques like density-based clustering, logistic regression, correspondence analysis, and AHP.
   """
 
 [[experience]]
-  title = "Summer Session in Linear Models"
+  title = "Summer Session in Linear Models, Grade: A"
   company = "University of California, Los Angeles"
   company_url = "http://www.stat.ucla.edu/~nchristo/statistics100C/"
   location = "Remote"
   date_start = "2020-07-01"
   date_end = "2020-09-01"
-  description = """I got an A in Stats100C: Linear Models, a course on the theory of regression analysis with matrix approach. Materials covered least square estimation, Guass-Markov theorem, partial regression, constrained least squares, general hypothesis testing ... """
+  description = """Top 10% grade in a proof-based course on the theory of regression analysis, offered by Statistics Department at UCLA. Topics include Gauss Markov theorem, general aspects of maximum likelihood estimation, partial regression, constrained estimation, generalized least squares and model selection. """
   
 [[experience]]
-  title = "Bachelor in Data Journalism"
+  title = "Bachelor in Data Journalism, GPA: 3.78/4"
   company = "Communication University of China"
   company_url = "http://www.cuc.edu.cn/"
   location = "Beijing, China"
   date_start = "2021-06-01"
   date_end = ""
-  description = "Relevant full-semester courses includes Calculus (up to multivariate), Linear Algebra, Probability (calculus based), Introductory Statistics, Web Development, Web Scarping with Python, Data Visualization"
+  description = "Excellent performance in Calculus, Linear Algebra, Probability and various courses in programming."
 +++

@@ -1,23 +1,24 @@
 ---
 authors:
 - qiushi
-bio: Yet another object of type closure
-#education:
-#  courses:
-#  - course: BA in Data Journalism
-#    institution: Communication University of China
-#    year: 2021 (expected)
+bio: There were 50 or more warnings, use quit() to hide all of them. 
+education:
+ courses:
+ - course: B.A. in Data Journalism
+   institution: Communication University of China
+   year: 2021 (expected)
 email: "qiushi.yann@gmail.com"
 interests:
 - R, Statistics, Visualization
 - Predictive Modeling & Statistical Learning
-- Text Mining
+- Quantitative Ecology and Natural Resource Management 
+- Educational Measurement and Psychometrics
 - Chinese and English Literature
 name: Qiushi Yan
 organizations:
 - name: Communication University of China
   url: "http://www.cuc.edu.cn/"
-role: Senior student, Data Journalism
+# role: Data Science candidates
 social:
 - icon: github
   icon_pack: fab

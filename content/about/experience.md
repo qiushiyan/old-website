@@ -82,13 +82,13 @@ date_format = "January 2006"
   """
 
 [[experience]]
-  title = "Summer Session in Linear Models, Grade: A"
+  title = "Summer Session Course Stats100C: Linear Models, Grade: A"
   company = "University of California, Los Angeles"
   company_url = "http://www.stat.ucla.edu/~nchristo/statistics100C/"
   location = "Remote"
   date_start = "2020-07-01"
   date_end = "2020-09-01"
-  description = """Top 10% grade in a proof-based course on the theory of regression analysis, offered by Statistics Department at UCLA. Topics include Gauss Markov theorem, general aspects of maximum likelihood estimation, partial regression, constrained estimation, generalized least squares and model selection. """
+  description = """Top 20% grade in a proof-based course on the theory of regression analysis, offered by Statistics Department at UCLA. Topics include Gauss Markov theorem, general aspects of maximum likelihood estimation, partial regression, constrained estimation, generalized least squares and model selection. """
   
 [[experience]]
   title = "Bachelor in Data Journalism, GPA: 3.78/4"

@@ -95,7 +95,7 @@ date_format = "January 2006"
   company = "Communication University of China"
   company_url = "http://www.cuc.edu.cn/"
   location = "Beijing, China"
-  date_start = "2021-06-01"
+  date_start = "2017-09-01"
   date_end = ""
   description = "Excellent performance in Calculus, Linear Algebra, Probability and various courses in programming."
 +++

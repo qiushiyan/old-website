@@ -48,41 +48,41 @@ date_format = "January 2006"
 
 
 [[experience]]
-  title = "Data Analyst (Intern)"
+  title = "Data Analyst Intern"
   company = "51talk"
   company_url = "https://51talk.ph/"
   location = "Beijing, China"
   date_start = "2020-09-01"
   date_end = ""
   description = """
-   At a leading K-12 online English education company, the data team and I are dedicated to fostering personal development of tutors. We are establishing an integrated performance system to inform of teachers their strengths and weaknesses in recent classes. With R and Python, I did extensive exploratory analysis and research in how factors such as hardware setup, use of teaching tools, speaking speed, facial expressions and time management could coimpact conversion rate and customer review. I am involved throughout the project in problem definition, data cleaning, feature engineering, regression modeling and developing end-to-end web applications. 
+   At a leading K-12 online English education company, I built an integrated tutoring performance system for free trials. With R and Python, I conducted extensive exploratory analysis and research on the influence of hardware setup, speaking speed, facial expressions and time management on conversion rate and customer review. I am involved throughout the project in problem definition, data cleaning, feature engineering, regression modeling and the development of end-to-end web applications. I am also involved in the ongoing project optimizing our adaptive placement test system, based on item-response theory and deep knowledge tracing. 
   """
 
 [[experience]]
-  title = "Business Analyst (Intern)"
+  title = "Business Analyst Intern"
   company = "Analysys"
   company_url = "https://www.analysys.cn/"
   location = "Beijing, China"
   date_start = "2020-06-01"
   date_end = "2020-09-01"
   description = """
-   Constantly innovating our web and app analytics service in aspects of data visualization tools and user interface. Provide supports for users across industries by designing tracking events and analysis of user behavioural data. At a client-facing role, I translated numbers into interactive reports and dashboards written in R Markdown and JavaScript, receiving immense positive feedback from client management.
+   Constantly innovating our web and app analytics service in aspects of data visualization tools and user interface. Provided supports for users across industries by designing tracking events and analysis of user behavioural data. At a client-facing role, I translated numbers into interactive reports and dashboards written in R Markdown and JavaScript, receiving immense positive feedback from client management.
   """
 
 
 [[experience]]
-  title = "Data Mining Engineer (Intern)"
+  title = "Data Mining Engineer Intern"
   company = "DiDi Chuxing"
   company_url = "www.didigloabl.com"
   location = "Beijing, China"
   date_start = "2019-03-01"
   date_end = "2019-08-01"
   description = """
-  Build fast, scalable and extensible AB testing environment with R and C++. Conduct comprehensive overseas geo-marketing research targeting South America and Australia with techniques like density-based clustering, logistic regression, correspondence analysis, and AHP.
+  At China's Uber, our team built fast, scalable and extensible AB testing environment with R and C++. Conducted overseas geo-marketing research targeting South America and Australia with techniques like density-based clustering, logistic regression, and correspondence analysis.
   """
 
 [[experience]]
-  title = "Summer Session Course Stats100C: Linear Models, Grade: A"
+  title = "Summer Session Course Stats100C: Linear Models, 4.0/4.0"
   company = "University of California, Los Angeles"
   company_url = "http://www.stat.ucla.edu/~nchristo/statistics100C/"
   location = "Remote"

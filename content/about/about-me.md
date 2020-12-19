@@ -64,7 +64,7 @@ Below is an autobiographical essay on my data science story.
 
 ___
 
-*TO BE DONE*
+*TO BE DONE: love story with statistics*
 
 I became an R user in late 2018. Thanks to the striking animal cover on O'Reilly book series, a book titled *Graphing with R: An introduction* with a colorful bird on the front caught my attention in the school library. The book was about the basics of R programming and making graphs in `base`. It was the first time I learned to create code-based data visualization. At that time, I did not know the word "data science", nor R's computational power. I was excited to find something I love and enjoyed the self-motivated process of learning. I began to document my progress in an MS Word document, by copying & pasting code and plots and adding my own comments.  
 

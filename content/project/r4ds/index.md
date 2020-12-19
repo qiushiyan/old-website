@@ -4,6 +4,7 @@ external_link: https://enixam.github.io/rfordatascience/
 summary: Notes for "R for Data Science"
 tags:
 - R
+- Notes
 title: R4DS
 ---
 

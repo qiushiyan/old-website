@@ -9091,7 +9091,7 @@ img {
 
 .btn {
   font-family: Lora;
-  text-transform: lowercase;
+  text-transform: capitalize;
   font-style: italic;
   border-radius: 0px; }
 
@@ -9103,3 +9103,8 @@ img {
 
 .btn-toolbar {
   justify-content: center; }
+
+/* About page */
+#about-me {
+  font-family: Lato;
+  font-size: 20px; }

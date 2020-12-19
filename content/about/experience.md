@@ -32,7 +32,7 @@ subtitle = ""
 
 [design.spacing]
   # Customize the section spacing. Order is top, right, bottom, left.
-  padding = ["0px", "0", "20px", "0"]
+  padding = ["0px", "250px", "20px", "250px"]
 
 # Date format for experience
 #   Refer to https://sourcethemes.com/academic/docs/customization/#date-format

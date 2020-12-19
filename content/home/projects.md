@@ -30,8 +30,16 @@ subtitle = ""
     tag = "R"
   
   [[content.filter_button]]
-    name = "Other"
-    tag = "Other"
+    name = "Math"
+    tag = "Math"
+    
+  [[content.filter_button]]
+    name = "Notes"
+    tag = "Notes"
+  
+  [[content.filter_button]]
+    name = "Case Study"
+    tag = "Case Study"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.

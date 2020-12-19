@@ -8,7 +8,7 @@ headless = true  # This file represents a page section.
 active = true # Activate this widget? true/false
 weight = 10  # Order that this section will appear.
 
-title = "More about me"
+title = "More About Me"
 subtitle = ""
 
 [design]
@@ -29,15 +29,15 @@ subtitle = ""
   # gradient_end = "SkyBlue"
   
   # Background image.
-  image = "pre-about-me.jpg"  # Name of image in `static/img/`.
-  image_darken = 0.2  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
+  image = "boat.jpg"  # Name of image in `static/img/`.
+  image_darken = 0  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
 
   # Text color (true=light or false=dark).
-  text_color_light = true
+  text_color_light = false
 
 [design.spacing]
   # Customize the section spacing. Order is top, right, bottom, left.
-  padding = ["20px", "0", "50px", "0"]
+  padding = ["0px", "0px", "200px", "0px"]
 
 [advanced]
  # Custom CSS. 

@@ -105,8 +105,8 @@ h1, h2, h3 {
 
 
 .hljs { /* code font size */
-font-size: 16px;
-padding: 1rem;
+  font-size: 16px;
+  padding: 1rem;
 }
 
 

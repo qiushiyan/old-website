@@ -49,19 +49,14 @@ subtitle = ""
 
 This blog is dedicated to learning and sharing my data science journey. Most of the posts are case studies in data analysis and machine learning. Many of my current [projects](../#projects) are reading notes on R books. My resume lives [here](/files/resume-en.pdf). Feel free to [contact](#contact) me.
 
-I have broad interests in all things related to statistics, data science and AI. Particularly, I am drawn the most by natural language processing and its applications in healthcare. I consider clinical notes as the key to dynamic decision support.
+I have broad interests in all things related to statistics, data science and AI. Particularly, I am drawn the most by natural language processing and its applications in healthcare. I believe that clinical text is the key to dynamic decision support.
 
 After joining 51talk, I have been actively learning education data science, computerized adaptive testing (CAT), and the applications of item-response theory. 
 
 Other than that, I aspire to apply data science techniques to quantitative ecology and natural resource management. Although human in natural systems go out of our way to tip that balance in our favor to the extreme detriment of everything else, within the discipline there are some heroes who have at least been able to clearly identify our impacts and are fighting to protect species, habitats, and, ultimately, the human race.
 
 
-
-
 Below is an autobiographical essay on my data science story. 
-
-
-
 ___
 
 *TO BE DONE: love story with statistics*
@@ -80,17 +75,17 @@ In the meantime, I made a transition from MS Word to R Markdown and Jupyter. As 
 
 I visited San Francisco for [RStudio Conf](https://rstudio.com/resources/rstudioconf-2020/) in January 2020, meeting R and data science experts worldwide. I enjoyed talks and Birds of a Feather sessions in machine learning, text mining, Shiny, visualization, and medicine. I also participated in the two-day workshop [Introduction to Machine Learning with the Tidyverse](https://github.com/rstudio-conf-2020/intro-to-ml-tidy), where [Alison Hill](https://alison.rbind.io/) introduced supervised machine learning using the [tidymodels](www.tidymodels.org) core packages. It was a memorable occasion to see the endeavor to knowledge sharing and community building of RStudio and top data scientists in the industry. I was motivated to pour in my effort by becoming an active member in online discussion boards, such as Stack Overflow and RStudio Community. 
 
-
 In February, I volunteered at [Wuhan2020](https://community.wuhan2020.org.cn/en-us), an information service platform to combat COVID-19. I served both as a developer and community coordinator, where I automated the verification process with Github Actions, and engineered ECharts visualization components for tracking hospital bed occupancy. The project also launched an open data initiative. Many data scientists contributed data, code, and software. As infections continued their rapid spread, there was also a worldwide transformation in universities, academic institutes, and companies to embrace the idea of shared data and research transparency. I had a simple investigation into local hospitals and organizations, in which I witnessed a significantly higher proportion of code-based data analysis and reproducible results. These findings deepened my passion in that data science is more than deploying smarter algorithms, but rather a revolution in both industry and academia towards openness, transparency and reproducibility.
 
 I joined [Analysys](http://www.analysyschina.com/about.html) as a business analyst from June to September. The position is a mixture of roles between an engineer and customer success. Challenges are that I had to constantly switch my audience between technicians and managements. The job was helpful in presentation skills and communicating to non-technical customers. 
 
-I have undertaken research projects since 2020. Many of them are COVID-19 related, and draw heavily on text mining methods such as topic modeling. I was also involved in a metazoan genomic analysis using probabilistic graphic models. Apart from that, Prof. [Elisa Celis](https://datascienceethics.wordpress.com/elisacelis/)’s lecture in data science ethics inspired me to contemplate fairness in machine learning. As a result, I proposed a new loan strategy based on group error parity to local banks.   
+
+I also took the UCLA Summer Session in [Stats100C: Linear Models](http://www.stat.ucla.edu/~nchristo/statistics100C/) from July to September. It turned out to be a rather theoretical course with lots of proofs, refreshing my memory about many details of matrix computation and mathematical statistics. The midterm and final exam were quite demanding by covering some advanced materials, and I was certainly more confident to succeed in a rigorous graduate program. Although all classes were offered remotely, Prof. Christou did show some exciting sights of UCLA campus and Los Angeles.  
 
 
 After leaving Analysys, I have worked as a data analyst at [51talk](https://51talk.ph/) up till now. At China's largest online English education plat, the Big Data team brings together many R wizards dedicated to education data science. Currently, I am leading projects in developing a tutor evaluation system.  
 
-
+I have undertaken research projects throughout 2020. Many of them are COVID-19 related, and draw heavily on text mining methods such as topic modeling. I was also involved in a metazoan genomic analysis using probabilistic graphic models. Apart from that, Prof. [Elisa Celis](https://datascienceethics.wordpress.com/elisacelis/)’s lecture in data science ethics inspired me to contemplate fairness in machine learning. As a result, I proposed a new loan strategy based on group error parity to local banks.   
 
 
 The following experience section describes my educational background and professional experience in data science. 

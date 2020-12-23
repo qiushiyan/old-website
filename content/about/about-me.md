@@ -85,7 +85,7 @@ I also took the UCLA Summer Session in [Stats100C: Linear Models](http://www.sta
 
 After leaving Analysys, I have worked as a data analyst at [51talk](https://51talk.ph/) up till now. At China's largest online English education plat, the Big Data team brings together many R wizards dedicated to education data science. Currently, I am leading projects in developing a tutor evaluation system.  
 
-I have undertaken research projects throughout 2020. Many of them are COVID-19 related, and draw heavily on text mining methods such as topic modeling. I was also involved in a metazoan genomic analysis using probabilistic graphic models. Apart from that, Prof. [Elisa Celis](https://datascienceethics.wordpress.com/elisacelis/)’s lecture in data science ethics inspired me to contemplate fairness in machine learning. As a result, I proposed a new loan strategy based on group error parity to local banks.   
+I have undertaken research projects throughout 2020. Many of them are COVID-19 related, and draw heavily on text mining methods such as topic modeling. I was also involved in a metazoan genomic analysis with probabilistic graphical models. Apart from that, Prof. [Elisa Celis](https://datascienceethics.wordpress.com/elisacelis/)’s lecture in data science ethics inspired me to contemplate fairness in machine learning. As a result, I proposed a new loan strategy based on group error parity to local banks.   
 
 
 The following experience section describes my educational background and professional experience in data science. 

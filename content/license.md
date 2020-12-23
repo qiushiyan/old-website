@@ -5,6 +5,7 @@ header:
   caption: ""
   image: ""
 share: false
+commentable: false
 title: "LICENSE: CC-BY-NC"
 linktitle: "<i class=\"fab fa-creative-commons fa-2x\"></i><i class=\"fab fa-creative-commons-by fa-2x\"></i><i class=\"fab fa-creative-commons-nc fa-2x\"></i>"
 ---

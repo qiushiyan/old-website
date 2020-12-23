@@ -144,6 +144,44 @@ img {
 }
 
 
+/* navbar */
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link:focus {
+	color: #328CC1;
+}
+
+.navbar-nav a.nav-link span,
+.navbar-nav a.nav-link span:after,
+.navbar-nav a.nav-link span:before {
+  transition: all .5s;
+}
+
+.navbar-nav a.nav-link {
+  position: relative;
+}
+
+.navbar-nav a.nav-link span:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.'; /* make invisible, dot beneath links */
+  color: transparent;
+  background: #328CC1;
+  height: 3px;
+}
+
+.navbar-nav a.nav-link span:hover:after {
+  width: 80%;
+}
+
+.navbar-light {
+  font-family: Zilla Slab;
+  font-size: 20px;
+}
 
 /* About page */
 

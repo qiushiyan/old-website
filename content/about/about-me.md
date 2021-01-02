@@ -63,7 +63,14 @@ ___
 
 I became an R user in late 2018. Thanks to the striking animal cover on O'Reilly book series, a book titled *Graphing with R: An introduction* with a colorful bird on the front caught my attention in the school library. The book was about the basics of R programming and making graphs in `base`. It was the first time I learned to create code-based data visualization. At that time, I did not know the word "data science", nor R's computational power. I was excited to find something I love and enjoyed the self-motivated process of learning. I began to document my progress in an MS Word document, by copying & pasting code and plots and adding my own comments.  
 
+<figure>
+    <img src="worddoc.jpg" style='margin-bottom:1rem'>
+    <figcaption style="margin:1rem">the old days of storing R code in a Word document</figcaption>
+</figure>
+
 After that, I read more R books such as *R in Action* and *ggplot2: Elegant Graphics for Data Analysis*. I came to understand that R's capability went far beyond plotting. So I made my next step to study statistical inference and modeling. Online learning platforms and professors who generously made public their class videos were of great help. I benefited a lot from Prof. [Chris Bilder](http://www.chrisbilder.com/)'s courses in *Regression Analysis* and *Categorical Data Analysis*. The lectures stimulated me to make sense of complex systems with statistical models. R, of course, provided a hands-on environment for practices. In addition, Prof. [Guan-Hua Huang](http://ghuang.stat.nctu.edu.tw/)'s class in *Multivariate Statistics* laid foundations for understanding many machine learning models, and expanded my knowledge in Linear Algebra. 
+
+
 
 In March 2019, I got my first internship as a data analyst at DiDi, China's Uber. I gained professional experience in AB testing and marketing research. Clustering, Correspondence Analysis, and PCA are used throughout the job. I was also introduced to text mining methods to extract opinions from customer reviews. More importantly, I had the luck to work in a multilingual data team, where my colleagues used a mix of R, C++, and Python. Over the months, I accumulated a smattering knowledge of programming in the other two languages. In my last project at DiDi, I contributed a handful of components written in C++ to our AB testing environment.
 
@@ -75,6 +82,12 @@ In the meantime, I made a transition from MS Word to R Markdown and Jupyter. As 
 
 I visited San Francisco for [RStudio Conf](https://rstudio.com/resources/rstudioconf-2020/) in January 2020, meeting R and data science experts worldwide. I enjoyed talks and Birds of a Feather sessions in machine learning, text mining, Shiny, visualization, and medicine. I also participated in the two-day workshop [Introduction to Machine Learning with the Tidyverse](https://github.com/rstudio-conf-2020/intro-to-ml-tidy), where [Alison Hill](https://alison.rbind.io/) introduced supervised machine learning using the [tidymodels](www.tidymodels.org) core packages. It was a memorable occasion to see the endeavor to knowledge sharing and community building of RStudio and top data scientists in the industry. I was motivated to pour in my effort by becoming an active member in online discussion boards, such as Stack Overflow and RStudio Community. 
 
+<figure>
+    <img src="harrell-speech.jpg" style='margin-bottom:1rem'>
+    <figcaption style="margin:1rem">Listening to Professor Frank Harrell's talk on clinical trial reporting</figcaption>
+</figure>
+
+
 In February, I volunteered at [Wuhan2020](https://community.wuhan2020.org.cn/en-us), an information service platform to combat COVID-19. I served both as a developer and community coordinator, where I automated the verification process with Github Actions, and engineered ECharts visualization components for tracking hospital bed occupancy. The project also launched an open data initiative. Many data scientists contributed data, code, and software. As infections continued their rapid spread, there was also a worldwide transformation in universities, academic institutes, and companies to embrace the idea of shared data and research transparency. I had a simple investigation into local hospitals and organizations, in which I witnessed a significantly higher proportion of code-based data analysis and reproducible results. These findings deepened my passion in that data science is more than deploying smarter algorithms, but rather a revolution in both industry and academia towards openness, transparency and reproducibility.
 
 I joined [Analysys](http://www.analysyschina.com/about.html) as a business analyst from June to September. The position is a mixture of roles between an engineer and customer success. Challenges are that I had to constantly switch my audience between technicians and managements. The job was helpful in presentation skills and communicating to non-technical customers. 
@@ -82,6 +95,10 @@ I joined [Analysys](http://www.analysyschina.com/about.html) as a business analy
 
 I also took the UCLA Summer Session in [Stats100C: Linear Models](http://www.stat.ucla.edu/~nchristo/statistics100C/) from July to September. It turned out to be a rather theoretical course with lots of proofs, refreshing my memory about many details of matrix computation and mathematical statistics. The midterm and final exam were quite demanding by covering some advanced materials, and I was certainly more confident to succeed in a rigorous graduate program. Although all classes were offered remotely, Prof. Christou did show some exciting sights of UCLA campus and Los Angeles.  
 
+<figure>
+    <img src="course-notes.jpg" style='height:20rem;margin-bottom:1rem'>
+    <figcaption style="margin:1rem">course notes in html document</figcaption>
+</figure>
 
 After leaving Analysys, I have worked as a data analyst at [51talk](https://51talk.ph/) up till now. At China's largest online English education plat, the Big Data team brings together many R wizards dedicated to education data science. Currently, I am leading projects in developing a tutor evaluation system.  
 

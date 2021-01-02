@@ -9141,3 +9141,5 @@ img {
 #about-me {
   font-family: Lato;
   font-size: 20px; }
+
+/* skill section */

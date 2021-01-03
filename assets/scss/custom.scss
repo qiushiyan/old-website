@@ -1,4 +1,9 @@
 /* -----------div tips------------- */
+:root {
+  --white-bg: #f7f7f7;
+}
+
+
 div.puzzle, div.fyi, div.demo, div.note {
     padding: 1em;
     margin: 1em 0;
@@ -180,14 +185,31 @@ img {
 
 .navbar-light {
   font-family: Zilla Slab;
-  font-size: 20px;
+  font-size:  calc(10px + 0.5em);
 }
 
 /* About page */
 
 #about-me {
   font-family: Lato;
-  font-size: 20px;
+  font-size: calc(10px + 0.5em);
+  padding: 1.2em 15vw;
+  margin: 0 auto;
+  
+}
+
+#contact {
+  padding: 1.2em 15vw;
+  background-color: var(--white-bg);
 }
 
 /* skill section */
+
+/* footer */
+
+
+.container footer {
+  margin: 1rem auto;
+  padding: 0;
+
+}

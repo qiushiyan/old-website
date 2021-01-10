@@ -33,3 +33,4 @@ In addition to modeling, we answer the following practical questions
 - Does having companions (e.g., parents, children, siblings and spouse) on the vessel increase or decrease survival probability. 
 
 - The impact of nationality. For example, did English subjects gained an advantage in a British-managed ship. 
+

@@ -4,7 +4,7 @@ summary: A fun Reaction Time Test built with Vue
 abstract: ""
 date: "2020-01-23"
 image:
-  caption: '[Test your reaction time](img/reaction-timer.png)'
+  caption: '[Have fun clicking!](img/reaction-timer.png)'
   focal_point: Smart
 links:
 - icon: github
@@ -21,4 +21,4 @@ tags:
 - Frontend
 ---
 
-A simple yet fun app testing your reaction time :clock1030:, built with Vue, deployed with firebase. Have fun clicking!
+A simple yet fun app testing your reaction time :clock1030:, built with Vue, deployed with firebase. 

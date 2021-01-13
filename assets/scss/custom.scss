@@ -72,6 +72,11 @@ iframe {
   border: none;
 }
 
+/* do not transform project title to uppercase */
+.card h4 {
+  text-transform: none;
+}
+
 /* MOBILE PROJECTS PAGE */
 /* Adds small gap between feature img and Title */
 

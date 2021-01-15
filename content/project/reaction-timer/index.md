@@ -4,7 +4,7 @@ summary: A fun Reaction Time Test built with Vue
 abstract: ""
 date: "2020-01-23"
 image:
-  caption: '[Have fun clicking!](img/reaction-timer.png)'
+  caption: 'Have fun clicking!'
   focal_point: Smart
 links:
 - icon: github

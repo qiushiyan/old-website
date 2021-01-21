@@ -9170,3 +9170,7 @@ img {
 .container footer {
   margin: 1rem auto;
   padding: 0; }
+
+/* commnet */
+#comment {
+  margin-top: 1rem; }

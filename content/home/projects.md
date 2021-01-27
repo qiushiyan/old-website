@@ -34,8 +34,8 @@ subtitle = ""
     tag = "Notes"
     
   [[content.filter_button]]
-    name = "Front-end"
-    tag = "Front-end"
+    name = "Web-Dev"
+    tag = "Web-Dev"
   
 
 [design]

@@ -1,3 +1,10 @@
+
+/* import fonts */
+@font-face {
+  font-family: "Lato";
+  src: url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,40);
+}
+
 /* -----------div tips------------- */
 :root {
   --white-bg: #f7f7f7;
@@ -189,7 +196,6 @@ img {
 }
 
 .navbar-light {
-  font-family: Zilla Slab;
   font-size:  calc(10px + 0.5em);
 }
 
@@ -209,7 +215,6 @@ img {
 }
 
 #other {
-  font-family: Lato;
   font-size: calc(10px + 0.5em);
   padding: 1.2em 15vw;
   margin: 0 auto;

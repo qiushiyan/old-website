@@ -7082,7 +7082,7 @@ ul.task-list {
 
 /* Navigation bar text */
 .navbar-light {
-  font-family: Josefin Slab, sans-serif;
+  font-family: Zilla Slab, sans-serif;
   font-weight: 400;
   line-height: 1.25;
   text-rendering: optimizeLegibility; }
@@ -7165,7 +7165,7 @@ figcaption.numbered {
 
 pre,
 code {
-  font-family: Roboto Mono, monospace;
+  font-family: Fira Code, monospace;
   color: #c7254e;
   background-color: #f9f2f4; }
 
@@ -8984,6 +8984,11 @@ div.mermaid {
   text-align: center;
   margin-bottom: 1rem; }
 
+/* import fonts */
+@font-face {
+  font-family: "Lato";
+  src: url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,40); }
+
 /* -----------div tips------------- */
 :root {
   --white-bg: #f7f7f7; }
@@ -9141,7 +9146,6 @@ img {
   width: 80%; }
 
 .navbar-light {
-  font-family: Zilla Slab;
   font-size: calc(10px + 0.5em); }
 
 /* About page */
@@ -9156,7 +9160,6 @@ img {
   margin: 0 auto; }
 
 #other {
-  font-family: Lato;
   font-size: calc(10px + 0.5em);
   padding: 1.2em 15vw;
   margin: 0 auto; }

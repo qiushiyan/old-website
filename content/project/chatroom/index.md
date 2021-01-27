@@ -1,6 +1,6 @@
 ---
 title: Chatroom
-summary: A minimal online chatroom
+summary: A minimal real-time chatroom
 abstract: ""
 date: "2020-01-26"
 image:
@@ -17,7 +17,7 @@ links:
   url: https://minimal-chatroom.web.app/
 
 tags:
-- Front-end
+- Web-Dev
 ---
 
 A minimal online chatroom built with Vue, and hosted on Firebase. Includes realtime updates, authentication, and security rules, uses Glassmorphism UI. It's also my first attempt at [Github Actions](https://github.com/enixam/chatroom/actions?query=workflow%3A%22Deploy+with+Firebase%22)!  

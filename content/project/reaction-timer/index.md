@@ -18,7 +18,7 @@ links:
 
 
 tags:
-- Front-end
+- Web-Dev
 ---
 
 A simple yet fun app testing your reaction time :clock1030:, built with Vue, deployed with [Firebase](https://firebase.google.com/). 

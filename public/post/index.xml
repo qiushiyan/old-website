@@ -13,22 +13,112 @@
     </image>
     
     <item>
+      <title>Automated Deployment of Vue Applications using Github Actions</title>
+      <link>https://qiushi.rbind.io/post/github-actions-firebase-vue/</link>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/post/github-actions-firebase-vue/</guid>
+      <description>
+&lt;script src=&#34;https://qiushi.rbind.io/post/github-actions-firebase-vue/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#firebase-setups&#34;&gt;Firebase Setups&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#use-github-actions&#34;&gt;Use Github Actions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#an-example&#34;&gt;An Example&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.github.com/en/actions&#34;&gt;Github Actions&lt;/a&gt; is a CI/CD service provided by Github to automate the software development workflow. Basically, it allows users to have some actions automatically triggered, for example run some testing, build a webpage or make a new release, once certain events are met, say you push to your repository or it receives a pull request. Instead of repeating the same cycle over and over again, you can use Github-hosted “runners”&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; (just think of it as a virtual environment with certain tools like &lt;code&gt;git&lt;/code&gt; and &lt;code&gt;python&lt;/code&gt; preinstalled) do the job for you. Github Actions supports many languages and complex tasks. In this post, I will focus on one specific application, that is having &lt;a href=&#34;https://firebase.google.com/&#34;&gt;Firebase&lt;/a&gt; deploy a Vue app once you push to the repo.&lt;/p&gt;
+&lt;p&gt;I assume basic understanding of Vue applications and the command line, but not necessarily Firebase. &lt;a href=&#34;https://firebase.google.com/&#34;&gt;Firebase&lt;/a&gt; is a backend service by Google. In this post I only use Firebase for hosting to generate a public url for my site, but there are more functionalities such as equipping your site with a real-time database. And the framework isn’t limited to Vue. For example, you could easily find Github Actions tailored for React and Angular apps once you understand its inner workings.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;firebase-setups&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Firebase Setups&lt;/h2&gt;
+&lt;p&gt;Before heading to deployment, you will first need to register a Firebase account and initialize you project as a Firebase project. The &lt;a href=&#34;https://firebase.google.com/docs/hosting&#34;&gt;official documentation&lt;/a&gt; details this process. In brief, you need to&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Register a Firebase account, and &lt;a href=&#34;https://firebase.google.com/docs/web/setup&#34;&gt;create a remote project&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Install the Firebase cli locally with &lt;code&gt;npm install -g firebase-tools&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;After the Firebase cli has been installed, run &lt;code&gt;firebase login&lt;/code&gt; to connect your local machine to Firebase. This doesn’t have to be in your project folder and only need to be done once per computer.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;firebase init hosting&lt;/code&gt; in your Vue project folder to initialize the hosting service. After it’s down, you should have two files &lt;code&gt;firebase.json&lt;/code&gt; and &lt;code&gt;.firebaserc&lt;/code&gt; created in the root directory.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, you can run &lt;code&gt;npm run build&lt;/code&gt; and &lt;code&gt;firebase deploy --only hosting&lt;/code&gt; every time you want to update your site and make it available to the public. Simple as it is, you might not want to do it manually. This is when Github Actions can save a lot of extra work.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;use-github-actions&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Use Github Actions&lt;/h2&gt;
+&lt;p&gt;I have a example Vue app in this &lt;a href=&#34;https://github.com/enixam/chatroom&#34;&gt;repo&lt;/a&gt;. What I want to achieve is that every time I push to this repo, the site automatically rebuilds and Firebase would deploy the updated site. To design the according Github Actions, create in the root directory a &lt;code&gt;.github/workflows/&lt;/code&gt;, and inside that folder a yaml file with extension &lt;code&gt;.yml&lt;/code&gt;. This file inside the special folder will be recognized by Github Actions and interpreted as instructions to follow. Mine is named &lt;code&gt;deploy-dev.yml&lt;/code&gt; but you can name it whatever you want. You can also have multiple yaml files, which will run in parallel. Each yaml file is called a &lt;em&gt;workflow&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Inside the yaml file, we tell Github Actions what to do after certain events. Let’s have a look inside&lt;/p&gt;
+&lt;script src=&#34;https://gist.github.com/enixam/f9deb27ef09a8229661e8c309fa4e0a9.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;The &lt;code&gt;name&lt;/code&gt; field specifies the name of the workflow. A workflow can contain multiple jobs, and a job can contain multiple steps. This is analogous to packages, functions and code. Try to make this name informative since it will help you find certain workflow if you have more than one.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;on&lt;/code&gt; field is the event after which we want follow-up actions to happen. In this case, the event is pushing to the &lt;code&gt;dev&lt;/code&gt; branch. This is highly customizable, for example, if you want something to happen after pushing to the main and dev branch, and also when the main branch receives a pull request, you can write&lt;/p&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;on:
+  push:
+    - main
+    - dev
+  pull_request:
+    - main &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The next step is telling Github Actions what to do by specifying &lt;em&gt;jobs&lt;/em&gt;. A job is a series &lt;em&gt;steps&lt;/em&gt; to perform, and each step is individual commands executed by bash on runners. A step begins with an optional &lt;code&gt;name&lt;/code&gt;, which makes debugging easier, followed by fields like &lt;code&gt;run&lt;/code&gt; and &lt;code&gt;uses&lt;/code&gt; that actually issue the commands. The &lt;code&gt;runs-on&lt;/code&gt; keyword configures the job to run on an Ubuntu Linux runner, you can use other os such as mac-os or windows.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;steps&lt;/code&gt; defines a series of actions to take. But at this point, Github Actions have only available some environmental variables of our repo, such as the repo url, the commit id and so on. It makes sense to first fetch the repo files and get the our code, since other actions will depend on them. We can do this by writing git commands as the first action to download these files. But a much easier solution is to &lt;code&gt;use&lt;/code&gt; community contributed actions. These actions are essentially templates for a specific task so that we will not go into the details ourselves. You can find more community contributed actions at the &lt;a href=&#34;https://github.com/marketplace?type=actions&#34;&gt;Github Marketplace&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In our case, the &lt;code&gt;uses&lt;/code&gt; keyword tells the job to retrieve v2 of the community action named &lt;code&gt;actions/checkout@v2&lt;/code&gt;. This is an action that checks out your repository and downloads it to the runner. Normally a job always starts with the checkout step.&lt;/p&gt;
+&lt;p&gt;After that, the following two steps proceed to install node.js and project dependencies. We need this step because unlike git, node.js is not by default available in the runner. The third step uses &lt;code&gt;run&lt;/code&gt; instead of &lt;code&gt;uses&lt;/code&gt; because we are just writing bash commands ourselves. You may want to switch to python shell in a python project, for example, by appending a &lt;code&gt;shell: python&lt;/code&gt; to certain steps. If we have not used the checkout action before, &lt;code&gt;uses: actions/setup-node@master&lt;/code&gt; can still run but &lt;code&gt;run: npm install&lt;/code&gt; will fail because the &lt;code&gt;package.json&lt;/code&gt; file won’t be available.&lt;/p&gt;
+&lt;p&gt;For now, the site is rebuilt in the runner with updates. We only have to tell Firebase to deploy. This is done by the last step&lt;/p&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;- name: Deploy with Firebase
+  uses: w9jds/firebase-action@master
+  with:
+    args: deploy --only hosting
+  env:
+    # see via cmd: firebase login:ci
+    FIREBASE_TOKEN: ${{ secrets.FirebaseDeploy }}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The action &lt;code&gt;w9jds/firebase-action&lt;/code&gt; sets up the Firebase cli. We provide an additional argument to tell &lt;code&gt;deploy --only hosting&lt;/code&gt; it to run the deployment service, and an token as environmental variables for authentication. This token can be generated by running &lt;code&gt;firebase login:ci&lt;/code&gt; locally. Then, you need to add the token into your &lt;em&gt;Github’s Repo &amp;gt; Settings &amp;gt; Secrets&lt;/em&gt;. &lt;code&gt;Mine&lt;/code&gt; is named &lt;code&gt;FirebaseDeploy&lt;/code&gt;. And the process is done.&lt;/p&gt;
+&lt;p&gt;To visualize the series of instructions followed by Github Actions, I created a diagram below.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&#34;diagram.jpg&#34;/&gt;
+&lt;figcaption&gt;
+The inner workings of Github Actions specified with workflow, jobs and steps
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
+&lt;div id=&#34;an-example&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;An Example&lt;/h2&gt;
+&lt;p&gt;I made a push to the &lt;a href=&#34;https://github.com/enixam/chatroom&#34;&gt;repo&lt;/a&gt;’s dev branch, so we could see how the process worked in action. The change was simple, I deleted Vue’s default icon inside &lt;code&gt;src/assests&lt;/code&gt;, and then committed and pushed to dev. After the push completed, Github Actions gets up and running because it detected a yaml file under &lt;code&gt;.github/workflows&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;running.jpg&#34; /&gt;
+When the workflow completed, the running icon turned green. We can click inside to see the running status of each step. In this case, all steps passed. (the first one and last two steps are auto-generated by Github Actions)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;steps.jpg&#34; /&gt;
+Clicking on individual step gives more details. If we click on the &lt;code&gt;Deploy with Firebase&lt;/code&gt; step, we can see that deployment succeed.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;deployment.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;While this is a relatively simple workflow, hopefully it gives you a general idea of how Github Actions can be used for automation. If you want to learn more, the &lt;a href=&#34;https://docs.github.com/en/actions/learn-github-actions&#34;&gt;official doc&lt;/a&gt; is a great resource.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;you can set up your own runner if you like&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>A Taste of dplyr 1.0.0</title>
       <link>https://qiushi.rbind.io/post/taste-dplyr-1.0.0/</link>
       <pubDate>Tue, 02 Jun 2020 00:00:00 +0000</pubDate>
       <guid>https://qiushi.rbind.io/post/taste-dplyr-1.0.0/</guid>
       <description>
+&lt;script src=&#34;https://qiushi.rbind.io/post/taste-dplyr-1.0.0/index.en_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#working-within-columns&#34;&gt;Working within columns&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#working-within-rows&#34;&gt;Working within rows&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#working-within-rows&#34;&gt;Working within rows&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#basic-usage&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#list-columns&#34;&gt;List-columns&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#simulaiton&#34;&gt;Simulaiton&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#group-wise-models&#34;&gt;Group-wise models&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#new-summarize-features&#34;&gt;New &lt;code&gt;summarize&lt;/code&gt; features&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#new-summarize-features&#34;&gt;New &lt;code&gt;summarize&lt;/code&gt; features&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#multiple-rows-and-columns&#34;&gt;Multiple rows and columns&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#use-summarize-in-non-summary-context&#34;&gt;Use &lt;code&gt;summarize&lt;/code&gt; in non-summary context&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
@@ -37,7 +127,8 @@
 &lt;li&gt;&lt;a href=&#34;#context-dependent-expressions&#34;&gt;Context dependent expressions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#superseded-functions&#34;&gt;Superseded functions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#other-changes&#34;&gt;Other changes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#use-cases&#34;&gt;Use cases&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#use-cases&#34;&gt;Use cases&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#replace-missing-values-in-many-columns&#34;&gt;Replace missing values in many columns&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#rolling-regression&#34;&gt;Rolling regression&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
@@ -45,12 +136,12 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;This post uses the &lt;code&gt;penguins&lt;/code&gt; dataset &lt;span class=&#34;citation&#34;&gt;(Gorman &lt;a href=&#34;#ref-10.1371/journal.pone.0090081&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt; for most demonstration puporses, modified by &lt;a href=&#34;https://github.com/allisonhorst/penguins&#34;&gt;Allison Horst&lt;/a&gt; (as an alternative to iris).&lt;/p&gt;
+&lt;p&gt;This post uses the &lt;code&gt;penguins&lt;/code&gt; dataset &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-10.1371/journal.pone.0090081&#34; role=&#34;doc-biblioref&#34;&gt;Gorman 2014&lt;/a&gt;)&lt;/span&gt; for most demonstration purposes, modified by &lt;a href=&#34;https://github.com/allisonhorst/penguins&#34;&gt;Allison Horst&lt;/a&gt; (as an alternative to iris).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
 library(ggplot2)
 
 packageVersion(&amp;quot;dplyr&amp;quot;)
-#&amp;gt; [1] &amp;#39;1.0.2.9000&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; [1] &amp;#39;1.0.3&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins &amp;lt;- readr::read_csv(&amp;quot;D:/RProjects/data/blog/penguins.csv&amp;quot;)
 penguins
 #&amp;gt; # A tibble: 344 x 7
@@ -70,7 +161,7 @@ penguins
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;% 
   ggplot(aes(culmen_length_mm, culmen_depth_mm, color = species, shape = species)) + 
   geom_point()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-06-02-a-taste-of-dplyr-1-0-0/index.en_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/taste-dplyr-1.0.0/index.en_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;div id=&#34;working-within-columns&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Working within columns&lt;/h1&gt;
 &lt;p&gt;The new &lt;code&gt;across()&lt;/code&gt; function supersedes functionalities of &lt;code&gt;_at&lt;/code&gt;, &lt;code&gt;_if&lt;/code&gt;, &lt;code&gt;_all&lt;/code&gt; variants. The first argument, &lt;code&gt;.cols&lt;/code&gt;, selects the columns you want to operate on. It uses tidy selection (like select()) so you can pick variables by position, name, and type. The second argument, &lt;code&gt;.fns&lt;/code&gt;, is a function or list of functions to apply to each column. This can also be a purrr style formula&lt;/p&gt;
@@ -81,7 +172,7 @@ penguins_grouped %&amp;gt;%
             n = n())
 #&amp;gt; # A tibble: 3 x 4
 #&amp;gt;   species   culmen_length_mm culmen_depth_mm     n
-#&amp;gt;   &amp;lt;chr&amp;gt;                &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; * &amp;lt;chr&amp;gt;                &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
 #&amp;gt; 1 Adelie                38.8            18.3   152
 #&amp;gt; 2 Chinstrap             48.8            18.4    68
 #&amp;gt; 3 Gentoo                47.5            15.0   124&lt;/code&gt;&lt;/pre&gt;
@@ -119,7 +210,7 @@ penguins %&amp;gt;%
                    .names = &amp;quot;{fn}_{col}&amp;quot;))
 #&amp;gt; # A tibble: 3 x 7
 #&amp;gt;   species min_culmen_leng~ max_culmen_leng~ min_culmen_dept~ max_culmen_dept~
-#&amp;gt;   &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;
+#&amp;gt; * &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;
 #&amp;gt; 1 Adelie              32.1             46               15.5             21.5
 #&amp;gt; 2 Chinst~             40.9             58               16.4             20.8
 #&amp;gt; 3 Gentoo              40.9             59.6             13.1             17.3
@@ -273,7 +364,7 @@ df
 #&amp;gt; 1     1     3     0     1 &amp;lt;dbl [3]&amp;gt;
 #&amp;gt; 2     2     2    10   100 &amp;lt;dbl [2]&amp;gt;
 #&amp;gt; 3     3     2   100  1000 &amp;lt;dbl [2]&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Or take advantage of &lt;code&gt;summarize&lt;/code&gt;’s new features to return multiple rows per group&lt;/p&gt;
+&lt;p&gt;Or taking advantage of &lt;code&gt;summarize&lt;/code&gt;’s new features to return multiple rows per group&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
   rowwise(everything()) %&amp;gt;% 
   summarize(sim = runif(n, min, max))
@@ -281,13 +372,13 @@ df
 #&amp;gt; # Groups:   id, n, min, max [3]
 #&amp;gt;      id     n   min   max     sim
 #&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
-#&amp;gt; 1     1     3     0     1   0.374
-#&amp;gt; 2     1     3     0     1   0.970
-#&amp;gt; 3     1     3     0     1   0.245
-#&amp;gt; 4     2     2    10   100  50.7  
-#&amp;gt; 5     2     2    10   100  33.6  
-#&amp;gt; 6     3     2   100  1000 393.   
-#&amp;gt; 7     3     2   100  1000 477.&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1     1     3     0     1   0.330
+#&amp;gt; 2     1     3     0     1   0.637
+#&amp;gt; 3     1     3     0     1   0.379
+#&amp;gt; 4     2     2    10   100  82.7  
+#&amp;gt; 5     2     2    10   100  85.5  
+#&amp;gt; 6     3     2   100  1000 184.   
+#&amp;gt; 7     3     2   100  1000 252.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The previous approach&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;%
   mutate(sim = purrr::pmap(., ~ runif(..2, ..3, ..4)))
@@ -348,7 +439,7 @@ by_species %&amp;gt;%
 #&amp;gt; 4 Chinstrap culmen_depth_mm    1.92      0.274      7.01 1.53e- 9
 #&amp;gt; 5 Gentoo    (Intercept)       17.2       3.28       5.25 6.60e- 7
 #&amp;gt; 6 Gentoo    culmen_depth_mm    2.02      0.219      9.24 1.02e-15&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;An alternative approach:&lt;/p&gt;
+&lt;p&gt;An alternative approach&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;penguins %&amp;gt;%
   group_by(species) %&amp;gt;% 
   group_modify(~ broom::tidy(lm(culmen_length_mm ~ culmen_depth_mm, data = .x)))
@@ -397,7 +488,7 @@ by_species %&amp;gt;%
                    max = max(culmen_depth_mm, na.rm = TRUE)))
 #&amp;gt; # A tibble: 3 x 3
 #&amp;gt;   species     min   max
-#&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+#&amp;gt; * &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
 #&amp;gt; 1 Adelie     15.5  21.5
 #&amp;gt; 2 Chinstrap  16.4  20.8
 #&amp;gt; 3 Gentoo     13.1  17.3&lt;/code&gt;&lt;/pre&gt;
@@ -632,23 +723,23 @@ gf %&amp;gt;% summarize(row = cur_group_rows())
 #&amp;gt; # Groups:   g [3]
 #&amp;gt;   g       row
 #&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;
-#&amp;gt; 1 a         5
+#&amp;gt; 1 a         3
 #&amp;gt; 2 b         2
-#&amp;gt; 3 b         4
+#&amp;gt; 3 b         5
 #&amp;gt; 4 c         1
-#&amp;gt; 5 c         3
+#&amp;gt; 5 c         4
 #&amp;gt; 6 c         6
 gf %&amp;gt;% summarize(data = list(cur_group()))
 #&amp;gt; # A tibble: 3 x 2
 #&amp;gt;   g     data            
-#&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;list&amp;gt;          
+#&amp;gt; * &amp;lt;chr&amp;gt; &amp;lt;list&amp;gt;          
 #&amp;gt; 1 a     &amp;lt;tibble [1 x 1]&amp;gt;
 #&amp;gt; 2 b     &amp;lt;tibble [1 x 1]&amp;gt;
 #&amp;gt; 3 c     &amp;lt;tibble [1 x 1]&amp;gt;
 gf %&amp;gt;% summarize(data = list(cur_data()))
 #&amp;gt; # A tibble: 3 x 2
 #&amp;gt;   g     data            
-#&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;list&amp;gt;          
+#&amp;gt; * &amp;lt;chr&amp;gt; &amp;lt;list&amp;gt;          
 #&amp;gt; 1 a     &amp;lt;tibble [1 x 2]&amp;gt;
 #&amp;gt; 2 b     &amp;lt;tibble [2 x 2]&amp;gt;
 #&amp;gt; 3 c     &amp;lt;tibble [3 x 2]&amp;gt;
@@ -658,12 +749,12 @@ gf %&amp;gt;% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
 #&amp;gt; # Groups:   g [3]
 #&amp;gt;   g     x      y     
 #&amp;gt;   &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; 
-#&amp;gt; 1 c     x 0.54 y 0.31
-#&amp;gt; 2 b     x 0.3  y 0.44
-#&amp;gt; 3 c     x 0.76 y 0.76
-#&amp;gt; 4 b     x 0.05 y 0.02
-#&amp;gt; 5 a     x 0.82 y 0.74
-#&amp;gt; 6 c     x 0.11 y 0.04&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 c     x 0.23 y 0.24
+#&amp;gt; 2 b     x 0.3  y 0.98
+#&amp;gt; 3 a     x 0.09 y 0.62
+#&amp;gt; 4 c     x 0.74 y 0.93
+#&amp;gt; 5 b     x 0.5  y 0.41
+#&amp;gt; 6 c     x 0.89 y 0.16&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;superseded-functions&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Superseded functions&lt;/h1&gt;
@@ -697,16 +788,16 @@ penguins %&amp;gt;%
 #&amp;gt; # A tibble: 10 x 7
 #&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
-#&amp;gt;  1 Adelie  Biscoe             35.7            16.9              185        3150
-#&amp;gt;  2 Adelie  Biscoe             40.6            18.8              193        3800
-#&amp;gt;  3 Adelie  Biscoe             38.6            17.2              199        3750
-#&amp;gt;  4 Adelie  Dream              40.2            17.1              193        3400
-#&amp;gt;  5 Gentoo  Biscoe             50              15.9              224        5350
-#&amp;gt;  6 Chinst~ Dream              50.6            19.4              193        3800
-#&amp;gt;  7 Chinst~ Dream              46              18.9              195        4150
-#&amp;gt;  8 Adelie  Torge~             NA              NA                 NA          NA
-#&amp;gt;  9 Gentoo  Biscoe             44.5            14.3              216        4100
-#&amp;gt; 10 Adelie  Dream              37.3            16.8              192        3000
+#&amp;gt;  1 Adelie  Dream              37.3            17.8              191        3350
+#&amp;gt;  2 Chinst~ Dream              48.1            16.4              199        3325
+#&amp;gt;  3 Chinst~ Dream              49              19.5              210        3950
+#&amp;gt;  4 Chinst~ Dream              46.4            18.6              190        3450
+#&amp;gt;  5 Gentoo  Biscoe             46.7            15.3              219        5200
+#&amp;gt;  6 Gentoo  Biscoe             49.8            15.9              229        5950
+#&amp;gt;  7 Adelie  Dream              41.1            18.1              205        4300
+#&amp;gt;  8 Adelie  Dream              41.1            17.5              190        3900
+#&amp;gt;  9 Gentoo  Biscoe             47.2            13.7              214        4925
+#&amp;gt; 10 Gentoo  Biscoe             45.5            14.5              212        4750
 #&amp;gt; # ... with 1 more variable: sex &amp;lt;chr&amp;gt;
 
 penguins %&amp;gt;% 
@@ -714,16 +805,16 @@ penguins %&amp;gt;%
 #&amp;gt; # A tibble: 34 x 7
 #&amp;gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;             &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;
-#&amp;gt;  1 Adelie  Biscoe             41.1            19.1              188        4100
-#&amp;gt;  2 Gentoo  Biscoe             48.7            15.7              208        5350
-#&amp;gt;  3 Adelie  Biscoe             38.1            16.5              198        3825
-#&amp;gt;  4 Adelie  Biscoe             35.3            18.9              187        3800
-#&amp;gt;  5 Gentoo  Biscoe             42.6            13.7              213        4950
-#&amp;gt;  6 Gentoo  Biscoe             45.5            13.7              214        4650
-#&amp;gt;  7 Gentoo  Biscoe             47.5            14                212        4875
-#&amp;gt;  8 Chinst~ Dream              47              17.3              185        3700
-#&amp;gt;  9 Adelie  Torge~             40.2            17                176        3450
-#&amp;gt; 10 Adelie  Biscoe             34.5            18.1              187        2900
+#&amp;gt;  1 Gentoo  Biscoe             46.2            14.4              214        4650
+#&amp;gt;  2 Gentoo  Biscoe             49.1            14.5              212        4625
+#&amp;gt;  3 Gentoo  Biscoe             42.7            13.7              208        3950
+#&amp;gt;  4 Gentoo  Biscoe             45.2            14.8              212        5200
+#&amp;gt;  5 Adelie  Torge~             38.5            17.9              190        3325
+#&amp;gt;  6 Gentoo  Biscoe             48.5            14.1              220        5300
+#&amp;gt;  7 Adelie  Torge~             34.6            21.1              198        4400
+#&amp;gt;  8 Chinst~ Dream              50.3            20                197        3300
+#&amp;gt;  9 Adelie  Biscoe             35.3            18.9              187        3800
+#&amp;gt; 10 Adelie  Dream              36.9            18.6              189        3500
 #&amp;gt; # ... with 24 more rows, and 1 more variable: sex &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;summarize()&lt;/code&gt; gains new argument &lt;code&gt;.groups&lt;/code&gt; to control grouping structure of theh result.&lt;/p&gt;
 &lt;ul&gt;
@@ -883,9 +974,9 @@ stock %&amp;gt;%
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;
-&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
-&lt;div id=&#34;ref-10.1371/journal.pone.0090081&#34;&gt;
-&lt;p&gt;Gorman, Tony D. AND Fraser, Kristen B. AND Williams. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” &lt;em&gt;PLOS ONE&lt;/em&gt; 9 (3): 1–14. &lt;a href=&#34;https://doi.org/10.1371/journal.pone.0090081&#34;&gt;https://doi.org/10.1371/journal.pone.0090081&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-10.1371/journal.pone.0090081&#34; class=&#34;csl-entry&#34;&gt;
+Gorman, Tony D. AND Fraser, Kristen B. AND Williams. 2014. &lt;span&gt;“Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (genus Pygoscelis).”&lt;/span&gt; &lt;em&gt;PLOS ONE&lt;/em&gt; 9 (3): 1–14. &lt;a href=&#34;https://doi.org/10.1371/journal.pone.0090081&#34;&gt;https://doi.org/10.1371/journal.pone.0090081&lt;/a&gt;.
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

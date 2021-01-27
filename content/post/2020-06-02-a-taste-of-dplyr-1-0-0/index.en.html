@@ -6,7 +6,7 @@ slug: taste-dplyr-1.0.0
 categories:
   - R
 summary: 'Hopefully this will remind myself of new features in dplyr 1.0.0'
-lastmod: '2020-09-01'
+lastmod: '2021-01-28'
 draft: no
 
 bibliography: ../bib/updated-dplyr.bib
@@ -18,17 +18,20 @@ image:
   preview_only: yes
 ---
 
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
 
 <div id="TOC">
 <ul>
 <li><a href="#working-within-columns">Working within columns</a></li>
-<li><a href="#working-within-rows">Working within rows</a><ul>
+<li><a href="#working-within-rows">Working within rows</a>
+<ul>
 <li><a href="#basic-usage">Basic usage</a></li>
 <li><a href="#list-columns">List-columns</a></li>
 <li><a href="#simulaiton">Simulaiton</a></li>
 <li><a href="#group-wise-models">Group-wise models</a></li>
 </ul></li>
-<li><a href="#new-summarize-features">New <code>summarize</code> features</a><ul>
+<li><a href="#new-summarize-features">New <code>summarize</code> features</a>
+<ul>
 <li><a href="#multiple-rows-and-columns">Multiple rows and columns</a></li>
 <li><a href="#use-summarize-in-non-summary-context">Use <code>summarize</code> in non-summary context</a></li>
 </ul></li>
@@ -37,7 +40,8 @@ image:
 <li><a href="#context-dependent-expressions">Context dependent expressions</a></li>
 <li><a href="#superseded-functions">Superseded functions</a></li>
 <li><a href="#other-changes">Other changes</a></li>
-<li><a href="#use-cases">Use cases</a><ul>
+<li><a href="#use-cases">Use cases</a>
+<ul>
 <li><a href="#replace-missing-values-in-many-columns">Replace missing values in many columns</a></li>
 <li><a href="#rolling-regression">Rolling regression</a></li>
 </ul></li>
@@ -45,12 +49,12 @@ image:
 </ul>
 </div>
 
-<p>This post uses the <code>penguins</code> dataset <span class="citation">(Gorman <a href="#ref-10.1371/journal.pone.0090081" role="doc-biblioref">2014</a>)</span> for most demonstration puporses, modified by <a href="https://github.com/allisonhorst/penguins">Allison Horst</a> (as an alternative to iris).</p>
+<p>This post uses the <code>penguins</code> dataset <span class="citation">(<a href="#ref-10.1371/journal.pone.0090081" role="doc-biblioref">Gorman 2014</a>)</span> for most demonstration purposes, modified by <a href="https://github.com/allisonhorst/penguins">Allison Horst</a> (as an alternative to iris).</p>
 <pre class="r"><code>library(dplyr)
 library(ggplot2)
 
 packageVersion(&quot;dplyr&quot;)
-#&gt; [1] &#39;1.0.2.9000&#39;</code></pre>
+#&gt; [1] &#39;1.0.3&#39;</code></pre>
 <pre class="r"><code>penguins &lt;- readr::read_csv(&quot;D:/RProjects/data/blog/penguins.csv&quot;)
 penguins
 #&gt; # A tibble: 344 x 7
@@ -70,7 +74,7 @@ penguins
 <pre class="r"><code>penguins %&gt;% 
   ggplot(aes(culmen_length_mm, culmen_depth_mm, color = species, shape = species)) + 
   geom_point()</code></pre>
-<p><img src="/post/2020-06-02-a-taste-of-dplyr-1-0-0/index.en_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
 <div id="working-within-columns" class="section level1">
 <h1>Working within columns</h1>
 <p>The new <code>across()</code> function supersedes functionalities of <code>_at</code>, <code>_if</code>, <code>_all</code> variants. The first argument, <code>.cols</code>, selects the columns you want to operate on. It uses tidy selection (like select()) so you can pick variables by position, name, and type. The second argument, <code>.fns</code>, is a function or list of functions to apply to each column. This can also be a purrr style formula</p>
@@ -81,7 +85,7 @@ penguins_grouped %&gt;%
             n = n())
 #&gt; # A tibble: 3 x 4
 #&gt;   species   culmen_length_mm culmen_depth_mm     n
-#&gt;   &lt;chr&gt;                &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
+#&gt; * &lt;chr&gt;                &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
 #&gt; 1 Adelie                38.8            18.3   152
 #&gt; 2 Chinstrap             48.8            18.4    68
 #&gt; 3 Gentoo                47.5            15.0   124</code></pre>
@@ -119,7 +123,7 @@ penguins %&gt;%
                    .names = &quot;{fn}_{col}&quot;))
 #&gt; # A tibble: 3 x 7
 #&gt;   species min_culmen_leng~ max_culmen_leng~ min_culmen_dept~ max_culmen_dept~
-#&gt;   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+#&gt; * &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
 #&gt; 1 Adelie              32.1             46               15.5             21.5
 #&gt; 2 Chinst~             40.9             58               16.4             20.8
 #&gt; 3 Gentoo              40.9             59.6             13.1             17.3
@@ -273,7 +277,7 @@ df
 #&gt; 1     1     3     0     1 &lt;dbl [3]&gt;
 #&gt; 2     2     2    10   100 &lt;dbl [2]&gt;
 #&gt; 3     3     2   100  1000 &lt;dbl [2]&gt;</code></pre>
-<p>Or take advantage of <code>summarize</code>’s new features to return multiple rows per group</p>
+<p>Or taking advantage of <code>summarize</code>’s new features to return multiple rows per group</p>
 <pre class="r"><code>df %&gt;% 
   rowwise(everything()) %&gt;% 
   summarize(sim = runif(n, min, max))
@@ -281,13 +285,13 @@ df
 #&gt; # Groups:   id, n, min, max [3]
 #&gt;      id     n   min   max     sim
 #&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1     1     3     0     1   0.374
-#&gt; 2     1     3     0     1   0.970
-#&gt; 3     1     3     0     1   0.245
-#&gt; 4     2     2    10   100  50.7  
-#&gt; 5     2     2    10   100  33.6  
-#&gt; 6     3     2   100  1000 393.   
-#&gt; 7     3     2   100  1000 477.</code></pre>
+#&gt; 1     1     3     0     1   0.330
+#&gt; 2     1     3     0     1   0.637
+#&gt; 3     1     3     0     1   0.379
+#&gt; 4     2     2    10   100  82.7  
+#&gt; 5     2     2    10   100  85.5  
+#&gt; 6     3     2   100  1000 184.   
+#&gt; 7     3     2   100  1000 252.</code></pre>
 <p>The previous approach</p>
 <pre class="r"><code>df %&gt;%
   mutate(sim = purrr::pmap(., ~ runif(..2, ..3, ..4)))
@@ -348,7 +352,7 @@ by_species %&gt;%
 #&gt; 4 Chinstrap culmen_depth_mm    1.92      0.274      7.01 1.53e- 9
 #&gt; 5 Gentoo    (Intercept)       17.2       3.28       5.25 6.60e- 7
 #&gt; 6 Gentoo    culmen_depth_mm    2.02      0.219      9.24 1.02e-15</code></pre>
-<p>An alternative approach:</p>
+<p>An alternative approach</p>
 <pre class="r"><code>penguins %&gt;%
   group_by(species) %&gt;% 
   group_modify(~ broom::tidy(lm(culmen_length_mm ~ culmen_depth_mm, data = .x)))
@@ -397,7 +401,7 @@ by_species %&gt;%
                    max = max(culmen_depth_mm, na.rm = TRUE)))
 #&gt; # A tibble: 3 x 3
 #&gt;   species     min   max
-#&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+#&gt; * &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1 Adelie     15.5  21.5
 #&gt; 2 Chinstrap  16.4  20.8
 #&gt; 3 Gentoo     13.1  17.3</code></pre>
@@ -632,23 +636,23 @@ gf %&gt;% summarize(row = cur_group_rows())
 #&gt; # Groups:   g [3]
 #&gt;   g       row
 #&gt;   &lt;chr&gt; &lt;int&gt;
-#&gt; 1 a         5
+#&gt; 1 a         3
 #&gt; 2 b         2
-#&gt; 3 b         4
+#&gt; 3 b         5
 #&gt; 4 c         1
-#&gt; 5 c         3
+#&gt; 5 c         4
 #&gt; 6 c         6
 gf %&gt;% summarize(data = list(cur_group()))
 #&gt; # A tibble: 3 x 2
 #&gt;   g     data            
-#&gt;   &lt;chr&gt; &lt;list&gt;          
+#&gt; * &lt;chr&gt; &lt;list&gt;          
 #&gt; 1 a     &lt;tibble [1 x 1]&gt;
 #&gt; 2 b     &lt;tibble [1 x 1]&gt;
 #&gt; 3 c     &lt;tibble [1 x 1]&gt;
 gf %&gt;% summarize(data = list(cur_data()))
 #&gt; # A tibble: 3 x 2
 #&gt;   g     data            
-#&gt;   &lt;chr&gt; &lt;list&gt;          
+#&gt; * &lt;chr&gt; &lt;list&gt;          
 #&gt; 1 a     &lt;tibble [1 x 2]&gt;
 #&gt; 2 b     &lt;tibble [2 x 2]&gt;
 #&gt; 3 c     &lt;tibble [3 x 2]&gt;
@@ -658,12 +662,12 @@ gf %&gt;% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
 #&gt; # Groups:   g [3]
 #&gt;   g     x      y     
 #&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; 
-#&gt; 1 c     x 0.54 y 0.31
-#&gt; 2 b     x 0.3  y 0.44
-#&gt; 3 c     x 0.76 y 0.76
-#&gt; 4 b     x 0.05 y 0.02
-#&gt; 5 a     x 0.82 y 0.74
-#&gt; 6 c     x 0.11 y 0.04</code></pre>
+#&gt; 1 c     x 0.23 y 0.24
+#&gt; 2 b     x 0.3  y 0.98
+#&gt; 3 a     x 0.09 y 0.62
+#&gt; 4 c     x 0.74 y 0.93
+#&gt; 5 b     x 0.5  y 0.41
+#&gt; 6 c     x 0.89 y 0.16</code></pre>
 </div>
 <div id="superseded-functions" class="section level1">
 <h1>Superseded functions</h1>
@@ -697,16 +701,16 @@ penguins %&gt;%
 #&gt; # A tibble: 10 x 7
 #&gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&gt;    &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
-#&gt;  1 Adelie  Biscoe             35.7            16.9              185        3150
-#&gt;  2 Adelie  Biscoe             40.6            18.8              193        3800
-#&gt;  3 Adelie  Biscoe             38.6            17.2              199        3750
-#&gt;  4 Adelie  Dream              40.2            17.1              193        3400
-#&gt;  5 Gentoo  Biscoe             50              15.9              224        5350
-#&gt;  6 Chinst~ Dream              50.6            19.4              193        3800
-#&gt;  7 Chinst~ Dream              46              18.9              195        4150
-#&gt;  8 Adelie  Torge~             NA              NA                 NA          NA
-#&gt;  9 Gentoo  Biscoe             44.5            14.3              216        4100
-#&gt; 10 Adelie  Dream              37.3            16.8              192        3000
+#&gt;  1 Adelie  Dream              37.3            17.8              191        3350
+#&gt;  2 Chinst~ Dream              48.1            16.4              199        3325
+#&gt;  3 Chinst~ Dream              49              19.5              210        3950
+#&gt;  4 Chinst~ Dream              46.4            18.6              190        3450
+#&gt;  5 Gentoo  Biscoe             46.7            15.3              219        5200
+#&gt;  6 Gentoo  Biscoe             49.8            15.9              229        5950
+#&gt;  7 Adelie  Dream              41.1            18.1              205        4300
+#&gt;  8 Adelie  Dream              41.1            17.5              190        3900
+#&gt;  9 Gentoo  Biscoe             47.2            13.7              214        4925
+#&gt; 10 Gentoo  Biscoe             45.5            14.5              212        4750
 #&gt; # ... with 1 more variable: sex &lt;chr&gt;
 
 penguins %&gt;% 
@@ -714,16 +718,16 @@ penguins %&gt;%
 #&gt; # A tibble: 34 x 7
 #&gt;    species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
 #&gt;    &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
-#&gt;  1 Adelie  Biscoe             41.1            19.1              188        4100
-#&gt;  2 Gentoo  Biscoe             48.7            15.7              208        5350
-#&gt;  3 Adelie  Biscoe             38.1            16.5              198        3825
-#&gt;  4 Adelie  Biscoe             35.3            18.9              187        3800
-#&gt;  5 Gentoo  Biscoe             42.6            13.7              213        4950
-#&gt;  6 Gentoo  Biscoe             45.5            13.7              214        4650
-#&gt;  7 Gentoo  Biscoe             47.5            14                212        4875
-#&gt;  8 Chinst~ Dream              47              17.3              185        3700
-#&gt;  9 Adelie  Torge~             40.2            17                176        3450
-#&gt; 10 Adelie  Biscoe             34.5            18.1              187        2900
+#&gt;  1 Gentoo  Biscoe             46.2            14.4              214        4650
+#&gt;  2 Gentoo  Biscoe             49.1            14.5              212        4625
+#&gt;  3 Gentoo  Biscoe             42.7            13.7              208        3950
+#&gt;  4 Gentoo  Biscoe             45.2            14.8              212        5200
+#&gt;  5 Adelie  Torge~             38.5            17.9              190        3325
+#&gt;  6 Gentoo  Biscoe             48.5            14.1              220        5300
+#&gt;  7 Adelie  Torge~             34.6            21.1              198        4400
+#&gt;  8 Chinst~ Dream              50.3            20                197        3300
+#&gt;  9 Adelie  Biscoe             35.3            18.9              187        3800
+#&gt; 10 Adelie  Dream              36.9            18.6              189        3500
 #&gt; # ... with 24 more rows, and 1 more variable: sex &lt;chr&gt;</code></pre>
 <p><code>summarize()</code> gains new argument <code>.groups</code> to control grouping structure of theh result.</p>
 <ul>
@@ -883,9 +887,9 @@ stock %&gt;%
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
-<div id="refs" class="references">
-<div id="ref-10.1371/journal.pone.0090081">
-<p>Gorman, Tony D. AND Fraser, Kristen B. AND Williams. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” <em>PLOS ONE</em> 9 (3): 1–14. <a href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-10.1371/journal.pone.0090081" class="csl-entry">
+Gorman, Tony D. AND Fraser, Kristen B. AND Williams. 2014. <span>“Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (genus Pygoscelis).”</span> <em>PLOS ONE</em> 9 (3): 1–14. <a href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a>.
 </div>
 </div>
 </div>

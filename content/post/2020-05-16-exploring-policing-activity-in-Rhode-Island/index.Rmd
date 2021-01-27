@@ -21,7 +21,7 @@ Some questions include:
 
 - The relationship between search rate, types of search, types of violation, gender and race.
 - How do the number of drug related stops and search rate change during the past few years?
-- Is there a patten in violations across different zones of Rhode Island?
+- Is there a pattern in violations across different zones of Rhode Island?
 - Does weather affect arrest rate?
 
 
@@ -32,6 +32,15 @@ knitr::opts_chunk$set(comment = "#>", collapse = TRUE,
 ```
 
 # Data preprocessing
+
+```{python, include = FALSE}
+# fix plotting error when making matplotlib graphics inside RStudio
+import os as os
+path = 'C:/Users/Lenovo/AppData/Local/r-miniconda/envs/r-reticulate/Library/plugins/platforms'
+os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
+
+```
+
 
 Let's begin by loading the library and data:
 ```{python}
@@ -114,7 +123,7 @@ This is a marked difference considering the base volume. This could be misleadin
 ri_clean.groupby(["violation", "driver_gender"]).search_conducted.mean()
 ```
 
-For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variales, by and large.  
+For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variables, by and large.  
 
 The `search_type` column contains information about categories of searching on the part of the police. I investigate the relative proportion of the most common search types for 4 races. 
 
@@ -140,7 +149,7 @@ plt.show()
 ```
 
 
-Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in `search_type` by "Protective Frisk"). Since a search instance can be of multiple types, such as "Protective Frisk and Reasonable Suspicion", I create a new column indicating if `search_type` contains protective firsk, and calculate its rate across races. 
+Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in `search_type` by "Protective Frisk"). Since a search instance can be of multiple types, such as "Protective Frisk and Reasonable Suspicion", I create a new column indicating if `search_type` contains protective frisk, and calculate its rate across races. 
 
 ```{python}
 ri_clean["frisk"] = ri_clean.search_type.str.contains("Protective Frisk").astype("bool")

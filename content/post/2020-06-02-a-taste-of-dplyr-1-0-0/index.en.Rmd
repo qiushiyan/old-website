@@ -20,7 +20,7 @@ image:
 
 
 
-This post uses the `penguins` dataset [@10.1371/journal.pone.0090081] for most demonstration puporses, modified by [Allison Horst](https://github.com/allisonhorst/penguins) (as an alternative to iris).  
+This post uses the `penguins` dataset [@10.1371/journal.pone.0090081] for most demonstration purposes, modified by [Allison Horst](https://github.com/allisonhorst/penguins) (as an alternative to iris).  
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(message = FALSE,
@@ -205,7 +205,7 @@ df %>%
   rowwise() %>% 
   mutate(sim = list(runif(n, min, max)))
 ```
-Or take advantage of `summarize`'s new features to return multiple rows per group
+Or taking advantage of `summarize`'s new features to return multiple rows per group
 
 ```{r}
 df %>% 
@@ -249,7 +249,7 @@ by_species %>%
   summarize(broom::tidy(model))
 ```
 
-An alternative approach:
+An alternative approach
 
 ```{r}
 penguins %>%

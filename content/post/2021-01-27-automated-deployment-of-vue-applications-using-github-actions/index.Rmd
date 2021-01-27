@@ -2,6 +2,7 @@
 title: Automated Deployment of Vue Applications using Github Actions
 author: Qiushi Yan
 date: '2021-01-27'
+slug: github-actions-firebase-vue
 summary: "Use Github Actions and Firebase to automatically publishing you Vue app"
 categories:
   - Web Development

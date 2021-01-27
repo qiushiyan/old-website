@@ -7,7 +7,6 @@ slug: rhode-policing-activity
 categories:
   - Python
   - Data Analysis
-subtitle: 'Use pandas to answer data questions about traffic stops in Rhode Island.'
 summary: 'Use pandas to answer data questions about traffic stops in Rhode Island.'
 image:
   caption: ''
@@ -86,6 +85,7 @@ ri[["stop_date", "stop_time"]].head()
 ```
 
 Combine these steps yields a relatively clean version of this dataset.
+
 ```{python}
 ri["is_arrested"] = ri.is_arrested.astype("bool")
 dt_index = ri.stop_date.str.cat(ri.stop_time, sep = " ")

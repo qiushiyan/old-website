@@ -88,11 +88,12 @@ The action `w9jds/firebase-action` sets up the Firebase cli. We provide an addit
 
 To visualize the series of instructions followed by Github Actions, I created a diagram below. 
 
-<!-- <figure> -->
-<!--   <img src="diagram.png"/> -->
-<!-- </figure> -->
+<figure>
+  <img src="diagram.jpg"/>
+  <figcaption>The inner workings of Github Actions specified with workflow, jobs and steps</figcaption>
+</figure>
 
-```{r, fig.height=6, echo = FALSE}
+```{r, fig.height=6, eval = FALSE, echo = FALSE}
 library(DiagrammeR)
 mermaid("
 graph TB

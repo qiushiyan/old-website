@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web-Dev | Qiushi Yan</title>
+    <link>https://qiushi.rbind.io/tags/web-dev/</link>
+      <atom:link href="https://qiushi.rbind.io/tags/web-dev/index.xml" rel="self" type="application/rss+xml" />
+    <description>Web-Dev</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Sun, 26 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
+      <title>Web-Dev</title>
+      <link>https://qiushi.rbind.io/tags/web-dev/</link>
+    </image>
+    
+    <item>
+      <title>Chatroom</title>
+      <link>https://qiushi.rbind.io/project/chatroom/</link>
+      <pubDate>Sun, 26 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/project/chatroom/</guid>
+      <description>&lt;p&gt;A minimal online chatroom built with Vue, and hosted on Firebase. Includes realtime updates, authentication, and security rules, uses Glassmorphism UI. It&amp;rsquo;s also my first attempt at &lt;a href=&#34;https://github.com/enixam/chatroom/actions?query=workflow%3A%22Deploy+with+Firebase%22&#34;&gt;Github Actions&lt;/a&gt;!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Reaction Timer</title>
+      <link>https://qiushi.rbind.io/project/reaction-timer/</link>
+      <pubDate>Thu, 23 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/project/reaction-timer/</guid>
+      <description>&lt;p&gt;A simple yet fun app testing your reaction time 🕥, built with Vue, deployed with &lt;a href=&#34;https://firebase.google.com/&#34;&gt;Firebase&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

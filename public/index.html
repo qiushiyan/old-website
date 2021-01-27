@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Personal blog of Qiushi Yan">
+  <meta name="description" content="A data science blog by Qiushi Yan">
 
   
-  <link rel="alternate" hreflang="en-us" href="/">
+  <link rel="alternate" hreflang="en-us" href="https://qiushi.rbind.io/">
 
   
 
@@ -77,7 +77,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CRoboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CZilla+Slab:300,300i%7CFira+Code:wght@300&display=swap">
   
 
   
@@ -138,7 +138,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="https://qiushi.rbind.io/">
 
   
   
@@ -154,12 +154,12 @@
   <meta property="twitter:creator" content="@qiushizzzz">
   
   <meta property="og:site_name" content="Qiushi Yan">
-  <meta property="og:url" content="/">
+  <meta property="og:url" content="https://qiushi.rbind.io/">
   <meta property="og:title" content="Qiushi Yan">
-  <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="A data science blog by Qiushi Yan"><meta property="og:image" content="https://qiushi.rbind.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://qiushi.rbind.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-07-17T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-11-23T00:00:00&#43;00:00">
   
 
   
@@ -170,10 +170,10 @@
   "@type": "WebSite",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "/?q={search_term_string}",
+    "target": "https://qiushi.rbind.io/?q={search_term_string}",
     "query-input": "required name=search_term_string"
   },
-  "url": "/"
+  "url": "https://qiushi.rbind.io/"
 }
 </script>
 
@@ -356,7 +356,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/about"><span>About / Contact</span></a>
+          <a class="nav-link " href="/about"><span>About</span></a>
         </li>
 
         
@@ -470,11 +470,11 @@
 
       <div class="portrait-title">
         <h2>Qiushi Yan</h2>
-        <h3>Junior student, Data Journalism</h3>
+        
 
         
         <h3>
-          <a href="http://www.cuc.edu.cn/" target="_blank" rel="noopener">
+          <a href="http://en.cuc.edu.cn/" target="_blank" rel="noopener">
           <span>Communication University of China</span>
           </a>
         </h3>
@@ -529,7 +529,7 @@
           
         
         <li>
-          <a href="https://www.linkedin.com/in/qiushi-yan-893a48194/" target="_blank" rel="noopener">
+          <a href="https://www.linkedin.com/in/qiushiyan/" target="_blank" rel="noopener">
             <i class="fab fa-linkedin-in big-icon"></i>
           </a>
         </li>
@@ -560,9 +560,42 @@
     
     
 
-    <!-- raw HTML omitted -->
-<p>I&rsquo;m currently a junior majoring in data journalism at <a href="http://www.cuc.edu.cn/">Communication University of China</a>. I enjoy applied statistics as well as &ldquo;modern&rdquo; data science initiatives. I take particular interest in data wrangling, visualizing and modeling in <code>#rstats</code>.</p>
-<p>I take equal delight in ancient Chinese literature, game theory, network analysis and sports statistics. My favourite author is Bertrand Russell. ✒</p>
+    <br>
+<p>Lately I have been applying to master programs in Data Science and Statistics. If you find this site, you probably want to know more about me and why I am a promising candidate through the following links. The <a href="/about">About</a> page is a complement to my personal statement, elaborating on my passion for data science and background.</p>
+<ul>
+<li>
+<p><a href="/files/titanic-survival.pdf">Modeling Titanic Survival</a>: A 30-page case study on the most up-to-date and comprehensive Titanic survival data. A binary logistic model is built to analyze survival probability given characteristics such as age, gender, cabin class, nationality, embarkation point, etc. I demonstrate the overall modeling process, including preprocessing, exploratory analysis,  model fitting, adjustment, bootstrap internal validation and interpretation as well as other relevant techniques such as redundancy analysis and multiple imputation for missing data. The article also touches on key issues such as the choice of a statistical model or a machine learning model, using bootstrap to alleviate selection bias, disadvantages of the holdout sample approach in validation, and more.</p>
+</li>
+<li>
+<p>My <a href="https://enixam.github.io/math-foundations/">Mathematical Notes for Data Science and Statistics</a>: in-progress notes in Linear Algebra, Multivariate Calculus, Optimization and Probability Theory</p>
+</li>
+<li>
+<p><a href="post/text-classification-logistic/">Classify Brontë Sisters with Penalized Logistic Regression</a>: I trained a logistic model with lasso penalty to predict the probability of a line being authored by Emily Brontë or Charlotte Brontë, featuring text processing, cross validation and grid search, and interpretation based on variable importance plots. A later <a href="post/2020-05-07-analyzing-animal-crossing-reviews">post</a> extended this idea to build a multinomial regressor classifying customer reviews into 3 categories, taking advantage of upsampling to counteract class imbalance.</p>
+</li>
+<li>
+<p>My personal R package <a href="https://github.com/enixam/ymisc">ymisc</a>. This is my first attempt at developing an R package, which currently contains miscellaneous functions for general hypothesis testing in multiple linear regression, converting multiple file encodings, writing a grouped by data frame to separate files.</p>
+</li>
+<li>
+<p><a href="post/python-tidy-data/">Tidy Data with Python</a>: a blog post on tidying messing data in Hadley Wickham’s Tidy Data paper, using python&rsquo;s pandas library</p>
+</li>
+<li>
+<p><a href="/post/analyzing-covid-19-publications/">Analyzing COVID-19 Publications</a>:  Text analysis on the abstract of publications on the coronavirus disease (COVID-19). Use weighted log odds and LDA topic model for information extraction. Finish with a network visualization of word correlation.</p>
+</li>
+<li>
+<p>A &ldquo;My Life In Months&rdquo; <a href="/img/life_in_months.png">plot</a> illustrating my relevant experience in the field</p>
+</li>
+<li>
+<p><a href="https://enixam.github.io/fpp/">Time Series Analysis with R</a>: Another notes in time series analysis using the <a href="https://tidyverts.org/">tidyverts</a> framework</p>
+</li>
+<li>
+<p>My <a href="https://github.com/enixam">Github profile</a>: I have been active in coding and contributing to open source projects ever since I decide to pursue such a career.</p>
+</li>
+<li>
+<p><a href="/post">More Posts</a>: a list of all my other projects in data analysis and machine learning</p>
+</li>
+</ul>
+<p>I am currently a fourth-year student majoring in data journalism at <a href="http://en.cuc.edu.cn/">Communication University of China</a>. I enjoy applied statistics as well as &ldquo;modern&rdquo; data science initiatives. I take particular interest in data wrangling, visualizing and modeling in <code>#rstats</code>.</p>
+<p>In addition to data stuff, I take delight in Chinese Literature, nature &amp; ecology documentaries, and cat videos. My favorite author is Bertrand Russell ✒.</p>
 
 
     <div class="row">
@@ -576,12 +609,31 @@
           
           <li>Predictive Modeling &amp; Statistical Learning</li>
           
+          <li>Quantitative Ecology and Natural Resource Management</li>
+          
+          <li>Educational Measurement and Psychometrics</li>
+          
           <li>Chinese and English Literature</li>
           
         </ul>
       </div>
       
 
+      
+      <div class="col-md-7">
+        <h3>Education</h3>
+        <ul class="ul-edu fa-ul">
+          
+          <li>
+            <i class="fa-li fas fa-graduation-cap"></i>
+            <div class="description">
+              <p class="course">B.A. in Data Journalism, 2021 (expected)</p>
+              <p class="institution">Communication University of China</p>
+            </div>
+          </li>
+          
+        </ul>
+      </div>
       
 
     </div>
@@ -787,12 +839,12 @@
   <div class="media-body">
 
     <h3 class="article-title mb-0 mt-0">
-      <a href="/post/2020-05-21-excess-death-for-2020/" >Excess Death for 2020</a>
+      <a href="/post/rhode-policing-activity/" >Exploring policing activity in Rhode Island</a>
     </h3>
 
     
     <div class="article-style">
-      Reveal true effect of the pandanic with year-on-year death rates
+      Use pandas to answer data questions about traffic stops in Rhode Island.
     </div>
     
 
@@ -817,7 +869,7 @@
           Last updated on
       
     
-    May 21, 2020
+    Jan 27, 2021
   </span>
   
 
@@ -826,7 +878,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    9 min read
   </span>
   
 
@@ -838,7 +890,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/data-analysis/">Data Analysis</a>, <a href="/categories/r/">R</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/categories/python/">Python</a>, <a href="/categories/data-analysis/">Data Analysis</a></span>
   
 
 </div>
@@ -852,6 +904,11 @@
   <div class="ml-3">
     
     
+    
+    <a href="/post/rhode-policing-activity/" >
+      <img src="/post/rhode-policing-activity/featured_hu424aaecb35a4cf77f5503f56d941f112_103489_150x0_resize_q90_lanczos.jpg" alt="">
+    </a>
+    
   </div>
 </div>
 
@@ -871,14 +928,20 @@
 
 
 
+  
+
 
 <div class="media stream-item">
   <div class="media-body">
 
     <h3 class="article-title mb-0 mt-0">
-      <a href="/post/2020-05-18-predicting-graduate-admission/" >Predicting Graduate Admission for Internaitonal student</a>
+      <a href="/post/json-column-r/" >Working with JSON Columns in R</a>
     </h3>
 
+    
+    <div class="article-style">
+      data cleaning tips in R when your df contains a json column
+    </div>
     
 
     <div class="stream-meta article-metadata">
@@ -902,7 +965,7 @@
           Last updated on
       
     
-    May 18, 2020
+    May 15, 2020
   </span>
   
 
@@ -911,7 +974,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    17 min read
   </span>
   
 
@@ -923,7 +986,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/data-analysis/">Data Analysis</a>, <a href="/categories/machine-learning/">Machine Learning</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a></span>
   
 
 </div>
@@ -995,7 +1058,7 @@
   
   
 
-  <section id="projects" class="home-section wg-portfolio   bg-image parallax " style="background-image:  url(&#39;/img/plant.jpg&#39;);" >
+  <section id="projects" class="home-section wg-portfolio   bg-image parallax " style="background-image:  url(&#39;https://qiushi.rbind.io/img/plant.jpg&#39;);" >
     <div class="container">
       
 
@@ -1051,12 +1114,17 @@
                 
                 
                 
-                <a href="#" data-filter=".js-id-R" class="btn btn-primary btn-lg">R</a>
+                <a href="#" data-filter=".js-id-Data" class="btn btn-primary btn-lg">Data</a>
               
                 
                 
                 
-                <a href="#" data-filter=".js-id-Other" class="btn btn-primary btn-lg">Other</a>
+                <a href="#" data-filter=".js-id-Notes" class="btn btn-primary btn-lg">Notes</a>
+              
+                
+                
+                
+                <a href="#" data-filter=".js-id-Web-Dev" class="btn btn-primary btn-lg">Web-Dev</a>
               
             </div>
           </div>
@@ -1066,6 +1134,49 @@
     
 
     <div class="isotope projects-container js-layout-masonry ">
+      
+
+        
+        
+        
+
+        
+          
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+<div class="project-card project-item isotope-item js-id-Data">
+  <div class="card">
+    
+    
+    <a href="/project/titanic-survival/"  class="card-image hover-overlay">
+      <img src="/project/titanic-survival/featured_hu73b4d09d39792aaec378c6714c142f2b_599256_550x0_resize_q90_lanczos.jpg" alt="" class="img-responsive">
+    </a>
+    
+    <div class="card-text">
+      <h4><a href="/project/titanic-survival/" >Modeling Titanic survival</a></h4>
+      
+      <div class="article-style">
+        <p>Predicting Titaic surviavl patterns with logistic regression</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+        
+
       
 
         
@@ -1091,7 +1202,7 @@
 
 
 
-<div class="project-card project-item isotope-item js-id-Linear-Algebra js-id-Calculus js-id-Probability-Theory js-id-Statistics js-id-Optimization">
+<div class="project-card project-item isotope-item js-id-Notes">
   <div class="card">
     
     
@@ -1137,7 +1248,7 @@
 
 
 
-<div class="project-card project-item isotope-item js-id-R js-id-time-series js-id-forecasting">
+<div class="project-card project-item isotope-item js-id-Notes js-id-Data">
   <div class="card">
     
     
@@ -1150,6 +1261,92 @@
       
       <div class="article-style">
         <p>Notes for &ldquo;Forecasting：Principles and Practice, 3rd edition&rdquo;</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+        
+
+      
+
+        
+        
+        
+
+        
+          
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+<div class="project-card project-item isotope-item js-id-Web-Dev">
+  <div class="card">
+    
+    
+    <a href="/project/chatroom/"  class="card-image hover-overlay">
+      <img src="/project/chatroom/featured_hu18ec2d6ae2dafaff64fc87f8ab1abd15_43567_550x0_resize_q90_lanczos.jpg" alt="" class="img-responsive">
+    </a>
+    
+    <div class="card-text">
+      <h4><a href="/project/chatroom/" >Chatroom</a></h4>
+      
+      <div class="article-style">
+        <p>A minimal real-time chatroom</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+        
+
+      
+
+        
+        
+        
+
+        
+          
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+<div class="project-card project-item isotope-item js-id-Web-Dev">
+  <div class="card">
+    
+    
+    <a href="/project/reaction-timer/"  class="card-image hover-overlay">
+      <img src="/project/reaction-timer/featured_hub15b733d044dbeffe3060a11a359ffc0_46776_550x0_resize_q90_lanczos.jpg" alt="" class="img-responsive">
+    </a>
+    
+    <div class="card-text">
+      <h4><a href="/project/reaction-timer/" >Reaction Timer</a></h4>
+      
+      <div class="article-style">
+        <p>A simple Vue app Testing Your Reaction Time</p>
       </div>
       
     </div>
@@ -1183,7 +1380,7 @@
 
 
 
-<div class="project-card project-item isotope-item js-id-R">
+<div class="project-card project-item isotope-item js-id-Notes js-id-Data">
   <div class="card">
     
     
@@ -1229,7 +1426,7 @@
 
 
 
-<div class="project-card project-item isotope-item js-id-Text-Mining js-id-R">
+<div class="project-card project-item isotope-item js-id-Notes js-id-Data">
   <div class="card">
     
     
@@ -1313,11 +1510,7 @@
 
     
     
-
     
-    
-    
-
     
     
     <script>hljs.initHighlightingOnLoad();</script>
@@ -1402,7 +1595,7 @@
   
 
   <p class="powered-by">
-    Qiushi Yan © 2020 &middot; 
+    Qiushi Yan © 2021 &middot; 
 
     Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and the 
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
@@ -1418,6 +1611,7 @@
     </span>
     
   </p>
+
 </footer>
   </div>
   

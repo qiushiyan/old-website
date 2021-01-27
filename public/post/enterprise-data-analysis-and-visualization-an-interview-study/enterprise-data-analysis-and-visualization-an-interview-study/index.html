@@ -31,7 +31,7 @@
   <meta name="description" content="Reading notes on &#34;Enterprise Data Analysis and Visualization: An Interview Study&#34; by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/">
+  <link rel="alternate" hreflang="en-us" href="https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/">
 
   
 
@@ -77,7 +77,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CRoboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CZilla+Slab:300,300i%7CFira+Code:wght@300&display=swap">
   
 
   
@@ -136,7 +136,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/">
+  <link rel="canonical" href="https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/">
 
   
   
@@ -152,15 +152,15 @@
   <meta property="twitter:creator" content="@qiushizzzz">
   
   <meta property="og:site_name" content="Qiushi Yan">
-  <meta property="og:url" content="/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/">
+  <meta property="og:url" content="https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/">
   <meta property="og:title" content="Enterprise Data Analysis and Visualization: An Interview Study | Qiushi Yan">
-  <meta property="og:description" content="Reading notes on &#34;Enterprise Data Analysis and Visualization: An Interview Study&#34; by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Reading notes on &#34;Enterprise Data Analysis and Visualization: An Interview Study&#34; by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer"><meta property="og:image" content="https://qiushi.rbind.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://qiushi.rbind.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2019-11-21T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-11-21T18:42:03&#43;08:00">
+    <meta property="article:modified_time" content="2020-04-07T00:34:19&#43;08:00">
   
 
   
@@ -186,12 +186,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/"
+    "@id": "https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/"
   },
   "headline": "Enterprise Data Analysis and Visualization: An Interview Study",
   
   "datePublished": "2019-11-21T00:00:00Z",
-  "dateModified": "2019-11-21T18:42:03+08:00",
+  "dateModified": "2020-04-07T00:34:19+08:00",
   
   "author": {
     "@type": "Person",
@@ -203,7 +203,7 @@
     "name": "Qiushi Yan",
     "logo": {
       "@type": "ImageObject",
-      "url": "/img/icon-512.png"
+      "url": "https://qiushi.rbind.io/img/icon-512.png"
     }
   },
   "description": "Reading notes on \"Enterprise Data Analysis and Visualization: An Interview Study\" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer"
@@ -390,7 +390,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/about"><span>About / Contact</span></a>
+          <a class="nav-link " href="/about"><span>About</span></a>
         </li>
 
         
@@ -465,7 +465,7 @@
           Last updated on
       
     
-    Nov 21, 2019
+    Apr 7, 2020
   </span>
   
 
@@ -575,14 +575,14 @@ often missing in relational databases and non-existent in other types of data st
 <p><strong>Modeling</strong>: The biggest challenge in constructing an model according to respondents are feature selection, whether to choose a set of variables, which to transfrom and how to transform.</p>
 <p><div class="alert alert-note">
   <div>
-    There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: <!-- raw HTML omitted -->Feature Engineering and Selection: A Practical Approach for Predictive Models<!-- raw HTML omitted -->
+    There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: <a href="http://www.feat.engineering/index.html">Feature Engineering and Selection: A Practical Approach for Predictive Models</a>
   </div>
 </div>
 </p>
 <p>Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help explore these models and visualize their output.</p>
 <p><div class="alert alert-note">
   <div>
-    R’s package <!-- raw HTML omitted -->broom<!-- raw HTML omitted --> <!-- raw HTML omitted -->(Robinson and Hayes <!-- raw HTML omitted -->2019<!-- raw HTML omitted -->)<!-- raw HTML omitted --> are desgined to facilitate modeling diagnosis, visualization, etc. <!-- raw HTML omitted -->tidymodels<!-- raw HTML omitted --> <!-- raw HTML omitted -->(Kuhn and Wickham <!-- raw HTML omitted -->2019<!-- raw HTML omitted -->)<!-- raw HTML omitted --> contains a burgeoning list of such packages.
+    R’s package <strong>broom</strong> <span class="citation">(Robinson and Hayes <a href="#ref-R-broom" role="doc-biblioref">2019</a>)</span> are desgined to facilitate modeling diagnosis, visualization, etc. <strong>tidymodels</strong> <span class="citation">(Kuhn and Wickham <a href="#ref-R-tidymodels" role="doc-biblioref">2019</a>)</span> contains a burgeoning list of such packages.
   </div>
 </div>
 </p>
@@ -657,7 +657,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;text=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;text=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -670,7 +670,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;t=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;t=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -683,7 +683,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
       
       
       <li>
-        <a href="mailto:?subject=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study&amp;body=/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study&amp;body=https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -696,7 +696,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;title=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;title=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -709,7 +709,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study%20/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study%20https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -722,7 +722,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;title=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/&amp;title=Enterprise%20Data%20Analysis%20and%20Visualization:%20An%20Interview%20Study" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -761,9 +761,9 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Qiushi Yan</a></h5>
-      <h6 class="card-subtitle">Junior student, Data Journalism</h6>
-      <p class="card-text">Yet another object of type closure</p>
+      <h5 class="card-title"><a href="https://qiushi.rbind.io/">Qiushi Yan</a></h5>
+      
+      <p class="card-text">There were 50 or more warnings, use quit() to hide all of them.</p>
       <ul class="network-icon" aria-hidden="true">
   
     
@@ -812,7 +812,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
       
     
     <li>
-      <a href="https://www.linkedin.com/in/qiushi-yan-893a48194/" target="_blank" rel="noopener">
+      <a href="https://www.linkedin.com/in/qiushiyan/" target="_blank" rel="noopener">
         <i class="fab fa-linkedin-in"></i>
       </a>
     </li>
@@ -844,32 +844,15 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
 
 <section id="comments">
   
-    
-<div id="disqus_thread"></div>
-<script>
-  let disqus_config = function () {
-    
-    
-    
-  };
-  (function() {
-    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-      return;
-    }
-    var d = document, s = d.createElement('script'); s.async = true;
-    s.src = 'https://' + "qiushiyan" + '.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
+    <script src="https://utteranc.es/client.js"
+  repo="enixam/blog-comments"
+  issue-term="title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
   
 </section>
-
 
 
 
@@ -951,11 +934,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
 
     
     
-
     
-    
-    
-
     
     
     <script>hljs.initHighlightingOnLoad();</script>
@@ -1040,7 +1019,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
   
 
   <p class="powered-by">
-    Qiushi Yan © 2020 &middot; 
+    Qiushi Yan © 2021 &middot; 
 
     Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and the 
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
@@ -1056,6 +1035,7 @@ lines (the “payload”) belong to the record<a href="#fnref2" class="footnote-
     </span>
     
   </p>
+
 </footer>
   </div>
   

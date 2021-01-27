@@ -2,57 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Readings | Qiushi Yan</title>
-    <link>/categories/readings/</link>
-      <atom:link href="/categories/readings/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/categories/readings/</link>
+      <atom:link href="https://qiushi.rbind.io/categories/readings/index.xml" rel="self" type="application/rss+xml" />
     <description>Readings</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sat, 09 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Readings</title>
-      <link>/categories/readings/</link>
+      <link>https://qiushi.rbind.io/categories/readings/</link>
     </image>
     
     <item>
-      <title>A Manual of Classification Metrics</title>
-      <link>/post/classification-metrics/</link>
-      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/classification-metrics/</guid>
-      <description>
-
-&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#terminology&#34;&gt;Terminology&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#evaluating-predicted-classes&#34;&gt;Evaluating predicted classes&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#accuracy-based-criteria&#34;&gt;Accuracy based criteria&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://tidymodels.github.io/yardstick/reference/f_meas.html&#34; class=&#34;uri&#34;&gt;https://tidymodels.github.io/yardstick/reference/f_meas.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&#34; class=&#34;uri&#34;&gt;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&lt;/a&gt;&lt;/p&gt;
-&lt;div id=&#34;terminology&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Terminology&lt;/h1&gt;
-&lt;/div&gt;
-&lt;div id=&#34;evaluating-predicted-classes&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Evaluating predicted classes&lt;/h1&gt;
-&lt;div id=&#34;accuracy-based-criteria&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Accuracy based criteria&lt;/h2&gt;
-&lt;p&gt;To make this more concrete. Suppose the event is having a disease, and sensitivity, specificity and prevalence are known. Then:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\text{sensitivity} = P(\text{true}|\text{disease}) \\
-\text{specificity} = P(\text{true}|\text{no disease}) \\
-\text{prevalence} = P(\text{disease})
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Better science in less time</title>
-      <link>/post/better-sicence-in-less-time/better-science-in-less-time/</link>
+      <link>https://qiushi.rbind.io/post/better-sicence-in-less-time/better-science-in-less-time/</link>
       <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/better-sicence-in-less-time/better-science-in-less-time/</guid>
+      <guid>https://qiushi.rbind.io/post/better-sicence-in-less-time/better-science-in-less-time/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -78,7 +42,7 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;/div&gt;
 &lt;div id=&#34;the-happy-transition&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;The happy transition&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ohi_transition.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/img/ohi_transition.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This figure shows an interesting transition of the OHI project from traditional methods to modern data science tools, and most importantly, with greater reproducibility and collaboration effectiveness. As they described:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The original assessment in 2012 focused solely on scientific methods (for example, obtaining and analysing data, developing models, calculating, and presenting results; dark shading). In 2013, by necessity we gave more focus to data science (for example, data organization and wrangling, coding, versioning, and documentation; light shading), using open data science tools. We established R as the main language for all data preparation and modelling (using RStudio), which drastically decreased the time involved to complete the assessment. In 2014, we adopted Git and GitHub for version control, project management, and collaboration. This further decreased the time required to repeat the assessment. We also created the OHI Toolbox, which includes our R package ohicore for core analytical operations used in all OHI assessments. In subsequent years we have continued (and plan to continue) this trajectory towards better science in less time by improving code with principles of tidy data ; standardizing file and data structure; and focusing more on communication, in part by creating websites with the same open data science tools and workflow.&lt;/p&gt;
@@ -90,11 +54,11 @@ pace, with which comes wasted time struggling to create their own conventions fo
 &lt;h2&gt;Reproducibility&lt;/h2&gt;
 &lt;p&gt;Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data&lt;span class=&#34;citation&#34;&gt;(Wickham and others &lt;a href=&#34;#ref-wickham2014tidy&#34; role=&#34;doc-biblioref&#34;&gt;2014&lt;/a&gt;)&lt;/span&gt;, and grammar of data manipulation provided by dplyr&lt;span class=&#34;citation&#34;&gt;(Wickham et al. &lt;a href=&#34;#ref-R-dplyr&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown&lt;span class=&#34;citation&#34;&gt;(Allaire et al. &lt;a href=&#34;#ref-R-rmarkdown&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;, instead of plain text files.&lt;/p&gt;
 &lt;p&gt;Modeling practices are also unified and standardized in R, and the OHI framwork are incorporated in an R package &lt;strong&gt;ohicore&lt;/strong&gt;, which can be downloaded in R via &lt;code&gt;devtools::install_github(&#39;ohi-science/ohicore&#39;)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ohi.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/img/ohi.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Of all things that &lt;strong&gt;ohicore&lt;/strong&gt; package has to offer, most seminal is that it has made self-made OHI assessment possible without recreating the wheel. There are currently two dozen OHI assessments underway, most of which are led by independent groups.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    Scientific advancement comes from building off the past work of others. Only in an growing, accomodating community could modern science thrive.&lt;!-- raw HTML omitted --&gt;
+    Scientific advancement comes from building off the past work of others. Only in an growing, accomodating community could modern science thrive.&lt;br /&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;
@@ -144,9 +108,9 @@ pace, with which comes wasted time struggling to create their own conventions fo
     
     <item>
       <title>50 Years of Data Science</title>
-      <link>/post/50-years-of-data-science/</link>
+      <link>https://qiushi.rbind.io/post/50-years-of-data-science/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/50-years-of-data-science/</guid>
+      <guid>https://qiushi.rbind.io/post/50-years-of-data-science/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -310,9 +274,9 @@ Prediction: To be able to predict what the responses are going to be to future i
     
     <item>
       <title>Enterprise Data Analysis and Visualization: An Interview Study</title>
-      <link>/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</link>
+      <link>https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</link>
       <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</guid>
+      <guid>https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -328,7 +292,7 @@ Prediction: To be able to predict what the responses are going to be to future i
 &lt;div id=&#34;archetypes&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;3 Archetypes&lt;/h1&gt;
 &lt;p&gt;According to the responses, we can see analysts generally fall into 3 archetypes: &lt;em&gt;hacker&lt;/em&gt;, &lt;em&gt;scripter&lt;/em&gt; and &lt;em&gt;application user&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/archetypes.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/img/archetypes.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Hackers&lt;/strong&gt; are faced with the most diverse and complex tasks. They are most literate in terms of programming and thus rarely ask IT staffs fro help. More oftern than not, hackers master more than three languages, R / Matlab for analysis, Python, Perl as an scripting language, and SQL for queries.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
@@ -374,14 +338,14 @@ often missing in relational databases and non-existent in other types of data st
 &lt;p&gt;&lt;strong&gt;Modeling&lt;/strong&gt;: The biggest challenge in constructing an model according to respondents are feature selection, whether to choose a set of variables, which to transfrom and how to transform.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: &lt;!-- raw HTML omitted --&gt;Feature Engineering and Selection: A Practical Approach for Predictive Models&lt;!-- raw HTML omitted --&gt;
+    There is a great book on feature engineering and selectin by Max Kuhn and Kjell Johnson: &lt;a href=&#34;http://www.feat.engineering/index.html&#34;&gt;Feature Engineering and Selection: A Practical Approach for Predictive Models&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;p&gt;Most repondents also pointed to the scalibility of existing analysis and visualization tools. Hackers are less limited by large amounts of data, obviously, but hackers were often limited by the types of analysis they could run because useful models or algorithms did not have available parallelized implementations. Visualizing model results is another pain point, analysts using more advanced machine learning methods (14/35) expressed a desire for visualization tools to help explore these models and visualize their output.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    R’s package &lt;!-- raw HTML omitted --&gt;broom&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;(Robinson and Hayes &lt;!-- raw HTML omitted --&gt;2019&lt;!-- raw HTML omitted --&gt;)&lt;!-- raw HTML omitted --&gt; are desgined to facilitate modeling diagnosis, visualization, etc. &lt;!-- raw HTML omitted --&gt;tidymodels&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;(Kuhn and Wickham &lt;!-- raw HTML omitted --&gt;2019&lt;!-- raw HTML omitted --&gt;)&lt;!-- raw HTML omitted --&gt; contains a burgeoning list of such packages.
+    R’s package &lt;strong&gt;broom&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Robinson and Hayes &lt;a href=&#34;#ref-R-broom&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; are desgined to facilitate modeling diagnosis, visualization, etc. &lt;strong&gt;tidymodels&lt;/strong&gt; &lt;span class=&#34;citation&#34;&gt;(Kuhn and Wickham &lt;a href=&#34;#ref-R-tidymodels&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; contains a burgeoning list of such packages.
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/p&gt;

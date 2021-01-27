@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Personal blog of Qiushi Yan">
+  <meta name="description" content="A data science blog by Qiushi Yan">
 
   
-  <link rel="alternate" hreflang="en-us" href="/categories/data-analysis/">
+  <link rel="alternate" hreflang="en-us" href="https://qiushi.rbind.io/categories/data-analysis/">
 
   
 
@@ -77,7 +77,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CRoboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CZilla+Slab:300,300i%7CFira+Code:wght@300&display=swap">
   
 
   
@@ -138,7 +138,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/categories/data-analysis/">
+  <link rel="canonical" href="https://qiushi.rbind.io/categories/data-analysis/">
 
   
   
@@ -154,12 +154,12 @@
   <meta property="twitter:creator" content="@qiushizzzz">
   
   <meta property="og:site_name" content="Qiushi Yan">
-  <meta property="og:url" content="/categories/data-analysis/">
+  <meta property="og:url" content="https://qiushi.rbind.io/categories/data-analysis/">
   <meta property="og:title" content="Data Analysis | Qiushi Yan">
-  <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="A data science blog by Qiushi Yan"><meta property="og:image" content="https://qiushi.rbind.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://qiushi.rbind.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-05-21T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-05-17T00:00:00&#43;00:00">
   
 
   
@@ -342,7 +342,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/about"><span>About / Contact</span></a>
+          <a class="nav-link " href="/about"><span>About</span></a>
         </li>
 
         
@@ -411,65 +411,10 @@
   
   
   <div>
-    <h2><a href="/post/2020-05-21-excess-death-for-2020/">Excess Death for 2020</a></h2>
-    <div class="article-style">
-      
-      Reveal true effect of the pandanic with year-on-year death rates
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-18-predicting-graduate-admission/">Predicting Graduate Admission for Internaitonal student</a></h2>
-    <div class="article-style">
-      
-      https://www.kaggle.com/eswarchandt/admission?
-library(tidyverse)admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% janitor::clean_names() %&gt;% mutate(admit = factor(admit))library(tidymodels)admission_split &lt;- initial_split(admission)admission_test &lt;- testing(admission_split)admission_train &lt;- training(admission_split)rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%step_dummy(all_nominal(), -all_outcomes()) %&gt;% step_normalize(gre, gpa)
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/">Biterm Topic Modeling for Danmaku on Bilibili</a></h2>
-    <div class="article-style">
-      
-      btm package: https://github.com/bnosac/BTM
-definition of danmaku https://blogs.ubc.ca/titus283/2018/02/03/43/
-bilibili https://en.wikipedia.org/wiki/Bilibili
-      
-    </div>
-  </div>
-  
-  <div>
     <h2><a href="/post/rhode-policing-activity/">Exploring policing activity in Rhode Island</a></h2>
     <div class="article-style">
       
       Use pandas to answer data questions about traffic stops in Rhode Island.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/police-activity-pandas/">Analyzing Police Activity with Pandas</a></h2>
-    <div class="article-style">
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-14-analyzing-ted-talks/">Analyzing Ted Talks</a></h2>
-    <div class="article-style">
-      
-      ted talk with topics: https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset?, upto 2020-5
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-14-volcano-eruptions/">Volcano Eruptions</a></h2>
-    <div class="article-style">
-      
-      library(tidyverse)tuesdata &lt;- tidytuesdayR::tt_load(&#39;2020-05-12&#39;)volcano &lt;- tuesdata$volcanoeruptions &lt;- tuesdata$eruptions
       
     </div>
   </div>
@@ -484,39 +429,43 @@ bilibili https://en.wikipedia.org/wiki/Bilibili
   </div>
   
   <div>
-    <h2><a href="/post/2020-05-08-machine-learning-with-titanic-data/">Machine Learning with Titanic Data</a></h2>
+    <h2><a href="/post/2020-05-07-analyzing-animal-crossing-reviews/">Analyzing Animal Crossing Reviews</a></h2>
     <div class="article-style">
       
-      https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb
-https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb
-https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/
-import pandas as pdimport numpy as npimport matplotlib.pyplot as pltfrom scipy.stats import pearsonrimport mathimport random from sklearn.neighbors import KNeighborsClassifierfrom sklearn.linear_model import LogisticRegressionfrom sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifierfrom sklearn.tree import DecisionTreeClassifierfrom datetime import datetimeimport itertoolsRandom sample of all titanic passengers.
-titanic = pd.read_excel(&#39;D:/RProjects/data/blog/titanic.xls&#39;)titanic.head()## pclass survived ... body home.dest## 0 1 1 ... NaN St Louis, MO## 1 1 1 .
+      Practice on data cleaning, text analysis and multicategory logistic models with penalization
       
     </div>
   </div>
   
   <div>
-    <h2><a href="/post/programmer-word-choice/">Programmers and Their Choice of Words</a></h2>
+    <h2><a href="/post/international-debt-sql/">Analyzing International Debt Statistics</a></h2>
     <div class="article-style">
       
-      https://medium.com/swlh/what-programming-language-has-the-happiest-developers-f0636b08e898
-https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-words
+      Write SQL queries to analyze international debt from the World Bank, and make ggplot2 visulizations.
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/text-classification-logistic/">Text Classfication with Penalized Logistic Regression</a></h2>
+    <div class="article-style">
+      
+      Teach models how to distinguish Charlotte Brontë from Emily Brontë
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/analyzing-covid-19-publications/">Analyzing COVID-19 Publications</a></h2>
+    <div class="article-style">
+      
+      A simple text analysis on the abstract of up-to-date COVID-19 publications.
       
     </div>
   </div>
   
 
   
-<nav>
-  <ul class="pagination justify-content-center">
-    
-    
-    <li class="page-item"><a class="page-link" href="/categories/data-analysis/page/2/">&raquo;</a></li>
-    
-  </ul>
-</nav>
-
 
 </div>
 
@@ -572,11 +521,7 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
 
     
     
-
     
-    
-    
-
     
     
     <script>hljs.initHighlightingOnLoad();</script>
@@ -661,7 +606,7 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
   
 
   <p class="powered-by">
-    Qiushi Yan © 2020 &middot; 
+    Qiushi Yan © 2021 &middot; 
 
     Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and the 
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
@@ -677,6 +622,7 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
     </span>
     
   </p>
+
 </footer>
   </div>
   

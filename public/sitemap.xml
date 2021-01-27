@@ -3,314 +3,221 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/docs/writings/</loc>
-    <lastmod>2020-04-11T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/docs/writings/</loc>
+    <lastmod>2020-04-11T15:36:18+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/docs/writings/of-certificate/</loc>
-    <lastmod>2019-05-05T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/docs/writings/of-certificate/</loc>
+    <lastmod>2020-04-11T15:31:48+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/calculus/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/tags/data/</loc>
+    <lastmod>2021-01-13T23:26:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/linear-algebra/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/titanic-survival/</loc>
+    <lastmod>2021-01-13T23:26:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/project/math-foundations/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/</loc>
+    <lastmod>2021-01-27T11:27:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/optimization/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/</loc>
+    <lastmod>2021-01-27T19:22:29+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/probability-theory/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/tags/</loc>
+    <lastmod>2021-01-27T11:27:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/project/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/math-foundations/</loc>
+    <lastmod>2021-01-13T23:26:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2020-09-01T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/tags/notes/</loc>
+    <lastmod>2021-01-13T23:26:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/statistics/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/taste-dplyr-1.0.0/</loc>
+    <lastmod>2020-09-01T17:28:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-07-17T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/</loc>
+    <lastmod>2021-01-27T19:22:29+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/taste-dplyr-1.0.0/</loc>
-    <lastmod>2020-09-01T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/r/</loc>
+    <lastmod>2020-09-01T17:28:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-09-01T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/data-analysis/</loc>
+    <lastmod>2021-01-27T19:22:29+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2020-09-01T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/rhode-policing-activity/</loc>
+    <lastmod>2021-01-27T19:22:29+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2020-09-01T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/python/</loc>
+    <lastmod>2021-01-27T19:22:29+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/data-analysis/</loc>
-    <lastmod>2020-05-21T17:56:35+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/json-column-r/</loc>
+    <lastmod>2020-05-15T15:31:15+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-21-excess-death-for-2020/</loc>
-    <lastmod>2020-05-21T17:56:35+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/python-tidy-data/</loc>
+    <lastmod>2020-05-15T15:08:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/machine-learning/</loc>
-    <lastmod>2020-05-18T18:29:49+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/</loc>
+    <lastmod>2020-06-07T13:16:05+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-18-predicting-graduate-admission/</loc>
-    <lastmod>2020-05-18T18:29:49+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/machine-learning/</loc>
+    <lastmod>2020-06-07T13:16:05+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</loc>
-    <lastmod>2020-05-17T21:56:42+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/international-debt-sql/</loc>
+    <lastmod>2020-05-07T18:54:36+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/rhode-policing-activity/</loc>
-    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/data-visualization/</loc>
+    <lastmod>2020-05-07T18:54:36+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2020-05-18T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/sql/</loc>
+    <lastmod>2020-05-07T18:54:36+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/json-column-r/</loc>
-    <lastmod>2020-05-15T17:40:47+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/text-classification-logistic/</loc>
+    <lastmod>2020-05-07T18:20:27+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/police-activity-pandas/</loc>
-    <lastmod>2020-05-14T00:55:41+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/analyzing-covid-19-publications/</loc>
+    <lastmod>2020-05-13T20:14:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-14-analyzing-ted-talks/</loc>
-    <lastmod>2020-05-14T15:37:00+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/about/</loc>
+    <lastmod>2020-08-30T01:53:08+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/data-visualization/</loc>
-    <lastmod>2020-05-14T11:36:16+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/fpp/</loc>
+    <lastmod>2021-01-13T23:26:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-14-volcano-eruptions/</loc>
-    <lastmod>2020-05-14T11:36:16+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/chatroom/</loc>
+    <lastmod>2021-01-27T11:27:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/python-tidy-data/</loc>
-    <lastmod>2020-05-12T22:11:05+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/tags/web-dev/</loc>
+    <lastmod>2021-01-27T11:27:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/classification-metrics/</loc>
-    <lastmod>2020-05-09T14:58:21+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/reaction-timer/</loc>
+    <lastmod>2021-01-27T11:27:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/readings/</loc>
-    <lastmod>2020-05-09T14:58:21+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/listviewer/view-of-nested-objects-listviewer/</loc>
+    <lastmod>2020-04-07T01:04:55+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-08-machine-learning-with-titanic-data/</loc>
-    <lastmod>2020-05-08T11:34:35+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/reorder-varible-within-facets/</loc>
+    <lastmod>2020-05-05T00:15:31+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/programmer-word-choice/</loc>
-    <lastmod>2020-05-08T20:21:30+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/better-sicence-in-less-time/better-science-in-less-time/</loc>
+    <lastmod>2020-04-07T00:34:19+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-07-analyzing-animal-crossing-reviews/</loc>
-    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/categories/readings/</loc>
+    <lastmod>2020-05-15T15:08:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/international-debt-sql/</loc>
-    <lastmod>2020-05-05T18:42:11+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/introduction-to-skimr/</loc>
+    <lastmod>2020-05-04T23:13:04+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/sql/</loc>
-    <lastmod>2020-05-05T18:42:11+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/50-years-of-data-science/</loc>
+    <lastmod>2020-05-15T15:08:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-05-03-evaluating-topic-models/</loc>
-    <lastmod>2020-05-03T00:06:36+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</loc>
+    <lastmod>2020-04-07T00:34:19+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/text-classification-logistic/</loc>
-    <lastmod>2020-05-02T23:33:49+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/r4ds/</loc>
+    <lastmod>2021-01-13T23:26:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/overwatch/</loc>
-    <lastmod>2020-04-25T00:09:45+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/project/tidy-text-mining/</loc>
+    <lastmod>2021-01-13T23:26:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-04-25-who-is-carrying-there-team-in-owl/</loc>
-    <lastmod>2020-04-25T00:09:45+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/license/</loc>
+    <lastmod>2020-12-23T15:18:18+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-04-15-tidy-comparison-of-classification-methods/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+    <loc>https://qiushi.rbind.io/authors/qiushi/</loc>
+    <lastmod>2020-12-19T15:40:01+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/exploring-the-london-stage-database/</loc>
-    <lastmod>2020-04-05T14:09:39+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/authors/</loc>
   </url>
   
   <url>
-    <loc>/categories/statistics/</loc>
-    <lastmod>2020-04-07T15:48:14+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/docs/</loc>
+    <lastmod>2020-04-11T15:31:48+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020-04-07-using-infer-for-tidy-statistical-inference/</loc>
-    <lastmod>2020-04-07T15:48:14+08:00</lastmod>
+    <loc>https://qiushi.rbind.io/post/</loc>
+    <lastmod>2020-04-05T22:00:52+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/analyzing-covid-19-publications/</loc>
-    <lastmod>2020-05-08T12:54:24+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/about/</loc>
-    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/forecasting/</loc>
-    <lastmod>2020-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2020-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/time-series/</loc>
-    <lastmod>2020-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/fpp/</loc>
-    <lastmod>2020-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/listviewer/view-of-nested-objects-listviewer/</loc>
-    <lastmod>2019-11-30T14:04:22+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/reorder-varible-within-facets/</loc>
-    <lastmod>2020-04-05T21:38:24+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/better-sicence-in-less-time/better-science-in-less-time/</loc>
-    <lastmod>2019-11-25T08:23:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/introduction-to-skimr/</loc>
-    <lastmod>2020-04-05T23:27:44+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/50-years-of-data-science/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/enterprise-data-analysis-and-visualization-an-interview-study/enterprise-data-analysis-and-visualization-an-interview-study/</loc>
-    <lastmod>2019-11-21T18:42:03+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/r4ds/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/text-mining/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/tidy-text-mining/</loc>
-    <lastmod>2019-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/license/</loc>
-    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/qiushi/</loc>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-  </url>
-  
-  <url>
-    <loc>/docs/</loc>
-  </url>
-  
-  <url>
-    <loc>/publication_types/</loc>
+    <loc>https://qiushi.rbind.io/publication_types/</loc>
   </url>
   
 </urlset>

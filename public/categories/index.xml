@@ -2,85 +2,69 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories | Qiushi Yan</title>
-    <link>/categories/</link>
-      <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/categories/</link>
+      <atom:link href="https://qiushi.rbind.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Tue, 02 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Tue, 02 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Categories</title>
-      <link>/categories/</link>
+      <link>https://qiushi.rbind.io/categories/</link>
     </image>
     
     <item>
       <title>R</title>
-      <link>/categories/r/</link>
+      <link>https://qiushi.rbind.io/categories/r/</link>
       <pubDate>Tue, 02 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/r/</guid>
+      <guid>https://qiushi.rbind.io/categories/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Analysis</title>
-      <link>/categories/data-analysis/</link>
-      <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/data-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Machine Learning</title>
-      <link>/categories/machine-learning/</link>
-      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/machine-learning/</guid>
+      <link>https://qiushi.rbind.io/categories/data-analysis/</link>
+      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/categories/data-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>/categories/python/</link>
+      <link>https://qiushi.rbind.io/categories/python/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/python/</guid>
+      <guid>https://qiushi.rbind.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://qiushi.rbind.io/categories/machine-learning/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/categories/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Visualization</title>
-      <link>/categories/data-visualization/</link>
-      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/data-visualization/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Readings</title>
-      <link>/categories/readings/</link>
-      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/readings/</guid>
+      <link>https://qiushi.rbind.io/categories/data-visualization/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/categories/data-visualization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SQL</title>
-      <link>/categories/sql/</link>
+      <link>https://qiushi.rbind.io/categories/sql/</link>
       <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/sql/</guid>
+      <guid>https://qiushi.rbind.io/categories/sql/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Overwatch</title>
-      <link>/categories/overwatch/</link>
-      <pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/overwatch/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Statistics</title>
-      <link>/categories/statistics/</link>
-      <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/statistics/</guid>
+      <title>Readings</title>
+      <link>https://qiushi.rbind.io/categories/readings/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/categories/readings/</guid>
       <description></description>
     </item>
     

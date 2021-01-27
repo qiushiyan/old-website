@@ -2,80 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Analysis | Qiushi Yan</title>
-    <link>/categories/data-analysis/</link>
-      <atom:link href="/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/categories/data-analysis/</link>
+      <atom:link href="https://qiushi.rbind.io/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Analysis</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Data Analysis</title>
-      <link>/categories/data-analysis/</link>
+      <link>https://qiushi.rbind.io/categories/data-analysis/</link>
     </image>
     
     <item>
-      <title>Excess Death for 2020</title>
-      <link>/post/2020-05-21-excess-death-for-2020/</link>
-      <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-21-excess-death-for-2020/</guid>
-      <description>
-
-
-&lt;div class=&#34;box&#34;&gt;
-&lt;p&gt;This is my normal chunk&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;puzzle&#34;&gt;
-&lt;p&gt;this my puzzle chunk&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Predicting Graduate Admission for Internaitonal student</title>
-      <link>/post/2020-05-18-predicting-graduate-admission/</link>
-      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-18-predicting-graduate-admission/</guid>
-      <description>
-
-
-&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com/eswarchandt/admission&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com/eswarchandt/admission&lt;/a&gt;?&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
-
-
-admission &amp;lt;- readxl::read_excel(&amp;quot;D:/RProjects/data/blog/admission.xlsx&amp;quot;) %&amp;gt;% 
-  janitor::clean_names() %&amp;gt;% 
-  mutate(admit = factor(admit))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
-
-admission_split &amp;lt;- initial_split(admission)
-admission_test &amp;lt;- testing(admission_split)
-admission_train &amp;lt;- training(admission_split)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rec &amp;lt;- recipe(admit ~ ., data = admission_train) %&amp;gt;% 
-  step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&amp;gt;%
-  step_dummy(all_nominal(), -all_outcomes()) %&amp;gt;% 
-  step_normalize(gre, gpa)&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Biterm Topic Modeling for Danmaku on Bilibili</title>
-      <link>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</link>
-      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</guid>
-      <description>
-
-
-&lt;p&gt;btm package: &lt;a href=&#34;https://github.com/bnosac/BTM&#34; class=&#34;uri&#34;&gt;https://github.com/bnosac/BTM&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;definition of danmaku &lt;a href=&#34;https://blogs.ubc.ca/titus283/2018/02/03/43/&#34; class=&#34;uri&#34;&gt;https://blogs.ubc.ca/titus283/2018/02/03/43/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;bilibili &lt;a href=&#34;https://en.wikipedia.org/wiki/Bilibili&#34; class=&#34;uri&#34;&gt;https://en.wikipedia.org/wiki/Bilibili&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Exploring policing activity in Rhode Island</title>
-      <link>/post/rhode-policing-activity/</link>
+      <link>https://qiushi.rbind.io/post/rhode-policing-activity/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/rhode-policing-activity/</guid>
+      <guid>https://qiushi.rbind.io/post/rhode-policing-activity/</guid>
       <description>
+&lt;script src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
@@ -92,12 +35,12 @@ admission_train &amp;lt;- training(admission_split)&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;The relationship between search rate, types of search, types of violation, gender and race.&lt;/li&gt;
 &lt;li&gt;How do the number of drug related stops and search rate change during the past few years?&lt;/li&gt;
-&lt;li&gt;Is there a patten in violations across different zones of Rhode Island?&lt;/li&gt;
+&lt;li&gt;Is there a pattern in violations across different zones of Rhode Island?&lt;/li&gt;
 &lt;li&gt;Does weather affect arrest rate?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;data-preprocessing&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data preprocessing&lt;/h1&gt;
-&lt;p&gt;Let’s begin by loading the library and data:&lt;/p&gt;
+&lt;p&gt;Let’s begin by loading the library and data&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd &lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri = pd.read_csv(&amp;quot;D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv&amp;quot;)
 print(ri.head())
@@ -195,7 +138,7 @@ ri_clean = (ri.
 &lt;/div&gt;
 &lt;div id=&#34;exploring-the-relationship-between-gender-race-and-policing&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Exploring the relationship between gender, race and policing&lt;/h1&gt;
-&lt;p&gt;The &lt;code&gt;search_conducted&lt;/code&gt; column indicates whether or not a vehicle were searched by an officer:&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;search_conducted&lt;/code&gt; column indicates whether or not a vehicle were searched by an officer&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean.search_conducted.head()
 #&amp;gt; stop_datetime
 #&amp;gt; 2005-01-04 12:55:00    False
@@ -227,7 +170,7 @@ ri_clean.groupby(&amp;quot;driver_gender&amp;quot;).search_conducted.mean()
 #&amp;gt; Speeding             F                0.008309
 #&amp;gt;                      M                0.027885
 #&amp;gt; Name: search_conducted, dtype: float64&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variales, by and large.&lt;/p&gt;
+&lt;p&gt;For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variables, by and large.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;search_type&lt;/code&gt; column contains information about categories of searching on the part of the police. I investigate the relative proportion of the most common search types for 4 races.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;condition = ri_clean.driver_race.isin([&amp;quot;White&amp;quot;, &amp;quot;Black&amp;quot;, &amp;quot;Hispanic&amp;quot;, &amp;quot;Asian&amp;quot;]) &amp;amp; ri_clean.search_type.isin([&amp;quot;Incident to Arrest&amp;quot;, &amp;#39;Probable Cause&amp;#39;, &amp;#39;Inventory&amp;#39;])
 
@@ -241,8 +184,8 @@ search_type_by_race = (ri_clean[condition].
 search_type_by_race.plot(kind = &amp;quot;bar&amp;quot;)
 plt.title(&amp;quot;Proportion of common search types across 4 races&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in &lt;code&gt;search_type&lt;/code&gt; by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if &lt;code&gt;search_type&lt;/code&gt; contains protective firsk, and calculate its rate across races.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in &lt;code&gt;search_type&lt;/code&gt; by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if &lt;code&gt;search_type&lt;/code&gt; contains protective frisk, and calculate its rate across races.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean[&amp;quot;frisk&amp;quot;] = ri_clean.search_type.str.contains(&amp;quot;Protective Frisk&amp;quot;).astype(&amp;quot;bool&amp;quot;)
 
 (ri_clean[ri_clean.search_conducted == True].
@@ -265,11 +208,10 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 annual_search_rate = ri_clean.search_conducted.resample(&amp;quot;A&amp;quot;).mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&amp;quot;columns&amp;quot;)
 annual.plot(subplots = True)
-#&amp;gt; array([&amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AADF548&amp;gt;,
-#&amp;gt;        &amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000000050650DC8&amp;gt;],
-#&amp;gt;       dtype=object)
+#&amp;gt; array([&amp;lt;AxesSubplot:xlabel=&amp;#39;stop_datetime&amp;#39;&amp;gt;,
+#&amp;gt;        &amp;lt;AxesSubplot:xlabel=&amp;#39;stop_datetime&amp;#39;&amp;gt;], dtype=object)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The rate of drug-related stops increased even though the search rate decreased.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;distribution-of-violation-across-zones&#34; class=&#34;section level1&#34;&gt;
@@ -278,7 +220,7 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;all_zones = pd.crosstab(ri_clean.district, ri_clean.violation)
 all_zones.plot(kind = &amp;#39;bar&amp;#39;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;weather-impact-on-policing-behaviour&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Weather Impact on policing behaviour&lt;/h1&gt;
@@ -302,7 +244,7 @@ weather.head()
   
 weather.bad_conditions.plot(kind = &amp;quot;hist&amp;quot;, bins = 10)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Next, I split the daily weather into a categorical variable with 3 categories based on &lt;code&gt;bad_conditions&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from pandas.api.types import CategoricalDtype
 mapping = {0:&amp;#39;good&amp;#39;, 1:&amp;#39;bad&amp;#39;, 2:&amp;#39;bad&amp;#39;, 3: &amp;quot;bad&amp;quot;, 4: &amp;quot;bad&amp;quot;,
@@ -368,7 +310,7 @@ arrest_rate
 #&amp;gt; Name: is_arrested, dtype: float64
 arrest_rate.unstack().plot(kind = &amp;quot;bar&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Generally, the arrest rate is higher when weather condition gets worse. This doesn’t prove a causal link, but it’s quite an interesting result! Also, this plot can be illustrated via a pivot table.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_weather.pivot_table(index = &amp;quot;violation&amp;quot;, columns = &amp;quot;rating&amp;quot;, values = &amp;quot;is_arrested&amp;quot;)
 #&amp;gt; rating                   good       bad     worse
@@ -384,49 +326,10 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Analyzing Police Activity with Pandas</title>
-      <link>/post/police-activity-pandas/</link>
-      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/police-activity-pandas/</guid>
-      <description>
-
-
-
-</description>
-    </item>
-    
-    <item>
-      <title>Analyzing Ted Talks</title>
-      <link>/post/2020-05-14-analyzing-ted-talks/</link>
-      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-14-analyzing-ted-talks/</guid>
-      <description>
-
-
-&lt;p&gt;ted talk with topics: &lt;a href=&#34;https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com/miguelcorraljr/ted-ultimate-dataset&lt;/a&gt;?, upto 2020-5&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Volcano Eruptions</title>
-      <link>/post/2020-05-14-volcano-eruptions/</link>
-      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-14-volcano-eruptions/</guid>
-      <description>
-
-
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tuesdata &amp;lt;- tidytuesdayR::tt_load(&amp;#39;2020-05-12&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;volcano &amp;lt;- tuesdata$volcano
-eruptions &amp;lt;- tuesdata$eruptions&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Tidy Data with Python</title>
-      <link>/post/python-tidy-data/</link>
+      <link>https://qiushi.rbind.io/post/python-tidy-data/</link>
       <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/python-tidy-data/</guid>
+      <guid>https://qiushi.rbind.io/post/python-tidy-data/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -515,7 +418,7 @@ py$tidy_pew %&amp;gt;%
   hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;%
   visualize(method = &amp;quot;theoretical&amp;quot;) +
   shade_p_value(obs_stat = chisq_stat, direction = &amp;quot;right&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This shows strong relationship between &lt;code&gt;income&lt;/code&gt; and &lt;code&gt;religion&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Another common use of this wide data format is to record regularly spaced observations over time, illustrated by the &lt;code&gt;billboard&lt;/code&gt; dataset. Ther rank of a specific track in each week after it enters the Billboard top 100 is recorded in 75 columns, &lt;code&gt;wk1&lt;/code&gt; to &lt;code&gt;wk75&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;billboard = pd.read_csv(&amp;quot;D:/RProjects/data/blog/billboard.csv&amp;quot;)
@@ -769,7 +672,7 @@ plt.title(&amp;quot;Temporal pattern of all causes of death&amp;quot;)
 plt.xlabel(&amp;quot;Hour of the day&amp;quot;)
 plt.ylabel(&amp;quot;Number of deaths&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;To provide informative labels for causes, we next join the dataset to the &lt;code&gt;codes&lt;/code&gt; dataset, on the &lt;code&gt;cod&lt;/code&gt; variable.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;deaths &amp;lt;- left_join(deaths, codes) %&amp;gt;%
   rename(cause = disease)
@@ -855,7 +758,7 @@ dist %&amp;gt;%
   labs(title = &amp;quot;Temporal deviation of causes of deaths in Mexico&amp;quot;,
        y = NULL,
        x = &amp;quot;total death&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Thus, our final solution is to build a model with &lt;code&gt;n&lt;/code&gt; as predictor, and &lt;code&gt;dist&lt;/code&gt; as response. The cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I opt for linear regression (Hadley used robust linear model in the paper).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(broom)
 lm_fit &amp;lt;- lm(log(dist) ~ log(n), data = dist)
@@ -870,7 +773,7 @@ tidy(lm_fit)
   ggplot(aes(log.n., .resid)) + 
   geom_hline(yintercept = 0, color = &amp;quot;red&amp;quot;) + 
   geom_point()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The plot shows an empty region around a residual of 1.5. So somewhat arbitrarily, we’ll select those diseases with a residual greater than 1.5&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -918,7 +821,7 @@ unusual
        subtitle = &amp;quot;comparing cause-specific temporal pattern to overall trend&amp;quot;) + 
   theme_minimal(base_size = 22) +
   theme(legend.position = &amp;quot;top&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;1536&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;1536&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;
@@ -938,83 +841,10 @@ unusual
     </item>
     
     <item>
-      <title>Machine Learning with Titanic Data</title>
-      <link>/post/2020-05-08-machine-learning-with-titanic-data/</link>
-      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-08-machine-learning-with-titanic-data/</guid>
-      <description>
-
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&#34; class=&#34;uri&#34;&gt;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-from scipy.stats import pearsonr
-import math
-import random 
-
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-
-from datetime import datetime
-import itertools&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Random sample of all titanic passengers.&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic = pd.read_excel(&amp;#39;D:/RProjects/data/blog/titanic.xls&amp;#39;)
-titanic.head()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    pclass  survived  ...   body                        home.dest
-## 0       1         1  ...    NaN                     St Louis, MO
-## 1       1         1  ...    NaN  Montreal, PQ / Chesterville, ON
-## 2       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
-## 3       1         0  ...  135.0  Montreal, PQ / Chesterville, ON
-## 4       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
-## 
-## [5 rows x 14 columns]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic.info()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
-## RangeIndex: 1309 entries, 0 to 1308
-## Data columns (total 14 columns):
-## pclass       1309 non-null int64
-## survived     1309 non-null int64
-## name         1309 non-null object
-## sex          1309 non-null object
-## age          1046 non-null float64
-## sibsp        1309 non-null int64
-## parch        1309 non-null int64
-## ticket       1309 non-null object
-## fare         1308 non-null float64
-## cabin        295 non-null object
-## embarked     1307 non-null object
-## boat         486 non-null object
-## body         121 non-null float64
-## home.dest    745 non-null object
-## dtypes: float64(3), int64(4), object(7)
-## memory usage: 143.3+ KB&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Programmers and Their Choice of Words</title>
-      <link>/post/programmer-word-choice/</link>
-      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/programmer-word-choice/</guid>
-      <description>
-
-
-&lt;p&gt;&lt;a href=&#34;https://medium.com/swlh/what-programming-language-has-the-happiest-developers-f0636b08e898&#34; class=&#34;uri&#34;&gt;https://medium.com/swlh/what-programming-language-has-the-happiest-developers-f0636b08e898&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-words&#34; class=&#34;uri&#34;&gt;https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-words&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Analyzing Animal Crossing Reviews</title>
-      <link>/post/2020-05-07-analyzing-animal-crossing-reviews/</link>
+      <link>https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-07-analyzing-animal-crossing-reviews/</guid>
+      <guid>https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1054,7 +884,7 @@ glimpse(reviews)
                y = n),
            fill = &amp;quot;midnightblue&amp;quot;, alpha = 0.6) + 
   labs(x = &amp;quot;grade&amp;quot;, y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The data is messy in several ways (I have chosen 3 observations from the &lt;code&gt;text&lt;/code&gt; column for example):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines&lt;/li&gt;
@@ -1133,7 +963,7 @@ reviews_clean &amp;lt;- anti_join(reviews_en, repetition_clean,
   labs(title = &amp;quot;Distribution of review length (characters) before and after cleaning&amp;quot;,
        x = NULL,
        y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;text-analysis-of-user-reviews&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Text analysis of user reviews&lt;/h1&gt;
@@ -1171,7 +1001,7 @@ common_words &amp;lt;- words %&amp;gt;%
         axis.text.x = element_text(size = 12),
         axis.title.x = element_text(size = 16), 
         strip.text = element_text(size = 20, color = &amp;quot;white&amp;quot;)) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As it is, this plot aren’t that helpful for all categories share a very similar set of words. For this reason I turn to two other algorithms developed for information retrieval: tf-idf and weighted log odds.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
 
@@ -1250,7 +1080,7 @@ log_odds &amp;lt;- key_words %&amp;gt;%
         strip.text = element_blank()) 
 
 patchwork::wrap_plots(tf_idf, log_odds, nrow = 2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Emmm… this is a little better, isn’t it 😅? The &lt;code&gt;tf_idf&lt;/code&gt; plot performed well in identifying characteristic words in low ratings like “unacceptable”, “wtf” and “boring”, While the &lt;code&gt;log_odds&lt;/code&gt; plo shows a somewhat dominance of words like “fun”, “cute” and “relaxing” in high ratings.&lt;/p&gt;
 &lt;p&gt;Additionally, we may also be interested in words that tend to co-occur within a particular review. For simplicity I focus on long reivews only (more than 800 characters).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(widyr)
@@ -1291,7 +1121,7 @@ word_cors %&amp;gt;%
   geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
   geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 6.5) + 
   geom_node_text(aes(label = name), repel = TRUE, size = 5.5)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;predictive-modeling-for-rating&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Predictive modeling for rating&lt;/h1&gt;
@@ -1393,7 +1223,7 @@ multinom_search &amp;lt;- tune_grid(wf,
   facet_wrap(~ .metric, scales = &amp;quot;free_y&amp;quot;) + 
   labs(y = NULL, x = expression(lambda)) + 
   theme(legend.position = &amp;quot;none&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It’s clear from the plot that all 3 metrics benefit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the “one-standard error rule” that selects model with largest lambda that is within one standard error of the numerically optimal Kappa metric.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;best_lambda &amp;lt;- multinom_search %&amp;gt;% 
   select_by_one_std_err(metric = &amp;quot;kap&amp;quot;, desc(penalty))
@@ -1457,16 +1287,16 @@ final_fit %&amp;gt;%
   theme(axis.text = element_text(size = 20),
         panel.grid.major.y = element_blank(),
         strip.text = element_text(size = 24, face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Analyzing International Debt Statistics</title>
-      <link>/post/international-debt-sql/</link>
+      <link>https://qiushi.rbind.io/post/international-debt-sql/</link>
       <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/international-debt-sql/</guid>
+      <guid>https://qiushi.rbind.io/post/international-debt-sql/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -2122,7 +1952,7 @@ ORDER BY mean_debt DESC&lt;/code&gt;&lt;/pre&gt;
         x = NULL)
 
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;One may notice that principle repayment of long term debts tops the table of average debt and debt proportion of China. As such, we can find the top 10 countries with highest amount of debt in the category of long term debts (&lt;code&gt;DT.AMT.DLXF.CD&lt;/code&gt;)&lt;/p&gt;
 &lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT DISTINCT country_name
 FROM international_debt
@@ -2309,7 +2139,7 @@ WHERE indicator_code = &amp;#39;DT.INT.OFFT.CD&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;By inspecting the six indicaotors in which all the countries listed in our dataset have taken debt (&lt;code&gt;n_indicator = 124&lt;/code&gt;), we have a clue that all these countries are suffering from some common economic issues. Another problem is what is the most serious issus each country has? We can look into this by retrieveing maximum of debt of all categories of each country.&lt;/p&gt;
 &lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- some countries have tied max debt on multiple categories
 WITH max_debt AS (
@@ -2510,7 +2340,7 @@ showtext_auto()&lt;/code&gt;&lt;/pre&gt;
         axis.text.x = element_text(face = &amp;quot;bold&amp;quot;, size = 14),
         axis.text.y = element_text(face = &amp;quot;bold&amp;quot;, size = 18),
         panel.grid.major.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
@@ -2523,9 +2353,9 @@ showtext_auto()&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Text Classfication with Penalized Logistic Regression</title>
-      <link>/post/text-classification-logistic/</link>
+      <link>https://qiushi.rbind.io/post/text-classification-logistic/</link>
       <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/text-classification-logistic/</guid>
+      <guid>https://qiushi.rbind.io/post/text-classification-logistic/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -2608,7 +2438,7 @@ tidy_books &amp;lt;- clean_books %&amp;gt;%
   labs(title = &amp;quot;Word frequency between two sisters&amp;quot;) + 
   theme(text = element_text(size = 18),
         plot.title.position = &amp;quot;plot&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1440&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1440&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Words lie near the line such as “home”, “head” and “half” indicate similar tendency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff”, “linton”, “catherine”, etc.&lt;/p&gt;
 &lt;p&gt;What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model.&lt;/p&gt;
 &lt;/div&gt;
@@ -2766,7 +2596,7 @@ book_folds &amp;lt;- vfold_cv(book_train, v = 10)&lt;/code&gt;&lt;/pre&gt;
   labs(y = NULL,
        x = expression(lambda),
        title = &amp;quot;Performance metric of logistic regession versus differenct choices of L1 regularization&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to the author’s respective proportion of appearance in the data. This plot shows that the model is generally better at small penalty, suggesting that the majority of the predictors are fairly important to the model. We may lean towards larger penalty with slightly worse performance, bacause they lead to simpler models. It follows that we may want to choose lambda in top rows in the following data frame&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;top_models &amp;lt;- logistic_results %&amp;gt;% 
     show_best(&amp;quot;roc_auc&amp;quot;, n = 100) %&amp;gt;%
@@ -2859,7 +2689,7 @@ logistic_vi %&amp;gt;%
         plot.title = element_text(size = 24),
         plot.title.position = &amp;quot;plot&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-25&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-25-1.png&#34; alt=&#34;Variable importance plot for penalized logistic regression&#34; width=&#34;1056&#34; /&gt;
+&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-25-1.png&#34; alt=&#34;Variable importance plot for penalized logistic regression&#34; width=&#34;1056&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: Variable importance plot for penalized logistic regression
 &lt;/p&gt;
@@ -2874,125 +2704,10 @@ Figure 1: Variable importance plot for penalized logistic regression
     </item>
     
     <item>
-      <title>Who is Carrying There Team in OWL?</title>
-      <link>/post/2020-04-25-who-is-carrying-there-team-in-owl/</link>
-      <pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-04-25-who-is-carrying-there-team-in-owl/</guid>
-      <description>
-
-&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#the-fleta-deadlift&#34;&gt;The Fleta deadlift&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#extend-the-stat-to-tanks-and-supports&#34;&gt;Extend the stat to tanks and supports&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div id=&#34;the-fleta-deadlift&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;The Fleta deadlift&lt;/h1&gt;
-&lt;p&gt;The &lt;a href=&#34;https://overwatchleague.com/en-us/statslab&#34;&gt;Overwatch Stats Lab&lt;/a&gt; is a treasure trove holding vast digital riches for people who want to observe the Overwatch League in a more detailed manner. One of my favourite statistic is the &lt;strong&gt;Fleta deadlift&lt;/strong&gt;, calculated as&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\text{Fleta deadlifts} = \frac{\text{final blows of a player}}{\text{final blows of the whole team}}
-\]&lt;/span&gt;
-It comes as no surprise that the index was named after Fleta, the current Shanghai dragons DPS player, who is known for his former amazing performance in a less talented team before he joined Seoul Dyanasty and entered OWL. If you are not familiar with esports or overwatch, I have some equivelent “Fleta deadlifted his team” examples in the NBA context:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Michael Jordan in the 1998 final&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;Kobe Bryant (I miss him) in season 2006-2007, or perhaps half time in his career&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;Lebron Jmaes in the 2015 final&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The player section on Overwatch Stats Lab even established a special tab for this stat, showing records with Fleta deadlift &amp;gt; 50% (see the last tab below):&lt;br /&gt;
-&lt;iframe src=&#34;https://overwatchleague.com/en-us/statslab-players&#34; width=&#34;768&#34; height=&#34;400px&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;p&gt;It should be obvious though, that Fleta deadlifts are more suitable for describe performaces of DPS players, and less applicable to the other two positions, tanks and supports. Since final blows may not be a good measure for a player’s performance if his main responsibility indicates otherwise.&lt;/p&gt;
-&lt;p&gt;I used &lt;code&gt;load_data.R&lt;/code&gt; to laod in data and do soem preprocessing. You can browse it at.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
-library(vroom)
-
-df &amp;lt;- vroom(&amp;quot;D:/RProjects/data/overwatch/fleta_deadlifts.csv&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;extend-the-stat-to-tanks-and-supports&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Extend the stat to tanks and supports&lt;/h2&gt;
-&lt;p&gt;However, since OWL mandates the 2-2-2 composition only after the third stage in season 2019. A player can belong to different positions even in the same map or match.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dpss &amp;lt;- c(&amp;quot;Hanzo&amp;quot;, &amp;quot;Junkrat&amp;quot;, &amp;quot;Tracer&amp;quot;, &amp;quot;Soldier: 76&amp;quot;, &amp;quot;Widowmaker&amp;quot;, &amp;quot;McCree&amp;quot;, &amp;quot;Pharah&amp;quot;, &amp;quot;Genji&amp;quot;, &amp;quot;Sombra&amp;quot;, &amp;quot;Reaper&amp;quot;, &amp;quot;Doomfist&amp;quot;, &amp;quot;Bastion&amp;quot;, &amp;quot;Mei&amp;quot;, &amp;quot;Torbjörn&amp;quot;, &amp;quot;Symmetra&amp;quot;, &amp;quot;Ashe&amp;quot;)
-tanks &amp;lt;- c(&amp;quot;Orisa&amp;quot;, &amp;quot;Winston&amp;quot;, &amp;quot;Roadhog&amp;quot;, &amp;quot;D.Va&amp;quot;, &amp;quot;Zarya&amp;quot;, &amp;quot;Reinhardt&amp;quot;, &amp;quot;Wrecking Ball&amp;quot;)
-supports &amp;lt;- c(&amp;quot;Lúcio&amp;quot;, &amp;quot;Mercy&amp;quot;, &amp;quot;Zenyatta&amp;quot;, &amp;quot;Brigitte&amp;quot;, &amp;quot;Moira&amp;quot;, &amp;quot;Ana&amp;quot;, &amp;quot;Sigma&amp;quot;, &amp;quot;Baptiste&amp;quot;)
-
-dps_records &amp;lt;- df %&amp;gt;% filter(hero %in% dpss)
-tank_records &amp;lt;- df %&amp;gt;% filter(hero %in% tanks)
-support_records &amp;lt;- df %&amp;gt;% filter(hero %in% supports)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For dps players, I will stick to the official measure of a Fleta deadlift: involved in more than 50% percent of team total final blows in a match.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dps_deadlifts &amp;lt;- dps_records %&amp;gt;% 
-  filter(stat_name == &amp;quot;Final Blows&amp;quot;) %&amp;gt;% 
-  mutate(final_blows = stat_amount) %&amp;gt;% 
-  select(-stat_name, -stat_amount) %&amp;gt;%
-  add_count(date, team, wt = final_blows, name = &amp;quot;team_final_blows&amp;quot;) %&amp;gt;%
-  filter(team_final_blows &amp;gt; 10) %&amp;gt;% 
-  group_by(date, player, team_final_blows) %&amp;gt;%
-  summarize(player_final_blows = sum(final_blows)) %&amp;gt;%
-  ungroup() %&amp;gt;%
-  mutate(rate = player_final_blows / team_final_blows) %&amp;gt;%
-  filter(rate &amp;gt; 0.5) 
-
-dps_deadlifts
-#&amp;gt; # A tibble: 827 x 5
-#&amp;gt;    date       player   team_final_blows player_final_blows  rate
-#&amp;gt;    &amp;lt;date&amp;gt;     &amp;lt;chr&amp;gt;               &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
-#&amp;gt;  1 2018-01-11 babybay                95                 48 0.505
-#&amp;gt;  2 2018-01-11 carpe                  44                 25 0.568
-#&amp;gt;  3 2018-01-11 EFFECT                139                 70 0.504
-#&amp;gt;  4 2018-01-11 Fleta                 131                 68 0.519
-#&amp;gt;  5 2018-01-11 Jake                   35                 20 0.571
-#&amp;gt;  6 2018-01-11 Profit                 90                 58 0.644
-#&amp;gt;  7 2018-01-11 TviQ                   80                 42 0.525
-#&amp;gt;  8 2018-01-11 Undead                 35                 18 0.514
-#&amp;gt;  9 2018-01-12 Jake                   95                 49 0.516
-#&amp;gt; 10 2018-01-13 Birdring              100                 52 0.52 
-#&amp;gt; # ... with 817 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Exploring the London Stage Database</title>
-      <link>/post/exploring-the-london-stage-database/</link>
-      <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/post/exploring-the-london-stage-database/</guid>
-      <description>
-
-
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# setup
-library(tidyverse)
-library(jsonlite)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# get the data
-london_stage &amp;lt;- fromJSON(&amp;quot;D:/RProjects/data/LondonStageFull.json&amp;quot;) %&amp;gt;% 
-  as_tibble()
-
-london_stage
-#&amp;gt; # A tibble: 52,617 x 13
-#&amp;gt;    EventId EventDate TheatreCode Season Volume Hathi CommentC TheatreId Phase2
-#&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt; 
-#&amp;gt;  1 0       16591029  city        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;The &amp;lt;i~ 63        *p165~
-#&amp;gt;  2 1       16591100  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;On 23 ~ 206       *p165~
-#&amp;gt;  3 2       16591218  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Repres~ 1         *p165~
-#&amp;gt;  4 3       16600200  mt          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;6 Feb.~ 206       *p166~
-#&amp;gt;  5 4       16600204  cockpit     1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;$Thoma~ 73        *p166~
-#&amp;gt;  6 5       16600328  dh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;At &amp;lt;i&amp;gt;~ 90        *p166~
-#&amp;gt;  7 6       16600406  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
-#&amp;gt;  8 7       16600412  vh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;Editio~ 319       *p166~
-#&amp;gt;  9 8       16600413  fh          1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;lt;i&amp;gt;The~ 116       *p166~
-#&amp;gt; 10 9       16600416  none        1659-~ 1      &amp;quot;&amp;quot;    &amp;quot;&amp;quot;       1         *p166~
-#&amp;gt; # ... with 52,607 more rows, and 4 more variables: Phase1 &amp;lt;chr&amp;gt;,
-#&amp;gt; #   CommentCClean &amp;lt;chr&amp;gt;, BookPDF &amp;lt;chr&amp;gt;, Performances &amp;lt;list&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;json&lt;/code&gt; file can be downloaded at &lt;a href=&#34;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&#34; class=&#34;uri&#34;&gt;https://londonstagedatabase.usu.edu/downloads/LondonStageJSON.zip&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Analyzing COVID-19 Publications</title>
-      <link>/post/analyzing-covid-19-publications/</link>
+      <link>https://qiushi.rbind.io/post/analyzing-covid-19-publications/</link>
       <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/post/analyzing-covid-19-publications/</guid>
+      <guid>https://qiushi.rbind.io/post/analyzing-covid-19-publications/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -3127,7 +2842,7 @@ words
         plot.title.position = &amp;quot;plot&amp;quot;,
         plot.title = element_text(size = 35, face = &amp;quot;bold&amp;quot;),
         axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;I’m also interested in paper-specific properties, namely their keywords, what topics distinguish them from others? In comparison to the commonly used algorithm tf-idf, I prefer using weighted log odds proposed by &lt;span class=&#34;citation&#34;&gt;Monroe, Colaresi, and Quinn (&lt;a href=&#34;#ref-monroe_colaresi_quinn&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt;, which a standardized metric from a complete statistical model. It is also implemented in the R package &lt;a href=&#34;https://github.com/juliasilge/tidylo&#34;&gt;&lt;code&gt;tidylo&lt;/code&gt;&lt;/a&gt;&lt;span class=&#34;citation&#34;&gt;(Schnoebelen and Silge &lt;a href=&#34;#ref-tidylo&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. The reason is that tf-idf cannot extract the varying use trend of common words, if a word appears in every research paper, then its inverse document frequency will be zero. For weighted log odds this is not the case, even if all researched mentioned this word it can still differentiate those who used it a lot more often from those who used less. This could be essential when we are trying to find an emphasis on which researchers place as our understanding of the virus advances. Sadly I have no access to the exact date of the publication, so I will just display words with topest score and their corresponding publications.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
 
@@ -3300,7 +3015,7 @@ tidy(topic_model) %&amp;gt;%
         plot.title = element_text(size = 30, face = &amp;quot;bold&amp;quot;),
         strip.text = element_text(size = 25, hjust = 0.05),
         axis.ticks.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It’s hard to interpret these topics without domain knwoledge. But it seems to me that topic3 is related to clinical findings, topic4 to china and wuhan, the epicenter of covid19.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;a-network-of-paired-words&#34; class=&#34;section level1&#34;&gt;
@@ -3341,7 +3056,7 @@ word_cors %&amp;gt;%
   geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
   geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 6.5) + 
   geom_node_text(aes(label = name), repel = TRUE, size = 5.5)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/analyzing-covid-19-publications/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As you can see, there are still some non-English words that stemming and adding stopwrods cannot handle… Nonetheless, we are be able to identify some of the clusters revovling around infant infection (infant, pregnant, newborn, mother), pathology (angiotensin, protein, receptor), symptoms (lung, thicken, lesion), etc.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;

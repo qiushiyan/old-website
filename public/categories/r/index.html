@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Personal blog of Qiushi Yan">
+  <meta name="description" content="A data science blog by Qiushi Yan">
 
   
-  <link rel="alternate" hreflang="en-us" href="/categories/r/">
+  <link rel="alternate" hreflang="en-us" href="https://qiushi.rbind.io/categories/r/">
 
   
 
@@ -77,7 +77,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CRoboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CZilla+Slab:300,300i%7CFira+Code:wght@300&display=swap">
   
 
   
@@ -138,7 +138,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/categories/r/">
+  <link rel="canonical" href="https://qiushi.rbind.io/categories/r/">
 
   
   
@@ -154,10 +154,10 @@
   <meta property="twitter:creator" content="@qiushizzzz">
   
   <meta property="og:site_name" content="Qiushi Yan">
-  <meta property="og:url" content="/categories/r/">
+  <meta property="og:url" content="https://qiushi.rbind.io/categories/r/">
   <meta property="og:title" content="R | Qiushi Yan">
-  <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="A data science blog by Qiushi Yan"><meta property="og:image" content="https://qiushi.rbind.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://qiushi.rbind.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     <meta property="og:updated_time" content="2020-06-02T00:00:00&#43;00:00">
   
@@ -342,7 +342,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/about"><span>About / Contact</span></a>
+          <a class="nav-link " href="/about"><span>About</span></a>
         </li>
 
         
@@ -420,36 +420,6 @@
   </div>
   
   <div>
-    <h2><a href="/post/2020-05-21-excess-death-for-2020/">Excess Death for 2020</a></h2>
-    <div class="article-style">
-      
-      Reveal true effect of the pandanic with year-on-year death rates
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-18-predicting-graduate-admission/">Predicting Graduate Admission for Internaitonal student</a></h2>
-    <div class="article-style">
-      
-      https://www.kaggle.com/eswarchandt/admission?
-library(tidyverse)admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% janitor::clean_names() %&gt;% mutate(admit = factor(admit))library(tidymodels)admission_split &lt;- initial_split(admission)admission_test &lt;- testing(admission_split)admission_train &lt;- training(admission_split)rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%step_dummy(all_nominal(), -all_outcomes()) %&gt;% step_normalize(gre, gpa)
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/">Biterm Topic Modeling for Danmaku on Bilibili</a></h2>
-    <div class="article-style">
-      
-      btm package: https://github.com/bnosac/BTM
-definition of danmaku https://blogs.ubc.ca/titus283/2018/02/03/43/
-bilibili https://en.wikipedia.org/wiki/Bilibili
-      
-    </div>
-  </div>
-  
-  <div>
     <h2><a href="/post/json-column-r/">Working with JSON Columns in R</a></h2>
     <div class="article-style">
       
@@ -459,29 +429,10 @@ bilibili https://en.wikipedia.org/wiki/Bilibili
   </div>
   
   <div>
-    <h2><a href="/post/2020-05-14-volcano-eruptions/">Volcano Eruptions</a></h2>
-    <div class="article-style">
-      
-      library(tidyverse)tuesdata &lt;- tidytuesdayR::tt_load(&#39;2020-05-12&#39;)volcano &lt;- tuesdata$volcanoeruptions &lt;- tuesdata$eruptions
-      
-    </div>
-  </div>
-  
-  <div>
     <h2><a href="/post/python-tidy-data/">Tidy Data with Python</a></h2>
     <div class="article-style">
       
       A play with messy data in Hadley Wickham's Tidy Data paper in pandas, finish by exploring a real-world dataset using both R and Python.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/programmer-word-choice/">Programmers and Their Choice of Words</a></h2>
-    <div class="article-style">
-      
-      https://medium.com/swlh/what-programming-language-has-the-happiest-developers-f0636b08e898
-https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-words
       
     </div>
   </div>
@@ -504,17 +455,44 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
     </div>
   </div>
   
+  <div>
+    <h2><a href="/post/analyzing-covid-19-publications/">Analyzing COVID-19 Publications</a></h2>
+    <div class="article-style">
+      
+      A simple text analysis on the abstract of up-to-date COVID-19 publications.
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/listviewer/view-of-nested-objects-listviewer/">Interactive view of nested objects in R</a></h2>
+    <div class="article-style">
+      
+      {listviewer} is a package of R htmlwidgets to interactively view and maybe modify lists
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/reorder-varible-within-facets/">Reordering within facets</a></h2>
+    <div class="article-style">
+      
+      {ggetxt} provides convenient yet less-recognized graphing helpers to reorder an x or y axis within facets.
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/introduction-to-skimr/">Skimming through {skimr}</a></h2>
+    <div class="article-style">
+      
+      Develpoed by the rOpenSci conmmunity, skimr is designed to provide useful, tidy summary statistics of data frames
+      
+    </div>
+  </div>
+  
 
   
-<nav>
-  <ul class="pagination justify-content-center">
-    
-    
-    <li class="page-item"><a class="page-link" href="/categories/r/page/2/">&raquo;</a></li>
-    
-  </ul>
-</nav>
-
 
 </div>
 
@@ -570,11 +548,7 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
 
     
     
-
     
-    
-    
-
     
     
     <script>hljs.initHighlightingOnLoad();</script>
@@ -659,7 +633,7 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
   
 
   <p class="powered-by">
-    Qiushi Yan © 2020 &middot; 
+    Qiushi Yan © 2021 &middot; 
 
     Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and the 
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
@@ -675,6 +649,7 @@ https://github.com/Dobiasd/programming-language-subreddits-and-their-choice-of-w
     </span>
     
   </p>
+
 </footer>
   </div>
   

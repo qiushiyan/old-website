@@ -2,36 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Visualization | Qiushi Yan</title>
-    <link>/categories/data-visualization/</link>
-      <atom:link href="/categories/data-visualization/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/categories/data-visualization/</link>
+      <atom:link href="https://qiushi.rbind.io/categories/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     <description>Data Visualization</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Data Visualization</title>
-      <link>/categories/data-visualization/</link>
+      <link>https://qiushi.rbind.io/categories/data-visualization/</link>
     </image>
     
     <item>
-      <title>Volcano Eruptions</title>
-      <link>/post/2020-05-14-volcano-eruptions/</link>
-      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-14-volcano-eruptions/</guid>
-      <description>
-
-
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tuesdata &amp;lt;- tidytuesdayR::tt_load(&amp;#39;2020-05-12&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;volcano &amp;lt;- tuesdata$volcano
-eruptions &amp;lt;- tuesdata$eruptions&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Analyzing International Debt Statistics</title>
-      <link>/post/international-debt-sql/</link>
+      <link>https://qiushi.rbind.io/post/international-debt-sql/</link>
       <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/international-debt-sql/</guid>
+      <guid>https://qiushi.rbind.io/post/international-debt-sql/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -687,7 +672,7 @@ ORDER BY mean_debt DESC&lt;/code&gt;&lt;/pre&gt;
         x = NULL)
 
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;One may notice that principle repayment of long term debts tops the table of average debt and debt proportion of China. As such, we can find the top 10 countries with highest amount of debt in the category of long term debts (&lt;code&gt;DT.AMT.DLXF.CD&lt;/code&gt;)&lt;/p&gt;
 &lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT DISTINCT country_name
 FROM international_debt
@@ -874,7 +859,7 @@ WHERE indicator_code = &amp;#39;DT.INT.OFFT.CD&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;816&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;By inspecting the six indicaotors in which all the countries listed in our dataset have taken debt (&lt;code&gt;n_indicator = 124&lt;/code&gt;), we have a clue that all these countries are suffering from some common economic issues. Another problem is what is the most serious issus each country has? We can look into this by retrieveing maximum of debt of all categories of each country.&lt;/p&gt;
 &lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;-- some countries have tied max debt on multiple categories
 WITH max_debt AS (
@@ -1075,7 +1060,7 @@ showtext_auto()&lt;/code&gt;&lt;/pre&gt;
         axis.text.x = element_text(face = &amp;quot;bold&amp;quot;, size = 14),
         axis.text.y = element_text(face = &amp;quot;bold&amp;quot;, size = 18),
         panel.grid.major.y = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-05-analyzing-international-debt-statistics/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
@@ -1088,9 +1073,9 @@ showtext_auto()&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Reordering within facets</title>
-      <link>/post/reorder-varible-within-facets/</link>
+      <link>https://qiushi.rbind.io/post/reorder-varible-within-facets/</link>
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/post/reorder-varible-within-facets/</guid>
+      <guid>https://qiushi.rbind.io/post/reorder-varible-within-facets/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1146,7 +1131,7 @@ common_words
   labs(title = &amp;quot;Top 10 commono words in Jane Austen&amp;#39;s novels, default ordering&amp;quot;,
        y = NULL,
        x = &amp;quot;# of words&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;960&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;960&#34; /&gt;
 (&lt;strong&gt;Reminder&lt;/strong&gt;: don’t forget &lt;code&gt;scales = &#34;free_y&#34;&lt;/code&gt; or &lt;code&gt;scales = &#34;free&#34;&lt;/code&gt; in this case.)&lt;/p&gt;
 &lt;p&gt;By default, ggplot2 order y lables alphabetically, because they are of type character. One common solution is to use &lt;code&gt;fct_reorder()&lt;/code&gt; or its equivalent &lt;code&gt;reorder()&lt;/code&gt; in baes R`:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;common_words %&amp;gt;% 
@@ -1161,7 +1146,7 @@ common_words
   labs(y = NULL,
        title = &amp;quot;fct_reorder() on y&amp;quot;,
        x = &amp;quot;# of words&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Well, our plot improve a bit, but is still wanting in some respects. In each facet, the order of words is not strictly in line with its frequency. In fact, &lt;code&gt;fct_reorder&lt;/code&gt; or &lt;code&gt;reorder&lt;/code&gt; only reorder all of these together, meaning that &lt;code&gt;word&lt;/code&gt; are reordered in an overall level so that it cannot guarantee order in any specific subset of data.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;helper-functions-for-reordering&#34; class=&#34;section level1&#34;&gt;
@@ -1191,7 +1176,7 @@ common_words %&amp;gt;%
   labs(title = &amp;quot;Reordering with {ggtext} graph helpers&amp;quot;,
        x = &amp;quot;# of words&amp;quot;,
        y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Without &lt;code&gt;scale_y_reordered&lt;/code&gt; which overides ggplot2’s default scale, the label of the reordered variable will carry a suffix related to the group variable, making lables way too long and uninformative.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;common_words %&amp;gt;% 
   ggplot(aes(y = reorder_within(word, n, book), 
@@ -1205,7 +1190,7 @@ common_words %&amp;gt;%
   labs(title = &amp;quot;Without scale_y_reordered()&amp;quot;,
        x = &amp;quot;# of words&amp;quot;,
        y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/reorder-varible-within-facets/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;

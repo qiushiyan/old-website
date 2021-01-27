@@ -37,7 +37,7 @@ image:
 </ul>
 <div id="data-preprocessing" class="section level1">
 <h1>Data preprocessing</h1>
-<p>Let’s begin by loading the library and data:</p>
+<p>Let’s begin by loading the library and data</p>
 <pre class="python"><code>import pandas as pd </code></pre>
 <pre class="python"><code>ri = pd.read_csv(&quot;D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv&quot;)
 print(ri.head())
@@ -135,7 +135,7 @@ ri_clean = (ri.
 </div>
 <div id="exploring-the-relationship-between-gender-race-and-policing" class="section level1">
 <h1>Exploring the relationship between gender, race and policing</h1>
-<p>The <code>search_conducted</code> column indicates whether or not a vehicle were searched by an officer:</p>
+<p>The <code>search_conducted</code> column indicates whether or not a vehicle were searched by an officer</p>
 <pre class="python"><code>ri_clean.search_conducted.head()
 #&gt; stop_datetime
 #&gt; 2005-01-04 12:55:00    False
@@ -207,31 +207,7 @@ annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&quot;columns&qu
 annual.plot(subplots = True)
 #&gt; array([&lt;AxesSubplot:xlabel=&#39;stop_datetime&#39;&gt;,
 #&gt;        &lt;AxesSubplot:xlabel=&#39;stop_datetime&#39;&gt;], dtype=object)
-plt.show()
-#&gt; Traceback (most recent call last):
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\backends\backend_qt5.py&quot;, line 480, in _draw_idle
-#&gt;     self.draw()
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\backends\backend_agg.py&quot;, line 407, in draw
-#&gt;     self.figure.draw(self.renderer)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\artist.py&quot;, line 41, in draw_wrapper
-#&gt;     return draw(artist, renderer, *args, **kwargs)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\figure.py&quot;, line 1864, in draw
-#&gt;     renderer, self, artists, self.suppressComposite)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\image.py&quot;, line 131, in _draw_list_compositing_images
-#&gt;     a.draw(renderer)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\artist.py&quot;, line 41, in draw_wrapper
-#&gt;     return draw(artist, renderer, *args, **kwargs)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\cbook\deprecation.py&quot;, line 411, in wrapper
-#&gt;     return func(*inner_args, **inner_kwargs)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axes\_base.py&quot;, line 2707, in draw
-#&gt;     self._update_title_position(renderer)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axes\_base.py&quot;, line 2636, in _update_title_position
-#&gt;     if (ax.xaxis.get_ticks_position() in [&#39;top&#39;, &#39;unknown&#39;]
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axis.py&quot;, line 2207, in get_ticks_position
-#&gt;     self._get_ticks_position()]
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axis.py&quot;, line 1892, in _get_ticks_position
-#&gt;     major = self.majorTicks[0]
-#&gt; IndexError: list index out of range</code></pre>
+plt.show()</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-17-1.png" width="768" /></p>
 <p>The rate of drug-related stops increased even though the search rate decreased.</p>
 </div>
@@ -330,31 +306,7 @@ arrest_rate
 #&gt;                      worse     0.016886
 #&gt; Name: is_arrested, dtype: float64
 arrest_rate.unstack().plot(kind = &quot;bar&quot;)
-plt.show()
-#&gt; Traceback (most recent call last):
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\backends\backend_qt5.py&quot;, line 480, in _draw_idle
-#&gt;     self.draw()
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\backends\backend_agg.py&quot;, line 407, in draw
-#&gt;     self.figure.draw(self.renderer)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\artist.py&quot;, line 41, in draw_wrapper
-#&gt;     return draw(artist, renderer, *args, **kwargs)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\figure.py&quot;, line 1864, in draw
-#&gt;     renderer, self, artists, self.suppressComposite)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\image.py&quot;, line 131, in _draw_list_compositing_images
-#&gt;     a.draw(renderer)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\artist.py&quot;, line 41, in draw_wrapper
-#&gt;     return draw(artist, renderer, *args, **kwargs)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\cbook\deprecation.py&quot;, line 411, in wrapper
-#&gt;     return func(*inner_args, **inner_kwargs)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axes\_base.py&quot;, line 2707, in draw
-#&gt;     self._update_title_position(renderer)
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axes\_base.py&quot;, line 2636, in _update_title_position
-#&gt;     if (ax.xaxis.get_ticks_position() in [&#39;top&#39;, &#39;unknown&#39;]
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axis.py&quot;, line 2207, in get_ticks_position
-#&gt;     self._get_ticks_position()]
-#&gt;   File &quot;C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\matplotlib\axis.py&quot;, line 1892, in _get_ticks_position
-#&gt;     major = self.majorTicks[0]
-#&gt; IndexError: list index out of range</code></pre>
+plt.show()</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-24-1.png" width="768" /></p>
 <p>Generally, the arrest rate is higher when weather condition gets worse. This doesn’t prove a causal link, but it’s quite an interesting result! Also, this plot can be illustrated via a pivot table.</p>
 <pre class="python"><code>ri_weather.pivot_table(index = &quot;violation&quot;, columns = &quot;rating&quot;, values = &quot;is_arrested&quot;)

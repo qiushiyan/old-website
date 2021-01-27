@@ -2,22 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python | Qiushi Yan</title>
-    <link>/categories/python/</link>
-      <atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/categories/python/</link>
+      <atom:link href="https://qiushi.rbind.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Python</title>
-      <link>/categories/python/</link>
+      <link>https://qiushi.rbind.io/categories/python/</link>
     </image>
     
     <item>
       <title>Exploring policing activity in Rhode Island</title>
-      <link>/post/rhode-policing-activity/</link>
+      <link>https://qiushi.rbind.io/post/rhode-policing-activity/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/rhode-policing-activity/</guid>
+      <guid>https://qiushi.rbind.io/post/rhode-policing-activity/</guid>
       <description>
+&lt;script src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
@@ -34,12 +35,12 @@
 &lt;ul&gt;
 &lt;li&gt;The relationship between search rate, types of search, types of violation, gender and race.&lt;/li&gt;
 &lt;li&gt;How do the number of drug related stops and search rate change during the past few years?&lt;/li&gt;
-&lt;li&gt;Is there a patten in violations across different zones of Rhode Island?&lt;/li&gt;
+&lt;li&gt;Is there a pattern in violations across different zones of Rhode Island?&lt;/li&gt;
 &lt;li&gt;Does weather affect arrest rate?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;data-preprocessing&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data preprocessing&lt;/h1&gt;
-&lt;p&gt;Let’s begin by loading the library and data:&lt;/p&gt;
+&lt;p&gt;Let’s begin by loading the library and data&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd &lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri = pd.read_csv(&amp;quot;D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv&amp;quot;)
 print(ri.head())
@@ -137,7 +138,7 @@ ri_clean = (ri.
 &lt;/div&gt;
 &lt;div id=&#34;exploring-the-relationship-between-gender-race-and-policing&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Exploring the relationship between gender, race and policing&lt;/h1&gt;
-&lt;p&gt;The &lt;code&gt;search_conducted&lt;/code&gt; column indicates whether or not a vehicle were searched by an officer:&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;search_conducted&lt;/code&gt; column indicates whether or not a vehicle were searched by an officer&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean.search_conducted.head()
 #&amp;gt; stop_datetime
 #&amp;gt; 2005-01-04 12:55:00    False
@@ -169,7 +170,7 @@ ri_clean.groupby(&amp;quot;driver_gender&amp;quot;).search_conducted.mean()
 #&amp;gt; Speeding             F                0.008309
 #&amp;gt;                      M                0.027885
 #&amp;gt; Name: search_conducted, dtype: float64&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variales, by and large.&lt;/p&gt;
+&lt;p&gt;For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variables, by and large.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;search_type&lt;/code&gt; column contains information about categories of searching on the part of the police. I investigate the relative proportion of the most common search types for 4 races.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;condition = ri_clean.driver_race.isin([&amp;quot;White&amp;quot;, &amp;quot;Black&amp;quot;, &amp;quot;Hispanic&amp;quot;, &amp;quot;Asian&amp;quot;]) &amp;amp; ri_clean.search_type.isin([&amp;quot;Incident to Arrest&amp;quot;, &amp;#39;Probable Cause&amp;#39;, &amp;#39;Inventory&amp;#39;])
 
@@ -183,8 +184,8 @@ search_type_by_race = (ri_clean[condition].
 search_type_by_race.plot(kind = &amp;quot;bar&amp;quot;)
 plt.title(&amp;quot;Proportion of common search types across 4 races&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in &lt;code&gt;search_type&lt;/code&gt; by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if &lt;code&gt;search_type&lt;/code&gt; contains protective firsk, and calculate its rate across races.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in &lt;code&gt;search_type&lt;/code&gt; by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if &lt;code&gt;search_type&lt;/code&gt; contains protective frisk, and calculate its rate across races.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean[&amp;quot;frisk&amp;quot;] = ri_clean.search_type.str.contains(&amp;quot;Protective Frisk&amp;quot;).astype(&amp;quot;bool&amp;quot;)
 
 (ri_clean[ri_clean.search_conducted == True].
@@ -207,11 +208,10 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 annual_search_rate = ri_clean.search_conducted.resample(&amp;quot;A&amp;quot;).mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&amp;quot;columns&amp;quot;)
 annual.plot(subplots = True)
-#&amp;gt; array([&amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AADF548&amp;gt;,
-#&amp;gt;        &amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000000050650DC8&amp;gt;],
-#&amp;gt;       dtype=object)
+#&amp;gt; array([&amp;lt;AxesSubplot:xlabel=&amp;#39;stop_datetime&amp;#39;&amp;gt;,
+#&amp;gt;        &amp;lt;AxesSubplot:xlabel=&amp;#39;stop_datetime&amp;#39;&amp;gt;], dtype=object)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The rate of drug-related stops increased even though the search rate decreased.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;distribution-of-violation-across-zones&#34; class=&#34;section level1&#34;&gt;
@@ -220,7 +220,7 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;all_zones = pd.crosstab(ri_clean.district, ri_clean.violation)
 all_zones.plot(kind = &amp;#39;bar&amp;#39;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;weather-impact-on-policing-behaviour&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Weather Impact on policing behaviour&lt;/h1&gt;
@@ -244,7 +244,7 @@ weather.head()
   
 weather.bad_conditions.plot(kind = &amp;quot;hist&amp;quot;, bins = 10)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Next, I split the daily weather into a categorical variable with 3 categories based on &lt;code&gt;bad_conditions&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from pandas.api.types import CategoricalDtype
 mapping = {0:&amp;#39;good&amp;#39;, 1:&amp;#39;bad&amp;#39;, 2:&amp;#39;bad&amp;#39;, 3: &amp;quot;bad&amp;quot;, 4: &amp;quot;bad&amp;quot;,
@@ -310,7 +310,7 @@ arrest_rate
 #&amp;gt; Name: is_arrested, dtype: float64
 arrest_rate.unstack().plot(kind = &amp;quot;bar&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Generally, the arrest rate is higher when weather condition gets worse. This doesn’t prove a causal link, but it’s quite an interesting result! Also, this plot can be illustrated via a pivot table.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_weather.pivot_table(index = &amp;quot;violation&amp;quot;, columns = &amp;quot;rating&amp;quot;, values = &amp;quot;is_arrested&amp;quot;)
 #&amp;gt; rating                   good       bad     worse
@@ -326,22 +326,10 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Analyzing Police Activity with Pandas</title>
-      <link>/post/police-activity-pandas/</link>
-      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/police-activity-pandas/</guid>
-      <description>
-
-
-
-</description>
-    </item>
-    
-    <item>
       <title>Tidy Data with Python</title>
-      <link>/post/python-tidy-data/</link>
+      <link>https://qiushi.rbind.io/post/python-tidy-data/</link>
       <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/python-tidy-data/</guid>
+      <guid>https://qiushi.rbind.io/post/python-tidy-data/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -430,7 +418,7 @@ py$tidy_pew %&amp;gt;%
   hypothesize(null = &amp;quot;independence&amp;quot;) %&amp;gt;%
   visualize(method = &amp;quot;theoretical&amp;quot;) +
   shade_p_value(obs_stat = chisq_stat, direction = &amp;quot;right&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This shows strong relationship between &lt;code&gt;income&lt;/code&gt; and &lt;code&gt;religion&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Another common use of this wide data format is to record regularly spaced observations over time, illustrated by the &lt;code&gt;billboard&lt;/code&gt; dataset. Ther rank of a specific track in each week after it enters the Billboard top 100 is recorded in 75 columns, &lt;code&gt;wk1&lt;/code&gt; to &lt;code&gt;wk75&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;billboard = pd.read_csv(&amp;quot;D:/RProjects/data/blog/billboard.csv&amp;quot;)
@@ -684,7 +672,7 @@ plt.title(&amp;quot;Temporal pattern of all causes of death&amp;quot;)
 plt.xlabel(&amp;quot;Hour of the day&amp;quot;)
 plt.ylabel(&amp;quot;Number of deaths&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;To provide informative labels for causes, we next join the dataset to the &lt;code&gt;codes&lt;/code&gt; dataset, on the &lt;code&gt;cod&lt;/code&gt; variable.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;deaths &amp;lt;- left_join(deaths, codes) %&amp;gt;%
   rename(cause = disease)
@@ -770,7 +758,7 @@ dist %&amp;gt;%
   labs(title = &amp;quot;Temporal deviation of causes of deaths in Mexico&amp;quot;,
        y = NULL,
        x = &amp;quot;total death&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Thus, our final solution is to build a model with &lt;code&gt;n&lt;/code&gt; as predictor, and &lt;code&gt;dist&lt;/code&gt; as response. The cause with highest residual are assumed to have the most deviation. Since the linear trend fits the data quite well, I opt for linear regression (Hadley used robust linear model in the paper).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(broom)
 lm_fit &amp;lt;- lm(log(dist) ~ log(n), data = dist)
@@ -785,7 +773,7 @@ tidy(lm_fit)
   ggplot(aes(log.n., .resid)) + 
   geom_hline(yintercept = 0, color = &amp;quot;red&amp;quot;) + 
   geom_point()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The plot shows an empty region around a residual of 1.5. So somewhat arbitrarily, we’ll select those diseases with a residual greater than 1.5&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -833,7 +821,7 @@ unusual
        subtitle = &amp;quot;comparing cause-specific temporal pattern to overall trend&amp;quot;) + 
   theme_minimal(base_size = 22) +
   theme(legend.position = &amp;quot;top&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;1536&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-12-tidy-data-with-python/index_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;1536&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;
@@ -849,66 +837,6 @@ unusual
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Although pandas and dplyr 1.0 can perform rowwise operatios in a breeze, it’s not considered best practice in such cases.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Machine Learning with Titanic Data</title>
-      <link>/post/2020-05-08-machine-learning-with-titanic-data/</link>
-      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-08-machine-learning-with-titanic-data/</guid>
-      <description>
-
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&#34; class=&#34;uri&#34;&gt;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-from scipy.stats import pearsonr
-import math
-import random 
-
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-
-from datetime import datetime
-import itertools&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Random sample of all titanic passengers.&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic = pd.read_excel(&amp;#39;D:/RProjects/data/blog/titanic.xls&amp;#39;)
-titanic.head()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    pclass  survived  ...   body                        home.dest
-## 0       1         1  ...    NaN                     St Louis, MO
-## 1       1         1  ...    NaN  Montreal, PQ / Chesterville, ON
-## 2       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
-## 3       1         0  ...  135.0  Montreal, PQ / Chesterville, ON
-## 4       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
-## 
-## [5 rows x 14 columns]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic.info()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
-## RangeIndex: 1309 entries, 0 to 1308
-## Data columns (total 14 columns):
-## pclass       1309 non-null int64
-## survived     1309 non-null int64
-## name         1309 non-null object
-## sex          1309 non-null object
-## age          1046 non-null float64
-## sibsp        1309 non-null int64
-## parch        1309 non-null int64
-## ticket       1309 non-null object
-## fare         1308 non-null float64
-## cabin        295 non-null object
-## embarked     1307 non-null object
-## boat         486 non-null object
-## body         121 non-null float64
-## home.dest    745 non-null object
-## dtypes: float64(3), int64(4), object(7)
-## memory usage: 143.3+ KB&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

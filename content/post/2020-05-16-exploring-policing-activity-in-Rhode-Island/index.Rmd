@@ -42,7 +42,8 @@ os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
 ```
 
 
-Let's begin by loading the library and data:
+Let's begin by loading the library and data
+
 ```{python}
 import pandas as pd 
 ```
@@ -105,7 +106,8 @@ ri_clean.head()
 
 # Exploring the relationship between gender, race and policing 
 
-The `search_conducted` column indicates whether or not a vehicle were searched by an officer:  
+The `search_conducted` column indicates whether or not a vehicle were searched by an officer
+
 ```{python}
 ri_clean.search_conducted.head()
 ```
@@ -165,6 +167,7 @@ It looks like white people has a slightly higher frisk rate. But there is no con
 
 
 # Temporal pattern of drug related stops and search rates
+
 The `drugs_related_stop` shows if a traffic stop eneded in the spotting of drugs in the vehicle. Resampling the column annually gives the drug rate over years, and annual search rate is calculated as a reference. 
 
 ```{python}
@@ -181,6 +184,7 @@ The rate of drug-related stops increased even though the search rate decreased.
 # Distribution of violation across zones 
 
 Speeding is the most common violation in all districts. 
+
 ```{python}
 all_zones = pd.crosstab(ri_clean.district, ri_clean.violation)
 all_zones.plot(kind = 'bar')

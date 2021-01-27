@@ -2,85 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | Qiushi Yan</title>
-    <link>/tags/</link>
-      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/tags/</link>
+      <atom:link href="https://qiushi.rbind.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Fri, 17 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Mon, 23 Nov 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Tags</title>
-      <link>/tags/</link>
+      <link>https://qiushi.rbind.io/tags/</link>
     </image>
     
     <item>
-      <title>Calculus</title>
-      <link>/tags/calculus/</link>
+      <title>Data</title>
+      <link>https://qiushi.rbind.io/tags/data/</link>
+      <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/tags/data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Notes</title>
+      <link>https://qiushi.rbind.io/tags/notes/</link>
       <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/calculus/</guid>
+      <guid>https://qiushi.rbind.io/tags/notes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Linear Algebra</title>
-      <link>/tags/linear-algebra/</link>
-      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/linear-algebra/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Optimization</title>
-      <link>/tags/optimization/</link>
-      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/optimization/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Probability Theory</title>
-      <link>/tags/probability-theory/</link>
-      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/probability-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Statistics</title>
-      <link>/tags/statistics/</link>
-      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/statistics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>forecasting</title>
-      <link>/tags/forecasting/</link>
-      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/forecasting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>time series</title>
-      <link>/tags/time-series/</link>
-      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/time-series/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Text Mining</title>
-      <link>/tags/text-mining/</link>
-      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/text-mining/</guid>
+      <title>Web-Dev</title>
+      <link>https://qiushi.rbind.io/tags/web-dev/</link>
+      <pubDate>Sun, 26 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/tags/web-dev/</guid>
       <description></description>
     </item>
     

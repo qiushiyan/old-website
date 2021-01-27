@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Personal blog of Qiushi Yan">
+  <meta name="description" content="A data science blog by Qiushi Yan">
 
   
-  <link rel="alternate" hreflang="en-us" href="/categories/machine-learning/">
+  <link rel="alternate" hreflang="en-us" href="https://qiushi.rbind.io/categories/machine-learning/">
 
   
 
@@ -77,7 +77,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CRoboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arapey:400,400i%7CKarla:400,700%7CZilla+Slab:300,300i%7CFira+Code:wght@300&display=swap">
   
 
   
@@ -138,7 +138,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/categories/machine-learning/">
+  <link rel="canonical" href="https://qiushi.rbind.io/categories/machine-learning/">
 
   
   
@@ -154,12 +154,12 @@
   <meta property="twitter:creator" content="@qiushizzzz">
   
   <meta property="og:site_name" content="Qiushi Yan">
-  <meta property="og:url" content="/categories/machine-learning/">
+  <meta property="og:url" content="https://qiushi.rbind.io/categories/machine-learning/">
   <meta property="og:title" content="Machine Learning | Qiushi Yan">
-  <meta property="og:description" content="Personal blog of Qiushi Yan"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="A data science blog by Qiushi Yan"><meta property="og:image" content="https://qiushi.rbind.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://qiushi.rbind.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-05-18T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-05-07T00:00:00&#43;00:00">
   
 
   
@@ -342,7 +342,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/about"><span>About / Contact</span></a>
+          <a class="nav-link " href="/about"><span>About</span></a>
         </li>
 
         
@@ -411,53 +411,6 @@
   
   
   <div>
-    <h2><a href="/post/2020-05-18-predicting-graduate-admission/">Predicting Graduate Admission for Internaitonal student</a></h2>
-    <div class="article-style">
-      
-      https://www.kaggle.com/eswarchandt/admission?
-library(tidyverse)admission &lt;- readxl::read_excel(&quot;D:/RProjects/data/blog/admission.xlsx&quot;) %&gt;% janitor::clean_names() %&gt;% mutate(admit = factor(admit))library(tidymodels)admission_split &lt;- initial_split(admission)admission_test &lt;- testing(admission_split)admission_train &lt;- training(admission_split)rec &lt;- recipe(admit ~ ., data = admission_train) %&gt;% step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&gt;%step_dummy(all_nominal(), -all_outcomes()) %&gt;% step_normalize(gre, gpa)
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/">Biterm Topic Modeling for Danmaku on Bilibili</a></h2>
-    <div class="article-style">
-      
-      btm package: https://github.com/bnosac/BTM
-definition of danmaku https://blogs.ubc.ca/titus283/2018/02/03/43/
-bilibili https://en.wikipedia.org/wiki/Bilibili
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/classification-metrics/">A Manual of Classification Metrics</a></h2>
-    <div class="article-style">
-      
-      TerminologyEvaluating predicted classesAccuracy based criteriahttps://tidymodels.github.io/yardstick/reference/f_meas.html
-https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes
-TerminologyEvaluating predicted classesAccuracy based criteriaTo make this more concrete. Suppose the event is having a disease, and sensitivity, specificity and prevalence are known. Then:
-\[\text{sensitivity} = P(\text{true}|\text{disease}) \\\text{specificity} = P(\text{true}|\text{no disease}) \\\text{prevalence} = P(\text{disease})\]
-
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-05-08-machine-learning-with-titanic-data/">Machine Learning with Titanic Data</a></h2>
-    <div class="article-style">
-      
-      https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb
-https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb
-https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/
-import pandas as pdimport numpy as npimport matplotlib.pyplot as pltfrom scipy.stats import pearsonrimport mathimport random from sklearn.neighbors import KNeighborsClassifierfrom sklearn.linear_model import LogisticRegressionfrom sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifierfrom sklearn.tree import DecisionTreeClassifierfrom datetime import datetimeimport itertoolsRandom sample of all titanic passengers.
-titanic = pd.read_excel(&#39;D:/RProjects/data/blog/titanic.xls&#39;)titanic.head()## pclass survived ... body home.dest## 0 1 1 ... NaN St Louis, MO## 1 1 1 .
-      
-    </div>
-  </div>
-  
-  <div>
     <h2><a href="/post/2020-05-07-analyzing-animal-crossing-reviews/">Analyzing Animal Crossing Reviews</a></h2>
     <div class="article-style">
       
@@ -467,26 +420,10 @@ titanic = pd.read_excel(&#39;D:/RProjects/data/blog/titanic.xls&#39;)titanic.he
   </div>
   
   <div>
-    <h2><a href="/post/2020-05-03-evaluating-topic-models/">Evaluating Topic Models</a></h2>
-    <div class="article-style">
-      
-    </div>
-  </div>
-  
-  <div>
     <h2><a href="/post/text-classification-logistic/">Text Classfication with Penalized Logistic Regression</a></h2>
     <div class="article-style">
       
       Teach models how to distinguish Charlotte Brontë from Emily Brontë
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/2020-04-15-tidy-comparison-of-classification-methods/">Tidy Comparison of Classification Methods</a></h2>
-    <div class="article-style">
-      
-      Evaluate performance of logistic regression, LDA, QDA and KNN in different scenarios using {tidymodels}.
       
     </div>
   </div>
@@ -548,11 +485,7 @@ titanic = pd.read_excel(&#39;D:/RProjects/data/blog/titanic.xls&#39;)titanic.he
 
     
     
-
     
-    
-    
-
     
     
     <script>hljs.initHighlightingOnLoad();</script>
@@ -637,7 +570,7 @@ titanic = pd.read_excel(&#39;D:/RProjects/data/blog/titanic.xls&#39;)titanic.he
   
 
   <p class="powered-by">
-    Qiushi Yan © 2020 &middot; 
+    Qiushi Yan © 2021 &middot; 
 
     Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and the 
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
@@ -653,6 +586,7 @@ titanic = pd.read_excel(&#39;D:/RProjects/data/blog/titanic.xls&#39;)titanic.he
     </span>
     
   </p>
+
 </footer>
   </div>
   

@@ -2,158 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Machine Learning | Qiushi Yan</title>
-    <link>/categories/machine-learning/</link>
-      <atom:link href="/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/categories/machine-learning/</link>
+      <atom:link href="https://qiushi.rbind.io/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright><lastBuildDate>Mon, 18 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Machine Learning</title>
-      <link>/categories/machine-learning/</link>
+      <link>https://qiushi.rbind.io/categories/machine-learning/</link>
     </image>
     
     <item>
-      <title>Predicting Graduate Admission for Internaitonal student</title>
-      <link>/post/2020-05-18-predicting-graduate-admission/</link>
-      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-18-predicting-graduate-admission/</guid>
-      <description>
-
-
-&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com/eswarchandt/admission&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com/eswarchandt/admission&lt;/a&gt;?&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
-
-
-admission &amp;lt;- readxl::read_excel(&amp;quot;D:/RProjects/data/blog/admission.xlsx&amp;quot;) %&amp;gt;% 
-  janitor::clean_names() %&amp;gt;% 
-  mutate(admit = factor(admit))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidymodels)
-
-admission_split &amp;lt;- initial_split(admission)
-admission_test &amp;lt;- testing(admission_split)
-admission_train &amp;lt;- training(admission_split)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rec &amp;lt;- recipe(admit ~ ., data = admission_train) %&amp;gt;% 
-  step_mutate_at(all_predictors(), -gre, -gpa, fn = factor) %&amp;gt;%
-  step_dummy(all_nominal(), -all_outcomes()) %&amp;gt;% 
-  step_normalize(gre, gpa)&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Biterm Topic Modeling for Danmaku on Bilibili</title>
-      <link>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</link>
-      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-16-biterm-topic-modeling-for-danmaku-on-bilibili/</guid>
-      <description>
-
-
-&lt;p&gt;btm package: &lt;a href=&#34;https://github.com/bnosac/BTM&#34; class=&#34;uri&#34;&gt;https://github.com/bnosac/BTM&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;definition of danmaku &lt;a href=&#34;https://blogs.ubc.ca/titus283/2018/02/03/43/&#34; class=&#34;uri&#34;&gt;https://blogs.ubc.ca/titus283/2018/02/03/43/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;bilibili &lt;a href=&#34;https://en.wikipedia.org/wiki/Bilibili&#34; class=&#34;uri&#34;&gt;https://en.wikipedia.org/wiki/Bilibili&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Manual of Classification Metrics</title>
-      <link>/post/classification-metrics/</link>
-      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/classification-metrics/</guid>
-      <description>
-
-&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#terminology&#34;&gt;Terminology&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#evaluating-predicted-classes&#34;&gt;Evaluating predicted classes&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#accuracy-based-criteria&#34;&gt;Accuracy based criteria&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://tidymodels.github.io/yardstick/reference/f_meas.html&#34; class=&#34;uri&#34;&gt;https://tidymodels.github.io/yardstick/reference/f_meas.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&#34; class=&#34;uri&#34;&gt;https://topepo.github.io/caret/measuring-performance.html#measures-for-predicted-classes&lt;/a&gt;&lt;/p&gt;
-&lt;div id=&#34;terminology&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Terminology&lt;/h1&gt;
-&lt;/div&gt;
-&lt;div id=&#34;evaluating-predicted-classes&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Evaluating predicted classes&lt;/h1&gt;
-&lt;div id=&#34;accuracy-based-criteria&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Accuracy based criteria&lt;/h2&gt;
-&lt;p&gt;To make this more concrete. Suppose the event is having a disease, and sensitivity, specificity and prevalence are known. Then:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\text{sensitivity} = P(\text{true}|\text{disease}) \\
-\text{specificity} = P(\text{true}|\text{no disease}) \\
-\text{prevalence} = P(\text{disease})
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Machine Learning with Titanic Data</title>
-      <link>/post/2020-05-08-machine-learning-with-titanic-data/</link>
-      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-08-machine-learning-with-titanic-data/</guid>
-      <description>
-
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/ritvikmath/Machine-Learning-With-Titanic-Data/blob/master/UMSA%20May%202018%20-%20Machine%20Learning%20in%20Python.ipynb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&#34; class=&#34;uri&#34;&gt;https://github.com/minsuk-heo/kaggle-titanic/blob/master/titanic-solution.ipynb&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&#34; class=&#34;uri&#34;&gt;https://mlr3gallery.mlr-org.com/posts/2020-04-27-mlr3pipelines-Imputation-titanic/&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-from scipy.stats import pearsonr
-import math
-import random 
-
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-
-from datetime import datetime
-import itertools&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Random sample of all titanic passengers.&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic = pd.read_excel(&amp;#39;D:/RProjects/data/blog/titanic.xls&amp;#39;)
-titanic.head()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    pclass  survived  ...   body                        home.dest
-## 0       1         1  ...    NaN                     St Louis, MO
-## 1       1         1  ...    NaN  Montreal, PQ / Chesterville, ON
-## 2       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
-## 3       1         0  ...  135.0  Montreal, PQ / Chesterville, ON
-## 4       1         0  ...    NaN  Montreal, PQ / Chesterville, ON
-## 
-## [5 rows x 14 columns]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;titanic.info()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
-## RangeIndex: 1309 entries, 0 to 1308
-## Data columns (total 14 columns):
-## pclass       1309 non-null int64
-## survived     1309 non-null int64
-## name         1309 non-null object
-## sex          1309 non-null object
-## age          1046 non-null float64
-## sibsp        1309 non-null int64
-## parch        1309 non-null int64
-## ticket       1309 non-null object
-## fare         1308 non-null float64
-## cabin        295 non-null object
-## embarked     1307 non-null object
-## boat         486 non-null object
-## body         121 non-null float64
-## home.dest    745 non-null object
-## dtypes: float64(3), int64(4), object(7)
-## memory usage: 143.3+ KB&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Analyzing Animal Crossing Reviews</title>
-      <link>/post/2020-05-07-analyzing-animal-crossing-reviews/</link>
+      <link>https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-07-analyzing-animal-crossing-reviews/</guid>
+      <guid>https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -193,7 +56,7 @@ glimpse(reviews)
                y = n),
            fill = &amp;quot;midnightblue&amp;quot;, alpha = 0.6) + 
   labs(x = &amp;quot;grade&amp;quot;, y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The data is messy in several ways (I have chosen 3 observations from the &lt;code&gt;text&lt;/code&gt; column for example):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Review contains repetition. the following review where the first 4.5 lines are repeated in the following lines&lt;/li&gt;
@@ -272,7 +135,7 @@ reviews_clean &amp;lt;- anti_join(reviews_en, repetition_clean,
   labs(title = &amp;quot;Distribution of review length (characters) before and after cleaning&amp;quot;,
        x = NULL,
        y = NULL)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;text-analysis-of-user-reviews&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Text analysis of user reviews&lt;/h1&gt;
@@ -310,7 +173,7 @@ common_words &amp;lt;- words %&amp;gt;%
         axis.text.x = element_text(size = 12),
         axis.title.x = element_text(size = 16), 
         strip.text = element_text(size = 20, color = &amp;quot;white&amp;quot;)) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As it is, this plot aren’t that helpful for all categories share a very similar set of words. For this reason I turn to two other algorithms developed for information retrieval: tf-idf and weighted log odds.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidylo)
 
@@ -389,7 +252,7 @@ log_odds &amp;lt;- key_words %&amp;gt;%
         strip.text = element_blank()) 
 
 patchwork::wrap_plots(tf_idf, log_odds, nrow = 2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;1344&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Emmm… this is a little better, isn’t it 😅? The &lt;code&gt;tf_idf&lt;/code&gt; plot performed well in identifying characteristic words in low ratings like “unacceptable”, “wtf” and “boring”, While the &lt;code&gt;log_odds&lt;/code&gt; plo shows a somewhat dominance of words like “fun”, “cute” and “relaxing” in high ratings.&lt;/p&gt;
 &lt;p&gt;Additionally, we may also be interested in words that tend to co-occur within a particular review. For simplicity I focus on long reivews only (more than 800 characters).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(widyr)
@@ -430,7 +293,7 @@ word_cors %&amp;gt;%
   geom_edge_link(aes(alpha = correlation), show.legend = FALSE) + 
   geom_node_point(color = &amp;quot;lightblue&amp;quot;, size = 6.5) + 
   geom_node_text(aes(label = name), repel = TRUE, size = 5.5)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;predictive-modeling-for-rating&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Predictive modeling for rating&lt;/h1&gt;
@@ -532,7 +395,7 @@ multinom_search &amp;lt;- tune_grid(wf,
   facet_wrap(~ .metric, scales = &amp;quot;free_y&amp;quot;) + 
   labs(y = NULL, x = expression(lambda)) + 
   theme(legend.position = &amp;quot;none&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It’s clear from the plot that all 3 metrics benefit from appropriate regularization, and we can identify a local maximum in all penals at rougly the same lambda. Here I use the “one-standard error rule” that selects model with largest lambda that is within one standard error of the numerically optimal Kappa metric.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;best_lambda &amp;lt;- multinom_search %&amp;gt;% 
   select_by_one_std_err(metric = &amp;quot;kap&amp;quot;, desc(penalty))
@@ -596,28 +459,16 @@ final_fit %&amp;gt;%
   theme(axis.text = element_text(size = 20),
         panel.grid.major.y = element_blank(),
         strip.text = element_text(size = 24, face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-07-analyzing-animal-crossing-reviews/index_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;1152&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
-      <title>Evaluating Topic Models</title>
-      <link>/post/2020-05-03-evaluating-topic-models/</link>
-      <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-05-03-evaluating-topic-models/</guid>
-      <description>
-
-
-
-</description>
-    </item>
-    
-    <item>
       <title>Text Classfication with Penalized Logistic Regression</title>
-      <link>/post/text-classification-logistic/</link>
+      <link>https://qiushi.rbind.io/post/text-classification-logistic/</link>
       <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/text-classification-logistic/</guid>
+      <guid>https://qiushi.rbind.io/post/text-classification-logistic/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -700,7 +551,7 @@ tidy_books &amp;lt;- clean_books %&amp;gt;%
   labs(title = &amp;quot;Word frequency between two sisters&amp;quot;) + 
   theme(text = element_text(size = 18),
         plot.title.position = &amp;quot;plot&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1440&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;1440&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Words lie near the line such as “home”, “head” and “half” indicate similar tendency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff”, “linton”, “catherine”, etc.&lt;/p&gt;
 &lt;p&gt;What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model.&lt;/p&gt;
 &lt;/div&gt;
@@ -858,7 +709,7 @@ book_folds &amp;lt;- vfold_cv(book_train, v = 10)&lt;/code&gt;&lt;/pre&gt;
   labs(y = NULL,
        x = expression(lambda),
        title = &amp;quot;Performance metric of logistic regession versus differenct choices of L1 regularization&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ok, the two metrics both display a monotone decrease as lambda increases, but does not exhibit much change once lambda is greater than 0.1, which is essentailly random guess according to the author’s respective proportion of appearance in the data. This plot shows that the model is generally better at small penalty, suggesting that the majority of the predictors are fairly important to the model. We may lean towards larger penalty with slightly worse performance, bacause they lead to simpler models. It follows that we may want to choose lambda in top rows in the following data frame&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;top_models &amp;lt;- logistic_results %&amp;gt;% 
     show_best(&amp;quot;roc_auc&amp;quot;, n = 100) %&amp;gt;%
@@ -951,7 +802,7 @@ logistic_vi %&amp;gt;%
         plot.title = element_text(size = 24),
         plot.title.position = &amp;quot;plot&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-25&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-25-1.png&#34; alt=&#34;Variable importance plot for penalized logistic regression&#34; width=&#34;1056&#34; /&gt;
+&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-02-text-classification-with-logistic-rm/index_files/figure-html/unnamed-chunk-25-1.png&#34; alt=&#34;Variable importance plot for penalized logistic regression&#34; width=&#34;1056&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: Variable importance plot for penalized logistic regression
 &lt;/p&gt;
@@ -962,28 +813,6 @@ Figure 1: Variable importance plot for penalized logistic regression
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Tidy Comparison of Classification Methods</title>
-      <link>/post/2020-04-15-tidy-comparison-of-classification-methods/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/post/2020-04-15-tidy-comparison-of-classification-methods/</guid>
-      <description>
-
-
-&lt;pre&gt;&lt;code&gt;## -- Attaching packages ----------------------------- tidyverse 1.3.0 --&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## v ggplot2 3.3.0.9000     v purrr   0.3.4     
-## v tibble  3.0.1          v dplyr   0.8.5     
-## v tidyr   1.0.2          v stringr 1.4.0     
-## v readr   1.3.1          v forcats 0.5.0&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## -- Conflicts -------------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## FALSE  TRUE 
-##   135   365&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

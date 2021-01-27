@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes | Qiushi Yan</title>
+    <link>https://qiushi.rbind.io/tags/notes/</link>
+      <atom:link href="https://qiushi.rbind.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <description>Notes</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright><lastBuildDate>Fri, 17 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
+      <title>Notes</title>
+      <link>https://qiushi.rbind.io/tags/notes/</link>
+    </image>
+    
+    <item>
+      <title>Mathematical Notes for Machine Learning</title>
+      <link>https://qiushi.rbind.io/project/math-foundations/</link>
+      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/project/math-foundations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Time Series Analysis with R</title>
+      <link>https://qiushi.rbind.io/project/fpp/</link>
+      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/project/fpp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R4DS</title>
+      <link>https://qiushi.rbind.io/project/r4ds/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/project/r4ds/</guid>
+      <description>&lt;p&gt;Learning the tidyverse ecosystem.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Text Mining with R</title>
+      <link>https://qiushi.rbind.io/project/tidy-text-mining/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://qiushi.rbind.io/project/tidy-text-mining/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

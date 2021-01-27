@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docs | Qiushi Yan</title>
-    <link>/docs/</link>
-      <atom:link href="/docs/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://qiushi.rbind.io/docs/</link>
+      <atom:link href="https://qiushi.rbind.io/docs/index.xml" rel="self" type="application/rss+xml" />
     <description>Docs</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2020</copyright>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Qiushi Yan © 2021</copyright>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://qiushi.rbind.io/img/icon-192.png</url>
       <title>Docs</title>
-      <link>/docs/</link>
+      <link>https://qiushi.rbind.io/docs/</link>
     </image>
     
   </channel>

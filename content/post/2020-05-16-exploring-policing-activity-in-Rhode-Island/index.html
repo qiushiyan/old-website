@@ -7,6 +7,7 @@ slug: rhode-policing-activity
 categories:
   - Python
   - Data Analysis
+subtitle: 'Use pandas to answer data questions about traffic stops in Rhode Island.'
 summary: 'Use pandas to answer data questions about traffic stops in Rhode Island.'
 image:
   caption: ''
@@ -35,7 +36,7 @@ image:
 </ul>
 <div id="data-preprocessing" class="section level1">
 <h1>Data preprocessing</h1>
-<p>Let’s begin by loading the library and data</p>
+<p>Let’s begin by loading the library and data:</p>
 <pre class="python"><code>import pandas as pd </code></pre>
 <pre class="python"><code>ri = pd.read_csv(&quot;D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv&quot;)
 print(ri.head())
@@ -133,7 +134,7 @@ ri_clean = (ri.
 </div>
 <div id="exploring-the-relationship-between-gender-race-and-policing" class="section level1">
 <h1>Exploring the relationship between gender, race and policing</h1>
-<p>The <code>search_conducted</code> column indicates whether or not a vehicle were searched by an officer</p>
+<p>The <code>search_conducted</code> column indicates whether or not a vehicle were searched by an officer:</p>
 <pre class="python"><code>ri_clean.search_conducted.head()
 #&gt; stop_datetime
 #&gt; 2005-01-04 12:55:00    False
@@ -165,7 +166,7 @@ ri_clean.groupby(&quot;driver_gender&quot;).search_conducted.mean()
 #&gt; Speeding             F                0.008309
 #&gt;                      M                0.027885
 #&gt; Name: search_conducted, dtype: float64</code></pre>
-<p>For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variables, by and large.</p>
+<p>For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variales, by and large.</p>
 <p>The <code>search_type</code> column contains information about categories of searching on the part of the police. I investigate the relative proportion of the most common search types for 4 races.</p>
 <pre class="python"><code>condition = ri_clean.driver_race.isin([&quot;White&quot;, &quot;Black&quot;, &quot;Hispanic&quot;, &quot;Asian&quot;]) &amp; ri_clean.search_type.isin([&quot;Incident to Arrest&quot;, &#39;Probable Cause&#39;, &#39;Inventory&#39;])
 
@@ -179,8 +180,8 @@ search_type_by_race = (ri_clean[condition].
 search_type_by_race.plot(kind = &quot;bar&quot;)
 plt.title(&quot;Proportion of common search types across 4 races&quot;)
 plt.show()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-15-1.png" width="768" /></p>
-<p>Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in <code>search_type</code> by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if <code>search_type</code> contains protective frisk, and calculate its rate across races.</p>
+<p><img src="/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-14-1.png" width="768" /></p>
+<p>Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in <code>search_type</code> by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if <code>search_type</code> contains protective frisk, and calculate the average rate across races.</p>
 <pre class="python"><code>ri_clean[&quot;frisk&quot;] = ri_clean.search_type.str.contains(&quot;Protective Frisk&quot;).astype(&quot;bool&quot;)
 
 (ri_clean[ri_clean.search_conducted == True].
@@ -203,10 +204,11 @@ plt.show()</code></pre>
 annual_search_rate = ri_clean.search_conducted.resample(&quot;A&quot;).mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&quot;columns&quot;)
 annual.plot(subplots = True)
-#&gt; array([&lt;AxesSubplot:xlabel=&#39;stop_datetime&#39;&gt;,
-#&gt;        &lt;AxesSubplot:xlabel=&#39;stop_datetime&#39;&gt;], dtype=object)
+#&gt; array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AADF548&gt;,
+#&gt;        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000000050650DC8&gt;],
+#&gt;       dtype=object)
 plt.show()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-17-1.png" width="768" /></p>
+<p><img src="/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-16-1.png" width="768" /></p>
 <p>The rate of drug-related stops increased even though the search rate decreased.</p>
 </div>
 <div id="distribution-of-violation-across-zones" class="section level1">
@@ -215,7 +217,7 @@ plt.show()</code></pre>
 <pre class="python"><code>all_zones = pd.crosstab(ri_clean.district, ri_clean.violation)
 all_zones.plot(kind = &#39;bar&#39;)
 plt.show()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-18-1.png" width="768" /></p>
+<p><img src="/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-17-1.png" width="768" /></p>
 </div>
 <div id="weather-impact-on-policing-behaviour" class="section level1">
 <h1>Weather Impact on policing behaviour</h1>
@@ -239,7 +241,7 @@ weather.head()
   
 weather.bad_conditions.plot(kind = &quot;hist&quot;, bins = 10)
 plt.show()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-20-1.png" width="768" /></p>
+<p><img src="/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-19-1.png" width="768" /></p>
 <p>Next, I split the daily weather into a categorical variable with 3 categories based on <code>bad_conditions</code>.</p>
 <pre class="python"><code>from pandas.api.types import CategoricalDtype
 mapping = {0:&#39;good&#39;, 1:&#39;bad&#39;, 2:&#39;bad&#39;, 3: &quot;bad&quot;, 4: &quot;bad&quot;,
@@ -305,7 +307,7 @@ arrest_rate
 #&gt; Name: is_arrested, dtype: float64
 arrest_rate.unstack().plot(kind = &quot;bar&quot;)
 plt.show()</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-24-1.png" width="768" /></p>
+<p><img src="/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-23-1.png" width="768" /></p>
 <p>Generally, the arrest rate is higher when weather condition gets worse. This doesn’t prove a causal link, but it’s quite an interesting result! Also, this plot can be illustrated via a pivot table.</p>
 <pre class="python"><code>ri_weather.pivot_table(index = &quot;violation&quot;, columns = &quot;rating&quot;, values = &quot;is_arrested&quot;)
 #&gt; rating                   good       bad     worse

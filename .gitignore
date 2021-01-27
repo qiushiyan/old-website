@@ -1,4 +1,5 @@
 .Rproj.user
 .Rhistory
 .RData
-blogdown
+/blogdown
+.DS_Store, Thumbs.db

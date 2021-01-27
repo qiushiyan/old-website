@@ -944,7 +944,6 @@ stock %&amp;gt;%
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
       <guid>https://qiushi.rbind.io/post/rhode-policing-activity/</guid>
       <description>
-&lt;script src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
@@ -966,7 +965,7 @@ stock %&amp;gt;%
 &lt;/ul&gt;
 &lt;div id=&#34;data-preprocessing&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data preprocessing&lt;/h1&gt;
-&lt;p&gt;Let’s begin by loading the library and data&lt;/p&gt;
+&lt;p&gt;Let’s begin by loading the library and data:&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd &lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri = pd.read_csv(&amp;quot;D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv&amp;quot;)
 print(ri.head())
@@ -1064,7 +1063,7 @@ ri_clean = (ri.
 &lt;/div&gt;
 &lt;div id=&#34;exploring-the-relationship-between-gender-race-and-policing&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Exploring the relationship between gender, race and policing&lt;/h1&gt;
-&lt;p&gt;The &lt;code&gt;search_conducted&lt;/code&gt; column indicates whether or not a vehicle were searched by an officer&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;search_conducted&lt;/code&gt; column indicates whether or not a vehicle were searched by an officer:&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean.search_conducted.head()
 #&amp;gt; stop_datetime
 #&amp;gt; 2005-01-04 12:55:00    False
@@ -1096,7 +1095,7 @@ ri_clean.groupby(&amp;quot;driver_gender&amp;quot;).search_conducted.mean()
 #&amp;gt; Speeding             F                0.008309
 #&amp;gt;                      M                0.027885
 #&amp;gt; Name: search_conducted, dtype: float64&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variables, by and large.&lt;/p&gt;
+&lt;p&gt;For all types of violation, the search rate is higher for males than for females, disproving our hypothesis related to confounding variales, by and large.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;search_type&lt;/code&gt; column contains information about categories of searching on the part of the police. I investigate the relative proportion of the most common search types for 4 races.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;condition = ri_clean.driver_race.isin([&amp;quot;White&amp;quot;, &amp;quot;Black&amp;quot;, &amp;quot;Hispanic&amp;quot;, &amp;quot;Asian&amp;quot;]) &amp;amp; ri_clean.search_type.isin([&amp;quot;Incident to Arrest&amp;quot;, &amp;#39;Probable Cause&amp;#39;, &amp;#39;Inventory&amp;#39;])
 
@@ -1110,8 +1109,8 @@ search_type_by_race = (ri_clean[condition].
 search_type_by_race.plot(kind = &amp;quot;bar&amp;quot;)
 plt.title(&amp;quot;Proportion of common search types across 4 races&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in &lt;code&gt;search_type&lt;/code&gt; by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if &lt;code&gt;search_type&lt;/code&gt; contains protective frisk, and calculate its rate across races.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now we come to the question that if race played a role in whether or not someone is frisked during a search (coded in &lt;code&gt;search_type&lt;/code&gt; by “Protective Frisk”). Since a search instance can be of multiple types, such as “Protective Frisk and Reasonable Suspicion”, I create a new column indicating if &lt;code&gt;search_type&lt;/code&gt; contains protective frisk, and calculate the average rate across races.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_clean[&amp;quot;frisk&amp;quot;] = ri_clean.search_type.str.contains(&amp;quot;Protective Frisk&amp;quot;).astype(&amp;quot;bool&amp;quot;)
 
 (ri_clean[ri_clean.search_conducted == True].
@@ -1134,10 +1133,11 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 annual_search_rate = ri_clean.search_conducted.resample(&amp;quot;A&amp;quot;).mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis=&amp;quot;columns&amp;quot;)
 annual.plot(subplots = True)
-#&amp;gt; array([&amp;lt;AxesSubplot:xlabel=&amp;#39;stop_datetime&amp;#39;&amp;gt;,
-#&amp;gt;        &amp;lt;AxesSubplot:xlabel=&amp;#39;stop_datetime&amp;#39;&amp;gt;], dtype=object)
+#&amp;gt; array([&amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x000000002AADF548&amp;gt;,
+#&amp;gt;        &amp;lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000000050650DC8&amp;gt;],
+#&amp;gt;       dtype=object)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The rate of drug-related stops increased even though the search rate decreased.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;distribution-of-violation-across-zones&#34; class=&#34;section level1&#34;&gt;
@@ -1146,7 +1146,7 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;all_zones = pd.crosstab(ri_clean.district, ri_clean.violation)
 all_zones.plot(kind = &amp;#39;bar&amp;#39;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;weather-impact-on-policing-behaviour&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Weather Impact on policing behaviour&lt;/h1&gt;
@@ -1170,7 +1170,7 @@ weather.head()
   
 weather.bad_conditions.plot(kind = &amp;quot;hist&amp;quot;, bins = 10)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Next, I split the daily weather into a categorical variable with 3 categories based on &lt;code&gt;bad_conditions&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from pandas.api.types import CategoricalDtype
 mapping = {0:&amp;#39;good&amp;#39;, 1:&amp;#39;bad&amp;#39;, 2:&amp;#39;bad&amp;#39;, 3: &amp;quot;bad&amp;quot;, 4: &amp;quot;bad&amp;quot;,
@@ -1236,7 +1236,7 @@ arrest_rate
 #&amp;gt; Name: is_arrested, dtype: float64
 arrest_rate.unstack().plot(kind = &amp;quot;bar&amp;quot;)
 plt.show()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/rhode-policing-activity/index_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiushi.rbind.io/post/2020-05-16-exploring-policing-activity-in-Rhode-Island/index_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Generally, the arrest rate is higher when weather condition gets worse. This doesn’t prove a causal link, but it’s quite an interesting result! Also, this plot can be illustrated via a pivot table.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;ri_weather.pivot_table(index = &amp;quot;violation&amp;quot;, columns = &amp;quot;rating&amp;quot;, values = &amp;quot;is_arrested&amp;quot;)
 #&amp;gt; rating                   good       bad     worse
@@ -1247,8 +1247,7 @@ plt.show()&lt;/code&gt;&lt;/pre&gt;
 #&amp;gt; Registration/plates  0.081574  0.098160  0.115625
 #&amp;gt; Seat belt            0.028587  0.022493  0.000000
 #&amp;gt; Speeding             0.013405  0.013314  0.016886&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>

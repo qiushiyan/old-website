@@ -34,7 +34,7 @@ image:
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p><a href="https://docs.github.com/en/actions">Github Actions</a> is a CI/CD service provided by Github to automate the software development workflow. Basically, it allows users to have some actions automatically triggered, for example run some testing, build a webpage or make a new release, once certain events are met, say you push to your repository or it receives a pull request. Instead of repeating the same cycle over and over again, you can use Github-hosted “runners”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> (just think of it as a virtual environment with certain tools like <code>git</code> and <code>python</code> preinstalled) do the job for you. Github Actions supports many languages and complex tasks. In this post, I will focus on one specific application, that is having <a href="https://firebase.google.com/">Firebase</a> deploy a Vue app once you push to the repo.</p>
-<p>I assume basic understanding of Vue applications and the command line, but not necessarily Firebase. <a href="https://firebase.google.com/">Firebase</a> is a backend service by Google. In this post I only use Firebase for hosting to generate a public url for my site, but there are more functionalities such as equipping your site with a real-time database. And the framework isn’t limited to Vue. For example, you could easily find Github Actions tailored for React and Angular apps once you understand its inner workings.</p>
+<p>I assume basic understanding of Vue applications and the command line, but not necessarily Firebase. <a href="https://firebase.google.com/">Firebase</a> is a backend service by Google. In this post I only use Firebase for hosting to generate a public url for my site, but there are more functionalities such as equipping your site with a real-time database. And the framework isn’t limited to Vue. You could certainly use Github Actions tailored for React and Angular apps once you understand the basic idea.</p>
 </div>
 <div id="firebase-setups" class="section level2">
 <h2>Firebase Setups</h2>
@@ -49,12 +49,13 @@ image:
 </div>
 <div id="use-github-actions" class="section level2">
 <h2>Use Github Actions</h2>
-<p>I have a example Vue app in this <a href="https://github.com/enixam/chatroom">repo</a>. What I want to achieve is that every time I push to this repo, the site automatically rebuilds and Firebase would deploy the updated site. To design the according Github Actions, create in the root directory a <code>.github/workflows/</code>, and inside that folder a yaml file with extension <code>.yml</code>. This file inside the special folder will be recognized by Github Actions and interpreted as instructions to follow. Mine is named <code>deploy-dev.yml</code> but you can name it whatever you want. You can also have multiple yaml files, which will run in parallel. Each yaml file is called a <em>workflow</em>.</p>
+<p>I have a example Vue app in this <a href="https://github.com/enixam/chatroom">repo</a>. What I want to achieve is that every time I push to this repo, the site automatically rebuilds and Firebase would deploy the updated site.</p>
+<p>To design the according Github Actions, create in the root directory a <code>.github/workflows/</code>, and inside that folder a yaml file with extension <code>.yml</code>. This file inside the special folder will be recognized by Github Actions and interpreted as instructions to follow. Mine is named <code>deploy-dev.yml</code> but you can name it whatever you want. You can also have multiple yaml files, which will run in parallel. Each yaml file is called a <em>workflow</em>.</p>
 <p><img src="create.jpg" /></p>
 <p>Inside the yaml file, we tell Github Actions what to do after certain events. Let’s have a look inside</p>
 <script src="https://gist.github.com/enixam/f9deb27ef09a8229661e8c309fa4e0a9.js"></script>
-<p>The <code>name</code> field specifies the name of the workflow. A workflow can contain multiple jobs, and a job can contain multiple steps. This is analogous to packages, functions and code. Try to make this name informative since it will help you find certain workflow if you have more than one.</p>
-<p>The <code>on</code> field is the event after which we want follow-up actions to happen. In this case, the event is pushing to the <code>dev</code> branch. This is highly customizable, for example, if you want something to happen after pushing to the main and dev branch, and also when the main branch receives a pull request, you can write</p>
+<p>The <code>name</code> field specifies the name of the workflow. A workflow can contain multiple jobs, and a job can contain multiple steps. This is analogous to the idea of packages, functions, and code. Try to make this name informative since it will help you find certain workflow if you have more than one.</p>
+<p>The <code>on</code> field is the event after which we want follow-up actions to happen. In this case, the event is pushing to the <code>dev</code> branch. This is highly customizable. For example, if you want something to happen after pushing to the main and dev branch, and also when the main branch receives a pull request, you can write</p>
 <pre class="yaml"><code>on:
   push:
     - main
@@ -73,23 +74,38 @@ image:
   env:
     # see via cmd: firebase login:ci
     FIREBASE_TOKEN: ${{ secrets.FirebaseDeploy }}</code></pre>
-<p>The action <code>w9jds/firebase-action</code> sets up the Firebase cli. We provide an additional argument to tell <code>deploy --only hosting</code> it to run the deployment service, and an token as environmental variables for authentication. This token can be generated by running <code>firebase login:ci</code> locally. Then, you need to add the token into your <em>Github’s Repo &gt; Settings &gt; Secrets</em>. <code>Mine</code> is named <code>FirebaseDeploy</code>. And the process is done.</p>
-<p>To visualize the series of instructions followed by Github Actions, I created a diagram below.</p>
+<p>The action <code>w9jds/firebase-action</code> sets up the Firebase cli. We provide an additional argument to tell <code>deploy --only hosting</code> it to run the deployment service, and a token as a environmental variable for authentication. This token can be generated by running <code>firebase login:ci</code> locally. Then, you need to add the token into your <em>Github’s Repo &gt; Settings &gt; Secrets</em>. <code>Mine</code> is named <code>FirebaseDeploy</code>. And the whole workflow is done.</p>
+<p>To visualize this workflow, I created a diagram below.</p>
 <figure>
 <img src="diagram.jpg"/>
 <figcaption>
-The inner workings of Github Actions specified with workflow, jobs and steps
+the hierarchy of Github Actions specified with workflow, jobs and steps
 </figcaption>
 </figure>
 </div>
 <div id="an-example" class="section level2">
 <h2>An Example</h2>
-<p>I made a push to the <a href="https://github.com/enixam/chatroom">repo</a>’s dev branch, so we could see how the process worked in action. The change was simple, I deleted Vue’s default icon inside <code>src/assests</code>, and then committed and pushed to dev. After the push completed, Github Actions gets up and running because it detected a yaml file under <code>.github/workflows</code>.</p>
-<p><img src="running.jpg" />
-When the workflow completed, the running icon turned green. We can click inside to see the running status of each step. In this case, all steps passed. (the first one and last two steps are auto-generated by Github Actions)</p>
-<p><img src="steps.jpg" />
-Clicking on individual step gives more details. If we click on the <code>Deploy with Firebase</code> step, we can see that deployment succeed.</p>
-<p><img src="deployment.jpg" /></p>
+<p>I made a push to the <a href="https://github.com/enixam/chatroom">repo</a>’s dev branch, so we could see how the process worked in action. The change was simple, I <a href="https://github.com/enixam/chatroom/commit/e92989a0e219f59fe3b7110a976d1fe2c5592b09">deleted</a> Vue’s icon image inside <code>src/assests</code>, and then committed and pushed to dev. After the push completed, Github Actions got up and running because it detected a yaml file under <code>.github/workflows</code>.</p>
+<figure>
+<img src="running.jpg"/>
+<figcaption>
+After pushing to the dev branch, Github Actions started the workflow. <code>deploy-dev</code>
+</figcaption>
+</figure>
+<p>When the workflow completed, the running icon turned green. We can click inside to see the running status of each step. In this case, all steps passed. (the first one and last two steps are auto-generated by Github Actions)</p>
+<figure>
+<img src="steps.jpg"/>
+<figcaption>
+The workflow completed.
+</figcaption>
+</figure>
+<p>Clicking on individual steps yields execution messages. If we click on the <code>Deploy with Firebase</code> step, we can see that the Firebaes cli succesfully deployed the app.</p>
+<figure>
+<img src="deployment.jpg"/>
+<figcaption>
+Checking messages of individual steps
+</figcaption>
+</figure>
 <p>While this is a relatively simple workflow, hopefully it gives you a general idea of how Github Actions can be used for automation. If you want to learn more, the <a href="https://docs.github.com/en/actions/learn-github-actions">official doc</a> is a great resource.</p>
 </div>
 <div class="footnotes">

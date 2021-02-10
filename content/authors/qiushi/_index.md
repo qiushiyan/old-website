@@ -43,11 +43,13 @@ Lately I have been applying to master programs in Data Science and Statistics. I
 
 - [Modeling Titanic Survival](/files/titanic-survival.pdf): A 30-page case study on the most up-to-date and comprehensive Titanic survival data. A binary logistic model is built to analyze survival probability given characteristics such as age, gender, cabin class, nationality, embarkation point, etc. I demonstrate the overall modeling process, including preprocessing, exploratory analysis,  model fitting, adjustment, bootstrap internal validation and interpretation as well as other relevant techniques such as redundancy analysis and multiple imputation for missing data. The article also touches on key issues such as the choice of a statistical model or a machine learning model, using bootstrap to alleviate selection bias, disadvantages of the holdout sample approach in validation, and more. 
 
-- My [Mathematical Notes for Data Science and Statistics](https://enixam.github.io/math-foundations/): in-progress notes in Linear Algebra, Multivariate Calculus, Optimization and Probability Theory
+- [Data Science Shelf](/project/data-science-shelf): A web app I developed for sharing good reads in data science. Users can create, share and like book lists, and write reviews via markdown syntax. 
 
 - [Classify Brontë Sisters with Penalized Logistic Regression](post/text-classification-logistic/): I trained a logistic model with lasso penalty to predict the probability of a line being authored by Emily Brontë or Charlotte Brontë, featuring text processing, cross validation and grid search, and interpretation based on variable importance plots. A later [post](post/2020-05-07-analyzing-animal-crossing-reviews) extended this idea to build a multinomial regressor classifying customer reviews into 3 categories, taking advantage of upsampling to counteract class imbalance.  
 
 - My personal R package [ymisc](https://github.com/enixam/ymisc). This is my first attempt at developing an R package, which currently contains miscellaneous functions for general hypothesis testing in multiple linear regression, converting multiple file encodings, writing a grouped by data frame to separate files. 
+
+- My [Mathematical Notes for Data Science and Statistics](https://enixam.github.io/math-foundations/): in-progress notes in Linear Algebra, Multivariate Calculus, Optimization and Probability Theory
 
 - [Tidy Data with Python](post/python-tidy-data/): a blog post on tidying messing data in Hadley Wickham’s Tidy Data paper, using python's pandas library
 

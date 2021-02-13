@@ -30,15 +30,17 @@ tags:
 
 - filter lists based on categories, tags, or search term 
 
-- view any user's profile 
+- view other users' book profile 
 
 
 The whole site is built with Vue.js and Firebase, see the source [here](https://github.com/enixam/data-science-shelf). Some features include 
 
-- user authentication and file storage
+- user authentication
 
 - real-time updates and query
 
 - markdown editor support 
 
-- composition API 
+- file storage and security rules
+
+- uses the new Vue3 features like the composition API and new hooks 

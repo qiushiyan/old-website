@@ -47,7 +47,7 @@ subtitle = ""
  css_class = "mini"
 +++
 
-This blog is dedicated to learning and sharing my data science journey. Most of the posts are case studies in data analysis and machine learning. Many of my current [projects](../#projects) are reading notes on R books. My resume lives [here](/files/resume-en-work.pdf). Feel free to [contact](#contact) me.
+This blog is dedicated to learning and sharing my data science journey. Most of the posts are case studies in data analysis and machine learning. Many of my current [projects](../#projects) are reading notes on R books. My resume lives [here](/files/resume-work-en.pdf). Feel free to [contact](#contact) me.
 
 I have broad interests in all things related to statistics, data science and AI. Particularly, I am drawn the most by natural language processing and its applications in healthcare. I believe that clinical text is the key to dynamic decision support.
 

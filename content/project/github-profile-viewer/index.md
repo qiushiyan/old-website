@@ -1,6 +1,6 @@
 ---
 title: Github Profile Viewer
-summary: A glance at developer's profile 
+summary: A react app for visualizing Github Statistics
 abstract: ""
 date: "2020-02-16"
 image: 

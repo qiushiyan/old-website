@@ -1,6 +1,6 @@
 ---
 title: Data Science Shelf 
-summary: A book website for Data Science
+summary: A Vue app for data science good reads
 abstract: ""
 date: "2020-02-10"
 image:

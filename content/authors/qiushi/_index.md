@@ -39,6 +39,7 @@ user_groups:
 ---
 <br>
 
+<!--
 Lately I have been applying to master programs in Data Science and Statistics. If you find this site, you probably want to know more about me and why I am a promising candidate through the following links. The [About](/about) page is a complement to my personal statement, elaborating on my passion for data science and background. 
 
 - [Modeling Titanic Survival](/files/titanic-survival.pdf): A 30-page case study on the most up-to-date and comprehensive Titanic survival data. A binary logistic model is built to analyze survival probability given characteristics such as age, gender, cabin class, nationality, embarkation point, etc. I demonstrate the overall modeling process, including preprocessing, exploratory analysis,  model fitting, adjustment, bootstrap internal validation and interpretation as well as other relevant techniques such as redundancy analysis and multiple imputation for missing data. The article also touches on key issues such as the choice of a statistical model or a machine learning model, using bootstrap to alleviate selection bias, disadvantages of the holdout sample approach in validation, and more. 
@@ -63,8 +64,10 @@ Lately I have been applying to master programs in Data Science and Statistics. I
 - My [Github profile](https://github.com/enixam): I have been active in coding and contributing to open source projects ever since I decide to pursue such a career.  
 
 - [More Posts](/post): a list of all my other projects in data analysis and machine learning
+-->
 
-I am currently a fourth-year student majoring in data journalism at [Communication University of China](http://en.cuc.edu.cn/). I enjoy applied statistics as well as "modern" data science initiatives. I take particular interest in data wrangling, visualizing and modeling in `#rstats`.
+I am currently a fourth-year student at [Communication University of China](http://en.cuc.edu.cn/). I enjoy studying statistics and data science, particularly in data wrangling, visualizing and modeling in `#rstats`. I take equal interest in developing web applications with React and Vue. 
+
 
 In addition to data stuff, I take delight in Chinese Literature, nature & ecology documentaries, and cat videos. My favorite author is Bertrand Russell :black_nib:.  
 

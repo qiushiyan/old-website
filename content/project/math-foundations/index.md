@@ -5,4 +5,5 @@ summary: A collection of notes in Linear Algebra, Calculus, Probability Theory, 
 tags:
 - Notes
 title: Mathematical Notes for Machine Learning
+draft: yes
 ---

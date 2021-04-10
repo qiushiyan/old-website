@@ -9,13 +9,14 @@ image:
 links:
 - icon: github
   icon_pack: fab
-  name: code
+  name: Code
   url: https://github.com/enixam/reaction-timer
 - icon: vuejs
   icon_pack: fab
   name: App
   url: https://test-your-reaction.web.app/
 
+draft: yes
 
 tags:
 - Web-Dev

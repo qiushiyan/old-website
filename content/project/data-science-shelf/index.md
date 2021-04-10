@@ -9,7 +9,7 @@ image:
 links:
 - icon: github
   icon_pack: fab
-  name: code
+  name: Code
   url: https://github.com/enixam/data-science-shelf
 - icon: vuejs
   icon_pack: fab

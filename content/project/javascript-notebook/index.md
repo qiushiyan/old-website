@@ -27,7 +27,8 @@ tags:
 ---
 
 
-An interactive notebook for JavaScript.
+A command line tool to create browser-based interactive notebook for JavaScript and TypeScript, similar to Jupyter Notebook.
+
 
 To use the app, run `npx javascript-notebook serve` and then navigate to https://localhost:3001
 

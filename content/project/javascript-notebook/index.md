@@ -13,6 +13,7 @@ links:
 - icon: npm
   icon_pack: fab
   name: Package
+  url: https://www.npmjs.com/package/javascript-notebook
 - icon: react
   icon_pack: fab
   name: App

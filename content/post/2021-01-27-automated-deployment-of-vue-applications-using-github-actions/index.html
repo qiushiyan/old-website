@@ -49,11 +49,11 @@ image:
 </div>
 <div id="use-github-actions" class="section level2">
 <h2>Use Github Actions</h2>
-<p>I have a example Vue app in this <a href="https://github.com/enixam/chatroom">repo</a>. What I want to achieve is that every time I push to this repo, the site automatically rebuilds and Firebase would deploy the updated site.</p>
-<p>To design the according Github Actions, create in the root directory a <code>.github/workflows/</code>, and inside that folder a yaml file with extension <code>.yml</code>. This file inside the special folder will be recognized by Github Actions and interpreted as instructions to follow. Mine is named <code>deploy-dev.yml</code> but you can name it whatever you want. You can also have multiple yaml files, which will run in parallel. Each yaml file is called a <em>workflow</em>.</p>
+<p>I have a example Vue app in this <a href="https://github.com/qiushiyan/chatroom">repo</a>. I would like gh actions to perform automatic updates to the site whenever I make changes to the github repo.</p>
+<p>To design the according Github Action, create in the root directory a <code>.github/workflows/</code> folder, and inside that folder a yaml file with extension <code>.yml</code>. This file inside the special folder will be recognized by Github Actions and interpreted as instructions to follow. Mine is named <code>deploy-dev.yml</code> but you can name it whatever you want. You can also have multiple yaml files, which will run in parallel. Each yaml file is called a <em>workflow</em>.</p>
 <p><img src="create.jpg" /></p>
 <p>Inside the yaml file, we tell Github Actions what to do after certain events. Let’s have a look inside</p>
-<script src="https://gist.github.com/enixam/f9deb27ef09a8229661e8c309fa4e0a9.js"></script>
+<script src="https://gist.github.com/qiushiyan/f9deb27ef09a8229661e8c309fa4e0a9.js"></script>
 <p>The <code>name</code> field specifies the name of the workflow. A workflow can contain multiple jobs, and a job can contain multiple steps. This is analogous to the idea of packages, functions, and code. Try to make this name informative since it will help you find certain workflow if you have more than one.</p>
 <p>The <code>on</code> field is the event after which we want follow-up actions to happen. In this case, the event is pushing to the <code>dev</code> branch. This is highly customizable. For example, if you want something to happen after pushing to the main and dev branch, and also when the main branch receives a pull request, you can write</p>
 <pre class="yaml"><code>on:
@@ -61,7 +61,7 @@ image:
     - main
     - dev
   pull_request:
-    - main </code></pre>
+    - main</code></pre>
 <p>The next step is telling Github Actions what to do by specifying <em>jobs</em>. A job is a series <em>steps</em> to perform, and each step is individual commands executed by bash on runners. A step begins with an optional <code>name</code>, which makes debugging easier, followed by fields like <code>run</code> and <code>uses</code> that actually issue the commands. The <code>runs-on</code> keyword configures the job to run on an Ubuntu Linux runner, you can use other os such as mac-os or windows.</p>
 <p><code>steps</code> defines a series of actions to take. But at this point, Github Actions have only available some environmental variables of our repo, such as the repo url, the commit id and so on. It makes sense to first fetch the repo files and get the our code, since other actions will depend on them. We can do this by writing git commands as the first action to download these files. But a much easier solution is to <code>use</code> community contributed actions. These actions are essentially templates for a specific task so that we will not go into the details ourselves. You can find more community contributed actions at the <a href="https://github.com/marketplace?type=actions">Github Marketplace</a>.</p>
 <p>In our case, the <code>uses</code> keyword tells the job to retrieve v2 of the community action named <code>actions/checkout@v2</code>. This is an action that checks out your repository and downloads it to the runner. Normally a job always starts with the checkout step.</p>
@@ -85,7 +85,7 @@ the hierarchy of Github Actions specified with workflow, jobs and steps
 </div>
 <div id="an-example" class="section level2">
 <h2>An Example</h2>
-<p>I made a push to the <a href="https://github.com/enixam/chatroom">repo</a>’s dev branch, so we could see how the process worked in action. The change was simple, I <a href="https://github.com/enixam/chatroom/commit/e92989a0e219f59fe3b7110a976d1fe2c5592b09">deleted</a> Vue’s icon image inside <code>src/assests</code>, and then committed and pushed to dev. After the push completed, Github Actions got up and running because it detected a yaml file under <code>.github/workflows</code>.</p>
+<p>I made a push to the <a href="https://github.com/qiushiyan/chatroom">repo</a>’s dev branch, so we could see how the process worked in action. The change was simple, I <a href="https://github.com/qiushiyan/chatroom/commit/e92989a0e219f59fe3b7110a976d1fe2c5592b09">deleted</a> Vue’s icon image inside <code>src/assests</code>, and then committed and pushed to dev. After the push completed, Github Actions got up and running because it detected a yaml file under <code>.github/workflows</code>.</p>
 <figure>
 <img src="running.jpg"/>
 <figcaption>

@@ -60,7 +60,7 @@ highlight = true
 # Add support for highlighting additional languages
 highlight_languages = ["bash", "sql", "http", "javascript", "json", "markdown", "r", "xml", "yaml"]
 # For supported styles, see https://cdnjs.com/libraries/highlight.js/
-# highlight_style = "monokai" 
+# highlight_style = "monokai"
 
 
 # Enable LaTeX math rendering? true/false
@@ -78,7 +78,7 @@ privacy_pack = false
 
 # Enable visitors to edit pages?
 #   `repo` defines the repository URL. `editable` defines which page types can be edited.
-edit_page = {repo_url = "https://github.com/enixam/qiushi.rbind.io", repo_branch = "master", editable = {docs = true, page = false, post = false}}
+edit_page = {repo_url = "https://github.com/qiushiyan/qiushi.rbind.io", repo_branch = "master", editable = {docs = true, page = false, post = false}}
 
 ############################
 ## Contact details
@@ -113,7 +113,7 @@ office_hours = []
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
   {icon = "twitter", icon_pack = "fab", name = "DM me", link = "https://twitter.com/qiushizzzz"},
-  {icon = "github", icon_pack = "fab", name = "Raise an issue on Github", link = "https://github.com/enixam/qiushi.rbind.io/issues"}
+  {icon = "github", icon_pack = "fab", name = "Raise an issue on Github", link = "https://github.com/qiushiyan/qiushi.rbind.io/issues"}
   # {icon = "weibo", icon_pack = "fab", name = "微博", link = "https://weibo.com/5539639708/"}
   # { icon = "skype", icon_pack = "fab", name = "Skype Me", link = "skype:echo123?call"},
   # { icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/"},
@@ -209,7 +209,7 @@ plugins_js  = []
   #   0: Disabled
   #   1: Disqus (https://disqus.com)
   #   2: Commento (https://commento.io)
-  #   3: utterances 
+  #   3: utterances
   engine = 3
 
   # Which page types are commentable?

@@ -1,5 +1,5 @@
 ---
-title: Automated Deployment of Vue Applications using Github Actions
+title: Deploy Vue Applications to Firebase Using Github Actions
 author: Qiushi Yan
 date: '2021-01-27'
 slug: github-actions-firebase-vue

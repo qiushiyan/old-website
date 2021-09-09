@@ -36,6 +36,6 @@ superuser: true
 
 Hello and welcome to my blog!
 
-I am a graudate student at the Data Science Institute of Vanderbilt University. I enjoy statistics and data science, particularly in data wrangling, visualizing and modeling in `#rstats`. I am keen on engineering data-driven web applications with a combination of statistical methods and frontend technologies.
+I am a graduate student at the Data Science Institute of Vanderbilt University. I enjoy statistics and data science, particularly in data wrangling, visualizing and modeling in `#rstats`. I am keen on engineering data-driven web applications with a combination of statistical methods and frontend technologies.
 
 In addition to tech staff, I love nature documentaries and cat videos. My favorite author is Bertrand Russell :black_nib:.

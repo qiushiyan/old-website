@@ -14,7 +14,9 @@ education:
 email: "qiushi.yann@gmail.com"
 interests:
   - R, Statistics, Visualization
-  - Predictive Modeling & Statistical Learning
+  - Statistical Learning
+  - Web Development 
+  - AWS and cloud data pipelines 
 name: Qiushi Yan
 social:
   - icon: github
@@ -36,6 +38,8 @@ superuser: true
 
 Hello and welcome to my blog!
 
-I am a graduate student at the Data Science Institute of Vanderbilt University. I enjoy statistics and data science, particularly in data wrangling, visualizing and modeling in `#rstats`. I am keen on engineering data-driven web applications with a combination of statistical methods and frontend technologies.
+I am a graduate student at the Data Science Institute of Vanderbilt University. I enjoy statistics and data science, particularly in data wrangling, visualizing and modeling in R and Python. 
+
+I aspire to become a data scientist with strong engineering and development skills. I am keen on engineering data-driven applications with a combination of proven architecture and latest frontend technologies. I am also a fan of developing serverless applications on AWS and therefore get certified as a [AWS Developer Associate](/files/aws-cert-developer.pdf). Browse my [resume](/files/resume.pdf) and  [projects](#projects) to know more.  
 
 In addition to tech staff, I love nature documentaries and cat videos. My favorite author is Bertrand Russell :black_nib:.

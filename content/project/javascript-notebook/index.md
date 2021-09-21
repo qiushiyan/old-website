@@ -12,7 +12,7 @@ links:
     url: https://github.com/qiushiyan/js-notebook
   - icon: npm
     icon_pack: fab
-    name: Package
+    name: NPM Package
     url: https://www.npmjs.com/package/javascript-notebook
   - icon: react
     icon_pack: fab

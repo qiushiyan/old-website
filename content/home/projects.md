@@ -24,19 +24,25 @@ subtitle = ""
   [[content.filter_button]]
     name = "All"
     tag = "*"
-  
-  [[content.filter_button]]
-    name = "Data"
-    tag = "Data"
     
   [[content.filter_button]]
-    name = "Notes"
-    tag = "Notes"
+    name = "R"
+    tag = "R"
+    
+      
+  [[content.filter_button]]
+    name = "Python"
+    tag = "Python"
+    
     
   [[content.filter_button]]
     name = "Web-Dev"
     tag = "Web-Dev"
   
+      
+  [[content.filter_button]]
+    name = "Book"
+    tag = "Book"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.

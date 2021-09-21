@@ -1,6 +1,6 @@
 ---
 title: Modeling Titanic survival
-summary: Predicting Titaic surviavl patterns with logistic regression
+summary: Predicting Titanic survival patterns with logistic regression
 abstract: ""
 date: "2020-11-23"
 image:
@@ -17,7 +17,7 @@ links:
     url: https://github.com/qiushiyan/titanic-survival
 
 tags:
-  - Data
+  - R
 ---
 
 This case study showcases the development of a binary logistic model to predict the probability of survival in the loss of Titanic. I demonstrate the overall modeling process, including preprocessing, exploratory analysis, model fitting, adjustment, bootstrap internal validation and interpretation as well as other relevant techniques such as redundancy analysis and multiple imputation for missing data. The motivation and justification behind critical statistical decisions are explained, touching on key issues such as the choice of a statistical model or a machine learning model, using bootstrap to alleviate selection bias, disadvantages of the holdout sample approach in validation, and more. This analysis is fully reproducible with all source R code and text.

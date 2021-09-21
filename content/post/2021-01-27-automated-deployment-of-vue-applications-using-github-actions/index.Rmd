@@ -72,7 +72,7 @@ The next step is telling Github Actions what to do by specifying *jobs*. A job i
 
 In our case, the `uses` keyword tells the job to retrieve v2 of the community action named `actions/checkout@v2`. This is an action that checks out your repository and downloads it to the runner. Normally a job always starts with the checkout step.
 
-After that, the following two steps proceed to install node.js and project dependencies. We need this step because unlike git, Node.js is not by default available in the runner. The third step uses `run` instead of `uses` because we are just writing bash commands ourselves. You may want to switch to python shell in a python project, for example, by appending a `shell: python` to certain steps.  If we have not used the checkout action before, `uses: actions/setup-node@master` can still run but `run: npm install` will fail because the `package.json` file won't be available.
+After that, the following two steps proceed to install Node.js and project dependencies. We need this step because unlike git, Node.js is not by default available on the runner. The third step uses `run` instead of `uses` because we are just issuing bash commands ourselves. You may want to switch to python shell in a python project, for example, by appending a `shell: python` to certain steps.  If we have not used the checkout action before, `uses: actions/setup-node@master` can still run but `run: npm install` will fail because the `package.json` file won't be available.
 
 For now, the site is rebuilt in the runner with updates. We only have to tell Firebase to deploy. This is done by the last step
 

@@ -10,7 +10,7 @@ links:
     icon_pack: fab
     name: Code
     url: https://github.com/qiushiyan/overwatcher
-  - icon: server
+  - icon: python
     icon_pack: fab
     name: App
     url: https://overwatcher-stat.herokuapp.com/

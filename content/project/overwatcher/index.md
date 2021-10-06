@@ -22,6 +22,8 @@ tags:
 
 API endpoints for [Overwatch League](https://overwatchleague.com), based on [Overwatch League Stats Lab](https://overwatchleague.com/statslab) and [Liquipedia](https://liquipedia.net/overwatch/Players).
 
+<img src = "/img/overwatcher.jpg" />
+
 Techstack 
 
 - Python: FastAPI, pandas, SQLAlchemy

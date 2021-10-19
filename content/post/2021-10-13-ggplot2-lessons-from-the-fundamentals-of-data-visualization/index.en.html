@@ -1,0 +1,79 @@
+---
+title: 'ggplot2 Lessons from "The Fundamentals of Data Visualization"' 
+author: Qiushi Yan
+date: '2021-10-13'
+slug: []
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2021-10-13T22:01:32-05:00'
+draft: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code>library(dviz.supp)</code></pre>
+<pre><code>## Loading required package: cowplot</code></pre>
+<pre><code>## Loading required package: colorspace</code></pre>
+<pre><code>## Loading required package: colorblindr</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## Loading required package: dplyr</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dviz.supp&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:cowplot&#39;:
+## 
+##     plot_grid, stamp, stamp_bad, stamp_good, stamp_ugly, stamp_wrong</code></pre>
+<pre><code>## The following object is masked from &#39;package:datasets&#39;:
+## 
+##     CO2</code></pre>
+<pre class="r"><code>library(ggridges)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggridges&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dviz.supp&#39;:
+## 
+##     Aus_athletes</code></pre>
+<pre class="r"><code>theme_set(theme_minimal())
+
+titanic2 &lt;- titanic
+titanic2$sex &lt;- factor(titanic2$sex, levels = c(&quot;male&quot;, &quot;female&quot;))</code></pre>
+<pre class="r"><code>ggplot(titanic2, aes(age, y = ..count..)) + 
+  geom_density(data = . %&gt;% select(-sex), 
+               aes(fill = &quot;all passengers&quot;), color = &quot;transparent&quot;) + 
+  geom_density(aes(fill = sex), bw = 2, color = &quot;transparent&quot;) + 
+  facet_wrap(~ sex) + 
+  scale_fill_manual(
+    values = c(&quot;#b3b3b3a0&quot;, &quot;#D55E00&quot;, &quot;#0072B2&quot;), 
+    breaks = c(&quot;all passengers&quot;, &quot;male&quot;, &quot;female&quot;),
+    labels = c(&quot;all passengers  &quot;, &quot;males  &quot;, &quot;females&quot;),
+    name = NULL,
+    guide = guide_legend(direction = &quot;horizontal&quot;)
+  ) + 
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.position = &quot;top&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+<pre class="r"><code>titanic2 %&gt;% 
+  mutate(age_level = cut(age, breaks = 8)) %&gt;% 
+  count(sex, age_level) %&gt;%
+  ggplot(aes(x = age_level, y = ifelse(sex == &quot;male&quot;,-1, 1)*n, fill = sex)) + 
+  geom_col() +  
+  scale_x_discrete(name = &quot;age (years)&quot;) +
+  scale_y_continuous(name = &quot;count&quot;, breaks = 20*(-2:1), labels = c(&quot;40&quot;, &quot;20&quot;, &quot;0&quot;, &quot;20&quot;)) +
+  scale_fill_manual(values = c(&quot;#D55E00&quot;, &quot;#0072B2&quot;), guide = &quot;none&quot;) + 
+  coord_flip()</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>

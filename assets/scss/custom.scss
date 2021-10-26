@@ -4,6 +4,10 @@
   src: url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,40);
 }
 /* toc */
+.docs-toc {
+  z-index: -1;
+}
+
 #TableOfContents, .docs-toc-title {
   border-left: 1px solid $sta-primary;
   /* "$sta-primary" is the primary colour from the theme (sass/scss) */
@@ -17,6 +21,16 @@ html {
 .article-container {
   max-width: 1250px;
 }
+
+/* artcile description and date */
+.article-description {
+  margin-top: 40px;
+  font-size: 0.8rem;
+  color: #757575;
+  font-family: Lato;
+  z-index: 10;
+}
+
 
 /* -----------div tips------------- */
 :root {

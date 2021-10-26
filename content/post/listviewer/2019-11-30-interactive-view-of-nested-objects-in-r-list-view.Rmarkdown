@@ -17,17 +17,24 @@ link-citations: yes
 Often in R we encounter complex and perhaps nested objects, say, when dealing with geospatial data. Here is an example of a `SpatialPolygonsDataFrame` object  
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(message = F, warning = F,
-                      comment = "#>", collapse = TRUE)
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE,
+                      comment = "#>", 
+                      collapse = FALSE,
+                      fig.align = "center")
 ```
 
 
-```{r, message = F}
+```{r, include = FALSE}
 library(sf)
+nc <- st_read(system.file("shape/nc.shp", package = "sf"))
+spdf <- as(nc, "Spatial")
 ```
 
 
-```{r}
+
+```{r, eval = FALSE}
+library(sf)
 nc <- st_read(system.file("shape/nc.shp", package="sf"))
 spdf <- as(nc, "Spatial")
 ```
@@ -40,7 +47,7 @@ str(spdf, max.level = 2)
 
 A problem is that, with static output this is by far where we could go , we cannot tell `str()` to go deeper into one component while others stay in their level , or get a more visually appearing display of the object's structure. We  are either overwhelmed or constrained.  
 
-This is when a taste of interactivity might help. The **listviewr** package[@R-listviewer] contains R htmlwidgets designed to view and maybe modify nested and complicated objects in an interactive manner. In fact, underlying this interactivity is that listviewer provides an interface to 2 interactive JSON editors: [react-json-view](https://github.com/mac-s-g/react-json-view) and [jsoneditor](https://github.com/josdejong/jsoneditor). They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R's list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in **listviewer**.    
+This is when a taste of interactivity might help. The **listviewr** package [@R-listviewer] contains htmlwidgets designed to view and maybe modify nested and complicated objects in an interactive manner. In fact, underlying this interactivity is that listviewer provides an interface to 2 interactive JSON editors: [react-json-view](https://github.com/mac-s-g/react-json-view) and [jsoneditor](https://github.com/josdejong/jsoneditor). They are well designed to interactively visualize JSON data, which is also commonly hierarchical and sophisticated. JSON data in JavaScript, in its nature, are equivalent to R's list object. For this reason, any object that have a list-like structure (e.g, data frames, named vector, and of course lists) in R could be visualized in **listviewer**.    
 
 ```{r}
 library(listviewer)

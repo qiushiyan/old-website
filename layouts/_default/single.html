@@ -15,6 +15,25 @@
           </li>
         </ul>
         {{ .TableOfContents }}
+        
+        
+
+        <div class = "article-description">
+          {{ if (isset .Params "description") }}
+             {{ index .Params "description" }}
+          {{ else }}
+              {{ .Summary }}
+          {{ end }}
+        </div>
+<!--        
+        <div class = "article-date">
+            {{ if (isset .Params "lastmod") }}
+              <span class="date">last modified at 
+              {{ (index .Params "lastmod").Format "2006-01-02" }}</h2>
+            {{ end }}
+        </div>-->
+                
+        
       </div>
     </div>
     {{ partial "page_footer" . }}

@@ -4,6 +4,11 @@
   src: url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,40);
 }
 
+/* article body */
+.article-container {
+  max-width: 950px;
+}
+
 /* -----------div tips------------- */
 :root {
   --white-bg: #f7f7f7;
@@ -101,6 +106,11 @@ pre {
   background: #fff;
   overflow-x: auto;
   border-radius: 5px; /*undo rounded corners*/
+  /* increase code block width */
+/*  margin-left: calc(-100vw / 2 + 1100px / 2);
+  margin-right: calc(-100vw / 2 + 1100px / 2);
+  padding-left: 3rem;
+  padding-right: 3rem;*/
 }
 
 pre code {
@@ -125,6 +135,12 @@ img {
   overflow: hidden;
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* increase image width (with caption) */
+figure {
+  margin-left: calc(-100vw / 2 + 1100px / 2);
+  margin-right: calc(-100vw / 2 + 1100px / 2);
 }
 
 /* buttons */

@@ -26,15 +26,19 @@ Some questions include:
 
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(comment = "#>", collapse = TRUE,
-                      message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(comment = "#>", 
+                      collapse = TRUE,
+                      message = FALSE, 
+                      warning = FALSE,
+                      fig.align = "center"
+)
 ```
 
 # Data preprocessing
 
 ```{python, include = FALSE}
 # fix plotting error when making matplotlib graphics inside RStudio
-import os as os
+import os
 path = 'C:/Users/Lenovo/AppData/Local/r-miniconda/envs/r-reticulate/Library/plugins/platforms'
 os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
 
@@ -170,7 +174,7 @@ It looks like white people has a slightly higher frisk rate. But there is no con
 
 The `drugs_related_stop` shows if a traffic stop eneded in the spotting of drugs in the vehicle. Resampling the column annually gives the drug rate over years, and annual search rate is calculated as a reference. 
 
-```{python}
+```{python, message=FALSE}
 annual_drug_rate = ri_clean.drugs_related_stop.resample("A").mean()
 annual_search_rate = ri_clean.search_conducted.resample("A").mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis="columns")

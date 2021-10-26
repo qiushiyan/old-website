@@ -45,26 +45,26 @@ packageVersion("dplyr")
 
 
 ```{r}
-penguins <- readr::read_csv("D:/RProjects/data/blog/penguins.csv")
+penguins <- palmerpenguins::penguins
 penguins
 ```
 
 
 ```{r}
 penguins %>% 
-  ggplot(aes(culmen_length_mm, culmen_depth_mm, color = species, shape = species)) + 
+  ggplot(aes(bill_length_mm, bill_depth_mm, color = species, shape = species)) + 
   geom_point()
 ```
 
-# Working within columns 
+## Working within columns 
 
-The new `across()` function supersedes functionalities of `_at`, `_if`, `_all` variants. The first argument, `.cols`, selects the columns you want to operate on. It uses tidy selection (like select()) so you can pick variables by position, name, and type. The second argument, `.fns`, is a function or list of functions to apply to each column. This can also be a purrr style formula
+The new `across()` function supersedes functionalities of `_at`, `_if`, `_all` variants. The first argument, `.cols`, selects the columns you want to operate on. It uses tidy selection (like `select()`) so you can pick variables by position, name, and type. The second argument, `.fns`, is a function or list of functions to apply to each column. This can also be a purrr style formula
 
 ```{r}
 penguins_grouped <- penguins %>% group_by(species)
 
 penguins_grouped %>% 
-  summarize(across(starts_with("culmen"), mean, na.rm = TRUE),
+  summarize(across(starts_with("bill"), mean, na.rm = TRUE),
             n = n())
 ```
 
@@ -95,9 +95,10 @@ penguins_grouped %>%
 
 
 
-# Working within rows
+## Working within rows
 
-## Basic usage
+### Basics
+
 
 Row-wise operations require a special type of grouping where each group consists of a single row. You create this with `rowwise()`.  
 
@@ -161,7 +162,7 @@ df %>%
 
 
 
-## List-columns
+### List-columns
 
 Because lists can contain anything, you can use list-columns to keep related objects together, regardless of what type of thing they are. List-columns give you a convenient storage mechanism and `rowwise` gives you a convenient computation mechanism.
 
@@ -185,7 +186,7 @@ df %>%
 ```
 
 
-## Simulaiton
+### Simulaiton
 
 The basic idea of using `rowwise` to perform simulation is to store all your simulation paramters in a data frame, similar to `purrr::pmap`.   
 
@@ -235,7 +236,7 @@ Now we can use `mutate` to fit a model to each data frame:
 ```{r}
 by_species <- by_species %>% 
   rowwise(species) %>% 
-  mutate(model = list(lm(culmen_length_mm ~ culmen_depth_mm, data = data)))
+  mutate(model = list(lm(bill_length_mm ~ bill_depth_mm, data = data)))
 
 by_species
 ```
@@ -254,14 +255,14 @@ An alternative approach
 ```{r}
 penguins %>%
   group_by(species) %>% 
-  group_modify(~ broom::tidy(lm(culmen_length_mm ~ culmen_depth_mm, data = .x)))
+  group_modify(~ broom::tidy(lm(bill_length_mm ~ bill_depth_mm, data = .x)))
 ```
 
 
 
-# New `summarize` features 
+## New `summarize` features 
 
-## Multiple rows and columns
+### Multiple rows and columns
 
 Two big changes make `summarize()` much more flexible. A single summary expression can now return:
 
@@ -275,7 +276,7 @@ Two big changes make `summarize()` much more flexible. A single summary expressi
 
 ```{r}
 penguins_grouped %>%
-  summarize(culmen_length_dist = quantile(culmen_length_mm, 
+  summarize(bill_length_dist = quantile(bill_length_mm, 
                                           c(0.25, 0.5, 0.75),
                                           na.rm = TRUE), 
             q = c(0.25, 0.5, 0.75))
@@ -286,8 +287,8 @@ Or return multiple columns from a single summary expression:
 
 ```{r}
 penguins_grouped %>% 
-  summarize(tibble(min = min(culmen_depth_mm, na.rm = TRUE),
-                   max = max(culmen_depth_mm, na.rm = TRUE)))
+  summarize(tibble(min = min(bill_depth_mm, na.rm = TRUE),
+                   max = max(bill_depth_mm, na.rm = TRUE)))
 ```
 
 
@@ -299,7 +300,7 @@ quibble <- function(x, q = c(0.25, 0.5, 0.75), na.rm = TRUE) {
 }
 
 penguins_grouped %>% 
-  summarize(quibble(culmen_depth_mm))
+  summarize(quibble(bill_depth_mm))
 ```
 
 When combining glue syntax and tidy evaluation, it is easy to dynamically name the column names. 
@@ -323,7 +324,7 @@ penguins_grouped %>%
 
 
 
-## Use `summarize` in non-summary context
+### non-summary context
 
 In combination with rowwise operations,  `summarize()` is now sufficiently powerful to replace many workflows that previously required a `map()` function.
 
@@ -336,14 +337,14 @@ tibble(path = dir(pattern = "\\.csv$")) %>%
 ```
 
 
-# Move columns around within data frames
+## Move columns around within data frames
 
-New verb `relocate` is provided to change column positions with the same syntax as `select`. The default behaviour is to move selected columns to the left-hand side  
+New verb `relocate` is provided to change column positions with the same syntax as `select`. The default behavior is to move selected columns to the left-hand side  
 
 ```{r}
 penguins %>% relocate(island)
 
-penguins %>% relocate(starts_with("culmen"))
+penguins %>% relocate(starts_with("bill"))
 
 penguins %>% relocate(sex, body_mass_g, .after = species)
 ```
@@ -356,7 +357,7 @@ penguins %>%
   mutate(mass_double = body_mass_g * 2, .before = 1)
 ```
 
-# Row mutation 
+## Row mutation 
 
 dplyr has a new experimental family of row mutation functions inspired by SQL’s `UPDATE`, `INSERT`, `UPSERT`, and `DELETE`. Like the join functions, they all work with a pair of data frames:
 
@@ -417,7 +418,7 @@ df %>%
 
 
 
-# Context dependent expressions 
+## Context dependent expressions 
 
 `n()` is a special function in dplyr which return the number of observations in the current group. Now the new version comes with more such special functions, aka context dependent expressions. These functions return information about the "current" group or "current" variable, so only work inside specific contexts like `summarize()` and `mutate()`. Specifically, a family of `cur_` functions are added: 
 
@@ -449,7 +450,7 @@ gf %>% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
 
 
 
-# Superseded functions
+## Superseded functions
 
 `top_n()`, `sample_n()`, and `sample_frac()` have been superseded in favor of a new family of slice helpers: `slice_min()`, `slice_max()`, `slice_head()`, `slice_tail()`, `slice_random()`. 
 
@@ -484,7 +485,7 @@ penguins %>%
 - `.groups = "rowwise"` turns each row into its own group.
 
 
-# Other changes
+## Other changes
 
 The new `rename_with()` makes it easier to rename variables programmatically:
 
@@ -497,7 +498,7 @@ You can optionally choose which columns to apply the transformation to with the 
 
 ```{r}
 penguins %>%
-  rename_with(stringr::str_to_upper, starts_with("culmen"))
+  rename_with(stringr::str_to_upper, starts_with("bill"))
 ```
 
 `mutate()` gains argument `.keep` that allows you to control which columns are retained in the output:  
@@ -513,23 +514,23 @@ penguins %>% mutate(double_mass = body_mass_g * 2, .keep = "none")
 
 
 
-# Use cases
+## Use cases
 
 This in-progress section documents tasks that would otherwise been impossible or laborious with previous version of dplyr. 
 
-## Replace missing values in many columns
+### Replace missing values in many columns
 
 Since `tidyr::replace_na` does not support tidy select syntax, replacing NA values in multiple columns could be a drudgery. Now this is made easy with `coalesce` and `across`  
 
 ```{r}
-penguins %>% summarize(across(starts_with("culmen"), ~ sum(is.na(.x))))
+penguins %>% summarize(across(starts_with("bill"), ~ sum(is.na(.x))))
 
 penguins %>% 
-  mutate(across(starts_with("culmen"), ~ coalesce(.x, 0))) %>% 
-  summarize(across(starts_with("culmen"), ~ sum(is.na(.x))))
+  mutate(across(starts_with("bill"), ~ coalesce(.x, 0))) %>% 
+  summarize(across(starts_with("bill"), ~ sum(is.na(.x))))
 ```
 
-## Rolling regression
+### Rolling regression
 
 `cur_data()` is particularly useful for rolling regression, in conjunction with the [slider](https://davisvaughan.github.io/slider/) package. 
 
@@ -564,6 +565,6 @@ stock %>%
 
 
 
-# References 
+## References 
 
 

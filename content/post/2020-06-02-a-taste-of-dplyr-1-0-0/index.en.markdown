@@ -25,27 +25,29 @@ library(dplyr)
 library(ggplot2)
 
 packageVersion("dplyr")
-#> [1] '1.0.7'
 ```
+
+    #> [1] '1.0.7'
 
 ``` r
 penguins <- palmerpenguins::penguins
 penguins
-#> # A tibble: 344 x 8
-#>    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-#>    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
-#>  1 Adelie  Torgersen           39.1          18.7               181        3750
-#>  2 Adelie  Torgersen           39.5          17.4               186        3800
-#>  3 Adelie  Torgersen           40.3          18                 195        3250
-#>  4 Adelie  Torgersen           NA            NA                  NA          NA
-#>  5 Adelie  Torgersen           36.7          19.3               193        3450
-#>  6 Adelie  Torgersen           39.3          20.6               190        3650
-#>  7 Adelie  Torgersen           38.9          17.8               181        3625
-#>  8 Adelie  Torgersen           39.2          19.6               195        4675
-#>  9 Adelie  Torgersen           34.1          18.1               193        3475
-#> 10 Adelie  Torgersen           42            20.2               190        4250
-#> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
 ```
+
+    #> # A tibble: 344 x 8
+    #>    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+    #>    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+    #>  1 Adelie  Torgersen           39.1          18.7               181        3750
+    #>  2 Adelie  Torgersen           39.5          17.4               186        3800
+    #>  3 Adelie  Torgersen           40.3          18                 195        3250
+    #>  4 Adelie  Torgersen           NA            NA                  NA          NA
+    #>  5 Adelie  Torgersen           36.7          19.3               193        3450
+    #>  6 Adelie  Torgersen           39.3          20.6               190        3650
+    #>  7 Adelie  Torgersen           38.9          17.8               181        3625
+    #>  8 Adelie  Torgersen           39.2          19.6               195        4675
+    #>  9 Adelie  Torgersen           34.1          18.1               193        3475
+    #> 10 Adelie  Torgersen           42            20.2               190        4250
+    #> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
 
 ``` r
 penguins %>% 
@@ -53,7 +55,7 @@ penguins %>%
   geom_point()
 ```
 
-<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-5-1.png" width="768" />
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" />
 
 ## Working within columns
 
@@ -65,13 +67,14 @@ penguins_grouped <- penguins %>% group_by(species)
 penguins_grouped %>% 
   summarize(across(starts_with("bill"), mean, na.rm = TRUE),
             n = n())
-#> # A tibble: 3 x 4
-#>   species   bill_length_mm bill_depth_mm     n
-#>   <fct>              <dbl>         <dbl> <int>
-#> 1 Adelie              38.8          18.3   152
-#> 2 Chinstrap           48.8          18.4    68
-#> 3 Gentoo              47.5          15.0   124
 ```
+
+    #> # A tibble: 3 x 4
+    #>   species   bill_length_mm bill_depth_mm     n
+    #>   <fct>              <dbl>         <dbl> <int>
+    #> 1 Adelie              38.8          18.3   152
+    #> 2 Chinstrap           48.8          18.4    68
+    #> 3 Gentoo              47.5          15.0   124
 
 For conditional selection (previous `_if` variants), predicate function should be wrapped in `where`.
 
@@ -79,26 +82,30 @@ For conditional selection (previous `_if` variants), predicate function should b
 # double all numeric columns
 penguins %>% 
   mutate(across(where(is.numeric), ~ .x * 2))
-#> # A tibble: 344 x 8
-#>    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-#>    <fct>   <fct>              <dbl>         <dbl>             <dbl>       <dbl>
-#>  1 Adelie  Torgersen           78.2          37.4               362        7500
-#>  2 Adelie  Torgersen           79            34.8               372        7600
-#>  3 Adelie  Torgersen           80.6          36                 390        6500
-#>  4 Adelie  Torgersen           NA            NA                  NA          NA
-#>  5 Adelie  Torgersen           73.4          38.6               386        6900
-#>  6 Adelie  Torgersen           78.6          41.2               380        7300
-#>  7 Adelie  Torgersen           77.8          35.6               362        7250
-#>  8 Adelie  Torgersen           78.4          39.2               390        9350
-#>  9 Adelie  Torgersen           68.2          36.2               386        6950
-#> 10 Adelie  Torgersen           84            40.4               380        8500
-#> # ... with 334 more rows, and 2 more variables: sex <fct>, year <dbl>
+```
 
+    #> # A tibble: 344 x 8
+    #>    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+    #>    <fct>   <fct>              <dbl>         <dbl>             <dbl>       <dbl>
+    #>  1 Adelie  Torgersen           78.2          37.4               362        7500
+    #>  2 Adelie  Torgersen           79            34.8               372        7600
+    #>  3 Adelie  Torgersen           80.6          36                 390        6500
+    #>  4 Adelie  Torgersen           NA            NA                  NA          NA
+    #>  5 Adelie  Torgersen           73.4          38.6               386        6900
+    #>  6 Adelie  Torgersen           78.6          41.2               380        7300
+    #>  7 Adelie  Torgersen           77.8          35.6               362        7250
+    #>  8 Adelie  Torgersen           78.4          39.2               390        9350
+    #>  9 Adelie  Torgersen           68.2          36.2               386        6950
+    #> 10 Adelie  Torgersen           84            40.4               380        8500
+    #> # ... with 334 more rows, and 2 more variables: sex <fct>, year <dbl>
+
+``` r
 # count unique values of all character columns
 penguins %>%
   summarize(across(where(is.character), ~ length(unique(.x))))
-#> # A tibble: 1 x 0
 ```
+
+    #> # A tibble: 1 x 0
 
 Apply multiple functions using list and use the `.names` argument to control column names.
 
@@ -108,15 +115,16 @@ penguins_grouped %>%
                    list(min = ~ min(.x, na.rm = TRUE),
                         max = ~ max(.x, na.rm = TRUE)),
                    .names = "{fn}_{col}"))
-#> # A tibble: 3 x 7
-#>   species   min_bill_length_~ max_bill_length~ min_bill_depth_~ max_bill_depth_~
-#>   <fct>                 <dbl>            <dbl>            <dbl>            <dbl>
-#> 1 Adelie                 32.1             46               15.5             21.5
-#> 2 Chinstrap              40.9             58               16.4             20.8
-#> 3 Gentoo                 40.9             59.6             13.1             17.3
-#> # ... with 2 more variables: min_flipper_length_mm <int>,
-#> #   max_flipper_length_mm <int>
 ```
+
+    #> # A tibble: 3 x 7
+    #>   species   min_bill_length_~ max_bill_length~ min_bill_depth_~ max_bill_depth_~
+    #>   <fct>                 <dbl>            <dbl>            <dbl>            <dbl>
+    #> 1 Adelie                 32.1             46               15.5             21.5
+    #> 2 Chinstrap              40.9             58               16.4             20.8
+    #> 3 Gentoo                 40.9             59.6             13.1             17.3
+    #> # ... with 2 more variables: min_flipper_length_mm <int>,
+    #> #   max_flipper_length_mm <int>
 
 ## Working within rows
 
@@ -133,15 +141,16 @@ df <- tibble(
   test4 = 40:43
 )
 df %>% rowwise()
-#> # A tibble: 4 x 5
-#> # Rowwise: 
-#>   student_id test1 test2 test3 test4
-#>        <int> <int> <int> <int> <int>
-#> 1          1    10    20    30    40
-#> 2          2    11    21    31    41
-#> 3          3    12    22    32    42
-#> 4          4    13    23    33    43
 ```
+
+    #> # A tibble: 4 x 5
+    #> # Rowwise: 
+    #>   student_id test1 test2 test3 test4
+    #>        <int> <int> <int> <int> <int>
+    #> 1          1    10    20    30    40
+    #> 2          2    11    21    31    41
+    #> 3          3    12    22    32    42
+    #> 4          4    13    23    33    43
 
 `rowwise` doesn’t need any additional arguments unless you have variables that identify the rows, like `student_id` here. This can be helpful when you want to keep a row identifier.
 
@@ -149,47 +158,55 @@ Like `group_by`, `rowwise` doesn’t really do anything itself; it just changes 
 
 ``` r
 df %>% mutate(avg = mean(c(test1, test2, test3, test4)))
-#> # A tibble: 4 x 6
-#>   student_id test1 test2 test3 test4   avg
-#>        <int> <int> <int> <int> <int> <dbl>
-#> 1          1    10    20    30    40  26.5
-#> 2          2    11    21    31    41  26.5
-#> 3          3    12    22    32    42  26.5
-#> 4          4    13    23    33    43  26.5
-
-df %>% rowwise() %>% mutate(avg = mean(c(test1, test2, test3, test4)))
-#> # A tibble: 4 x 6
-#> # Rowwise: 
-#>   student_id test1 test2 test3 test4   avg
-#>        <int> <int> <int> <int> <int> <dbl>
-#> 1          1    10    20    30    40    25
-#> 2          2    11    21    31    41    26
-#> 3          3    12    22    32    42    27
-#> 4          4    13    23    33    43    28
 ```
+
+    #> # A tibble: 4 x 6
+    #>   student_id test1 test2 test3 test4   avg
+    #>        <int> <int> <int> <int> <int> <dbl>
+    #> 1          1    10    20    30    40  26.5
+    #> 2          2    11    21    31    41  26.5
+    #> 3          3    12    22    32    42  26.5
+    #> 4          4    13    23    33    43  26.5
+
+``` r
+df %>% rowwise() %>% mutate(avg = mean(c(test1, test2, test3, test4)))
+```
+
+    #> # A tibble: 4 x 6
+    #> # Rowwise: 
+    #>   student_id test1 test2 test3 test4   avg
+    #>        <int> <int> <int> <int> <int> <dbl>
+    #> 1          1    10    20    30    40    25
+    #> 2          2    11    21    31    41    26
+    #> 3          3    12    22    32    42    27
+    #> 4          4    13    23    33    43    28
 
 In its essence, `rowwise` vectorize / parallelize a function to acheive rowwisee computation. And in this case, the `mean()` function is vectorized. If there are alternative ways of computing row-wise summaries that take advantage of built-in vectorisation then we do not need `rowwise` at all.
 
 ``` r
 df %>% mutate(s = test1 + test2 + test3)
-#> # A tibble: 4 x 6
-#>   student_id test1 test2 test3 test4     s
-#>        <int> <int> <int> <int> <int> <int>
-#> 1          1    10    20    30    40    60
-#> 2          2    11    21    31    41    63
-#> 3          3    12    22    32    42    66
-#> 4          4    13    23    33    43    69
-
-df %>% rowwise() %>% mutate(s = test1 + test2 + test3)
-#> # A tibble: 4 x 6
-#> # Rowwise: 
-#>   student_id test1 test2 test3 test4     s
-#>        <int> <int> <int> <int> <int> <int>
-#> 1          1    10    20    30    40    60
-#> 2          2    11    21    31    41    63
-#> 3          3    12    22    32    42    66
-#> 4          4    13    23    33    43    69
 ```
+
+    #> # A tibble: 4 x 6
+    #>   student_id test1 test2 test3 test4     s
+    #>        <int> <int> <int> <int> <int> <int>
+    #> 1          1    10    20    30    40    60
+    #> 2          2    11    21    31    41    63
+    #> 3          3    12    22    32    42    66
+    #> 4          4    13    23    33    43    69
+
+``` r
+df %>% rowwise() %>% mutate(s = test1 + test2 + test3)
+```
+
+    #> # A tibble: 4 x 6
+    #> # Rowwise: 
+    #>   student_id test1 test2 test3 test4     s
+    #>        <int> <int> <int> <int> <int> <int>
+    #> 1          1    10    20    30    40    60
+    #> 2          2    11    21    31    41    63
+    #> 3          3    12    22    32    42    66
+    #> 4          4    13    23    33    43    69
 
 Another family of summary functions have “parallel” extensions where you can provide multiple variables in the arguments:
 
@@ -198,14 +215,15 @@ df %>%
   mutate(min = pmin(test1, test2, test3, test4),
          max = pmax(test1, test2, test3, test4),
          string = paste(test1, test2, test3, test4, sep = "-"))
-#> # A tibble: 4 x 8
-#>   student_id test1 test2 test3 test4   min   max string     
-#>        <int> <int> <int> <int> <int> <int> <int> <chr>      
-#> 1          1    10    20    30    40    10    40 10-20-30-40
-#> 2          2    11    21    31    41    11    41 11-21-31-41
-#> 3          3    12    22    32    42    12    42 12-22-32-42
-#> 4          4    13    23    33    43    13    43 13-23-33-43
 ```
+
+    #> # A tibble: 4 x 8
+    #>   student_id test1 test2 test3 test4   min   max string     
+    #>        <int> <int> <int> <int> <int> <int> <int> <chr>      
+    #> 1          1    10    20    30    40    10    40 10-20-30-40
+    #> 2          2    11    21    31    41    11    41 11-21-31-41
+    #> 3          3    12    22    32    42    12    42 12-22-32-42
+    #> 4          4    13    23    33    43    13    43 13-23-33-43
 
 Where these functions exist, they’ll usually be faster than `rowwise`. The advantage of `rowwise` is that it works with any function, not just those that are already vectorised.
 
@@ -216,15 +234,16 @@ df %>%
   rowwise() %>% 
   mutate(min = min(c_across(starts_with("test"))),
          max = max(c_across(starts_with("test"))))
-#> # A tibble: 4 x 7
-#> # Rowwise: 
-#>   student_id test1 test2 test3 test4   min   max
-#>        <int> <int> <int> <int> <int> <int> <int>
-#> 1          1    10    20    30    40    10    40
-#> 2          2    11    21    31    41    11    41
-#> 3          3    12    22    32    42    12    42
-#> 4          4    13    23    33    43    13    43
 ```
+
+    #> # A tibble: 4 x 7
+    #> # Rowwise: 
+    #>   student_id test1 test2 test3 test4   min   max
+    #>        <int> <int> <int> <int> <int> <int> <int>
+    #> 1          1    10    20    30    40    10    40
+    #> 2          2    11    21    31    41    11    41
+    #> 3          3    12    22    32    42    12    42
+    #> 4          4    13    23    33    43    13    43
 
 Plus, a rowwise df will naturally contain exactly the same rows after `summarize()`, the same as `mutate`
 
@@ -232,14 +251,15 @@ Plus, a rowwise df will naturally contain exactly the same rows after `summarize
 df %>% 
   rowwise() %>% 
   summarize(across(starts_with("test"), ~ .x, .names = "{col}_same"))
-#> # A tibble: 4 x 4
-#>   test1_same test2_same test3_same test4_same
-#>        <int>      <int>      <int>      <int>
-#> 1         10         20         30         40
-#> 2         11         21         31         41
-#> 3         12         22         32         42
-#> 4         13         23         33         43
 ```
+
+    #> # A tibble: 4 x 4
+    #>   test1_same test2_same test3_same test4_same
+    #>        <int>      <int>      <int>      <int>
+    #> 1         10         20         30         40
+    #> 2         11         21         31         41
+    #> 3         12         22         32         42
+    #> 4         13         23         33         43
 
 ### List-columns
 
@@ -252,13 +272,14 @@ df <- tibble(
   z = list(sum, mean, sd)
 )
 df
-#> # A tibble: 3 x 3
-#>   x         y         z     
-#>   <list>    <list>    <list>
-#> 1 <dbl [1]> <lgl [1]> <fn>  
-#> 2 <int [2]> <dbl [1]> <fn>  
-#> 3 <int [3]> <chr [1]> <fn>
 ```
+
+    #> # A tibble: 3 x 3
+    #>   x         y         z     
+    #>   <list>    <list>    <list>
+    #> 1 <dbl [1]> <lgl [1]> <fn>  
+    #> 2 <int [2]> <dbl [1]> <fn>  
+    #> 3 <int [3]> <chr [1]> <fn>
 
 ``` r
 df %>% 
@@ -268,13 +289,14 @@ df %>%
     y_type = typeof(y),
     z_call = z(1:5)
   )
-#> # A tibble: 3 x 3
-#>   x_length y_type    z_call
-#>      <int> <chr>      <dbl>
-#> 1        1 logical    15   
-#> 2        2 double      3   
-#> 3        3 character   1.58
 ```
+
+    #> # A tibble: 3 x 3
+    #>   x_length y_type    z_call
+    #>      <int> <chr>      <dbl>
+    #> 1        1 logical    15   
+    #> 2        2 double      3   
+    #> 3        3 character   1.58
 
 ### Simulaiton
 
@@ -295,14 +317,15 @@ Then you can either generate a list-column containing the simulated values with 
 df %>% 
   rowwise() %>% 
   mutate(sim = list(runif(n, min, max)))
-#> # A tibble: 3 x 5
-#> # Rowwise: 
-#>      id     n   min   max sim      
-#>   <dbl> <dbl> <dbl> <dbl> <list>   
-#> 1     1     3     0     1 <dbl [3]>
-#> 2     2     2    10   100 <dbl [2]>
-#> 3     3     2   100  1000 <dbl [2]>
 ```
+
+    #> # A tibble: 3 x 5
+    #> # Rowwise: 
+    #>      id     n   min   max sim      
+    #>   <dbl> <dbl> <dbl> <dbl> <list>   
+    #> 1     1     3     0     1 <dbl [3]>
+    #> 2     2     2    10   100 <dbl [2]>
+    #> 3     3     2   100  1000 <dbl [2]>
 
 Or taking advantage of `summarize`’s new features to return multiple rows per group
 
@@ -310,31 +333,33 @@ Or taking advantage of `summarize`’s new features to return multiple rows per 
 df %>% 
   rowwise(everything()) %>% 
   summarize(sim = runif(n, min, max))
-#> # A tibble: 7 x 5
-#> # Groups:   id, n, min, max [3]
-#>      id     n   min   max      sim
-#>   <dbl> <dbl> <dbl> <dbl>    <dbl>
-#> 1     1     3     0     1   0.876 
-#> 2     1     3     0     1   0.512 
-#> 3     1     3     0     1   0.0959
-#> 4     2     2    10   100  72.2   
-#> 5     2     2    10   100  21.3   
-#> 6     3     2   100  1000 272.    
-#> 7     3     2   100  1000 171.
 ```
+
+    #> # A tibble: 7 x 5
+    #> # Groups:   id, n, min, max [3]
+    #>      id     n   min   max     sim
+    #>   <dbl> <dbl> <dbl> <dbl>   <dbl>
+    #> 1     1     3     0     1   0.255
+    #> 2     1     3     0     1   0.391
+    #> 3     1     3     0     1   0.298
+    #> 4     2     2    10   100  16.3  
+    #> 5     2     2    10   100  91.2  
+    #> 6     3     2   100  1000 332.   
+    #> 7     3     2   100  1000 360.
 
 The previous approach
 
 ``` r
 df %>%
   mutate(sim = purrr::pmap(., ~ runif(..2, ..3, ..4)))
-#> # A tibble: 3 x 5
-#>      id     n   min   max sim      
-#>   <dbl> <dbl> <dbl> <dbl> <list>   
-#> 1     1     3     0     1 <dbl [3]>
-#> 2     2     2    10   100 <dbl [2]>
-#> 3     3     2   100  1000 <dbl [2]>
 ```
+
+    #> # A tibble: 3 x 5
+    #>      id     n   min   max sim      
+    #>   <dbl> <dbl> <dbl> <dbl> <list>   
+    #> 1     1     3     0     1 <dbl [3]>
+    #> 2     2     2    10   100 <dbl [2]>
+    #> 3     3     2   100  1000 <dbl [2]>
 
 ## Group-wise models
 
@@ -343,14 +368,15 @@ The new `nest_by()` function works similarly to `group_nest()`
 ``` r
 by_species <- penguins %>% nest_by(species)
 by_species
-#> # A tibble: 3 x 2
-#> # Rowwise:  species
-#>   species                 data
-#>   <fct>     <list<tibble[,7]>>
-#> 1 Adelie             [152 x 7]
-#> 2 Chinstrap           [68 x 7]
-#> 3 Gentoo             [124 x 7]
 ```
+
+    #> # A tibble: 3 x 2
+    #> # Rowwise:  species
+    #>   species                 data
+    #>   <fct>     <list<tibble[,7]>>
+    #> 1 Adelie             [152 x 7]
+    #> 2 Chinstrap           [68 x 7]
+    #> 3 Gentoo             [124 x 7]
 
 Now we can use `mutate` to fit a model to each data frame:
 
@@ -360,43 +386,48 @@ by_species <- by_species %>%
   mutate(model = list(lm(bill_length_mm ~ bill_depth_mm, data = data)))
 
 by_species
-#> # A tibble: 3 x 3
-#> # Rowwise:  species
-#>   species                 data model 
-#>   <fct>     <list<tibble[,7]>> <list>
-#> 1 Adelie             [152 x 7] <lm>  
-#> 2 Chinstrap           [68 x 7] <lm>  
-#> 3 Gentoo             [124 x 7] <lm>
 ```
+
+    #> # A tibble: 3 x 3
+    #> # Rowwise:  species
+    #>   species                 data model 
+    #>   <fct>     <list<tibble[,7]>> <list>
+    #> 1 Adelie             [152 x 7] <lm>  
+    #> 2 Chinstrap           [68 x 7] <lm>  
+    #> 3 Gentoo             [124 x 7] <lm>
 
 And then extract model summaries or coefficients with `summarize()` and `broom` functions (note that `by_species` is still a rowwise data frame):
 
 ``` r
 by_species %>% 
   summarize(broom::glance(model))
-#> # A tibble: 3 x 13
-#> # Groups:   species [3]
-#>   species   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
-#>   <fct>         <dbl>         <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl> <dbl>
-#> 1 Adelie        0.153         0.148  2.46      27.0 6.67e- 7     1  -349.  704.
-#> 2 Chinstrap     0.427         0.418  2.55      49.2 1.53e- 9     1  -159.  324.
-#> 3 Gentoo        0.414         0.409  2.37      85.5 1.02e-15     1  -280.  565.
-#> # ... with 4 more variables: BIC <dbl>, deviance <dbl>, df.residual <int>,
-#> #   nobs <int>
+```
 
+    #> # A tibble: 3 x 13
+    #> # Groups:   species [3]
+    #>   species   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
+    #>   <fct>         <dbl>         <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl> <dbl>
+    #> 1 Adelie        0.153         0.148  2.46      27.0 6.67e- 7     1  -349.  704.
+    #> 2 Chinstrap     0.427         0.418  2.55      49.2 1.53e- 9     1  -159.  324.
+    #> 3 Gentoo        0.414         0.409  2.37      85.5 1.02e-15     1  -280.  565.
+    #> # ... with 4 more variables: BIC <dbl>, deviance <dbl>, df.residual <int>,
+    #> #   nobs <int>
+
+``` r
 by_species %>% 
   summarize(broom::tidy(model))
-#> # A tibble: 6 x 6
-#> # Groups:   species [3]
-#>   species   term          estimate std.error statistic  p.value
-#>   <fct>     <chr>            <dbl>     <dbl>     <dbl>    <dbl>
-#> 1 Adelie    (Intercept)     23.1       3.03       7.60 3.01e-12
-#> 2 Adelie    bill_depth_mm    0.857     0.165      5.19 6.67e- 7
-#> 3 Chinstrap (Intercept)     13.4       5.06       2.66 9.92e- 3
-#> 4 Chinstrap bill_depth_mm    1.92      0.274      7.01 1.53e- 9
-#> 5 Gentoo    (Intercept)     17.2       3.28       5.25 6.60e- 7
-#> 6 Gentoo    bill_depth_mm    2.02      0.219      9.24 1.02e-15
 ```
+
+    #> # A tibble: 6 x 6
+    #> # Groups:   species [3]
+    #>   species   term          estimate std.error statistic  p.value
+    #>   <fct>     <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 Adelie    (Intercept)     23.1       3.03       7.60 3.01e-12
+    #> 2 Adelie    bill_depth_mm    0.857     0.165      5.19 6.67e- 7
+    #> 3 Chinstrap (Intercept)     13.4       5.06       2.66 9.92e- 3
+    #> 4 Chinstrap bill_depth_mm    1.92      0.274      7.01 1.53e- 9
+    #> 5 Gentoo    (Intercept)     17.2       3.28       5.25 6.60e- 7
+    #> 6 Gentoo    bill_depth_mm    2.02      0.219      9.24 1.02e-15
 
 An alternative approach
 
@@ -404,17 +435,18 @@ An alternative approach
 penguins %>%
   group_by(species) %>% 
   group_modify(~ broom::tidy(lm(bill_length_mm ~ bill_depth_mm, data = .x)))
-#> # A tibble: 6 x 6
-#> # Groups:   species [3]
-#>   species   term          estimate std.error statistic  p.value
-#>   <fct>     <chr>            <dbl>     <dbl>     <dbl>    <dbl>
-#> 1 Adelie    (Intercept)     23.1       3.03       7.60 3.01e-12
-#> 2 Adelie    bill_depth_mm    0.857     0.165      5.19 6.67e- 7
-#> 3 Chinstrap (Intercept)     13.4       5.06       2.66 9.92e- 3
-#> 4 Chinstrap bill_depth_mm    1.92      0.274      7.01 1.53e- 9
-#> 5 Gentoo    (Intercept)     17.2       3.28       5.25 6.60e- 7
-#> 6 Gentoo    bill_depth_mm    2.02      0.219      9.24 1.02e-15
 ```
+
+    #> # A tibble: 6 x 6
+    #> # Groups:   species [3]
+    #>   species   term          estimate std.error statistic  p.value
+    #>   <fct>     <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 Adelie    (Intercept)     23.1       3.03       7.60 3.01e-12
+    #> 2 Adelie    bill_depth_mm    0.857     0.165      5.19 6.67e- 7
+    #> 3 Chinstrap (Intercept)     13.4       5.06       2.66 9.92e- 3
+    #> 4 Chinstrap bill_depth_mm    1.92      0.274      7.01 1.53e- 9
+    #> 5 Gentoo    (Intercept)     17.2       3.28       5.25 6.60e- 7
+    #> 6 Gentoo    bill_depth_mm    2.02      0.219      9.24 1.02e-15
 
 ## New `summarize` features
 
@@ -432,20 +464,21 @@ penguins_grouped %>%
                                           c(0.25, 0.5, 0.75),
                                           na.rm = TRUE), 
             q = c(0.25, 0.5, 0.75))
-#> # A tibble: 9 x 3
-#> # Groups:   species [3]
-#>   species   bill_length_dist     q
-#>   <fct>                <dbl> <dbl>
-#> 1 Adelie                36.8  0.25
-#> 2 Adelie                38.8  0.5 
-#> 3 Adelie                40.8  0.75
-#> 4 Chinstrap             46.3  0.25
-#> 5 Chinstrap             49.6  0.5 
-#> 6 Chinstrap             51.1  0.75
-#> 7 Gentoo                45.3  0.25
-#> 8 Gentoo                47.3  0.5 
-#> 9 Gentoo                49.6  0.75
 ```
+
+    #> # A tibble: 9 x 3
+    #> # Groups:   species [3]
+    #>   species   bill_length_dist     q
+    #>   <fct>                <dbl> <dbl>
+    #> 1 Adelie                36.8  0.25
+    #> 2 Adelie                38.8  0.5 
+    #> 3 Adelie                40.8  0.75
+    #> 4 Chinstrap             46.3  0.25
+    #> 5 Chinstrap             49.6  0.5 
+    #> 6 Chinstrap             51.1  0.75
+    #> 7 Gentoo                45.3  0.25
+    #> 8 Gentoo                47.3  0.5 
+    #> 9 Gentoo                49.6  0.75
 
 Or return multiple columns from a single summary expression:
 
@@ -453,13 +486,14 @@ Or return multiple columns from a single summary expression:
 penguins_grouped %>% 
   summarize(tibble(min = min(bill_depth_mm, na.rm = TRUE),
                    max = max(bill_depth_mm, na.rm = TRUE)))
-#> # A tibble: 3 x 3
-#>   species     min   max
-#>   <fct>     <dbl> <dbl>
-#> 1 Adelie     15.5  21.5
-#> 2 Chinstrap  16.4  20.8
-#> 3 Gentoo     13.1  17.3
 ```
+
+    #> # A tibble: 3 x 3
+    #>   species     min   max
+    #>   <fct>     <dbl> <dbl>
+    #> 1 Adelie     15.5  21.5
+    #> 2 Chinstrap  16.4  20.8
+    #> 3 Gentoo     13.1  17.3
 
 At the first glance this may seem not so different with supplying multiple name-value pairs. But this can be useful inside functions. For example, in the previous `quantile` code it would be nice to be able to reduce the duplication so that we don’t have to type the quantile values twice. We can now write a simple function because summary expressions can now be data frames or tibbles:
 
@@ -470,20 +504,21 @@ quibble <- function(x, q = c(0.25, 0.5, 0.75), na.rm = TRUE) {
 
 penguins_grouped %>% 
   summarize(quibble(bill_depth_mm))
-#> # A tibble: 9 x 3
-#> # Groups:   species [3]
-#>   species       x     q
-#>   <fct>     <dbl> <dbl>
-#> 1 Adelie     17.5  0.25
-#> 2 Adelie     18.4  0.5 
-#> 3 Adelie     19    0.75
-#> 4 Chinstrap  17.5  0.25
-#> 5 Chinstrap  18.4  0.5 
-#> 6 Chinstrap  19.4  0.75
-#> 7 Gentoo     14.2  0.25
-#> 8 Gentoo     15    0.5 
-#> 9 Gentoo     15.7  0.75
 ```
+
+    #> # A tibble: 9 x 3
+    #> # Groups:   species [3]
+    #>   species       x     q
+    #>   <fct>     <dbl> <dbl>
+    #> 1 Adelie     17.5  0.25
+    #> 2 Adelie     18.4  0.5 
+    #> 3 Adelie     19    0.75
+    #> 4 Chinstrap  17.5  0.25
+    #> 5 Chinstrap  18.4  0.5 
+    #> 6 Chinstrap  19.4  0.75
+    #> 7 Gentoo     14.2  0.25
+    #> 8 Gentoo     15    0.5 
+    #> 9 Gentoo     15.7  0.75
 
 When combining glue syntax and tidy evaluation, it is easy to dynamically name the column names.
 
@@ -495,40 +530,42 @@ quibble <- function(x, q = c(0.25, 0.5, 0.75), na.rm = TRUE) {
 
 penguins_grouped %>% 
   summarize(quibble(flipper_length_mm))
-#> # A tibble: 9 x 3
-#> # Groups:   species [3]
-#>   species   flipper_length_mm_quantile flipper_length_mm_q
-#>   <fct>                          <dbl>               <dbl>
-#> 1 Adelie                           186                0.25
-#> 2 Adelie                           190                0.5 
-#> 3 Adelie                           195                0.75
-#> 4 Chinstrap                        191                0.25
-#> 5 Chinstrap                        196                0.5 
-#> 6 Chinstrap                        201                0.75
-#> 7 Gentoo                           212                0.25
-#> 8 Gentoo                           216                0.5 
-#> 9 Gentoo                           221                0.75
 ```
+
+    #> # A tibble: 9 x 3
+    #> # Groups:   species [3]
+    #>   species   flipper_length_mm_quantile flipper_length_mm_q
+    #>   <fct>                          <dbl>               <dbl>
+    #> 1 Adelie                           186                0.25
+    #> 2 Adelie                           190                0.5 
+    #> 3 Adelie                           195                0.75
+    #> 4 Chinstrap                        191                0.25
+    #> 5 Chinstrap                        196                0.5 
+    #> 6 Chinstrap                        201                0.75
+    #> 7 Gentoo                           212                0.25
+    #> 8 Gentoo                           216                0.5 
+    #> 9 Gentoo                           221                0.75
 
 As an aside, if we name the tibble expression in `summarize()` that part will be packed in the result, which can be solved by `tidyr::unpack`. That’s because when we leave the name off, the data frame result is automatically unpacked.
 
 ``` r
 penguins_grouped %>% 
   summarize(df = quibble(flipper_length_mm))
-#> # A tibble: 9 x 2
-#> # Groups:   species [3]
-#>   species   df$flipper_length_mm_quantile $flipper_length_mm_q
-#>   <fct>                             <dbl>                <dbl>
-#> 1 Adelie                              186                 0.25
-#> 2 Adelie                              190                 0.5 
-#> 3 Adelie                              195                 0.75
-#> 4 Chinstrap                           191                 0.25
-#> 5 Chinstrap                           196                 0.5 
-#> 6 Chinstrap                           201                 0.75
-#> 7 Gentoo                              212                 0.25
-#> 8 Gentoo                              216                 0.5 
-#> 9 Gentoo                              221                 0.75
 ```
+
+    #> # A tibble: 9 x 2
+    #> # Groups:   species [3]
+    #>   species   df$flipper_length_mm_quantile $flipper_length_mm_q
+    #>   <fct>                             <dbl>                <dbl>
+    #> 1 Adelie                              186                 0.25
+    #> 2 Adelie                              190                 0.5 
+    #> 3 Adelie                              195                 0.75
+    #> 4 Chinstrap                           191                 0.25
+    #> 5 Chinstrap                           196                 0.5 
+    #> 6 Chinstrap                           201                 0.75
+    #> 7 Gentoo                              212                 0.25
+    #> 8 Gentoo                              216                 0.5 
+    #> 9 Gentoo                              221                 0.75
 
 ### non-summary context
 
@@ -548,76 +585,84 @@ New verb `relocate` is provided to change column positions with the same syntax 
 
 ``` r
 penguins %>% relocate(island)
-#> # A tibble: 344 x 8
-#>    island    species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-#>    <fct>     <fct>            <dbl>         <dbl>             <int>       <int>
-#>  1 Torgersen Adelie            39.1          18.7               181        3750
-#>  2 Torgersen Adelie            39.5          17.4               186        3800
-#>  3 Torgersen Adelie            40.3          18                 195        3250
-#>  4 Torgersen Adelie            NA            NA                  NA          NA
-#>  5 Torgersen Adelie            36.7          19.3               193        3450
-#>  6 Torgersen Adelie            39.3          20.6               190        3650
-#>  7 Torgersen Adelie            38.9          17.8               181        3625
-#>  8 Torgersen Adelie            39.2          19.6               195        4675
-#>  9 Torgersen Adelie            34.1          18.1               193        3475
-#> 10 Torgersen Adelie            42            20.2               190        4250
-#> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
-
-penguins %>% relocate(starts_with("bill"))
-#> # A tibble: 344 x 8
-#>    bill_length_mm bill_depth_mm species island    flipper_length_mm body_mass_g
-#>             <dbl>         <dbl> <fct>   <fct>                 <int>       <int>
-#>  1           39.1          18.7 Adelie  Torgersen               181        3750
-#>  2           39.5          17.4 Adelie  Torgersen               186        3800
-#>  3           40.3          18   Adelie  Torgersen               195        3250
-#>  4           NA            NA   Adelie  Torgersen                NA          NA
-#>  5           36.7          19.3 Adelie  Torgersen               193        3450
-#>  6           39.3          20.6 Adelie  Torgersen               190        3650
-#>  7           38.9          17.8 Adelie  Torgersen               181        3625
-#>  8           39.2          19.6 Adelie  Torgersen               195        4675
-#>  9           34.1          18.1 Adelie  Torgersen               193        3475
-#> 10           42            20.2 Adelie  Torgersen               190        4250
-#> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
-
-penguins %>% relocate(sex, body_mass_g, .after = species)
-#> # A tibble: 344 x 8
-#>    species sex    body_mass_g island    bill_length_mm bill_depth_mm
-#>    <fct>   <fct>        <int> <fct>              <dbl>         <dbl>
-#>  1 Adelie  male          3750 Torgersen           39.1          18.7
-#>  2 Adelie  female        3800 Torgersen           39.5          17.4
-#>  3 Adelie  female        3250 Torgersen           40.3          18  
-#>  4 Adelie  <NA>            NA Torgersen           NA            NA  
-#>  5 Adelie  female        3450 Torgersen           36.7          19.3
-#>  6 Adelie  male          3650 Torgersen           39.3          20.6
-#>  7 Adelie  female        3625 Torgersen           38.9          17.8
-#>  8 Adelie  male          4675 Torgersen           39.2          19.6
-#>  9 Adelie  <NA>          3475 Torgersen           34.1          18.1
-#> 10 Adelie  <NA>          4250 Torgersen           42            20.2
-#> # ... with 334 more rows, and 2 more variables: flipper_length_mm <int>,
-#> #   year <int>
 ```
+
+    #> # A tibble: 344 x 8
+    #>    island    species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+    #>    <fct>     <fct>            <dbl>         <dbl>             <int>       <int>
+    #>  1 Torgersen Adelie            39.1          18.7               181        3750
+    #>  2 Torgersen Adelie            39.5          17.4               186        3800
+    #>  3 Torgersen Adelie            40.3          18                 195        3250
+    #>  4 Torgersen Adelie            NA            NA                  NA          NA
+    #>  5 Torgersen Adelie            36.7          19.3               193        3450
+    #>  6 Torgersen Adelie            39.3          20.6               190        3650
+    #>  7 Torgersen Adelie            38.9          17.8               181        3625
+    #>  8 Torgersen Adelie            39.2          19.6               195        4675
+    #>  9 Torgersen Adelie            34.1          18.1               193        3475
+    #> 10 Torgersen Adelie            42            20.2               190        4250
+    #> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
+
+``` r
+penguins %>% relocate(starts_with("bill"))
+```
+
+    #> # A tibble: 344 x 8
+    #>    bill_length_mm bill_depth_mm species island    flipper_length_mm body_mass_g
+    #>             <dbl>         <dbl> <fct>   <fct>                 <int>       <int>
+    #>  1           39.1          18.7 Adelie  Torgersen               181        3750
+    #>  2           39.5          17.4 Adelie  Torgersen               186        3800
+    #>  3           40.3          18   Adelie  Torgersen               195        3250
+    #>  4           NA            NA   Adelie  Torgersen                NA          NA
+    #>  5           36.7          19.3 Adelie  Torgersen               193        3450
+    #>  6           39.3          20.6 Adelie  Torgersen               190        3650
+    #>  7           38.9          17.8 Adelie  Torgersen               181        3625
+    #>  8           39.2          19.6 Adelie  Torgersen               195        4675
+    #>  9           34.1          18.1 Adelie  Torgersen               193        3475
+    #> 10           42            20.2 Adelie  Torgersen               190        4250
+    #> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
+
+``` r
+penguins %>% relocate(sex, body_mass_g, .after = species)
+```
+
+    #> # A tibble: 344 x 8
+    #>    species sex    body_mass_g island    bill_length_mm bill_depth_mm
+    #>    <fct>   <fct>        <int> <fct>              <dbl>         <dbl>
+    #>  1 Adelie  male          3750 Torgersen           39.1          18.7
+    #>  2 Adelie  female        3800 Torgersen           39.5          17.4
+    #>  3 Adelie  female        3250 Torgersen           40.3          18  
+    #>  4 Adelie  <NA>            NA Torgersen           NA            NA  
+    #>  5 Adelie  female        3450 Torgersen           36.7          19.3
+    #>  6 Adelie  male          3650 Torgersen           39.3          20.6
+    #>  7 Adelie  female        3625 Torgersen           38.9          17.8
+    #>  8 Adelie  male          4675 Torgersen           39.2          19.6
+    #>  9 Adelie  <NA>          3475 Torgersen           34.1          18.1
+    #> 10 Adelie  <NA>          4250 Torgersen           42            20.2
+    #> # ... with 334 more rows, and 2 more variables: flipper_length_mm <int>,
+    #> #   year <int>
 
 Similarly, `mutate` gains new arguments `.after` and `.before` to control where new columns should appear.
 
 ``` r
 penguins %>% 
   mutate(mass_double = body_mass_g * 2, .before = 1)
-#> # A tibble: 344 x 9
-#>    mass_double species island    bill_length_mm bill_depth_mm flipper_length_mm
-#>          <dbl> <fct>   <fct>              <dbl>         <dbl>             <int>
-#>  1        7500 Adelie  Torgersen           39.1          18.7               181
-#>  2        7600 Adelie  Torgersen           39.5          17.4               186
-#>  3        6500 Adelie  Torgersen           40.3          18                 195
-#>  4          NA Adelie  Torgersen           NA            NA                  NA
-#>  5        6900 Adelie  Torgersen           36.7          19.3               193
-#>  6        7300 Adelie  Torgersen           39.3          20.6               190
-#>  7        7250 Adelie  Torgersen           38.9          17.8               181
-#>  8        9350 Adelie  Torgersen           39.2          19.6               195
-#>  9        6950 Adelie  Torgersen           34.1          18.1               193
-#> 10        8500 Adelie  Torgersen           42            20.2               190
-#> # ... with 334 more rows, and 3 more variables: body_mass_g <int>, sex <fct>,
-#> #   year <int>
 ```
+
+    #> # A tibble: 344 x 9
+    #>    mass_double species island    bill_length_mm bill_depth_mm flipper_length_mm
+    #>          <dbl> <fct>   <fct>              <dbl>         <dbl>             <int>
+    #>  1        7500 Adelie  Torgersen           39.1          18.7               181
+    #>  2        7600 Adelie  Torgersen           39.5          17.4               186
+    #>  3        6500 Adelie  Torgersen           40.3          18                 195
+    #>  4          NA Adelie  Torgersen           NA            NA                  NA
+    #>  5        6900 Adelie  Torgersen           36.7          19.3               193
+    #>  6        7300 Adelie  Torgersen           39.3          20.6               190
+    #>  7        7250 Adelie  Torgersen           38.9          17.8               181
+    #>  8        9350 Adelie  Torgersen           39.2          19.6               195
+    #>  9        6950 Adelie  Torgersen           34.1          18.1               193
+    #> 10        8500 Adelie  Torgersen           42            20.2               190
+    #> # ... with 334 more rows, and 3 more variables: body_mass_g <int>, sex <fct>,
+    #> #   year <int>
 
 ## Row mutation
 
@@ -638,13 +683,14 @@ The `rows_` functions match x and y using **keys**. All of them check that the k
 ``` r
 df <- tibble(a = 1:3, b = letters[c(1:2, NA)], c = 0.5 + 0:2)
 df
-#> # A tibble: 3 x 3
-#>       a b         c
-#>   <int> <chr> <dbl>
-#> 1     1 a       0.5
-#> 2     2 b       1.5
-#> 3     3 <NA>    2.5
 ```
+
+    #> # A tibble: 3 x 3
+    #>       a b         c
+    #>   <int> <chr> <dbl>
+    #> 1     1 a       0.5
+    #> 2     2 b       1.5
+    #> 3     3 <NA>    2.5
 
 We can use `rows_insert()` to add new rows:
 
@@ -652,58 +698,68 @@ We can use `rows_insert()` to add new rows:
 new <- tibble(a = c(4, 5), b = c("d", "e"), c = c(3.5, 4.5))
 
 rows_insert(df, new)
-#> # A tibble: 5 x 3
-#>       a b         c
-#>   <dbl> <chr> <dbl>
-#> 1     1 a       0.5
-#> 2     2 b       1.5
-#> 3     3 <NA>    2.5
-#> 4     4 d       3.5
-#> 5     5 e       4.5
 ```
+
+    #> # A tibble: 5 x 3
+    #>       a b         c
+    #>   <dbl> <chr> <dbl>
+    #> 1     1 a       0.5
+    #> 2     2 b       1.5
+    #> 3     3 <NA>    2.5
+    #> 4     4 d       3.5
+    #> 5     5 e       4.5
 
 Note that `rows_insert()` will fail if we attempt to insert a row that already exists:
 
 ``` r
 df %>% rows_insert(tibble(a = 3, b = "c"))
-#> Error: Attempting to insert duplicate rows.
-
-df %>% rows_insert(tibble(a = 3, b = "c"), by = c("a", "b"))
-#> # A tibble: 4 x 3
-#>       a b         c
-#>   <dbl> <chr> <dbl>
-#> 1     1 a       0.5
-#> 2     2 b       1.5
-#> 3     3 <NA>    2.5
-#> 4     3 c      NA
 ```
+
+    #> Error: Attempting to insert duplicate rows.
+
+``` r
+df %>% rows_insert(tibble(a = 3, b = "c"), by = c("a", "b"))
+```
+
+    #> # A tibble: 4 x 3
+    #>       a b         c
+    #>   <dbl> <chr> <dbl>
+    #> 1     1 a       0.5
+    #> 2     2 b       1.5
+    #> 3     3 <NA>    2.5
+    #> 4     3 c      NA
 
 If you want to update existing values, use `rows_update()`. It will throw an error if one of the rows to update does not exist:
 
 ``` r
 df %>% rows_update(tibble(a = 3, b = "c"))
-#> # A tibble: 3 x 3
-#>       a b         c
-#>   <int> <chr> <dbl>
-#> 1     1 a       0.5
-#> 2     2 b       1.5
-#> 3     3 c       2.5
-
-df %>% rows_update(tibble(a = 4, b = "d"))
-#> Error: Attempting to update missing rows.
 ```
+
+    #> # A tibble: 3 x 3
+    #>       a b         c
+    #>   <int> <chr> <dbl>
+    #> 1     1 a       0.5
+    #> 2     2 b       1.5
+    #> 3     3 c       2.5
+
+``` r
+df %>% rows_update(tibble(a = 4, b = "d"))
+```
+
+    #> Error: Attempting to update missing rows.
 
 `rows_patch()` is a variant of `rows_update()` that will only update values in x that are `NA`.
 
 ``` r
 df %>% rows_patch(tibble(a = 1:3, b = "patch"))
-#> # A tibble: 3 x 3
-#>       a b         c
-#>   <int> <chr> <dbl>
-#> 1     1 a       0.5
-#> 2     2 b       1.5
-#> 3     3 patch   2.5
 ```
+
+    #> # A tibble: 3 x 3
+    #>       a b         c
+    #>   <int> <chr> <dbl>
+    #> 1     1 a       0.5
+    #> 2     2 b       1.5
+    #> 3     3 patch   2.5
 
 `row_upsert` update a df or insert new rows.
 
@@ -711,14 +767,15 @@ df %>% rows_patch(tibble(a = 1:3, b = "patch"))
 df %>% 
   rows_upsert(tibble(a = 3, b = "c")) %>%  # update
   rows_upsert(tibble(a = 4, b = "d")) # insert
-#> # A tibble: 4 x 3
-#>       a b         c
-#>   <dbl> <chr> <dbl>
-#> 1     1 a       0.5
-#> 2     2 b       1.5
-#> 3     3 c       2.5
-#> 4     4 d      NA
 ```
+
+    #> # A tibble: 4 x 3
+    #>       a b         c
+    #>   <dbl> <chr> <dbl>
+    #> 1     1 a       0.5
+    #> 2     2 b       1.5
+    #> 3     3 c       2.5
+    #> 4     4 d      NA
 
 ## Context dependent expressions
 
@@ -741,43 +798,56 @@ df <- tibble(
 gf <- df %>% group_by(g)
 
 gf %>% summarize(row = cur_group_rows())
-#> # A tibble: 6 x 2
-#> # Groups:   g [3]
-#>   g       row
-#>   <chr> <int>
-#> 1 a         2
-#> 2 b         3
-#> 3 b         4
-#> 4 c         1
-#> 5 c         5
-#> 6 c         6
+```
+
+    #> # A tibble: 6 x 2
+    #> # Groups:   g [3]
+    #>   g       row
+    #>   <chr> <int>
+    #> 1 a         5
+    #> 2 b         1
+    #> 3 b         4
+    #> 4 c         2
+    #> 5 c         3
+    #> 6 c         6
+
+``` r
 gf %>% summarize(data = list(cur_group()))
-#> # A tibble: 3 x 2
-#>   g     data            
-#>   <chr> <list>          
-#> 1 a     <tibble [1 x 1]>
-#> 2 b     <tibble [1 x 1]>
-#> 3 c     <tibble [1 x 1]>
+```
+
+    #> # A tibble: 3 x 2
+    #>   g     data            
+    #>   <chr> <list>          
+    #> 1 a     <tibble [1 x 1]>
+    #> 2 b     <tibble [1 x 1]>
+    #> 3 c     <tibble [1 x 1]>
+
+``` r
 gf %>% summarize(data = list(cur_data()))
-#> # A tibble: 3 x 2
-#>   g     data            
-#>   <chr> <list>          
-#> 1 a     <tibble [1 x 2]>
-#> 2 b     <tibble [2 x 2]>
-#> 3 c     <tibble [3 x 2]>
+```
+
+    #> # A tibble: 3 x 2
+    #>   g     data            
+    #>   <chr> <list>          
+    #> 1 a     <tibble [1 x 2]>
+    #> 2 b     <tibble [2 x 2]>
+    #> 3 c     <tibble [3 x 2]>
+
+``` r
 # has nothing to do with groups
 gf %>% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
-#> # A tibble: 6 x 3
-#> # Groups:   g [3]
-#>   g     x      y     
-#>   <chr> <chr>  <chr> 
-#> 1 c     x 0.14 y 0.65
-#> 2 a     x 0.53 y 0.04
-#> 3 b     x 0.48 y 0.89
-#> 4 b     x 0.41 y 0.28
-#> 5 c     x 0.72 y 0.5 
-#> 6 c     x 0.69 y 0.29
 ```
+
+    #> # A tibble: 6 x 3
+    #> # Groups:   g [3]
+    #>   g     x      y     
+    #>   <chr> <chr>  <chr> 
+    #> 1 b     x 0.27 y 0.45
+    #> 2 c     x 0.65 y 0.31
+    #> 3 c     x 0.32 y 0.29
+    #> 4 b     x 0.54 y 0.66
+    #> 5 a     x 0.22 y 0.73
+    #> 6 c     x 0.63 y 0.35
 
 ## Superseded functions
 
@@ -787,64 +857,72 @@ gf %>% mutate(across(everything(), ~ paste(cur_column(), round(.x, 2))))
 # select penguins per group on body mass
 penguins_grouped %>% 
   slice_max(body_mass_g, n = 1)
-#> # A tibble: 3 x 8
-#> # Groups:   species [3]
-#>   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
-#>   <fct>   <fct>           <dbl>         <dbl>            <int>       <int> <fct>
-#> 1 Adelie  Biscoe           43.2          19                197        4775 male 
-#> 2 Chinst~ Dream            52            20.7              210        4800 male 
-#> 3 Gentoo  Biscoe           49.2          15.2              221        6300 male 
-#> # ... with 1 more variable: year <int>
+```
 
+    #> # A tibble: 3 x 8
+    #> # Groups:   species [3]
+    #>   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
+    #>   <fct>   <fct>           <dbl>         <dbl>            <int>       <int> <fct>
+    #> 1 Adelie  Biscoe           43.2          19                197        4775 male 
+    #> 2 Chinst~ Dream            52            20.7              210        4800 male 
+    #> 3 Gentoo  Biscoe           49.2          15.2              221        6300 male 
+    #> # ... with 1 more variable: year <int>
+
+``` r
 penguins_grouped %>% 
   slice_min(body_mass_g, n = 1)
-#> # A tibble: 4 x 8
-#> # Groups:   species [3]
-#>   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
-#>   <fct>   <fct>           <dbl>         <dbl>            <int>       <int> <fct>
-#> 1 Adelie  Biscoe           36.5          16.6              181        2850 fema~
-#> 2 Adelie  Biscoe           36.4          17.1              184        2850 fema~
-#> 3 Chinst~ Dream            46.9          16.6              192        2700 fema~
-#> 4 Gentoo  Biscoe           42.7          13.7              208        3950 fema~
-#> # ... with 1 more variable: year <int>
 ```
+
+    #> # A tibble: 4 x 8
+    #> # Groups:   species [3]
+    #>   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
+    #>   <fct>   <fct>           <dbl>         <dbl>            <int>       <int> <fct>
+    #> 1 Adelie  Biscoe           36.5          16.6              181        2850 fema~
+    #> 2 Adelie  Biscoe           36.4          17.1              184        2850 fema~
+    #> 3 Chinst~ Dream            46.9          16.6              192        2700 fema~
+    #> 4 Gentoo  Biscoe           42.7          13.7              208        3950 fema~
+    #> # ... with 1 more variable: year <int>
 
 ``` r
 # random sampling
 penguins %>% 
   slice_sample(n = 10)
-#> # A tibble: 10 x 8
-#>    species   island    bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
-#>    <fct>     <fct>              <dbl>         <dbl>            <int>       <int>
-#>  1 Adelie    Torgersen           38.5          17.9              190        3325
-#>  2 Chinstrap Dream               45.7          17.3              193        3600
-#>  3 Gentoo    Biscoe              49.8          15.9              229        5950
-#>  4 Adelie    Biscoe              35.5          16.2              195        3350
-#>  5 Adelie    Dream               38.1          17.6              187        3425
-#>  6 Adelie    Dream               36.4          17                195        3325
-#>  7 Gentoo    Biscoe              45.4          14.6              211        4800
-#>  8 Adelie    Dream               39.2          18.6              190        4250
-#>  9 Gentoo    Biscoe              54.3          15.7              231        5650
-#> 10 Adelie    Dream               43.2          18.5              192        4100
-#> # ... with 2 more variables: sex <fct>, year <int>
+```
 
+    #> # A tibble: 10 x 8
+    #>    species   island    bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
+    #>    <fct>     <fct>              <dbl>         <dbl>            <int>       <int>
+    #>  1 Adelie    Dream               39.7          17.9              193        4250
+    #>  2 Chinstrap Dream               51.3          18.2              197        3750
+    #>  3 Adelie    Dream               41.5          18.5              201        4000
+    #>  4 Gentoo    Biscoe              48.4          14.4              203        4625
+    #>  5 Adelie    Torgersen           37.8          17.3              180        3700
+    #>  6 Adelie    Biscoe              41            20                203        4725
+    #>  7 Gentoo    Biscoe              50.7          15                223        5550
+    #>  8 Chinstrap Dream               46.4          17.8              191        3700
+    #>  9 Adelie    Dream               40.3          18.5              196        4350
+    #> 10 Adelie    Torgersen           34.1          18.1              193        3475
+    #> # ... with 2 more variables: sex <fct>, year <int>
+
+``` r
 penguins %>% 
   slice_sample(prop = 0.1)
-#> # A tibble: 34 x 8
-#>    species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-#>    <fct>     <fct>           <dbl>         <dbl>             <int>       <int>
-#>  1 Adelie    Biscoe           40.1          18.9               188        4300
-#>  2 Adelie    Biscoe           38.1          17                 181        3175
-#>  3 Gentoo    Biscoe           47.4          14.6               212        4725
-#>  4 Chinstrap Dream            46.6          17.8               193        3800
-#>  5 Adelie    Dream            39.2          21.1               196        4150
-#>  6 Gentoo    Biscoe           45.3          13.8               208        4200
-#>  7 Gentoo    Biscoe           44.9          13.8               212        4750
-#>  8 Gentoo    Biscoe           55.9          17                 228        5600
-#>  9 Adelie    Dream            36.2          17.3               187        3300
-#> 10 Chinstrap Dream            49            19.5               210        3950
-#> # ... with 24 more rows, and 2 more variables: sex <fct>, year <int>
 ```
+
+    #> # A tibble: 34 x 8
+    #>    species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+    #>    <fct>   <fct>           <dbl>         <dbl>             <int>       <int>
+    #>  1 Gentoo  Biscoe           46.2          14.5               209        4800
+    #>  2 Adelie  Biscoe           37.9          18.6               193        2925
+    #>  3 Adelie  Dream            39.7          17.9               193        4250
+    #>  4 Adelie  Dream            36.8          18.5               193        3500
+    #>  5 Adelie  Biscoe           39.7          18.9               184        3550
+    #>  6 Gentoo  Biscoe           43.8          13.9               208        4300
+    #>  7 Gentoo  Biscoe           48.7          15.7               208        5350
+    #>  8 Adelie  Dream            35.6          17.5               191        3175
+    #>  9 Gentoo  Biscoe           46.8          16.1               215        5500
+    #> 10 Gentoo  Biscoe           55.1          16                 230        5850
+    #> # ... with 24 more rows, and 2 more variables: sex <fct>, year <int>
 
 `summarize()` gains new argument `.groups` to control grouping structure of theh result.
 
@@ -863,42 +941,44 @@ The new `rename_with()` makes it easier to rename variables programmatically:
 ``` r
 penguins %>%
   rename_with(stringr::str_to_upper)
-#> # A tibble: 344 x 8
-#>    SPECIES ISLAND    BILL_LENGTH_MM BILL_DEPTH_MM FLIPPER_LENGTH_MM BODY_MASS_G
-#>    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
-#>  1 Adelie  Torgersen           39.1          18.7               181        3750
-#>  2 Adelie  Torgersen           39.5          17.4               186        3800
-#>  3 Adelie  Torgersen           40.3          18                 195        3250
-#>  4 Adelie  Torgersen           NA            NA                  NA          NA
-#>  5 Adelie  Torgersen           36.7          19.3               193        3450
-#>  6 Adelie  Torgersen           39.3          20.6               190        3650
-#>  7 Adelie  Torgersen           38.9          17.8               181        3625
-#>  8 Adelie  Torgersen           39.2          19.6               195        4675
-#>  9 Adelie  Torgersen           34.1          18.1               193        3475
-#> 10 Adelie  Torgersen           42            20.2               190        4250
-#> # ... with 334 more rows, and 2 more variables: SEX <fct>, YEAR <int>
 ```
+
+    #> # A tibble: 344 x 8
+    #>    SPECIES ISLAND    BILL_LENGTH_MM BILL_DEPTH_MM FLIPPER_LENGTH_MM BODY_MASS_G
+    #>    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+    #>  1 Adelie  Torgersen           39.1          18.7               181        3750
+    #>  2 Adelie  Torgersen           39.5          17.4               186        3800
+    #>  3 Adelie  Torgersen           40.3          18                 195        3250
+    #>  4 Adelie  Torgersen           NA            NA                  NA          NA
+    #>  5 Adelie  Torgersen           36.7          19.3               193        3450
+    #>  6 Adelie  Torgersen           39.3          20.6               190        3650
+    #>  7 Adelie  Torgersen           38.9          17.8               181        3625
+    #>  8 Adelie  Torgersen           39.2          19.6               195        4675
+    #>  9 Adelie  Torgersen           34.1          18.1               193        3475
+    #> 10 Adelie  Torgersen           42            20.2               190        4250
+    #> # ... with 334 more rows, and 2 more variables: SEX <fct>, YEAR <int>
 
 You can optionally choose which columns to apply the transformation to with the second argument:
 
 ``` r
 penguins %>%
   rename_with(stringr::str_to_upper, starts_with("bill"))
-#> # A tibble: 344 x 8
-#>    species island    BILL_LENGTH_MM BILL_DEPTH_MM flipper_length_mm body_mass_g
-#>    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
-#>  1 Adelie  Torgersen           39.1          18.7               181        3750
-#>  2 Adelie  Torgersen           39.5          17.4               186        3800
-#>  3 Adelie  Torgersen           40.3          18                 195        3250
-#>  4 Adelie  Torgersen           NA            NA                  NA          NA
-#>  5 Adelie  Torgersen           36.7          19.3               193        3450
-#>  6 Adelie  Torgersen           39.3          20.6               190        3650
-#>  7 Adelie  Torgersen           38.9          17.8               181        3625
-#>  8 Adelie  Torgersen           39.2          19.6               195        4675
-#>  9 Adelie  Torgersen           34.1          18.1               193        3475
-#> 10 Adelie  Torgersen           42            20.2               190        4250
-#> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
 ```
+
+    #> # A tibble: 344 x 8
+    #>    species island    BILL_LENGTH_MM BILL_DEPTH_MM flipper_length_mm body_mass_g
+    #>    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+    #>  1 Adelie  Torgersen           39.1          18.7               181        3750
+    #>  2 Adelie  Torgersen           39.5          17.4               186        3800
+    #>  3 Adelie  Torgersen           40.3          18                 195        3250
+    #>  4 Adelie  Torgersen           NA            NA                  NA          NA
+    #>  5 Adelie  Torgersen           36.7          19.3               193        3450
+    #>  6 Adelie  Torgersen           39.3          20.6               190        3650
+    #>  7 Adelie  Torgersen           38.9          17.8               181        3625
+    #>  8 Adelie  Torgersen           39.2          19.6               195        4675
+    #>  9 Adelie  Torgersen           34.1          18.1               193        3475
+    #> 10 Adelie  Torgersen           42            20.2               190        4250
+    #> # ... with 334 more rows, and 2 more variables: sex <fct>, year <int>
 
 `mutate()` gains argument `.keep` that allows you to control which columns are retained in the output:
 
@@ -906,37 +986,41 @@ penguins %>%
 penguins %>% mutate(double_mass = body_mass_g * 2,
                     island_lower = stringr::str_to_lower(island), 
                     .keep = "used")
-#> # A tibble: 344 x 4
-#>    island    body_mass_g double_mass island_lower
-#>    <fct>           <int>       <dbl> <chr>       
-#>  1 Torgersen        3750        7500 torgersen   
-#>  2 Torgersen        3800        7600 torgersen   
-#>  3 Torgersen        3250        6500 torgersen   
-#>  4 Torgersen          NA          NA torgersen   
-#>  5 Torgersen        3450        6900 torgersen   
-#>  6 Torgersen        3650        7300 torgersen   
-#>  7 Torgersen        3625        7250 torgersen   
-#>  8 Torgersen        4675        9350 torgersen   
-#>  9 Torgersen        3475        6950 torgersen   
-#> 10 Torgersen        4250        8500 torgersen   
-#> # ... with 334 more rows
-
-penguins %>% mutate(double_mass = body_mass_g * 2, .keep = "none")
-#> # A tibble: 344 x 1
-#>    double_mass
-#>          <dbl>
-#>  1        7500
-#>  2        7600
-#>  3        6500
-#>  4          NA
-#>  5        6900
-#>  6        7300
-#>  7        7250
-#>  8        9350
-#>  9        6950
-#> 10        8500
-#> # ... with 334 more rows
 ```
+
+    #> # A tibble: 344 x 4
+    #>    island    body_mass_g double_mass island_lower
+    #>    <fct>           <int>       <dbl> <chr>       
+    #>  1 Torgersen        3750        7500 torgersen   
+    #>  2 Torgersen        3800        7600 torgersen   
+    #>  3 Torgersen        3250        6500 torgersen   
+    #>  4 Torgersen          NA          NA torgersen   
+    #>  5 Torgersen        3450        6900 torgersen   
+    #>  6 Torgersen        3650        7300 torgersen   
+    #>  7 Torgersen        3625        7250 torgersen   
+    #>  8 Torgersen        4675        9350 torgersen   
+    #>  9 Torgersen        3475        6950 torgersen   
+    #> 10 Torgersen        4250        8500 torgersen   
+    #> # ... with 334 more rows
+
+``` r
+penguins %>% mutate(double_mass = body_mass_g * 2, .keep = "none")
+```
+
+    #> # A tibble: 344 x 1
+    #>    double_mass
+    #>          <dbl>
+    #>  1        7500
+    #>  2        7600
+    #>  3        6500
+    #>  4          NA
+    #>  5        6900
+    #>  6        7300
+    #>  7        7250
+    #>  8        9350
+    #>  9        6950
+    #> 10        8500
+    #> # ... with 334 more rows
 
 ## Use cases
 
@@ -948,19 +1032,23 @@ Since `tidyr::replace_na` does not support tidy select syntax, replacing NA valu
 
 ``` r
 penguins %>% summarize(across(starts_with("bill"), ~ sum(is.na(.x))))
-#> # A tibble: 1 x 2
-#>   bill_length_mm bill_depth_mm
-#>            <int>         <int>
-#> 1              2             2
+```
 
+    #> # A tibble: 1 x 2
+    #>   bill_length_mm bill_depth_mm
+    #>            <int>         <int>
+    #> 1              2             2
+
+``` r
 penguins %>% 
   mutate(across(starts_with("bill"), ~ coalesce(.x, 0))) %>% 
   summarize(across(starts_with("bill"), ~ sum(is.na(.x))))
-#> # A tibble: 1 x 2
-#>   bill_length_mm bill_depth_mm
-#>            <int>         <int>
-#> 1              0             0
 ```
+
+    #> # A tibble: 1 x 2
+    #>   bill_length_mm bill_depth_mm
+    #>            <int>         <int>
+    #> 1              0             0
 
 ### Rolling regression
 
@@ -972,21 +1060,22 @@ library(lubridate)
 # historical stock prices from 2014-2018 for Google, Amazon, Facebook and Apple
 stock <- tsibbledata::gafa_stock %>% select(Symbol, Date, Close, Volume)
 stock
-#> # A tibble: 5,032 x 4
-#>    Symbol Date       Close    Volume
-#>    <chr>  <date>     <dbl>     <dbl>
-#>  1 AAPL   2014-01-02  79.0  58671200
-#>  2 AAPL   2014-01-03  77.3  98116900
-#>  3 AAPL   2014-01-06  77.7 103152700
-#>  4 AAPL   2014-01-07  77.1  79302300
-#>  5 AAPL   2014-01-08  77.6  64632400
-#>  6 AAPL   2014-01-09  76.6  69787200
-#>  7 AAPL   2014-01-10  76.1  76244000
-#>  8 AAPL   2014-01-13  76.5  94623200
-#>  9 AAPL   2014-01-14  78.1  83140400
-#> 10 AAPL   2014-01-15  79.6  97909700
-#> # ... with 5,022 more rows
 ```
+
+    #> # A tibble: 5,032 x 4
+    #>    Symbol Date       Close    Volume
+    #>    <chr>  <date>     <dbl>     <dbl>
+    #>  1 AAPL   2014-01-02  79.0  58671200
+    #>  2 AAPL   2014-01-03  77.3  98116900
+    #>  3 AAPL   2014-01-06  77.7 103152700
+    #>  4 AAPL   2014-01-07  77.1  79302300
+    #>  5 AAPL   2014-01-08  77.6  64632400
+    #>  6 AAPL   2014-01-09  76.6  69787200
+    #>  7 AAPL   2014-01-10  76.1  76244000
+    #>  8 AAPL   2014-01-13  76.5  94623200
+    #>  9 AAPL   2014-01-14  78.1  83140400
+    #> 10 AAPL   2014-01-15  79.6  97909700
+    #> # ... with 5,022 more rows
 
 ``` r
 # Arrange and group by `Symbol` (i.e. Google)
@@ -1007,22 +1096,23 @@ stock %>%
     .before = days(9),
     .complete = TRUE
   )) 
-#> # A tibble: 5,032 x 5
-#> # Groups:   Symbol [4]
-#>    Symbol Date       Close    Volume model 
-#>    <chr>  <date>     <dbl>     <dbl> <list>
-#>  1 AAPL   2014-01-02  79.0  58671200 <NULL>
-#>  2 AAPL   2014-01-03  77.3  98116900 <NULL>
-#>  3 AAPL   2014-01-06  77.7 103152700 <NULL>
-#>  4 AAPL   2014-01-07  77.1  79302300 <NULL>
-#>  5 AAPL   2014-01-08  77.6  64632400 <NULL>
-#>  6 AAPL   2014-01-09  76.6  69787200 <NULL>
-#>  7 AAPL   2014-01-10  76.1  76244000 <NULL>
-#>  8 AAPL   2014-01-13  76.5  94623200 <lm>  
-#>  9 AAPL   2014-01-14  78.1  83140400 <lm>  
-#> 10 AAPL   2014-01-15  79.6  97909700 <lm>  
-#> # ... with 5,022 more rows
 ```
+
+    #> # A tibble: 5,032 x 5
+    #> # Groups:   Symbol [4]
+    #>    Symbol Date       Close    Volume model 
+    #>    <chr>  <date>     <dbl>     <dbl> <list>
+    #>  1 AAPL   2014-01-02  79.0  58671200 <NULL>
+    #>  2 AAPL   2014-01-03  77.3  98116900 <NULL>
+    #>  3 AAPL   2014-01-06  77.7 103152700 <NULL>
+    #>  4 AAPL   2014-01-07  77.1  79302300 <NULL>
+    #>  5 AAPL   2014-01-08  77.6  64632400 <NULL>
+    #>  6 AAPL   2014-01-09  76.6  69787200 <NULL>
+    #>  7 AAPL   2014-01-10  76.1  76244000 <NULL>
+    #>  8 AAPL   2014-01-13  76.5  94623200 <lm>  
+    #>  9 AAPL   2014-01-14  78.1  83140400 <lm>  
+    #> 10 AAPL   2014-01-15  79.6  97909700 <lm>  
+    #> # ... with 5,022 more rows
 
 ## References
 

@@ -24,9 +24,10 @@ This post uses the `penguins` dataset [@10.1371/journal.pone.0090081] for most d
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(message = FALSE,
-                      collapse = TRUE, 
+                      collapse = FALSE, 
                       comment = "#>",
-                      warning = FALSE)
+                      warning = FALSE,
+                      fig.align = "center")
 ```
 
 ```{r, echo = FALSE}

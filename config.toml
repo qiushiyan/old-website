@@ -36,6 +36,11 @@ enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
 ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
 
+pygmentsCodefences = true
+pygmentsStyle = "pygments"
+
+
+
 [outputs]
   home = [ "HTML", "RSS" ]
   section = [ "HTML", "RSS" ]
@@ -79,11 +84,13 @@ ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "
     endLevel = 3
 
    [markup.highlight]
-      codeFences = false
+      codeFences = true
       hl_Lines = ""
-      lineNoStart = 1
-      lineNos = true
+      lineNoStart = 1 
+      lineNos = false
       lineNumbersInTable = true
       noClasses = true
-      style = "Material"
-      tabWidth = 1
+      # style = "Material"
+      # tabWidth = 4
+
+

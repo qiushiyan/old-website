@@ -51,7 +51,8 @@ import seaborn as sns
 
 ```{python, echo = FALSE}
 import os
-os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = 'D:/Anaconda/Library/plugins/platforms'
+path = 'C:/Users/Lenovo/AppData/Local/r-miniconda/envs/r-reticulate/Library/plugins/platforms'
+os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
 ```
 
 
@@ -323,18 +324,18 @@ Let's plot these residuals against the predictor `log(n)`:
 
 ```{r}
 augment(lm_fit) %>% 
-  ggplot(aes(log.n., .resid)) + 
+  ggplot(aes(`log(n)`, .std.resid)) + 
   geom_hline(yintercept = 0, color = "red") + 
   geom_point()
 ```
 
 
-> The plot shows an empty region around a residual of 1.5.  So somewhat arbitrarily, we’ll select those diseases with a residual greater than 1.5  
+> The plot shows an empty region around a standardized residual of 1.5.  So somewhat arbitrarily, we’ll select those diseases with a residual greater than 1.5  
 
 ```{r}
 rows <- augment(lm_fit) %>% 
   mutate(row = row_number()) %>% 
-  filter(.resid > 1.5) %>% 
+  filter(.std.resid> 1.5) %>% 
   select(row) %>% 
   pull(row)
 

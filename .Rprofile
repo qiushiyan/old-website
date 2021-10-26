@@ -6,7 +6,8 @@ options(blogdown.author = "Qiushi Yan",
         blogdown.title_case = TRUE,
         blogdown.hugo.version = "0.64.1",
         blogdown.initial_files.number = 0,
-        blogdown.knit.on_save = TRUE)
+        blogdown.knit.on_save = TRUE,
+        blogdown.method = "markdown")
 rprofile <- Sys.getenv("R_PROFILE_USER", "~/.Rprofile")
 
 if (file.exists(rprofile)) {

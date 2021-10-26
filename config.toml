@@ -74,4 +74,16 @@ ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-      
+   [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 3
+
+   [markup.highlight]
+      codeFences = false
+      hl_Lines = ""
+      lineNoStart = 1
+      lineNos = false
+      lineNumbersInTable = true
+      noClasses = true
+      style = "solarized-dark"
+      tabWidth = 1

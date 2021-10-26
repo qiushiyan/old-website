@@ -3,10 +3,19 @@
   font-family: "Lato";
   src: url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,40);
 }
+/* toc */
+#TableOfContents, .docs-toc-title {
+  border-left: 1px solid $sta-primary;
+  /* "$sta-primary" is the primary colour from the theme (sass/scss) */
+}
+
+html {
+	scroll-behavior: smooth;
+}
 
 /* article body */
 .article-container {
-  max-width: 950px;
+  max-width: 1250px;
 }
 
 /* -----------div tips------------- */
@@ -105,12 +114,16 @@ pre {
   padding: 0.25em;
   background: #fff;
   overflow-x: auto;
-  border-radius: 5px; /*undo rounded corners*/
+  border-radius: 5px; 
+  /*undo rounded corners*/
   /* increase code block width */
-/*  margin-left: calc(-100vw / 2 + 1100px / 2);
+  /*  
+  margin-left: calc(-100vw / 2 + 1100px / 2);
   margin-right: calc(-100vw / 2 + 1100px / 2);
   padding-left: 3rem;
-  padding-right: 3rem;*/
+  padding-right: 3rem;
+  
+  */
 }
 
 pre code {

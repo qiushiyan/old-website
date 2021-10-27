@@ -4,10 +4,6 @@
   src: url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,40);
 }
 /* toc */
-.docs-toc {
-  z-index: -1;
-}
-
 #TableOfContents, .docs-toc-title {
   border-left: 1px solid $sta-primary;
   /* "$sta-primary" is the primary colour from the theme (sass/scss) */
@@ -15,6 +11,11 @@
 
 html {
 	scroll-behavior: smooth;
+}
+
+/* let figure be on top of toc */
+.row .article-style {
+  z-index: 1;
 }
 
 /* article body */

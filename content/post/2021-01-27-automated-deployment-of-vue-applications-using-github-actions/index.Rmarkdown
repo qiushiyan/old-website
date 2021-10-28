@@ -3,7 +3,7 @@ title: Deploy Vue Applications to Firebase Using Github Actions
 author: Qiushi Yan
 date: '2021-01-27'
 slug: github-actions-firebase-vue
-summary: "Use Github Actions and Firebase to automatically publishing you Vue app"
+summary: "Use Github Actions and Firebase to automatically publish you Vue app"
 categories:
   - Web Development
 tags:
@@ -43,7 +43,7 @@ Now, you can run `npm run build` and `firebase deploy --only hosting` every time
 
 ## Use Github Actions
 
-I have a example Vue app in this [repo](https://github.com/qiushiyan/chatroom). I would like gh actions to perform automatic updates to the site whenever I make changes to the github repo. 
+I have a example Vue app in this [repo](https://github.com/qiushiyan/chatroom). I would like gh actions to perform automatic updates to the site whenever I make changes to the github repo.
 
 To design the according Github Action,  create in the root directory a `.github/workflows/` folder, and inside that folder a yaml file with extension `.yml`. This file inside the special folder will be recognized by Github Actions and interpreted as instructions to follow. Mine is named `deploy-dev.yml` but you can name it whatever you want. You can also have multiple yaml files, which will run in parallel. Each yaml file is called a *workflow*.
 

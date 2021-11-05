@@ -41,7 +41,7 @@ import pandas as pd
 
 
 ```python
-ri = pd.read_csv("D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv")
+ri = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/rhode_traffic_stops.csv")
 print(ri.head())
 #>   state   stop_date stop_time  ...  stop_duration drugs_related_stop district
 #> 0    RI  2005-01-04     12:55  ...       0-15 Min              False  Zone X4
@@ -144,8 +144,6 @@ Combine these steps yields a relatively clean version of this dataset.
 ```python
 ri["is_arrested"] = ri.is_arrested.astype("bool")
 dt_index = ri.stop_date.str.cat(ri.stop_time, sep = " ")
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\numpy\core\fromnumeric.py:87: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
-#>   return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
 ri["stop_datetime"] = pd.to_datetime(dt_index)
 
 ri_clean = (ri.
@@ -283,34 +281,8 @@ annual_drug_rate = ri_clean.drugs_related_stop.resample("A").mean()
 annual_search_rate = ri_clean.search_conducted.resample("A").mean()
 annual = pd.concat([annual_drug_rate, annual_search_rate], axis="columns")
 annual.plot(subplots = True)
-#> array([<matplotlib.axes._subplots.AxesSubplot object at 0x000000002FC6AF98>,
-#>        <matplotlib.axes._subplots.AxesSubplot object at 0x00000000316C9208>],
-#>       dtype=object)
-#> 
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:307: MatplotlibDeprecationWarning: 
-#> The rowNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().rowspan.start instead.
-#>   layout[ax.rowNum, ax.colNum] = ax.get_visible()
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:307: MatplotlibDeprecationWarning: 
-#> The colNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().colspan.start instead.
-#>   layout[ax.rowNum, ax.colNum] = ax.get_visible()
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:313: MatplotlibDeprecationWarning: 
-#> The rowNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().rowspan.start instead.
-#>   if not layout[ax.rowNum + 1, ax.colNum]:
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:313: MatplotlibDeprecationWarning: 
-#> The colNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().colspan.start instead.
-#>   if not layout[ax.rowNum + 1, ax.colNum]:
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:307: MatplotlibDeprecationWarning: 
-#> The rowNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().rowspan.start instead.
-#>   layout[ax.rowNum, ax.colNum] = ax.get_visible()
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:307: MatplotlibDeprecationWarning: 
-#> The colNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().colspan.start instead.
-#>   layout[ax.rowNum, ax.colNum] = ax.get_visible()
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:313: MatplotlibDeprecationWarning: 
-#> The rowNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().rowspan.start instead.
-#>   if not layout[ax.rowNum + 1, ax.colNum]:
-#> C:\Users\Lenovo\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\pandas\plotting\_matplotlib\tools.py:313: MatplotlibDeprecationWarning: 
-#> The colNum attribute was deprecated in Matplotlib 3.2 and will be removed two minor releases later. Use ax.get_subplotspec().colspan.start instead.
-#>   if not layout[ax.rowNum + 1, ax.colNum]:
+#> array([<AxesSubplot:xlabel='stop_datetime'>,
+#>        <AxesSubplot:xlabel='stop_datetime'>], dtype=object)
 plt.show()
 ```
 
@@ -338,7 +310,7 @@ This section uses a second dataset to explore the impact of weather conditions o
 
 
 ```python
-weather = pd.read_csv("D:/RProjects/data/stanford-open-policing/rhode_weather.csv")
+weather = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/rhode_weather.csv")
 weather.head()
 #>        STATION        DATE  TAVG  TMIN  TMAX  ...  WT17  WT18  WT19  WT21  WT22
 #> 0  USW00014765  2005-01-01  44.0    35    53  ...   NaN   NaN   NaN   NaN   NaN
@@ -461,7 +433,7 @@ plt.show()
 
 
 
-Generally, the arrest rate is higher when weather condition gets worse. This doesn't prove a causal link, but it's quite an interesting result! Also, this plot can be illustrated via a pivot table. 
+Generally, arrest rate is higher when weather condition gets worse. This doesn't prove a causal link, but it's quite an interesting result! Also, this plot can be illustrated via a pivot table. 
 
 
 ```python

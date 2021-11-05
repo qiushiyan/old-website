@@ -39,8 +39,10 @@ knitr::opts_chunk$set(comment = "#>",
 ```{python, include = FALSE}
 # fix plotting error when making matplotlib graphics inside RStudio
 import os
-path = 'C:/Users/Lenovo/AppData/Local/r-miniconda/envs/r-reticulate/Library/plugins/platforms'
-os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
+import sys 
+if sys.platform.startswith("win"):
+  path = 'C:/Users/Lenovo/AppData/Local/r-miniconda/envs/r-reticulate/Library/plugins/platforms'
+  os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
 
 ```
 
@@ -52,7 +54,7 @@ import pandas as pd
 ```
 
 ```{python}
-ri = pd.read_csv("D:/RProjects/data/stanford-open-policing/rhode_traffic_stops.csv")
+ri = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/rhode_traffic_stops.csv")
 print(ri.head())
 print(ri.columns)
 ```
@@ -200,7 +202,7 @@ plt.show()
 This section uses a second dataset to explore the impact of weather conditions on police behavior during traffic stops.  
 
 ```{python}
-weather = pd.read_csv("D:/RProjects/data/stanford-open-policing/rhode_weather.csv")
+weather = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/rhode_weather.csv")
 weather.head()
 ```
 
@@ -266,7 +268,7 @@ plt.show()
 
 
 
-Generally, the arrest rate is higher when weather condition gets worse. This doesn't prove a causal link, but it's quite an interesting result! Also, this plot can be illustrated via a pivot table. 
+Generally, arrest rate is higher when weather condition gets worse. This doesn't prove a causal link, but it's quite an interesting result! Also, this plot can be illustrated via a pivot table. 
 
 ```{python}
 ri_weather.pivot_table(index = "violation", columns = "rating", values = "is_arrested")

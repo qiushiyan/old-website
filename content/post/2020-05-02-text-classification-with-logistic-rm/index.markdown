@@ -18,7 +18,10 @@ image:
 In this post I aim to train a text classification model with penalized logistic regression using the [`tidymodels`](https://www.tidymodels.org/) framework. Data are from 5 books and downloaded via the [`gutenbergr`](https://docs.ropensci.org/gutenbergr/) package, written by either Emily Brontë or Charlotte Brontë. And the goal is to predict the author of a line, in other words the probability of line being written by one sister instead of another.
 
 ``` r
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(stringr)
 library(tidytext)
 library(gutenbergr)
 ```
@@ -55,7 +58,7 @@ books
 #> # ... with 88,979 more rows
 ```
 
-To obtain tidy text structure illustrated in [Text Mining with R](https://www.tidytextmining.com/), I use `unnest_tokens()` to perform tokenization and remove all the stop words. I also removed characters like `'`, `'s`, `'` and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff’s becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author’s total word counts) are removed. The cutoff may be a little too high if you plot that histogram, but I really need this to save computation efforts on my laptop :sweat\_smile:.
+To obtain tidy text structure illustrated in [Text Mining with R](https://www.tidytextmining.com/), I use `unnest_tokens()` to perform tokenization and remove all the stop words. I also removed characters like `'`, `'s`, `'` and whitespaces to return valid column names after widening. But it turns out this served as some sort of stemming too! (heathcliff’s becomes heathcliff). Then low frequency words (whose frequency is less than 0.05% of an author’s total word counts) are removed. The cutoff may be a little too high if you plot that histogram, but I really need this to save computation efforts on my laptop :sweat_smile:.
 
 ``` r
 clean_books <- books %>% 
@@ -104,7 +107,7 @@ tidy_books %>%
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="1440" />
 
-Words lie near the line such as “home,” “head” and “half” indicate similar tendency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff,” “linton,” “catherine,” etc.
+Words lie near the line such as “home”, “head” and “half” indicate similar tendency to use that word, while those that are far from the line are words that are found more in one set of texts than another, for example “headthcliff”, “linton”, “catherine”, etc.
 
 What does this plot tell us? Judged only by word frequency, it looks that there are a number of words that are quite characteristic of Emily Brontë (upper left corner). Charlotte, on the other hand, has few representative words (bottom right corner). We will investigate this further in the model.
 

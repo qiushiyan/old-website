@@ -1,3 +1,4 @@
+source("renv/activate.R")
 options(blogdown.author = "Qiushi Yan",
         blogdown.ext = ".Rmd",
         blogdown.subdir = "post",

@@ -40,14 +40,14 @@ The reviews data contains four columns:
 
 
 ```r
-reviews <- readr::read_tsv("D:/RProjects/data/blog/animal-crossing-reviews.tsv")
+reviews <- vroom::vroom("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/animal-crossing-reviews.tsv")
 glimpse(reviews)
 #> Rows: 1,472
 #> Columns: 4
-#> $ grade     <dbl> 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
-#> $ user_name <chr> "mds27272", "lolo2178", "Roachant", "Houndf", "ProfessorFox"~
-#> $ text      <chr> "My gf started playing before me. No option to create my own~
-#> $ date      <date> 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20,~
+#> $ grade     <dbl> 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ user_name <chr> "mds27272", "lolo2178", "Roachant", "Houndf", "ProfessorFox"…
+#> $ text      <chr> "My gf started playing before me. No option to create my own…
+#> $ date      <date> 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20, 2020-03-20,…
 ```
 
 
@@ -539,7 +539,7 @@ final_model %>%
 
 These number may not look so nice in terms of accuracy and ROC AUC, but there is a tradeoff happening. When I was still experimenting on different models I trained one that would miss all the medium ratings in the testing set, but did achieve relatively high predictive metrics. Then I decided to add the `step_upsampling` step to enhance detection towards medium ratings. Although the game campany may not actually care about those mild people as much as they do about those go to extremes. For another, the best penality is judged by the Kappa statistic, which shows reasonable agreement.
 
-Varible importance plot could help us to identify useful features. For multiclass logit models, importance is defined as the sum of absolute value of coef of a variable. For example, in our baseline logit models:  
+Varible importance plot could help us to identify useful features. For multiclass logit models, importance is defined as the sum of absolute value of coef of a variable. For example, in our baseline logit models:
 
 
 $$
@@ -566,6 +566,7 @@ importance <- final_fit %>%
   extract_fit_parsnip() %>% 
   vi() 
 ```
+
 
 
 

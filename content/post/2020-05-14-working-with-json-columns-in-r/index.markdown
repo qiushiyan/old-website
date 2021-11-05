@@ -22,7 +22,11 @@ JSON, as a lightweight and flexible data format originating in JavaScript, has b
 
 ```r
 library(jsonlite)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(readr)
 
 # a json-like string
 my_json <- '{"firt_name": "Qiushi", "last_name": "Yan"}'
@@ -48,7 +52,7 @@ str_c("[", my_json, "]") %>%
 my_json %>% 
   fromJSON() %>% 
   as_tibble()
-#> # A tibble: 1 x 2
+#> # A tibble: 1 × 2
 #>   firt_name last_name
 #>   <chr>     <chr>    
 #> 1 Qiushi    Yan
@@ -101,7 +105,7 @@ friends_df <- str_c(friends, collapse = ", ") %>%
   as_tibble()
 
 friends_df
-#> # A tibble: 6 x 2
+#> # A tibble: 6 × 2
 #>   name     detail$job $hobby     
 #>   <chr>    <list>     <chr>      
 #> 1 Monica   <chr [1]>  cleaning   
@@ -132,7 +136,7 @@ friends_df$detail
 ```r
 friends_df %>% 
   unpack(detail)
-#> # A tibble: 6 x 3
+#> # A tibble: 6 × 3
 #>   name     job       hobby      
 #>   <chr>    <list>    <chr>      
 #> 1 Monica   <chr [1]> cleaning   
@@ -184,7 +188,7 @@ parser <- function(df, col) {
 
 tibble(index = 1:6, friends = friends) %>% 
   parser(friends)
-#> # A tibble: 6 x 4
+#> # A tibble: 6 × 4
 #>   index name     job       hobby      
 #>   <int> <chr>    <list>    <chr>      
 #> 1     1 Monica   <chr [1]> cleaning   
@@ -260,20 +264,20 @@ On the other hand, `spread_all` cannot spread arrays, this is when `gather_array
 worldbank %>%
   spread_all()
 #> # A tbl_json: 500 x 9 tibble with a "JSON" attribute
-#>    ..JSON document.id boardapprovalda~ closingdate countryshortname project_name
+#>    ..JSON document.id boardapprovalda… closingdate countryshortname project_name
 #>    <chr>        <int> <chr>            <chr>       <chr>            <chr>       
-#>  1 "{\"_~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
-#>  2 "{\"_~           2 2013-11-04T00:0~ <NA>        Tunisia          TN: DTF Soc~
-#>  3 "{\"_~           3 2013-11-01T00:0~ <NA>        Tuvalu           Tuvalu Avia~
-#>  4 "{\"_~           4 2013-10-31T00:0~ <NA>        Yemen, Republic~ Gov't and C~
-#>  5 "{\"_~           5 2013-10-31T00:0~ 2019-04-30~ Lesotho          Second Priv~
-#>  6 "{\"_~           6 2013-10-31T00:0~ <NA>        Kenya            Additional ~
-#>  7 "{\"_~           7 2013-10-29T00:0~ 2019-06-30~ India            National Hi~
-#>  8 "{\"_~           8 2013-10-29T00:0~ <NA>        China            China Renew~
-#>  9 "{\"_~           9 2013-10-29T00:0~ 2018-12-31~ India            Rajasthan R~
-#> 10 "{\"_~          10 2013-10-29T00:0~ 2014-12-31~ Morocco          MA Accounta~
-#> # ... with 490 more rows, and 3 more variables: regionname <chr>,
-#> #   totalamt <dbl>, _id.$oid <chr>
+#>  1 "{\"_…           1 2013-11-12T00:0… 2018-07-07… Ethiopia         Ethiopia Ge…
+#>  2 "{\"_…           2 2013-11-04T00:0… <NA>        Tunisia          TN: DTF Soc…
+#>  3 "{\"_…           3 2013-11-01T00:0… <NA>        Tuvalu           Tuvalu Avia…
+#>  4 "{\"_…           4 2013-10-31T00:0… <NA>        Yemen, Republic… Gov't and C…
+#>  5 "{\"_…           5 2013-10-31T00:0… 2019-04-30… Lesotho          Second Priv…
+#>  6 "{\"_…           6 2013-10-31T00:0… <NA>        Kenya            Additional …
+#>  7 "{\"_…           7 2013-10-29T00:0… 2019-06-30… India            National Hi…
+#>  8 "{\"_…           8 2013-10-29T00:0… <NA>        China            China Renew…
+#>  9 "{\"_…           9 2013-10-29T00:0… 2018-12-31… India            Rajasthan R…
+#> 10 "{\"_…          10 2013-10-29T00:0… 2014-12-31… Morocco          MA Accounta…
+#> # … with 490 more rows, and 3 more variables: regionname <chr>, totalamt <dbl>,
+#> #   _id.$oid <chr>
 ```
 
 If you take a careful look at the actual object in js, you'll notice that one key is missing in the 9 columns printed above, namely `majorsector_percent`, because its paired value is an array. 
@@ -293,7 +297,7 @@ worldbank %>%
   gather_object() %>% 
   json_types() %>% 
   count(name, type)
-#> # A tibble: 8 x 3
+#> # A tibble: 8 × 3
 #>   name                type       n
 #>   <chr>               <fct>  <int>
 #> 1 _id                 object   500
@@ -319,15 +323,15 @@ worldbank %>%
 #>    <chr>                         <int>       <int> <chr>                   <dbl>
 #>  1 "{\"Name\":\"Educat..."           1           1 Education                  46
 #>  2 "{\"Name\":\"Educat..."           1           2 Education                  26
-#>  3 "{\"Name\":\"Public..."           1           3 Public Administratio~      16
+#>  3 "{\"Name\":\"Public..."           1           3 Public Administratio…      16
 #>  4 "{\"Name\":\"Educat..."           1           4 Education                  12
-#>  5 "{\"Name\":\"Public..."           2           1 Public Administratio~      70
-#>  6 "{\"Name\":\"Public..."           2           2 Public Administratio~      30
+#>  5 "{\"Name\":\"Public..."           2           1 Public Administratio…      70
+#>  6 "{\"Name\":\"Public..."           2           2 Public Administratio…      30
 #>  7 "{\"Name\":\"Transp..."           3           1 Transportation            100
-#>  8 "{\"Name\":\"Health..."           4           1 Health and other soc~     100
+#>  8 "{\"Name\":\"Health..."           4           1 Health and other soc…     100
 #>  9 "{\"Name\":\"Indust..."           5           1 Industry and trade         50
 #> 10 "{\"Name\":\"Indust..."           5           2 Industry and trade         40
-#> # ... with 1,395 more rows
+#> # … with 1,395 more rows
 ```
 
 These steps can be readily combined with the initial spread, just enter into the unsolved `majorsector_percent` after the first `spread_all`
@@ -340,19 +344,19 @@ worldbank %>%
   gather_array() %>% 
   spread_all()
 #> # A tbl_json: 1,405 x 12 tibble with a "JSON" attribute
-#>    ..JSON document.id boardapprovalda~ closingdate countryshortname project_name
+#>    ..JSON document.id boardapprovalda… closingdate countryshortname project_name
 #>    <chr>        <int> <chr>            <chr>       <chr>            <chr>       
-#>  1 "{\"N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
-#>  2 "{\"N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
-#>  3 "{\"N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
-#>  4 "{\"N~           1 2013-11-12T00:0~ 2018-07-07~ Ethiopia         Ethiopia Ge~
-#>  5 "{\"N~           2 2013-11-04T00:0~ <NA>        Tunisia          TN: DTF Soc~
-#>  6 "{\"N~           2 2013-11-04T00:0~ <NA>        Tunisia          TN: DTF Soc~
-#>  7 "{\"N~           3 2013-11-01T00:0~ <NA>        Tuvalu           Tuvalu Avia~
-#>  8 "{\"N~           4 2013-10-31T00:0~ <NA>        Yemen, Republic~ Gov't and C~
-#>  9 "{\"N~           5 2013-10-31T00:0~ 2019-04-30~ Lesotho          Second Priv~
-#> 10 "{\"N~           5 2013-10-31T00:0~ 2019-04-30~ Lesotho          Second Priv~
-#> # ... with 1,395 more rows, and 6 more variables: regionname <chr>,
+#>  1 "{\"N…           1 2013-11-12T00:0… 2018-07-07… Ethiopia         Ethiopia Ge…
+#>  2 "{\"N…           1 2013-11-12T00:0… 2018-07-07… Ethiopia         Ethiopia Ge…
+#>  3 "{\"N…           1 2013-11-12T00:0… 2018-07-07… Ethiopia         Ethiopia Ge…
+#>  4 "{\"N…           1 2013-11-12T00:0… 2018-07-07… Ethiopia         Ethiopia Ge…
+#>  5 "{\"N…           2 2013-11-04T00:0… <NA>        Tunisia          TN: DTF Soc…
+#>  6 "{\"N…           2 2013-11-04T00:0… <NA>        Tunisia          TN: DTF Soc…
+#>  7 "{\"N…           3 2013-11-01T00:0… <NA>        Tuvalu           Tuvalu Avia…
+#>  8 "{\"N…           4 2013-10-31T00:0… <NA>        Yemen, Republic… Gov't and C…
+#>  9 "{\"N…           5 2013-10-31T00:0… 2019-04-30… Lesotho          Second Priv…
+#> 10 "{\"N…           5 2013-10-31T00:0… 2019-04-30… Lesotho          Second Priv…
+#> # … with 1,395 more rows, and 6 more variables: regionname <chr>,
 #> #   totalamt <dbl>, _id.$oid <chr>, array.index <int>, Name <chr>,
 #> #   Percent <dbl>
 ```
@@ -413,7 +417,7 @@ friends %>%
   enter_object(detail, job) %>% 
   mutate(job = ..JSON) %>% 
   unnest_longer(job)
-#> # A tibble: 10 x 5
+#> # A tibble: 10 × 5
 #>    document.id name     hobby       job            ..JSON    
 #>          <int> <chr>    <chr>       <chr>          <list>    
 #>  1           1 Monica   cleaning    chef           <list [1]>
@@ -437,7 +441,7 @@ This data comes from [Kaggle](https://www.kaggle.com/c/ga-customer-revenue-predi
 
 
 ```r
-ga <- read_csv("D:/RProjects/data/ga-customer-revenue-prediction/test.csv",
+ga <- vroom::vroom("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/ga-customer-revenue-prediction.csv",
          n_max = 100,
          col_types = cols_only(
            device = col_character(),
@@ -449,10 +453,10 @@ ga <- read_csv("D:/RProjects/data/ga-customer-revenue-prediction/test.csv",
 glimpse(ga)
 #> Rows: 100
 #> Columns: 4
-#> $ device        <chr> "{\"browser\": \"Chrome\", \"browserVersion\": \"not ava~
-#> $ geoNetwork    <chr> "{\"continent\": \"Asia\", \"subContinent\": \"Southeast~
-#> $ totals        <chr> "{\"visits\": \"1\", \"hits\": \"4\", \"pageviews\": \"4~
-#> $ trafficSource <chr> "{\"campaign\": \"(not set)\", \"source\": \"google\", \~
+#> $ device        <chr> "{\"browser\": \"Chrome\", \"browserVersion\": \"not ava…
+#> $ geoNetwork    <chr> "{\"continent\": \"Asia\", \"subContinent\": \"Southeast…
+#> $ totals        <chr> "{\"visits\": \"1\", \"hits\": \"4\", \"pageviews\": \"4…
+#> $ trafficSource <chr> "{\"campaign\": \"(not set)\", \"source\": \"google\", \…
 ```
 
 All four columns are json columns. First let's define function that is used to parse a single json character vector:
@@ -474,26 +478,26 @@ ga[1:3] %>%
               map_dfr(~ fromJSON(.) %>% 
                         as_tibble %>% 
                         nest(data = c(adwordsClickInfo))))
-#> # A tibble: 100 x 38
-#>    browser browserVersion  browserSize operatingSystem operatingSystem~ isMobile
+#> # A tibble: 100 × 38
+#>    browser browserVersion  browserSize operatingSystem operatingSystem… isMobile
 #>    <chr>   <chr>           <chr>       <chr>           <chr>            <lgl>   
-#>  1 Chrome  not available ~ not availa~ Macintosh       not available i~ FALSE   
-#>  2 Chrome  not available ~ not availa~ Windows         not available i~ FALSE   
-#>  3 Chrome  not available ~ not availa~ Macintosh       not available i~ FALSE   
-#>  4 Safari  not available ~ not availa~ iOS             not available i~ TRUE    
-#>  5 Safari  not available ~ not availa~ Macintosh       not available i~ FALSE   
-#>  6 Chrome  not available ~ not availa~ Linux           not available i~ FALSE   
-#>  7 Chrome  not available ~ not availa~ Macintosh       not available i~ FALSE   
-#>  8 Chrome  not available ~ not availa~ Windows         not available i~ FALSE   
-#>  9 Chrome  not available ~ not availa~ Macintosh       not available i~ FALSE   
-#> 10 Chrome  not available ~ not availa~ Windows         not available i~ FALSE   
-#> # ... with 90 more rows, and 32 more variables: mobileDeviceBranding <chr>,
+#>  1 Chrome  not available … not availa… Macintosh       not available i… FALSE   
+#>  2 Chrome  not available … not availa… Windows         not available i… FALSE   
+#>  3 Chrome  not available … not availa… Macintosh       not available i… FALSE   
+#>  4 Safari  not available … not availa… iOS             not available i… TRUE    
+#>  5 Safari  not available … not availa… Macintosh       not available i… FALSE   
+#>  6 Chrome  not available … not availa… Linux           not available i… FALSE   
+#>  7 Chrome  not available … not availa… Macintosh       not available i… FALSE   
+#>  8 Chrome  not available … not availa… Windows         not available i… FALSE   
+#>  9 Chrome  not available … not availa… Macintosh       not available i… FALSE   
+#> 10 Chrome  not available … not availa… Windows         not available i… FALSE   
+#> # … with 90 more rows, and 32 more variables: mobileDeviceBranding <chr>,
 #> #   mobileDeviceModel <chr>, mobileInputSelector <chr>, mobileDeviceInfo <chr>,
 #> #   mobileDeviceMarketingName <chr>, flashVersion <chr>, language <chr>,
 #> #   screenColors <chr>, screenResolution <chr>, deviceCategory <chr>,
 #> #   continent <chr>, subContinent <chr>, country <chr>, region <chr>,
 #> #   metro <chr>, city <chr>, cityId <chr>, networkDomain <chr>, latitude <chr>,
-#> #   longitude <chr>, networkLocation <chr>, visits <chr>, hits <chr>, ...
+#> #   longitude <chr>, networkLocation <chr>, visits <chr>, hits <chr>, …
 ```
 
 There are 38 columns in total, we can verify this by applying `spread_all` to each columns: (the following tally exludes `..JSON` and `document.id`)  
@@ -502,19 +506,19 @@ There are 38 columns in total, we can verify this by applying `spread_all` to ea
 # 16 columns
 spread_all(ga$device)
 #> # A tbl_json: 100 x 18 tibble with a "JSON" attribute
-#>    ..JSON                  document.id browser browserVersion browserSize operatingSystem
-#>    <chr>                         <int> <chr>   <chr>          <chr>       <chr>          
-#>  1 "{\"browser\":\"Chr..."           1 Chrome  not available~ not availa~ Macintosh      
-#>  2 "{\"browser\":\"Chr..."           2 Chrome  not available~ not availa~ Windows        
-#>  3 "{\"browser\":\"Chr..."           3 Chrome  not available~ not availa~ Macintosh      
-#>  4 "{\"browser\":\"Saf..."           4 Safari  not available~ not availa~ iOS            
-#>  5 "{\"browser\":\"Saf..."           5 Safari  not available~ not availa~ Macintosh      
-#>  6 "{\"browser\":\"Chr..."           6 Chrome  not available~ not availa~ Linux          
-#>  7 "{\"browser\":\"Chr..."           7 Chrome  not available~ not availa~ Macintosh      
-#>  8 "{\"browser\":\"Chr..."           8 Chrome  not available~ not availa~ Windows        
-#>  9 "{\"browser\":\"Chr..."           9 Chrome  not available~ not availa~ Macintosh      
-#> 10 "{\"browser\":\"Chr..."          10 Chrome  not available~ not availa~ Windows        
-#> # ... with 90 more rows, and 12 more variables: operatingSystemVersion <chr>,
+#>    ..JSON    document.id browser browserVersion    browserSize   operatingSystem
+#>    <chr>           <int> <chr>   <chr>             <chr>         <chr>          
+#>  1 "{\"brow…           1 Chrome  not available in… not availabl… Macintosh      
+#>  2 "{\"brow…           2 Chrome  not available in… not availabl… Windows        
+#>  3 "{\"brow…           3 Chrome  not available in… not availabl… Macintosh      
+#>  4 "{\"brow…           4 Safari  not available in… not availabl… iOS            
+#>  5 "{\"brow…           5 Safari  not available in… not availabl… Macintosh      
+#>  6 "{\"brow…           6 Chrome  not available in… not availabl… Linux          
+#>  7 "{\"brow…           7 Chrome  not available in… not availabl… Macintosh      
+#>  8 "{\"brow…           8 Chrome  not available in… not availabl… Windows        
+#>  9 "{\"brow…           9 Chrome  not available in… not availabl… Macintosh      
+#> 10 "{\"brow…          10 Chrome  not available in… not availabl… Windows        
+#> # … with 90 more rows, and 12 more variables: operatingSystemVersion <chr>,
 #> #   isMobile <lgl>, mobileDeviceBranding <chr>, mobileDeviceModel <chr>,
 #> #   mobileInputSelector <chr>, mobileDeviceInfo <chr>,
 #> #   mobileDeviceMarketingName <chr>, flashVersion <chr>, language <chr>,
@@ -525,17 +529,17 @@ spread_all(ga$geoNetwork)
 #> # A tbl_json: 100 x 13 tibble with a "JSON" attribute
 #>    ..JSON  document.id continent subContinent  country region metro city  cityId
 #>    <chr>         <int> <chr>     <chr>         <chr>   <chr>  <chr> <chr> <chr> 
-#>  1 "{\"co~           1 Asia      Southeast As~ Singap~ (not ~ (not~ (not~ not a~
-#>  2 "{\"co~           2 Europe    Southern Eur~ Spain   Aragon (not~ Zara~ not a~
-#>  3 "{\"co~           3 Europe    Western Euro~ France  not a~ not ~ not ~ not a~
-#>  4 "{\"co~           4 Americas  Northern Ame~ United~ Calif~ San ~ Moun~ not a~
-#>  5 "{\"co~           5 Americas  Northern Ame~ United~ Calif~ San ~ San ~ not a~
-#>  6 "{\"co~           6 Americas  Northern Ame~ United~ not a~ not ~ not ~ not a~
-#>  7 "{\"co~           7 Americas  Northern Ame~ United~ not a~ not ~ not ~ not a~
-#>  8 "{\"co~           8 Americas  Northern Ame~ United~ not a~ not ~ not ~ not a~
-#>  9 "{\"co~           9 Europe    Southern Eur~ Portug~ Lisbon (not~ Lisb~ not a~
-#> 10 "{\"co~          10 Europe    Southern Eur~ Spain   Aragon (not~ Zara~ not a~
-#> # ... with 90 more rows, and 4 more variables: networkDomain <chr>,
+#>  1 "{\"co…           1 Asia      Southeast As… Singap… (not … (not… (not… not a…
+#>  2 "{\"co…           2 Europe    Southern Eur… Spain   Aragon (not… Zara… not a…
+#>  3 "{\"co…           3 Europe    Western Euro… France  not a… not … not … not a…
+#>  4 "{\"co…           4 Americas  Northern Ame… United… Calif… San … Moun… not a…
+#>  5 "{\"co…           5 Americas  Northern Ame… United… Calif… San … San … not a…
+#>  6 "{\"co…           6 Americas  Northern Ame… United… not a… not … not … not a…
+#>  7 "{\"co…           7 Americas  Northern Ame… United… not a… not … not … not a…
+#>  8 "{\"co…           8 Americas  Northern Ame… United… not a… not … not … not a…
+#>  9 "{\"co…           9 Europe    Southern Eur… Portug… Lisbon (not… Lisb… not a…
+#> 10 "{\"co…          10 Europe    Southern Eur… Spain   Aragon (not… Zara… not a…
+#> # … with 90 more rows, and 4 more variables: networkDomain <chr>,
 #> #   latitude <chr>, longitude <chr>, networkLocation <chr>
 
 # 4 columns
@@ -553,24 +557,24 @@ spread_all(ga$totals)
 #>  8 "{\"visits\":\"1\",\"..."           8 1      52    22        1        
 #>  9 "{\"visits\":\"1\",\"..."           9 1      5     5         <NA>     
 #> 10 "{\"visits\":\"1\",\"..."          10 1      6     6         1        
-#> # ... with 90 more rows
+#> # … with 90 more rows
 
 # 7 columns, all adwordsClickInfo columns are seen as one column
 spread_all(ga$trafficSource)
 #> # A tbl_json: 100 x 14 tibble with a "JSON" attribute
 #>    ..JSON   document.id campaign source medium keyword isTrueDirect referralPath
 #>    <chr>          <int> <chr>    <chr>  <chr>  <chr>   <lgl>        <chr>       
-#>  1 "{\"cam~           1 (not se~ google organ~ (not p~ TRUE         <NA>        
-#>  2 "{\"cam~           2 (not se~ google organ~ (not p~ NA           <NA>        
-#>  3 "{\"cam~           3 (not se~ google organ~ (not p~ NA           <NA>        
-#>  4 "{\"cam~           4 (not se~ google organ~ (not p~ NA           <NA>        
-#>  5 "{\"cam~           5 (not se~ google organ~ (not p~ NA           <NA>        
-#>  6 "{\"cam~           6 (not se~ google organ~ (not p~ NA           <NA>        
-#>  7 "{\"cam~           7 (not se~ google organ~ (not p~ NA           <NA>        
-#>  8 "{\"cam~           8 (not se~ google organ~ (not p~ NA           <NA>        
-#>  9 "{\"cam~           9 (not se~ google organ~ (not p~ TRUE         <NA>        
-#> 10 "{\"cam~          10 (not se~ google organ~ (not p~ NA           <NA>        
-#> # ... with 90 more rows, and 6 more variables:
+#>  1 "{\"cam…           1 (not se… google organ… (not p… TRUE         <NA>        
+#>  2 "{\"cam…           2 (not se… google organ… (not p… NA           <NA>        
+#>  3 "{\"cam…           3 (not se… google organ… (not p… NA           <NA>        
+#>  4 "{\"cam…           4 (not se… google organ… (not p… NA           <NA>        
+#>  5 "{\"cam…           5 (not se… google organ… (not p… NA           <NA>        
+#>  6 "{\"cam…           6 (not se… google organ… (not p… NA           <NA>        
+#>  7 "{\"cam…           7 (not se… google organ… (not p… NA           <NA>        
+#>  8 "{\"cam…           8 (not se… google organ… (not p… NA           <NA>        
+#>  9 "{\"cam…           9 (not se… google organ… (not p… TRUE         <NA>        
+#> 10 "{\"cam…          10 (not se… google organ… (not p… NA           <NA>        
+#> # … with 90 more rows, and 6 more variables:
 #> #   adwordsClickInfo.criteriaParameters <chr>, adwordsClickInfo.page <chr>,
 #> #   adwordsClickInfo.slot <chr>, adwordsClickInfo.gclId <chr>,
 #> #   adwordsClickInfo.adNetworkType <chr>, adwordsClickInfo.isVideoAd <lgl>
@@ -582,26 +586,26 @@ And this may reminds you of a even simpler solution with the `tidyjson` package.
 ```r
 ga %>% 
   map_dfc(spread_all)
-#> # A tibble: 100 x 51
+#> # A tibble: 100 × 51
 #>    document.id...1 browser browserVersion      browserSize       operatingSystem
 #>              <int> <chr>   <chr>               <chr>             <chr>          
-#>  1               1 Chrome  not available in d~ not available in~ Macintosh      
-#>  2               2 Chrome  not available in d~ not available in~ Windows        
-#>  3               3 Chrome  not available in d~ not available in~ Macintosh      
-#>  4               4 Safari  not available in d~ not available in~ iOS            
-#>  5               5 Safari  not available in d~ not available in~ Macintosh      
-#>  6               6 Chrome  not available in d~ not available in~ Linux          
-#>  7               7 Chrome  not available in d~ not available in~ Macintosh      
-#>  8               8 Chrome  not available in d~ not available in~ Windows        
-#>  9               9 Chrome  not available in d~ not available in~ Macintosh      
-#> 10              10 Chrome  not available in d~ not available in~ Windows        
-#> # ... with 90 more rows, and 46 more variables: operatingSystemVersion <chr>,
+#>  1               1 Chrome  not available in d… not available in… Macintosh      
+#>  2               2 Chrome  not available in d… not available in… Windows        
+#>  3               3 Chrome  not available in d… not available in… Macintosh      
+#>  4               4 Safari  not available in d… not available in… iOS            
+#>  5               5 Safari  not available in d… not available in… Macintosh      
+#>  6               6 Chrome  not available in d… not available in… Linux          
+#>  7               7 Chrome  not available in d… not available in… Macintosh      
+#>  8               8 Chrome  not available in d… not available in… Windows        
+#>  9               9 Chrome  not available in d… not available in… Macintosh      
+#> 10              10 Chrome  not available in d… not available in… Windows        
+#> # … with 90 more rows, and 46 more variables: operatingSystemVersion <chr>,
 #> #   isMobile <lgl>, mobileDeviceBranding <chr>, mobileDeviceModel <chr>,
 #> #   mobileInputSelector <chr>, mobileDeviceInfo <chr>,
 #> #   mobileDeviceMarketingName <chr>, flashVersion <chr>, language <chr>,
 #> #   screenColors <chr>, screenResolution <chr>, deviceCategory <chr>,
 #> #   ..JSON...18 <list>, document.id...19 <int>, continent <chr>,
-#> #   subContinent <chr>, country <chr>, region <chr>, metro <chr>, ...
+#> #   subContinent <chr>, country <chr>, region <chr>, metro <chr>, city <chr>, …
 ```
 
 

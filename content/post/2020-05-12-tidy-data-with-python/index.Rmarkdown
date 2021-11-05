@@ -49,10 +49,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 ```
 
+
 ```{python, echo = FALSE}
 import os
-path = 'C:/Users/Lenovo/AppData/Local/r-miniconda/envs/r-reticulate/Library/plugins/platforms'
-os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
+import sys
+
+if sys.platform.startswith('win'):
+  path = 'C:/Users/Lenovo/AppData/Local/r-miniconda/envs/r-reticulate/Library/plugins/platforms'
+  os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = path
 ```
 
 
@@ -91,7 +95,7 @@ ggplot2::theme_set(theme_bar())
 # Column headers are values, not variable names  
 
 ```{python}
-pew = pd.read_csv("D:/RProjects/data/blog/pew.csv")
+pew = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/pew.csv")
 pew.head()
 ```
 
@@ -127,7 +131,7 @@ This shows strong relationship between `income` and `religion`.
 Another common use of this wide data format is to record regularly spaced observations over time, illustrated by the `billboard` dataset. Ther rank of a specific track in each week after it enters the Billboard top 100 is recorded in 75 columns, `wk1` to `wk75`.
 
 ```{python}
-billboard = pd.read_csv("D:/RProjects/data/blog/billboard.csv")
+billboard = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/billboard.csv")
 billboard
 ```
 
@@ -157,7 +161,7 @@ Now we can compute the average ranking:
 > The `tb` daaset comes from the World Health Organisation, and records the counts of confirmed tuberculosis cases by country, year, and demographic group. The demographic groups are broken down by sex (m, f)  and age (0–14,  15–25,  25–34,  35–44.  
 
 ```{python}
-tb = pd.read_csv("D:/RProjects/data/blog/tb.csv")
+tb = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/tb.csv")
 tb
 ```
 
@@ -187,7 +191,7 @@ tidy_tb
 > The `weather` data shows daily weather data from the Global Historical Climatology Network for one  weather station (MX17004) in Mexico for five months in 2010. 
 
 ```{python}
-weather = pd.read_csv("D:/RProjects/data/blog/weather.csv")
+weather = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/weather.csv")
 weather
 ```
 
@@ -214,15 +218,18 @@ There are two major problems with `weather`:
 After stating these common problems and their remidies, Hadley presented a case study section on how tidy dataset can facilitate data analysis. The case study uses individual-level mortality data from Mexico.  The goal is to find causes of death with unusual temporal patterns, at hour level. It's time to move back from Python to R!
 
 ```{r}
-library(tidyverse)
-deaths <- read_csv("D:/RProjects/data/blog/mexico-deaths.csv") %>% na.omit()
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+deaths <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/mexico-deaths.csv") %>% na.omit()
 deaths
 ```
 
 The columns are year, month, day, hour and cause of specific death respectively. Another table `codes` explains what acronyms in `cod` mean. 
 
 ```{r}
-codes <- read_csv("D:/RProjects/data/blog/codes.csv")
+codes <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/codes.csv")
 codes
 ```
 
@@ -275,7 +282,7 @@ prop2 <- deaths %>%
   mutate(prop2 = per_hour / total)
 ```
 
-Hadley used mean square error between the two proportions as a kind of distance, to indicate the average degree of anomaly of a cause, and I follow:  
+Hadley used mean square error between the two proportions as a kind of distance, to indicate the average degree of anomaly of a cause, and I follow:
 
 ```{r}
 dist <- prop1 %>% 

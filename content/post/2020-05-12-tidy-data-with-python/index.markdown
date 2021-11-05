@@ -15,7 +15,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-This week I’ve been doing some recap on how to do basic data processing and cleaning in Python with the `pandas` and `NumPy` library. So this post is mostly a self-reminder on how to deal with messy data in Python, by reproducing data cleaning examples presented in Hadley Wickham’s [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) paper, [Wickham](#ref-JSSv059i10) ([2014](#ref-JSSv059i10)).
+This week I’ve been doing some recap on how to do basic data processing and cleaning in Python with the `pandas` and `NumPy` library. So this post is mostly a self-reminder on how to deal with messy data in Python, by reproducing data cleaning examples presented in Hadley Wickham’s [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) paper, Wickham ([2014](#ref-JSSv059i10)).
 
 The most significant contribution of this well-known work is that it gave clear definition on what “tidy” means for a dataset. There are 3 main requirements, as illustrated on [`tidyr`](https://tidyr.tidyverse.org/)’s website (evolving from what Hadley originally proposed):
 
@@ -43,7 +43,7 @@ import seaborn as sns
 # Column headers are values, not variable names
 
 ``` python
-pew = pd.read_csv("D:/RProjects/data/blog/pew.csv")
+pew = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/pew.csv")
 pew.head()
 #>              religion  <$10k  $10-20k  ...  $100-150k  >150k  Don't know/refused
 #> 0            Agnostic     27       34  ...        109     84                  96
@@ -111,7 +111,7 @@ This shows strong relationship between `income` and `religion`.
 Another common use of this wide data format is to record regularly spaced observations over time, illustrated by the `billboard` dataset. Ther rank of a specific track in each week after it enters the Billboard top 100 is recorded in 75 columns, `wk1` to `wk75`.
 
 ``` python
-billboard = pd.read_csv("D:/RProjects/data/blog/billboard.csv")
+billboard = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/billboard.csv")
 billboard
 #>      year            artist                    track  ... wk74 wk75  wk76
 #> 0    2000             2 Pac  Baby Don't Cry (Keep...  ...  NaN  NaN   NaN
@@ -129,7 +129,7 @@ billboard
 #> [317 rows x 81 columns]
 ```
 
-If we are to answer questions like “what are the average ranking of artisits across all weeks?” `wk` like columns need to be transformed into values:[^1]
+If we are to answer questions like “what are the average ranking of artisits across all weeks?”, `wk` like columns need to be transformed into values: [^1]
 
 ``` python
 tidy_billboard = billboard.melt(id_vars = ["year", "artist", "track", "time", "date.entered"],
@@ -183,7 +183,7 @@ Now we can compute the average ranking:
 > The `tb` daaset comes from the World Health Organisation, and records the counts of confirmed tuberculosis cases by country, year, and demographic group. The demographic groups are broken down by sex (m, f) and age (0–14, 15–25, 25–34, 35–44.
 
 ``` python
-tb = pd.read_csv("D:/RProjects/data/blog/tb.csv")
+tb = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/tb.csv")
 tb
 #>     country  year   m014   m1524   m2534  ...   f3544  f4554  f5564   f65  fu
 #> 0        AD  2000    0.0     0.0     1.0  ...     NaN    NaN    NaN   NaN NaN
@@ -262,7 +262,7 @@ tidy_tb
 > The `weather` data shows daily weather data from the Global Historical Climatology Network for one weather station (MX17004) in Mexico for five months in 2010.
 
 ``` python
-weather = pd.read_csv("D:/RProjects/data/blog/weather.csv")
+weather = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/weather.csv")
 weather
 #>          id  year  month element    d1  ...   d27   d28   d29   d30   d31
 #> 0   MX17004  2010      1    tmax   NaN  ...   NaN   NaN   NaN  27.8   NaN
@@ -318,10 +318,13 @@ There are two major problems with `weather`:
 After stating these common problems and their remidies, Hadley presented a case study section on how tidy dataset can facilitate data analysis. The case study uses individual-level mortality data from Mexico. The goal is to find causes of death with unusual temporal patterns, at hour level. It’s time to move back from Python to R!
 
 ``` r
-library(tidyverse)
-deaths <- read_csv("D:/RProjects/data/blog/mexico-deaths.csv") %>% na.omit()
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+deaths <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/mexico-deaths.csv") %>% na.omit()
 deaths
-#> # A tibble: 513,273 x 5
+#> # A tibble: 513,273 × 5
 #>      yod   mod   dod   hod cod  
 #>    <dbl> <dbl> <dbl> <dbl> <chr>
 #>  1  1920    11    17     3 W78  
@@ -334,15 +337,15 @@ deaths
 #>  8  1930     9    11    19 E14  
 #>  9  1930    12    22    19 E11  
 #> 10  1931     5    26    11 K65  
-#> # ... with 513,263 more rows
+#> # … with 513,263 more rows
 ```
 
 The columns are year, month, day, hour and cause of specific death respectively. Another table `codes` explains what acronyms in `cod` mean.
 
 ``` r
-codes <- read_csv("D:/RProjects/data/blog/codes.csv")
+codes <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/codes.csv")
 codes
-#> # A tibble: 1,851 x 2
+#> # A tibble: 1,851 × 2
 #>    cod   disease                                                              
 #>    <chr> <chr>                                                                
 #>  1 A00   "Cholera"                                                            
@@ -355,7 +358,7 @@ codes
 #>  8 A07   "Other protozoal intestinal\ndiseases"                               
 #>  9 A08   "Viral and other specified\nintestinal infections"                   
 #> 10 A09   "Diarrhea and gastroenteritis\nof infectious origin"                 
-#> # ... with 1,841 more rows
+#> # … with 1,841 more rows
 ```
 
 Thanks to the [`reticulate`](https://rstudio.github.io/reticulate/) package, we can mix R and Python code seamlessly. Here is a line plot made with `seaborn` demonstrating total deaths per hour:
@@ -404,7 +407,7 @@ To provide informative labels for causes, we next join the dataset to the `codes
 deaths <- left_join(deaths, codes) %>%
   rename(cause = disease)
 head(deaths)
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>     yod   mod   dod   hod cod   cause                                         
 #>   <dbl> <dbl> <dbl> <dbl> <chr> <chr>                                         
 #> 1  1920    11    17     3 W78   "Inhalation of gastric\ncontents"             
@@ -471,20 +474,20 @@ dist <- prop1 %>%
 
 dist %>% 
   arrange(desc(dist))
-#> # A tibble: 447 x 3
+#> # A tibble: 447 × 3
 #>    cause                                                               n    dist
 #>    <chr>                                                           <int>   <dbl>
 #>  1 "Accident to powered aircraft\ncausing injury to occupant"         57 0.00573
 #>  2 "Victim of lightning"                                              97 0.00513
-#>  3 "Bus occupant injured in other\nand unspecified transport\nacc~    52 0.00419
+#>  3 "Bus occupant injured in other\nand unspecified transport\nacc…    52 0.00419
 #>  4 "Assault (homicide) by smoke,\nfire, and flames"                   51 0.00229
 #>  5 "Exposure to electric\ntransmission lines"                         77 0.00161
 #>  6 "Sudden infant death syndrome"                                    323 0.00156
 #>  7 "Drowning and submersion while\nin natural water"                 469 0.00133
-#>  8 "Motorcycle rider injured in\ncollision with car, pickup\ntruc~    66 0.00126
+#>  8 "Motorcycle rider injured in\ncollision with car, pickup\ntruc…    66 0.00126
 #>  9 "Contact with hornets, wasps,\nand bees"                           86 0.00118
 #> 10 "Exposure to smoke, fire, and\nflames, undetermined intent"        51 0.00110
-#> # ... with 437 more rows
+#> # … with 437 more rows
 ```
 
 Here we see causes of death with highest `dist` are mainly accidents and rare diseases. However, there is a negative correlation between the frequency of a cause and its deviation, as shown in the following plot, so that the result based solely on the `dist` column would be biased in favour of rare causes.
@@ -511,7 +514,7 @@ Thus, our final solution is to build a model with `n` as predictor, and `dist` a
 library(broom)
 lm_fit <- lm(log(dist) ~ log(n), data = dist)
 tidy(lm_fit)
-#> # A tibble: 2 x 5
+#> # A tibble: 2 × 5
 #>   term        estimate std.error statistic   p.value
 #>   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
 #> 1 (Intercept)   -3.74     0.110      -34.0 8.34e-126
@@ -545,7 +548,7 @@ unusual <- dist %>%
   select(cause, n)
 
 unusual
-#> # A tibble: 26 x 2
+#> # A tibble: 26 × 2
 #>    cause                                                                     n
 #>    <chr>                                                                 <int>
 #>  1 "Accident to powered aircraft\ncausing injury to occupant"               57
@@ -555,10 +558,10 @@ unusual
 #>  5 "Assault (homicide) by sharp\nobject"                                  1575
 #>  6 "Assault (homicide) by smoke,\nfire, and flames"                         51
 #>  7 "Bus occupant injured in other\nand unspecified transport\naccidents"    52
-#>  8 "Car occupant injured in other\nand unspecified transport\naccidents"  1938
-#>  9 "Car occupant injured in\nnoncollision transport\naccident"             616
+#>  8 "Car occupant injured in\nnoncollision transport\naccident"             616
+#>  9 "Car occupant injured in other\nand unspecified transport\naccidents"  1938
 #> 10 "Contact with hornets, wasps,\nand bees"                                 86
-#> # ... with 16 more rows
+#> # … with 16 more rows
 ```
 
 Finally, we plot the temporal course for each unusual cause of death.

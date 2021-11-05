@@ -28,7 +28,10 @@ knitr::opts_chunk$set(message = FALSE,
 
 
 ```{r, cache = FALSE}
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(stringr)
 library(tidytext)
 library(gutenbergr)
 ```
@@ -76,7 +79,7 @@ theme_set(theme_bar())
 ```
 
 ```{r, echo = FALSE}
-books <- read_rds("D:/RProjects/data/blog/bronte-sisters-data.rds")
+books <- readr::read_rds("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/bronte-sisters-data.rds")
 ```
 
 `books` is at line level

@@ -15,8 +15,12 @@ lastmod: '2020-05-15T17:40:47+08:00'
 
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(message = FALSE, warning = FALSE,
-                      comment = "#>", collapse = TRUE)
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE,
+                      comment = "#>", 
+                      collapse = TRUE,
+                      fig.align = "center"
+                      )
 ```
 
 
@@ -24,7 +28,11 @@ JSON, as a lightweight and flexible data format originating in JavaScript, has b
 
 ```{r}
 library(jsonlite)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(readr)
 
 # a json-like string
 my_json <- '{"firt_name": "Qiushi", "last_name": "Yan"}'
@@ -259,7 +267,7 @@ The potential disadvantage of using `tidyjson` is that it's built on the `tbl_js
 This data comes from [Kaggle](https://www.kaggle.com/c/ga-customer-revenue-prediction/data?select=test.csv). I read in only the top 100 rows and relevant json columns.
 
 ```{r}
-ga <- read_csv("D:/RProjects/data/ga-customer-revenue-prediction/test.csv",
+ga <- vroom::vroom("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/ga-customer-revenue-prediction.csv",
          n_max = 100,
          col_types = cols_only(
            device = col_character(),

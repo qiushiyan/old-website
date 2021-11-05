@@ -41,9 +41,11 @@ CREATE TABLE international_debt (
 
 
 ```r
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 
-international_debt <- readr::read_csv("D:/RProjects/data/blog/international_debt.csv")
+international_debt <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/international_debt.csv")
 ```
 
 
@@ -51,7 +53,7 @@ Then we can upload debt data into that table. If you happen to be a datacamp sub
 
 ```sql
 COPY international_debt
-FROM 'D:/RProjects/data/blog/international_debt.csv'
+FROM 'path/to/csv/file'
 WITH (FORMAT csv, header)
 ```
 
@@ -130,31 +132,31 @@ SELECT DISTINCT indicator_code, indicator_name FROM international_debt
 
 |indicator_code |indicator_name                                                                        |
 |:--------------|:-------------------------------------------------------------------------------------|
-|DT.INT.BLAT.CD |PPG, bilateral (INT, current US$)                                                     |
-|DT.AMT.BLAT.CD |PPG, bilateral (AMT, current US$)                                                     |
-|DT.DIS.BLAT.CD |PPG, bilateral (DIS, current US$)                                                     |
-|DT.INT.MLAT.CD |PPG, multilateral (INT, current US$)                                                  |
-|DT.AMT.PCBK.CD |PPG, commercial banks (AMT, current US$)                                              |
-|DT.DIS.MLAT.CD |PPG, multilateral (DIS, current US$)                                                  |
-|DT.INT.DLXF.CD |Interest payments on external debt, long-term (INT, current US$)                      |
-|DT.DIS.OFFT.CD |PPG, official creditors (DIS, current US$)                                            |
-|DT.INT.PROP.CD |PPG, other private creditors (INT, current US$)                                       |
-|DT.AMT.DPNG.CD |Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$) |
-|DT.AMT.PRVT.CD |PPG, private creditors (AMT, current US$)                                             |
-|DT.DIS.DLXF.CD |Disbursements on external debt, long-term (DIS, current US$)                          |
-|DT.DIS.PRVT.CD |PPG, private creditors (DIS, current US$)                                             |
-|DT.AMT.OFFT.CD |PPG, official creditors (AMT, current US$)                                            |
-|DT.DIS.PROP.CD |PPG, other private creditors (DIS, current US$)                                       |
-|DT.AMT.PROP.CD |PPG, other private creditors (AMT, current US$)                                       |
-|DT.AMT.MLAT.CD |PPG, multilateral (AMT, current US$)                                                  |
-|DT.INT.DPNG.CD |Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)    |
-|DT.AMT.PBND.CD |PPG, bonds (AMT, current US$)                                                         |
 |DT.INT.PRVT.CD |PPG, private creditors (INT, current US$)                                             |
-|DT.INT.PBND.CD |PPG, bonds (INT, current US$)                                                         |
+|DT.AMT.OFFT.CD |PPG, official creditors (AMT, current US$)                                            |
+|DT.INT.DLXF.CD |Interest payments on external debt, long-term (INT, current US$)                      |
+|DT.INT.DPNG.CD |Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)    |
 |DT.DIS.PCBK.CD |PPG, commercial banks (DIS, current US$)                                              |
-|DT.AMT.DLXF.CD |Principal repayments on external debt, long-term (AMT, current US$)                   |
-|DT.INT.PCBK.CD |PPG, commercial banks (INT, current US$)                                              |
+|DT.AMT.PBND.CD |PPG, bonds (AMT, current US$)                                                         |
+|DT.DIS.MLAT.CD |PPG, multilateral (DIS, current US$)                                                  |
+|DT.DIS.PRVT.CD |PPG, private creditors (DIS, current US$)                                             |
+|DT.INT.MLAT.CD |PPG, multilateral (INT, current US$)                                                  |
+|DT.INT.PBND.CD |PPG, bonds (INT, current US$)                                                         |
+|DT.INT.PROP.CD |PPG, other private creditors (INT, current US$)                                       |
+|DT.DIS.OFFT.CD |PPG, official creditors (DIS, current US$)                                            |
+|DT.AMT.MLAT.CD |PPG, multilateral (AMT, current US$)                                                  |
 |DT.INT.OFFT.CD |PPG, official creditors (INT, current US$)                                            |
+|DT.DIS.PROP.CD |PPG, other private creditors (DIS, current US$)                                       |
+|DT.AMT.PCBK.CD |PPG, commercial banks (AMT, current US$)                                              |
+|DT.DIS.BLAT.CD |PPG, bilateral (DIS, current US$)                                                     |
+|DT.AMT.DLXF.CD |Principal repayments on external debt, long-term (AMT, current US$)                   |
+|DT.AMT.PROP.CD |PPG, other private creditors (AMT, current US$)                                       |
+|DT.AMT.PRVT.CD |PPG, private creditors (AMT, current US$)                                             |
+|DT.AMT.BLAT.CD |PPG, bilateral (AMT, current US$)                                                     |
+|DT.INT.PCBK.CD |PPG, commercial banks (INT, current US$)                                              |
+|DT.INT.BLAT.CD |PPG, bilateral (INT, current US$)                                                     |
+|DT.DIS.DLXF.CD |Disbursements on external debt, long-term (DIS, current US$)                          |
+|DT.AMT.DPNG.CD |Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$) |
 
 </div>
 
@@ -171,9 +173,9 @@ SELECT ROUND(SUM(debt), 2) AS total_debt FROM international_debt
 <div class="knitsql-table">
 
 
-|   total_debt|
-|------------:|
-| 3.079734e+12|
+| total_debt|
+|----------:|
+|   3.08e+12|
 
 </div>
 
@@ -196,28 +198,28 @@ LIMIT 20
 
 Table: Table 1: Countries with highest debt
 
-|country_name                                 |   total_debt|
-|:--------------------------------------------|------------:|
-|China                                        | 285793494734|
-|Brazil                                       | 280623966141|
-|South Asia                                   | 247608723991|
-|Least developed countries: UN classification | 212880992792|
-|Russian Federation                           | 191289057259|
-|IDA only                                     | 179048127207|
-|Turkey                                       | 151125758035|
-|India                                        | 133627060958|
-|Mexico                                       | 124596786217|
-|Indonesia                                    | 113435696694|
-|Cameroon                                     |  86491206347|
-|Angola                                       |  71368842500|
-|Kazakhstan                                   |  70159942694|
-|Egypt, Arab Rep.                             |  62077727757|
-|Vietnam                                      |  45851299896|
-|Colombia                                     |  45430117605|
-|Pakistan                                     |  45139315399|
-|Romania                                      |  42813979498|
-|South Africa                                 |  36703940743|
-|Venezuela, RB                                |  36048260108|
+|country_name                                 | total_debt|
+|:--------------------------------------------|----------:|
+|China                                        |  2.858e+11|
+|Brazil                                       |  2.806e+11|
+|South Asia                                   |  2.476e+11|
+|Least developed countries: UN classification |  2.129e+11|
+|Russian Federation                           |  1.913e+11|
+|IDA only                                     |  1.790e+11|
+|Turkey                                       |  1.511e+11|
+|India                                        |  1.336e+11|
+|Mexico                                       |  1.246e+11|
+|Indonesia                                    |  1.134e+11|
+|Cameroon                                     |  8.649e+10|
+|Angola                                       |  7.137e+10|
+|Kazakhstan                                   |  7.016e+10|
+|Egypt, Arab Rep.                             |  6.208e+10|
+|Vietnam                                      |  4.585e+10|
+|Colombia                                     |  4.543e+10|
+|Pakistan                                     |  4.514e+10|
+|Romania                                      |  4.281e+10|
+|South Africa                                 |  3.670e+10|
+|Venezuela, RB                                |  3.605e+10|
 
 </div>
 
@@ -238,32 +240,32 @@ ORDER BY proportion DESC
 <div class="knitsql-table">
 
 
-|indicator_name                                                                        |        debt| proportion|
-|:-------------------------------------------------------------------------------------|-----------:|----------:|
-|Principal repayments on external debt, long-term (AMT, current US$)                   | 96218620836|  0.3366718|
-|Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$) | 72392986214|  0.2533052|
-|Interest payments on external debt, long-term (INT, current US$)                      | 17866548651|  0.0625156|
-|Disbursements on external debt, long-term (DIS, current US$)                          | 15692563746|  0.0549088|
-|PPG, private creditors (AMT, current US$)                                             | 14677464466|  0.0513569|
-|Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)    | 14142718752|  0.0494858|
-|PPG, bonds (AMT, current US$)                                                         |  9834677000|  0.0344118|
-|PPG, official creditors (AMT, current US$)                                            |  9148170156|  0.0320097|
-|PPG, bilateral (AMT, current US$)                                                     |  6532446442|  0.0228572|
-|PPG, private creditors (DIS, current US$)                                             |  4111062474|  0.0143847|
-|PPG, commercial banks (AMT, current US$)                                              |  4046243299|  0.0141579|
-|PPG, commercial banks (DIS, current US$)                                              |  3777050273|  0.0132160|
-|PPG, official creditors (DIS, current US$)                                            |  3079501272|  0.0107753|
-|PPG, multilateral (DIS, current US$)                                                  |  3079501272|  0.0107753|
-|PPG, multilateral (AMT, current US$)                                                  |  2615723714|  0.0091525|
-|PPG, private creditors (INT, current US$)                                             |  2350524518|  0.0082246|
-|PPG, official creditors (INT, current US$)                                            |  1373305382|  0.0048052|
-|PPG, bonds (INT, current US$)                                                         |  1224249000|  0.0042837|
-|PPG, commercial banks (INT, current US$)                                              |   969933090|  0.0033938|
-|PPG, multilateral (INT, current US$)                                                  |   858406975|  0.0030036|
-|PPG, other private creditors (AMT, current US$)                                       |   796544167|  0.0027871|
-|PPG, bilateral (INT, current US$)                                                     |   514898407|  0.0018016|
-|PPG, other private creditors (DIS, current US$)                                       |   334012201|  0.0011687|
-|PPG, other private creditors (INT, current US$)                                       |   156342428|  0.0005470|
+|indicator_name                                                                        |      debt| proportion|
+|:-------------------------------------------------------------------------------------|---------:|----------:|
+|Principal repayments on external debt, long-term (AMT, current US$)                   | 9.622e+10|     0.3367|
+|Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$) | 7.239e+10|     0.2533|
+|Interest payments on external debt, long-term (INT, current US$)                      | 1.787e+10|     0.0625|
+|Disbursements on external debt, long-term (DIS, current US$)                          | 1.569e+10|     0.0549|
+|PPG, private creditors (AMT, current US$)                                             | 1.468e+10|     0.0514|
+|Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)    | 1.414e+10|     0.0495|
+|PPG, bonds (AMT, current US$)                                                         | 9.835e+09|     0.0344|
+|PPG, official creditors (AMT, current US$)                                            | 9.148e+09|     0.0320|
+|PPG, bilateral (AMT, current US$)                                                     | 6.532e+09|     0.0229|
+|PPG, private creditors (DIS, current US$)                                             | 4.111e+09|     0.0144|
+|PPG, commercial banks (AMT, current US$)                                              | 4.046e+09|     0.0142|
+|PPG, commercial banks (DIS, current US$)                                              | 3.777e+09|     0.0132|
+|PPG, official creditors (DIS, current US$)                                            | 3.080e+09|     0.0108|
+|PPG, multilateral (DIS, current US$)                                                  | 3.080e+09|     0.0108|
+|PPG, multilateral (AMT, current US$)                                                  | 2.616e+09|     0.0092|
+|PPG, private creditors (INT, current US$)                                             | 2.351e+09|     0.0082|
+|PPG, official creditors (INT, current US$)                                            | 1.373e+09|     0.0048|
+|PPG, bonds (INT, current US$)                                                         | 1.224e+09|     0.0043|
+|PPG, commercial banks (INT, current US$)                                              | 9.699e+08|     0.0034|
+|PPG, multilateral (INT, current US$)                                                  | 8.584e+08|     0.0030|
+|PPG, other private creditors (AMT, current US$)                                       | 7.965e+08|     0.0028|
+|PPG, bilateral (INT, current US$)                                                     | 5.149e+08|     0.0018|
+|PPG, other private creditors (DIS, current US$)                                       | 3.340e+08|     0.0012|
+|PPG, other private creditors (INT, current US$)                                       | 1.563e+08|     0.0005|
 
 </div>
 
@@ -286,33 +288,33 @@ ORDER BY mean_debt DESC
 <div class="knitsql-table">
 
 
-|indicator_name                                                                        |  mean_debt|
-|:-------------------------------------------------------------------------------------|----------:|
-|Principal repayments on external debt, long-term (AMT, current US$)                   | 5904868401|
-|Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$) | 5161194334|
-|Disbursements on external debt, long-term (DIS, current US$)                          | 2152041217|
-|PPG, official creditors (DIS, current US$)                                            | 1958983453|
-|PPG, private creditors (AMT, current US$)                                             | 1803694102|
-|Interest payments on external debt, long-term (INT, current US$)                      | 1644024068|
-|PPG, bilateral (DIS, current US$)                                                     | 1223139290|
-|Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)    | 1220410844|
-|PPG, official creditors (AMT, current US$)                                            | 1191187963|
-|PPG, bonds (AMT, current US$)                                                         | 1082623948|
-|PPG, multilateral (DIS, current US$)                                                  |  839843679|
-|PPG, bonds (INT, current US$)                                                         |  804733377|
-|PPG, other private creditors (AMT, current US$)                                       |  746888800|
-|PPG, commercial banks (AMT, current US$)                                              |  734868743|
-|PPG, private creditors (INT, current US$)                                             |  719740180|
-|PPG, bilateral (AMT, current US$)                                                     |  712619635|
-|PPG, multilateral (AMT, current US$)                                                  |  490062193|
-|PPG, private creditors (DIS, current US$)                                             |  311323265|
-|PPG, official creditors (INT, current US$)                                            |  297677339|
-|PPG, commercial banks (DIS, current US$)                                              |  293305196|
-|PPG, bilateral (INT, current US$)                                                     |  164093286|
-|PPG, commercial banks (INT, current US$)                                              |  156647613|
-|PPG, multilateral (INT, current US$)                                                  |  136230719|
-|PPG, other private creditors (DIS, current US$)                                       |   81135161|
-|PPG, other private creditors (INT, current US$)                                       |   34250651|
+|indicator_name                                                                        | mean_debt|
+|:-------------------------------------------------------------------------------------|---------:|
+|Principal repayments on external debt, long-term (AMT, current US$)                   | 5.905e+09|
+|Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$) | 5.161e+09|
+|Disbursements on external debt, long-term (DIS, current US$)                          | 2.152e+09|
+|PPG, official creditors (DIS, current US$)                                            | 1.959e+09|
+|PPG, private creditors (AMT, current US$)                                             | 1.804e+09|
+|Interest payments on external debt, long-term (INT, current US$)                      | 1.644e+09|
+|PPG, bilateral (DIS, current US$)                                                     | 1.223e+09|
+|Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)    | 1.220e+09|
+|PPG, official creditors (AMT, current US$)                                            | 1.191e+09|
+|PPG, bonds (AMT, current US$)                                                         | 1.083e+09|
+|PPG, multilateral (DIS, current US$)                                                  | 8.398e+08|
+|PPG, bonds (INT, current US$)                                                         | 8.047e+08|
+|PPG, other private creditors (AMT, current US$)                                       | 7.469e+08|
+|PPG, commercial banks (AMT, current US$)                                              | 7.349e+08|
+|PPG, private creditors (INT, current US$)                                             | 7.197e+08|
+|PPG, bilateral (AMT, current US$)                                                     | 7.126e+08|
+|PPG, multilateral (AMT, current US$)                                                  | 4.901e+08|
+|PPG, private creditors (DIS, current US$)                                             | 3.113e+08|
+|PPG, official creditors (INT, current US$)                                            | 2.977e+08|
+|PPG, commercial banks (DIS, current US$)                                              | 2.933e+08|
+|PPG, bilateral (INT, current US$)                                                     | 1.641e+08|
+|PPG, commercial banks (INT, current US$)                                              | 1.566e+08|
+|PPG, multilateral (INT, current US$)                                                  | 1.362e+08|
+|PPG, other private creditors (DIS, current US$)                                       | 8.114e+07|
+|PPG, other private creditors (INT, current US$)                                       | 3.425e+07|
 
 </div>
 
@@ -358,16 +360,16 @@ WHERE country_name IN (
 
 |country_name                                 |
 |:--------------------------------------------|
+|Indonesia                                    |
 |Turkey                                       |
+|China                                        |
+|India                                        |
+|Kazakhstan                                   |
 |Russian Federation                           |
 |Brazil                                       |
+|South Asia                                   |
 |Mexico                                       |
 |Least developed countries: UN classification |
-|South Asia                                   |
-|China                                        |
-|Kazakhstan                                   |
-|India                                        |
-|Indonesia                                    |
 
 </div>
 
@@ -389,11 +391,11 @@ ORDER BY n_indicator DESC
 
 |indicator_name                                                                        | n_indicator|
 |:-------------------------------------------------------------------------------------|-----------:|
-|PPG, official creditors (INT, current US$)                                            |         124|
-|Principal repayments on external debt, long-term (AMT, current US$)                   |         124|
 |PPG, multilateral (INT, current US$)                                                  |         124|
-|PPG, multilateral (AMT, current US$)                                                  |         124|
+|Principal repayments on external debt, long-term (AMT, current US$)                   |         124|
 |Interest payments on external debt, long-term (INT, current US$)                      |         124|
+|PPG, official creditors (INT, current US$)                                            |         124|
+|PPG, multilateral (AMT, current US$)                                                  |         124|
 |PPG, official creditors (AMT, current US$)                                            |         124|
 |Disbursements on external debt, long-term (DIS, current US$)                          |         123|
 |PPG, official creditors (DIS, current US$)                                            |         122|
@@ -401,14 +403,14 @@ ORDER BY n_indicator DESC
 |PPG, bilateral (INT, current US$)                                                     |         122|
 |PPG, multilateral (DIS, current US$)                                                  |         120|
 |PPG, bilateral (DIS, current US$)                                                     |         113|
-|PPG, private creditors (INT, current US$)                                             |          98|
 |PPG, private creditors (AMT, current US$)                                             |          98|
-|PPG, commercial banks (AMT, current US$)                                              |          84|
+|PPG, private creditors (INT, current US$)                                             |          98|
 |PPG, commercial banks (INT, current US$)                                              |          84|
+|PPG, commercial banks (AMT, current US$)                                              |          84|
 |Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$) |          79|
 |Interest payments on external debt, private nonguaranteed (PNG) (INT, current US$)    |          79|
-|PPG, bonds (INT, current US$)                                                         |          69|
 |PPG, bonds (AMT, current US$)                                                         |          69|
+|PPG, bonds (INT, current US$)                                                         |          69|
 |PPG, other private creditors (INT, current US$)                                       |          54|
 |PPG, other private creditors (AMT, current US$)                                       |          54|
 |PPG, private creditors (DIS, current US$)                                             |          53|
@@ -462,28 +464,28 @@ LIMIT 20
 <div class="knitsql-table">
 
 
-|country_name                                 |indicator_name                                                      |     maximum|
-|:--------------------------------------------|:-------------------------------------------------------------------|-----------:|
-|China                                        |Principal repayments on external debt, long-term (AMT, current US$) | 96218620836|
-|Brazil                                       |Principal repayments on external debt, long-term (AMT, current US$) | 90041840304|
-|Russian Federation                           |Principal repayments on external debt, long-term (AMT, current US$) | 66589761834|
-|Turkey                                       |Principal repayments on external debt, long-term (AMT, current US$) | 51555031006|
-|South Asia                                   |Principal repayments on external debt, long-term (AMT, current US$) | 48756295898|
-|Least developed countries: UN classification |Disbursements on external debt, long-term (DIS, current US$)        | 40160766262|
-|IDA only                                     |Disbursements on external debt, long-term (DIS, current US$)        | 34531188113|
-|India                                        |Principal repayments on external debt, long-term (AMT, current US$) | 31923507001|
-|Indonesia                                    |Principal repayments on external debt, long-term (AMT, current US$) | 30916112654|
-|Kazakhstan                                   |Principal repayments on external debt, long-term (AMT, current US$) | 27482093686|
-|Mexico                                       |Principal repayments on external debt, long-term (AMT, current US$) | 25218503927|
-|Cameroon                                     |Disbursements on external debt, long-term (DIS, current US$)        | 18186662060|
-|Romania                                      |Principal repayments on external debt, long-term (AMT, current US$) | 14013783350|
-|Colombia                                     |Principal repayments on external debt, long-term (AMT, current US$) | 11985674439|
-|Angola                                       |Principal repayments on external debt, long-term (AMT, current US$) | 11067045628|
-|Venezuela, RB                                |Principal repayments on external debt, long-term (AMT, current US$) |  9878659207|
-|Egypt, Arab Rep.                             |Principal repayments on external debt, long-term (AMT, current US$) |  9692114177|
-|Lebanon                                      |Principal repayments on external debt, long-term (AMT, current US$) |  9506919670|
-|South Africa                                 |Principal repayments on external debt, long-term (AMT, current US$) |  9474257552|
-|Bangladesh                                   |PPG, official creditors (DIS, current US$)                          |  9050557612|
+|country_name                                 |indicator_name                                                      |   maximum|
+|:--------------------------------------------|:-------------------------------------------------------------------|---------:|
+|China                                        |Principal repayments on external debt, long-term (AMT, current US$) | 9.622e+10|
+|Brazil                                       |Principal repayments on external debt, long-term (AMT, current US$) | 9.004e+10|
+|Russian Federation                           |Principal repayments on external debt, long-term (AMT, current US$) | 6.659e+10|
+|Turkey                                       |Principal repayments on external debt, long-term (AMT, current US$) | 5.156e+10|
+|South Asia                                   |Principal repayments on external debt, long-term (AMT, current US$) | 4.876e+10|
+|Least developed countries: UN classification |Disbursements on external debt, long-term (DIS, current US$)        | 4.016e+10|
+|IDA only                                     |Disbursements on external debt, long-term (DIS, current US$)        | 3.453e+10|
+|India                                        |Principal repayments on external debt, long-term (AMT, current US$) | 3.192e+10|
+|Indonesia                                    |Principal repayments on external debt, long-term (AMT, current US$) | 3.092e+10|
+|Kazakhstan                                   |Principal repayments on external debt, long-term (AMT, current US$) | 2.748e+10|
+|Mexico                                       |Principal repayments on external debt, long-term (AMT, current US$) | 2.522e+10|
+|Cameroon                                     |Disbursements on external debt, long-term (DIS, current US$)        | 1.819e+10|
+|Romania                                      |Principal repayments on external debt, long-term (AMT, current US$) | 1.401e+10|
+|Colombia                                     |Principal repayments on external debt, long-term (AMT, current US$) | 1.199e+10|
+|Angola                                       |Principal repayments on external debt, long-term (AMT, current US$) | 1.107e+10|
+|Venezuela, RB                                |Principal repayments on external debt, long-term (AMT, current US$) | 9.879e+09|
+|Egypt, Arab Rep.                             |Principal repayments on external debt, long-term (AMT, current US$) | 9.692e+09|
+|Lebanon                                      |Principal repayments on external debt, long-term (AMT, current US$) | 9.507e+09|
+|South Africa                                 |Principal repayments on external debt, long-term (AMT, current US$) | 9.474e+09|
+|Bangladesh                                   |PPG, official creditors (DIS, current US$)                          | 9.051e+09|
 
 </div>
 
@@ -512,29 +514,29 @@ countries <- international_debt %>%
   left_join(maximum_category) 
 
 countries
-#> # A tibble: 20 x 3
+#> # A tibble: 20 × 3
 #>    country_name          total_debt indicator_name                              
 #>    <chr>                      <dbl> <chr>                                       
-#>  1 Angola              71368842500. Principal repayments on external debt, long~
-#>  2 Bangladesh          35045492840. Disbursements on external debt, long-term (~
-#>  3 Brazil             280623966141. Principal repayments on external debt, long~
-#>  4 Cameroon            86491206347. Disbursements on external debt, long-term (~
-#>  5 China              285793494734. Principal repayments on external debt, long~
-#>  6 Colombia            45430117605. Principal repayments on external debt, long~
-#>  7 Egypt, Arab Rep.    62077727757. Principal repayments on external debt, long~
-#>  8 India              133627060958. Principal repayments on external debt, long~
-#>  9 Indonesia          113435696694. Principal repayments on external debt, long~
-#> 10 Kazakhstan          70159942694. Principal repayments on external debt, long~
-#> 11 Lebanon             29697872619. Principal repayments on external debt, long~
-#> 12 Mexico             124596786217. Principal repayments on external debt, long~
-#> 13 Pakistan            45139315398. Principal repayments on external debt, long~
-#> 14 Romania             42813979498. Principal repayments on external debt, long~
-#> 15 Russian Federation 191289057259. Principal repayments on external debt, long~
-#> 16 South Africa        36703940742. Principal repayments on external debt, long~
-#> 17 Turkey             151125758035. Principal repayments on external debt, long~
-#> 18 Ukraine             28490304100. Principal repayments on external debt, long~
-#> 19 Venezuela, RB       36048260108. Principal repayments on external debt, long~
-#> 20 Vietnam             45851299896. Principal repayments on external debt, long~
+#>  1 Angola              71368842500. Principal repayments on external debt, long…
+#>  2 Bangladesh          35045492841. Disbursements on external debt, long-term (…
+#>  3 Brazil             280623966141. Principal repayments on external debt, long…
+#>  4 Cameroon            86491206347. Disbursements on external debt, long-term (…
+#>  5 China              285793494734. Principal repayments on external debt, long…
+#>  6 Colombia            45430117605. Principal repayments on external debt, long…
+#>  7 Egypt, Arab Rep.    62077727757. Principal repayments on external debt, long…
+#>  8 India              133627060958. Principal repayments on external debt, long…
+#>  9 Indonesia          113435696694. Principal repayments on external debt, long…
+#> 10 Kazakhstan          70159942694. Principal repayments on external debt, long…
+#> 11 Lebanon             29697872619. Principal repayments on external debt, long…
+#> 12 Mexico             124596786217. Principal repayments on external debt, long…
+#> 13 Pakistan            45139315399. Principal repayments on external debt, long…
+#> 14 Romania             42813979498. Principal repayments on external debt, long…
+#> 15 Russian Federation 191289057259. Principal repayments on external debt, long…
+#> 16 South Africa        36703940742. Principal repayments on external debt, long…
+#> 17 Turkey             151125758035. Principal repayments on external debt, long…
+#> 18 Ukraine             28490304100. Principal repayments on external debt, long…
+#> 19 Venezuela, RB       36048260108. Principal repayments on external debt, long…
+#> 20 Vietnam             45851299896. Principal repayments on external debt, long…
 ```
 
 
@@ -551,7 +553,7 @@ showtext_auto()
 
 ```r
 ggplot(countries) + 
-  geom_chicklet(aes(x =  fct_reorder(country_name, total_debt),
+  geom_chicklet(aes(x =  forcats::fct_reorder(country_name, total_debt),
                     y = total_debt,
                     fill = indicator_name), 
            color = NA, width = 0.8) + 

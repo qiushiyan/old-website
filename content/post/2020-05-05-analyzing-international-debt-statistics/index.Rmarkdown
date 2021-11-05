@@ -37,11 +37,11 @@ library(RPostgreSQL)
 library(DBI)
 
 con <- dbConnect(DBI::dbDriver('PostgreSQL'), 
-                 dbname = "analysis",
+                 dbname = "qiushi",
                  host = "localhost",
                  port = 5432,
-                 user = "postgres",
-                 password = "Yanqiushi123")
+                 user = Sys.getenv("PG_USER"),
+                 password = Sys.getenv("PG_PASSWORD"))
 ```
 
 
@@ -57,9 +57,11 @@ CREATE TABLE international_debt (
 ```
 
 ```{r}
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 
-international_debt <- readr::read_csv("D:/RProjects/data/blog/international_debt.csv")
+international_debt <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/international_debt.csv")
 ```
 
 
@@ -67,7 +69,7 @@ Then we can upload debt data into that table. If you happen to be a datacamp sub
 
 ```sql
 COPY international_debt
-FROM 'D:/RProjects/data/blog/international_debt.csv'
+FROM 'path/to/csv/file'
 WITH (FORMAT csv, header)
 ```
 
@@ -267,7 +269,7 @@ showtext_auto()
 
 ```{r, fig.width = 14, fig.height = 11}
 ggplot(countries) + 
-  geom_chicklet(aes(x =  fct_reorder(country_name, total_debt),
+  geom_chicklet(aes(x =  forcats::fct_reorder(country_name, total_debt),
                     y = total_debt,
                     fill = indicator_name), 
            color = NA, width = 0.8) + 

@@ -28,14 +28,17 @@ In this post, I will be performing a simple text analysis on the abstract of pub
 knitr::opts_chunk$set(message = FALSE, 
                       warning = FALSE,
                       comment = "#>", 
-                      collapse = TRUE)
+                      collapse = TRUE,
+                      fig.align = "center")
 ```
 
 
 # Data preprocessing
 
 ```{r}
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(stringr)
 ```
 
 ```{r, echo = FALSE}
@@ -68,7 +71,7 @@ theme_set(theme_bar())
 
 
 ```{r}
-raw <- read_csv("D:/RProjects/data/covid-research.csv") %>% 
+raw <- vroom::vroom("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/covid-research.csv") %>% 
   janitor::clean_names() 
 
 glimpse(raw)
@@ -138,7 +141,7 @@ An immediate question is, what are the most common words among all these publica
 words %>% 
   count(word, sort = TRUE) %>%
   top_n(50) %>%
-  ggplot(aes(y = fct_reorder(word, n),
+  ggplot(aes(y = forcats::fct_reorder(word, n),
              x = n)) + 
   geom_col() + 
   scale_x_continuous(expand = c(0.01, 0)) + 
@@ -178,13 +181,9 @@ dfm <- cast_dfm(words %>% count(title, word),
 
 `dfm` is a document-term matrix with 2415 documents and 13383 features.  
 
-```{r, eval = FALSE}
+```{r,  cache = TRUE}
 library(stm)
 topic_model <- stm(dfm, K = 5, init.type = "LDA", verbose = FALSE)
-```
-
-```{r, echo = FALSE}
-topic_model <- pins::pin_get("covid-topic-model")
 ```
 
 

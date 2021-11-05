@@ -32,6 +32,28 @@ html {
   z-index: 10;
 }
 
+/* center bio after post */
+.media-body {
+  .card-title {
+    text-align: center;
+  }
+  .card-text {
+    text-align: center;
+  }
+  
+  ul.network-icon {
+    text-align: center;
+  }
+}
+
+/* post nav link */ 
+.post-nav {
+  text-align: center;
+  a {
+    color: #328cc1;
+  }
+}
+
 
 /* -----------div tips------------- */
 :root {

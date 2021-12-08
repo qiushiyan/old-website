@@ -13,7 +13,7 @@ links:
   - icon: cube
     icon_pack: fas
     name: Package
-    url: https://github.com/qiushiyan/data-science-shelf
+    url: https://qiushiyan.github.io/nyclodging
 tags:
   - R
   - Shiny

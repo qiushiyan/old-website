@@ -16,7 +16,7 @@ links:
     url: https://qiushiyan.github.io/nyclodging
 tags:
   - R
-  - Shiny
+  - Web-Dev
 ---
 
 A shiny app created with the [golem](https://github.com/ThinkR-open/golem) framework. 

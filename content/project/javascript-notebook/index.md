@@ -38,7 +38,7 @@ npm install -g javascript-notebook
 yarn global add javascript-notebook
 ```
 
-For a quick preview, go to https://javascript-notebook.netlify.app/, where you can still code but not save to local files.
+For a quick preview, go to https://javascript-notebook.netlify.app/ where you can still code but not save to local files.
 
 <figure>
   <img src = "featured.jpg" />

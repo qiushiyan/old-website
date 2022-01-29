@@ -21,12 +21,14 @@ image:
 ## Htmlwidgets in R
 
 <div class = "note">
-This post assumes you know the basics of R Package development, JavaScript and node. I recommend the second chapter of [JavaScript for R](https://book.javascript-for-r.com/) as a starter.
+This post assumes you know the basics of R Package development, JavaScript and node. I recommend the second chapter of <a href="https://book.javascript-for-r.com">JavaScript for R</a> as a starter.
 </div>
 
 The R `htmlwidgets` package provides a friendly framework for developing R packages that wraps JavaScript libraries. An htmlwidget is nothing more than a normal R plot plus interactivity powered by JavaScript. The package abstracts away many of the details of juggling with both JavaScript and R, most notable of which being dependecy managment.
 
-An example from the [JavaScript for R](https://book.javascript-for-r.com/) book shows the development of the [`gior`](https://github.com/JohnCoene/gior) package, which corresponds to the [`gio.js`](https://giojs.org/) javascirpt library. The [`inst/htmlwidgets`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets) directory contains necessary dependencies required by `gio.js`. This file is the entrypoint of creating the widget. It depends on javasciprt libraries including `gio.js`, `three.js` and `HTMLWidgets`, `Shiny`. We don't need to worry about including `HTMLWidgets` or `Shiny` ourselves, since R will do it for us. For the first two dependencies, we can download it from cdn and include it in the [`inst/htmlwidgets/lib`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets/lib) directory. Lastly, we include a file [`gior.yaml`](https://github.com/JohnCoene/gior/blob/master/inst/htmlwidgets/gior.yaml) to declare locations of the dependencies that looks like:
+An example from the [JavaScript for R](https://book.javascript-for-r.com/) book shows the development of the [`gior`](https://github.com/JohnCoene/gior) package, which corresponds to the [`gio.js`](https://giojs.org/) javascirpt library. The [`inst/htmlwidgets`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets) directory contains necessary dependencies required by `gio.js`. This file is the entrypoint of creating the widget. It depends on javasciprt libraries including `gio.js`, `three.js`, `HTMLWidgets` and `Shiny`. We don't need to worry about including `HTMLWidgets` or `Shiny` ourselves, since R will do it for us.
+
+For the first two dependencies, we can download it from cdn and include it in the [`inst/htmlwidgets/lib`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets/lib) directory. Lastly, we include a file [`gior.yaml`](https://github.com/JohnCoene/gior/blob/master/inst/htmlwidgets/gior.yaml) to declare locations of the dependencies that looks like:
 
 ```yaml
 dependencies:
@@ -40,9 +42,9 @@ dependencies:
    script: gio.min.js
 ```
 
-Now, whenever we create a widget from R, the rendering context will automatically serve all the javascript files. This workflow is convenient for developing pacakges that does not require much work on the JavaScript side, all we need to do is call some initialization functions in `gior.js`. However, if we need to interact more with the javascript library, more than just passing a few lines of options, this setup is not sufficient. Since javascript dependencies is managed from R and never decalred in `gior.js`, we won't be getting all the nice features a modern text editor can provide, such as autocompletion, snippets, linking and intellisense. Moreover, when our package gets larger we might want to split the javascript code into separate modules rather than cluttering the `gior.js` file, and it's not so fun to do bundling ourselves.
+Now, whenever we create a widget from R, the rendering context will automatically serve all the javascript files. This workflow is convenient for developing pacakges that does not require much work on the JavaScript side, all we need to do is calling some initialization functions in `gior.js`. However, if we need to interact more with the javascript library, more than just passing a few lines of options, this setup is not sufficient. Since javascript dependencies are managed from R and never decalred in `gior.js`, we won't be getting all the nice features a modern text editor can provide, such as autocompletion, snippets, linking and intellisense. Moreover, when our package gets larger we might want to split the javascript code into separate modules rather than cluttering the `gior.js` file, and it's not so fun to do bundling ourselves.
 
-For this reason, it make sense to have more control over how javascript dependencies is managed, rather than just downloding and including a dist file. The end result is still the same, we need to include one or several javascript files for the plot. It's just we will not be using files already provided by cdn but to download the javascript package and do the bundling ourselves. The [`packer`](https://github.com/JohnCoene/packer) package provides an solution to this.
+For this reason, it makes sense to have more control over how javascript dependencies are managed, rather than just downloding and including a dist file. The end result is still the same, we need to include one or several javascript files for the plot. It's just we will not be using files already provided by cdn, but to download the javascript package and do the bundling ourselves. The [`packer`](https://github.com/JohnCoene/packer) package provides an solution to this.
 
 ## The `packer` package
 

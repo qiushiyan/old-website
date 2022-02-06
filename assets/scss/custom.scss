@@ -34,6 +34,8 @@ html {
 
 /* center bio after post */
 .media-body {
+  display: flex;
+  flex-direction: column;
   .card-title {
     text-align: center;
   }

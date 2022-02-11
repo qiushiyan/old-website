@@ -1,0 +1,153 @@
+---
+title: 'Pandas Recipes'
+author: Qiushi Yan
+date: '2022-02-09'
+slug: []
+categories:
+  - Data Analysis
+  - Python
+tags: []
+subtitle: ''
+summary: 'bag of tricks in pandas'
+authors: []
+lastmod: '2022-02-09T10:33:55-06:00'
+draft: no
+link-citations: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+
+It's my seventh time trying to learn pandas in the past 3 years. I used to cram the whole pandas documentation into one day to finish all data manipulation parts in a project, and then repeat the process 6 months later. So I decided to make a post collecting common operations for which I have to constantly look through the docs or search on stackoverflow. 
+
+```{r setup, include = FALSE}
+ymisc::set_knitr_options()
+library(reticulate)
+```
+
+
+```{python}
+import pandas as pd
+import numpy as np 
+import seaborn as sns 
+
+df = sns.load_dataset("penguins")
+
+print(pd.__version__)
+```
+
+
+## Reading data
+
+### select columns 
+
+### select rows 
+
+`nrows` specifies the (continuous) number of lines file to read. `skiprows` can be used to skip multiple rows while reading (don't have to be contiguous), from the beginning of the file. This might be useful for some malformed files exported from excel, e.g., the second row might be units. 
+
+```python
+# skip 2nd and 4th row 
+pd.read_csv(path, skiprows = [1, 3])
+```
+
+
+
+
+
+### Specifying data types 
+
+
+There is a [table](https://pandas.pydata.org/docs/user_guide/basics.html#basics-dtypes) from the pandas documentation listing all available data types. Some common data types including 
+
+- nullable integer: `'int8'`, `'int16'`, `'int32'`, `'int64'`, for unsigned integers use the `u` prefix, e.g., `'uint16'`
+
+- floats: replace `int` above with `float` (there is no unsigned version for float and it starts with `float16`)
+
+- strings: `'string'` (after pandas 1.0). Before `object` is the only option.
+
+- booleans: `'bool'`
+
+- datetime: `"datetime"` or `'datetime64[ns, <tz>]'` (time-zone aware)
+
+- `object`: the catch-all data type, should be avoided for performance reasons 
+
+I'm using the string version here but there is always a class constructor in pandas or numpy, e.g. `np.int8` or `pd.Int32Dtype`. 
+
+`DataFrame.astype()` convert one all multiple columns using a dict
+
+
+```{python}
+df = df.astype({
+  "species": "string", 
+  "island": "string", 
+  "bill_length_mm": "float16", 
+  "bill_depth_mm": "float16", 
+  "flipper_length_mm": "float16",
+  "body_mass_g": "float16",
+  "sex": "string"
+})
+df.info()
+```
+
+
+
+
+There also a `infer_objects()` method that attempts to convert object-typed columns automatically: 
+
+```{python}
+sns.load_dataset("penguins").infer_objects().info()
+```
+
+
+## Filtering rows 
+
+
+## Creating columns 
+
+
+## Group by operations 
+
+## Selecting columns 
+
+### By name and regex
+ 
+select all columns that starts with "bill"
+
+```{python}
+df.iloc[:, df.columns.map(lambda x: x.startswith("bill"))]
+```
+
+
+### By data types 
+
+`DataFrame.select_dtypes(include = None, exclude = None)` returns a subset of the DataFrame’s columns based on the column dtypes.
+
+```python
+# select all numerical columns regardless of digits 
+df.select_dtypes(include = 'number')
+
+# select all columns that are not boolean 
+df.select_dtypes(exclude = "bool")
+```
+
+More generally, use the `apply + iloc` flow: 
+
+```{python}
+# check each column's type 
+df.apply(lambda x: x.dtype == "string", axis = 0).values
+
+# select columns that pass the check 
+df.iloc[:, df.apply(lambda x: x.dtype == "string", axis = 0).values]
+```
+
+
+
+
+
+
+## Text data 
+
+## Plotting 
+

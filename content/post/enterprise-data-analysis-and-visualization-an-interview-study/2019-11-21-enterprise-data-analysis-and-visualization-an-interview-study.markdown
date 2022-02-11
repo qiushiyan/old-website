@@ -8,11 +8,12 @@ categories:
 summary: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer'
 lastmod: '2019-11-21T18:42:03+08:00'
 bibliography: ../bib/enterprise-data-analysis-and-visualization-an-interview-study.bib
+draft: yes
 biblio-style: "apalike"
 link-citations: true
 ---
 
-*Enterprise Data Analysis and Visualization: An Interview Study* is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, [Heer](#ref-2012-enterprise-analysis-interviews) ([2012](#ref-2012-enterprise-analysis-interviews)) provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.
+*Enterprise Data Analysis and Visualization: An Interview Study* is an effort to penetrate into enterprises and glean real-world data science experience from analysts directly. By conducting semi-structured interviews with 35 data analysts, Heer ([2012](#ref-2012-enterprise-analysis-interviews)) provides insight on 3 archetypes describing different workflows and tasks given, common pain points analysts may encounter, future trends, etc.
 
 # 3 Archetypes
 
@@ -54,7 +55,7 @@ The author identifies three impediemnts to collaboration:
 -   finding a script or inter-
     mediate data product someone else produced was often more time-
     consumingthanwritingthescriptfromscratch  
--   many analysis process are “ad hoc,” “experimental”
+-   many analysis process are “ad hoc”, “experimental”
 
 # Challenges
 

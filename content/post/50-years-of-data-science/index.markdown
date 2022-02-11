@@ -12,12 +12,12 @@ image:
   
 categories:
   - Readings
-
+draft: yes 
 bibliography: ../bib/50-years-of-data-science.bib
 link-citations: true
 ---
 
-More than 50 years ago, John Tukey in his renowned *The Future of Dat Analysis* envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data sicence / data analysis” trend, to soar above theoretical statistics which was characterized by theorems, proofs, etc. In this article, David Donoho([Donoho 2017](#ref-doi:10.1080/10618600.2017.1384734)) presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.
+More than 50 years ago, John Tukey in his renowned *The Future of Dat Analysis* envisioned a would-be field, where the subject of interest is to learn from data. Other pioneers, like John Chambers, Jeff Wu, Bill Cleveland, and Leo Breiman independently once again exhorted academic statistics to embrace this so-called “data science / data analysis” trend, to soar above theoretical statistics which was characterized by theorems, proofs, etc. In this article, David Donoho([Donoho 2017](#ref-doi:10.1080/10618600.2017.1384734)) presents a vision of data science based on the activities of people who are “learning from data,” and he describes an academic field dedicated to improving that activity in an evidence-based manner.
 
 # Data Science vs. Statistics
 
@@ -82,13 +82,13 @@ UC Berkeley based statistician Leo Breiman brought his “two modeling cultures 
 > Prediction: To be able to predict what the responses are going to be to future input variables;  
 > \[Inference\]: To \[infer\] how nature is associating the response variables to the input variables.[^1]
 
-Proceeding from this basis, Brieman thought that the prdiction emphasis can be described as “predictive modeling” culture", which lay stress on accuracy of prediction made by different algorithm on various datasets. But this culture, according to his estimation, is only practiced by 2% of academic statisticians.
+Proceeding from this basis, Brieman thought that the prdiction emphasis can be described as “predictive modeling” culture”, which lay stress on accuracy of prediction made by different algorithm on various datasets. But this culture, according to his estimation, is only practiced by 2% of academic statisticians.
 
 “Generative modeling culture” corresponds to the latter inference emphasis, and accounted for 98% statistical practice. Brienman said:
 
 > If our goal as a field is to use data to solve problems, then we need to move away from exclusive dependence on \[generative\] models
 
-From today’s standpoint, Breiman’s opinions is fairly justified. But why? ([2017](#ref-doi:10.1080/10618600.2017.1384734)) thinks the Common Task Framework played a key role here.
+From today’s standpoint, Breiman’s opinions is fairly justified. But why? -Donoho ([2017](#ref-doi:10.1080/10618600.2017.1384734)) thinks the Common Task Framework played a key role here.
 
 An instance of the CTF has these ingredients( I actually have never heard the term before. To my mind, it’s just like a usual kaggle contest or a data visualization challenge, yet may not subjected ot choosing the “best” machine learning model or plot):
 
@@ -105,10 +105,15 @@ The synergy of minimizing prediction error with CTF is worth noting. This combin
 Further, to dipict an even larger professional on a quest to extract information from data, the author comes up with a classificcation concerning data science practices:
 
 1.  **Data Gathering, Preparation, and Exploration**
-2.  **Data Representation and Transformation:** To tranfrom data collected from a wealth of formats in an attempt to represent them in one format susceptible for analysis.(i.e., get features with acoustic data, one often transforms to the cepstrum or the Fourier transform)  
+
+2.  **Data Representation and Transformation:** To transform data collected from a wealth of formats in an attempt to represent them in one format susceptible for analysis.(i.e., get features with acoustic data, one often transforms to the cepstrum or the Fourier transform)
+
 3.  **Computing with Data**: Beyond basic knowledge of programming languages, data scientists need to keep current on new idioms for efficiently using those languages and need to understand the deeper issues associated with computational efficiency. Cluster and cloud computing and the ability to run massive numbers of jobs on such clusters has become an overwhelmingly powerful ingredient of the modern computational landscape.
+
 4.  **Data Modeling**
+
 5.  **Data Visualization and Presentation**
+
 6.  **Science about Data Science**: Data scientists are doing science about data science when they identify commonly occurring analysis/processing workflows, for example, using data about their frequency of occurrence in some scholarly or business domain; when they measure the effectiveness of standard workflows in terms of the human time, the computing resource, the analysis validity, or other performance metric, and when they uncover emergent phenomena in data analysis, for example, new patterns arising in data analysis workflows, or disturbing artifacts in published analysis results.
 
 [^2]
@@ -120,14 +125,14 @@ David then elaborates on the 6th part: science about data Science, which has mad
 -   Science-Wide Meta Analysis: the idea of “analyzing what people have analyzed” across disciplines  
 -   Cross-Study Analysis: To study the validation of different studies on the same dataset. \* Cross-Workflow Analysis: To study the impact of analysis workflow on results
 
-All these 3 approaches, comtribute to enhancing the validity of the scientific literature.
+All these 3 approaches, contribute to enhancing the validity of the scientific literature.
 
 # Next 50 years
 
 At the end, what about the next 50 years of data science?
 
 -   Research will be more open and reproducible. Code sharing, data sharing will allow large numbers of datasets and analysis workflows to be derived from studies science-wide  
--   All scientific publifications will be transformed to data thta can be mined  
+-   All scientific publications will be transformed to data thta can be mined  
 -   Ample data will be available to measure the performance of algorithms and models across a whole ensemble of situations
 
 # Conclusion
@@ -146,7 +151,7 @@ Society already spends tens of billions of dollars yearly on scientific research
 
 <div id="ref-breiman2001statistical" class="csl-entry">
 
-Breiman, Leo, and others. 2001. “Statistical Modeling: The Two Cultures (with Comments and a Rejoinder by the Author).” *Statistical Science* 16 (3): 199–231.
+Breiman, Leo et al. 2001. “Statistical Modeling: The Two Cultures (with Comments and a Rejoinder by the Author).” *Statistical Science* 16 (3): 199–231.
 
 </div>
 
@@ -186,4 +191,4 @@ Xie, Yihui. 2019. *Knitr: A General-Purpose Package for Dynamic Report Generatio
 
 [^2]: Here I skipped some discussion related to R as an computing environment, literate programming in `knitr`([Xie 2019](#ref-R-knitr)) and the “tidy data” concept
 
-[^3]: For now, this section is copied from the original article
+[^3]: this section is copied from the original article

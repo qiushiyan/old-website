@@ -1,0 +1,16 @@
+Kind of Data,Data Type,Data Type,Scalar,Scalar,Array,String Aliases
+tz-aware datetime,DatetimeTZDtype,DatetimeTZDtype,Timestamp,Timestamp,arrays.DatetimeArray,"'datetime64[ns, <tz>]'"
+Categorical,CategoricalDtype,CategoricalDtype,(none),(none),Categorical,'category'
+period (time spans),PeriodDtype,PeriodDtype,Period,Period,"arrays.PeriodArray
+'Period[<freq>]'","'period[<freq>]',"
+sparse,SparseDtype,SparseDtype,(none),(none),arrays.SparseArray,"'Sparse', 'Sparse[int]',
+'Sparse[float]'"
+intervals,IntervalDtype,IntervalDtype,Interval,Interval,arrays.IntervalArray,"'interval', 'Interval',
+'Interval[<numpy_dtype>]',
+'Interval[datetime64[ns, <tz>]]',
+'Interval[timedelta64[<freq>]]'"
+nullable integer,"Int64Dtype, …","Int64Dtype, …",(none),(none),arrays.IntegerArray,"'Int8', 'Int16', 'Int32',
+'Int64', 'UInt8', 'UInt16',
+'UInt32', 'UInt64'"
+Strings,StringDtype,StringDtype,str,str,arrays.StringArray,'string'
+Boolean (with NA),BooleanDtype,BooleanDtype,bool,bool,arrays.BooleanArray,'boolean'

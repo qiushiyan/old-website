@@ -2,11 +2,11 @@
 name = "qiushi"
 
 # Optional Google font URL
-google_fonts = "Arapey:400,400i|Karla:400,700|Zilla+Slab:300,300i|Fira+Code:wght@300"
+google_fonts = "Arapey:400,400i|Libre+Baskerville:400,400i|Zilla+Slab:300,300i|Fira+Code:wght@300"
 
 # Font familiest
 heading_font = "Arapey"
-body_font = "Karla"
+body_font = "Libre Baskerville"
 nav_font = "Zilla Slab"
 mono_font = "Fira Code"
 

@@ -180,8 +180,53 @@ code {
   font-size: 0.9em;
 }
 
+.highlight {
+  position: relative;
+}
+
+.highlight pre code[class*="language-"]::before {
+    background: black;
+    border-radius: 0 0 0.25rem 0.25rem;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.025rem;
+    padding: 0.1rem 0.5rem;
+    position: absolute;
+    right: 1rem;
+    text-align: right;
+    text-transform: uppercase;
+    top: 0;
+}
+
+.highlight pre code[class*="language-r"]::before {
+  content: "R";
+  background: #2467bb;
+  color: black;
+}
+
+.highlight pre code[class*="language-python"]::before {
+  content: "PY";
+  background: #3776ab;
+  color: black;
+  tab-size: 4;
+}
+
+.highlight pre code[class*="language-sql"]::before {
+  content: "SQL";
+  background: #D2C4E9;
+  color: black;
+  tab-size: 4;
+}
+
+
+
 .hljs {
   background: #fff;
+}
+
+/* table */
+.knitsql-table table {
+  font-size: 0.7rem;
 }
 
 /* images more like cards */

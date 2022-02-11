@@ -8,6 +8,7 @@ categories:
 summary: 'Reading notes on "Enterprise Data Analysis and Visualization: An Interview Study" by Sean Kandel, Andreas Paepcke, Joseph M. Hellerstein, and Jeffrey Heer'
 lastmod: '2019-11-21T18:42:03+08:00'
 bibliography: ../bib/enterprise-data-analysis-and-visualization-an-interview-study.bib
+draft: yes
 biblio-style: "apalike"
 link-citations: true
 ---

@@ -3,7 +3,7 @@ title: Better science in less time
 author: Qiushi Yan
 date: '2019-11-25'
 slug: better-science-in-less-time
-
+draft: yes
 categories:
   - Readings
   
@@ -19,7 +19,7 @@ The [Ocean Health Index project](http://www.oceanhealthindex.org)(OHI) provides 
 
 # Reproducibility challenges in environmental science
 
-Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because “they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines.”
+Reproducibility challenges are haunting all major branches of science, and of all its victims, environmental scientists face arguably unique challenges in achieving goals of transparency and reproducibility because “they rely on vast amounts of data spanning natural, economic and social sciences that create semantic and synthesis issues exceeding those for most other disciplines”.
 
 For another, environmental scientists, perhaps more than ever, are eager to build trust in public. So that in recognition of their work, some people would be roused to action. However, proposed environmental solutions can be opaque, controversial and prohibitively costly either in financial or resource terms, increasing the need for scientists to work transparently, reproducibly and collaboratively with data.
 
@@ -38,11 +38,11 @@ In OHI’s 2012 annual report, global assessments of 220 coastal nations and ter
 
 Not surprisingly, team members struggled to efficienty repeat our own work during the second assessment in 2013. And a 130-pages documentation just seems not sufficient.
 
-However, in 2013 OHI team started to tackle with reproducibility, collaboration and communication, “with R and Rstudio for coding and visualization, Git for version control, GitHub for collaboration, and a combination of GitHub and Rstudio for organization, documentation, project management, online publishing, distribution and communication.”
+However, in 2013 OHI team started to tackle with reproducibility, collaboration and communication, “with R and Rstudio for coding and visualization, Git for version control, GitHub for collaboration, and a combination of GitHub and Rstudio for organization, documentation, project management, online publishing, distribution and communication”.
 
 ## Reproducibility
 
-Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data([Wickham and others 2014](#ref-wickham2014tidy)), and grammar of data manipulation provided by dplyr([Wickham et al. 2019](#ref-R-dplyr)) have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown([Allaire et al. 2019](#ref-R-rmarkdown)), instead of plain text files.
+Primary data preparation (coding and documenting) is now conducted in R, and a single language makes it more practical to learn and collaborate. The principles of tidy data([Wickham et al. 2014](#ref-wickham2014tidy)), and grammar of data manipulation provided by dplyr([Wickham et al. 2019](#ref-R-dplyr)) have dramatically facilitate learning and analysis. And metadata, data processing decisions are well documented with R Markdown([Allaire et al. 2019](#ref-R-rmarkdown)), instead of plain text files.
 
 Modeling practices are also unified and standardized in R, and the OHI framwork are incorporated in an R package **ohicore**, which can be downloaded in R via `devtools::install_github('ohi-science/ohicore')`
 
@@ -77,7 +77,7 @@ Two critical barrier to embracing open science using efficient tools are brieved
 -   knowing which tools exist that can be directly useful to one’s research  
 -   having the confidence to develop the skills to use them
 
-I really enjoy reading the last section, in which the author explained why open, transparent and reproducible science should be promoted and how to kickstart the rewarding learning path. The original line can be found at https://www.nature.com/articles/s41559-017-0160\#Sec7.
+I really enjoy reading the last section, in which the author explained why open, transparent and reproducible science should be promoted and how to kickstart the rewarding learning path. The original line can be found at https://www.nature.com/articles/s41559-017-0160#Sec7.
 
 # References
 
@@ -95,15 +95,15 @@ Lowndes, Julia S Stewart, Benjamin D Best, Courtney Scarborough, Jamie C Afflerb
 
 </div>
 
-<div id="ref-R-dplyr" class="csl-entry">
+<div id="ref-wickham2014tidy" class="csl-entry">
 
-Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. *Dplyr: A Grammar of Data Manipulation*. <https://CRAN.R-project.org/package=dplyr>.
+Wickham, Hadley et al. 2014. “Tidy Data.” *Journal of Statistical Software* 59 (10): 1–23.
 
 </div>
 
-<div id="ref-wickham2014tidy" class="csl-entry">
+<div id="ref-R-dplyr" class="csl-entry">
 
-Wickham, Hadley, and others. 2014. “Tidy Data.” *Journal of Statistical Software* 59 (10): 1–23.
+Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. *Dplyr: A Grammar of Data Manipulation*. <https://CRAN.R-project.org/package=dplyr>.
 
 </div>
 

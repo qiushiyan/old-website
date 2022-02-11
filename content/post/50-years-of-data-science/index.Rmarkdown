@@ -12,7 +12,7 @@ image:
   
 categories:
   - Readings
-
+draft: yes 
 bibliography: ../bib/50-years-of-data-science.bib
 link-citations: true
 ---

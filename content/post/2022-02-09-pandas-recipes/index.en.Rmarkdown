@@ -11,7 +11,6 @@ subtitle: ''
 summary: 'bag of tricks in pandas'
 authors: []
 lastmod: '2022-02-09T10:33:55-06:00'
-draft: no
 link-citations: yes
 draft: yes
 image:
@@ -20,14 +19,12 @@ image:
   preview_only: no
 ---
 
-
-It's my seventh time trying to learn pandas in the past 3 years. I used to cram the whole pandas documentation into one day to finish all data manipulation parts in a project, and then repeat the process 6 months later. So I decided to make a post collecting common operations for which I have to constantly look through the docs or search on stackoverflow. 
+It's my seventh time trying to learn pandas in the past 3 years. I used to cram the whole pandas documentation into one day to finish all data manipulation parts in a project, and then repeat the process 6 months later. So I decided to make a post collecting common operations for which I have to constantly look through the docs or search on stackoverflow.
 
 ```{r setup, include = FALSE}
 ymisc::set_knitr_options()
 library(reticulate)
 ```
-
 
 ```{python}
 import pandas as pd
@@ -39,93 +36,251 @@ df = sns.load_dataset("penguins")
 print(pd.__version__)
 ```
 
-
 ## Reading data
 
-### select columns 
+Common options for `pandas.read_csv` and other data-importing functions:
 
-### select rows 
+-   `header` row number of header
 
-`nrows` specifies the (continuous) number of lines file to read. `skiprows` can be used to skip multiple rows while reading (don't have to be contiguous), from the beginning of the file. This might be useful for some malformed files exported from excel, e.g., the second row might be units. 
+-   `names`: specify column names
+
+-   `usecols`: which columns to keep
+
+-   `dtype`: specify data types
+
+-   `nrows`: \# of rows to read
+
+-   `skiprows`: index of rows to skip
+
+-   `na_values`: strings to recognize as NaN
+
+### Select columns
+
+### Select rows
+
+`nrows` specifies the (continuous) number of lines file to read. `skiprows` can be used to skip multiple rows while reading (don't have to be contiguous), from the beginning of the file. This might be useful for some malformed files exported from excel, e.g., the second row might be units.
+
+```{python}
+# make the 3rd row header, skip 4nd and 5th row, ignore comment that starts with # 
+import io 
+csv_string = io.StringIO(
+""",,
+,,
+col1,col2,col3
+# all number in mm
+,,
+,,
+1,2,3
+4,5,6
+"""
+)
+pd.read_csv(csv_string, header = 2, skiprows = [4, 5], comment = "#")
+```
+
+`skiprows` also accepts a lambda function that returns a boolean indicating if a row should be skipped, this can be useful when sampling large datasets
 
 ```python
-# skip 2nd and 4th row 
-pd.read_csv(path, skiprows = [1, 3])
+# skipping negative rows and 99% of the rest 
+pd.read_csv(file, skiprows = lambda x: x > 0 
+                  and np.random.rand() > 0.01)
 ```
 
 
+### Specifying data types
 
+There is a [table](https://pandas.pydata.org/docs/user_guide/basics.html#basics-dtypes) from the pandas documentation listing all available data types. Some common data types including
 
+-   nullable integer: `'int8'`, `'int16'`, `'int32'`, `'int64'`, for unsigned integers use the `u` prefix, e.g., `'uint16'`
 
-### Specifying data types 
+-   floats: replace `int` above with `float` (there is no unsigned version for float and it starts with `float16`)
 
+-   strings: `'string'` (after pandas 1.0). Before `object` is the only option. Memory-wise string took up exactly the **same** space as object type [^1], and the performance is similar too. But it's still recommended to use string whenever possible because of clearer code. A [category](#use-category-data-type) data type is also available
 
-There is a [table](https://pandas.pydata.org/docs/user_guide/basics.html#basics-dtypes) from the pandas documentation listing all available data types. Some common data types including 
+-   booleans: `'bool'`
 
-- nullable integer: `'int8'`, `'int16'`, `'int32'`, `'int64'`, for unsigned integers use the `u` prefix, e.g., `'uint16'`
+-   datetime: `"datetime"` or `'datetime64[ns, <tz>]'` (time-zone aware)
 
-- floats: replace `int` above with `float` (there is no unsigned version for float and it starts with `float16`)
+-   `object`: the catch-all data type, should be avoided for performance reasons
 
-- strings: `'string'` (after pandas 1.0). Before `object` is the only option.
+[^1]: pandas 1.3 introduced a new data type `'string[pyarrow]'` that promises more efficient storage, see <https://pythonspeed.com/articles/pandas-string-dtype-memory/>
 
-- booleans: `'bool'`
+I'm using the string version here but there is always a class constructor in pandas or numpy, e.g. `np.int8` or `pd.Int32Dtype`.
 
-- datetime: `"datetime"` or `'datetime64[ns, <tz>]'` (time-zone aware)
+Data types can either be specified during creation or after it:
 
-- `object`: the catch-all data type, should be avoided for performance reasons 
+-   during creation: `pd.read_csv(dtypes = {"col": "type"})`
 
-I'm using the string version here but there is always a class constructor in pandas or numpy, e.g. `np.int8` or `pd.Int32Dtype`. 
-
-`DataFrame.astype()` convert one all multiple columns using a dict
-
+-   after creation: `df.astype({"col": "type"})`
 
 ```{python}
 df = df.astype({
-  "species": "string", 
-  "island": "string", 
+  "species": "category", 
+  "island": "category", 
   "bill_length_mm": "float16", 
   "bill_depth_mm": "float16", 
   "flipper_length_mm": "float16",
   "body_mass_g": "float16",
-  "sex": "string"
+  "sex": "category"
 })
 df.info()
 ```
 
-
-
-
-There also a `infer_objects()` method that attempts to convert object-typed columns automatically: 
+There also a `infer_objects()` method that attempts to convert object-typed columns automatically:
 
 ```{python}
 sns.load_dataset("penguins").infer_objects().info()
 ```
 
+### Reading from a directory 
 
-## Filtering rows 
+```python
+from glob import glob
+pd.concat([pd.read_csv(f).assign(file=f) 
+           for f in glob("*.csv")])
+```
+
+### Reading from other sources 
+
+- json: `pd.read_json``
+
+- html table: `pd.read_html`
+
+- pdf: `tabula.read_pdf`
 
 
-## Creating columns 
 
 
-## Group by operations 
+## Filtering rows
 
-## Selecting columns 
+### `.loc` and `iloc`
+
+
+Chain loc and iloc
+
+```{python}
+df.iloc[10:15, :].loc[:, ["island", "body_mass_g"]]
+```
+
+
+Use a mix of label-based and integer-based selection 
+
+```python
+df.iloc[df.index.get_loc("a"), 1]
+```
+
+
+### Related functions 
+
+Filter by `IN` conditions 
+
+```{python}
+df.loc[df["sex"].apply(lambda x: x in ["Male"]), :]
+```
+
+
+
+## Working with columns
+
+
+In general, when working with columns pandas is more similar to base R rather than dplyr, in the sense that it encourages me to directly access the column `df[col]` and operate on it. The `assign` method is a helper function that's similar to dplyr's `mutate`, but I figured the python community gravitates more towards the general approach.  This also makes pandas more procedural and non-functional to me. Anyway this is a helpful mental model where there is not a convenient helper function in pandas, for example, change all string column's value to lower case: 
+
+```{python}
+for col in df.columns:
+    if str(df[col].dtype) == "string":
+        df[col] = df[col].str.lower()
+```
+
+### Creating and modifying columns 
+
+The `assign` method creates multiple columns with quotes: 
+
+```{python}
+df.assign(
+  sex2 = np.where(df.sex == "Male", 0, 1),
+  length_double = 
+    lambda df: df.bill_length_mm * 2
+).head()
+```
+
+`assign` insert columns at the end, the `insert` method create columns in the specified location **inplace**
+
+```{python}
+# insert column at the top 
+df.insert(0, "bill_double", df.bill_length_mm * 2)
+df.info()
+```
+
+`rename` accepts a dict of {oldname: newname} pair to rename the columns 
+
+```{python}
+df.rename({"body_mass_g": "mass"}, axis = "columns")
+```
+
+
+### Selecting columns 
+
+`loc` and `iloc` are two general options
+
+```python
+df[list(df.columns[0:3]) + list(df.columns[5:6])]
+```
+
+
+### Removing columns 
+
+The `pop` method removes a column **inplace** and returns the removed column as a series. This comes in handy in machine learning when creating input matrix and the response out of training_set
+
+```python
+# create input X and response y
+y = df_training.pop("label")
+X = df_training
+```
+
+### Related functions
+
+Common operations and related functions 
+
+- if else: `np.where` or `apply` in general
+
+- case when: nested `np.where` or `np.select`, or multiple `.loc` statements
+
+```python
+pd_df['difficulty'] = np.select(
+    [
+        pd_df['Time'].between(0, 30, inclusive=False), 
+        pd_df['Time'].between(30, 60, inclusive=True)
+    ], 
+    [
+        'Easy', 
+        'Medium'
+    ], 
+    default='Unknown'
+)
+
+pd_df['difficulty'] = 'Unknown'
+pd_df.loc[pd_df['Time'].between(0, 30, inclusive=False), 'difficulty'] = 'Easy'
+pd_df.loc[pd_df['Time'].between(30, 60, inclusive=True), 'difficulty'] = 'Medium'
+```
+
+
+
+## Group by operations
+
+## Selecting columns
 
 ### By name and regex
- 
+
 select all columns that starts with "bill"
 
 ```{python}
 df.iloc[:, df.columns.map(lambda x: x.startswith("bill"))]
 ```
 
+### By data types
 
-### By data types 
+`DataFrame.select_dtypes(include = None, exclude = None)` returns a subset of the DataFrame's columns based on the column dtypes.
 
-`DataFrame.select_dtypes(include = None, exclude = None)` returns a subset of the DataFrame’s columns based on the column dtypes.
-
-```python
+``` python
 # select all numerical columns regardless of digits 
 df.select_dtypes(include = 'number')
 
@@ -133,22 +288,45 @@ df.select_dtypes(include = 'number')
 df.select_dtypes(exclude = "bool")
 ```
 
-More generally, use the `apply + iloc` flow: 
+More generally, use the `apply + iloc` flow:
 
 ```{python}
 # check each column's type 
-df.apply(lambda x: x.dtype == "string", axis = 0).values
+df.apply(lambda x: x.dtype == "category", axis = 0).values
 
 # select columns that pass the check 
-df.iloc[:, df.apply(lambda x: x.dtype == "string", axis = 0).values]
+df.iloc[:, df.apply(lambda x: x.dtype == "category", axis = 0).values]
 ```
 
+## Text data
+
+### Use category data type
+
+In addition to `'string'`, pandas has a `'category'` data type that are designed for strings fixed in a small set of values. It's similar to R's `factor` data type and can be more memory friendly in some cases. A rule-of-thumb is to only use category when it's really "categorical" column, make a column with high cardinality a category column can cost even more space than string or object.
+
+<div class = "note">
+The memory usage of a category column is proportional to the number of categories plus the length of the data. In contrast, an object dtype is a constant times the length of the data.
+</div>
+
+```{python}
+s = pd.Series(["foo", "bar"] * 1000)
+# object
+s.nbytes
+# string
+s.astype("string").nbytes
+# category
+s.astype("category").nbytes
+```
+
+All string methods accessed by `.str` are available to category.
+
+Internally, category data type are represented using integers (like in R), and `apply` functions does not preserve this data type.
+
+## Plotting
 
 
+<!-- ## Comparing with R  -->
 
+<!-- Syntactically I feel pandas is like a mix of base R and dplyr. These tools all implement the core operations that would be required with analyzing tabular data, or what can be done in SQL and relational algebra, such as selecting and creating columns, filtering rows, aggregation, and group-wise computations. While base R encourage users to manipulate data directly with vectors  -->
 
-
-## Text data 
-
-## Plotting 
 

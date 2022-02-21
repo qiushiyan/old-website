@@ -16,7 +16,7 @@ image:
 
 ## Introduction
 
-[Structural Pattern Matching](https://www.python.org/dev/peps/pep-0634/) is a new feature introduced in python [3.10](https://docs.python.org/3/whatsnew/3.10.html), and perhaps the most intriguing one.  It takes as input a object to inspect (following `match`), and multiple patterns to match (following one or more `case`). If there is a match, a pattern-specific code block runs. The basic syntax is 
+[Structural Pattern Matching](https://www.python.org/dev/peps/pep-0634/) is a new feature introduced in python [3.10](https://docs.python.org/3/whatsnew/3.10.html), and perhaps the most intriguing one.  It takes as input an object to inspect (following `match`), and multiple patterns to match against (following one or more `case`). If there is a match, a pattern-specific code block runs. The basic syntax is 
 
 
 
@@ -95,7 +95,7 @@ For a more advanced example, suppose we are working with the [SpaceX API](https:
             "rocket_name": "Falcon 1",
         },
         "details": "Engine failure at 33 seconds and loss of vehicle",
-        //... other fields 
+        //... other fields
 } 
 ```
 
@@ -151,7 +151,7 @@ match [1, 2, 3]:
 #> [1, 2]
 ```
 
-I mentioned that pattern matching for dict does not require use to explicitly declare all fields. For lists this is different, we have to declare all elements, this is why match 1 fails. Match 2 attempts to use the `*` syntax to capture all values after 2 into a list called `rest`. This is helpful in case the list is really large and it's impossible to exhaust all elements, or we simply don't care about some elements, but the pattern does not specify the correct order, as 2 is not the first element in the matching object. Match 3 captures all elements but the last into `other`, and assign the last element to `last`. 
+I mentioned that pattern matching for dict does not require use to explicitly declare all fields. For lists this is different, we have to declare all elements, this is why match 1 fails. Match 2 attempts to use the `*` syntax to capture all values after 2 into a list called `rest`. This is helpful in case the list is really large and it's impossible to exhaust all elements, or we simply don't care about some elements. However, the second pattern does not specify the correct order, as 2 is not the first element in the matching object. Match 3 captures all elements but the last into `other`, and assign the last element to `last`. 
 
 
 It's also possible to do `or` logic with `|` in case statement. For example we may add a `case 401 | 403 | 404: "Not allowed"` statement to our first example. Here is another example from pep: 
@@ -185,7 +185,7 @@ match commad.split():
     case ["go", direction] if direction in all_directions:
         move(direction)
     case ["go", _]:
-        print(f"{direction} not supported")
+        print("direction not supported")
 ```
 
 

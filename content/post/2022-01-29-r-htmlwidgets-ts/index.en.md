@@ -17,16 +17,147 @@ image:
 ---
 
 
+<script>
+window.onload = function() {
+
+	var toc = document.querySelector( '#TableOfContents' );
+	var tocPath = document.querySelector( '.toc-marker path' );
+	var tocItems;
+
+	// Factor of screen size that the element must cross
+	// before it's considered visible
+	var TOP_MARGIN = 0.1,
+		BOTTOM_MARGIN = 0.2;
+
+	var pathLength;
+
+	var lastPathStart,
+		lastPathEnd;
+
+	window.addEventListener( 'resize', drawPath, false );
+	window.addEventListener( 'scroll', sync, false );
+
+	drawPath();
+
+	function drawPath() {
+
+		tocItems = [].slice.call( toc.querySelectorAll( 'li' ) );
+
+		// Cache element references and measurements
+		tocItems = tocItems.map( function( item ) {
+			var anchor = item.querySelector( 'a' );
+			var target = document.getElementById( anchor.getAttribute( 'href' ).slice( 1 ) );
+
+			return {
+				listItem: item,
+				anchor: anchor,
+				target: target
+			};
+		} );
+
+		// Remove missing targets
+		tocItems = tocItems.filter( function( item ) {
+			return !!item.target;
+		} );
+
+		var path = [];
+		var pathIndent;
+
+		tocItems.forEach( function( item, i ) {
+
+			var x = item.anchor.offsetLeft - 5,
+				y = item.anchor.offsetTop,
+				height = item.anchor.offsetHeight;
+
+			if( i === 0 ) {
+				path.push( 'M', x, y, 'L', x, y + height );
+				item.pathStart = 0;
+			}
+			else {
+				// Draw an additional line when there's a change in
+				// indent levels
+				if( pathIndent !== x ) path.push( 'L', pathIndent, y );
+
+				path.push( 'L', x, y );
+
+				// Set the current path so that we can measure it
+				tocPath.setAttribute( 'd', path.join( ' ' ) );
+				item.pathStart = tocPath.getTotalLength() || 0;
+
+				path.push( 'L', x, y + height );
+			}
+
+			pathIndent = x;
+
+			tocPath.setAttribute( 'd', path.join( ' ' ) );
+			item.pathEnd = tocPath.getTotalLength();
+
+		} );
+
+		pathLength = tocPath.getTotalLength();
+
+		sync();
+
+	}
+
+	function sync() {
+
+		var windowHeight = window.innerHeight;
+
+		var pathStart = pathLength,
+			pathEnd = 0;
+
+		var visibleItems = 0;
+
+		tocItems.forEach( function( item ) {
+
+			var targetBounds = item.target.getBoundingClientRect();
+
+			if( targetBounds.bottom > windowHeight * TOP_MARGIN && targetBounds.top < windowHeight * ( 1 - BOTTOM_MARGIN ) ) {
+				pathStart = Math.min( item.pathStart, pathStart );
+				pathEnd = Math.max( item.pathEnd, pathEnd );
+
+				visibleItems += 1;
+
+				item.listItem.classList.add( 'visible' );
+			}
+			else {
+				item.listItem.classList.remove( 'visible' );
+			}
+
+		} );
+
+		// Specify the visible path or hide the path altogether
+		// if there are no visible items
+		if( visibleItems > 0 && pathStart < pathEnd ) {
+			if( pathStart !== lastPathStart || pathEnd !== lastPathEnd ) {
+				tocPath.setAttribute( 'stroke-dashoffset', '1' );
+				tocPath.setAttribute( 'stroke-dasharray', '1, '+ pathStart +', '+ ( pathEnd - pathStart ) +', ' + pathLength );
+				tocPath.setAttribute( 'opacity', 1 );
+			}
+		}
+		else {
+			tocPath.setAttribute( 'opacity', 0 );
+		}
+
+		lastPathStart = pathStart;
+		lastPathEnd = pathEnd;
+
+	}
+</script>
+
 
 ## Htmlwidgets in R
 
 <div class = "note">
-This post assumes you know the basics of R Package development, JavaScript and node. I recommend the second chapter of [JavaScript for R](https://book.javascript-for-r.com/) as a starter.
+This post assumes you know the basics of R Package development, JavaScript and node. I recommend the second chapter of <a href="https://book.javascript-for-r.com">JavaScript for R</a> as a starter.
 </div>
 
-The R `htmlwidgets` package provides a friendly framework for developing R packages that wraps JavaScript libraries. An htmlwidget is nothing more than a normal R plot plus interactivity powered by JavaScript. The package abstracts away many of the details of juggling with both JavaScript and R, most notable of which being dependecy managment.
+The R `htmlwidgets` package provides a friendly framework for developing R packages that wraps JavaScript libraries. An htmlwidget is nothing more than a normal R plot plus interactivity powered by JavaScript. The package abstracts away many of the details of juggling with both JavaScript and R, most notable of which being dependency management.
 
-An example from the [JavaScript for R](https://book.javascript-for-r.com/) book shows the development of the [`gior`](https://github.com/JohnCoene/gior) package, which corresponds to the [`gio.js`](https://giojs.org/) javascirpt library. The [`inst/htmlwidgets`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets) directory contains necessary dependencies required by `gio.js`. This file is the entrypoint of creating the widget. It depends on javasciprt libraries including `gio.js`, `three.js` and `HTMLWidgets`, `Shiny`. We don't need to worry about including `HTMLWidgets` or `Shiny` ourselves, since R will do it for us. For the first two dependencies, we can download it from cdn and include it in the [`inst/htmlwidgets/lib`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets/lib) directory. Lastly, we include a file [`gior.yaml`](https://github.com/JohnCoene/gior/blob/master/inst/htmlwidgets/gior.yaml) to declare locations of the dependencies that looks like:
+An example from the [JavaScript for R](https://book.javascript-for-r.com/) book shows the development of the [`gior`](https://github.com/JohnCoene/gior) package, which corresponds to the [`gio.js`](https://giojs.org/) JavaScript library. The [`inst/htmlwidgets`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets) directory contains necessary dependencies required by `gio.js`. This file is the entry point of creating the widget. It depends on JavaScript libraries including `gio.js`, `three.js`, `HTMLWidgets` and `Shiny`. We don't need to worry about including `HTMLWidgets` or `Shiny` ourselves, since R will do it for us.
+
+For the first two dependencies, we can download it from CDN and include it in the [`inst/htmlwidgets/lib`](https://github.com/JohnCoene/gior/tree/master/inst/htmlwidgets/lib) directory. Lastly, we include a file [`gior.yaml`](https://github.com/JohnCoene/gior/blob/master/inst/htmlwidgets/gior.yaml) to declare locations of the dependencies that looks like:
 
 ```yaml
 dependencies:
@@ -40,13 +171,13 @@ dependencies:
    script: gio.min.js
 ```
 
-Now, whenever we create a widget from R, the rendering context will automatically serve all the javascript files. This workflow is convenient for developing pacakges that does not require much work on the JavaScript side, all we need to do is call some initialization functions in `gior.js`. However, if we need to interact more with the javascript library, more than just passing a few lines of options, this setup is not sufficient. Since javascript dependencies is managed from R and never decalred in `gior.js`, we won't be getting all the nice features a modern text editor can provide, such as autocompletion, snippets, linking and intellisense. Moreover, when our package gets larger we might want to split the javascript code into separate modules rather than cluttering the `gior.js` file, and it's not so fun to do bundling ourselves.
+Now, whenever we create a widget from R, the rendering context will automatically serve all the javascript files. This workflow is convenient for developing pacakges that does not require much work on the JavaScript side, all we need to do is calling some initialization functions in `gior.js`. However, if we need to interact more with the javascript library, more than just passing a few lines of options, this setup is not sufficient. Since javascript dependencies are managed from R and never decalred in `gior.js`, we won't be getting all the nice features a modern text editor can provide, such as autocompletion, snippets, linking and intellisense. Moreover, when our package gets larger we might want to split the javascript code into separate modules rather than cluttering the `gior.js` file, and it's not so fun to do bundling ourselves.
 
-For this reason, it make sense to have more control over how javascript dependencies is managed, rather than just downloding and including a dist file. The end result is still the same, we need to include one or several javascript files for the plot. It's just we will not be using files already provided by cdn but to download the javascript package and do the bundling ourselves. The [`packer`](https://github.com/JohnCoene/packer) package provides an solution to this.
+For this reason, it makes sense to have more control over how javascript dependencies are managed, rather than just downloding and including a dist file. The end result is still the same, we need to include one or several javascript files for the plot. It's just we will not be using files already provided by cdn, but to download the javascript package and do the bundling ourselves. The [`packer`](https://github.com/JohnCoene/packer) package provides an solution to this.
 
 ## The `packer` package
 
-In the JavaScript world, dependecy management is done through node and a package manager of choice, like npm, yarn or pnpm. These package managers call be used to create a project-specific environment into which various packages will be insallted.  Then, we would use a bundler like webpack to extract all files into a single file, which is provided everytime a widget is created from R. `packer` can be used to scaffold a project structure for this need, and provides an R interface so that we can still do all the work through R commands. The following two commands scaffold an htmlwidgets package powered by packer:
+In the JavaScript world, dependency management is done through node and a package manager of choice, like npm, yarn or pnpm. These package managers call be used to create a project-specific environment into which various packages will be insalled.  Then, we would use a bundler like webpack to extract all files into a single file, which is served every time a widget is created from R. `packer` can be used to scaffold a project structure for this need, and provides an R interface so that we can still do all the work through R commands. The following two commands scaffold an htmlwidgets package powered by packer:
 
 ```r
 usethis::create_package("<package-name>")
@@ -74,30 +205,30 @@ The project directory tree is generated as
 └── webpack.prod.js
 ```
 
-A `node_modules` folder is created for storing javascript dependencies. Note that we are managing javascript dependecies ourselves now, and we can install them with `packer::yarn_install` from R or simply `yarn add` from the command line.
+A `node_modules` folder is created for storing javascript dependencies. Note that we are managing javascript dependencies ourselves now, and we can install them with `packer::yarn_install` from R or simply `yarn add` from the command line.
 
-The three files started with `webpack` are webpack configurations for bundling. The `webpack.common.js` file is are common options for both development and production. The `webpack.dev.js` is used for development, and the `webpack.prod.js` is used for production. There are 3 most important webpack options for our purposes, which packer sets in the `srcjs/config`
+The three files started with `webpack` are webpack configurations for bundling. The `webpack.common.js` file stores shared options for both development and production. The `webpack.dev.js` is used for development, and the `webpack.prod.js` is used for production. There are 3 most important webpack options for our purposes, which packer sets in the `srcjs/config`
 directory.
 
 
 - `output` will determine the dist file name and location, this should be named `<widget-name>.js` in the `inst/htmlwidgets` directory so that R knows to include it.
 
-- `entryPoints` determins the starting point of the bundling process. This can be set to any top-level file that imports other dependencies that calls `HTMLWidgets.widget()`. packer use the convention of `srcjs/widgets/<widget-name>.js` as the entry point.
+- `entryPoints` determines the starting point of the bundling process. This can be set to any top-level file that imports other dependencies that calls `HTMLWidgets.widget()`. packer use the convention of `srcjs/widgets/<widget-name>.js` as the entry point.
 
-- `externals` declares the dependencies that we dont need webpack to resolve. This includes `Shiny` and `HTMLWidgets` which is outside of the `node_modules` folder and added by R. If we don't declare them webpack will be stucked as it can't find them.
+- `externals` declares the dependencies that we don't need webpack to resolve. This includes `Shiny` and `HTMLWidgets` which is outside of the `node_modules` folder and added by R. If we don't declare them webpack will be report an error as it can't find them.
 
-Besdies, there is also a `loaders` option that tells webpack how to preprocess each file type. If we are developing a regular javascript website, this will include different preprocessors for javascript, css, scss, etc. Though in the context of htmlwidgets it's all setup by packer.
+Besides, there is also a `loaders` option that tells webpack how to preprocess each file type. If we are developing a regular javascript website, this will include different preprocessors for javascript, css, scss, etc. Though in the context of htmlwidgets it's all setup by packer.
 
-Now, if we run `packer::bundle_dev()`, it will invoke `npm run development` specified in the `scripts` section in `package.json`, whcih then runs webpack with development configurations. webpack will include all necessary files and bundle them into a `inst/htmlwidgets`. Anytime we make a change to the `srcjs` directory, we need to run `packer::bundle_dev()` to update the dist file.
+Now, if we run `packer::bundle_dev()`, it will invoke `npm run development` specified in the `scripts` section in `package.json`, which then runs webpack with development configurations. webpack will include all necessary files and bundle them into a `inst/htmlwidgets`. Anytime we make a change to the `srcjs` directory, we need to run `packer::bundle_dev()` to update the dist file.
 
 This time, since our project follows standard javascript project structure with `package.json` and `node_modules`. When we are writing JavaScript code, our text editor will be able to resolve them and provide intellisense. And we can have arbitrary code structure to to better organize our code, as long as it is imported by the entry file.
 
 ## Using TypeScript and Esbuild
 
 
-The boilerplate produced by packer is satisfactory enough if you are happy with simple JavaScript libraries and webpack. However, if you need to include TypeScript, Sass or framworks like React and Svelte, webpack configurations can be notoriously time-consuming. Although packer also provides templates for the JavaScript version of React and Vue, but they still require a handful of customization in my opinion. Further, webpack is sometimes considered outdated with bigger bundle size and slow bundling speed.
+The boilerplate produced by packer is satisfactory enough if you are happy with simple JavaScript libraries and webpack. However, if you need to include TypeScript, Sass or frameworks like React and Svelte, webpack configurations can be notoriously time-consuming. Although packer also provides templates for the JavaScript version of React and Vue, but they still require a handful of customization in my opinion. Further, webpack is sometimes considered outdated with bigger bundle size and slow bundling speed.
 
-So if you are like me who goes out of his way to have an as "optimized" package as possible, it may be better off to have a personal setup similar to packer with optimized replacements. In essence it's just a matter of producing a dist file in the `inst/htmlwidgets/` directory that guarantees the best development experience, and I will share one combo I find most comfortable. TypeScript is used to replace javascript for static typing, and esbuild to replace webpack with hundres times faster performance , simpler configurations, and native support for TypeScript.
+So if you are like me who goes out of his way to have an as "optimized" package as possible, it may be better off to have a personal setup similar to packer with optimized replacements. In essence it's just a matter of producing a dist file in the `inst/htmlwidgets/` directory that guarantees the best development experience, and I will share one combo I find most comfortable. TypeScript is used to replace javascript for static typing, and esbuild to replace webpack with hundreds times faster performance , simpler configurations, and native support for TypeScript.
 
 During my recent development of the [xkcd](https://github.com/qiushiyan/xkcd) htmlwidgets package, I migrate a packer-generated setup to one with TypeScript and esbuild.
 
@@ -177,10 +308,9 @@ esbuild
   });
 ```
 
-Note that esbuild share similar configurations with webpack, we are again decalring entry file (`entryPoints`), where the bundled file should go (`outfile`),  and external dependencies (`external`). The last step is adding a command that invokes this script and do the bundling:
+Note that esbuild share similar configurations with webpack, we are again declaring entry file (`entryPoints`), where the bundled file should go (`outfile`),  and external dependencies (`external`). The last step is adding a command that invokes this script and do the bundling:
 
 ```json
-./package.json
 {
   "scripts": {
 		"watch": "node esbuild.js"
@@ -200,9 +330,9 @@ After run `yarn watch` from the command line, esbuild starts with the message:
 
 ```bash
 ❯ yarn watch
-yarn run v1.22.17
-$ node esbuild.js
-watch build succeeded: { errors: [], warnings: [], stop: [Function: stop] }
+#> yarn run v1.22.17
+#> $ node esbuild.js
+#> watch build succeeded: { errors: [], warnings: [], stop: [Function: stop] }
 ```
 
 This will create the `<widget-name>.js` dist file under `inst/htmlwidgets/`. Because we set `watch` in `esbuild.js`, esbuild will watch for changes in the entry file and related modules and rebuild the bundle whenever it changes. This means if we are making only making a change on the JavaScript side, the widget should update automatically next time it's created. So there is no similar need to call `packer::bundle_dev()` again.

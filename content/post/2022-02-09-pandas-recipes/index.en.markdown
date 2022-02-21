@@ -208,6 +208,25 @@ Use a mix of label-based and integer-based selection
 df.iloc[df.index.get_loc("a"), 1]
 ```
 
+use lambda function 
+
+```python
+df.loc[lambda d: d.sex == "Male"]
+```
+
+
+### Related functions 
+
+Filter by `IN` conditions 
+
+```python
+df.loc[df.island.apply(lambda x: x in ["Dream", "Biscoe"]), :]
+```
+
+
+
+
+
 
 ## Working with columns
 
@@ -288,10 +307,18 @@ df.rename({"body_mass_g": "mass"}, axis = "columns")
 ```
 
 
+### Selecting columns 
+
+`loc` and `iloc` are two general options
+
+```python
+df[list(df.columns[0:3]) + list(df.columns[5:6])]
+```
+
 
 ### Removing columns 
 
-The `pop` method removes a column **inplace** and returns the removed column as a series. This comes in handy in machine learning when creating input matrix and the response out of training_set
+The `pop` method removes a column **inplace** and returns the removed column as a series. This comes in handy in machine learning when creating input matrix and the response out of training set
 
 ```python
 # create input X and response y
@@ -423,8 +450,49 @@ Internally, category data type are represented using integers (like in R), and `
 ## Plotting
 
 
-<!-- ## Comparing with R  -->
 
-<!-- Syntactically I feel pandas is like a mix of base R and dplyr. These tools all implement the core operations that would be required with analyzing tabular data, or what can be done in SQL and relational algebra, such as selecting and creating columns, filtering rows, aggregation, and group-wise computations. While base R encourage users to manipulate data directly with vectors  -->
+## Miscellaneous tips 
+
+### Chaining operations 
+
+A generic approach is chaining operations enclosed in a set of parenthesis: 
+
+```python
+(df
+  .method1()
+  .method2()
+  .method3)
+```
+
+Since pandas 0.16.2 the `pipe` method was introduced, it accepts a function, which takes in the current dataframe and return a new dataframe. 
+
+
+```python
+def double_length(df: pd.DataFrame) -> pd.DataFrame: 
+    return df.assign(double_length = df.flipper_length_mm * 2)
+    
+def filter_island(df: pd.DataFrame, islands: [] = ["Biscoe", "Dream"]) -> pd.DataFrame: 
+    return df[df.island.isin(islands)]
+  
+(df
+    .pipe(double_length)
+    .pipe(filter_island))
+#>      bill_double species  island  ...  body_mass_g     sex  double_length
+#> 20       75.6250  Adelie  Biscoe  ...       3400.0  Female          348.0
+#> 21       75.3750  Adelie  Biscoe  ...       3600.0    Male          360.0
+#> 22       71.8125  Adelie  Biscoe  ...       3800.0  Female          378.0
+#> 23       76.3750  Adelie  Biscoe  ...       3950.0    Male          370.0
+#> 24       77.6250  Adelie  Biscoe  ...       3800.0    Male          360.0
+#> ..           ...     ...     ...  ...          ...     ...            ...
+#> 339          NaN  Gentoo  Biscoe  ...          NaN     NaN            NaN
+#> 340      93.6250  Gentoo  Biscoe  ...       4848.0  Female          430.0
+#> 341     100.8125  Gentoo  Biscoe  ...       5752.0    Male          444.0
+#> 342      90.3750  Gentoo  Biscoe  ...       5200.0  Female          424.0
+#> 343      99.8125  Gentoo  Biscoe  ...       5400.0    Male          426.0
+#> 
+#> [292 rows x 9 columns]
+```
+
+
 
 

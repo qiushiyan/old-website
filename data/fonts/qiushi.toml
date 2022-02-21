@@ -2,7 +2,7 @@
 name = "qiushi"
 
 # Optional Google font URL
-google_fonts = "Arapey:400,400i|Libre+Baskerville:400,400i|Zilla+Slab:300,300i|Fira+Code:wght@300"
+google_fonts = "Arapey:400,400i|Libre+Baskerville:400,400i,700b|Zilla+Slab:300,300i|Fira+Code:wght@300"
 
 # Font familiest
 heading_font = "Arapey"

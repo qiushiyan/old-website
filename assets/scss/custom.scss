@@ -1,16 +1,12 @@
-/* import fonts */
-@font-face {
-  font-family: "Lato";
-  src: url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,40);
-}
-/* toc */
-#TableOfContents, .docs-toc-title {
-  border-left: 1px solid $sta-primary;
-  /* "$sta-primary" is the primary colour from the theme (sass/scss) */
+html {
+  scroll-behavior: smooth;
 }
 
-html {
-	scroll-behavior: smooth;
+/* toc */
+#TableOfContents,
+.docs-toc-title {
+  border-left: 1px solid $sta-primary;
+  /* "$sta-primary" is the primary colour from the theme (sass/scss) */
 }
 
 /* let figure be on top of toc */
@@ -42,20 +38,19 @@ html {
   .card-text {
     text-align: center;
   }
-  
+
   ul.network-icon {
     text-align: center;
   }
 }
 
-/* post nav link */ 
+/* post nav link */
 .post-nav {
   text-align: center;
   a {
     color: #328cc1;
   }
 }
-
 
 /* -----------div tips------------- */
 :root {
@@ -151,22 +146,22 @@ pre {
   border-width: 1px 0px 0px 1px;
   box-shadow: 5px 5px 5px #eee;
   padding: 0.25em;
-/*  background: #fff;*/ 
+  /*  background: #fff;*/
   overflow-x: auto;
-  border-radius: 5px; 
+  border-radius: 5px;
   /*undo rounded corners*/
   /* increase code block width */
-  /*  
+  /*
   margin-left: calc(-100vw / 2 + 1100px / 2);
   margin-right: calc(-100vw / 2 + 1100px / 2);
   padding-left: 3rem;
   padding-right: 3rem;
-  
+
   */
 }
 
 .hljs-meta {
- font-weight: normal; 
+  font-weight: normal;
 }
 
 pre code {
@@ -182,43 +177,61 @@ code {
 
 .highlight {
   position: relative;
+  pre {
+    code[class*="language-"]::before {
+      border-radius: 0 0 0.25rem 0.25rem;
+      font-size: 12px;
+      letter-spacing: 0.025rem;
+      padding: 0.1rem 0.5rem;
+      position: absolute;
+      right: 1rem;
+      text-align: right;
+      text-transform: uppercase;
+      top: 0;
+    }
+    code[class*="language-r"]::before {
+      content: "R";
+      background: #2467bb;
+      color: black;
+    }
+    code[class*="language-python"]::before {
+      content: "PY";
+      background: #3776ab;
+      color: black;
+      tab-size: 4;
+    }
+    code[class*="language-sql"]::before {
+      content: "SQL";
+      background: #d2c4e9;
+      color: black;
+      tab-size: 4;
+    }
+    code[class*="language-bash"]::before {
+      content: "SHELL";
+      background: #385b58;
+      color: black;
+      tab-size: 4;
+    }
+    code[class*="language-json"]::before {
+      content: "JSON";
+      background: #f7df1e;
+      color: black;
+      tab-size: 4;
+    }
+    code[class*="language-javascript"]::before {
+      content: "JS";
+      background: #f7df1e;
+      color: black;
+      tab-size: 4;
+    }
+    code[class*="language-typescript"]::before {
+      content: "TS";
+      background: #3178c6;
+      color: black;
+      tab-size: 4;
+    }
+  }
 }
-
-.highlight pre code[class*="language-"]::before {
-    background: black;
-    border-radius: 0 0 0.25rem 0.25rem;
-    color: white;
-    font-size: 12px;
-    letter-spacing: 0.025rem;
-    padding: 0.1rem 0.5rem;
-    position: absolute;
-    right: 1rem;
-    text-align: right;
-    text-transform: uppercase;
-    top: 0;
-}
-
-.highlight pre code[class*="language-r"]::before {
-  content: "R";
-  background: #2467bb;
-  color: black;
-}
-
-.highlight pre code[class*="language-python"]::before {
-  content: "PY";
-  background: #3776ab;
-  color: black;
-  tab-size: 4;
-}
-
-.highlight pre code[class*="language-sql"]::before {
-  content: "SQL";
-  background: #D2C4E9;
-  color: black;
-  tab-size: 4;
-}
-
-
 
 .hljs {
   background: #fff;
@@ -228,13 +241,10 @@ code {
 
 table {
   font-size: 0.8rem;
+  tr th {
+    font-size: 1.1rem;
+  }
 }
-
-table tr th {
-  font-size: 1.1rem;
-}
-
-/* images more like cards */
 
 img {
   margin-bottom: 2rem;

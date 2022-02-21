@@ -168,14 +168,23 @@ Use a mix of label-based and integer-based selection
 df.iloc[df.index.get_loc("a"), 1]
 ```
 
+use lambda function 
+
+```python
+df.loc[lambda d: d.sex == "Male"]
+```
+
 
 ### Related functions 
 
 Filter by `IN` conditions 
 
-```{python}
-df.loc[df["sex"].apply(lambda x: x in ["Male"]), :]
+```python
+df.loc[df.island.apply(lambda x: x in ["Dream", "Biscoe"]), :]
 ```
+
+
+
 
 
 
@@ -228,7 +237,7 @@ df[list(df.columns[0:3]) + list(df.columns[5:6])]
 
 ### Removing columns 
 
-The `pop` method removes a column **inplace** and returns the removed column as a series. This comes in handy in machine learning when creating input matrix and the response out of training_set
+The `pop` method removes a column **inplace** and returns the removed column as a series. This comes in handy in machine learning when creating input matrix and the response out of training set
 
 ```python
 # create input X and response y
@@ -325,8 +334,34 @@ Internally, category data type are represented using integers (like in R), and `
 ## Plotting
 
 
-<!-- ## Comparing with R  -->
 
-<!-- Syntactically I feel pandas is like a mix of base R and dplyr. These tools all implement the core operations that would be required with analyzing tabular data, or what can be done in SQL and relational algebra, such as selecting and creating columns, filtering rows, aggregation, and group-wise computations. While base R encourage users to manipulate data directly with vectors  -->
+## Miscellaneous tips 
+
+### Chaining operations 
+
+A generic approach is chaining operations enclosed in a set of parenthesis: 
+
+```python
+(df
+  .method1()
+  .method2()
+  .method3)
+```
+
+Since pandas 0.16.2 the `pipe` method was introduced, it accepts a function, which takes in the current dataframe and return a new dataframe. 
+
+```{python}
+def double_length(df: pd.DataFrame) -> pd.DataFrame: 
+    return df.assign(double_length = df.flipper_length_mm * 2)
+    
+def filter_island(df: pd.DataFrame, islands: [] = ["Biscoe", "Dream"]) -> pd.DataFrame: 
+    return df[df.island.isin(islands)]
+  
+(df
+    .pipe(double_length)
+    .pipe(filter_island))
+```
+
+
 
 

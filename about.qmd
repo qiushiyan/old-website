@@ -20,7 +20,7 @@ I am currently a graduate student at Vanderbilt University, Data Scinece Institu
 
 ## Projects
 
-I work mostly in R and sometimes in Python for data science. Here is some selected proejcts.
+I work mostly in R and sometimes in Python for data science. Here are some selected proejcts.
 
 - [agua](https://agua.tidymodels.org): An R package that provides h2o integration to the tidymodels framework. Users can fit, optimize and evaluate models using the friendly tidymodels syntax as well as taking advantages of h2o's computing infrastructure. This package is my 2022 summer internship project at RStudio (now Posit).
 
@@ -48,7 +48,7 @@ The next few projects are typically proof-of-concepts ones for a sense of achiev
 
   - [linux command line cheatsheet](https://github.com/qiushiyan/linux-command-line-cheatsheet/blob/main/Linux_Command_Line_Cheat_Sheet.pdf?raw=true): A cheatsheet of common linux commands.
 
-  - [clipstash](https://github.com/qiushiyan/clipstash): A web app and cli written in rust to take notes and retrieve to clipboard
+  - [clipstash](https://github.com/qiushiyan/clipstash): A web app and cli written in rust to take notes and copy to clipboard
 
   - [vstodo](https://github.com/qiushiyan/vstodo): A vscode extension to manage todo lists in the editor.
 

@@ -1,0 +1,6 @@
+output:
+  blogdown::html_page:
+    toc: true
+    fig_width: 8
+    fig_height: 6
+

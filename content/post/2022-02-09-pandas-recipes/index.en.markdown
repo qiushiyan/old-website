@@ -26,14 +26,15 @@ It's my seventh time trying to learn pandas in the past 3 years. I used to cram 
 
 ```python
 import pandas as pd
-import numpy as np 
-import seaborn as sns 
+import numpy as np
+import seaborn as sns
 
 df = sns.load_dataset("penguins")
 
 print(pd.__version__)
 #> 1.3.4
 ```
+
 
 ## Reading data
 
@@ -61,8 +62,8 @@ Common options for `pandas.read_csv` and other data-importing functions:
 
 
 ```python
-# make the 3rd row header, skip 4nd and 5th row, ignore comment that starts with # 
-import io 
+# make the 3rd row header, skip 4nd and 5th row, ignore comment that starts with #
+import io
 csv_string = io.StringIO(
 """,,
 ,,
@@ -83,8 +84,8 @@ pd.read_csv(csv_string, header = 2, skiprows = [4, 5], comment = "#")
 `skiprows` also accepts a lambda function that returns a boolean indicating if a row should be skipped, this can be useful when sampling large datasets
 
 ```python
-# skipping negative rows and 99% of the rest 
-pd.read_csv(file, skiprows = lambda x: x > 0 
+# skipping negative rows and 99% of the rest
+pd.read_csv(file, skiprows = lambda x: x > 0
                   and np.random.rand() > 0.01)
 ```
 
@@ -118,10 +119,10 @@ Data types can either be specified during creation or after it:
 
 ```python
 df = df.astype({
-  "species": "category", 
-  "island": "category", 
-  "bill_length_mm": "float16", 
-  "bill_depth_mm": "float16", 
+  "species": "category",
+  "island": "category",
+  "bill_length_mm": "float16",
+  "bill_depth_mm": "float16",
   "flipper_length_mm": "float16",
   "body_mass_g": "float16",
   "sex": "category"
@@ -164,17 +165,70 @@ sns.load_dataset("penguins").infer_objects().info()
 #> memory usage: 18.9+ KB
 ```
 
-### Reading from a directory 
+### Reading from a directory
 
 ```python
 from glob import glob
-pd.concat([pd.read_csv(f).assign(file=f) 
+pd.concat([pd.read_csv(f).assign(file=f)
            for f in glob("*.csv")])
 ```
 
-### Reading from other sources 
+### Reading by chunks
 
-- json: `pd.read_json``
+Suppose you wish to iterate through a (potentially very large) file lazily rather than reading the entire file into memory, By specifying a `chunksize` to `read_csv`, the return value will be an iterable object of type `TextFileReader`:
+
+
+```python
+# read 20 lines, 5 lines a chunk
+with pd.read_csv(
+    "https://media.githubusercontent.com/media/qiushiyan/blog-data/master/animal-crossing-reviews.tsv", 
+    sep = "\t", 
+    chunksize = 5,
+    nrows = 20,
+    usecols = ["grade", "date"]) as reader:
+    for chunk in reader:
+        print(chunk)
+#>    grade        date
+#> 0      4  2020-03-20
+#> 1      5  2020-03-20
+#> 2      0  2020-03-20
+#> 3      0  2020-03-20
+#> 4      0  2020-03-20
+#>    grade        date
+#> 5      0  2020-03-20
+#> 6      0  2020-03-20
+#> 7      0  2020-03-20
+#> 8      0  2020-03-20
+#> 9      0  2020-03-20
+#>     grade        date
+#> 10      1  2020-03-20
+#> 11      0  2020-03-20
+#> 12      0  2020-03-20
+#> 13      0  2020-03-20
+#> 14      0  2020-03-20
+#>     grade        date
+#> 15      0  2020-03-20
+#> 16      0  2020-03-20
+#> 17      0  2020-03-20
+#> 18      0  2020-03-20
+#> 19      0  2020-03-20
+```
+
+
+
+Specifying `iterator = True` will also return the `TextFileReader` object:
+
+```python
+with pd.read_csv("tmp.sv", sep="|", iterator=True) as reader:
+    reader.get_chunk(5)
+```
+
+
+
+
+### Reading from other sources
+
+- json: `pd.read_json`
 
 - html table: `pd.read_html`
 
@@ -185,10 +239,9 @@ pd.concat([pd.read_csv(f).assign(file=f)
 
 ## Filtering rows
 
-### `.loc` and `iloc`
+### Selection by integer and label 
 
-
-Chain loc and iloc
+Chain `.loc` and `.iloc`
 
 
 ```python
@@ -201,23 +254,57 @@ df.iloc[10:15, :].loc[:, ["island", "body_mass_g"]]
 #> 14  Torgersen       4400.0
 ```
 
+For `iloc`, the boolean mask cannot be a `Series`, if so, use its `values` property 
 
-Use a mix of label-based and integer-based selection 
+```python
+df = pd.DataFrame([[1, 2], [3, 4], [5, 6]],
+                  index=list('abc'),
+                  columns=['A', 'B'])
+                  
+# raise ValueError: iLocation based boolean indexing cannot use an indexable as a mask
+df.iloc[df["A"] > 1]
+# use .values instead 
+df.iloc[(df["A"] > 1).values]
+```
+
+
+
+Use a mix of label-based and integer-based selection
 
 ```python
 df.iloc[df.index.get_loc("a"), 1]
 ```
 
-use lambda function 
+
+### Selection by callable
+
+`.loc`, `.iloc`, and also `[]` indexing can accept a callable as indexer. The callable must be a function with one argument (the calling Series or DataFrame) that returns valid output for indexing.
 
 ```python
 df.loc[lambda d: d.sex == "Male"]
 ```
 
 
-### Related functions 
 
-Filter by `IN` conditions 
+When using lambda functions, the first argument it received comes from the previous chain, not the original data frame. 
+
+
+```python
+(df.groupby("sex")
+    .mean()
+    # select group with mean > 40
+    .loc[lambda df: df["bill_length_mm"] > 40]
+    .reset_index())
+#>       sex  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g
+#> 0  Female        42.09375      16.421875            197.375       3862.0
+#> 1    Male        45.84375      17.890625            204.500       4544.0
+```
+
+
+
+### Related functions
+
+Filter by `IN` conditions
 
 ```python
 df.loc[df.island.apply(lambda x: x in ["Dream", "Biscoe"]), :]
@@ -231,7 +318,7 @@ df.loc[df.island.apply(lambda x: x in ["Dream", "Biscoe"]), :]
 ## Working with columns
 
 
-In general, when working with columns pandas is more similar to base R rather than dplyr, in the sense that it encourages me to directly access the column `df[col]` and operate on it. The `assign` method is a helper function that's similar to dplyr's `mutate`, but I figured the python community gravitates more towards the general approach.  This also makes pandas more procedural and non-functional to me. Anyway this is a helpful mental model where there is not a convenient helper function in pandas, for example, change all string column's value to lower case: 
+In general, when working with columns pandas is more similar to base R rather than dplyr, in the sense that it encourages me to directly access the column `df[col]` and operate on it. The `assign` method is a helper function that's similar to dplyr's `mutate`, but I figured the python community gravitates more towards the general approach.  This also makes pandas more procedural and non-functional to me. Anyway this is a helpful mental model where there is not a convenient helper function in pandas, for example, change all string column's value to lower case:
 
 
 ```python
@@ -240,15 +327,15 @@ for col in df.columns:
         df[col] = df[col].str.lower()
 ```
 
-### Creating and modifying columns 
+### Creating and modifying columns
 
-The `assign` method creates multiple columns with quotes: 
+The `assign` method creates multiple columns with quotes:
 
 
 ```python
 df.assign(
   sex2 = np.where(df.sex == "Male", 0, 1),
-  length_double = 
+  length_double =
     lambda df: df.bill_length_mm * 2
 ).head()
 #>   species     island  bill_length_mm  ...     sex  sex2  length_double
@@ -261,11 +348,11 @@ df.assign(
 #> [5 rows x 9 columns]
 ```
 
-`assign` insert columns at the end, the `insert` method create columns in the specified location **inplace**
+`assign` inserts columns at the end, the `insert` method create columns in the specified location **inplace**
 
 
 ```python
-# insert column at the top 
+# insert column at the top
 df.insert(0, "bill_double", df.bill_length_mm * 2)
 df.info()
 #> <class 'pandas.core.frame.DataFrame'>
@@ -285,7 +372,7 @@ df.info()
 #> memory usage: 4.9 KB
 ```
 
-`rename` accepts a dict of {oldname: newname} pair to rename the columns 
+`rename` accepts a dict of {oldname: newname} pair to rename the columns
 
 
 ```python
@@ -307,7 +394,7 @@ df.rename({"body_mass_g": "mass"}, axis = "columns")
 ```
 
 
-### Selecting columns 
+### Selecting columns
 
 `loc` and `iloc` are two general options
 
@@ -316,7 +403,7 @@ df[list(df.columns[0:3]) + list(df.columns[5:6])]
 ```
 
 
-### Removing columns 
+### Removing columns
 
 The `pop` method removes a column **inplace** and returns the removed column as a series. This comes in handy in machine learning when creating input matrix and the response out of training set
 
@@ -328,7 +415,7 @@ X = df_training
 
 ### Related functions
 
-Common operations and related functions 
+Common operations and related functions
 
 - if else: `np.where` or `apply` in general
 
@@ -337,13 +424,13 @@ Common operations and related functions
 ```python
 pd_df['difficulty'] = np.select(
     [
-        pd_df['Time'].between(0, 30, inclusive=False), 
+        pd_df['Time'].between(0, 30, inclusive=False),
         pd_df['Time'].between(30, 60, inclusive=True)
-    ], 
+    ],
     [
-        'Easy', 
+        'Easy',
         'Medium'
-    ], 
+    ],
     default='Unknown'
 )
 
@@ -386,10 +473,10 @@ df.iloc[:, df.columns.map(lambda x: x.startswith("bill"))]
 `DataFrame.select_dtypes(include = None, exclude = None)` returns a subset of the DataFrame's columns based on the column dtypes.
 
 ``` python
-# select all numerical columns regardless of digits 
+# select all numerical columns regardless of digits
 df.select_dtypes(include = 'number')
 
-# select all columns that are not boolean 
+# select all columns that are not boolean
 df.select_dtypes(exclude = "bool")
 ```
 
@@ -397,10 +484,10 @@ More generally, use the `apply + iloc` flow:
 
 
 ```python
-# check each column's type 
+# check each column's type
 df.apply(lambda x: x.dtype == "category", axis = 0).values
 
-# select columns that pass the check 
+# select columns that pass the check
 #> array([False,  True,  True, False, False, False, False,  True])
 df.iloc[:, df.apply(lambda x: x.dtype == "category", axis = 0).values]
 #>     species     island     sex
@@ -451,11 +538,11 @@ Internally, category data type are represented using integers (like in R), and `
 
 
 
-## Miscellaneous tips 
+## Miscellaneous tips
 
-### Chaining operations 
+### Chaining operations
 
-A generic approach is chaining operations enclosed in a set of parenthesis: 
+A generic approach is chaining operations enclosed in a set of parenthesis:
 
 ```python
 (df
@@ -464,16 +551,16 @@ A generic approach is chaining operations enclosed in a set of parenthesis:
   .method3)
 ```
 
-Since pandas 0.16.2 the `pipe` method was introduced, it accepts a function, which takes in the current dataframe and return a new dataframe. 
+Since pandas 0.16.2 the `pipe` method was introduced, it accepts a function, which takes in the current dataframe and return a new dataframe.
 
 
 ```python
-def double_length(df: pd.DataFrame) -> pd.DataFrame: 
+def double_length(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(double_length = df.flipper_length_mm * 2)
-    
-def filter_island(df: pd.DataFrame, islands: [] = ["Biscoe", "Dream"]) -> pd.DataFrame: 
+
+def filter_island(df: pd.DataFrame, islands: [] = ["Biscoe", "Dream"]) -> pd.DataFrame:
     return df[df.island.isin(islands)]
-  
+
 (df
     .pipe(double_length)
     .pipe(filter_island))
@@ -494,5 +581,12 @@ def filter_island(df: pd.DataFrame, islands: [] = ["Biscoe", "Dream"]) -> pd.Dat
 ```
 
 
+### Iterating over rows
+
+
+```python
+for row in zip(*[df[c] for c in df.columns]):
+    pass
+```
 
 

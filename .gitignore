@@ -1,10 +1,2 @@
-.Rproj.user
-.Rhistory
-.RData
-/blogdown
-.DS_Store
-Thumbs.db
-/public/
-/resources/
-renv/*
-!renv/activate.R
+/.quarto/
+/_site/

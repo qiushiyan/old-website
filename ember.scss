@@ -1,0 +1,79 @@
+/*-- scss:defaults --*/
+
+// use litera as the base
+$theme: "litera" !default;
+
+// import google fonts
+@import "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap";
+
+// use Atkinson Hyperlegible font if available
+$font-family-sans-serif: "Atkinson Hyperlegible", -apple-system,
+  BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+  "Noto Color Emoji" !default;
+
+/*-- scss:rules --*/
+
+// litera is serif by default: revert to san-serif
+p {
+  font-family: $font-family-sans-serif;
+}
+
+.sourceCode {
+  position: relative;
+  code::before {
+    border-radius: 0 0 0.25rem 0.25rem;
+    font-size: 12px;
+    letter-spacing: 0.025rem;
+    padding: 0.1rem 0.5rem;
+    position: absolute;
+    right: 0.5rem;
+    text-align: right;
+    text-transform: uppercase;
+    bottom: 0;
+  }
+  pre {
+    code.r::before {
+      content: "R";
+      background: #2467bb;
+      color: black;
+    }
+    code.python::before {
+      content: "PY";
+      background: #3776ab;
+      color: black;
+      tab-size: 4;
+    }
+    code.json::before {
+      content: "JSON";
+      background: #3776ab;
+      color: black;
+      tab-size: 4;
+    }
+    code.sql::before {
+      content: "SQL";
+      background: #d2c4e9;
+      color: black;
+      tab-size: 4;
+    }
+    code.bash::before {
+      content: "SHELL";
+      background: #385b58;
+      color: black;
+      tab-size: 4;
+    }
+    code.javascript::before {
+      content: "JS";
+      background: #f7df1e;
+      color: black;
+      tab-size: 4;
+    }
+    code.typescript::before {
+      content: "TS";
+      background: #3178c6;
+      color: black;
+      tab-size: 4;
+    }
+  }
+}

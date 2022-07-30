@@ -1,0 +1,55 @@
+---
+title: ""
+about:
+  template: solana
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/qiushiyan
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/qiushiyan
+    - icon: file-arrow-down-fill
+      text: resume
+      url: "assets/files/resume.pdf"
+---
+
+## About me
+
+I am currently a graduate student at Vanderbilt University, Data Scinece Institute.
+
+## Projects
+
+I work mostly in R and sometimes in Python for data science. Here is some selected proejcts.
+
+- [agua](https://agua.tidymodels.org): An R package that provides h2o integration to the tidymodels framework. Users can fit, optimize and evaluate models using the friendly tidymodels syntax as well as taking advantages of h2o's computing infrastructure. This package is my 2022 summer internship project at RStudio (now Posit).
+
+- [xkcd](https://qiushiyan.github.io/xkcd/): An R package to create interactive xkcd-styled charts in R. The package itself is nothing to brag about but I have done some experimentations in it with building htmlwidgets with TypeScript and esbuild.
+
+- [nyclodging](https://github.com/qiushiyan/nyclodging) : A shiny app to explore Airbnb rentals in NYC. Includes various EDA of spatial data and a prediction model for listing prices given housing descriptions as user input. The application is built with the golem framework.
+
+- [overwatcher](https://overwatcher-stat.herokuapp.com/docs): A REST API for player and match statistics in the Overwatch League (yes it's not a dead game). The application is built with FastAPI.
+
+
+In addition to data stuff I like to dabble in many other technologies to keep myself motivated to learn something new.
+The next few projects are typically proof-of-concepts ones for a sense of achievement from time to time, and is not intended for wider usage. But perhaps someday I will return to them and have data science as a pure hobby.
+
+- frontend development
+
+  - [JavaScript notebook](https://github.com/qiushiyan/js-notebook): an interactive notebook for JavaScript and TypeScript, available via npx with `npx javascript-notebook serve`. The application is built with React, Redux Toolkit, TypeScript and esbuild.
+
+  - [data science shelf](dsbook-list.web.app/): a vue + firebase application for sharing good readings in data science.
+
+- game development
+
+  - [real2d](https://github.com/qiushiyan/real2d): a really simple 2D ECS game engine written in C++ and Lua.
+
+- miscellaneous
+
+  - [linux command line cheatsheet](https://github.com/qiushiyan/linux-command-line-cheatsheet/blob/main/Linux_Command_Line_Cheat_Sheet.pdf?raw=true): A cheatsheet of common linux commands.
+
+  - [clipstash](https://github.com/qiushiyan/clipstash): A web app and cli written in rust to take notes and retrieve to clipboard
+
+  - [vstodo](https://github.com/qiushiyan/vstodo): A vscode extension to manage todo lists in the editor.
+
+  - [servy](https://github.com/qiushiyan/servy): A simple HTTP server written with Elixir OTP

@@ -1,0 +1,42 @@
+project:
+  type: website
+
+website:
+  title: "Data and other boring things"
+  site-url: https://qiushiyan.dev
+  open-graph:
+    site-name: qiushiyan.dev
+  comments:
+    utterances:
+      repo: qiushiyan/qiushiyan.dev
+  navbar:
+    right:
+      - text: "Home"
+        href: posts.html
+      - text: "About"
+        href: about.html
+      - icon: github
+        href: https://github.com/qiushiyan
+format:
+  html:
+    theme: ember.scss
+    css: styles.css
+    citation-location: margin
+    reference-location: margin
+    highlight-style: pygments
+    code-block-bg: "#f4f4f4"
+    code-overflow: wrap
+    fig-width: 8
+    fig-height: 6
+    code-link: true
+
+filters:
+  - code-filename
+  - lightbox
+
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    message: false
+    warning: false

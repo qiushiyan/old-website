@@ -252,7 +252,7 @@ deaths
 
 The total deaths for each cause varies over several orders of magnitude: there are 46,794 deaths from heart attack but only 1 from Tularemia.
 ```{python}
-#| display-language: python
+#| display-language: true 
 (deaths.groupby(["cod"]).
   size().
   reset_index(name = "per_cause").

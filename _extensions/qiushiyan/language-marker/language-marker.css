@@ -20,6 +20,12 @@
   color: white;
 }
 
+.language-marker code.r::before {
+  content: "R";
+  background: #276dc2;
+  color: white;
+}
+
 .language-marker code.python::before {
   content: "PYTHON";
   background: #3776ab;

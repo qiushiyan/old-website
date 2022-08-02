@@ -11,7 +11,7 @@ website:
       repo: qiushiyan/qiushiyan.dev
   navbar:
     right:
-      - text: "Home"
+      - text: "Posts"
         href: posts.html
       - text: "About"
         href: about.html
@@ -32,7 +32,6 @@ format:
 
 filters:
   - code-filename
-  - lightbox
 
 knitr:
   opts_chunk:

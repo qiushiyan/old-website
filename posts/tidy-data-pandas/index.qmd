@@ -6,6 +6,8 @@ description: "Finally some notes on tidying messy data with pandas so I don't ha
 bibliography: ref.bib
 image: featured.png
 image-alt: artwork by @allison_hosrt
+filters: 
+  - language-marker 
 ---
 
 I have been been doing some recap on how to do basic data processing and cleaning in Python with pandas. So this post is mostly a self-reminder on how to deal with messy data in Python, by reproducing examples presented in Hadley Wickham's [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) paper [@JSSv059i10].
@@ -98,6 +100,8 @@ Now let's calculate the $\chi^2$ statistic in R and the corresponding p value；
 
 
 ```{r}
+#| display-language: true
+
 library(infer)
 chisq_stat <- py$tidy_pew %>%
   tidyr::uncount(count) %>%
@@ -118,11 +122,12 @@ This shows strong relationship between `income` and `religion`.
 Another common use of this wide data format is to record regularly spaced observations over time, illustrated by the `billboard` dataset. Ther rank of a specific track in each week after it enters the Billboard top 100 is recorded in 75 columns, `wk1` to `wk75`.
 
 ```{python}
+#| display-language: true
 billboard = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/billboard.csv")
 billboard
 ```
 
-If we are to answer questions like "what are the average ranking of artisits across all weeks?", the `wk*` columns need to be transformed into values:  ^[Although both pandas and dplyr (> 1.0) supports rowwise operatios, we will suffer some performance penalties for not utilizing vectorization.]
+If we are to answer questions like "what are the average ranking of artists across all weeks?", the `wk*` columns need to be transformed into values:  ^[Although both pandas and dplyr (> 1.0) supports row-wise operations, we will suffer some performance penalties for not utilizing vectorization.]
 
 ```{python}
 tidy_billboard = billboard.melt(id_vars = ["year", "artist", "track", "time", "date.entered"],
@@ -203,6 +208,7 @@ There are two major problems with `weather`:
 After stating these common problems and their remidies, Hadley presented a case study section on how tidy dataset can facilitate data analysis. The case study uses individual-level mortality data from Mexico.  The goal is to find causes of death with unusual temporal patterns, at hour level. It's time to move back from Python to R!
 
 ```{r}
+#| display-language: true
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -222,6 +228,7 @@ Thanks to the [`reticulate`](https://rstudio.github.io/reticulate/) package, we 
 
 
 ```{python}
+#| display-language: true
 deaths = r.deaths
 deaths_per_hour = deaths["hod"].value_counts()
 sns.lineplot(x = deaths_per_hour.index, y = deaths_per_hour.values)
@@ -235,6 +242,7 @@ To provide informative labels for causes, we next join the dataset to the `codes
 
 
 ```{r}
+#| display-language: true
 deaths <- left_join(deaths, codes) %>%
   rename(cause = disease)
 
@@ -244,7 +252,7 @@ deaths
 
 The total deaths for each cause varies over several orders of magnitude: there are 46,794 deaths from heart attack but only 1 from Tularemia.
 ```{python}
-# Python
+#| display-language: python
 (deaths.groupby(["cod"]).
   size().
   reset_index(name = "per_cause").
@@ -255,6 +263,7 @@ The total deaths for each cause varies over several orders of magnitude: there a
 This means that rather than the total number, it makes more sense to think in proportions. If a cause of death departs from the overall temporal pattern, then its proportion of deaths in a given hour compared to the total deaths of that cause should differ significantly from that of the hourly deaths at the same time compared to total deaths. I denote these two proportions as `prop1` and `prop2` respectively. To ensure that the causes we consider are sufficiently representative we’ll only work with causes with more than 50 total deaths.
 
 ```{r}
+#| display-language: true
 prop1 <- deaths %>%
   count(hod, cause, name = "per_hour_per_cause") %>%
   add_count(cause, wt = per_hour_per_cause, name = "per_cause") %>%

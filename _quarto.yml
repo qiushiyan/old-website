@@ -13,8 +13,8 @@ website:
     right:
       - text: "Posts"
         href: posts.html
-      - text: "About"
-        href: about.html
+      - text: "Projects"
+        href: projects.html
       - icon: github
         href: https://github.com/qiushiyan
 format:

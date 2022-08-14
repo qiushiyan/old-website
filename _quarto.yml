@@ -33,6 +33,10 @@ format:
 filters:
   - code-filename
 
+comments:
+  giscus:
+    repo: qiushiyan/qiushiyan.dev
+
 knitr:
   opts_chunk:
     collapse: true

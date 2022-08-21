@@ -9,9 +9,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/qiushiyan
-    - icon: file-arrow-down-fill
-      text: Resume
-      url: "assets/files/resume.pdf"
+    # - icon: file-arrow-down-fill
+    #   text: Resume
+    #   url: "assets/files/resume.pdf"
 ---
 
 ## Projects

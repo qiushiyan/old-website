@@ -4,7 +4,7 @@ date: '2022-02-20'
 categories: Python
 description: |
     The biggest incentive to upgrade my python version
-knitr: true
+jupyter: python3.10
 image: featured.png
 ---
 
@@ -12,11 +12,11 @@ image: featured.png
 
 [Structural Pattern Matching](https://www.python.org/dev/peps/pep-0634/) is a new feature introduced in python [3.10](https://docs.python.org/3/whatsnew/3.10.html), and perhaps the most intriguing one.  It takes as input an object to inspect (following `match`), and multiple patterns to match against (following one or more `case`). If there is a match, a pattern-specific code block runs. The basic syntax is
 
-```{r, include = FALSE}
+<!-- ```{r, include = FALSE}
 ymisc::set_knitr_options()
 library(reticulate)
 Sys.setenv(RETICULATE_PYTHON = "/opt/homebrew/Cellar/python@3.10/3.10.5/bin/python3")
-```
+``` -->
 
 
 ```{python}
@@ -166,13 +166,8 @@ match commad.split():
 
 For conditions that checks if an object is of a data type, we can directly use the class creator function:
 
-::: {.column-margin}
-
-Note: the first line of the error message `"Error in py_call_impl(...)"` in this example are not from python, because this post is rendered with a python wrapper in R.
-
-:::
-
-```{python, error = TRUE}
+```{python}
+#| error: true
 def sum_list(numbers):
     match numbers:
         case []:
@@ -180,7 +175,7 @@ def sum_list(numbers):
         case [int(first) | float(first), *rest]:
             return first + sum_list(rest)
         case _:
-            raise ValueError(f"Can only sum lists of numbers, get {_}")
+            raise ValueError(f"Can only sum lists of numbers")
 
 sum_list([1, 2, 3])
 sum_list([1, "2", 3])
@@ -232,10 +227,10 @@ class Direction(str, enum.Enum):
 
 match "down":
     case Direction.up:
-        "match 1"
+        print("match 1")
     case Direction.down:
-        "match 2"
+        print("match 2")
     case _:
-        "match 3"
+        print("match 3")
 ```
 

@@ -23,12 +23,13 @@ website:
         href: https://github.com/qiushiyan
 format:
   html:
-    theme: ember.scss
+    theme:
+      light: ember.scss
+      dark: [ember.scss, dark.scss]
     css: styles.css
     citation-location: margin
     reference-location: margin
     highlight-style: pygments
-    code-block-bg: "#f4f4f4"
     code-overflow: wrap
     fig-width: 8
     fig-height: 6

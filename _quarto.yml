@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+    - resume.pdf
 
 website:
   title: "Data and other boring things"
@@ -12,9 +14,11 @@ website:
   navbar:
     right:
       - text: "Posts"
-        href: posts.html
+        href: posts.qmd
       - text: "Projects"
-        href: projects.html
+        href: projects.qmd
+      - text: "About"
+        href: about.qmd
       - icon: github
         href: https://github.com/qiushiyan
 format:

@@ -1,0 +1,22 @@
+---
+about:
+  template: solana
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/qiushiyan
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/qiushiyan
+    - icon: file-arrow-down-fill
+      text: Resume
+      url: "/resume.pdf"
+---
+
+## About me
+
+I am currently a graduate student at Vanderbilt University, Data Science Institute.
+
+My resume.
+
+<iframe id="resume" src="/resume.pdf" width="100%" height="800px"></iframe

@@ -1,17 +1,6 @@
 ---
-title: ""
 about:
   template: solana
-  links:
-    - icon: github
-      text: Github
-      href: https://github.com/qiushiyan
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com/in/qiushiyan
-    # - icon: file-arrow-down-fill
-    #   text: Resume
-    #   url: "assets/files/resume.pdf"
 ---
 
 ## Projects
@@ -50,6 +39,19 @@ The next few projects are typically proof of concepts and are not intended for w
 
   - [servy](https://github.com/qiushiyan/servy): A simple HTTP server written with Elixir OTP
 
-## About me
 
-I am currently a graduate student at Vanderbilt University, Data Science Institute.
+## Currently working on
+
+I am trying to implement a recommendation system in Python from scratch. Components to be considered:
+
+- a data cleaning and feature engineering pipeline with kedro and pyspark
+
+- recall services: A FastAPI service, may need to implement item2vec
+
+- rank services: Another FastAPI service
+
+- recommendation services: Another FastAPI service
+
+- message services: may use kafka and cassandra to collect behavior data
+
+- frontend: Svelte and TypeScript

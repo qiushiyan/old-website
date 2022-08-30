@@ -6,8 +6,12 @@ description: "Finally some notes on tidying messy data with pandas so I don't ha
 bibliography: ref.bib
 image: featured.png
 image-alt: artwork by @allison_hosrt
-filters: 
-  - language-marker 
+filters:
+  - language-marker
+knitr:
+  opts_chunk:
+      collapse: false
+      comment: ""
 ---
 
 I have been been doing some recap on how to do basic data processing and cleaning in Python with pandas. So this post is mostly a self-reminder on how to deal with messy data in Python, by reproducing examples presented in Hadley Wickham's [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) paper [@JSSv059i10].
@@ -252,7 +256,7 @@ deaths
 
 The total deaths for each cause varies over several orders of magnitude: there are 46,794 deaths from heart attack but only 1 from Tularemia.
 ```{python}
-#| display-language: true 
+#| display-language: true
 (deaths.groupby(["cod"]).
   size().
   reset_index(name = "per_cause").

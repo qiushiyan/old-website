@@ -1,1 +1,36 @@
 /* css styles */
+i {
+  font-style: normal;
+}
+
+i.bi {
+  margin-right: 0.15em;
+}
+
+.about-link {
+  font-size: 0.8em;
+  padding: 0.25em 0.5em;
+  border-radius: 4px;
+  color: #4e5862;
+  text-decoration: none;
+  border: solid 1px;
+}
+
+.about-links {
+  display: flex;
+  justify-content: left;
+  padding-bottom: 1.2em;
+}
+
+#about-me h2 {
+  border: none;
+}
+
+@media (min-width: 992px) {
+  .about-links {
+    flex-direction: row;
+    column-gap: 0.8em;
+    row-gap: 15px;
+    flex-wrap: wrap;
+  }
+}

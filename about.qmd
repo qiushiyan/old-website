@@ -1,22 +1,46 @@
----
-about:
-  template: solana
-  links:
-    - icon: github
-      text: Github
-      href: https://github.com/qiushiyan
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com/in/qiushiyan
-    - icon: file-arrow-down-fill
-      text: Resume
-      url: "/resume.pdf"
----
-
 ## About me
+
+
+::: {.about-links}
+
+<a href="https://github.com/qiushiyan" class="about-link">
+  <i class="bi bi-github">
+    <span class="about-link-text">Github</span>
+  </i>
+</a>
+
+<a href="https://linkedin.com/in/qiushiyan" class="about-link">
+  <i class="bi bi-linkedin">
+    <span class="about-link-text">Linkedin</span>
+  </i>
+</a>
+
+<a href="/resume.pdf" class="about-link">
+  <i class="bi bi-file-arrow-down-fill">
+    <span class="about-link-text">Resume</span>
+  </i>
+</a>
+
+:::
+
+<!-- ```{r}
+#| eval: false
+source("R/ui.R")
+library(htmltools)
+tagList(
+  make_about_icon("github", "Github", "https://github.com/qiushiyan"),
+  make_about_icon("linkedin", "Linkedin", "https://linkedin.com/in/qiushiyan"),
+  make_about_icon("file-arrow-down-fill", "Resume", "/resume.pdf")
+)
+``` -->
+
 
 I am currently a graduate student at Vanderbilt University, Data Science Institute.
 
 My resume.
 
-<iframe id="resume" src="/resume.pdf" width="100%" height="800px"></iframe
+::: {.column-body-outset}
+
+<iframe id="resume" src="/resume.pdf" width="100%" style="min-height: 900px"></iframe>
+
+:::

@@ -281,13 +281,15 @@ Hadley used mean square error between the two proportions as a kind of distance,
 dist <- prop1 %>%
   filter(per_cause > 50) %>%
   left_join(prop2, on = "hod") %>%
-  select(hour = hod,
-         cause,
-         n = per_cause,
-         prop1,
-         prop2) %>%
+  select(
+    hour = hod,
+    cause,
+    n = per_cause,
+    prop1,
+    prop2
+  ) %>%
   group_by(cause, n) %>%
-  summarize(dist = mean((prop1 - prop2) ^ 2)) %>%
+  summarize(dist = mean((prop1 - prop2)^2)) %>%
   ungroup()
 
 dist %>%
@@ -301,14 +303,18 @@ Here we see causes of death with highest `dist` are mainly accidents and rare di
 dist %>%
   ggplot(aes(n, dist)) +
   geom_jitter() +
-  ggrepel::geom_text_repel(aes(label = cause),
-                           top_n(dist, 10)) +
+  ggrepel::geom_text_repel(
+    aes(label = cause),
+    top_n(dist, 10)
+  ) +
   scale_x_log10() +
   scale_y_log10() +
   geom_smooth(method = "lm") +
-  labs(title = "Temporal deviation of causes of deaths in Mexico",
-       y = NULL,
-       x = "total death")
+  labs(
+    title = "Temporal deviation of causes of deaths in Mexico",
+    y = NULL,
+    x = "total death"
+  )
 ```
 
 
@@ -335,7 +341,7 @@ augment(lm_fit) %>%
 ```{r}
 rows <- augment(lm_fit) %>%
   mutate(row = row_number()) %>%
-  filter(.std.resid> 1.5) %>%
+  filter(.std.resid > 1.5) %>%
   select(row) %>%
   pull(row)
 
@@ -361,12 +367,16 @@ prop1 %>%
   pivot_longer(c(prop1, prop2)) %>%
   ggplot(aes(hod, value, color = name)) +
   geom_line() +
-  scale_color_manual(name = NULL,
-                     labels = c("cause-specific", "overall"),
-                     values = c("#FFBF0F", "#0382E5")) +
-  facet_wrap(~ cause, scales = "free_y", labeller = label_wrap_gen(20)) +
-  labs(x = "hour", y = NULL, title = "Most deviated causes of death",
-       subtitle = "comparing cause-specific temporal pattern to overall trend") +
+  scale_color_manual(
+    name = NULL,
+    labels = c("cause-specific", "overall"),
+    values = c("#FFBF0F", "#0382E5")
+  ) +
+  facet_wrap(~cause, scales = "free_y", labeller = label_wrap_gen(20)) +
+  labs(
+    x = "hour", y = NULL, title = "Most deviated causes of death",
+    subtitle = "comparing cause-specific temporal pattern to overall trend"
+  ) +
   theme_minimal(base_size = 16) +
   theme(legend.position = "top")
 ```

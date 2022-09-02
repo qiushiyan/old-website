@@ -11,7 +11,7 @@ listing:
 page-layout: full
 ---
 
-Welcome to my blog. This is the place I share notes about various data science technologies, mostly centered around R, Python and Shiny. See [projects](/projects) to see my past projects and [about](/about) to know more about me.
+Welcome to my blog. This is the place I share notes about various data science technologies, mostly centered around R, Shiny, Python and Julia.
 
 
 

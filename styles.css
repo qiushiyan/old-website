@@ -1,13 +1,25 @@
-/* css styles */
-i {
+/* about page icons */
+#about-me .cell-output-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 45px;
+  overflow: hidden;
+}
+
+#about-me .cell-output-display a {
+  margin-right: 10px;
+}
+
+#about-me .cell-output-display i {
   font-style: normal;
 }
 
-i.bi {
+#about-me .cell-output-display i.bi {
   margin-right: 0.15em;
 }
 
-.about-link {
+#about-me .about-link {
   font-size: 0.8em;
   padding: 0.25em 0.5em;
   border-radius: 4px;
@@ -16,18 +28,12 @@ i.bi {
   border: solid 1px;
 }
 
-.about-links {
-  display: flex;
-  justify-content: left;
-  padding-bottom: 1.2em;
-}
-
 #about-me h2 {
   border: none;
 }
 
 @media (min-width: 992px) {
-  .about-links {
+  #about-me .cell-output-display {
     flex-direction: row;
     column-gap: 0.8em;
     row-gap: 15px;

@@ -3,21 +3,23 @@ about:
   template: solana
 ---
 
-## Projects
-
-I work mostly in R and sometimes in Python doing data science work. Here are some selected projects.
+## Software projects
 
 - [agua](https://agua.tidymodels.org): An R package that provides H2O integration to the tidymodels framework. Users can fit, optimize and evaluate models using the friendly tidymodels syntax as well as taking advantages of H2O's computing infrastructure. This package is my 2022 summer internship project at RStudio (now Posit).
 
+- [overwatcher](https://overwatcher-stat.herokuapp.com/docs): A REST API for player and match statistics in the Overwatch League (yes it's not a dead game). The application is built with FastAPI.
+
 - [xkcd](https://qiushiyan.github.io/xkcd/): An R package to create interactive xkcd-styled charts in R. The package itself is nothing to brag about but I have done some experiments in it with building htmlwidgets with TypeScript and esbuild.
+
+## Analytical projects
 
 - [nyclodging](https://github.com/qiushiyan/nyclodging) : A shiny app to explore Airbnb rentals in NYC. Includes various EDA of spatial data and a prediction model for listing prices given housing descriptions as user input. The application is built with the golem framework.
 
-- [overwatcher](https://overwatcher-stat.herokuapp.com/docs): A REST API for player and match statistics in the Overwatch League (yes it's not a dead game). The application is built with FastAPI.
+- [Titanic Survival](/titanic-survival.pdf): A rather pedantic analysis of the Titanic incident. Ok it's boring but it uses a more complete and updated version of the Titanic dataset (not the kaggle one) provided by the [Encyclopedia Titanica](https://www.encyclopedia-titanica.org/), including redundancy analysis, multiple imputation, logistic regression, bootstrap validation and interpretability analysis.
 
+## Miscellaneous
 
-In addition to data stuff I like to dabble in many other technologies to keep myself motivated to learn something new.
-The next few projects are typically proof of concepts and are not intended for wider usage at this point.
+In addition to data stuff I like to dabble in many other technologies to keep myself motivated to learn something new. Thee following listings are typically proof of concepts and are not intended for wider usage at this point.
 
 - frontend development
 
@@ -29,9 +31,7 @@ The next few projects are typically proof of concepts and are not intended for w
 
   - [real2d](https://github.com/qiushiyan/real2d): a really simple 2D ECS game engine written in C++ and Lua.
 
-- miscellaneous
-
-  - [linux command line cheatsheet](https://github.com/qiushiyan/linux-command-line-cheatsheet/blob/main/Linux_Command_Line_Cheat_Sheet.pdf?raw=true): A cheatsheet of common linux commands.
+- others
 
   - [clipstash](https://github.com/qiushiyan/clipstash): A web app and cli written in Rust to take notes and copy to clipboard
 
@@ -40,7 +40,7 @@ The next few projects are typically proof of concepts and are not intended for w
   - [servy](https://github.com/qiushiyan/servy): A simple HTTP server written with Elixir OTP
 
 
-## Currently working on
+<!-- ## Currently working on
 
 I am trying to implement a recommendation system in Python from scratch. Components to be considered:
 
@@ -54,4 +54,4 @@ I am trying to implement a recommendation system in Python from scratch. Compone
 
 - message services: may use kafka and cassandra to collect behavior data
 
-- frontend: Svelte and TypeScript
+- frontend: Svelte and TypeScript -->

@@ -2,6 +2,7 @@ project:
   type: website
   resources:
     - resume.pdf
+    - titanic-survival.pdf
 
 website:
   title: "Data and other boring things"

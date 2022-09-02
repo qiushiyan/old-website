@@ -1,0 +1,78 @@
+---
+title: "Dataframe gymnastics in R, Pyhon and Julia"
+draft: true
+filters:
+    - grouped-tabsets
+description: |
+    A gallery of data frame opearations in R's tidyverse, data.table, Python's pandas, dask and Julia's DataFrames.jl.
+knitr:
+    opts_chunk:
+          cache: true
+          collpase: false
+---
+
+I am using R 4.2.0, Python 3.10.6 and Julia 1.8.0
+
+::: {.panel-tabset}
+
+### R
+Tidyverse packages
+
+```{r}
+library(dplyr)
+library(tidyr)
+```
+
+data.table
+
+```{r}
+library(data.table)
+```
+
+Versions of some core tidyverse packages in this post.
+
+```{r}
+#| collapse: true
+purrr::map(c("dplyr", "tidyr", "purrr"), packageVersion)
+```
+
+Version of data.table
+
+```{r}
+#| collapse: true
+packageVersion("data.table")
+getDTthreads()
+```
+
+
+### Python
+
+```{python}
+import pandas as pd
+import dask as dd
+```
+
+Package versions
+
+```{python}
+pd.__version__
+dd.__version__
+```
+
+
+### Julia
+
+```{julia}
+using DataFrames
+```
+
+Package version
+
+```{julia}
+using Pkg
+Pkg.status("DataFrames")
+```
+
+
+:::
+

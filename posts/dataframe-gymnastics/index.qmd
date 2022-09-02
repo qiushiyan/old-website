@@ -4,7 +4,11 @@ draft: true
 filters:
     - grouped-tabsets
 description: |
-    A gallery of data frame opearations in R's tidyverse, data.table, Python's pandas, dask and Julia's DataFrames.jl.
+    A gallery of data frame opearations in the following tools
+
+    - R: tidyverse, data.table
+    - Python: pandas, dask
+    - Julia: DataFrames.jl
 knitr:
     opts_chunk:
           cache: true

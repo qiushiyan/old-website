@@ -385,3 +385,6 @@ prop1 %>%
   theme(legend.position = "top")
 ```
 
+
+## Programmatic usage 
+

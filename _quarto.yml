@@ -3,6 +3,7 @@ project:
   resources:
     - resume.pdf
     - titanic-survival.pdf
+    - aws-cert-developer.pdf
 
 website:
   title: "Data and other boring things"

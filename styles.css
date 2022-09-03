@@ -20,7 +20,10 @@ body.floating.slimcontent .page-columns {
       25px,
       50px
     )
-    [page-start-inset] minmax(25px, 50px) [body-start-outset] minmax(25px, 50px)
+    [page-start-inset] minmax(25px, 100px) [body-start-outset] minmax(
+      25px,
+      50px
+    )
     [body-start] 1.5em [body-content-start] minmax(500px, calc(1000px - 3em))
     [body-content-end] 0.5em [body-end] minmax(25px, 50px)
     [body-end-outset] minmax(20px, 50px) [page-end-inset] minmax(25px, 150px) [page-end] 2fr [screen-end-inset] 1.5em [screen-end] !important;

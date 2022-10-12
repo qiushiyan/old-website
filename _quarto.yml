@@ -6,7 +6,7 @@ project:
     - aws-cert-developer.pdf
 
 website:
-  title: "Data and other boring stuff"
+  title: "Qiushi Yan"
   site-url: https://qiushiyan.dev
   open-graph:
     site-name: qiushiyan.dev
@@ -25,9 +25,7 @@ website:
         href: https://github.com/qiushiyan
 format:
   html:
-    theme:
-      dark: [ember.scss, dark.scss]
-      light: ember.scss
+    theme: [ember.scss, dark.scss]
     css: styles.css
     citation-location: margin
     reference-location: margin

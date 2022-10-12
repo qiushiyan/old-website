@@ -8,8 +8,8 @@ $link-color: #2563eb;
 $light: #525252;
 
 // Navigation element colors
-$footer-bg: #1e2a3b;
-$navbar-bg: #1e2a3b;
+$footer-bg: #0f182b;
+$navbar-bg: #0f182b;
 $sidebar-bg: #1e2a3b;
 
 // Code blocks
@@ -20,3 +20,24 @@ $popover-bg: #242424;
 
 // Bootstrap inputs
 $input-bg: #242424;
+
+#quarto-header {
+  background-color: #0f182b;
+  padding: 0.25rem 0;
+  z-index: 400;
+  nav {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    .navbar {
+      display: flex;
+      justify-content: center;
+    }
+    a {
+      color: white;
+    }
+    .navbar-brand {
+      font-size: 1.5em;
+    }
+  }
+}

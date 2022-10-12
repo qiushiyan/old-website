@@ -1,3 +1,31 @@
+.navbar-container.container-fluid {
+  width: 100%;
+  padding: 0.5rem 0;
+  max-width: 72rem;
+  display: flex;
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+}
+
+#navbarCollapse {
+  max-width: 38rem;
+}
+
+.blog-description {
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+.gradient-text {
+  --tw-gradient-to: #ec4899;
+  --tw-gradient-from: #3b82f6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
 /* increase main content width */
 .page-layout-article {
   grid-template-columns:

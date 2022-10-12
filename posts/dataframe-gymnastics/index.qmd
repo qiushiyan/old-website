@@ -1,8 +1,6 @@
 ---
 title: "Dataframe gymnastics in R, Pyhon and Julia"
 draft: true
-filters:
-    - grouped-tabsets
 description: |
     A gallery of data frame opearations in the following tools
 
@@ -11,7 +9,6 @@ description: |
     - Julia: DataFrames.jl
 knitr:
     opts_chunk:
-          cache: true
           collapse: false
           eval: false
 ---
@@ -23,7 +20,6 @@ flights <- nycflights13::flights
 
 ```{r}
 #| include: false
-#| eval: false
 
 vroom::vroom_write(flights, "flights.csv", delim = ",")
 repo <- "qiushiyan/qiushiyan.dev"

@@ -1,7 +1,7 @@
 .navbar-container.container-fluid {
   width: 100%;
   padding: 0.5rem 0;
-  max-width: 72rem;
+  max-width: 80rem;
   display: flex;
   justify-content: space-around;
   -webkit-justify-content: space-around;

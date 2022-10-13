@@ -18,7 +18,7 @@ website:
       - text: "Posts"
         href: posts.qmd
       - text: "Projects"
-        href: projects.qmd
+        href: https://projects.qiushiyan.dev
       - text: "About"
         href: about.qmd
       - icon: github

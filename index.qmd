@@ -8,6 +8,8 @@ listing:
   sort-ui: true
   filter-ui: true
 page-layout: full
+execute:
+  echo: false
 ---
 
 ::: {.blog-description}
@@ -27,10 +29,11 @@ Activities in the last year.
 ```
 
 ```{r}
-#| echo: false
-source("scripts/calendar.R")
-calendar_plot(calendar_data)
+library(ymisc)
+data <- calendar_data()
+calendar_plot(data)
 ```
+
 
 :::
 

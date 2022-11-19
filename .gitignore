@@ -2,5 +2,5 @@
 /_site/
 .Rproj.user
 posts/dataframe-gymnastics/flights.csv
-
+*.rds
 /.luarc.json

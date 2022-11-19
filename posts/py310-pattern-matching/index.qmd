@@ -3,7 +3,7 @@ title: Structural pattern matching in Python 3.10
 date: '2022-02-20'
 categories: Python
 description: |
-    The biggest incentive to upgrade my python version
+    The biggest incentive to upgrade my ython version
 jupyter: python3.10
 image: featured.png
 ---

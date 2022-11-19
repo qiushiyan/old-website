@@ -22,7 +22,7 @@ $popover-bg: #242424;
 $input-bg: #242424;
 
 #quarto-header {
-  background-color: #0f182b;
+  background-color: $body-bg;
   padding: 0.25rem 0;
   z-index: 400;
   nav {

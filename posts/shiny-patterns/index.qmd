@@ -1,56 +1,29 @@
 ---
-title: 'Shiny deisng patterns'
-date: '2022-07-30'
-categories: [R]
-description: | 
-  Tricks and patterns when building large shiny apps. 
-draft: yes 
+title: A Collection of Design Patterns in Shiny
+format: html
+draft: true
+filters:
+  - shinylive
 ---
 
-## Using modules 
+This is a Shinylive application embedded in a Quarto doc.
 
-## Dynamic updating 
+```{shinylive-python}
+#| standalone: true
 
+from shiny import *
 
-You can resolve this problem by “freezing” the input with `freezeReactiveValue()`. This ensures that any reactive value or outputs that use the input won’t be updated until the next full round of invalidation.
-
-```r
-server <- function(input, output, session) {
-  dataset <- reactive(get(input$dataset, "package:datasets"))
-  
-  observeEvent(input$dataset, {
-    freezeReactiveValue(input, "column")
-    updateSelectInput(inputId = "column", choices = names(dataset()))
-  })
-  
-  output$summary <- renderPrint({
-    summary(dataset()[[input$column]])
-  })
-}
-```
-
-preserve states
-
-```{.r}
-ui <- fluidPage(
-  textInput("label", "label"),
-  selectInput("type", "type", c("slider", "numeric")),
-  uiOutput("numeric")
+app_ui = ui.page_fluid(
+    ui.input_slider("n", "N", 0, 100, 40),
+    ui.output_text_verbatim("txt"),
 )
 
-server <- function(input, output, session) {
-  output$numeric <- renderUI({
-    value <- isolate(input$dynamic)
-    if (input$type == "slider") {
-      sliderInput("dynamic", input$label, value = value, min = 0, max = 10)
-    } else {
-      numericInput("dynamic", input$label, value = value, min = 0, max = 10)
-    }
-  })
-}
+def server(input, output, session):
+    @output
+    @render.text
+    def txt():
+        return f"The value of n*2 is {input.n() * 2}"
+
+app = App(app_ui, server)
+
 ```
-
-
-## Control Reactivity 
-
-## Data Management with R6 

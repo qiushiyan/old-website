@@ -8,6 +8,7 @@ project:
 website:
   title: "Qiushi Yan"
   site-url: https://qiushiyan.dev
+  google-analytics: G-34541V6NLD
   open-graph:
     site-name: qiushiyan.dev
   comments:

@@ -1,16 +1,15 @@
 /*-- scss:defaults --*/
 
 // Base document colors
-$body-bg: #0f182b;
-$body-color: #cbd5e1;
-$link-color: #2563eb;
-
+$body-bg: #18181b;
+$body-color: #FEFCE8;
+$link-color: #fde68a;
+$white: #fff;
 $light: #525252;
 
 // Navigation element colors
 $footer-bg: #0f182b;
-$navbar-bg: #0f182b;
-$sidebar-bg: #1e2a3b;
+$navbar-bg: rgba($body-bg, 0.8);
 
 // Code blocks
 $code-block-bg-alpha: -0.8;
@@ -22,7 +21,6 @@ $popover-bg: #242424;
 $input-bg: #242424;
 
 #quarto-header {
-  background-color: $body-bg;
   padding: 0.25rem 0;
   z-index: 400;
   nav {
@@ -34,10 +32,19 @@ $input-bg: #242424;
       justify-content: center;
     }
     a {
-      color: white;
+      color: $white;
     }
     .navbar-brand {
       font-size: 1.5em;
     }
+  }
+}
+
+p > code {
+  color: $white;
+  font-weight: 600;
+  background-color: none;
+  &:before, &:after {
+    content: "`";
   }
 }

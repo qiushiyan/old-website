@@ -29,6 +29,8 @@ Activities in the last year.
 ```
 
 ```{r}
+#| eval: false
+#| include: false
 library(ymisc)
 data <- calendar_data()
 calendar_plot(data)

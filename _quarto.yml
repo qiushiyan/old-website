@@ -2,6 +2,7 @@ project:
   type: website
   resources:
     - resume.pdf
+    - resume-sde.pdf
     - titanic-survival.pdf
     - aws-cert-developer.pdf
 
@@ -30,7 +31,7 @@ format:
     css: styles.css
     citation-location: margin
     reference-location: margin
-    highlight-style: dracula
+    highlight-style: oblivion
     code-overflow: wrap
     fig-width: 8
     fig-height: 6

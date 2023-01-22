@@ -386,5 +386,4 @@ prop1 %>%
 ```
 
 
-## Programmatic usage 
 

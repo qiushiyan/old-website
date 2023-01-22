@@ -90,6 +90,10 @@ body.floating.slimcontent .page-columns {
   border: none;
 }
 
+#title-block-header {
+  color: white
+}
+
 @media (min-width: 992px) {
   #about-me .cell-output-display {
     flex-direction: row;

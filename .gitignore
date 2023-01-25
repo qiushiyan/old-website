@@ -4,3 +4,5 @@
 posts/dataframe-gymnastics/flights.csv
 *.rds
 /.luarc.json
+rsconnect
+posts/dynamic-rmd-quarto/*_files

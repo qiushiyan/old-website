@@ -59,7 +59,7 @@ library(ggplot2)
 library(tidyr)
 library(scales)
 
-international_debt <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/international_debt.csv")
+international_debt <- readr::read_csv("https://github.com/qiushiyan/blog-data/blob/main/international_debt.csv?raw=true")
 sci_labeller <- label_number(scale_cut = cut_short_scale())
 ```
 

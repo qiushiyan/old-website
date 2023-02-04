@@ -87,7 +87,7 @@ ggplot2::theme_set(theme_bar())
 ## Column headers are values, not variable names
 
 ```{python}
-pew = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/pew.csv")
+pew = pd.read_csv("https://github.com/qiushiyan/blog-data/blob/main/pew.csv?raw=true")
 pew.head()
 ```
 
@@ -107,16 +107,16 @@ Now let's calculate the $\chi^2$ statistic in R and the corresponding p value；
 #| display-language: true
 
 library(infer)
-chisq_stat <- py$tidy_pew %>%
-  tidyr::uncount(count) %>%
-  specify(religion ~ income) %>%
-  hypothesize(null = "independence") %>%
+chisq_stat <- py$tidy_pew |>
+  tidyr::uncount(count) |>
+  specify(religion ~ income) |>
+  hypothesize(null = "independence") |>
   calculate(stat = "Chisq")
 
-py$tidy_pew %>%
-  tidyr::uncount(count) %>%
-  specify(religion ~ income) %>%
-  hypothesize(null = "independence") %>%
+py$tidy_pew |>
+  tidyr::uncount(count) |>
+  specify(religion ~ income) |>
+  hypothesize(null = "independence") |>
   visualize(method = "theoretical") +
   shade_p_value(obs_stat = chisq_stat, direction = "right")
 ```
@@ -127,7 +127,7 @@ Another common use of this wide data format is to record regularly spaced observ
 
 ```{python}
 #| display-language: true
-billboard = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/billboard.csv")
+billboard = pd.read_csv("https://github.com/qiushiyan/blog-data/blob/main/billboard.csv?raw=true")
 billboard
 ```
 
@@ -156,7 +156,7 @@ Now we can compute the average ranking:
 The `tb` daaset comes from the World Health Organisation, and records the counts of confirmed tuberculosis cases by country, year, and demographic group. The demographic groups are broken down by sex (m, f)  and age (0–14, 15–25, 25–34,  35–44).
 
 ```{python}
-tb = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/tb.csv")
+tb = pd.read_csv("https://github.com/qiushiyan/blog-data/blob/main/tb.csv?raw=true")
 tb
 ```
 
@@ -186,7 +186,7 @@ tidy_tb
 > The `weather` data shows daily weather data from the Global Historical Climatology Network for one  weather station (MX17004) in Mexico for five months in 2010.
 
 ```{python}
-weather = pd.read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/weather.csv")
+weather = pd.read_csv("https://github.com/qiushiyan/blog-data/blob/main/weather.csv?raw=true")
 weather
 ```
 
@@ -217,14 +217,14 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-deaths <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/mexico-deaths.csv") %>% na.omit()
+deaths <- readr::read_csv("https://github.com/qiushiyan/blog-data/blob/main/mexico-deaths.csv?raw=true") |> na.omit()
 deaths
 ```
 
 The columns are year, month, day, hour and cause of specific death respectively. Another table `codes` explains what acronyms in `cod` mean.
 
 ```{r}
-codes <- readr::read_csv("https://media.githubusercontent.com/media/qiushiyan/blog-data/master/codes.csv")
+codes <- readr::read_csv("https://github.com/qiushiyan/blog-data/blob/main/codes.csv?raw=true")
 codes
 ```
 
@@ -247,7 +247,7 @@ To provide informative labels for causes, we next join the dataset to the `codes
 
 ```{r}
 #| display-language: true
-deaths <- left_join(deaths, codes) %>%
+deaths <- left_join(deaths, codes) |>
   rename(cause = disease)
 
 deaths
@@ -268,35 +268,35 @@ This means that rather than the total number, it makes more sense to think in pr
 
 ```{r}
 #| display-language: true
-prop1 <- deaths %>%
-  count(hod, cause, name = "per_hour_per_cause") %>%
-  add_count(cause, wt = per_hour_per_cause, name = "per_cause") %>%
+prop1 <- deaths |>
+  count(hod, cause, name = "per_hour_per_cause") |>
+  add_count(cause, wt = per_hour_per_cause, name = "per_cause") |>
   mutate(prop1 = per_hour_per_cause / per_cause)
 
-prop2 <- deaths %>%
-  count(hod, name = "per_hour") %>%
-  add_count(wt = per_hour, name = "total") %>%
+prop2 <- deaths |>
+  count(hod, name = "per_hour") |>
+  add_count(wt = per_hour, name = "total") |>
   mutate(prop2 = per_hour / total)
 ```
 
 Hadley used mean square error between the two proportions as a kind of distance, to indicate the average degree of anomaly of a cause, and I follow:
 
 ```{r}
-dist <- prop1 %>%
-  filter(per_cause > 50) %>%
-  left_join(prop2, on = "hod") %>%
+dist <- prop1 |>
+  filter(per_cause > 50) |>
+  left_join(prop2, by = "hod") |>
   select(
     hour = hod,
     cause,
     n = per_cause,
     prop1,
     prop2
-  ) %>%
-  group_by(cause, n) %>%
-  summarize(dist = mean((prop1 - prop2)^2)) %>%
+  ) |>
+  group_by(cause, n) |>
+  summarize(dist = mean((prop1 - prop2)^2)) |>
   ungroup()
 
-dist %>%
+dist |>
   arrange(desc(dist))
 ```
 
@@ -304,7 +304,7 @@ Here we see causes of death with highest `dist` are mainly accidents and rare di
 
 
 ```{r, fig.height = 10, fig.width = 10}
-dist %>%
+dist |>
   ggplot(aes(n, dist)) +
   geom_jitter() +
   ggrepel::geom_text_repel(
@@ -333,7 +333,7 @@ tidy(lm_fit)
 Let's plot these residuals against the predictor `log(n)`:
 
 ```{r}
-augment(lm_fit) %>%
+augment(lm_fit) |>
   ggplot(aes(`log(n)`, .std.resid)) +
   geom_hline(yintercept = 0, color = "red") +
   geom_point()
@@ -343,16 +343,16 @@ augment(lm_fit) %>%
 > The plot shows an empty region around a standardized residual of 1.5.  So somewhat arbitrarily, we’ll select those diseases with a residual greater than 1.5
 
 ```{r}
-rows <- augment(lm_fit) %>%
-  mutate(row = row_number()) %>%
-  filter(.std.resid > 1.5) %>%
-  select(row) %>%
+rows <- augment(lm_fit) |>
+  mutate(row = row_number()) |>
+  filter(.std.resid > 1.5) |>
+  select(row) |>
   pull(row)
 
 
-unusual <- dist %>%
-  mutate(row = row_number()) %>%
-  filter(row %in% rows) %>%
+unusual <- dist |>
+  mutate(row = row_number()) |>
+  filter(row %in% rows) |>
   select(cause, n)
 
 unusual
@@ -365,10 +365,10 @@ Finally, we plot the temporal course for each unusual cause of death.
 #| fig-height: 18
 #| fig-width: 20
 
-prop1 %>%
-  filter(cause %in% unusual$cause) %>%
-  left_join(prop2, on = "hod") %>%
-  pivot_longer(c(prop1, prop2)) %>%
+prop1 |>
+  filter(cause %in% unusual$cause) |>
+  left_join(prop2, by = "hod") |>
+  pivot_longer(c(prop1, prop2)) |>
   ggplot(aes(hod, value, color = name)) +
   geom_line() +
   scale_color_manual(

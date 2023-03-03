@@ -16,13 +16,23 @@ tagList(
 
 :::
 
-I am currently a graduate student at Vanderbilt University, Data Science Institute.
-
-My resume.
+I am currently a master student in data science at Vanderbilt University. I am looking for full time jobs in either data science or software engineering starting from July 2023. See my resume below.
 
 
+::: {.panel-tabset}
+
+## Data Science Position
 
 <iframe id="resume" src="/resume.pdf" width="100%" style="min-height: 900px"></iframe>
+
+
+## Software Engineer Position
+
+<iframe id="resume" src="/resume-sde.pdf" width="100%" style="min-height: 900px"></iframe>
+
+
+:::
+
 
 
 

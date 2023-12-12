@@ -16,19 +16,19 @@ tagList(
 
 :::
 
-I am currently a master student in data science at Vanderbilt University. I am looking for full time jobs in either data science or software engineering starting from July 2023. See my resume below.
+My resume is listed below.
 
 
 ::: {.panel-tabset}
 
-## Data Science Position
+## Data Science
 
-<iframe id="resume" src="/resume.pdf" width="100%" style="min-height: 900px"></iframe>
+<iframe id="resume" src="/resume-data-science.pdf" width="100%" style="min-height: 900px"></iframe>
 
 
-## Software Engineer Position
+## Software Engineer
 
-<iframe id="resume" src="/resume-sde.pdf" width="100%" style="min-height: 900px"></iframe>
+<iframe id="resume" src="/resume-full-stack.pdf" width="100%" style="min-height: 900px"></iframe>
 
 
 :::

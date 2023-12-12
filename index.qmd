@@ -14,7 +14,7 @@ execute:
 
 ::: {.blog-description}
 
-Hi there 👋 My name is Qiushi Yan and I am currently a master student at Vanderbilt University's Data Science Institute. As RStudio's 2022 summer intern I developed the [agua](https://agua.tidymodels.org) package for integrating tidymodels with h2o. I post about <span class = "gradient-text">R</span>, <span class = "gradient-text">Python</span> and <span class = "gradient-text">web technologies</span>.
+Hi there 👋 My name is Qiushi Yan. I am currently a fullstack engineer at LearLab. As RStudio's 2022 summer intern I developed the [agua](https://agua.tidymodels.org) package for integrating tidymodels with h2o. I post about <span class = "gradient-text">R</span>, <span class = "gradient-text">Python</span> and <span class = "gradient-text">web technologies</span>.
 
 [See my projects](https://projects.qiushiyan.dev)
 :::

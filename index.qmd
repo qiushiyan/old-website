@@ -8,6 +8,8 @@ listing:
   sort-ui: true
   filter-ui: true
 page-layout: full
+include-in-header:
+  text: <script defer src="custom.js"></script>
 execute:
   echo: false
 ---

@@ -1,10 +1,13 @@
 project:
   type: website
+  preview:
+    port: 4200
   resources:
     - resume.pdf
     - resume-sde.pdf
     - titanic-survival.pdf
     - aws-cert-developer.pdf
+    - custom.js
 
 website:
   title: "Qiushi Yan"
@@ -31,7 +34,7 @@ format:
     css: styles.css
     citation-location: margin
     reference-location: margin
-    highlight-style: oblivion
+    highlight-style: github
     code-overflow: wrap
     fig-width: 8
     fig-height: 6

@@ -6,6 +6,8 @@ $body-color: #FEFCE8;
 $link-color: #fde68a;
 $white: #fff;
 $light: #525252;
+$code-color: #fde68a;
+$code-bg: #fff;
 
 // Navigation element colors
 $footer-bg: #0f182b;
@@ -40,14 +42,10 @@ $input-bg: #242424;
   }
 }
 
-p > code, h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code {
-  color: $white;
-  font-weight: 600;
-  background-color: none;
-  &:before, &:after {
-    content: "`";
-  }
+.cell-output code {
+  color: $white !important;
 }
+
 
 strong {
   color: $link-color;

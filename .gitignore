@@ -1,5 +1,6 @@
 /.quarto/
 /_site/
+site_libs/
 .Rproj.user
 posts/dataframe-gymnastics/flights.csv
 *.rds

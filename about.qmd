@@ -1,16 +1,17 @@
 ## About me
 
+TBD
 
-::: {.about-links}
+<!-- ::: {.about-links}
 
 ```{r}
 #| echo: false
 source("R/ui.R")
 library(htmltools)
 tagList(
-  make_about_icon("github", "Github", "https://github.com/qiushiyan"),
-  make_about_icon("linkedin", "Linkedin", "https://linkedin.com/in/qiushiyan"),
-  make_about_icon("file-arrow-down-fill", "Resume", "/resume.pdf")
+    make_about_icon("github", "Github", "https://github.com/qiushiyan"),
+    make_about_icon("linkedin", "Linkedin", "https://linkedin.com/in/qiushiyan"),
+    make_about_icon("file-arrow-down-fill", "Resume", "/resume.pdf")
 )
 ```
 
@@ -34,5 +35,5 @@ My resume is listed below.
 :::
 
 
-
+ -->
 

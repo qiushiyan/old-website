@@ -9,6 +9,7 @@ image: featured.jpg
 
 
 
+
 A common scenario in my day-to-day data analysis is that I have many objects that are typically data frames, and for each of them I want to create a new section in my Quarto/R Markdown document with their respective summary statistics. The set of operations to apply are usually the same, just the data is different. A manual way of doing this would be copy-pasting the same chunk of code for generating the summaries, and only change the variable name. For instance:
 
 
